@@ -1,0 +1,6 @@
+Étape 1) Créez deux palettes A et B sur les côtés gauche et droit de l'écran.
+Étape 2) Créez une balle.
+Étape 3) Créez un événement pour déplacer la palette verticalement en appuyant
+        sur une certaine touche.
+Étape 4) Créez la fonction pour mettre à jour le score après que chaque joueur
+        ait raté une collision.

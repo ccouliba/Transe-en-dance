@@ -1,0 +1,16 @@
+<p><h1>Sign up</h1><p>
+{% for message in messages %}
+    <h5> {{message}} </h5>
+{% endfor %}
+    <form action="{% url 'pong:login'%}" method="POST" novalidate>
+        {% csrf_token %}
+        {% for field in form %}
+            <div>
+                {{field.label_tag}}{{field}}
+                {% for error in field.errors %}
+                    <span>{{error}}</span>
+                {% endfor %}
+            </div>
+        {% endfor %}
+        <input type="submit" value="Register">
+    </form>

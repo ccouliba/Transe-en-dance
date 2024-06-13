@@ -1,4 +1,4 @@
-# Useful ressources for starting Transcendance
+# Useful ressources for starting Transcendance 
 
 Start a project with Django framework
 

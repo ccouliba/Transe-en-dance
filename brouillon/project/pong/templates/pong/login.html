@@ -1,0 +1,54 @@
+<p><h1>Sign in</h1><p>
+{% for message in messages %}
+    <h5> {{message}} </h5>
+{% endfor %}
+<form action="{% url 'pong:home'%}" method="POST" novalidate>
+    {% csrf_token %}
+    {% for field in form %}
+        <div>
+            {{field.label_tag}}{{field}}
+            {% for error in field.errors %}
+                <span>{{error}}</span>
+            {% endfor %}
+        </div>
+    {% endfor %}
+    <input type="submit" value="Login">
+</form>
+    
+
+
+
+{% comment %} 
+<div class="bienvenue">
+    <h1>Bienvenue dans le jeu</h1>
+    <p>Vous devez vous enregistrer pour pouvoir jouer !</p>
+    <form action="{% url 'pong:login'%}" method="post">    
+        {% csrf_token %}
+        <div>
+            <label for="login">Login</label>
+            <input type="text" id="login" name="login" placeholder="login" required>
+        </div>
+        <div>
+            <label for="email">e-mail</label>
+            <input type="email" id="email" name="email" placeholder="e@mail.com" hidden required>
+        </div>
+        <div>
+            <label for="password">password</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        <input type="submit" value="Register">
+    </form>
+</div> {% endcomment %}
+
+
+
+{% comment %} <div>
+    <label for="sujet">Quel est le sujet de votre message ?</label>
+    <select name="sujet" id="sujet" required>
+        <option value="" disabled selected hidden>Choisissez le sujet de votre message</option>
+        <option value="probleme-compte">Problème avec mon compte</option>
+        <option value="question-produit">Question à propos d’un produit</option>
+        <option value="suivi-commande">Suivi de ma commande</option>
+        <option value="autre">Autre...</option>
+        </select>
+    </div> {% endcomment %}
