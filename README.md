@@ -16,6 +16,9 @@ Start a project with Django framework
 
 - https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Authentication
 
+- https://code-garage.fr/blog/qu-est-ce-que-le-ssr-ou-server-side-rendering/
+(for ssr)
+
 ## For Ft_Transe_Brouillon :
 Please follow this steps:
   - `cd project`
