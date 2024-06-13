@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   web:
-    container_name: server
+    container_name: backend
     build: ./project
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
@@ -34,7 +34,6 @@ services:
     restart: always
     networks:
       - transcendance
- 
 
 volumes:
   postgres_data:

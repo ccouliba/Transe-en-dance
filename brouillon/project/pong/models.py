@@ -18,19 +18,19 @@ class Login(models.Model):
 #     groups = models.ManyToManyField(Group, related_name='custom_user_groups')
 #     login = models.CharField(unique=True, max_length=100)
 
-class RegisterForm(ModelForm):
-    """Form definition for MODELNAME."""
-    class Meta:
-        """Meta definition for MODELNAMEform."""
-        model = Login
-        fields = ('__all__')
+# class RegisterForm(ModelForm):
+#     """Form definition for MODELNAME."""
+#     class Meta:
+#         """Meta definition for MODELNAMEform."""
+#         model = Login
+#         fields = ('__all__')
     
-class LoginForm(ModelForm):
-    class Meta:
-        """Meta definition for MODELNAMEform."""
-        model = Login
-        # exclude = ('email',)
-        fields = ('username', 'password',)
+# class LoginForm(ModelForm):
+#     class Meta:
+#         """Meta definition for MODELNAMEform."""
+#         model = Login
+#         # exclude = ('email',)
+#         fields = ('username', 'password',)
         
 
 # class Choice(models.Model):

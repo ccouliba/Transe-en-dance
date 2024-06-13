@@ -1,14 +1,12 @@
 from django.template import loader
-from django.db.models import F
 from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render, redirect
+from django.contrib.auth.models import User
+from django.contrib.auth import login, authenticate
+from .forms import RegisterForm
 from django.contrib.auth import authenticate, login
-from django.shortcuts import get_object_or_404, render, redirect
-from django.urls import reverse
-# from django.contrib.auth.models import User, auth
-from django.contrib import messages
-from django.views import generic
-from .models import RegisterForm, LoginForm, Login
-from .forms import UserLoginForm, UserRegistrationForm
+from django.shortcuts import render, redirect
+from django.contrib.auth.forms import AuthenticationForm
 
 # Create your views here.
 
@@ -16,47 +14,39 @@ def index(request):
     template = loader.get_template('pong/index.html')
     return HttpResponse(template.render())
 
-def home(request):
+def home_view(request):
     template = loader.get_template('pong/home.html')
     return HttpResponse(template.render())
 
-async def getRegistered(request):
-    model = Login
-    template_name = 'pong/register.html'
-    form_class = RegisterForm
-    success_url = '/pong/home/'
-    if request.method == "POST":
-        form = UserRegistrationForm(request.POST or None)
-        # print(form)
-        if form.is_valid():
-            user = await Login.objects.create(
-                username1=form.cleaned_data['username'],
-                password=form.cleaned_data['password'],
-                email=form.cleaned_data['email'])
-            user.save()
-            return HttpResponseRedirect('/pong/login')
-        else:
-            print("Form is not valid")
-            return HttpResponseRedirect('/pong/register')
-    else:
-        form = UserRegistrationForm()
-    return render(request, "pong/register.html", { 'form': form })
+def lougout_view(request):
+    return redirect('/pong/login')
 
-async def getLogged(request):
-    model = Login
-    form_class = LoginForm
-    success_url = '/pong/home/'
-    template_name = "pong/login.html"
+def register_view(request):
     if request.method == 'POST':
-        form = UserLoginForm(request.POST or None)
+        form = RegisterForm(request.POST)
         if form.is_valid():
-            username1 = form.cleaned_data["username"]
-            password1 = form.cleaned_data["password"]
-            user = await authenticate(request, username=username1, password=password1)
+            user = form.save(commit=False)
+            user.set_password(form.cleaned_data['password'])
+            user.save()
+            return redirect('/pong/login') # Redirect to the login page after registration
+        else:
+            form = RegisterForm(request.POST or None)
+    else:
+        form = RegisterForm()
+    return render(request, 'pong/register.html', {'form': form})
+
+def login_view(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password'])
             if user is not None:
                 login(request, user)
-                return redirect(success_url)
+                return redirect('/pong/home')  # Redirige vers la page d'accueil après l'inscription
+        else:
+            return redirect('/pong/login')
     else:
-        print("Error")
-        form = UserLoginForm()
-    return render(request, "pong/login.html", { 'form': form })
+        form = AuthenticationForm()
+    return render(request, 'pong/login.html', {'form': form})

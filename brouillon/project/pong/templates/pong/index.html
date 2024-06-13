@@ -1,10 +1,5 @@
 <div class="index">
-    <p>Welcome you ! Please register or log-in if you are already registered</p>
-    <input type="button" class="button_active" name="Register" value="Register" onclick="location.href='register';" />
-    <input type="button" class="button_active" name="Login" value="Login" onclick="location.href='login';" />
-    {% comment %} <a href="{% url 'pong:register' %}"><input type="radio" name="Register" value="Register"></a> {% endcomment %}
-    {% comment %} <a href="{% url 'pong:login' %}"><input type="radio" name="Login" value="Login"></a> {% endcomment %}
+    <p>Welcome you !</p>
+    <p>You are not logged in.
+        Please <a href="{% url 'pong:login' %}">Login</a> or <a href="{% url 'pong:register' %}">Register</a></p>
 </div>
-    
-    {% comment %} <li><button type="button">Register<a href="{% url 'pong:register' %}"></a></button>
-    <button type="button">Login<a href="{% url 'pong:login' %}"></a></button></li> {% endcomment %}
