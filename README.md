@@ -37,22 +37,17 @@ Please follow this steps:
   - Majeur : Backend (Django)
   - mineur : Frontend (Bootstrap)
   - mineur : Database (Postgres)
-
 ### Gestion utilisateur
   - Majeur : Gestion utilisateur standard, authentification, utilisateurs en tournois.
   - Majeur : Implémenter une authentification à distance (API42)
-
 ### IA-algo
   - Majeur : IA
- 
 ### Securite
   - mineur : RGPD
-
 ### Devops
   - Majeur : Journaux de log
-  - mineur : Monitoring
-
-
+### Modules Accessibilite
+  - mineur : Multi-langues
 
 ## Bonus
 ### Modules IA-algo
@@ -66,7 +61,6 @@ Please follow this steps:
 ### Modules Accessibilite
   - mineur : Support sur tout type (*Bonus*)
   - mineur : Compatibilite navigateur (*Bonus*)
-  - mineur : Multi-langues (*Bonus*)
   - mineur : SSR (*Bonus*)
 ### Modules Devops
   - Majeur : Microservices (*Bonus*)
