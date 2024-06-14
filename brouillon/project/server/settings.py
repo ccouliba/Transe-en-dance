@@ -136,3 +136,6 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Callback URI
+LOGIN_REDIRECT_URL = 'http://localhost:8000/pong/auth/callback'
