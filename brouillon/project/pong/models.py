@@ -14,6 +14,26 @@ from django.contrib.auth.models import AbstractUser
 # 	def __str__(self): #definir mon objet en chaine de caractere (ce qui permet d'avoir la chaine de caractere dans l'interface admin)
 # 		return self.username
 
+# class User(AbstractUser):
+# 	groups = models.ManyToManyField(
+# 		Group,
+# 		related_name='pong_user_set',  # sinon conflits de noms avec les modèles de l'application auth.
+# 		blank=True,
+# 		help_text='The groups this user belongs to.',
+# 		related_query_name='pong_user',
+# 	)
+# 	user_permissions = models.ManyToManyField(
+# 		Permission,
+# 		related_name='pong_user_permissions_set', # sinon conflits de noms avec les modèles de l'application auth.
+# 		blank=True,
+# 		help_text='Specific permissions for this user.',
+# 		related_query_name='pong_user_permissions',
+# 	)
+
+# 	def __str__(self):
+# 		return self.username
+
+
 # # Definir le modele Player, qui herite de la classe Model de base de Django
 # class Player(models.Model):
 # 	# Creer une relation one-to-one avec le modele User
@@ -31,15 +51,43 @@ from django.contrib.auth.models import AbstractUser
 # 		return self.user.username
 
 
+from django.contrib.auth.models import AbstractUser, Group, Permission
+from django.db import models
+
+class User(AbstractUser):
+	groups = models.ManyToManyField(
+		Group,
+		related_name='pong_user_set',  # Nom unique sinon conflit avec app auth
+		blank=True,
+		help_text='The groups this user belongs to.',
+		related_query_name='pong_user',
+	)
+	user_permissions = models.ManyToManyField(
+		Permission,
+		related_name='pong_user_permissions_set',  # Nom unique sinon conflit avec app auth
+		blank=True,
+		help_text='Specific permissions for this user.',
+		related_query_name='pong_user_permissions',
+	)
+
+	def __str__(self):
+		return self.username
+
+class Player(models.Model):
+	user = models.OneToOneField(User, on_delete=models.CASCADE)
+	# avatar = models.ImageField(upload_to='avatars/', null=True, blank=True)
+
+	def __str__(self):
+		return self.user.username
 
 
 
 class Login(models.Model):
-    username = models.CharField(unique=True, max_length=50)
-    email = models.EmailField(unique=True, db_column="mail")
-    password = models.CharField(max_length=42)
-    def __str__(self):
-        return self.username
+	username = models.CharField(unique=True, max_length=50)
+	email = models.EmailField(unique=True, db_column="mail")
+	password = models.CharField(max_length=42)
+	def __str__(self):
+		return self.username
 
 # class User(AbstractUser):
 #     pass

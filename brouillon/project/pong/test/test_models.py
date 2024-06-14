@@ -33,3 +33,5 @@ class PlayerModelTest(TestCase):
 	# 	# Supprimer l'utilisateur et verifier que le joueur est aussi supprime
 	# 	self.user.delete()
 	# 	self.assertFalse(Player.objects.filter(user=self.user).exists())
+
+
