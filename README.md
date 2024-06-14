@@ -32,24 +32,27 @@ Please follow this steps:
 
 # Ft transcendance :
 
-### Modules Web
+## Modules a faire
+### Web
   - Majeur : Backend (Django)
   - mineur : Frontend (Bootstrap)
   - mineur : Database (Postgres)
 
-### Modules Gestion utilisateur
+### Gestion utilisateur
   - Majeur : Gestion utilisateur standard, authentification, utilisateurs en tournois.
   - Majeur : Implémenter une authentification à distance (API42)
 
-### Modules IA-algo
+### IA-algo
   - Majeur : IA
  
-### Modules Securite
+### Securite
   - mineur : RGPD
 
-### Modules Devops
+### Devops
   - Majeur : Journaux de log
   - mineur : Monitoring
+
+
 
 ## Bonus
 ### Modules IA-algo
