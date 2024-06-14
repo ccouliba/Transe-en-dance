@@ -3,45 +3,93 @@
 ### MLD 
 
 - **USER**
-  - `id_user`
-  - `username`
-  - `email`
-  - `password`
+  - `id_user` int, cle primaire
+  - `username` varchar
+  - `email` varchar
+  - `password` varchar
 
 - **PLAYER**
-  - `id_player`
-  - `avatar`
+  - `id_player` int, cle primaire
+  - `avatar` varchar
+  - `#id_user` int, cle etrangere (PLAYER)
 
 - **FRIENDSHIP**
-  - `id_player1`
-  - `id_player2`
+  - `#id_player1` int, cle etrangere (PLAYER)
+  - `#id_player2` int, cle etrangere (PLAYER)
 
 - **PLAY**
-  - `#id_player`
-  - `#id_game`
+  - `#id_player` int, cle etrangere (PLAYER)
+  - `#id_game` int, cle etrangere (GAME)
 
 - **GAME**
-  - `id_game`
-  - `date`
-  - `winner_id`
+  - `id_game` int, cle primaire
+  - `date` datetime
+  - `#winner_id` int, cle etrangere (PLAYER)
+  - `score` int
+  - `status`varchar (game.started, game.finished, game.canceled)
 
 - **PARTICIPATE**
-  - `#id_player`
-  - `#id_tournament`
-  - `order_of_turn`
-  - `alias`
+  - `#id_player` int, cle etrangere (PLAYER)
+  - `#id_tournament` int, cle etrangere (TOURNAMENT)
+  - `order_of_turn` int
+  - `alias` varchat
 
 - **TOURNAMENT**
-  - `id_tournament`
-  - `name`
-  - `is_started`
-  - `start_date`
-  - `end_date`
+  - `id_tournament` int, cle primaire
+  - `name` varchat
+  - `is_started` boolean
+  - `#winner_id` int, cle etrangere (PLAYER)
 
 - **COMPOSED**
-  - `#id_tournament`
-  - `#id_game`
-  - `game_number`
+  - `#id_tournament` int, cle etrangere (TOURNAMENT)
+  - `#id_game` int, cle etrangere (GAME)
+  - `game_number` 
+
+
+### Methodes  
+Chaque evenement metier = endpoint
+
+Un player peut debuter une partie 1v1 :
+player.started_a_game
+Un player peut debuter un tournoi :
+player.started_a_tournament
+
+**Une demande d'ami est automatique ou peut etre refuse ?**
+Un player devient ami avec un autre player:
+player.became_friend_with(other_player)
+
+**quand est ce qu'une partie est perdue ? quand la balle est perdue des la 1ere fois ? point de vie ?**
+game.is_won_by(player) 
+
+Inscription et gestion des utilisateurs :
+user.registered
+user.logged_in
+user.updated_profile
+user.password_changed
+user.account_deleted
+
+Gestion des joueurs et des parties :
+player.started_a_game
+player.started_a_tournament
+game.is_won_by(player)
+game.started
+game.finished
+game.score_updated
+game.canceled
+
+Friend:
+player.became_friend_with(other_player)
+player.sent_friend_request
+player.accepted_friend_request
+player.refused_friend_request
+
+Participation aux tournois :
+tournament.player_joined
+tournament.started
+tournament.finished
+
+
+
 
 ### Notes  
 

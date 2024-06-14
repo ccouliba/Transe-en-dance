@@ -2,85 +2,103 @@ import datetime
 from django.db import models
 from django.utils import timezone
 from django.forms import ModelForm
-from django.contrib.auth.models import AbstractUser
-
-# Create your models here.
+from django.contrib.auth.models import AbstractUser, Group, Permission
 
 
 # class User(AbstractUser): #https://openclassrooms.com/fr/courses/7192426-allez-plus-loin-avec-le-framework-django/7386368-personnalisez-le-modele-utilisateur
-# 	# champs id, username, email, et password => deja inclus par AbstractUser
-# 	# inserer champs supplementaires si necessaire
-# 	pass
-# 	def __str__(self): #definir mon objet en chaine de caractere (ce qui permet d'avoir la chaine de caractere dans l'interface admin)
-# 		return self.username
-
-# class User(AbstractUser):
-# 	groups = models.ManyToManyField(
-# 		Group,
-# 		related_name='pong_user_set',  # sinon conflits de noms avec les modèles de l'application auth.
-# 		blank=True,
-# 		help_text='The groups this user belongs to.',
-# 		related_query_name='pong_user',
-# 	)
-# 	user_permissions = models.ManyToManyField(
-# 		Permission,
-# 		related_name='pong_user_permissions_set', # sinon conflits de noms avec les modèles de l'application auth.
-# 		blank=True,
-# 		help_text='Specific permissions for this user.',
-# 		related_query_name='pong_user_permissions',
-# 	)
-
-# 	def __str__(self):
-# 		return self.username
-
-
-# # Definir le modele Player, qui herite de la classe Model de base de Django
-# class Player(models.Model):
-# 	# Creer une relation one-to-one avec le modele User
-# 	# Si l'utilisateur (User) est supprime, le joueur (Player) associe sera aussi supprime (CASCADE)
-# 	user = models.OneToOneField(User, on_delete=models.CASCADE)
-
-# 	# Definir un champ avatar pour stocker une image pour le joueur
-# 	# L'image sera telechargee dans le repertoire 'avatars/'
-# 	# Le champ peut etre nul ou laisse vide
-# 	avatar = models.ImageField(upload_to='avatars/', null=True, blank=True)
-
-# 	# Definir la representation en chaine de caracteres de l'objet Player
-# 	# Cette methode renvoie le nom d'utilisateur (username) de l'utilisateur associe
-# 	def __str__(self):
-# 		return self.user.username
-
-
-from django.contrib.auth.models import AbstractUser, Group, Permission
-from django.db import models
 
 class User(AbstractUser):
+	# Ajout d'un champ many-to-many pour les groupes auxquels cet utilisateur appartient
 	groups = models.ManyToManyField(
-		Group,
-		related_name='pong_user_set',  # Nom unique sinon conflit avec app auth
-		blank=True,
-		help_text='The groups this user belongs to.',
-		related_query_name='pong_user',
+		Group,  # Le modele de groupe du framework d'authentification de Django
+		related_name='pong_user_set',  # Nom unique pour eviter les conflits avec l'application d'authentification par defaut de Django
+		blank=True,  # Champ optionnel, permet de laisser ce champ vide
+		help_text='The groups this user belongs to.',  # Texte d'aide affiche dans l'interface d'administration
+		related_query_name='pong_user',  # Nom utilise pour les requetes inverses
 	)
+	# Ajout d'un champ many-to-many pour les permissions specifiques de cet utilisateur
 	user_permissions = models.ManyToManyField(
-		Permission,
-		related_name='pong_user_permissions_set',  # Nom unique sinon conflit avec app auth
-		blank=True,
-		help_text='Specific permissions for this user.',
-		related_query_name='pong_user_permissions',
+		Permission,  # Le modele de permission du framework d'authentification de Django
+		related_name='pong_user_permissions_set',  # Nom unique pour eviter les conflits avec l'application d'authentification par defaut de Django
+		blank=True,  # Champ optionnel, permet de laisser ce champ vide
+		help_text='Specific permissions for this user.',  # Texte d'aide affiche dans l'interface d'administration
+		related_query_name='pong_user_permissions',  # Nom utilise pour les requetes inverses
 	)
-
+	# Methode magique pour retourner une representation en chaine de caracteres de l'utilisateur
 	def __str__(self):
-		return self.username
+		return self.username  # Retourne le nom d'utilisateur comme representation de l'
 
 class Player(models.Model):
 	user = models.ForeignKey(User, on_delete=models.CASCADE)
-	# user = models.OneToOneField(User, on_delete=models.CASCADE)
-	avatar = models.ImageField(upload_to='avatars/', null=True, blank=True)
-
+	# avatar = models.ImageField(upload_to='avatars/', null=True, blank=True)
 	def __str__(self):
 		return self.user.username
+	# def __init__(self):
+		# self.friends = []
+	# def became_friend_with(self, other_player):
+	# 	self.friends.append(other_player)
+	# 	other_player.friends.push(self)
 
+
+
+
+
+# class Friendship(models.Model):
+# 	id_player1 = models.ForeignKey(Player, related_name='friendship_sender', on_delete=models.CASCADE)
+# 	id_player2 = models.ForeignKey(Player, related_name='friendship_receiver', on_delete=models.CASCADE)
+
+# 	class Meta:
+# 		unique_together = ('id_player1', 'id_player2')
+
+
+# class Game(models.Model):
+# 	date = models.DateTimeField(auto_now_add=True)
+# 	winner = models.ForeignKey(Player, related_name='won_games', on_delete=models.SET_NULL, null=True, blank=True)
+# 	status = models.CharField(max_length=20)  # Values can be 'started', 'finished', 'canceled'
+
+# 	def __str__(self):
+# 		return f"Game {self.id} on {self.date}"
+
+# class Play(models.Model):
+# 	player = models.ForeignKey(Player, on_delete=models.CASCADE)
+# 	game = models.ForeignKey(Game, on_delete=models.CASCADE)
+# 	score = models.IntegerField()
+
+# 	class Meta:
+# 		unique_together = ('player', 'game')
+
+# class Tournament(models.Model):
+# 	name = models.CharField(max_length=100)
+# 	is_started = models.BooleanField(default=False)
+# 	start_date = models.DateTimeField(null=True, blank=True)
+# 	end_date = models.DateTimeField(null=True, blank=True)
+# 	winner = models.ForeignKey(Player, related_name='won_tournaments', on_delete=models.SET_NULL, null=True, blank=True)
+
+# 	def __str__(self):
+# 		return self.name
+
+# class Participate(models.Model):
+# 	player = models.ForeignKey(Player, on_delete=models.CASCADE)
+# 	tournament = models.ForeignKey(Tournament, on_delete=models.CASCADE)
+# 	order_of_turn = models.IntegerField()
+# 	alias = models.CharField(max_length=50)
+
+# 	class Meta:
+# 		unique_together = ('player', 'tournament')
+
+# class Composed(models.Model):
+# 	tournament = models.ForeignKey(Tournament, on_delete=models.CASCADE)
+# 	game = models.ForeignKey(Game, on_delete=models.CASCADE)
+# 	game_number = models.IntegerField()
+
+# 	class Meta:
+# 		unique_together = ('tournament', 'game')
+
+
+
+
+		
+### Carrel's code below
 
 
 class Login(models.Model):
