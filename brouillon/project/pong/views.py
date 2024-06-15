@@ -1,5 +1,5 @@
 from django.template import loader
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate
@@ -7,8 +7,17 @@ from .forms import RegisterForm
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import AuthenticationForm
-
+from .models import Player, User
 # Create your views here.
+
+def player_list(request):
+    
+    players = list(Player.objects.all())    
+    viewModels = [ player.user.email for player in players]
+    return JsonResponse(viewModels, safe=False)
+
+
+
 
 def index(request):
     template = loader.get_template('pong/index.html')

@@ -44,11 +44,6 @@ class Friendship(models.Model):
 	id_player1 = models.ForeignKey(Player, related_name='friendship_sender', on_delete=models.CASCADE)
 	id_player2 = models.ForeignKey(Player, related_name='friendship_receiver', on_delete=models.CASCADE)
 
-	# Utiliser UniqueConstraint pour garantir l'unicité de la paire id_player1 et id_player2
-	# class Constraints(models.Model):
-	#     constraints = [
-	#         UniqueConstraint(fields=['id_player1', 'id_player2'], name='unique_friendship')
-	#     ]
 	class Meta: #Model Meta is basically the inner class of your model class https://www.geeksforgeeks.org/meta-class-in-models-django/
 		constraints = [
 			UniqueConstraint(fields=['id_player1', 'id_player2'], name='unique_friendship')#https://docs.djangoproject.com/en/5.0/ref/models/constraints/#fields
