@@ -1,3 +1,7 @@
+# nachin's notes
+
+from my laptop :  psql -U ccouliba -h localhost -p 5433 -W -d db1
+
 # Useful ressources for starting Transcendance 
 
 Start a project with Django framework
