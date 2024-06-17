@@ -138,4 +138,6 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Callback URI
-LOGIN_REDIRECT_URL = 'http://localhost:8000/pong/auth/callback'
+LOGIN_REDIRECT_URL = 'http://127.0.0.1:8000/pong/auth/callback'
+SECRET='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'
+UID='u-s4t2ud-7a3abaaf67dc8706eff3e08365b4b1f28d472ac6d002b7977a3ebcb46f048ddd'

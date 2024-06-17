@@ -10,6 +10,6 @@ urlpatterns = [
     path("register/", register_view, name='register'),
     path("login/", login_view, name="login"), #User Login Page
     path('logout/', LogoutView.as_view(next_page='login'), name='logout'), # logout view 
-    path('external-login/', views.external_login_view, name='external_login'),
+    path('external-login/', views.external_login_view, name='external-login'),
     path('auth/callback/', views.auth_callback, name='auth_callback'),
 ]
