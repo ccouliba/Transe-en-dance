@@ -1,0 +1,38 @@
+{% comment %} <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Mon Application{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Bienvenue sur Mon Application</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'pong:index' %}">Accueil</a></li>
+                <li><a href="{% url 'pong:play' %}">Jouer</a></li>
+                <li>
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'pong:logout' %}">Se déconnecter</a>
+                    {% else %}
+                        <a href="{% url 'pong:login' %}">Se connecter</a>
+                    {% endif %}
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}
+        <!-- Contenu spécifique à chaque page -->
+        {% endblock %}
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Mon Application. Tous droits réservés.</p>
+    </footer>
+
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+</html> {% endcomment %}

@@ -7,6 +7,7 @@ from .forms import RegisterForm
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -50,3 +51,7 @@ def login_view(request):
     else:
         form = AuthenticationForm()
     return render(request, 'pong/login.html', {'form': form})
+
+@login_required
+def play(request):
+    return render(request, 'pong/play.html')
