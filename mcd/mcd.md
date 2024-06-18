@@ -3,10 +3,12 @@
 ### MLD 
 
 - **USER**
-  - `id_user` int, cle primaire
-  - `username` varchar
-  - `email` varchar
-  - `password` varchar
+  - `id_user`
+  - `username`
+  - `email`
+  - `password`
+  - `creation_date` (//pour RGPD)
+  - `langue` 
 
 - **PLAYER**
   - `id_player` int, cle primaire
