@@ -1,3 +1,13 @@
+# nachin's notes
+
+from localhost :
+
+- docker-compose up db 
+- Si erreur : `django.core.exceptions.ImproperlyConfigured: Error loading psycopg2 or psycopg module` alors : 
+pip install psycopg2-binary
+- SECRET_KEY=foo python3 manage.py runserver
+- psql -U ccouliba -h localhost -p 5433 -W -d db1
+
 # Useful ressources for starting Transcendance 
 
 Start a project with Django framework
