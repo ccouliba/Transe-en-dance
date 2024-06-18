@@ -5,6 +5,7 @@ from .views import register_view, login_view, home_view
 
 app_name = "pong"
 urlpatterns = [
+    path("player", views.player_list, name="player_list"),
     path("", views.index, name="index"), # Home Page
     path("home/", home_view, name="home"), #home
     path("register/", register_view, name='register'),

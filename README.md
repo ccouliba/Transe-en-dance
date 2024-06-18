@@ -1,3 +1,10 @@
+# nachin's notes
+
+from localhost :
+docker-compose up db 
+SECRET_KEY=foo python3 manage.py runserver
+psql -U ccouliba -h localhost -p 5433 -W -d db1
+
 # Useful ressources for starting Transcendance 
 
 Start a project with Django framework
