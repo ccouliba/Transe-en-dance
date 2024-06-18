@@ -19,40 +19,41 @@ services:
     networks:
       - transcendance
 
-  # db:
-  #   image: postgres:15
-  #   volumes:
-  #     - postgres_data:/var/lib/postgresql/data/
-  #   ports:
-  #     - 5432:8000
-  #     #  - 5433:5432
-  #   environment:
-  #     - POSTGRES_USER=ccouliba
-  #     - POSTGRES_PASSWORD=password
-  #     - POSTGRES_DB=db1
-  #     - POSTGRES_PORT='5432'
-  #     - POSTGRES_HOST_AUTH_METHOD=trust
-  #   restart: always
-  #   networks:
-  #    - transcendance
-
-  # on localhost
   db:
     image: postgres:15
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     ports:
-      #- 5432:8000
-       - 5433:5432
+      - 5432:8000
+      #  - 5433:5432
     environment:
       - POSTGRES_USER=ccouliba
-     # - POSTGRES_PASSWORD=password
+      - POSTGRES_PASSWORD=password
       - POSTGRES_DB=db1
       - POSTGRES_PORT='5432'
-      # - POSTGRES_HOST_AUTH_METHOD=trust
+      - POSTGRES_HOST_AUTH_METHOD=trust
     restart: always
-    #networks:
-    #  - transcendance
+    networks:
+     - transcendance
+
+  # # on localhost
+  # db:
+  #   image: postgres:15
+  #   volumes:
+  #     - postgres_data:/var/lib/postgresql/data/
+  #   ports:
+  #     #- 5432:8000
+  #     #- 5433:5432
+  #     - 5432:5432
+  #   environment:
+  #     - POSTGRES_USER=ccouliba
+  #    # - POSTGRES_PASSWORD=password
+  #     - POSTGRES_DB=db1
+  #     - POSTGRES_PORT='5432'
+  #     # - POSTGRES_HOST_AUTH_METHOD=trust
+  #   restart: always
+  #   #networks:
+  #   #  - transcendance
 
 volumes:
   postgres_data:
