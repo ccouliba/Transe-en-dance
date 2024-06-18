@@ -16,8 +16,6 @@ def player_list(request):
     return JsonResponse(viewModels, safe=False)
 
 
-
-
 def index(request):
     template = loader.get_template('pong/index.html')
     return HttpResponse(template.render())
