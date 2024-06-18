@@ -13,14 +13,14 @@ def create_initial_user_and_player(apps, schema_editor):
     User = apps.get_model('pong', 'User')
     Player = apps.get_model('pong', 'Player')
     
-    # Créer un utilisateur
+    # Creer un utilisateur
     user = User.objects.create_user(
         username='user',
         email='user@email',
         password='abc'
     )
     
-    # Créer un joueur associé à cet utilisateur
+    # Creer un joueur associé à cet utilisateur
     Player.objects.create(user=user)
 
 class Migration(migrations.Migration):

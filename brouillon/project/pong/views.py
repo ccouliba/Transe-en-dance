@@ -11,7 +11,6 @@ from .models import Player, User
 # Create your views here.
 
 def player_list(request):
-    
     players = list(Player.objects.all())    
     viewModels = [ player.user.email for player in players]
     return JsonResponse(viewModels, safe=False)

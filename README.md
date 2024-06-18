@@ -1,6 +1,9 @@
 # nachin's notes
 
-from my laptop :  psql -U ccouliba -h localhost -p 5433 -W -d db1
+from localhost :
+docker-compose up db 
+SECRET_KEY=foo python3 manage.py runserver
+psql -U ccouliba -h localhost -p 5433 -W -d db1
 
 # Useful ressources for starting Transcendance 
 

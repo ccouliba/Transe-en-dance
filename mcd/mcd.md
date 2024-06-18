@@ -49,6 +49,7 @@
 ### Methodes  
 Chaque evenement metier = endpoint
 
+- notes : 
 Un player peut debuter une partie 1v1 :
 player.started_a_game
 Un player peut debuter un tournoi :
@@ -60,6 +61,8 @@ player.became_friend_with(other_player)
 
 **quand est ce qu'une partie est perdue ? quand la balle est perdue des la 1ere fois ? point de vie ?**
 game.is_won_by(player) 
+
+- liste des methodes
 
 Inscription et gestion des utilisateurs :
 user.registered
