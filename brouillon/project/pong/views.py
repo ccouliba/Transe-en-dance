@@ -7,10 +7,9 @@ from .forms import RegisterForm
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import AuthenticationForm
-from django.conf import settings
 from django.contrib.auth import logout
-import requests
 from .auth_api import get_token_from_api, get_user_from_api
+import os
 
 def index(request):
     template = loader.get_template('pong/index.html')
@@ -55,17 +54,19 @@ def login_view(request):
     return render(request, 'pong/login.html', {'form': form})
 
 def external_login_view(request):
-    forty2_auth_url = "https://api.intra.42.fr/oauth/authorize"
-    redirect_uri = 'http://127.0.0.1:8000/pong/auth/callback'
-    client_id = 'u-s4t2ud-7a3abaaf67dc8706eff3e08365b4b1f28d472ac6d002b7977a3ebcb46f048ddd'
+    forty2_auth_url = os.getenv('API_AUTH_URL', 'https://api.intra.42.fr/oauth/authorize')
+    redirect_uri = os.getenv('REDIRECT_URI', 'http://127.0.0.1:8000/pong/auth/callback')
+    client_id = os.getenv('UID')
     response_type = 'code'
     return redirect(f"{forty2_auth_url}?client_id={client_id}&redirect_uri={redirect_uri}&response_type=code")
 
 def auth_callback(request):
     api_response = get_token_from_api(request)
-    # print("status_code =", response.status_code)
+    print(api_response, "response_code =", api_response.status_code)
     if api_response.status_code == 200:
         token_data = api_response.json()
         access_token = token_data.get('access_token')
         return get_user_from_api(request, access_token)
     return HttpResponse("Authentication failed", status=401)
+
+

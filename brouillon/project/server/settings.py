@@ -28,7 +28,8 @@ DEBUG = True
 
 # 'DJANGO_ALLOWED_HOSTS' should be a single string of hosts with a space between each.
 # For example:'DJANGO_ALLOWED_HOSTS=localhost 127.0.0.1 [::1]'
-ALLOWED_HOSTS = ['bess-f*r*s*.clusters.42paris.fr', 'localhost', '127.0.0.1']
+# ALLOWED_HOSTS = ['bess-f*r*s*.clusters.42paris.fr' 'localhost' '127.0.0.1']
+ALLOWE_HOSTS = []
 # ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
 
 # For dev environnement, i have to comment these parameters
@@ -79,25 +80,17 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'server.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        # 'SERVICE': 'myservice',
-        'NAME': 'db1',
-        'USER': 'ccouliba',
-        'PASSWORD': 'password',
-        'HOST': 'db',
-        'PORT': '5432',
+        'ENGINE': os.getenv('SQL_ENGINE', 'django.db.backends.postgresql_psycopg2'),
+        'NAME': os.getenv('SQL_DATABASE', 'db1'),
+        'USER': os.getenv('SQL_USER', 'ccouliba'),
+        'PASSWORD': os.getenv('SQL_PASSWORD'),
+        'HOST': os.getenv('SQL_HOST', 'db'),
+        'PORT': os.getenv('SQL_PORT', '5432'),
     }
 }
 
@@ -118,7 +111,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
@@ -141,8 +133,3 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-# Callback URI
-LOGIN_REDIRECT_URL = 'http://127.0.0.1:8000/pong/auth/callback'
-SECRET='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'
-UID='u-s4t2ud-7a3abaaf67dc8706eff3e08365b4b1f28d472ac6d002b7977a3ebcb46f048ddd'
