@@ -7,6 +7,8 @@
   - `username`
   - `email`
   - `password`
+  - `creation_date` (//pour RGPD)
+  - `langue` 
 
 - **PLAYER**
   - `id_player`
@@ -23,6 +25,7 @@
 - **GAME**
   - `id_game`
   - `date`
+  - `score` (?)
   - `winner_id`
 
 - **PARTICIPATE**
