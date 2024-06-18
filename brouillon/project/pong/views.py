@@ -67,5 +67,5 @@ def auth_callback(request):
     if api_response.status_code == 200:
         token_data = api_response.json()
         access_token = token_data.get('access_token')
-        return get_user_from_api(request, api_response, access_token)
+        return get_user_from_api(request, access_token)
     return HttpResponse("Authentication failed", status=401)
