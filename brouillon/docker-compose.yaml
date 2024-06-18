@@ -30,7 +30,7 @@ services:
       - POSTGRES_PASSWORD=password
       - POSTGRES_DB=db1
       - POSTGRES_PORT='5432'
-      - POSTGRES_HOST_AUTH_METHOD=trust
+      # - POSTGRES_HOST_AUTH_METHOD=trust
     restart: always
     networks:
       - transcendance
