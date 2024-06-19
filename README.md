@@ -40,38 +40,39 @@ Please follow this steps:
 
   (You can also go to [localhost:8000/admin] and connect with the very identifiers you used to create the superuser)
 
-## Ft transcendance :
-### Modules W
-- Majeur : Backend (Django)
-- mineur : Frontend (Bootstrap)
-- mineur : Database (Postgres)
+# Ft transcendance :
 
-### Modules Gestion utilisateur
-- Majeur : Gestion utilisateur standard, authentification, utilisateurs en tournois.
-- Majeur : Implémenter une authentification à distance (API42)
-- Majeur : Jouer a distance
-- Majeur : Multijoueur
-- Majeur : Chat
-- mineur : Experience utilisateur (*Bonus*)
- 	
-### Modules IA-algo
-- Majeur : IA (*Bonus*)
-- mineur : Dashboard (*Bonus*)
- 
-### Modules Securite
-- mineur : RGPD
-- Majeur : 2FA/JWT (*Bonus*)
-
-### Modules Devops
-- Majeur : Journaux de log
-- mineur : Monitoring
-- Majeur : Microservices (*Bonus*)
-
+## Modules a faire
+### Web
+  - Majeur : Backend (Django)
+  - mineur : Frontend (Bootstrap)
+  - mineur : Database (Postgres)
+### Gestion utilisateur
+  - Majeur : Gestion utilisateur standard, authentification, utilisateurs en tournois.
+  - Majeur : Implémenter une authentification à distance (API42)
+### IA-algo
+  - Majeur : IA
+### Securite
+  - mineur : RGPD
+### Devops
+  - Majeur : Journaux de log
 ### Modules Accessibilite
-- mineur : Support sur tout type (*Bonus*)
-- mineur : Compatibilite navigateur (*Bonus*)
-- mineur : Multi-langues (*Bonus*)
-- mineur : SSR (*Bonus*)
+  - mineur : Multi-langues
 
+## Bonus
+### Modules IA-algo
+  - mineur : Dashboard (*Bonus*)
+### Modules Gestion utilisateur
+  - mineur : Experience utilisateur (*Bonus*)
+### Jouabilité et expérience utilisateur
+  - Majeur : Jouer a distance
+### Modules Securite
+  - Majeur : 2FA/JWT (*Bonus*)
+### Modules Accessibilite
+  - mineur : Support sur tout type (*Bonus*)
+  - mineur : Compatibilite navigateur (*Bonus*)
+  - mineur : SSR (*Bonus*)
+### Modules Devops
+  - Majeur : Microservices (*Bonus*)
 ### Modules Oriente objet
-- Majeur : Game cote serveur  (*Bonus*)
+  - Majeur : Game cote serveur  (*Bonus*)
