@@ -28,28 +28,17 @@ class User(AbstractUser):
 	def __str__(self):
 		return self.username 
 
-class Player(models.Model):
-	user = models.ForeignKey(User, on_delete=models.CASCADE)
-	# avatar = models.ImageField(upload_to='avatars/', null=True, blank=True)
-	def __str__(self):
-		return self.user.username
-	# def __init__(self):
-		# self.friends = []
-	# def became_friend_with(self, other_player):
-	# 	self.friends.append(other_player)
-	# 	other_player.friends.push(self)
-
 
 class Friendship(models.Model):
-	id_player1 = models.ForeignKey(Player, related_name='friendship_sender', on_delete=models.CASCADE)
-	id_player2 = models.ForeignKey(Player, related_name='friendship_receiver', on_delete=models.CASCADE)
+	id_user_1 = models.ForeignKey(User, related_name='friendship_sender', on_delete=models.CASCADE)
+	id_user_2 = models.ForeignKey(User, related_name='friendship_receiver', on_delete=models.CASCADE)
 
 	class Meta: #Model Meta is basically the inner class of your model class https://www.geeksforgeeks.org/meta-class-in-models-django/
 		constraints = [
-			UniqueConstraint(fields=['id_player1', 'id_player2'], name='unique_friendship')#https://docs.djangoproject.com/en/5.0/ref/models/constraints/#fields
+			UniqueConstraint(fields=['id_user_1', 'id_user_2'], name='unique_friendship')#https://docs.djangoproject.com/en/5.0/ref/models/constraints/#fields
 		]
 	def __str__(self):
-		return f"{self.id_player1} is friend with {self.id_player2}"
+		return f"{self.id_user_1} is friend with {self.id_user_2}"
 
 
 
