@@ -7,15 +7,15 @@ import os
 
 def get_token_from_api(request):
     # Get code parameter of the GET request (autorisation temporaire pour obtenir un jeton pour se connecter)
+    url = os.getenv('TOKEN_URL')
     code = request.GET['code']
-    response = requests.post(os.getenv('TOKEN_URL'), data={
+    response = requests.post(url, data={
         'code': code,
         'redirect_uri': os.getenv('REDIRECT_URI'),
         'client_id': os.getenv('UID'),
         'client_secret': os.getenv('SECRET'),
-        'expire_in': 3,
         'grant_type': 'authorization_code',
-    })
+    }, allow_redirects=False, cookies=None, auth=request.user, cert="",timeout=30)
     return response
 
 def get_user_from_api(request, access_token):    

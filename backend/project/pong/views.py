@@ -4,14 +4,14 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import AuthenticationForm
-from .forms import RegisterForm
 from django.contrib.auth.decorators import login_required
-
-from .models import Player, User
-# Create your views here.
 from django.contrib.auth import logout
-from .auth_api import get_token_from_api, get_user_from_api
+from .forms import RegisterForm
+from .auth import get_token_from_api, get_user_from_api
+from .models import Player, User
 import os
+
+# Create your views here.
 
 def player_list(request):
     players = list(Player.objects.all())    
@@ -40,7 +40,7 @@ def register_view(request):
             user = form.save(commit=False)
             user.set_password(form.cleaned_data['password'])
             user.save()
-            return redirect('/pong/login') # Redirect to the login page after registration
+            return redirect('/pong/home') # Redirect to the login page after registration
         else:
             form = RegisterForm(request.POST or None)
     else:
@@ -76,7 +76,7 @@ def external_login_view(request):
 
 def auth_callback(request):
     api_response = get_token_from_api(request)
-    print(api_response, "response_code =", api_response.status_code)
+    # print(api_response, "response_code =", api_response.status_code)
     if api_response.status_code == 200:
         token_data = api_response.json()
         access_token = token_data.get('access_token')

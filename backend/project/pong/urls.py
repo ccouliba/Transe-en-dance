@@ -5,8 +5,6 @@ from .views import register_view, login_view, home_view, auth_callback, external
 
 app_name = "pong"
 urlpatterns = [
-    # path("", views.index, name="index"),
-    # path("home/", home_view, name="home"),
     path("player", views.player_list, name="player_list"),
     path("", views.index, name="index"), # Home Page
     path("home/", home_view, name="home"), #home
