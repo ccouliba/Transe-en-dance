@@ -1,5 +1,6 @@
-<div class="home">
-    <p><h1>Welcome you !</h1></p>
-    <input type="button" class="button_active" name="Play" value="Play" onclick="location.href='{% url 'pong:play' %}';" />
-    <input type="button" class="button_active" name="Logout" value="Logout" onclick="location.href='{% url 'pong:login' %}';" />
-</div>
+{% extends 'pong/base.html' %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<input type="button" class="button_active" name="Play" value="Play" onclick="location.href='{% url 'pong:play' %}';" />
+<input type="button" class="button_active" name="Logout" value="Logout" onclick="location.href='{% url 'pong:login' %}';" />
+{% endblock %}

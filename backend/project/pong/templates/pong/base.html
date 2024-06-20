@@ -1,41 +1,25 @@
-{% comment %} <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<<<<<<< HEAD
-    <title>{% block title %}Mon Application{% endblock %}</title>
-=======
     <title>{% block title %}PONG{% endblock %}</title>
->>>>>>> api
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    {% comment %} <link rel="stylesheet" href="{% static 'css/style.css' %}"> {% endcomment %}
 </head>
 <body>
     <header>
-<<<<<<< HEAD
-        <h1>Bienvenue sur Mon Application</h1>
-        <nav>
-            <ul>
-                <li><a href="{% url 'pong:index' %}">Accueil</a></li>
-                <li><a href="{% url 'pong:play' %}">Jouer</a></li>
-                <li>
-                    {% if user.is_authenticated %}
-                        <a href="{% url 'pong:logout' %}">Se déconnecter</a>
-                    {% else %}
-                        <a href="{% url 'pong:login' %}">Se connecter</a>
-=======
         <h1>Welcome to PONG</h1>
         <nav>
             <ul>
-                {% comment %} <li><a href="{% url 'pong:index' %}">Accueil</a></li> {% endcomment %}
-                {% comment %} <li><a href="{% url 'pong:play' %}">Jouer</a></li> {% endcomment %}
+                {% comment %} <li><a href="{% url 'pong:index' %}">Accueil</a></li>
+                <li><a href="{% url 'pong:play' %}">Jouer</a></li> {% endcomment %}
                 <li>
                     {% if user.is_authenticated %}
                         <a href="{% url 'pong:play' %}">Play</a>
                         <a href="{% url 'pong:logout' %}">Logout</a>
+                        {% comment %} <a href="{% url 'pong:option' %}">Option</a> {% endcomment %}
                     {% else %}
-                        <p>You are not logged.
-                        Please <a href="{% url 'pong:login' %}">Login</a> or <a href="{% url 'pong:register' %}">Register</a><p>
->>>>>>> api
+                        <p>If you don't have any account, please
+                            please <a href="{% url 'pong:register' %}">Register here</a> or <a href="{% url 'pong:external-login' %}">Login with 42</a></p>
                     {% endif %}
                 </li>
             </ul>
@@ -47,15 +31,10 @@
         <!-- Contenu spécifique à chaque page -->
         {% endblock %}
     </main>
-
-<<<<<<< HEAD
-=======
     
->>>>>>> api
     <footer>
-        <p>&copy; 2024 Mon Application. Tous droits réservés.</p>
+        <p>&copy; 2024 pong. Tous droits réservés.</p>
     </footer>
-
-    <script src="{% static 'js/script.js' %}"></script>
+    {% comment %} <script src="{% static 'js/script.js' %}"></script> {% endcomment %}
 </body>
-</html> {% endcomment %}
+</html>
