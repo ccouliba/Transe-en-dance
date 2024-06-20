@@ -6,15 +6,19 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import AuthenticationForm
 from .forms import RegisterForm
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import UserChangeForm
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth import update_session_auth_hash
 
 from .models import User
+
 # Create your views here.
 from django.contrib.auth import logout
 from .auth_api import get_token_from_api, get_user_from_api
 import os
 
 def user_list(request):
-    userss = list(User.objects.all())    
+    users = list(User.objects.all())    
     viewModels = [ user.email for user in users]
     return JsonResponse(viewModels, safe=False)
 
@@ -27,23 +31,65 @@ def home_view(request):
     template = loader.get_template('pong/home.html')
     return HttpResponse(template.render())
 
-def lougout_view(request):
+def logout_view(request):
     logout(request)
     return redirect('/pong/login')
+
+# def register_view(request):
+#     if request.method == 'POST':
+#         form = RegisterForm(request.POST)
+#         if form.is_valid():
+#             user = form.save(commit=False)
+#             user.set_password(form.cleaned_data['password'])
+#             user.save()
+#             return redirect('/pong/login') # Redirect to the login page after registration
+#         else:
+#             form = RegisterForm(request.POST or None)
+#     else:
+#         form = RegisterForm()
+#     return render(request, 'pong/register.html', {'form': form})
+
+
+# def register_view(request):
+#     if request.method == 'POST':
+#         form = RegisterForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('/pong/login') 
+#     else:
+#         form = RegisterForm()
+#     return render(request, 'pong/register.html', {'form': form})
 
 def register_view(request):
     if request.method == 'POST':
         form = RegisterForm(request.POST)
         if form.is_valid():
-            user = form.save(commit=False)
-            user.set_password(form.cleaned_data['password'])
-            user.save()
-            return redirect('/pong/login') # Redirect to the login page after registration
+            form.save()
+            print("Enregistrement réussi")  # Message de succès
+            return redirect('/pong/login')  # Redirige vers la page de connexion après l'enregistrement
         else:
-            form = RegisterForm(request.POST or None)
+            print("Formulaire non valide")
+            print(form.errors)  # Affiche les erreurs du formulaire pour le débogage
     else:
         form = RegisterForm()
+        print("Affichage du formulaire d'inscription")  # Message lors de l'affichage du formulaire
     return render(request, 'pong/register.html', {'form': form})
+
+# def login_view(request):
+#     if request.method == 'POST':
+#         form = AuthenticationForm(request, data=request.POST)
+#         if form.is_valid():
+#             username = form.cleaned_data['username']
+#             password = form.cleaned_data['password']
+#             user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password'])
+#             if user is not None:
+#                 login(request, user)
+#                 return redirect('/pong/home')  # Redirige vers la page d'accueil après l'inscription
+#         else:
+#             return redirect('/pong/login')
+#     else:
+#         form = AuthenticationForm()
+#     return render(request, 'pong/login.html', {'form': form})
 
 def login_view(request):
     if request.method == 'POST':
@@ -51,12 +97,16 @@ def login_view(request):
         if form.is_valid():
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
-            user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password'])
+            user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect('/pong/home')  # Redirige vers la page d'accueil après l'inscription
+                return redirect('/pong/home')  # Redirige vers la page d'accueil après la connexion
+            else:
+                print("Authentification échouée")
         else:
-            return redirect('/pong/login')
+            print("Formulaire non valide")
+            print(form.errors)  # Affiche les erreurs du formulaire pour le débogage
+        return redirect('/pong/login')
     else:
         form = AuthenticationForm()
     return render(request, 'pong/login.html', {'form': form})
@@ -82,3 +132,39 @@ def auth_callback(request):
     return HttpResponse("Authentication failed", status=401)
 
 
+
+@login_required
+def profile_view(request):
+    return render(request, 'pong/profile.html')
+
+
+
+@login_required
+def user_updated_profile(request):
+    if request.method == 'POST':
+        form = UserChangeForm(request.POST, instance=request.user) # CECI EST DE LA MAGIE : formulaire fourni par django
+        if form.is_valid():
+            form.save()
+            return redirect('pong/profile.html')  
+    else:
+        form = UserChangeForm(instance=request.user)
+    return render(request, 'pong/update.html', {'form': form})
+
+
+@login_required
+def user_password_changed(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(user=request.user, data=request.POST) # CECI EST DE LA MAGIE : formulaire fourni par django
+        if form.is_valid():
+            form.save()
+            update_session_auth_hash(request, form.user)  # Important pour maintenir la session active
+            return redirect('pong/profile.html')  
+    else:
+        form = PasswordChangeForm(user=request.user)
+    return render(request, 'pong/change_password.html', {'form': form})
+
+@login_required
+def user_account_deleted(request):
+    user = request.user
+    user.delete()
+    return redirect('pong/home.html')  

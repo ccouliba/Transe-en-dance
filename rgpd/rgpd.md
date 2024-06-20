@@ -13,8 +13,7 @@
 
 - Sur la page du profil utilisateur, prevoir 
     - des boutons ou les utilisateurs peuvent rectifier/mettre a jour leurs donnees (ex : changer l'adresse email)
-    - un bouton ou l'utilisateur peut demander un rapport complet de ses donnees. S'
-    il demande ce rapport, prevoir une page ou on verifie bien son identite (ex : besoin de se relog ?)
+    - un bouton ou l'utilisateur peut demander un rapport complet de ses donnees. S'il demande ce rapport, prevoir une page ou on verifie bien son identite (ex : besoin de se relog ?)
 
 
 #### Backend

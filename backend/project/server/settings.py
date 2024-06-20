@@ -109,8 +109,8 @@ DATABASES = {
         'PASSWORD': 'password',
         #'HOST': 'db',
         'HOST': 'localhost',
-        #'PORT': '5432',
-        'PORT': '5433',
+        'PORT': '5432',
+        # 'PORT': '5433',
     }
 }
 
@@ -168,3 +168,18 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'pong.User'
+
+LOGIN_REDIRECT_URL = '/pong/home'
+LOGOUT_REDIRECT_URL = '/pong/login'
+
+# to manage static files (e.g. images, JavaScript, CSS)
+# STATIC_URL = "static/"
+
+# STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'project/static'),
+]
+
+# Chemin pour les fichiers statiques collectés (utilisé avec collectstatic)
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')

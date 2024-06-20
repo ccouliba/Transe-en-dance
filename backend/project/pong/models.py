@@ -71,16 +71,6 @@ class Tournament(models.Model):
 	def __str__(self):
 		return self.name
 
-# class Tournament(models.Model):
-# 	name = models.CharField(max_length=100)
-# 	is_started = models.BooleanField(default=False)
-# 	start_date = models.DateTimeField(null=True, blank=True)
-# 	end_date = models.DateTimeField(null=True, blank=True)
-# 	winner = models.ForeignKey(Player, related_name='won_tournaments', on_delete=models.SET_NULL, null=True, blank=True)
-
-# 	def __str__(self):
-# 		return self.name
-
 class Participate(models.Model):
 	player = models.ForeignKey(User, on_delete=models.CASCADE)
 	tournament = models.ForeignKey(Tournament, on_delete=models.CASCADE)
@@ -95,18 +85,6 @@ class Participate(models.Model):
 	def __str__(self):
 		return f"{self.player} participates in {self.tournament} as {self.alias}, order of turn: {self.order_of_turn}"
 
-# class Participate(models.Model):
-# 	player = models.ForeignKey(Player, on_delete=models.CASCADE)
-# 	tournament = models.ForeignKey(Tournament, on_delete=models.CASCADE)
-# 	order_of_turn = models.IntegerField()
-# 	alias = models.CharField(max_length=50)
-# 	class Meta:
-# 		constraints = [
-# 			UniqueConstraint(fields=['player', 'tournament'], name='unique_player_tournament')
-# 		]
-# 	def __str__(self):
-# 		return f"{self.player} participates in {self.tournament} as {self.alias}, order of turn: {self.order_of_turn}"
- 
 
 class Composed(models.Model):
 	tournament = models.ForeignKey(Tournament, on_delete=models.CASCADE)
