@@ -40,7 +40,7 @@ ALLOWE_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'polls',
+    # 'polls',
     'pong',
     'django.contrib.admin',
     'django.contrib.auth',

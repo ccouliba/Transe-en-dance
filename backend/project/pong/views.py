@@ -7,15 +7,15 @@ from django.contrib.auth.forms import AuthenticationForm
 from .forms import RegisterForm
 from django.contrib.auth.decorators import login_required
 
-from .models import Player, User
+from .models import User
 # Create your views here.
 from django.contrib.auth import logout
 from .auth_api import get_token_from_api, get_user_from_api
 import os
 
-def player_list(request):
-    players = list(Player.objects.all())    
-    viewModels = [ player.user.email for player in players]
+def user_list(request):
+    userss = list(User.objects.all())    
+    viewModels = [ user.email for user in users]
     return JsonResponse(viewModels, safe=False)
 
 

@@ -8,6 +8,10 @@ from django.db.models import UniqueConstraint
 # class User(AbstractUser): #https://openclassrooms.com/fr/courses/7192426-allez-plus-loin-avec-le-framework-django/7386368-personnalisez-le-modele-utilisateur
 
 class User(AbstractUser):
+	creation_date = models.DateTimeField(default=timezone.now)  # Date de creation de l'utilisateur
+	langue = models.CharField(max_length=10, blank=True, null=True)  # Langue de l'utilisateur
+	avatar = models.CharField(max_length=255, blank=True, null=True)  # URL ou chemin de l'avatar de l'utilisateur
+
 	# Ajout d'un champ many-to-many pour les groupes auxquels cet utilisateur appartient
 	groups = models.ManyToManyField(
 		Group,  # Le modele de groupe du framework d'authentification de Django
@@ -30,8 +34,8 @@ class User(AbstractUser):
 
 
 class Friendship(models.Model):
-	id_user_1 = models.ForeignKey(User, related_name='friendship_sender', on_delete=models.CASCADE)
-	id_user_2 = models.ForeignKey(User, related_name='friendship_receiver', on_delete=models.CASCADE)
+	id_user_1 = models.ForeignKey(User, related_name='friendship_sender', on_delete=models.CASCADE, null = True, blank = True)
+	id_user_2 = models.ForeignKey(User, related_name='friendship_receiver', on_delete=models.CASCADE, null = True, blank = True)
 
 	class Meta: #Model Meta is basically the inner class of your model class https://www.geeksforgeeks.org/meta-class-in-models-django/
 		constraints = [
@@ -44,45 +48,64 @@ class Friendship(models.Model):
 
 class Game(models.Model):
 	date = models.DateTimeField(auto_now_add=True)
-	winner = models.ForeignKey(Player, related_name='won_games', on_delete=models.SET_NULL, null=True, blank=True)
-	status = models.CharField(max_length=20)  # Values can be 'started', 'finished', 'canceled'
+	player_1 = models.ForeignKey(User, related_name='games_as_player_1', on_delete=models.CASCADE, null=True, blank=True)
+	player_2 = models.ForeignKey(User, related_name='games_as_player_2', on_delete=models.CASCADE, null=True, blank=True)
+	winner = models.ForeignKey(User, related_name='won_games', on_delete=models.SET_NULL, null=True, blank=True)
+	score = models.IntegerField(null=True, blank=True)
+	status = models.CharField(max_length=20, choices=[
+		('started', 'Started'),
+		('finished', 'Finished'),
+		('canceled', 'Canceled')
+	])
 
 	def __str__(self):
-		return f"Game {self.id} on {self.date}"
-
-class Play(models.Model):
-	player = models.ForeignKey(Player, on_delete=models.CASCADE)
-	game = models.ForeignKey(Game, on_delete=models.CASCADE)
-	score = models.IntegerField()
-	class Meta:
-		constraints = [
-			UniqueConstraint(fields=['player', 'game'], name='unique_player_game')
-		]
-
-	def __str__(self):
-		return f"{self.player} played in {self.game} with score {self.score}"
+		return f"Game {self.id} on {self.date} between {self.player_1} and {self.player_2}"
 
 class Tournament(models.Model):
 	name = models.CharField(max_length=100)
 	is_started = models.BooleanField(default=False)
 	start_date = models.DateTimeField(null=True, blank=True)
 	end_date = models.DateTimeField(null=True, blank=True)
-	winner = models.ForeignKey(Player, related_name='won_tournaments', on_delete=models.SET_NULL, null=True, blank=True)
+	winner = models.ForeignKey(User, related_name='won_tournaments', on_delete=models.SET_NULL, null=True, blank=True)
 
 	def __str__(self):
 		return self.name
 
+# class Tournament(models.Model):
+# 	name = models.CharField(max_length=100)
+# 	is_started = models.BooleanField(default=False)
+# 	start_date = models.DateTimeField(null=True, blank=True)
+# 	end_date = models.DateTimeField(null=True, blank=True)
+# 	winner = models.ForeignKey(Player, related_name='won_tournaments', on_delete=models.SET_NULL, null=True, blank=True)
+
+# 	def __str__(self):
+# 		return self.name
+
 class Participate(models.Model):
-	player = models.ForeignKey(Player, on_delete=models.CASCADE)
+	player = models.ForeignKey(User, on_delete=models.CASCADE)
 	tournament = models.ForeignKey(Tournament, on_delete=models.CASCADE)
 	order_of_turn = models.IntegerField()
 	alias = models.CharField(max_length=50)
+
 	class Meta:
 		constraints = [
-			UniqueConstraint(fields=['player', 'tournament'], name='unique_player_tournament')
+			models.UniqueConstraint(fields=['player', 'tournament'], name='unique_player_tournament')
 		]
+
 	def __str__(self):
 		return f"{self.player} participates in {self.tournament} as {self.alias}, order of turn: {self.order_of_turn}"
+
+# class Participate(models.Model):
+# 	player = models.ForeignKey(Player, on_delete=models.CASCADE)
+# 	tournament = models.ForeignKey(Tournament, on_delete=models.CASCADE)
+# 	order_of_turn = models.IntegerField()
+# 	alias = models.CharField(max_length=50)
+# 	class Meta:
+# 		constraints = [
+# 			UniqueConstraint(fields=['player', 'tournament'], name='unique_player_tournament')
+# 		]
+# 	def __str__(self):
+# 		return f"{self.player} participates in {self.tournament} as {self.alias}, order of turn: {self.order_of_turn}"
  
 
 class Composed(models.Model):
