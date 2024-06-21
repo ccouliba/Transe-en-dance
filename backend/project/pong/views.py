@@ -9,13 +9,15 @@ from django.contrib.auth.forms import UserChangeForm
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
 from django.shortcuts import render
-from .models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from .forms import RegisterForm
 from .models import User
+from .models import Game
+from django.views.decorators.csrf import csrf_exempt
 from . import auth
 import os
+from django.views.decorators.http import require_POST
 
 def user_list(request):
     users = list(User.objects.all())    
@@ -96,11 +98,11 @@ def auth_callback(request):
 
 
 
+#everything for the user
+
 @login_required
 def profile_view(request):
     return render(request, 'pong/profile.html')
-
-
 
 @login_required
 def user_updated_profile(request):
@@ -112,7 +114,6 @@ def user_updated_profile(request):
     else:
         form = UserChangeForm(instance=request.user)
     return render(request, 'pong/update.html', {'form': form})
-
 
 @login_required
 def user_password_changed(request):
@@ -131,3 +132,64 @@ def user_account_deleted(request):
     user = request.user
     user.delete()
     return redirect('pong/home.html')  
+
+#lets the game begin...
+import json
+@login_required
+@require_POST
+@csrf_exempt # TO DO : ENLEVER CELA C EST JUSTE POUR LES TESTS AVEC POSTMAN !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+def start_game(request):
+    player = request.user
+    
+    payload = json.loads(request.body) 
+    opponent_id = payload['opponent_id']    
+
+    opponent = User.objects.get(id=opponent_id)
+    
+    game = Game.objects.create(player1=player, player2=opponent, status='started')
+    
+    return JsonResponse({'game_id': game.id, 'status': 'started'})
+
+# @login_required
+# @require_POST
+# def update_score(request):
+#     game_id = request.POST.get('game_id')
+#     player_id = request.POST.get('player_id')
+#     new_score = request.POST.get('new_score')
+    
+#     game = Game.objects.get(id=game_id)
+#     if game.status == 'started':
+#         if game.player1.id == player_id:
+#             game.player1_score = new_score
+#         elif game.player2.id == player_id:
+#             game.player2_score = new_score
+#         game.save()
+        
+#         return JsonResponse({'status': 'score_updated', 'game_id': game.id})
+#     return JsonResponse({'status': 'error', 'message': 'Game not in progress'}, status=400)
+
+# @login_required
+# @require_POST
+# def finish_game(request):
+#     game_id = request.POST.get('game_id')
+#     winner_id = request.POST.get('winner_id')
+    
+#     game = Game.objects.get(id=game_id)
+#     game.status = 'finished'
+#     game.winner = User.objects.get(id=winner_id)
+#     game.save()
+    
+#     return JsonResponse({'status': 'finished', 'game_id': game.id, 'winner': game.winner.id})
+
+
+# @login_required
+# @require_POST
+# def cancel_game(request):
+#     game_id = request.POST.get('game_id')
+    
+#     game = Game.objects.get(id=game_id)
+#     game.status = 'canceled'
+#     game.save()
+    
+#     return JsonResponse({'status': 'canceled', 'game_id': game.id})
+

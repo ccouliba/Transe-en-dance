@@ -46,21 +46,33 @@ class Friendship(models.Model):
 
 
 
+# class Game(models.Model):
+# 	date = models.DateTimeField(auto_now_add=True)
+# 	player_1 = models.ForeignKey(User, related_name='games_as_player_1', on_delete=models.CASCADE, null=True, blank=True)
+# 	player_2 = models.ForeignKey(User, related_name='games_as_player_2', on_delete=models.CASCADE, null=True, blank=True)
+# 	winner = models.ForeignKey(User, related_name='won_games', on_delete=models.SET_NULL, null=True, blank=True)
+# 	score = models.IntegerField(null=True, blank=True)
+# 	status = models.CharField(max_length=20, choices=[
+# 		('started', 'Started'),
+# 		('finished', 'Finished'),
+# 		('canceled', 'Canceled')
+# 	])
+
+# 	def __str__(self):
+# 		return f"Game {self.id} on {self.date} between {self.player_1} and {self.player_2}"
+
 class Game(models.Model):
-	date = models.DateTimeField(auto_now_add=True)
-	player_1 = models.ForeignKey(User, related_name='games_as_player_1', on_delete=models.CASCADE, null=True, blank=True)
-	player_2 = models.ForeignKey(User, related_name='games_as_player_2', on_delete=models.CASCADE, null=True, blank=True)
-	winner = models.ForeignKey(User, related_name='won_games', on_delete=models.SET_NULL, null=True, blank=True)
-	score = models.IntegerField(null=True, blank=True)
-	status = models.CharField(max_length=20, choices=[
-		('started', 'Started'),
-		('finished', 'Finished'),
-		('canceled', 'Canceled')
-	])
+    player1 = models.ForeignKey(User, related_name='player1_games', on_delete=models.CASCADE,  null=True, blank=True)
+    player2 = models.ForeignKey(User, related_name='player2_games', on_delete=models.CASCADE,  null=True, blank=True)
+    player1_score = models.IntegerField(default=0)
+    player2_score = models.IntegerField(default=0)
+    status = models.CharField(max_length=20, choices=[('started', 'Started'), ('finished', 'Finished'), ('canceled', 'Canceled')])
+    winner = models.ForeignKey(User, related_name='won_games', on_delete=models.SET_NULL, null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True,  null=True, blank=True)
 
-	def __str__(self):
-		return f"Game {self.id} on {self.date} between {self.player_1} and {self.player_2}"
-
+    def __str__(self):
+        return f"Game {self.id}: {self.player1} vs {self.player2}"
+    
 class Tournament(models.Model):
 	name = models.CharField(max_length=100)
 	is_started = models.BooleanField(default=False)
