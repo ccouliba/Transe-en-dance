@@ -51,45 +51,77 @@ class FriendshipModelTest(TestCase):
 		self.assertEqual(self.friendship.id_user_2, self.user2)
 
 
+# class GameModelTest(TestCase):
+
+# 	def setUp(self):
+# 		# Création de trois utilisateurs pour les tests
+# 		self.player_1 = User.objects.create_user(username='player1', email='player1@example.com', password='password123')
+# 		self.player_2 = User.objects.create_user(username='player2', email='player2@example.com', password='password123')
+# 		self.winner = User.objects.create_user(username='winner', email='winner@example.com', password='password123')
+
+# 	def test_game_creation(self):
+# 		# Création d'un jeu
+# 		game = Game.objects.create(
+# 			player_1=self.player_1,
+# 			player_2=self.player_2,
+# 			winner=self.winner,
+# 			score=42,
+# 			status='finished'
+# 		)
+
+# 		# Vérification que l'objet a été créé correctement
+# 		self.assertEqual(game.player_1, self.player_1)
+# 		self.assertEqual(game.player_2, self.player_2)
+# 		self.assertEqual(game.winner, self.winner)
+# 		self.assertEqual(game.score, 42)
+# 		self.assertEqual(game.status, 'finished')
+
+# 	def test_game_str_method(self):
+# 		# Création d'un jeu
+# 		game = Game.objects.create(
+# 			player_1=self.player_1,
+# 			player_2=self.player_2,
+# 			winner=self.winner,
+# 			score=42,
+# 			status='finished'
+# 		)
+
+# 		# Vérification de la méthode __str__
+# 		expected_str = f"Game {game.id} on {game.date} between {self.player_1} and {self.player_2}"
+# 		self.assertEqual(str(game), expected_str)
+
+
+
 class GameModelTest(TestCase):
+    def setUp(self):
+        self.player1 = User.objects.create_user(username='player1', password='password')
+        self.player2 = User.objects.create_user(username='player2', password='password')
+        self.winner = User.objects.create_user(username='winner', password='password')
 
-	def setUp(self):
-		# Création de trois utilisateurs pour les tests
-		self.player_1 = User.objects.create_user(username='player1', email='player1@example.com', password='password123')
-		self.player_2 = User.objects.create_user(username='player2', email='player2@example.com', password='password123')
-		self.winner = User.objects.create_user(username='winner', email='winner@example.com', password='password123')
-
-	def test_game_creation(self):
-		# Création d'un jeu
-		game = Game.objects.create(
-			player_1=self.player_1,
-			player_2=self.player_2,
-			winner=self.winner,
-			score=42,
-			status='finished'
-		)
-
-		# Vérification que l'objet a été créé correctement
-		self.assertEqual(game.player_1, self.player_1)
-		self.assertEqual(game.player_2, self.player_2)
-		self.assertEqual(game.winner, self.winner)
-		self.assertEqual(game.score, 42)
-		self.assertEqual(game.status, 'finished')
-
-	def test_game_str_method(self):
-		# Création d'un jeu
-		game = Game.objects.create(
-			player_1=self.player_1,
-			player_2=self.player_2,
-			winner=self.winner,
-			score=42,
-			status='finished'
-		)
-
-		# Vérification de la méthode __str__
-		expected_str = f"Game {game.id} on {game.date} between {self.player_1} and {self.player_2}"
-		self.assertEqual(str(game), expected_str)
-
+    def test_game_creation(self):
+        game = Game.objects.create(
+            player1=self.player1,
+            player2=self.player2,
+            player1_score=10,
+            player2_score=5,
+            status='finished',
+            winner=self.winner
+        )
+        self.assertEqual(game.player1, self.player1)
+        self.assertEqual(game.player2, self.player2)
+        self.assertEqual(game.status, 'finished')
+        self.assertEqual(game.winner, self.winner)
+    
+    def test_game_str_method(self):
+        game = Game.objects.create(
+            player1=self.player1,
+            player2=self.player2,
+            player1_score=10,
+            player2_score=5,
+            status='finished',
+            winner=self.winner
+        )
+        self.assertEqual(str(game), f"Game {game.id}: {self.player1} vs {self.player2}")
 
 class TournamentModelTest(TestCase):
 	
@@ -132,37 +164,3 @@ class ComposedModelTest(TestCase):
         self.assertEqual(self.game.player2, self.player2)
         self.assertEqual(self.game.status, 'finished')
         self.assertEqual(self.game.winner, self.winner)
-
-
-#testing game now
-
-class GameModelTest(TestCase):
-    def setUp(self):
-        self.player1 = User.objects.create_user(username='player1', password='password')
-        self.player2 = User.objects.create_user(username='player2', password='password')
-        self.winner = User.objects.create_user(username='winner', password='password')
-
-    def test_game_creation(self):
-        game = Game.objects.create(
-            player1=self.player1,
-            player2=self.player2,
-            player1_score=10,
-            player2_score=5,
-            status='finished',
-            winner=self.winner
-        )
-        self.assertEqual(game.player1, self.player1)
-        self.assertEqual(game.player2, self.player2)
-        self.assertEqual(game.status, 'finished')
-        self.assertEqual(game.winner, self.winner)
-    
-    def test_game_str_method(self):
-        game = Game.objects.create(
-            player1=self.player1,
-            player2=self.player2,
-            player1_score=10,
-            player2_score=5,
-            status='finished',
-            winner=self.winner
-        )
-        self.assertEqual(str(game), f"Game {game.id}: {self.player1} vs {self.player2}")

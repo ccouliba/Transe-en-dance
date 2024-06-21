@@ -24,4 +24,8 @@ urlpatterns = [
 	path('profile/delete_account/', views.user_account_deleted, name='delete_account'),
  
 	path('start_game/', views.start_game, name='start_game'),
+	path('update_score/', views.update_score, name='update_score'),
+	path('finish_game/', views.finish_game, name='finish_game'),
+	path('cancel_game/', views.cancel_game, name='cancel_game'),
+ 
 ]
