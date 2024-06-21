@@ -6,6 +6,9 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
+from django.contrib.auth.forms import UserChangeForm
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth import update_session_auth_hash
 from .forms import RegisterForm
 from .models import Player, User
 from . import auth
@@ -13,13 +16,11 @@ import os
 
 # Create your views here.
 
-def player_list(request):
-    players = list(Player.objects.all())    
-    viewModels = [ player.user.email for player in players]
+@login_required
+def user_list(request):
+    users = list(User.objects.all())    
+    viewModels = [ user.email for user in users]
     return JsonResponse(viewModels, safe=False)
-
-
-
 
 def index(request):
     template = loader.get_template('pong/index.html')
