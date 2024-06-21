@@ -22,6 +22,8 @@ urlpatterns = [
 	path('profile/update/', views.user_updated_profile, name='update_profile'),
 	path('profile/change_password/', views.user_password_changed, name='change_password'),
 	path('profile/delete_account/', views.user_account_deleted, name='delete_account'),
+	
+ 	path('game/', views.game, name='game'), 
  
 	path('start_game/', views.start_game, name='start_game'),
 	path('update_score/', views.update_score, name='update_score'),

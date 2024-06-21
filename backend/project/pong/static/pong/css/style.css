@@ -67,3 +67,19 @@ h1.pong-title {
     margin-top: 20px; /* Marge en haut */
     letter-spacing: 2px; /* Espacement des lettres */
 }
+
+
+#game-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+}
+
+#pong-canvas {
+    border: 1px solid #000;
+}
+
+#controls {
+    margin-top: 20px;
+}

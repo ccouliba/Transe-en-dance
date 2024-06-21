@@ -133,6 +133,14 @@ def user_account_deleted(request):
     return redirect('pong/home.html')  
 
 #lets the game begin...
+
+
+
+def game(request):
+    return render(request, 'pong/game.html')
+
+
+
 import json
 from django.views.decorators.csrf import csrf_exempt
 
