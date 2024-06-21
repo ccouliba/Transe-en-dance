@@ -1,10 +1,9 @@
 from django.template import loader
-from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import AuthenticationForm
-from .forms import RegisterForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserChangeForm
 from django.contrib.auth.forms import PasswordChangeForm
@@ -13,7 +12,9 @@ from django.shortcuts import render
 from .models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
-from .auth_api import get_token_from_api, get_user_from_api
+from .forms import RegisterForm
+from .models import User
+from . import auth
 import os
 
 def user_list(request):
@@ -83,9 +84,11 @@ def external_login_view(request):
     return redirect(f"{forty2_auth_url}?client_id={client_id}&redirect_uri={redirect_uri}&response_type=code")
 
 def auth_callback(request):
-    api_response = get_token_from_api(request)
-    print(api_response, "response_code =", api_response.status_code)
-    if api_response.status_code == 200:
+    api_response = auth.get_response_from_api(request)
+    if api_response is None:
+        # print(api_response, "response_code =", api_response.status_code)
+        return redirect('/pong/login')    
+    elif api_response.status_code == 200:
         token_data = api_response.json()
         access_token = token_data.get('access_token')
         return get_user_from_api(request, access_token)

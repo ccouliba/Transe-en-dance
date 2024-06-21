@@ -58,6 +58,7 @@ Please follow this steps:
   - Majeur : Journaux de log
 ### Modules Accessibilite
   - mineur : Multi-langues
+  - mineur : SSR (Django itself allows us to)
 
 ## Bonus
 ### Modules IA-algo
@@ -71,7 +72,6 @@ Please follow this steps:
 ### Modules Accessibilite
   - mineur : Support sur tout type (*Bonus*)
   - mineur : Compatibilite navigateur (*Bonus*)
-  - mineur : SSR (*Bonus*)
 ### Modules Devops
   - Majeur : Microservices (*Bonus*)
 ### Modules Oriente objet

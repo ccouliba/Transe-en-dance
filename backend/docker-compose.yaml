@@ -10,7 +10,7 @@ services:
     ports:
       - 8000:8000
     env_file:
-      - ./.env.dev
+      - ./project/.env
     depends_on:
       - db
     restart: unless-stopped
