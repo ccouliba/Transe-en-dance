@@ -10,16 +10,12 @@
         <h1>Welcome to PONG</h1>
         <nav>
             <ul>
-                {% comment %} <li><a href="{% url 'pong:index' %}">Accueil</a></li>
-                <li><a href="{% url 'pong:play' %}">Jouer</a></li> {% endcomment %}
                 <li>
                     {% if user.is_authenticated %}
-                        <a href="{% url 'pong:play' %}">Play</a>
-                        <a href="{% url 'pong:logout' %}">Logout</a>
-                        {% comment %} <a href="{% url 'pong:option' %}">Option</a> {% endcomment %}
+                        <a href="{% url 'pong:home' %}">Home</a>
+                        {% comment %} <a href="{% url 'pong:logout' %}">Logout</a> {% endcomment %}
                     {% else %}
-                        <p>If you don't have any account, please
-                            please <a href="{% url 'pong:register' %}">Register here</a> or <a href="{% url 'pong:external-login' %}">Login with 42</a></p>
+                        <a href="{% url 'pong:index' %}"></a>
                     {% endif %}
                 </li>
             </ul>
@@ -28,7 +24,6 @@
 
     <main>
         {% block content %}
-        <!-- Contenu spécifique à chaque page -->
         {% endblock %}
     </main>
     

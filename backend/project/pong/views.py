@@ -29,6 +29,7 @@ def home_view(request):
     template = loader.get_template('pong/home.html')
     return HttpResponse(template.render())
 
+@login_required
 def lougout_view(request):
     logout(request)
     return redirect('/pong/login')
