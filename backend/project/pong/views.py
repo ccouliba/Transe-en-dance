@@ -5,18 +5,15 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
-<<<<<<< HEAD
-=======
 from django.contrib.auth.forms import UserChangeForm
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
 from django.shortcuts import render
 from .models import User
 from django.contrib.auth.decorators import login_required
->>>>>>> backend
 from django.contrib.auth import logout
 from .forms import RegisterForm
-from .models import Player, User
+from .models import User
 from . import auth
 import os
 
