@@ -173,12 +173,12 @@ LOGIN_REDIRECT_URL = '/pong/home'
 LOGOUT_REDIRECT_URL = '/pong/login'
 
 # to manage static files (e.g. images, JavaScript, CSS)
+# https://docs.djangoproject.com/en/5.0/howto/static-files/
+
 # STATIC_URL = "static/"
 
-# STATIC_URL = '/static/'
-
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'project/static'),
+    os.path.join(BASE_DIR, 'pong/static'),
 ]
 
 # Chemin pour les fichiers statiques collectés (utilisé avec collectstatic)

@@ -1,22 +1,18 @@
 <!-- templates/profile/profile.html -->
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Profile</title>
-	{% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'pong/css/style.css' %}">
-</head>
-<body>
-	{% include 'pong/menu.html' %}
-	<h1>Profile Information</h1>
-	<p>Username: {{ user.username }}</p>
-	<p>Email: {{ user.email }}</p>
+{% extends 'pong/base.html' %}
+{% load static %}
 
-	<a href="{% url 'pong:update_profile' %}">Update Profile</a><br>
-	<a href="{% url 'pong:change_password' %}">Change Password</a><br>
-	<form action="{% url 'pong:delete_account' %}" method="post">
-		{% csrf_token %}
-		<button type="submit">Delete Account</button>
-	</form>
-</body>
-</html>
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+<h1>Profile Information</h1>
+<p>Username: {{ user.username }}</p>
+<p>Email: {{ user.email }}</p>
+
+<a href="{% url 'pong:update_profile' %}">Update Profile</a><br>
+<a href="{% url 'pong:change_password' %}">Change Password</a><br>
+<form action="{% url 'pong:delete_account' %}" method="post">
+    {% csrf_token %}
+    <button type="submit">Delete Account</button>
+</form>
+{% endblock %}

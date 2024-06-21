@@ -9,9 +9,9 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserChangeForm
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
-
+from django.shortcuts import render
 from .models import User
-
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 from django.contrib.auth import logout
 from .auth_api import get_token_from_api, get_user_from_api
@@ -27,9 +27,12 @@ def index(request):
     template = loader.get_template('pong/index.html')
     return HttpResponse(template.render())
 
+# def home_view(request): #ne fonctionne pas car ne verifie pas l'authentification du user
+#     template = loader.get_template('pong/home.html')
+#     return HttpResponse(template.render())
+
 def home_view(request):
-    template = loader.get_template('pong/home.html')
-    return HttpResponse(template.render())
+    return render(request, 'pong/home.html')
 
 def logout_view(request):
     logout(request)
@@ -110,6 +113,8 @@ def login_view(request):
     else:
         form = AuthenticationForm()
     return render(request, 'pong/login.html', {'form': form})
+
+
 
 @login_required
 def play(request):
