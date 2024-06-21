@@ -1,0 +1,83 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-06-21 18:23+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+#: templates/pong/base.html:17
+msgid "You are not logged. Please"
+msgstr "Vous n'etes pas connectes."
+
+#: templates/pong/base.html:17
+msgid "or"
+msgstr "ou"
+
+#: templates/pong/base.html:18
+msgid "Or login with 42 here"
+msgstr "Ou se connecter vous avec 42"
+
+#: templates/pong/base.html:18
+msgid "Login with 42"
+msgstr "Se connecter avec 42"
+
+#: templates/pong/base.html:32
+msgid "Change language"
+msgstr "Changer la langue"
+
+#: templates/pong/base.html:45
+msgid "2024 pong. All rights reserved."
+
+msgstr "2024 pong. Tous droits réservés."
+
+#: templates/pong/change_password.html:12 templates/pong/profile.html:13
+msgid "Change Password"
+msgstr "Changer le mot de passe"
+
+#: templates/pong/change_password.html:14
+msgid "Back to Profile"
+msgstr "Retour au profil"
+
+#: templates/pong/login.html:18
+msgid "If you don't have an account, please"
+msgstr "If vous n'avez pas de compte, "
+
+#: templates/pong/login.html:18
+msgid "Register here"
+msgstr "Creer un compte"
+
+#: templates/pong/menu.html:7
+msgid "Deconnection"
+msgstr "Déconnexion"
+
+#: templates/pong/profile.html:8
+msgid "Profile Information"
+msgstr "Information du profil"
+
+#: templates/pong/profile.html:12
+msgid "Update Profile"
+msgstr "Mis a jour profil"
+
+#: templates/pong/profile.html:16
+msgid "Delete Account"
+msgstr "Supprimer mon compte"
+
+#: templates/pong/register.html:18
+msgid "If you already have an account, please"
+msgstr "Si vous avez deja un compte, "
+
+#: templates/pong/register.html:18
+msgid "Login here"
+msgstr "Se connecter"

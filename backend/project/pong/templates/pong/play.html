@@ -1,7 +1,20 @@
 {% extends 'pong/base.html' %}
 {% load static %}
+{% load i18n %}
+
+{% block title %}Play{% endblock %}
+
+{% block content %}
+    <h1>PONG</h1>
+    <!-- Include your game HTML here -->
+    <iframe src="{% static 'game/index.html' %}" width="900" height="600"></iframe>
+    {% comment %} <input type="button" class="button_active" name="Logout" value="Logout" onclick="location.href='{% url 'pong:logout' %}';" /> {% endcomment %}
+{% endblock %}
+
+{% comment %} {% extends 'pong/base.html' %}
+{% load static %}
 {% block title %}Play{% endblock %}
 {% block content %}
 <iframe src="{% static 'game/index.html' %}" width="900" height="600"></iframe>
 {% comment %} <input type="button" class="button_active" name="Logout" value="Logout" onclick="location.href='{% url 'pong:logout' %}';" /> {% endcomment %}
-{% endblock %}
+{% comment %}{% endblock %} {% endcomment %}

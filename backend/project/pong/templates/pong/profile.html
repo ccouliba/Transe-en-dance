@@ -1,21 +1,18 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Profile</title>
-	{% comment %} {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'pong/css/style.css' %}"> {% endcomment %}
-</head>
-<body>
-	{% include 'pong/menu.html' %}
-	<h1>Profile Information</h1>
-	<p>Username: {{ user.username }}</p>
-	<p>Email: {{ user.email }}</p>
+{% extends 'pong/base.html' %}
+{% load static %}
+{% load i18n %}
 
-	<a href="{% url 'pong:update_profile' %}">Update Profile</a><br>
-	<a href="{% url 'pong:change_password' %}">Change Password</a><br>
-	<form action="{% url 'pong:delete_account' %}" method="post">
-		{% csrf_token %}
-		<button type="submit">Delete Account</button>
-	</form>
-</body>
-</html>
+{% block title %}Profile{% endblock %}
+
+{% trans block content %}
+<h1>{% translate "Profile Information" %}</h1>
+<p>{% translate Username: {{ user.username }} %}</p>
+<p>{% translate Email: {{ user.email }} %}</p>
+
+<a href="{% url 'pong:update_profile' %}">{% translate "Update Profile" %}</a><br>
+<a href="{% url 'pong:change_password' %}">{% translate "Change Password" %}</a><br>
+<form action="{% url 'pong:delete_account' %}" method="post">
+    {% csrf_token %}
+    <button type="submit">{% translate "Delete Account" %}</button>
+</form>
+{% endblock %}

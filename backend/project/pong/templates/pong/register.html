@@ -1,4 +1,24 @@
 {% extends 'pong/base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}Register{% endblock %}
+
+{% block user_navigation %}
+    <!-- On surcharge ce bloc pour ne rien afficher -->
+{% endblock %}
+
+{% block content %}
+<h2>Register</h2>
+<form method="post" action="{% url 'pong:register' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Register</button>
+</form>
+<p>{% translate "If you already have an account, please" %} <a href="{% url 'pong:login' %}">{% translate "Login here" %}</a></p>
+{% endblock %}
+
+{% comment %} {% extends 'pong/base.html' %}
 {% block title %}Register{% endblock %}
 {% block content %}
 <form method="post" action="{% url 'pong:register' %}">
@@ -7,4 +27,4 @@
     <button type="submit">Register</button>
 </form>
 <p>if you already have an account, please <a href="{% url 'pong:login' %}">Log here</a></p>
-{% endblock %}
+{% endblock %} {% endcomment %}

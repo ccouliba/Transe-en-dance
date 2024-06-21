@@ -1,19 +1,15 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Update Profile</title>
-	{% comment %} {% load static %} {% endcomment %}
-    {% comment %} <link rel="stylesheet" type="text/css" href="{% static 'pong/css/style.css' %}"> {% endcomment %}
-</head>
-<body>
-	{% include 'pong/menu.html' %}
+{% extends 'pong/base.html' %}
+{% load static %}
+{% load i18n %}
 
-	<h1>Update Profile</h1>
-	<form method="post">
-		{% csrf_token %}
-		{{ form.as_p }}
-		<button type="submit">Update</button>
-	</form>
-	<a href="{% url 'pong:profile' %}">Back to Profile</a>
-</body>
-</html>
+{% block title %}Update Profile{% endblock %}
+
+{% trans block content %}
+<h1>Update Profile</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">{% translate Update %}</button>
+</form>
+<a href="{% url 'pong:profile' %}">{% translate "Back to Profile" }</a>
+{% endblock %}

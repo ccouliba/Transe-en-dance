@@ -8,6 +8,7 @@ from django.contrib.auth import logout
 from django.contrib.auth.forms import UserChangeForm
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
+from django.utils.translation import gettext as _
 from .forms import RegisterForm
 from .models import User
 from . import auth
