@@ -41,7 +41,7 @@ ALLOWE_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'polls',
+    # 'polls',
     'pong',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -84,31 +84,36 @@ WSGI_APPLICATION = 'server.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': os.getenv('SQL_ENGINE', 'django.db.backends.postgresql_psycopg2'),
-        'NAME': os.getenv('SQL_DATABASE', 'db1'),
-        'USER': os.getenv('SQL_USER', 'ccouliba'),
-        'PASSWORD': os.getenv('SQL_PASSWORD'),
-        'HOST': os.getenv('SQL_HOST', 'localhost'),
-        'PORT': os.getenv('SQL_PORT', '5432'),
-    }
-}
-
-# # on localhost
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         # 'SERVICE': 'myservice',
-#         'NAME': 'db1',
-#         'USER': 'ccouliba',
-#         'PASSWORD': 'password',
-#         #'HOST': 'db',
-#         'HOST': 'localhost',
-#         #'PORT': '5432',
-#         'PORT': '5433',
+#         'ENGINE': os.getenv('SQL_ENGINE', 'django.db.backends.postgresql_psycopg2'),
+#         'NAME': os.getenv('SQL_DATABASE', 'db1'),
+#         'USER': os.getenv('SQL_USER', 'ccouliba'),
+#         'PASSWORD': os.getenv('SQL_PASSWORD'),
+#         'HOST': os.getenv('SQL_HOST', 'db'),
+#         'PORT': os.getenv('SQL_PORT', '5432'),
+
+# # DATABASES = {
+# #     'default': {
+# #         'ENGINE': 'django.db.backends.sqlite3',
+# #         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
+
+# on localhost
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        # 'SERVICE': 'myservice',
+        'NAME': 'db1',
+        'USER': 'ccouliba',
+        'PASSWORD': 'password',
+        #'HOST': 'db',
+        'HOST': 'localhost',
+        'PORT': '5432',
+        # 'PORT': '5433',
+    }
+}
 
 # DATABASES = {
 #     'default': {
@@ -164,3 +169,18 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'pong.User'
+
+LOGIN_REDIRECT_URL = '/pong/home'
+LOGOUT_REDIRECT_URL = '/pong/login'
+
+# to manage static files (e.g. images, JavaScript, CSS)
+# https://docs.djangoproject.com/en/5.0/howto/static-files/
+
+# STATIC_URL = "static/"
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'pong/static'),
+]
+
+# Chemin pour les fichiers statiques collectés (utilisé avec collectstatic)
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')

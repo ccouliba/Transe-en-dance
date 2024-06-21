@@ -1,6 +1,26 @@
+<!-- templates/pong/index.html -->
+
 {% extends 'pong/base.html' %}
-{% block title %}Index{% endblock %}
+{% load static %}
+
+{% block title %}Welcome{% endblock %}
+
 {% block content %}
-    <p> <a href="{% url 'pong:login' %}">Login</a> or <a href="{% url 'pong:register' %}">Register</a></p>
-    <p>If you are a 42 student, please <a href="{% url 'pong:external-login' %}">Login with 42</a>
+<div class="index">
+    <!-- <p>Welcome you!</p> -->
+    <!-- {% if not user.is_authenticated %}
+        <p>You are not logged in.
+        Please <a href="{% url 'pong:login' %}">Login</a> or <a href="{% url 'pong:register' %}">Register</a></p>
+        <p>Or login with 42 here <a href="{% url 'pong:external-login' %}">Login with 42</a></p>
+    {% endif %} -->
+</div>
 {% endblock %}
+
+<!-- <div class="index">
+    <p>Welcome you !</p>
+    <p>You are not logged.
+    Please <a href="{% url 'pong:login' %}">Login</a> or <a href="{% url 'pong:register' %}">Register</a></p>
+    <p>Or login with 42 here <a href="{% url 'pong:external-login' %}">Login with 42</a>
+</div> -->
+
+<!-- templates/pong/index.html -->
