@@ -12,7 +12,6 @@ from django.contrib.auth import update_session_auth_hash
 from django.shortcuts import render
 from .models import User
 from django.contrib.auth.decorators import login_required
-# Create your views here.
 from django.contrib.auth import logout
 from .auth_api import get_token_from_api, get_user_from_api
 import os
@@ -27,41 +26,12 @@ def index(request):
     template = loader.get_template('pong/index.html')
     return HttpResponse(template.render())
 
-# def home_view(request): #ne fonctionne pas car ne verifie pas l'authentification du user
-#     template = loader.get_template('pong/home.html')
-#     return HttpResponse(template.render())
-
 def home_view(request):
     return render(request, 'pong/home.html')
 
 def logout_view(request):
     logout(request)
     return redirect('/pong/login')
-
-# def register_view(request):
-#     if request.method == 'POST':
-#         form = RegisterForm(request.POST)
-#         if form.is_valid():
-#             user = form.save(commit=False)
-#             user.set_password(form.cleaned_data['password'])
-#             user.save()
-#             return redirect('/pong/login') # Redirect to the login page after registration
-#         else:
-#             form = RegisterForm(request.POST or None)
-#     else:
-#         form = RegisterForm()
-#     return render(request, 'pong/register.html', {'form': form})
-
-
-# def register_view(request):
-#     if request.method == 'POST':
-#         form = RegisterForm(request.POST)
-#         if form.is_valid():
-#             form.save()
-#             return redirect('/pong/login') 
-#     else:
-#         form = RegisterForm()
-#     return render(request, 'pong/register.html', {'form': form})
 
 def register_view(request):
     if request.method == 'POST':
@@ -78,21 +48,6 @@ def register_view(request):
         print("Affichage du formulaire d'inscription")  # Message lors de l'affichage du formulaire
     return render(request, 'pong/register.html', {'form': form})
 
-# def login_view(request):
-#     if request.method == 'POST':
-#         form = AuthenticationForm(request, data=request.POST)
-#         if form.is_valid():
-#             username = form.cleaned_data['username']
-#             password = form.cleaned_data['password']
-#             user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password'])
-#             if user is not None:
-#                 login(request, user)
-#                 return redirect('/pong/home')  # Redirige vers la page d'accueil après l'inscription
-#         else:
-#             return redirect('/pong/login')
-#     else:
-#         form = AuthenticationForm()
-#     return render(request, 'pong/login.html', {'form': form})
 
 def login_view(request):
     if request.method == 'POST':
