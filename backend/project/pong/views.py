@@ -1,7 +1,6 @@
 from django.template import loader
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
-from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
@@ -10,7 +9,7 @@ from django.contrib.auth.forms import UserChangeForm
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
 from .forms import RegisterForm
-from .models import Player, User
+from .models import User
 from . import auth
 import os
 
@@ -87,3 +86,36 @@ def auth_callback(request):
         # print("request_method =", request.method)
         return auth.get_user_from_api(request, access_token)
     return redirect('/pong/login')
+
+@login_required
+def profile_view(request):
+    return render(request, 'pong/profile.html')
+
+@login_required
+def user_updated_profile(request):
+    if request.method == 'POST':
+        form = UserChangeForm(request.POST, instance=request.user) # CECI EST DE LA MAGIE : formulaire fourni par django
+        if form.is_valid():
+            form.save()
+            return redirect('pong/profile.html')  
+    else:
+        form = UserChangeForm(instance=request.user)
+    return render(request, 'pong/update.html', {'form': form})
+
+@login_required
+def user_password_changed(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(user=request.user, data=request.POST) # CECI EST DE LA MAGIE : formulaire fourni par django
+        if form.is_valid():
+            form.save()
+            update_session_auth_hash(request, form.user)  # Important pour maintenir la session active
+            return redirect('pong/profile.html')  
+    else:
+        form = PasswordChangeForm(user=request.user)
+    return render(request, 'pong/change_password.html', {'form': form})
+
+@login_required
+def user_account_deleted(request):
+    user = request.user
+    user.delete()
+    return redirect('pong/home.html')  
