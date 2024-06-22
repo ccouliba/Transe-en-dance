@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>try</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+</head>
+
+<body class="text-center"><span style="margin-left: 216px;">{% extends 'pong/base.html' %}{% load static %}{% block title %}Home{% endblock %}{% block content %}</span>
+    <nav class="navbar navbar-expand-md bg-body">
+        <div class="container-fluid"><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navcol-1">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link active text-center link-warning text-bg-danger" href="{% url 'pong:home' %}" style="margin-left: 100px;">Accueil</a></li>
+                    <li class="nav-item"><a class="nav-link text-center link-warning text-bg-danger" href="{% url 'pong:play' %}" style="padding-left: 0px;margin-left: 270px;">Jouer</a></li>
+                    <li class="nav-item"><a class="nav-link link-warning text-bg-danger" href="{% url 'pong:profile' %}" style="margin-left: 370px;">Profil</a></li>
+                    <li class="nav-item"><a class="nav-link link-warning text-bg-danger" href="{% url 'pong:logout' %}" style="padding-left: 0px;padding-right: 0px;margin-right: 100px;margin-left: 280px;">Déconnexion</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="home">
+        <h1 style="text-align: center;">Welcome you!</h1>
+        <div class="btn-toolbar d-xl-flex d-xxl-flex justify-content-xl-center justify-content-xxl-center">
+            <div class="btn-group d-xl-flex" role="group"><button class="btn btn-primary button_active" type="button">▶️Play</button><button class="btn btn-primary button_active" type="button">⏏️Logout</button></div>
+            <div class="btn-group" role="group"></div>
+        </div><input type="button" class="button_active" name="Play" value="Play"><input type="button" class="button_active" name="Logout" value="Logout">
+    </div><span>{% endblock %}</span>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/script.min.js"></script>
+</body>
+
+</html>
