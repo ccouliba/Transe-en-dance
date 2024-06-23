@@ -8,9 +8,9 @@ urlpatterns = [
 	# path("home/", views.home_view, name="home"),
 	path("users", views.user_list, name="user_list"),
 	path("", views.index, name="index"), # Home Page
-	path("home/", home_view, name="home"), #home
-	path("register/", register_view, name='register'),
-	path("login/", login_view, name="login"),
+	path("home/", views.home_view, name="home"), #home
+	path("register/", views.register_view, name='register'),
+	path("login/", views.login_view, name="login"),
  	path('logout/', LogoutView.as_view(next_page='pong:login'), name='logout'),
 	path('external-login/', views.external_login_view, name='external-login'),
 	path('auth/callback/', views.auth_callback, name='auth_callback'),
