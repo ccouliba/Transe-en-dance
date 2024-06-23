@@ -9,10 +9,14 @@
 <p>Username: {{ user.username }}</p>
 <p>Email: {{ user.email }}</p>
 
-<a href="{% url 'pong:update_profile' %}">Update Profile</a><br>
+<input type="button" class="button_active" name="Update profile" value="Update profile" onclick="location.href='{% url 'pong:update_profile' %}';" /> 
+<input type="button" class="button_active" name="Change password" value="Change password" onclick="location.href='{% url 'pong:change_password' %}';" /> 
+<input type="button" class="button_active" name="Delete account" value="Delete account" onclick="location.href='{% url 'pong:delete_account' %}';" /> 
+
+{% comment %} <a href="{% url 'pong:update_profile' %}">Update Profile</a><br>
 <a href="{% url 'pong:change_password' %}">Change Password</a><br>
 <form action="{% url 'pong:delete_account' %}" method="post">
     {% csrf_token %}
     <button type="submit">Delete Account</button>
-</form>
+</form> {% endcomment %}
 {% endblock %}

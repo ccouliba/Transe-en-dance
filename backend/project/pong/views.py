@@ -1,23 +1,26 @@
 from django.template import loader
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
-from django.contrib.auth.models import User
-from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserChangeForm
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth import login, authenticate
+from django.contrib.auth import logout
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from .forms import RegisterForm
-from .models import User
 from .models import Game
+from django.contrib import messages
+from .models import User
+from .forms import RegisterForm
 from . import auth
 import os
 from django.views.decorators.http import require_POST
 
+@login_required
 def user_list(request):
     users = list(User.objects.all())    
     viewModels = [ user.email for user in users]
@@ -28,9 +31,11 @@ def index(request):
     template = loader.get_template('pong/index.html')
     return HttpResponse(template.render())
 
+@login_required
 def home_view(request):
     return render(request, 'pong/home.html')
 
+@login_required
 def logout_view(request):
     logout(request)
     return redirect('/pong/login')
@@ -92,7 +97,7 @@ def auth_callback(request):
     elif api_response.status_code == 200:
         token_data = api_response.json()
         access_token = token_data.get('access_token')
-        return get_user_from_api(request, access_token)
+        return auth.get_user_from_api(request, access_token)
     return HttpResponse("Authentication failed", status=401)
 
 
@@ -109,7 +114,8 @@ def user_updated_profile(request):
         form = UserChangeForm(request.POST, instance=request.user) # CECI EST DE LA MAGIE : formulaire fourni par django
         if form.is_valid():
             form.save()
-            return redirect('pong/profile.html')  
+            return redirect('/pong/profile')  
+            # return redirect('pong/profile.html')  
     else:
         form = UserChangeForm(instance=request.user)
     return render(request, 'pong/update.html', {'form': form})
@@ -121,11 +127,21 @@ def user_password_changed(request):
         if form.is_valid():
             form.save()
             update_session_auth_hash(request, form.user)  # Important pour maintenir la session active
-            return redirect('pong/profile.html')  
+            return redirect('/pong/profile')  
+            # return redirect('pong/profile.html')  
     else:
         form = PasswordChangeForm(user=request.user)
     return render(request, 'pong/change_password.html', {'form': form})
 
+#  This view is causes some trouble on reverse html on success !
+# That is why i have done this ; for now we could use the view below instead
+# @login_required
+# def user_account_deleted(request):
+#     user = request.user
+#     user.delete()
+#     return redirect('pong/home.html')
+
+# Can be changed any time ! Just a simple view linked to a template/form that works
 @login_required
 def user_account_deleted(request):
     user = request.user
