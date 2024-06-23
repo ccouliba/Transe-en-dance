@@ -1,0 +1,13 @@
+<!-- templates/pong/home.html -->
+{% extends 'pong/base.html' %}
+{% load static %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="home">
+    <h1>Welcome you!</h1>
+    <input type="button" class="button_active" name="Play" value="Play" onclick="location.href='{% url 'pong:play' %}';" /> 
+    <input type="button" class="button_active" name="Logout" value="Logout" onclick="location.href='{% url 'pong:logout' %}';" />
+</div>
+{% endblock %}

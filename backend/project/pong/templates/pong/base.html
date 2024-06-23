@@ -1,0 +1,33 @@
+<!-- templates/pong/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}PONG{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'pong/css/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1 class="pong-title">PONG</h1>
+        {% block user_navigation %}
+            {% if user.is_authenticated %}
+                {% include 'pong/menu.html' %}
+            {% else %}
+                <a href="{% url 'pong:index' %}"></a>
+            {% endif %}
+        {% endblock %}
+    </header>
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Pong. Tous droits réservés.</p>
+    </footer>
+
+    <script src="{% static 'pong/js/script.js' %}"></script>
+</body>
+</html>
