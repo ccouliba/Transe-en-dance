@@ -11,6 +11,7 @@ class User(AbstractUser):
 	creation_date = models.DateTimeField(default=timezone.now)  # Date de creation de l'utilisateur
 	langue = models.CharField(max_length=10, blank=True, null=True)  # Langue de l'utilisateur
 	avatar = models.CharField(max_length=255, blank=True, null=True)  # URL ou chemin de l'avatar de l'utilisateur
+	friends = models.ManyToManyField('self', symmetrical=True, blank=True)  # Champ pour les amis
 
 	# Ajout d'un champ many-to-many pour les groupes auxquels cet utilisateur appartient
 	groups = models.ManyToManyField(

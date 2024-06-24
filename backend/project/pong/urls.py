@@ -20,7 +20,7 @@ urlpatterns = [
 	# path('profile/update/', views.user_updated_profile, name='update_profile'),
 	# path('profile/change_password/', views.user_password_changed, name='change_password'),
 	# path('profile/delete_account/', views.user_account_deleted, name='delete_account'),
-    
+	
 	# I think the url patterns above causes some troubles. If not we will delete these below
 	path('profile/', views.profile_view, name='profile'),
 	path('profile/update/', views.user_updated_profile, name='update_profile'),
@@ -34,4 +34,8 @@ urlpatterns = [
 	path('finish_game/', views.finish_game, name='finish_game'),
 	path('cancel_game/', views.cancel_game, name='cancel_game'),
  
+ 
+	path('send_friend_request/', views.send_friend_request, name='send_friend_request'),
+	path('accept_friend_request/', views.accept_friend_request, name='accept_friend_request'),
+	path('refuse_friend_request/', views.refuse_friend_request, name='refuse_friend_request'),
 ]
