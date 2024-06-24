@@ -255,24 +255,29 @@ def send_friend_request(request):
 @require_POST
 @csrf_exempt# TO DO : ENLEVER CELA C EST JUSTE POUR LES TESTS AVEC POSTMAN !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 def accept_friend_request(request):
-	print("HELLO")
 	payload = json.loads(request.body)
 	request_id = payload.get('request_id')
 
 	print(request_id)
 	print(request.user)
  
- 
-	friend_request = get_object_or_404(Friendship, id=request_id, id_user_2=request.user)
-
+	friend_request = get_object_or_404(Friendship, id=request_id)
+	
 	# Verifier si la demande est déjà acceptee
 	if friend_request.id_user_1.friends.filter(id=friend_request.id_user_2.id).exists():
 		return JsonResponse({'status': 'error', 'message': 'Friend request already accepted'}, status=400)
 
 	# Accepter la demande d'ami
-	request.user.friends.add(friend_request.id_user_1)
-	friend_request.id_user_1.friends.add(request.user)
-
+	sender   = friend_request.id_user_1
+	receiver = friend_request.id_user_2
+ 
+ 
+	sender.friends.add(receiver)
+	receiver.friends.add(sender)
+ 
+	sender.save()
+	receiver.save()
+ 
 	# Supprimer la demande d'ami car elle est maintenant acceptée
 	friend_request.delete()
 
@@ -285,10 +290,12 @@ def accept_friend_request(request):
 def refuse_friend_request(request):
 	payload = json.loads(request.body)
 	request_id = payload.get('request_id')
-	friend_request = get_object_or_404(Friendship, id=request_id, id_user_2=request.user)
+ 
+	friend_request = get_object_or_404(Friendship, id=request_id)
 
 	# Refuser la demande d'ami en supprimant l'entree dans la base de données
 	friend_request.delete()
 
 	return JsonResponse({'status': 'friend_request_refused', 'request_id': request_id})
+
 ##########################tournament stuff...
