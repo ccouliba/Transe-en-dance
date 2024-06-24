@@ -1,17 +1,20 @@
 from django.template import loader
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
-from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth import logout
 from django.contrib.auth.forms import UserChangeForm
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth import login, authenticate
+from django.contrib.auth import logout
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render
+from django.contrib import messages
+from django.utils import translation
+from django.conf import settings
 from django.utils.translation import gettext as _
-from .forms import RegisterForm
 from .models import User
-from . import auth
+from . import auth, forms
 import os
 
 # Create your views here.
@@ -26,28 +29,30 @@ def index(request):
     template = loader.get_template('pong/index.html')
     return HttpResponse(template.render())
 
+@login_required
 def home_view(request):
-    template = loader.get_template('pong/home.html')
-    return HttpResponse(template.render())
+    return render(request, 'pong/home.html')
 
 @login_required
-def lougout_view(request):
+def logout_view(request):
     logout(request)
     return redirect('/pong/login')
 
 def register_view(request):
     if request.method == 'POST':
-        form = RegisterForm(request.POST)
+        form = forms.RegisterForm(request.POST)
         if form.is_valid():
-            user = form.save(commit=False)
-            user.set_password(form.cleaned_data['password'])
-            user.save()
-            return redirect('/pong/home') # Redirect to the login page after registration
+            form.save()
+            print("Enregistrement réussi")  # Message de succès
+            return redirect('/pong/login')  # Redirige vers la page de connexion après l'enregistrement
         else:
-            form = RegisterForm(request.POST or None)
+            # print("Formulaire non valide")
+            print(_(form.errors))  # Affiche les erreurs du formulaire pour le débogage
     else:
-        form = RegisterForm()
+        form = forms.RegisterForm()
+        print("Affichage du formulaire d'inscription")  # Message lors de l'affichage du formulaire
     return render(request, 'pong/register.html', {'form': form})
+
 
 def login_view(request):
     if request.method == 'POST':
@@ -55,12 +60,16 @@ def login_view(request):
         if form.is_valid():
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
-            user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password'])
+            user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect('/pong/home')  # Redirige vers la page d'accueil après l'inscription
+                return redirect('/pong/home')  # Redirige vers la page d'accueil après la connexion
+            else:
+                print(_("Authentification échouée"))
         else:
-            return redirect('/pong/login')
+            print(_("Formulaire non valide"))
+            print(_(form.errors))  # Affiche les erreurs du formulaire pour le débogage
+        return redirect('/pong/login')
     else:
         form = AuthenticationForm()
     return render(request, 'pong/login.html', {'form': form})
@@ -84,9 +93,8 @@ def auth_callback(request):
     elif api_response.status_code == 200:
         token_data = api_response.json()
         access_token = token_data.get('access_token')
-        # print("request_method =", request.method)
         return auth.get_user_from_api(request, access_token)
-    return redirect('/pong/login')
+    return HttpResponse(_("Authentication failed"), status=401)
 
 @login_required
 def profile_view(request):
@@ -98,7 +106,7 @@ def user_updated_profile(request):
         form = UserChangeForm(request.POST, instance=request.user) # CECI EST DE LA MAGIE : formulaire fourni par django
         if form.is_valid():
             form.save()
-            return redirect('pong/profile.html')  
+            return redirect('/pong/profile')  
     else:
         form = UserChangeForm(instance=request.user)
     return render(request, 'pong/update.html', {'form': form})
@@ -110,13 +118,38 @@ def user_password_changed(request):
         if form.is_valid():
             form.save()
             update_session_auth_hash(request, form.user)  # Important pour maintenir la session active
-            return redirect('pong/profile.html')  
+            return redirect('/pong/profile')  
     else:
         form = PasswordChangeForm(user=request.user)
     return render(request, 'pong/change_password.html', {'form': form})
 
+#  This view is causes some trouble on reverse html on success !
+# That is why i have done this ; for now we could use the view below instead
+# @login_required
+# def user_account_deleted(request):
+#     user = request.user
+#     user.delete()
+#     return redirect('pong/home.html')
+
+# Can be removeded any time ! Just a simple view linked to a template/form that works
 @login_required
 def user_account_deleted(request):
-    user = request.user
-    user.delete()
-    return redirect('pong/home.html')  
+    if request.method == 'POST':
+        user = request.user
+        user.delete()
+        return redirect('/pong/register')
+    return render(request, 'pong/delete_account.html')
+
+@login_required
+def change_language(request):
+    if request.method == 'POST':
+        form = forms.SetLanguageForm(request.POST)
+        if form.is_valid():
+            user_language = form.cleaned_data['language']
+            translation.activate(user_language)
+            response = redirect('/pong/home')
+            response.set_cookie(settings.LANGUAGE_COOKIE_NAME, user_language)
+            return response
+    else:
+        form = forms.SetLanguageForm()
+    return render(request, 'pong/change_language.html', {'form': form})

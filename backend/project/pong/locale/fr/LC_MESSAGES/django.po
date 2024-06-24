@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-21 18:23+0200\n"
+"POT-Creation-Date: 2024-06-24 23:36+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,67 +17,164 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-#: templates/pong/base.html:17
-msgid "You are not logged. Please"
-msgstr "Vous n'etes pas connectes."
 
-#: templates/pong/base.html:17
+#: context_variables_processors.py:12
+msgid "Play"
+msgstr "Jouer"
+
+#: context_variables_processors.py:13
+msgid "Logout"
+msgstr "Se déconnecter"
+
+#: context_variables_processors.py:14
+msgid "Update profile"
+msgstr "Mettre à jour mon profil"
+
+#: context_variables_processors.py:15
+msgid "Change password"
+msgstr "Changer mon mot de passe"
+
+#: context_variables_processors.py:16
+msgid "Delete account"
+msgstr "Supprimer mon compte"
+
+#: context_variables_processors.py:19
+msgid "If you don't have an account"
+msgstr "Si vous n'avez pas de compte"
+
+#: context_variables_processors.py:20
+msgid "Register"
+msgstr "S'enregistrer"
+
+#: context_variables_processors.py:21
 msgid "or"
 msgstr "ou"
 
-#: templates/pong/base.html:18
-msgid "Or login with 42 here"
-msgstr "Ou se connecter vous avec 42"
+#: context_variables_processors.py:22
+msgid "Login with"
+msgstr "Se connecter via"
 
-#: templates/pong/base.html:18
-msgid "Login with 42"
-msgstr "Se connecter avec 42"
-
-#: templates/pong/base.html:32
-msgid "Change language"
-msgstr "Changer la langue"
-
-#: templates/pong/base.html:45
-msgid "2024 pong. All rights reserved."
-
-msgstr "2024 pong. Tous droits réservés."
-
-#: templates/pong/change_password.html:12 templates/pong/profile.html:13
-msgid "Change Password"
-msgstr "Changer le mot de passe"
-
-#: templates/pong/change_password.html:14
-msgid "Back to Profile"
-msgstr "Retour au profil"
-
-#: templates/pong/login.html:18
-msgid "If you don't have an account, please"
-msgstr "If vous n'avez pas de compte, "
-
-#: templates/pong/login.html:18
-msgid "Register here"
-msgstr "Creer un compte"
-
-#: templates/pong/menu.html:7
-msgid "Deconnection"
-msgstr "Déconnexion"
-
-#: templates/pong/profile.html:8
-msgid "Profile Information"
-msgstr "Information du profil"
-
-#: templates/pong/profile.html:12
-msgid "Update Profile"
-msgstr "Mis a jour profil"
-
-#: templates/pong/profile.html:16
-msgid "Delete Account"
-msgstr "Supprimer mon compte"
-
-#: templates/pong/register.html:18
-msgid "If you already have an account, please"
-msgstr "Si vous avez deja un compte, "
-
-#: templates/pong/register.html:18
-msgid "Login here"
+#: context_variables_processors.py:23
+msgid "Login"
 msgstr "Se connecter"
+
+#: context_variables_processors.py:24
+msgid "If you already have an account"
+msgstr "Si vous avez déjà un compte"
+
+#: context_variables_processors.py:26
+msgid "Profile Information"
+msgstr "Informations du profil"
+
+#: context_variables_processors.py:27
+msgid "Welcome"
+msgstr "Bienvenue"
+
+#: context_variables_processors.py:28
+msgid "Back to profile"
+msgstr "retour au profil"
+
+#: context_variables_processors.py:29
+msgid "No i have changed my mind"
+msgstr "Non, j'ai changé d'avis"
+
+#: context_variables_processors.py:30
+msgid "Do you confirm the deletion of your account?"
+msgstr "Confirmez-vous la suppression de votre compte ?"
+
+#: context_variables_processors.py:31
+msgid "Select language"
+msgstr "Selectionner ma langue"
+
+#: context_variables_processors.py:32
+msgid "Change"
+msgstr "Changer"
+
+#: context_variables_processors.py:33
+msgid "Home"
+msgstr "Accueil"
+
+#: context_variables_processors.py:34
+msgid "Profile"
+msgstr "Profil"
+
+#: context_variables_processors.py:35
+msgid "Language"
+msgstr "Langue"
+
+#: context_variables_processors.py:36
+msgid "Disconnect"
+msgstr "Se déconnecter"
+
+#: context_variables_processors.py:39
+msgid "All rights reserved"
+msgstr "Tous droits réservés"
+
+#: context_variables_processors.py:42 static/game/index.html:45
+msgid "Settings"
+msgstr "Paramètres"
+
+#: context_variables_processors.py:43 static/game/index.html:14
+#: static/game/index.html:46
+msgid "Single player"
+msgstr "Joueur unique"
+
+#: context_variables_processors.py:44 static/game/index.html:47
+msgid "Multiplayer"
+msgstr "Multijoueur"
+
+#: context_variables_processors.py:45
+msgid "Score to reach"
+msgstr "Score à atteindre"
+
+#: context_variables_processors.py:46
+msgid "Ball color"
+msgstr "Couleur de la balle"
+
+#: context_variables_processors.py:47
+msgid "Palette color"
+msgstr "Couleur de la palette"
+
+#: context_variables_processors.py:48
+msgid "Background color"
+msgstr "Couleur de l'arrière plan"
+
+#: context_variables_processors.py:49
+msgid "Save"
+msgstr "Sauvegarder"
+
+#: forms.py:13
+msgid "English"
+msgstr "Anglais"
+
+#: forms.py:14
+msgid "French"
+msgstr "Français"
+
+#: forms.py:15
+msgid "Italian"
+msgstr "Italien"
+
+#: forms.py:16
+msgid "Spanish"
+msgstr "Espagnol"
+
+#: forms.py:17
+msgid "Deutsch"
+msgstr "Allemand"
+
+#: forms.py:19
+msgid "Select your language"
+msgstr "Sélectionnez votre langue"
+
+#: views.py:68
+msgid "Authentification échouée"
+msgstr ""
+
+#: views.py:70
+msgid "Formulaire non valide"
+msgstr ""
+
+#: views.py:97
+msgid "Authentication failed"
+msgstr ""

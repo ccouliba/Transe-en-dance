@@ -4,12 +4,12 @@
 
 {% block title %}Update Profile{% endblock %}
 
-{% trans block content %}
-<h1>Update Profile</h1>
+{% block content %}
+<h1>{{ update_profile_txt }}</h1>
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">{% translate Update %}</button>
+    <button type="submit">{{ update_profile_txt }}</button>
 </form>
-<a href="{% url 'pong:profile' %}">{% translate "Back to Profile" }</a>
+<a href="{% url 'pong:profile' %}">{{ back_to_profile_txt }}</a>
 {% endblock %}

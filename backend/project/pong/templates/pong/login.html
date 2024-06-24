@@ -4,27 +4,12 @@
 
 {% block title %}Login{% endblock %}
 
-{% block user_navigation %}
-    {# Ne rien afficher pour la navigation utilisateur sur la page de login #}
-{% endblock %}
-
-{% trans block content %}
-<h2>Login</h2>
-<form method="post" action="{% url 'pong:login' %}">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">{% translate Login %}</button>
-</form>
-<p>{% translate "If you don't have an account, please" %}<a href="{% url 'pong:register' %}">{% translate "Register here" %}</a> or <a href="{% url 'pong:external-login' %}">{% trans Login with 42 %}</a></p>
-{% endblock %}
-
-{% comment %} {% extends 'pong/base.html' %}
-{% block title %}Login{% endblock %}
 {% block content %}
+<h2>{{ login_txt }}</h2>
 <form method="post" action="{% url 'pong:login' %}">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Login</button>
+    <button type="submit">{{ login_txt }}</button>
 </form>
-<p>If you do not have any account, please <a href="{% url 'pong:register' %}">Register here</a> or <a href="{% url 'pong:external-login' %}">Login with 42</a></p>
-{% endblock %} {% endcomment %}
+<p>{{ no_account_txt }}-> <a href="{% url 'pong:register' %}">{{ register_txt }}</a> {{ or_txt }} <a href="{% url 'pong:external-login' %}">{{ external_log_txt }} 42</a></p>
+{% endblock %}

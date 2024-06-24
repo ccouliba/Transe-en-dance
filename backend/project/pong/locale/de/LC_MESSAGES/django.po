@@ -1,0 +1,180 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-06-24 23:36+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: context_variables_processors.py:12
+msgid "Play"
+msgstr "Spielen"
+
+#: context_variables_processors.py:13
+msgid "Logout"
+msgstr "Ausloggen"
+
+#: context_variables_processors.py:14
+msgid "Update profile"
+msgstr "Profil aktualisieren"
+
+#: context_variables_processors.py:15
+msgid "Change password"
+msgstr "Kennwort ändern"
+
+#: context_variables_processors.py:16
+msgid "Delete account"
+msgstr "Konto löschen"
+
+#: context_variables_processors.py:19
+msgid "If you don't have an account"
+msgstr "Wenn Sie kein Konto haben"
+
+#: context_variables_processors.py:20
+msgid "Register"
+msgstr "Registrieren"
+
+#: context_variables_processors.py:21
+msgid "or"
+msgstr "oder"
+
+#: context_variables_processors.py:22
+msgid "Login with"
+msgstr "Einloggen mit"
+
+#: context_variables_processors.py:23
+msgid "Login"
+msgstr "Anmeldung"
+
+#: context_variables_processors.py:24
+msgid "If you already have an account"
+msgstr "Wenn Sie bereits ein Konto haben"
+
+#: context_variables_processors.py:26
+msgid "Profile Information"
+msgstr "Profil Information"
+
+#: context_variables_processors.py:27
+msgid "Welcome"
+msgstr "Willkommen"
+
+#: context_variables_processors.py:28
+msgid "Back to profile"
+msgstr "Zurück zum Profil"
+
+#: context_variables_processors.py:29
+msgid "No i have changed my mind"
+msgstr "Nein, ich habe meine Meinung geändert"
+
+#: context_variables_processors.py:30
+msgid "Do you confirm the deletion of your account?"
+msgstr "Bestätigen Sie die Löschung Ihres Kontos?"
+
+#: context_variables_processors.py:31
+msgid "Select language"
+msgstr "Sprache auswählen"
+
+#: context_variables_processors.py:32
+msgid "Change"
+msgstr "Ändern"
+
+#: context_variables_processors.py:33
+msgid "Home"
+msgstr "Heim"
+
+#: context_variables_processors.py:34
+msgid "Profile"
+msgstr "Profil"
+
+#: context_variables_processors.py:35
+msgid "Language"
+msgstr "Sprache"
+
+#: context_variables_processors.py:36
+msgid "Disconnect"
+msgstr "Trennen"
+
+#: context_variables_processors.py:39
+msgid "All rights reserved"
+msgstr "Alle Rechte vorbehalten"
+
+#: context_variables_processors.py:42 static/game/index.html:45
+msgid "Settings"
+msgstr "Einstellungen"
+
+#: context_variables_processors.py:43 static/game/index.html:14
+#: static/game/index.html:46
+msgid "Single player"
+msgstr "Einzelspieler"
+
+#: context_variables_processors.py:44 static/game/index.html:47
+msgid "Multiplayer"
+msgstr "Mehrspieler"
+
+#: context_variables_processors.py:45
+msgid "Score to reach"
+msgstr "Punktzahl zu erreichen"
+
+#: context_variables_processors.py:46
+msgid "Ball color"
+msgstr "Ball color"
+
+#: context_variables_processors.py:47
+msgid "Palette color"
+msgstr "Palettenfarbe"
+
+#: context_variables_processors.py:48
+msgid "Background color"
+msgstr "Hintergrundfarbe"
+
+#: context_variables_processors.py:49
+msgid "Save"
+msgstr "Speichern"
+
+#: forms.py:13
+msgid "English"
+msgstr "Englisch"
+
+#: forms.py:14
+msgid "French"
+msgstr "Französisch"
+
+#: forms.py:15
+msgid "Italian"
+msgstr "Italienisch"
+
+#: forms.py:16
+msgid "Spanish"
+msgstr "Spanisch"
+
+#: forms.py:17
+msgid "Deutsch"
+msgstr "Deutsch"
+
+#: forms.py:19
+msgid "Select your language"
+msgstr "Wähle deine Sprache"
+
+#: views.py:68
+msgid "Authentification échouée"
+msgstr ""
+
+#: views.py:70
+msgid "Formulaire non valide"
+msgstr ""
+
+#: views.py:97
+msgid "Authentication failed"
+msgstr ""

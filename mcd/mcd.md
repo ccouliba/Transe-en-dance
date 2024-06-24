@@ -3,32 +3,26 @@
 ### MLD 
 
 - **USER**
-  - `id_user`
-  - `username`
-  - `email`
-  - `password`
-  - `creation_date` (//pour RGPD)
-  - `langue` 
-
-- **PLAYER**
-  - `id_player` int, cle primaire
+  - `id_user` int, cle primaire
+  - `username` varchar
+  - `email` varchar
+  - `password` varchar
+  - `creation_date` datetime (//pour RGPD)
+  - `langue` varchar
   - `avatar` varchar
-  - `#id_user` int, cle etrangere (PLAYER)
 
 - **FRIENDSHIP**
   - `#id_player1` int, cle etrangere (PLAYER)
   - `#id_player2` int, cle etrangere (PLAYER)
 
-- **PLAY**
-  - `#id_player` int, cle etrangere (PLAYER)
-  - `#id_game` int, cle etrangere (GAME)
-
 - **GAME**
   - `id_game` int, cle primaire
   - `date` datetime
+  - `#player_1_id` int, cle etrangere (PLAYER)\
+  - `#player_2_id` int, cle etrangere (PLAYER)
   - `#winner_id` int, cle etrangere (PLAYER)
   - `score` int
-  - `status`varchar (game.started, game.finished, game.canceled)
+  - `status`varchar ou enum (game.started, game.finished, game.canceled)
 
 - **PARTICIPATE**
   - `#id_player` int, cle etrangere (PLAYER)
@@ -45,24 +39,11 @@
 - **COMPOSED**
   - `#id_tournament` int, cle etrangere (TOURNAMENT)
   - `#id_game` int, cle etrangere (GAME)
-  - `game_number` 
+  - `game_number` int
 
 
 ### Methodes  
 Chaque evenement metier = endpoint
-
-- notes : 
-Un player peut debuter une partie 1v1 :
-player.started_a_game
-Un player peut debuter un tournoi :
-player.started_a_tournament
-
-**Une demande d'ami est automatique ou peut etre refuse ?**
-Un player devient ami avec un autre player:
-player.became_friend_with(other_player)
-
-**quand est ce qu'une partie est perdue ? quand la balle est perdue des la 1ere fois ? point de vie ?**
-game.is_won_by(player) 
 
 - liste des methodes
 
@@ -116,17 +97,14 @@ COMPOSED, 1N TOURNAMENT, 1N GAME: game_number
 ```
 
 <!-- ```
+USER: id_user, username, email, password, creation_date, langue, avatar
+PARTICIPATE, 1N USER, 1N TOURNAMENT: order_of_turn, alias
+TOURNAMENT: id_tournament, name, is_started, winner_id, start_date, end_date
 
-TOURNAMENT: id tournament, name, is_started, start date, end date
-PARTICIPATE, 1N TOURNAMENT, 1N PLAYER: order_of_turn, alias
-:
-
+FRIENDSHIP, 0N [friend] USER, 0N [friend_of] USER
+PLAY, 0N USER, 11 GAME
+GAME: id_game, date, score, status
 COMPOSED, 1N TOURNAMENT, 1N GAME: game_number
-PLAYER: id player
-FRIENDSHIP, 0N [friend] PLAYER, 0N [friend_of] PLAYER
 
-GAME: id game, date,winner_id,  is_started, start date, end date
-PLAY, 0N PLAYER, 1N GAME
-:
 
 ``` -->

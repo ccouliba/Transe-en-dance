@@ -27,4 +27,6 @@ pip install psycopg2-binary
 
 # Essayer de lancer le serveur Django
 echo "Lancement du serveur Django..."
-SECRET_KEY=foo python manage.py runserver
+# SECRET_KEY=foo python manage.py runserver
+SECRET_KEY=foo python3 manage.py runserver
+

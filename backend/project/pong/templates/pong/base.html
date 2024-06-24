@@ -6,6 +6,8 @@
     <title>{% block title %}PONG{% endblock %}</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'pong/css/style.css' %}">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'pong/css/style.css' %}">
 </head>
 <body>
     <header>
@@ -14,24 +16,8 @@
             {% if user.is_authenticated %}
                 {% include 'pong/menu.html' %}
             {% else %}
-                <p>{% translate "You are not logged. Please" %}<a href="{% url 'pong:login' %}">{% translate Login %}</a> {% translate "or" %} <a href="{% url 'pong:register' %}">{% translate Register %}</a></p>
-                <p>{% translate "Or login with 42 here" %}<a href="{% url 'pong:external-login' %}">{% translate "Login with 42" %}</a></p>
+                <a href="{% url 'pong:index' %}"></a>
             {% endif %}
-            <form action="{% url 'pong:set_language' %}" method="post">
-                {% csrf_token %}
-                <input name="next" type="hidden" value="{{ redirect_to }}">
-                <select name="language">
-                    {% get_current_language as LANGUAGE_CODE %}
-                    {% get_available_languages as LANGUAGES %}
-                    {% for lang in LANGUAGES %}
-                        <option value="{{ lang.0 }}"{% if lang.0 == LANGUAGE_CODE %} selected{% endif %}>
-                            {{ lang.1 }}
-                        </option>
-                    {% endfor %}
-                </select>
-                <input type="submit" value="{% trans "Change language" %}">
-            </form>
-            
         {% endblock %}
     </header>
 
@@ -42,9 +28,9 @@
     </main>
 
     <footer>
-        <p>&copy; {% translate "2024 pong. All rights reserved." %}</p>
+        <p>&copy; 2024 pong. {{ reserved_rights_txt }}</p>
     </footer>
 
-    {% comment %} <script src="{% static 'pong/js/script.js' %}"></script> {% endcomment %}
+    <script src="{% static 'pong/js/script.js' %}"></script>
 </body>
 </html>

@@ -10,18 +10,20 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 import os
+from django.utils.translation import gettext_lazy as _
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 # BASE_DIR = Path(__file__).resolve().parent.parent
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # SECRET_KEY = 'django-insecure-o=4*ygn5oz$&iw6-ru(t=c+7wx2fjl9bs9xlka3b*@-204-vgn'
-SECRET_KEY = os.environ.get("SECRET_KEY")
+SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -41,7 +43,7 @@ ALLOWE_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'polls',
+    # 'polls',
     'pong',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -54,6 +56,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -74,6 +77,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'pong.context_variables_processors.translated_texts',
             ],
         },
     },
@@ -90,38 +94,10 @@ DATABASES = {
         'NAME': os.getenv('SQL_DATABASE', 'db1'),
         'USER': os.getenv('SQL_USER', 'ccouliba'),
         'PASSWORD': os.getenv('SQL_PASSWORD'),
-        'HOST': os.getenv('SQL_HOST', 'localhost'),
+        'HOST': os.getenv('SQL_HOST', 'db'),
         'PORT': os.getenv('SQL_PORT', '5432'),
     }
 }
-
-# # on localhost
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         # 'SERVICE': 'myservice',
-#         'NAME': 'db1',
-#         'USER': 'ccouliba',
-#         'PASSWORD': 'password',
-#         #'HOST': 'db',
-#         'HOST': 'localhost',
-#         #'PORT': '5432',
-#         'PORT': '5433',
-#     }
-# }
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'SERVICE': 'myservice',
-#         'NAME': 'db1',
-#         'USER': 'ccouliba',
-#         'PASSWORD': 'password',
-#         'HOST': 'db',
-#         'PORT': '5432',
-#     }
-# }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -144,14 +120,28 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
+LANGUAGES = [
+    ('en', _('English')),
+    ('fr', _('French')),
+    ('it', _('Italian')),
+    ('es', _('Spanish')),
+    ('de', _('Deutsch')),
+    ]
+
+# Path to translation files
+LOCALE_PATHS = [
+    os.path.join(BASE_DIR, 'locale'),
+]
+
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
-USE_TZ = True
+USE_L10N = True
 
+USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
@@ -164,3 +154,18 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'pong.User'
+
+LOGIN_REDIRECT_URL = '/pong/home'
+LOGOUT_REDIRECT_URL = '/pong/login'
+
+# to manage static files (e.g. images, JavaScript, CSS)
+# https://docs.djangoproject.com/en/5.0/howto/static-files/
+
+# STATIC_URL = "static/"
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'pong/static'),
+]
+
+# Chemin pour les fichiers statiques collectés (utilisé avec collectstatic)
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')

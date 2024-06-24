@@ -1,8 +1,7 @@
-    <!-- Menu de navigation -->
-    {% load i18n %}
-    <div class="navbar">
-        <a href="{% url 'pong:home' %}">{% translate Home %}</a>
-        <a href="{% url 'pong:play' %}">{% translate Play %}</a>
-        <a href="{% url 'pong:profile' %}">{% translate Profile %}</a>
-        <a href="{% url 'pong:logout' %}">{% translate "Deconnection" %}</a>
-    </div>
+{% load i18n %}
+<div class="navbar">
+    <a href="{% url 'pong:home' %}">{{ home_txt }}</a>
+    <a href="{% url 'pong:play' %}">{{ play_txt }}</a>
+    <a href="{% url 'pong:profile' %}">{{ profile_txt }}</a>
+    <a href="{% url 'pong:logout' %}">{{ disconnect_txt}}</a>
+</div>

@@ -6,15 +6,8 @@
 
 {% block content %}
 <div class="home">
-    <h1>{% trans Welcome you! %}</h1>
-    <input type="button" class="button_active" name="Play" value="Play" onclick="location.href='{% url 'pong:play' %}';" /> 
-    <input type="button" class="button_active" name="Logout" value="Logout" onclick="location.href='{% url 'pong:logout' %}';" />
+    <h1>{{ welcome_txt }}</h1>
+    <input type="button" class="button_active" name="Play" value="{{ play_txt }}" onclick="location.href='{% url 'pong:play' %}';" /> 
+    {% comment %} <input type="button" class="button_active" name="Logout" value="{{ logout_txt }}" onclick="location.href='{% url 'pong:logout' %}';" /> {% endcomment %}
 </div>
 {% endblock %}
-
-{% comment %} {% extends 'pong/base.html' %}
-{% block title %}Home{% endblock %}
-{% block content %}
-<input type="button" class="button_active" name="Play" value="Play" onclick="location.href='{% url 'pong:play' %}';" />
-<input type="button" class="button_active" name="Logout" value="Logout" onclick="location.href='{% url 'pong:logout' %}';" />
-{% endblock %} {% endcomment %}
