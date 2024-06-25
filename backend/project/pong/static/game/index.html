@@ -3,6 +3,8 @@
 <head>
     <title>Pong Game</title>
     <link rel="stylesheet" type="text/css" href="style.css">
+    <!-- <script type="text/javascript" src="{% url 'django.views.i18n.javascript_catalog' %}"></script> -->
+    <!-- <script src="{% static 'translation.js' %}"></script> -->
 </head>
 <body>
     <div id="scoreboard">
@@ -37,7 +39,7 @@
                 <label for="backgroundColor" data-translate="background color">Background color :</label>
                 <input type="color" id="backgroundColor" value="#000000">
             </div>
-            <button id="saveSettingsButton">Save</button>
+            <button id="saveSettingsButton" data-translate="Save">Save</button>
         </div>
     </div>
 

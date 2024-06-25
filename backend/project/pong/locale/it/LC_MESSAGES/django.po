@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-24 23:36+0200\n"
+"POT-Creation-Date: 2024-06-25 18:13+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -51,12 +51,14 @@ msgid "or"
 msgstr "o"
 
 #: context_variables_processors.py:22
-msgid "Login with"
+#, fuzzy
+#| msgid "Login with"
+msgid "Log with"
 msgstr "Entra con"
 
 #: context_variables_processors.py:23
-msgid "Login"
-msgstr "Login"
+msgid "Log in"
+msgstr ""
 
 #: context_variables_processors.py:24
 msgid "If you already have an account"
@@ -110,36 +112,35 @@ msgstr "Disconnetti"
 msgid "All rights reserved"
 msgstr "Tutti i diritti riservati"
 
-#: context_variables_processors.py:42 static/game/index.html:45
+#: context_variables_processors.py:43
 msgid "Settings"
 msgstr "Impostazioni"
 
-#: context_variables_processors.py:43 static/game/index.html:14
-#: static/game/index.html:46
+#: context_variables_processors.py:44
 msgid "Single player"
 msgstr "Giocatore singolo"
 
-#: context_variables_processors.py:44 static/game/index.html:47
+#: context_variables_processors.py:45
 msgid "Multiplayer"
 msgstr "Multigiocatore"
 
-#: context_variables_processors.py:45
+#: context_variables_processors.py:46
 msgid "Score to reach"
 msgstr "Punteggio da raggiungere"
 
-#: context_variables_processors.py:46
+#: context_variables_processors.py:47
 msgid "Ball color"
 msgstr "Colore della palla"
 
-#: context_variables_processors.py:47
+#: context_variables_processors.py:48
 msgid "Palette color"
 msgstr "Colore della tavolozza"
 
-#: context_variables_processors.py:48
+#: context_variables_processors.py:49
 msgid "Background color"
 msgstr "Colore di sfondo"
 
-#: context_variables_processors.py:49
+#: context_variables_processors.py:50
 msgid "Save"
 msgstr "Salva"
 
@@ -167,14 +168,5 @@ msgstr "Tedesco"
 msgid "Select your language"
 msgstr "seleziona la tua lingua"
 
-#: views.py:68
-msgid "Authentification échouée"
-msgstr ""
-
-#: views.py:70
-msgid "Formulaire non valide"
-msgstr ""
-
-#: views.py:97
-msgid "Authentication failed"
-msgstr ""
+#~ msgid "Login"
+#~ msgstr "Login"

@@ -47,7 +47,7 @@ def register_view(request):
             return redirect('/pong/login')  # Redirige vers la page de connexion après l'enregistrement
         else:
             # print("Formulaire non valide")
-            print(_(form.errors))  # Affiche les erreurs du formulaire pour le débogage
+            print(form.errors)  # Affiche les erreurs du formulaire pour le débogage
     else:
         form = forms.RegisterForm()
         print("Affichage du formulaire d'inscription")  # Message lors de l'affichage du formulaire
@@ -65,10 +65,10 @@ def login_view(request):
                 login(request, user)
                 return redirect('/pong/home')  # Redirige vers la page d'accueil après la connexion
             else:
-                print(_("Authentification échouée"))
+                print("Authentification échouée")
         else:
-            print(_("Formulaire non valide"))
-            print(_(form.errors))  # Affiche les erreurs du formulaire pour le débogage
+            print("Formulaire non valide")
+            print(form.errors)  # Affiche les erreurs du formulaire pour le débogage
         return redirect('/pong/login')
     else:
         form = AuthenticationForm()
@@ -94,7 +94,7 @@ def auth_callback(request):
         token_data = api_response.json()
         access_token = token_data.get('access_token')
         return auth.get_user_from_api(request, access_token)
-    return HttpResponse(_("Authentication failed"), status=401)
+    return HttpResponse("Authentication failed", status=401)
 
 @login_required
 def profile_view(request):
@@ -136,6 +136,8 @@ def user_password_changed(request):
 def user_account_deleted(request):
     if request.method == 'POST':
         user = request.user
+        # Maybe remove auth_token when user deletes account ??
+        # user.auth_token.delete()
         user.delete()
         return redirect('/pong/register')
     return render(request, 'pong/delete_account.html')

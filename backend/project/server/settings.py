@@ -77,7 +77,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'pong.context_variables_processors.translated_texts',
+                'pong.context_variables_processors.texts_to_translate',
             ],
         },
     },
@@ -128,9 +128,10 @@ LANGUAGES = [
     ('de', _('Deutsch')),
     ]
 
-# Path to translation files
+# Path to translation files (.po and .mo once compilation is done)
 LOCALE_PATHS = [
     os.path.join(BASE_DIR, 'locale'),
+    os.path.join(BASE_DIR, 'static/game/locale'),
 ]
 
 LANGUAGE_CODE = 'en-us'

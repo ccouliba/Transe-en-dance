@@ -6,7 +6,7 @@ from django.utils.translation import gettext as _
 # after that write the translations in the very file that python created (.po)
 # Finally run -> python3 -m django compilemessages (that will generate .mo)
 
-def translated_texts(request):
+def texts_to_translate(request):
     return {
         # Context variables for the values of input balise
         'play_txt': _("Play"),
@@ -19,8 +19,8 @@ def translated_texts(request):
         'no_account_txt':_("If you don't have an account"),
         'register_txt':_("Register"),
         'or_txt':_("or"),
-        'external_log_txt':_("Login with"),
-        'login_txt':_("Login"),
+        'external_log_txt':_("Log with"),
+        'login_txt':_("Log in"),
         'have_account_txt':_("If you already have an account"),
 
         'profile_information_txt':_("Profile Information"),
@@ -39,6 +39,7 @@ def translated_texts(request):
         'reserved_rights_txt':_("All rights reserved"),
 
         # Game index context variables
+        # These are texts from static repertory => does not work with classic templates_processors
         'settings_txt':_("Settings"),
         'single_play_txt':_("Single player"),
         'multiplayer_txt':_("Multiplayer"),
