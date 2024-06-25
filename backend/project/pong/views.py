@@ -386,3 +386,23 @@ def finish_tournament(request):
 	tournament.save()
 	
 	return JsonResponse({'status': 'tournament_finished', 'tournament_id': tournament.id, 'end_date': tournament.end_date, 'winner_id': winner.id})
+
+
+@login_required
+@require_POST
+@csrf_exempt  # TO DO : ENLEVER CELA C'EST JUSTE POUR LES TESTS AVEC POSTMAN !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+def cancel_tournament(request):
+	try:
+		payload = json.loads(request.body)
+		tournament_id = payload.get('tournament_id')
+
+		tournament = get_object_or_404(Tournament, id=tournament_id)
+
+		if tournament.is_started:
+			return JsonResponse({'status': 'error', 'message': 'Cannot cancel a started tournament'}, status=400)
+		
+		tournament.delete()
+		return JsonResponse({'status': 'tournament_canceled', 'tournament_id': tournament_id})
+	except Exception as e:
+		print(f"Error: {e}") 
+		return JsonResponse({'status': 'error', 'message': str(e)}, status=500)
