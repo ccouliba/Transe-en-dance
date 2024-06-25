@@ -12,7 +12,7 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from .forms import RegisterForm
-from .models import Game, Friendship
+from .models import Game, Friendship, Tournament
 from django.contrib import messages
 from .models import User
 from .forms import RegisterForm
@@ -21,7 +21,10 @@ import os
 from django.views.decorators.http import require_POST
 from django.shortcuts import get_object_or_404
 import json
+from django.utils import timezone
+from .models import Participate
 
+# view pour tester et lister les emails des users (sur l'url /users/)
 @login_required
 def user_list(request):
 	users = list(User.objects.all())    
@@ -48,7 +51,7 @@ def register_view(request):
 		if form.is_valid():
 			user = form.save()
 			login(request, user) # apres register = connecter le user
-			print("Enregistrement réussi")  # Message de succès
+			print("Enregistrement reussi")  # Message de succès
 			return redirect('/pong/login')  # Redirige vers la page de connexion après l'enregistrement
 		else:
 			print("Formulaire non valide")
@@ -240,7 +243,9 @@ def send_friend_request(request):
 	to_user_id = payload.get('to_user_id')
 	to_user = get_object_or_404(User, id=to_user_id)
 	print("request.user is: ",request.user, "to_user is: ",to_user)
+ 
 	# Verifier si une demande existe deja
+	# Rappel Friendship = class/model qui stock les demandes d'amis uniquement
 	existing_request = Friendship.objects.filter(id_user_1=request.user, id_user_2=to_user).first()
 	if existing_request:
 		print("existing_request.id is ", existing_request.id)
@@ -299,3 +304,68 @@ def refuse_friend_request(request):
 	return JsonResponse({'status': 'friend_request_refused', 'request_id': request_id})
 
 ##########################tournament stuff...
+
+
+@login_required
+@require_POST
+@csrf_exempt # TO DO : ENLEVER CELA C EST JUSTE POUR LES TESTS AVEC POSTMAN !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+def player_joined_tournament(request):
+	payload = json.loads(request.body)
+	tournament_id = payload.get('tournament_id')
+	alias = payload.get('alias')
+	
+	tournament = get_object_or_404(Tournament, id=tournament_id)
+	player = request.user
+
+	# Vérifier si le joueur a deja rejoint le tournoi
+	if Participate.objects.filter(player=player, tournament=tournament).exists():
+		return JsonResponse({'status': 'error', 'message': 'Player already joined the tournament'}, status=400)
+	
+	# Déterminer l'ordre de tour
+	order_of_turn = Participate.objects.filter(tournament=tournament).count() + 1
+
+	# Créer une nouvelle participation
+	Participate.objects.create(player=player, tournament=tournament, alias=alias, order_of_turn=order_of_turn)
+	
+	return JsonResponse({'status': 'player_joined', 'tournament_id': tournament.id, 'player_id': player.id, 'alias': alias, 'order_of_turn': order_of_turn})
+
+
+@login_required
+@require_POST
+@csrf_exempt # TO DO : ENLEVER CELA C EST JUSTE POUR LES TESTS AVEC POSTMAN !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+def start_tournament(request):
+	payload = json.loads(request.body)
+	tournament_id = payload.get('tournament_id')
+	
+	tournament = get_object_or_404(Tournament, id=tournament_id)
+	
+	if tournament.is_started:
+		return JsonResponse({'status': 'error', 'message': 'Tournament already started'}, status=400)
+	
+	tournament.is_started = True
+	tournament.start_date = timezone.now()
+	tournament.save()
+	
+	return JsonResponse({'status': 'tournament_started', 'tournament_id': tournament.id, 'start_date': tournament.start_date})
+
+
+@login_required
+@require_POST
+@csrf_exempt # TO DO : ENLEVER CELA C EST JUSTE POUR LES TESTS AVEC POSTMAN !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+def finish_tournament(request):
+	payload = json.loads(request.body)
+	tournament_id = payload.get('tournament_id')
+	winner_id = payload.get('winner_id')
+	
+	tournament = get_object_or_404(Tournament, id=tournament_id)
+	winner = get_object_or_404(User, id=winner_id)
+	
+	if not tournament.is_started:
+		return JsonResponse({'status': 'error', 'message': 'Tournament has not started yet'}, status=400)
+	
+	tournament.is_started = False
+	tournament.end_date = timezone.now()
+	tournament.winner = winner
+	tournament.save()
+	
+	return JsonResponse({'status': 'tournament_finished', 'tournament_id': tournament.id, 'end_date': tournament.end_date, 'winner_id': winner.id})

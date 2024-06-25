@@ -23,9 +23,9 @@ urlpatterns = [
 	
 	# I think the url patterns above causes some troubles. If not we will delete these below
 	path('profile/', views.profile_view, name='profile'),
-	path('profile/update/', views.user_updated_profile, name='update_profile'),
-	path('profile/change_password/', views.user_password_changed, name='change_password'),
-	path('profile/delete_account/', views.user_account_deleted, name='delete_account'),
+	path('update/', views.user_updated_profile, name='update_profile'),
+	path('change_password/', views.user_password_changed, name='change_password'),
+	path('delete_account/', views.user_account_deleted, name='delete_account'),
 	
  	path('game/', views.game, name='game'), 
  
@@ -38,4 +38,9 @@ urlpatterns = [
 	path('send_friend_request/', views.send_friend_request, name='send_friend_request'),
 	path('accept_friend_request/', views.accept_friend_request, name='accept_friend_request'),
 	path('refuse_friend_request/', views.refuse_friend_request, name='refuse_friend_request'),
+ 
+ 
+ 	path('player_joined_tournament/', views.player_joined_tournament, name='player_joined_tournament'),
+	path('start_tournament/', views.start_tournament, name='start_tournament'),
+	path('finish_tournament/', views.finish_tournament, name='finish_tournament'),
 ]
