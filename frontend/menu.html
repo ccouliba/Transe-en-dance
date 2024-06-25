@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>pong</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Almendra&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Amethysta&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Baskervville&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Bellefair&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Benne&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Bentham&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Besley&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cinzel&amp;subset=latin-ext&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cinzel+Decorative&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Grenze+Gotisch&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Imperial+Script&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Kantumruy&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Khmer&amp;display=swap">
+    <link rel="stylesheet" href="assets/css/Trajan%20Pro.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+
+<body>
+    <div class="navbar"><a class="menuButton" href="{% url 'pong:home' %}">Home</a><a class="menuButton" href="{% url 'pong:play' %}">Play</a><a class="menuButton" href="{% url 'pong:profile' %}">Profile</a><a class="menuButton" href="{% url 'pong:logout' %}">disconnect</a></div>
+    <canvas id="background"></canvas>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/script.js"></script>
+</body>
+
+</html>
