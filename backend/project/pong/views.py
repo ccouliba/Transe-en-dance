@@ -304,7 +304,21 @@ def refuse_friend_request(request):
 	return JsonResponse({'status': 'friend_request_refused', 'request_id': request_id})
 
 ##########################tournament stuff...
-
+@login_required
+@require_POST
+@csrf_exempt  # TO DO : ENLEVER CELA C'EST JUSTE POUR LES TESTS AVEC POSTMAN !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+def create_tournament(request):
+	try:
+		payload = json.loads(request.body)
+		name = payload.get('name')
+		if not name:
+			return JsonResponse({'status': 'error', 'message': 'Tournament name is required'}, status=400)
+		
+		tournament = Tournament.objects.create(name=name)
+		return JsonResponse({'status': 'tournament_created', 'tournament_id': tournament.id, 'name': tournament.name})
+	except Exception as e:
+		print(f"Error: {e}")  # Impression de débogage en cas d'erreur
+		return JsonResponse({'status': 'error', 'message': str(e)}, status=500)
 
 @login_required
 @require_POST
@@ -317,10 +331,14 @@ def player_joined_tournament(request):
 	tournament = get_object_or_404(Tournament, id=tournament_id)
 	player = request.user
 
+	print(f"User trying to join: {player}")
 	# Vérifier si le joueur a deja rejoint le tournoi
 	if Participate.objects.filter(player=player, tournament=tournament).exists():
 		return JsonResponse({'status': 'error', 'message': 'Player already joined the tournament'}, status=400)
-	
+		# Vérifier si l'alias est déjà utilisé dans le tournoi
+	if Participate.objects.filter(tournament=tournament, alias=alias).exists():
+		return JsonResponse({'status': 'error', 'message': 'Alias already used in the tournament'}, status=400)
+
 	# Déterminer l'ordre de tour
 	order_of_turn = Participate.objects.filter(tournament=tournament).count() + 1
 
@@ -336,9 +354,8 @@ def player_joined_tournament(request):
 def start_tournament(request):
 	payload = json.loads(request.body)
 	tournament_id = payload.get('tournament_id')
-	
+	print(tournament_id)
 	tournament = get_object_or_404(Tournament, id=tournament_id)
-	
 	if tournament.is_started:
 		return JsonResponse({'status': 'error', 'message': 'Tournament already started'}, status=400)
 	
