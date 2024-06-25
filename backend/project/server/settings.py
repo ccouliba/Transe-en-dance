@@ -131,7 +131,7 @@ LANGUAGES = [
 # Path to translation files (.po and .mo once compilation is done)
 LOCALE_PATHS = [
     os.path.join(BASE_DIR, 'locale'),
-    os.path.join(BASE_DIR, 'static/game/locale'),
+    # os.path.join(BASE_DIR, 'static/game/locale'),
 ]
 
 LANGUAGE_CODE = 'en-us'
