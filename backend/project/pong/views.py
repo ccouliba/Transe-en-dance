@@ -23,7 +23,9 @@ from django.shortcuts import get_object_or_404
 import json
 from django.utils import timezone
 from .models import Participate
-
+from io import BytesIO
+from reportlab.lib.pagesizes import letter
+from reportlab.pdfgen import canvas
 # view pour tester et lister les emails des users (sur l'url /users/)
 @login_required
 def user_list(request):
@@ -432,3 +434,70 @@ def cancel_tournament(request):
 	except Exception as e:
 		print(f"Error: {e}") 
 		return JsonResponse({'status': 'error', 'message': str(e)}, status=500)
+
+# RGPD stuff 
+
+@login_required
+def get_active_user_info(request):
+	user = request.user
+	user_info = {
+		'id': user.id,
+		'username': user.username,
+		'email': user.email,
+		'first_name': user.first_name,
+		'last_name': user.last_name,
+		'creation_date': user.creation_date,
+		'langue': user.langue,
+		'avatar': user.avatar,
+		'friends': list(user.friends.values('id', 'username', 'email')),
+		'groups': list(user.groups.values('id', 'name')),
+		'user_permissions': list(user.user_permissions.values('id', 'name', 'codename')),
+	}
+
+	# Si le paramètre `format` est 'pdf', générer et retourner un PDF
+	if request.GET.get('format') == 'pdf':
+		# Créer un buffer pour le PDF
+		buffer = BytesIO()
+		# Créer un canevas pour le PDF
+		p = canvas.Canvas(buffer, pagesize=letter)
+		# Définir les coordonnées de départ pour le texte
+		start_y = 750
+		line_height = 15
+
+		# Ajouter les informations utilisateur au PDF
+		p.drawString(100, start_y, f"ID: {user_info['id']}")
+		p.drawString(100, start_y - line_height, f"Username: {user_info['username']}")
+		p.drawString(100, start_y - 2 * line_height, f"Email: {user_info['email']}")
+		p.drawString(100, start_y - 3 * line_height, f"First Name: {user_info['first_name']}")
+		p.drawString(100, start_y - 4 * line_height, f"Last Name: {user_info['last_name']}")
+		p.drawString(100, start_y - 5 * line_height, f"Creation Date: {user_info['creation_date']}")
+		p.drawString(100, start_y - 6 * line_height, f"Langue: {user_info['langue']}")
+		p.drawString(100, start_y - 7 * line_height, f"Avatar: {user_info['avatar']}")
+
+		# Ajouter les amis
+		p.drawString(100, start_y - 9 * line_height, "Friends:")
+		for i, friend in enumerate(user_info['friends']):
+			p.drawString(120, start_y - (10 + i) * line_height, f"{friend['username']} ({friend['email']})")
+
+		# Ajouter les groupes
+		p.drawString(100, start_y - (11 + len(user_info['friends'])) * line_height, "Groups:")
+		for i, group in enumerate(user_info['groups']):
+			p.drawString(120, start_y - (12 + len(user_info['friends']) + i) * line_height, f"{group['name']}")
+
+		# Ajouter les permissions
+		p.drawString(100, start_y - (13 + len(user_info['friends']) + len(user_info['groups'])) * line_height, "Permissions:")
+		for i, permission in enumerate(user_info['user_permissions']):
+			p.drawString(120, start_y - (14 + len(user_info['friends']) + len(user_info['groups']) + i) * line_height, f"{permission['name']}")
+
+		# Finaliser le PDF
+		p.showPage()
+		p.save()
+
+		# Revenir au début du buffer
+		buffer.seek(0)
+
+		# Retourner le PDF en réponse HTTP
+		return HttpResponse(buffer, content_type='application/pdf')
+
+	# Si le format n'est pas PDF, retourner les informations en JSON
+	return JsonResponse(user_info, safe=False)

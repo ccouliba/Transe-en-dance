@@ -12,6 +12,7 @@
 <input type="button" class="button_active" name="Update profile" value="Update profile" onclick="location.href='{% url 'pong:update_profile' %}';" /> 
 <input type="button" class="button_active" name="Change password" value="Change password" onclick="location.href='{% url 'pong:change_password' %}';" /> 
 <input type="button" class="button_active" name="Delete account" value="Delete account" onclick="location.href='{% url 'pong:delete_account' %}';" /> 
+<input type="button" class="button_active" name="Download PDF" value="Download PDF" onclick="location.href='{% url 'pong:get_active_user_info' %}?format=pdf';" /> 
 
 {% comment %} <a href="{% url 'pong:update_profile' %}">Update Profile</a><br>
 <a href="{% url 'pong:change_password' %}">Change Password</a><br>
