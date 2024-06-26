@@ -29,7 +29,7 @@
 - **POST /finish_game/** : Terminer une partie.
 - **POST /cancel_game/** : Annuler une partie.
 
-## <a name="request-response"></a>Données envoyées par le frontend et réponses du backend du backend
+## <a name="request-response"></a>Données envoyées par le frontend et réponses du backend
 
 Tous les échanges de données entre le frontend et le backend se font au format JSON.
 
@@ -41,7 +41,7 @@ Tous les échanges de données entre le frontend et le backend se font au format
     "password": "string"
   }
   ```
-- **Réponse du backend** :
+- **Exemple de réponse du backend** :
   ```json
   {
     "status": "success",
@@ -56,7 +56,7 @@ Tous les échanges de données entre le frontend et le backend se font au format
     "name": "string"
   }
   ```
-- **Réponse du backend** :
+- **Exemple de réponse du backend** :
   ```json
   {
     "status": "tournament_created",
@@ -73,7 +73,7 @@ Tous les échanges de données entre le frontend et le backend se font au format
     "alias": "string"
   }
   ```
-- **Réponse du backend** :
+- **Exemple de réponse du backend** :
   ```json
   {
     "status": "player_joined",
@@ -91,7 +91,7 @@ Tous les échanges de données entre le frontend et le backend se font au format
     "tournament_id": "integer"
   }
   ```
-- **Réponse du backend** :
+- **Exemple de réponse du backend** :
   ```json
   {
     "status": "tournament_started",
@@ -108,7 +108,7 @@ Tous les échanges de données entre le frontend et le backend se font au format
     "winner_id": "integer"
   }
   ```
-- **Réponse du backend** :
+- **Exemple de réponse du backend** :
   ```json
   {
     "status": "tournament_finished",
@@ -128,7 +128,7 @@ Tous les échanges de données entre le frontend et le backend se font au format
 }
 ```
 
-- **Réponse du backend** :
+- **Exemple de réponse du backend** :
 
 ```json
 {
@@ -154,7 +154,7 @@ Tous les échanges de données entre le frontend et le backend se font au format
     "to_user_id": "integer"
   }
   ```
-- **Réponse du backend** :
+- **Exemple de réponse du backend** :
   ```json
   {
     "status": "friend_request_sent",
@@ -169,7 +169,7 @@ Tous les échanges de données entre le frontend et le backend se font au format
     "request_id": "integer"
   }
   ```
-- **Réponse du backend** :
+- **Exemple de réponse du backend** :
   ```json
   {
     "status": "friend_request_accepted",
@@ -184,7 +184,7 @@ Tous les échanges de données entre le frontend et le backend se font au format
     "request_id": "integer"
   }
   ```
-- **Réponse du backend** :
+- **Exemple de réponse du backend** :
   ```json
   {
     "status": "friend_request_refused",
@@ -199,7 +199,7 @@ Tous les échanges de données entre le frontend et le backend se font au format
     "opponent_id": "integer"
   }
   ```
-- **Réponse du backend** :
+- **Exemple de réponse du backend** :
   ```json
   {
     "game_id": "integer",
@@ -216,7 +216,7 @@ Tous les échanges de données entre le frontend et le backend se font au format
     "new_score": "integer"
   }
   ```
-- **Réponse du backend** :
+- **Exemple de réponse du backend** :
   ```json
   {
     "status": "score_updated",
@@ -232,7 +232,7 @@ Tous les échanges de données entre le frontend et le backend se font au format
     "winner_id": "integer"
   }
   ```
-- **Réponse du backend** :
+- **Exemple de réponse du backend** :
   ```json
   {
     "status": "finished",
@@ -248,7 +248,7 @@ Tous les échanges de données entre le frontend et le backend se font au format
     "game_id": "integer"
   }
   ```
-- **Réponse du backend** :
+- **Exemple de réponse du backend** :
   ```json
   {
     "status": "canceled",
