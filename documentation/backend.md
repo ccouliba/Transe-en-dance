@@ -31,7 +31,7 @@
 
 ## <a name="request-response"></a>Données envoyées par le frontend et réponses du backend
 
-Tous les échanges de données entre le frontend et le backend se font au format JSON.
+Les échanges de données entre le frontend et le backend sont au format JSON
 
 ### POST /login/
 - **Données envoyées par le frontend** :

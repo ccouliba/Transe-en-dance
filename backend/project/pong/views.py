@@ -36,39 +36,55 @@ def index(request):
 	template = loader.get_template('pong/index.html')
 	return HttpResponse(template.render())
 
+# vue pour afficher la page d'accueil
+# render => combines a template with a given context dictionary and returns an HttpResponse object with that rendered tex
 @login_required
 def home_view(request):
 	return render(request, 'pong/home.html')
 
+# vue pour gerer la deconnexion de l'utilisateur
 @login_required
 def logout_view(request):
-	logout(request)
+	logout(request) #fonction de django
 	return redirect('/pong/login')
 
+# Cette vue gere l'inscription des nouveaux utilisateurs
+# User clique sur bouton pour s'inscrire. GET -> recuperer formulaire d'inscription (RegisterForm())
+# User remplit le formulaire et clique sur bouton pour soumettre. POST -> envoyer formulaire d'inscription
+# - Si la methode HTTP est POST => on traite le formulaire d'inscription
+# 	- Si le formulaire est valide => l'utilisateur est enregistre et connecte automatiquement et l'utilisateur est redirige vers la page de connexion
+# 	- Si le formulaire n'est pas valide => les erreurs sont affichees pour le debug
+# - Si la methode HTTP n'est pas POST => elle affiche un formulaire d'inscription vide
 def register_view(request):
 	if request.method == 'POST':
 		form = RegisterForm(request.POST)
 		if form.is_valid():
 			user = form.save()
-			login(request, user) # apres register = connecter le user
-			print("Enregistrement reussi")  # Message de succès
-			return redirect('/pong/login')  # Redirige vers la page de connexion après l'enregistrement
+			login(request, user) 
+			print("Enregistrement reussi") 
+			return redirect('/pong/login')  
 		else:
 			print("Formulaire non valide")
-			print(form.errors)  # Affiche les erreurs du formulaire pour le débogage
+			print(form.errors)  
 	else:
 		form = RegisterForm()
-		print("Affichage du formulaire d'inscription")  # Message lors de l'affichage du formulaire
+		print("Affichage du formulaire d'inscription") 
 	return render(request, 'pong/register.html', {'form': form})
 
 
+# Cette vue gere la connexion des utilisateurs
+# - Si la methode HTTP est POST => elle traite le formulaire de connexion
+# 	- Si le formulaire est valide => elle authentifie l'utilisateur avec les informations 
+#		- Si l'authentification reussit => l'utilisateur est connecte et redirige vers la page d'accueil
+#		- Si l'authentification echoue ou si le formulaire n'est pas valide => les erreurs sont affichees pour le debogage
+# - Si la methode HTTP n'est pas POST => elle affiche un formulaire de connexion vide
 def login_view(request):
 	if request.method == 'POST':
-		form = AuthenticationForm(request, data=request.POST)
+		form = AuthenticationForm(request, data=request.POST) #AuthenticationForm = formulaire de Django pour gerer l'authentification 
 		if form.is_valid():
-			username = form.cleaned_data['username']
+			username = form.cleaned_data['username'] # cleaned_data => dictionary of validated form 
 			password = form.cleaned_data['password']
-			user = authenticate(username=username, password=password)
+			user = authenticate(username=username, password=password) # compare les informations d'identification (nom d'utilisateur et mdp) avec les informations stockees dans la bdd
 			if user is not None:
 				login(request, user)
 				return redirect('/pong/home')  # Redirige vers la page d'accueil après la connexion
@@ -76,18 +92,19 @@ def login_view(request):
 				print("Authentification échouée")
 		else:
 			print("Formulaire non valide")
-			print(form.errors)  # Affiche les erreurs du formulaire pour le débogage
+			print(form.errors)  # Affiche les erreurs du formulaire pour le debug
 		return redirect('/pong/login')
 	else:
 		form = AuthenticationForm()
 	return render(request, 'pong/login.html', {'form': form})
 
 
-
+# Cette vue restreint l'acces à la page de jeu uniquement aux utilisateurs connectés et retourne la page html 
 @login_required
 def play(request):
 	return render(request, 'pong/play.html')
 
+# Cette vue gere l'authentification via l'API d'Intra 42 en redirigeant l'utilisateur vers l'URL d'authentification appropriee
 def external_login_view(request):
 	forty2_auth_url = os.getenv('API_AUTH_URL', 'https://api.intra.42.fr/oauth/authorize')
 	redirect_uri = os.getenv('REDIRECT_URI', 'http://127.0.0.1:8000/pong/auth/callback')
@@ -96,6 +113,7 @@ def external_login_view(request):
 	response_type = 'code'
 	return redirect(f"{forty2_auth_url}?client_id={client_id}&redirect_uri={redirect_uri}&response_type=code")
 
+# Cette vue gere le callback de l'authentification (ie la reponse recue apres que l'utilisateur ait autorise l'application via l'authentification via l'API d'Intra 42)
 def auth_callback(request):
 	api_response = auth.get_response_from_api(request)
 	if api_response is None:
@@ -112,10 +130,12 @@ def auth_callback(request):
 
 #everything for the user
 
+#Cette vue affiche le profil de l'utilisateur connecte en rendant la page HTML appropriee
 @login_required
 def profile_view(request):
 	return render(request, 'pong/profile.html')
 
+#Cette vue permet a l'utilisateur connecte de mettre a jour son profil en utilisant un formulaire fourni par Django
 @login_required
 def user_updated_profile(request):
 	if request.method == 'POST':
@@ -128,6 +148,7 @@ def user_updated_profile(request):
 		form = UserChangeForm(instance=request.user)
 	return render(request, 'pong/update.html', {'form': form})
 
+# Cette vue permet a l'utilisateur connecte de changer son mot de passe en utilisant un formulaire fourni par Django
 @login_required
 def user_password_changed(request):
 	if request.method == 'POST':
@@ -150,6 +171,7 @@ def user_password_changed(request):
 #     return redirect('pong/home.html')
 
 # Can be changed any time ! Just a simple view linked to a template/form that works
+# Cette vue permet a l'utilisateur connecte de supprimer son compte et de rediriger vers la page d'accueil
 @login_required
 def user_account_deleted(request):
 	user = request.user
@@ -158,6 +180,7 @@ def user_account_deleted(request):
 
 ##########################lets the game begin...
 
+# Cette vue rend la page HTML du jeu 
 def game(request):
 	return render(request, 'pong/game.html')
 
@@ -166,6 +189,7 @@ def game(request):
 import json
 from django.views.decorators.csrf import csrf_exempt
 
+# Cette vue permet a l'utilisateur connecte de demarrer une nouvelle partie de pong avec un adversaire specifie
 @login_required
 @require_POST
 @csrf_exempt # TO DO : ENLEVER CELA C EST JUSTE POUR LES TESTS AVEC POSTMAN !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -180,6 +204,7 @@ def start_game(request):
 	# Retourne une reponse JSON avec l'identifiant du jeu et le statut
 	return JsonResponse({'game_id': game.id, 'status': 'started'})
 
+#Cette vue met a jour le score d'un joueur dans une partie en cours de Pong
 @login_required
 @require_POST
 @csrf_exempt # TO DO : ENLEVER CELA C EST JUSTE POUR LES TESTS AVEC POSTMAN !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -204,6 +229,7 @@ def update_score(request):
 	
 	return JsonResponse({'status': 'error', 'message': 'Game not in progress'}, status=400)
 
+#Cette vue termine une partie de Pong en mettant a jour son statut et en enregistrant le gagnant
 @login_required
 @require_POST
 @csrf_exempt # TO DO : ENLEVER CELA C EST JUSTE POUR LES TESTS AVEC POSTMAN !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -220,7 +246,7 @@ def finish_game(request):
 	
 	return JsonResponse({'status': 'finished', 'game_id': game.id, 'winner': game.winner.id})
 
-
+#Cette vue permet a l'utilisateur connecte d'annuler une partie de Pong en mettant a jour son statut
 @login_required
 @require_POST
 @csrf_exempt # TO DO : ENLEVER CELA C EST JUSTE POUR LES TESTS AVEC POSTMAN !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -235,6 +261,7 @@ def cancel_game(request):
 
 ##########################friends stuff...
 
+# Cette vue gere l'envoi d'une demande d'ami entre deux utilisateurs en verifiant d'abord si une demande existe deja puis en creant une nouvelle demande si necessaire
 @login_required
 @require_POST
 @csrf_exempt# TO DO : ENLEVER CELA C EST JUSTE POUR LES TESTS AVEC POSTMAN !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -243,14 +270,12 @@ def send_friend_request(request):
 	to_user_id = payload.get('to_user_id')
 	to_user = get_object_or_404(User, id=to_user_id)
 	print("request.user is: ",request.user, "to_user is: ",to_user)
- 
 	# Verifier si une demande existe deja
 	# Rappel Friendship = class/model qui stock les demandes d'amis uniquement
 	existing_request = Friendship.objects.filter(id_user_1=request.user, id_user_2=to_user).first()
 	if existing_request:
 		print("existing_request.id is ", existing_request.id)
 		return JsonResponse({'status': 'error', 'message': 'Friend request already sent'}, status=400)
-
 	# Creer une nouvelle demande d'ami
 	friend_request = Friendship.objects.create(id_user_1=request.user, id_user_2=to_user)
 	print("friend_request.id is : ", friend_request.id)
@@ -288,7 +313,7 @@ def accept_friend_request(request):
 
 	return JsonResponse({'status': 'friend_request_accepted', 'request_id': friend_request.id})
 
-
+# Cette vue gere l'acceptation d'une demande d'ami en verifiant d'abord si elle est deja acceptee puis en ajoutant chaque utilisateur a la liste d'amis de l'autre et en supprimant la demande acceptee
 @login_required
 @require_POST
 @csrf_exempt# TO DO : ENLEVER CELA C EST JUSTE POUR LES TESTS AVEC POSTMAN !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -304,6 +329,7 @@ def refuse_friend_request(request):
 	return JsonResponse({'status': 'friend_request_refused', 'request_id': request_id})
 
 ##########################tournament stuff...
+# Cette vue gere la creation d'un tournoi en verifiant que le nom est fourni et en creant le tournoi puis en retournant les details du tournoi
 @login_required
 @require_POST
 @csrf_exempt  # TO DO : ENLEVER CELA C'EST JUSTE POUR LES TESTS AVEC POSTMAN !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -317,7 +343,7 @@ def create_tournament(request):
 		tournament = Tournament.objects.create(name=name)
 		return JsonResponse({'status': 'tournament_created', 'tournament_id': tournament.id, 'name': tournament.name})
 	except Exception as e:
-		print(f"Error: {e}")  # Impression de débogage en cas d'erreur
+		print(f"Error: {e}")  # Impression de debug en cas d'erreur
 		return JsonResponse({'status': 'error', 'message': str(e)}, status=500)
 
 @login_required
@@ -347,7 +373,7 @@ def player_joined_tournament(request):
 	
 	return JsonResponse({'status': 'player_joined', 'tournament_id': tournament.id, 'player_id': player.id, 'alias': alias, 'order_of_turn': order_of_turn})
 
-
+# Cette vue gere l'ajout d'un joueur a un tournoi en verifiant d'abord si le joueur ou l'alias existe deja dans le tournoi puis en creant une nouvelle participation avec l'ordre de tour
 @login_required
 @require_POST
 @csrf_exempt # TO DO : ENLEVER CELA C EST JUSTE POUR LES TESTS AVEC POSTMAN !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -365,7 +391,7 @@ def start_tournament(request):
 	
 	return JsonResponse({'status': 'tournament_started', 'tournament_id': tournament.id, 'start_date': tournament.start_date})
 
-
+# Cette vue gere la finalisation d'un tournoi en verifiant que le tournoi a commence puis en mettant a jour sa date de fin et son gagnant
 @login_required
 @require_POST
 @csrf_exempt # TO DO : ENLEVER CELA C EST JUSTE POUR LES TESTS AVEC POSTMAN !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -387,7 +413,7 @@ def finish_tournament(request):
 	
 	return JsonResponse({'status': 'tournament_finished', 'tournament_id': tournament.id, 'end_date': tournament.end_date, 'winner_id': winner.id})
 
-
+# Cette vue gere l'annulation d'un tournoi en verifiant que le tournoi n'a pas commence puis en le supprimant
 @login_required
 @require_POST
 @csrf_exempt  # TO DO : ENLEVER CELA C'EST JUSTE POUR LES TESTS AVEC POSTMAN !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
