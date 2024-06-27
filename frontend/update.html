@@ -1,35 +1,22 @@
 <!DOCTYPE html>
-<html data-bs-theme="light" lang="en" style="text-align: center;">
+<html data-bs-theme="light" lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>pong</title>
+    <title>Untitled</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Almendra&amp;display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Amethysta&amp;display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Baskervville&amp;display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Bellefair&amp;display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Benne&amp;display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Bentham&amp;display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Besley&amp;display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter&amp;display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cinzel&amp;subset=latin-ext&amp;display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cinzel+Decorative&amp;display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Grenze+Gotisch&amp;display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Imperial+Script&amp;display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Kantumruy&amp;display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Khmer&amp;display=swap">
     <link rel="stylesheet" href="assets/css/Trajan%20Pro.css">
-    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/css/styles.css">
 </head>
 
 <body><span>{% extends 'pong/base.html' %}{% load static %}{% block title %}Update Profile{% endblock %}{% block content %}</span>
     <h1>Update Profile</h1>
-    <form method="post"><span> {% csrf_token %} {{ form.as_p }} </span><button id="profileupdatebutton" class="menuButton" type="submit">Update</button></form><a href="{% url 'pong:profile' %}">Back to Profile</a><span>{% endblock %}</span>
-    <canvas id="background"></canvas>
+    <form method="post"><span> {% csrf_token %} {{ form.as_p }} </span><button class="menuButton" type="submit">Update</button></form><a href="{% url 'pong:profile' %}">Back to Profile</a><span>{% endblock %}</span>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="assets/js/script.js"></script>
+    <script src="assets/js/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/js/script.js"></script>
 </body>
 
 </html>
