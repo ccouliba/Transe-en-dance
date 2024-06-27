@@ -6,8 +6,8 @@ app_name = "pong"
 urlpatterns = [
 	# path("", views.index, name="index"),
 	# path("home/", views.home_view, name="home"),
-    path("user_list_json/", views.user_list_json, name="user_list_json"),
-    path("user_list/", views.user_list, name="user_list"),
+	path("user_list_json/", views.user_list_json, name="user_list_json"),
+	path("user_list/", views.user_list, name="user_list"),
 	path("", views.index, name="index"), # Home Page
 	path("home/", views.home_view, name="home"), #home
 	path("register/", views.register_view, name='register'),
@@ -35,11 +35,12 @@ urlpatterns = [
 	path('finish_game/', views.finish_game, name='finish_game'),
 	path('cancel_game/', views.cancel_game, name='cancel_game'),
  
- 
 	path('send_friend_request/', views.send_friend_request, name='send_friend_request'),
 	path('accept_friend_request/', views.accept_friend_request, name='accept_friend_request'),
 	path('refuse_friend_request/', views.refuse_friend_request, name='refuse_friend_request'),
- 
+	path("remove_friend_request/", views.remove_friend_request, name="remove_friend_request"),
+	path("unfriend/", views.unfriend, name="unfriend"),
+	
  
  	path('player_joined_tournament/', views.player_joined_tournament, name='player_joined_tournament'),
 	path('start_tournament/', views.start_tournament, name='start_tournament'),
