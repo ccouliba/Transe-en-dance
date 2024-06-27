@@ -148,9 +148,12 @@ def change_language(request):
         form = forms.SetLanguageForm(request.POST)
         if form.is_valid():
             user_language = form.cleaned_data['language']
+            print("userlanguage before activate=%s", user_language)
             translation.activate(user_language)
+            # print("userlanguage after activate=%s", user_language)
             response = redirect('/pong/home')
             response.set_cookie(settings.LANGUAGE_COOKIE_NAME, user_language)
+            print("after setting cookie- userLanguage %s - %s", settings.LANGUAGE_COOKIE_NAME, user_language)
             return response
     else:
         form = forms.SetLanguageForm()

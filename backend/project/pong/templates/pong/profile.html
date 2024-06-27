@@ -9,8 +9,8 @@
 <p>{{ username_txt}}: {{ user.username }}</p>
 <p>{{ email_txt }}: {{ user.email }}</p>
 
-<input type="button" class="button_active" name="Update profile" value="{{ update_profile_txt }}" onclick="location.href='{% url 'pong:update_profile' %}';" />
-<input type="button" class="button_active" name="Change password" value="{{ change_password_txt }}" onclick="location.href='{% url 'pong:change_password' %}';" />
-<input type="button" class="button_active" name="Change language" value="{{ language_txt }}" onclick="location.href='{% url 'pong:change_language' %}';" />
-<input type="button" class="button_active" name="Delete account" value="{{ delete_account_txt }}" onclick="location.href='{% url 'pong:delete_account' %}';" />
+<input type="button" name="Update profile" value="{{ update_profile_txt }}" onclick="location.href='{% url 'pong:update_profile' %}';" />
+<input type="button" name="Change password" value="{{ change_password_txt }}" onclick="location.href='{% url 'pong:change_password' %}';" />
+<input type="button" name="Change language" value="{{ language_txt }}" onclick="location.href='{% url 'pong:change_language' %}';" />
+<input type="button" name="Delete account" value="{{ delete_account_txt }}" onclick="location.href='{% url 'pong:delete_account' %}';" />
 {% endblock %}

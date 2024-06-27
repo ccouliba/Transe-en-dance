@@ -8,6 +8,6 @@
 <div class="home">
     <h1>{{ welcome_txt }}</h1>
     <input type="button" class="button_active" name="Play" value="{{ play_txt }}" onclick="location.href='{% url 'pong:play' %}';" /> 
-    {% comment %} <input type="button" class="button_active" name="Logout" value="{{ logout_txt }}" onclick="location.href='{% url 'pong:logout' %}';" /> {% endcomment %}
+    {% comment %} <input type="button" name="Logout" value="{{ logout_txt }}" onclick="location.href='{% url 'pong:logout' %}';" /> {% endcomment %}
 </div>
 {% endblock %}

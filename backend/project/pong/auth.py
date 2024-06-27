@@ -25,6 +25,7 @@ def get_response_from_api(request):
 
 def get_user_from_api(request, access_token):    
     user_info_url = os.getenv('USER_INFO_URL')
+    # cookies=None ?
     user_info_response = requests.get(user_info_url, headers={
         'Authorization': f"Bearer {access_token}"
     }, cookies=None)

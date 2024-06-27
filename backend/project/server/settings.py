@@ -128,11 +128,10 @@ LANGUAGES = [
     ('de', _('Deutsch')),
     ]
 
+LANGUAGE_COOKIE_NAME = 'lang'
+
 # Path to translation files (.po and .mo once compilation is done)
-LOCALE_PATHS = [
-    os.path.join(BASE_DIR, 'locale'),
-    # os.path.join(BASE_DIR, 'static/game/locale'),
-]
+LOCALE_PATHS = [ os.path.join(BASE_DIR, 'locale'), ]
 
 LANGUAGE_CODE = 'en-us'
 
