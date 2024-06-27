@@ -27,12 +27,13 @@ from io import BytesIO
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
 # view pour tester et lister les emails des users (sur l'url /users/)
-@login_required
+# @login_required
+def user_list_json(request):
+	users = User.objects.all().values('id', 'username', 'email')
+	return JsonResponse(list(users), safe=False)
+# @login_required
 def user_list(request):
-	users = list(User.objects.all())    
-	viewModels = [ user.email for user in users]
-	return JsonResponse(viewModels, safe=False)
-
+    return render(request, 'pong/user_list.html')
 
 def index(request):
 	template = loader.get_template('pong/index.html')
@@ -437,6 +438,7 @@ def cancel_tournament(request):
 
 # RGPD stuff 
 
+# cette vue permet a un utilisateur de telecharger ses donnees en pdf 
 @login_required
 def get_active_user_info(request):
 	user = request.user

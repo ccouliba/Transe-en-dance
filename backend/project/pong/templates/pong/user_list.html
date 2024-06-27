@@ -1,0 +1,35 @@
+
+<!-- Page pour tester le frontend : recuperer donnees du backend et bdd avec fetch() -->
+
+<!-- templates/pong/user_list.html -->
+{% extends 'pong/base.html' %}
+
+{% block title %}Liste des Utilisateurs{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+	<h1>Liste des Utilisateurs</h1>
+	<ul id="user-list" class="list-group">
+		<!-- Les utilisateurs seront affichés ici -->
+	</ul>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+	document.addEventListener('DOMContentLoaded', function() {
+		fetch('{% url "pong:user_list_json" %}')
+			.then(response => response.json())
+			.then(data => {
+				const userList = document.getElementById('user-list');
+				data.forEach(user => {
+					const li = document.createElement('li');
+					li.textContent = `${user.username} (${user.email})`;
+					li.className = 'list-group-item';
+					userList.appendChild(li);
+				});
+			})
+			.catch(error => console.error('Error fetching user list:', error));
+	});
+</script>
+{% endblock %}
