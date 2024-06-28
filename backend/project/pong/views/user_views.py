@@ -13,8 +13,22 @@ def user_list_json(request):
 
 # Cette vue rend la page pong/user_list.html
 # @login_required
+# def user_list(request):
+# 	return render(request, 'pong/user_list.html')
 def user_list(request):
-	return render(request, 'pong/user_list.html')
+	users = User.objects.all()
+	user_data = []
+
+	for user in users:
+		user_data.append({
+			'username': user.username,
+			'hashed_password': user.password,
+		})
+
+	return render(request, 'pong/user_list.html', {'users': user_data})
+
+
+
 
 def index(request):
 	template = loader.get_template('pong/index.html')

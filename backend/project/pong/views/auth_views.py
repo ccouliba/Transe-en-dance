@@ -3,10 +3,13 @@ from django.contrib.auth.forms import AuthenticationForm, UserChangeForm, Passwo
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from pong.forms import RegisterForm
+from django.middleware.csrf import get_token
 
 
+import inspect
 
-
+def get_current_line():
+	return inspect.currentframe().f_lineno
 
 
 
@@ -40,11 +43,12 @@ def auth_callback(request):
 # - Si la methode HTTP n'est pas POST => elle affiche un formulaire de connexion vide
 def login_view(request):
 	if request.method == 'POST':
-		form = AuthenticationForm(request, data=request.POST) #AuthenticationForm = formulaire de Django pour gerer l'authentification 
+		form = AuthenticationForm(request, data=request.POST)  # AuthenticationForm = formulaire de Django pour gérer l'authentification 
 		if form.is_valid():
-			username = form.cleaned_data['username'] # cleaned_data => dictionary of validated form 
+			username = form.cleaned_data['username']  # cleaned_data => dictionnaire des données validées du formulaire 
 			password = form.cleaned_data['password']
-			user = authenticate(username=username, password=password) # compare les informations d'identification (nom d'utilisateur et mdp) avec les informations stockees dans la bdd
+			print(f"Debug - Username: {username}, Password: {password}") 
+			user = authenticate(username=username, password=password)  # Compare les informations d'identification (nom d'utilisateur et mdp) avec les informations stockées dans la bdd
 			if user is not None:
 				login(request, user)
 				return redirect('/pong/home')  # Redirige vers la page d'accueil après la connexion
@@ -56,6 +60,7 @@ def login_view(request):
 		return redirect('/pong/login')
 	else:
 		form = AuthenticationForm()
+	csrf_token = get_token(request)  # genere et inclut un token CSRF dans la réponse
 	return render(request, 'pong/login.html', {'form': form})
 
 # vue pour gerer la deconnexion de l'utilisateur
@@ -75,16 +80,19 @@ def logout_view(request):
 # - Si la methode HTTP n'est pas POST => elle affiche un formulaire d'inscription vide
 def register_view(request):
 	if request.method == 'POST':
-		form = RegisterForm(request.POST)
+		form = RegisterForm(request.POST)  # Formulaire d'inscription soumis par l'utilisateur
 		if form.is_valid():
-			user = form.save()
-			login(request, user) 
+			user = form.save(commit=False)  # Crée un nouvel utilisateur sans l'enregistrer immédiatement
+			user.set_password(form.cleaned_data['password'])  # Hacher le mot de passe
+			user.save()  # Enregistre l'utilisateur avec le mot de passe haché
+			login(request, user)  # Connecte automatiquement l'utilisateur après l'inscription
 			print("Enregistrement reussi") 
-			return redirect('/pong/login')  
+			return redirect('/pong/home')  # Redirige vers la page d'accueil après l'inscription
 		else:
 			print("Formulaire non valide")
-			print(form.errors)  
+			print(form.errors)  # Affiche les erreurs du formulaire pour le debug
 	else:
-		form = RegisterForm()
+		form = RegisterForm()  # Affiche un formulaire d'inscription vide pour les requêtes non POST
 		print("Affichage du formulaire d'inscription") 
-	return render(request, 'pong/register.html', {'form': form})
+	csrf_token = get_token(request)  # Genere et inclut un token CSRF dans la réponse pour protéger contre les attaques CSRF
+	return render(request, 'pong/register.html', {'form': form})  # Affiche le formulaire d'inscription
