@@ -123,14 +123,6 @@ def user_password_changed(request):
         form = PasswordChangeForm(user=request.user)
     return render(request, 'pong/change_password.html', {'form': form})
 
-#  This view is causes some trouble on reverse html on success !
-# That is why i have done this ; for now we could use the view below instead
-# @login_required
-# def user_account_deleted(request):
-#     user = request.user
-#     user.delete()
-#     return redirect('pong/home.html')
-
 # Can be removeded any time ! Just a simple view linked to a template/form that works
 @login_required
 def user_account_deleted(request):
@@ -148,12 +140,9 @@ def change_language(request):
         form = forms.SetLanguageForm(request.POST)
         if form.is_valid():
             user_language = form.cleaned_data['language']
-            print("userlanguage before activate=%s", user_language)
             translation.activate(user_language)
-            # print("userlanguage after activate=%s", user_language)
             response = redirect('/pong/home')
             response.set_cookie(settings.LANGUAGE_COOKIE_NAME, user_language)
-            print("after setting cookie- userLanguage %s - %s", settings.LANGUAGE_COOKIE_NAME, user_language)
             return response
     else:
         form = forms.SetLanguageForm()

@@ -128,7 +128,7 @@ LANGUAGES = [
     ('de', _('Deutsch')),
     ]
 
-LANGUAGE_COOKIE_NAME = 'lang'
+LANGUAGE_COOKIE_NAME = 'language'
 
 # Path to translation files (.po and .mo once compilation is done)
 LOCALE_PATHS = [ os.path.join(BASE_DIR, 'locale'), ]

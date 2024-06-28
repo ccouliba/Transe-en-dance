@@ -37,15 +37,4 @@ def texts_to_translate(request):
         'username_txt':("Username"),
         'email_txt':("Email"),
         'reserved_rights_txt':_("All rights reserved"),
-
-        # Game index context variables
-        # These are texts from static repertory => does not work with classic templates_processors
-        'settings_txt':_("Settings"),
-        'single_play_txt':_("Single player"),
-        'multiplayer_txt':_("Multiplayer"),
-        'score_to_reach_txt':_("Score to reach"),
-        'ball_color_txt':_("Ball color"),
-        'palette_color_txt':_("Palette color"),
-        'background_color_txt':_("Background color"),
-        'save_txt':_("Save"),
     }
