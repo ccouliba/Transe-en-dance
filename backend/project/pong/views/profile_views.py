@@ -74,7 +74,7 @@ def user_account_deleted(request):
 
 # cette vue permet a un utilisateur de telecharger ses donnees en pdf 
 @login_required
-def get_active_user_info(request):
+def get_user_info(request):
 	user = request.user
 	user_info = {
 		'id': user.id,

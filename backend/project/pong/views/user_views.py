@@ -21,6 +21,7 @@ def user_list(request):
 
 	for user in users:
 		user_data.append({
+			'id': user.id,
 			'username': user.username,
 			'hashed_password': user.password,
 		})

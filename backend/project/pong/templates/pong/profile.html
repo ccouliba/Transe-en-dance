@@ -1,4 +1,3 @@
-<!-- templates/pong/profile.html -->
 {% extends 'pong/base.html' %}
 
 {% block title %}Profil{% endblock %}
@@ -9,6 +8,7 @@
 	<p>Email : {{ user.email }}</p>
 	<p>Nom : {{ user.first_name }} {{ user.last_name }}</p>
 	<p>ID : {{ user.id }}</p>
+	<button class="btn btn-primary mt-3" id="download-pdf">Télécharger en PDF</button>
 
 	<h2>Liste des amis</h2>
 	{% if friends %}
@@ -76,7 +76,8 @@
 			method: 'POST',
 			body: JSON.stringify(data),
 			headers: {
-				'Content-Type': 'application/json'
+				'Content-Type': 'application/json',
+				'X-CSRFToken': '{{ csrf_token }}'
 			}
 		})
 		.then(response => response.json())
@@ -100,12 +101,17 @@
 		});
 	});
 
+	document.getElementById('download-pdf').addEventListener('click', function() {
+		window.location.href = '{% url "pong:get_user_info" %}?format=pdf';
+	});
+
 	function acceptFriendRequest(requestId) {
 		fetch('{% url "pong:accept_friend_request" %}', {
 			method: 'POST',
 			body: JSON.stringify({ request_id: requestId }),
 			headers: {
-				'Content-Type': 'application/json'
+				'Content-Type': 'application/json',
+				'X-CSRFToken': '{{ csrf_token }}'
 			}
 		})
 		.then(response => response.json())
@@ -120,7 +126,8 @@
 			method: 'POST',
 			body: JSON.stringify({ request_id: requestId }),
 			headers: {
-				'Content-Type': 'application/json'
+				'Content-Type': 'application/json',
+				'X-CSRFToken': '{{ csrf_token }}'
 			}
 		})
 		.then(response => response.json())
@@ -135,7 +142,8 @@
 			method: 'POST',
 			body: JSON.stringify({ request_id: requestId }),
 			headers: {
-				'Content-Type': 'application/json'
+				'Content-Type': 'application/json',
+				'X-CSRFToken': '{{ csrf_token }}'
 			}
 		})
 		.then(response => response.json())
@@ -165,7 +173,8 @@
 			method: 'POST',
 			body: JSON.stringify({ friend_id: friendId }),
 			headers: {
-				'Content-Type': 'application/json'
+				'Content-Type': 'application/json',
+				'X-CSRFToken': '{{ csrf_token }}'
 			}
 		})
 		.then(response => response.json())

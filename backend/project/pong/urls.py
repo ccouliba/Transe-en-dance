@@ -3,7 +3,7 @@ from .views.auth_views import register_view, login_view, logout_view, auth_callb
 from .views.game_views import play, start_game, update_score, finish_game, cancel_game, game
 from .views.friend_views import send_friend_request, accept_friend_request, refuse_friend_request, remove_friend_request, unfriend
 from .views.tournament_views import create_tournament, player_joined_tournament, start_tournament, finish_tournament, cancel_tournament
-from .views.profile_views import profile_view, user_updated_profile, user_password_changed, user_account_deleted, get_active_user_info
+from .views.profile_views import profile_view, user_updated_profile, user_password_changed, user_account_deleted, get_user_info
 from .views.user_views import user_list_json, user_list, index, home_view
 
 app_name = 'pong'  # definir le namespace
@@ -32,7 +32,7 @@ urlpatterns = [
 	path('update_profile/', user_updated_profile, name='update_profile'),
 	path('change_password/', user_password_changed, name='change_password'),
 	path('delete_account/', user_account_deleted, name='delete_account'),
-	path('get_user_info/', get_active_user_info, name='get_user_info'),
+	path('get_user_info/', get_user_info, name='get_user_info'),
 	path('auth_callback/', auth_callback, name='auth_callback'),
 	path('user_list_json/', user_list_json, name='user_list_json'),
 	path('user_list/', user_list, name='user_list'),

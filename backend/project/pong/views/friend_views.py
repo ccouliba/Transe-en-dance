@@ -6,8 +6,6 @@ from django.views.decorators.csrf import csrf_exempt
 from pong.models import User, Friendship
 import json
 
-
-
 # Cette vue gere l'envoi d'une demande d'ami entre deux utilisateurs en verifiant d'abord si une demande existe deja puis en creant une nouvelle demande si necessaire
 @login_required
 @require_POST
