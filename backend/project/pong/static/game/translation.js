@@ -26,7 +26,6 @@ const langDict = {
         'Paddle color :':'Paddle color :',
         'Background color :':'Background color :',
         'Save':'Save'
-
     },
     'fr': {
         'Settings':'Paramètres',

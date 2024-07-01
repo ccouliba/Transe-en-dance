@@ -12,23 +12,25 @@ def get_response_from_api(request):
     url = os.getenv('TOKEN_URL')
     code = request.GET.get('code')
     # possible parameters of post: allow_redirects=False, cookies=None, auth=request.user, cert="",timeout=30
-    response = requests.post(url, data={
-        'code': code or None,
-        'redirect_uri': os.getenv('REDIRECT_URI'),
-        'client_id': os.getenv('UID'),
-        'client_secret': os.getenv('SECRET'),
-        'grant_type': 'authorization_code',
-    })
+    response = requests.post(
+        url,
+        data={
+            'code': code or None,
+            'redirect_uri': os.getenv('REDIRECT_URI'),
+            'client_id': os.getenv('UID'),
+            'client_secret': os.getenv('SECRET'),
+            'grant_type': 'authorization_code',
+        })
     if response.status_code != 200 or code is None:
         return None
     return response
 
 def get_user_from_api(request, access_token):    
     user_info_url = os.getenv('USER_INFO_URL')
-    # cookies=None ?
-    user_info_response = requests.get(user_info_url, headers={
-        'Authorization': f"Bearer {access_token}"
-    }, cookies=None)
+    user_info_response = requests.get(
+            user_info_url,
+            headers={ 'Authorization': f"Bearer {access_token}"},
+            cookies=None)
     if user_info_response.status_code == 200:
         user_info = user_info_response.json()
         user, created = User.objects.get_or_create(username=user_info['login'])
