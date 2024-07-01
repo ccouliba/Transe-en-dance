@@ -79,7 +79,7 @@ function getCookie() {
             break;
         }
     }
-    return cookieLang || navigator.language;
+    return cookieLang;
 }
 
 function getTranslation(lang, val) {
