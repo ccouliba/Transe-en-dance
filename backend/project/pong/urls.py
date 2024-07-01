@@ -1,5 +1,5 @@
 from django.urls import path
-from .views.auth_views import register_view, login_view, logout_view, auth_callback
+from .views.auth_views import register_view, login_view, logout_view, auth_callback, external_login
 from .views.game_views import play, start_game, update_score, finish_game, cancel_game, game
 from .views.friend_views import send_friend_request, accept_friend_request, refuse_friend_request, remove_friend_request, unfriend
 from .views.tournament_views import create_tournament, player_joined_tournament, start_tournament, finish_tournament, cancel_tournament
@@ -39,4 +39,5 @@ urlpatterns = [
 	path('index/', index, name='index'),
 	path('home/', home_view, name='home'),
 	path('game/', game, name='game'),
+	path('external_login/', external_login, name='external_login'),
 ]

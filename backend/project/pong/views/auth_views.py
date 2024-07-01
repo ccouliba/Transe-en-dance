@@ -14,7 +14,7 @@ def get_current_line():
 
 
 # Cette vue gere l'authentification via l'API d'Intra 42 en redirigeant l'utilisateur vers l'URL d'authentification appropriee
-def external_login_view(request):
+def external_login(request):
 	forty2_auth_url = os.getenv('API_AUTH_URL', 'https://api.intra.42.fr/oauth/authorize')
 	redirect_uri = os.getenv('REDIRECT_URI', 'http://127.0.0.1:8000/pong/auth/callback')
 	client_id = os.getenv('UID')
@@ -44,10 +44,12 @@ def auth_callback(request):
 def login_view(request):
 	if request.method == 'POST':
 		form = AuthenticationForm(request, data=request.POST)  # AuthenticationForm = formulaire de Django pour gérer l'authentification 
+		# for field in form:
+			# print(field.name,  field.errors)
 		if form.is_valid():
 			username = form.cleaned_data['username']  # cleaned_data => dictionnaire des données validées du formulaire 
 			password = form.cleaned_data['password']
-			print(f"Debug - Username: {username}, Password: {password}") 
+			# print(f"Debug - Username: {username}, Password: {password}") 
 			user = authenticate(username=username, password=password)  # Compare les informations d'identification (nom d'utilisateur et mdp) avec les informations stockées dans la bdd
 			if user is not None:
 				login(request, user)
@@ -56,7 +58,7 @@ def login_view(request):
 				print("Authentification échouée")
 		else:
 			print("Formulaire non valide")
-			print(form.errors)  # Affiche les erreurs du formulaire pour le debug
+			# print(form.errors)  # Affiche les erreurs du formulaire pour le debug
 		return redirect('/pong/login')
 	else:
 		form = AuthenticationForm()
