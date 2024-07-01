@@ -5,8 +5,9 @@
 
 {% block content %}
     {% if not user.is_authenticated %}
-        <input type="button" name="Login" value="Login" onclick="location.href='{% url 'pong:login' %}';" />
-        <input type="button" name="Register" value="Register" onclick="location.href='{% url 'pong:register' %}';" /> 
-        <p>Or log with 42-><a href="{% url 'pong:external-login' %}"> Log with 42 here</a></p>
+        <input type="button" class="button_active" name="Login" value="Login" onclick="location.href='{% url 'pong:login' %}';" />
+        <input type="button" class="button_active" name="Register" value="Register" onclick="location.href='{% url 'pong:register' %}';" /> 
+        <p>Or log with 42 -><a href="{% url 'pong:external_login' %}">Login with 42 here</a></p>
     {% endif %}
 {% endblock %}
+

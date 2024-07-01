@@ -34,7 +34,23 @@ def texts_to_translate(request):
         'profile_txt':_("Profile"),
         'language_txt':_("Language"),
         'disconnect_txt':_("Disconnect"),
-        'username_txt':("Username"),
-        'email_txt':("Email"),
+        
+        'hashed_password_txt':_("Hashed password"),
+        'name_txt':_("Name"),
+        'username_txt':_("Username"),
+        'email_txt':_("Email"),
+        'profile_txt':_("Profile of"),
+        
         'reserved_rights_txt':_("All rights reserved"),
+        
+        # For game
+        'start_game_txt':_("start game"),
+        'stop_game_txt':_("stop game"),
+        'user_list_txt':_("user_list_txt"),
+        
+        'download_pdf_txt':_("Download as PDF"),
+        'suppress_txt':_("Suppress"),
+        
+        'friends_list_txt':_("Friends list"),
+        
     }

@@ -11,5 +11,5 @@
     {{ form.as_p }}
     <button type="submit">{{ login_txt }}</button>
 </form>
-<p>{{ no_account_txt }}-> <a href="{% url 'pong:register' %}">{{ register_txt }}</a> {{ or_txt }} <a href="{% url 'pong:external-login' %}">{{ external_log_txt }} 42</a></p>
+<p>{{ no_account_txt }}-> <a href="{% url 'pong:register' %}">{{ register_txt }}</a> {{ or_txt }} <a href="{% url 'pong:external_login' %}">{{ external_log_txt }} 42</a></p>
 {% endblock %}

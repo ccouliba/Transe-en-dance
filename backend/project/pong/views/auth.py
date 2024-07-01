@@ -2,7 +2,7 @@ from django.http import HttpResponse
 # from django.contrib.auth.models import User
 from django.contrib.auth import login
 from django.shortcuts import render, redirect
-from .models import User
+from ..models import User
 import requests
 # from requests.auth import HTTPBasicAuth 
 import os

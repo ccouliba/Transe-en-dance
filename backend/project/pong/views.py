@@ -8,10 +8,9 @@ from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth import login, authenticate
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
 from django.contrib import messages
-from django.utils import translation
 from django.conf import settings
+from django.utils import translation
 from django.utils.translation import gettext as _
 from .models import User
 from . import auth, forms
