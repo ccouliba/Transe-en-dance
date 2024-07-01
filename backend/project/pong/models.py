@@ -11,6 +11,7 @@ class User(AbstractUser):
 	creation_date = models.DateTimeField(default=timezone.now)  # Date de creation de l'utilisateur
 	langue = models.CharField(max_length=10, blank=True, null=True)  # Langue de l'utilisateur
 	avatar = models.CharField(max_length=255, blank=True, null=True)  # URL ou chemin de l'avatar de l'utilisateur
+	friends = models.ManyToManyField('self', symmetrical=True, blank=True)  # Champ pour les amis
 
 	# Ajout d'un champ many-to-many pour les groupes auxquels cet utilisateur appartient
 	groups = models.ManyToManyField(
@@ -33,6 +34,7 @@ class User(AbstractUser):
 		return self.username 
 
 
+#class qui permet de gerer les demandes d'amis. Si demande acceptee alors sauvegarde l'ami dans friends (cf. class user et dans bdd : `pong_user_friends``) 
 class Friendship(models.Model):
 	id_user_1 = models.ForeignKey(User, related_name='friendship_sender', on_delete=models.CASCADE, null = True, blank = True)
 	id_user_2 = models.ForeignKey(User, related_name='friendship_receiver', on_delete=models.CASCADE, null = True, blank = True)
@@ -44,23 +46,18 @@ class Friendship(models.Model):
 	def __str__(self):
 		return f"{self.id_user_1} is friend with {self.id_user_2}"
 
-
-
 class Game(models.Model):
-	date = models.DateTimeField(auto_now_add=True)
-	player_1 = models.ForeignKey(User, related_name='games_as_player_1', on_delete=models.CASCADE, null=True, blank=True)
-	player_2 = models.ForeignKey(User, related_name='games_as_player_2', on_delete=models.CASCADE, null=True, blank=True)
+	player1 = models.ForeignKey(User, related_name='player1_games', on_delete=models.CASCADE,  null=True, blank=True)
+	player2 = models.ForeignKey(User, related_name='player2_games', on_delete=models.CASCADE,  null=True, blank=True)
+	player1_score = models.IntegerField(default=0)
+	player2_score = models.IntegerField(default=0)
+	status = models.CharField(max_length=20, choices=[('started', 'Started'), ('finished', 'Finished'), ('canceled', 'Canceled')])
 	winner = models.ForeignKey(User, related_name='won_games', on_delete=models.SET_NULL, null=True, blank=True)
-	score = models.IntegerField(null=True, blank=True)
-	status = models.CharField(max_length=20, choices=[
-		('started', 'Started'),
-		('finished', 'Finished'),
-		('canceled', 'Canceled')
-	])
+	created_at = models.DateTimeField(auto_now_add=True,  null=True, blank=True)
 
 	def __str__(self):
-		return f"Game {self.id} on {self.date} between {self.player_1} and {self.player_2}"
-
+		return f"Game {self.id}: {self.player1} vs {self.player2}"
+	
 class Tournament(models.Model):
 	name = models.CharField(max_length=100)
 	is_started = models.BooleanField(default=False)

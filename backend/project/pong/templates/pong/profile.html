@@ -1,22 +1,202 @@
-<!-- templates/profile/profile.html -->
 {% extends 'pong/base.html' %}
-{% load static %}
 
-{% block title %}Profile{% endblock %}
+{% block title %}Profil{% endblock %}
 
 {% block content %}
-<h1>Profile Information</h1>
-<p>Username: {{ user.username }}</p>
-<p>Email: {{ user.email }}</p>
+<div class="container mt-5">
+	<h1>Profil de {{ user.username }}</h1>
+	<p>Email : {{ user.email }}</p>
+	<p>Nom : {{ user.first_name }} {{ user.last_name }}</p>
+	<p>ID : {{ user.id }}</p>
+	<button class="btn btn-primary mt-3" id="download-pdf">Télécharger en PDF</button>
 
-<input type="button" class="button_active" name="Update profile" value="Update profile" onclick="location.href='{% url 'pong:update_profile' %}';" /> 
-<input type="button" class="button_active" name="Change password" value="Change password" onclick="location.href='{% url 'pong:change_password' %}';" /> 
-<input type="button" class="button_active" name="Delete account" value="Delete account" onclick="location.href='{% url 'pong:delete_account' %}';" /> 
+	<h2>Liste des amis</h2>
+	{% if friends %}
+		<ul class="list-group">
+			{% for friend in friends %}
+				<li class="list-group-item">
+					{{ friend.id }} - {{ friend.username }} ({{ friend.email }})
+					<button class="btn btn-danger btn-sm" onclick="unfriend({{ friend.id }})">Supprimer</button>
+				</li>
+			{% endfor %}
+		</ul>
+	{% else %}
+		<p>Vous n'avez pas encore d'amis.</p>
+	{% endif %}
 
-{% comment %} <a href="{% url 'pong:update_profile' %}">Update Profile</a><br>
-<a href="{% url 'pong:change_password' %}">Change Password</a><br>
-<form action="{% url 'pong:delete_account' %}" method="post">
-    {% csrf_token %}
-    <button type="submit">Delete Account</button>
-</form> {% endcomment %}
+	<h2>Demandes d'amis envoyées</h2>
+	{% if sent_requests %}
+		<ul class="list-group">
+			{% for request in sent_requests %}
+				<li class="list-group-item">
+					{{ request.id_user_2.id }} - {{ request.id_user_2.username }} ({{ request.id_user_2.email }})
+					<button class="btn btn-danger btn-sm" onclick="removeFriendRequest({{ request.id }})">Retirer</button>
+				</li>
+			{% endfor %}
+		</ul>
+	{% else %}
+		<p>Vous n'avez pas encore envoyé de demandes d'amis.</p>
+	{% endif %}
+
+	<h2>Demandes d'amis reçues</h2>
+	{% if received_requests %}
+		<ul class="list-group">
+			{% for request in received_requests %}
+				<li class="list-group-item">
+					{{ request.id_user_1.id }} - {{ request.id_user_1.username }} ({{ request.id_user_1.email }})
+					<button class="btn btn-success btn-sm" onclick="acceptFriendRequest({{ request.id }})">Accepter</button>
+					<button class="btn btn-danger btn-sm" onclick="refuseFriendRequest({{ request.id }})">Refuser</button>
+				</li>
+			{% endfor %}
+		</ul>
+	{% else %}
+		<p>Vous n'avez pas encore reçu de demandes d'amis.</p>
+	{% endif %}
+
+	<h2>Envoyer une demande d'ami</h2>
+	<form id="send-friend-request-form">
+		<div id="error-message" class="mt-3" style="color: red; font-weight: bold;"></div>
+		<div class="form-group">
+			<label for="to_user_id">ID de l'utilisateur :</label>
+			<input type="text" id="to_user_id" name="to_user_id" class="form-control">
+		</div>
+		<button type="submit" class="btn btn-primary">Envoyer</button>
+	</form>
+	<div id="response" class="mt-3"></div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+	document.getElementById('send-friend-request-form').addEventListener('submit', function(event) {
+		event.preventDefault();
+		const formData = new FormData(this);
+		const data = Object.fromEntries(formData.entries());
+		fetch('{% url "pong:send_friend_request" %}', {
+			method: 'POST',
+			body: JSON.stringify(data),
+			headers: {
+				'Content-Type': 'application/json',
+				'X-CSRFToken': '{{ csrf_token }}'
+			}
+		})
+		.then(response => response.json())
+		.then(data => {
+			const responseDiv = document.getElementById('response');
+			const errorMessageDiv = document.getElementById('error-message');
+			if (data.status === 'success') {
+				responseDiv.innerHTML = `<div class="alert alert-success">${data.message}</div>`;
+				errorMessageDiv.innerHTML = '';
+			} else {
+				responseDiv.innerHTML = '';
+				errorMessageDiv.innerHTML = data.message;
+			}
+		})
+		.catch(error => {
+			const responseDiv = document.getElementById('response');
+			const errorMessageDiv = document.getElementById('error-message');
+			responseDiv.innerHTML = '';
+			errorMessageDiv.innerHTML = 'Erreur lors de l\'envoi de la demande d\'ami.';
+			console.error('Error:', error);
+		});
+	});
+
+	document.getElementById('download-pdf').addEventListener('click', function() {
+		window.location.href = '{% url "pong:get_user_info" %}?format=pdf';
+	});
+
+	function acceptFriendRequest(requestId) {
+		fetch('{% url "pong:accept_friend_request" %}', {
+			method: 'POST',
+			body: JSON.stringify({ request_id: requestId }),
+			headers: {
+				'Content-Type': 'application/json',
+				'X-CSRFToken': '{{ csrf_token }}'
+			}
+		})
+		.then(response => response.json())
+		.then(data => {
+			location.reload();
+		})
+		.catch(error => console.error('Error:', error));
+	}
+
+	function refuseFriendRequest(requestId) {
+		fetch('{% url "pong:refuse_friend_request" %}', {
+			method: 'POST',
+			body: JSON.stringify({ request_id: requestId }),
+			headers: {
+				'Content-Type': 'application/json',
+				'X-CSRFToken': '{{ csrf_token }}'
+			}
+		})
+		.then(response => response.json())
+		.then(data => {
+			location.reload();
+		})
+		.catch(error => console.error('Error:', error));
+	}
+
+	function removeFriendRequest(requestId) {
+		fetch('{% url "pong:remove_friend_request" %}', {
+			method: 'POST',
+			body: JSON.stringify({ request_id: requestId }),
+			headers: {
+				'Content-Type': 'application/json',
+				'X-CSRFToken': '{{ csrf_token }}'
+			}
+		})
+		.then(response => response.json())
+		.then(data => {
+			const responseDiv = document.getElementById('response');
+			const errorMessageDiv = document.getElementById('error-message');
+			if (data.status === 'success') {
+				responseDiv.innerHTML = `<div class="alert alert-success">${data.message}</div>`;
+				errorMessageDiv.innerHTML = '';
+				location.reload();
+			} else {
+				responseDiv.innerHTML = '';
+				errorMessageDiv.innerHTML = data.message;
+			}
+		})
+		.catch(error => {
+			const responseDiv = document.getElementById('response');
+			const errorMessageDiv = document.getElementById('error-message');
+			responseDiv.innerHTML = '';
+			errorMessageDiv.innerHTML = 'Erreur lors du retrait de la demande d\'ami.';
+			console.error('Error:', error);
+		});
+	}
+
+	function unfriend(friendId) {
+		fetch('{% url "pong:unfriend" %}', {
+			method: 'POST',
+			body: JSON.stringify({ friend_id: friendId }),
+			headers: {
+				'Content-Type': 'application/json',
+				'X-CSRFToken': '{{ csrf_token }}'
+			}
+		})
+		.then(response => response.json())
+		.then(data => {
+			const responseDiv = document.getElementById('response');
+			const errorMessageDiv = document.getElementById('error-message');
+			if (data.status === 'success') {
+				responseDiv.innerHTML = `<div class="alert alert-success">${data.message}</div>`;
+				errorMessageDiv.innerHTML = '';
+				location.reload();
+			} else {
+				responseDiv.innerHTML = '';
+				errorMessageDiv.innerHTML = data.message;
+			}
+		})
+		.catch(error => {
+			const responseDiv = document.getElementById('response');
+			const errorMessageDiv = document.getElementById('error-message');
+			responseDiv.innerHTML = '';
+			errorMessageDiv.innerHTML = 'Erreur lors de la suppression de l\'ami.';
+			console.error('Error:', error);
+		});
+	}
+</script>
 {% endblock %}
