@@ -4,7 +4,8 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from pong.forms import RegisterForm
 from django.middleware.csrf import get_token
-
+import os
+from . import auth
 
 import inspect
 
