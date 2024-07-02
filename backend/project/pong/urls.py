@@ -1,30 +1,43 @@
 from django.urls import path
-from . import views
-from django.contrib.auth.views import LogoutView
+from .views.auth_views import register_view, login_view, logout_view, auth_callback, external_login
+from .views.game_views import play, start_game, update_score, finish_game, cancel_game, game
+from .views.friend_views import send_friend_request, accept_friend_request, refuse_friend_request, remove_friend_request, unfriend
+from .views.tournament_views import create_tournament, player_joined_tournament, start_tournament, finish_tournament, cancel_tournament
+from .views.profile_views import profile_view, user_updated_profile, user_password_changed, user_account_deleted, get_user_info
+from .views.user_views import user_list_json, user_list, index, home_view
 
-app_name = "pong"
+app_name = 'pong'  # definir le namespace
+
 urlpatterns = [
-	# path("", views.index, name="index"),
-	# path("home/", views.home_view, name="home"),
-	path("users", views.user_list, name="user_list"),
-	path("", views.index, name="index"), # Home Page
-	path("home/", views.home_view, name="home"), #home
-	path("register/", views.register_view, name='register'),
-	path("login/", views.login_view, name="login"),
-	# path('logout/', LogoutView.as_view(next_page='login'), name='logout'),
- 	path('logout/', LogoutView.as_view(next_page='pong:login'), name='logout'),
-	path('external-login/', views.external_login_view, name='external-login'),
-	path('auth/callback/', views.auth_callback, name='auth_callback'),
-	path('play/', views.play, name='play'),
-	
-	# path('profile/', views.profile_view, name='profile'),
-	# path('profile/update/', views.user_updated_profile, name='update_profile'),
-	# path('profile/change_password/', views.user_password_changed, name='change_password'),
-	# path('profile/delete_account/', views.user_account_deleted, name='delete_account'),
-    
-	# I think the url patterns above causes some troubles. If not we will delete these below
-	path('profile/', views.profile_view, name='profile'),
-	path('update/', views.user_updated_profile, name='update_profile'),
-	path('change_password/', views.user_password_changed, name='change_password'),
-	path('delete_account/', views.user_account_deleted, name='delete_account'),
+	path('', login_view, name='default_login'), 
+	path('register/', register_view, name='register'),
+	path('login/', login_view, name='login'),
+	path('logout/', logout_view, name='logout'),
+	path('play/', play, name='play'),
+	path('start_game/', start_game, name='start_game'),
+	path('update_score/', update_score, name='update_score'),
+	path('finish_game/', finish_game, name='finish_game'),
+	path('cancel_game/', cancel_game, name='cancel_game'),
+	path('send_friend_request/', send_friend_request, name='send_friend_request'),
+	path('accept_friend_request/', accept_friend_request, name='accept_friend_request'),
+	path('refuse_friend_request/', refuse_friend_request, name='refuse_friend_request'),
+	path('remove_friend_request/', remove_friend_request, name='remove_friend_request'),
+	path('unfriend/', unfriend, name='unfriend'),
+	path('create_tournament/', create_tournament, name='create_tournament'),
+	path('player_joined_tournament/', player_joined_tournament, name='player_joined_tournament'),
+	path('start_tournament/', start_tournament, name='start_tournament'),
+	path('finish_tournament/', finish_tournament, name='finish_tournament'),
+	path('cancel_tournament/', cancel_tournament, name='cancel_tournament'),
+	path('profile/', profile_view, name='profile'),
+	path('update_profile/', user_updated_profile, name='update_profile'),
+	path('change_password/', user_password_changed, name='change_password'),
+	path('delete_account/', user_account_deleted, name='delete_account'),
+	path('get_user_info/', get_user_info, name='get_user_info'),
+	path('auth/callback/', auth_callback, name='auth_callback'),
+	path('user_list_json/', user_list_json, name='user_list_json'),
+	path('user_list/', user_list, name='user_list'),
+	path('index/', index, name='index'),
+	path('home/', home_view, name='home'),
+	path('game/', game, name='game'),
+	path('external_login/', external_login, name='external_login'),
 ]

@@ -1,0 +1,18 @@
+{% extends 'pong/base.html' %}
+
+{% block title %}Liste des utilisateurs{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1>Liste des utilisateurs</h1>
+    <ul id="user-list" class="list-group">
+        {% for user in users %}
+        <li class="list-group-item">
+            <strong>ID:</strong> {{ user.id }}<br>
+            <strong>Username:</strong> {{ user.username }}<br>
+            <strong>Hashed Password:</strong> {{ user.hashed_password }}
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}
