@@ -26,7 +26,20 @@ def send_friend_request(request):
 	
 	# Créer une nouvelle demande d'ami
 	friend_request = Friendship.objects.create(id_user_1=request.user, id_user_2=to_user)
-	return JsonResponse({'status': 'success', 'message': 'Demande d\'ami envoyée avec succès.'})
+	# return JsonResponse({'status': 'success', 'message': 'Demande d\'ami envoyée avec succès.'})
+ 	# Retourner les informations nécessaires pour mettre à jour le DOM
+	return JsonResponse({
+		'status': 'success',
+		'message': 'Demande d\'ami envoyée avec succès.',
+		'requested_user': {
+			'id': to_user.id,
+			'username': to_user.username,
+			'email': to_user.email
+		},
+		'request': {
+			'id': friend_request.id
+		}
+	})
 
 @login_required
 @require_POST

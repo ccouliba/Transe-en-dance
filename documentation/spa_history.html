@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+	<meta charset="UTF-8" />
+	<title>SPA</title>
+  </head>
+  <body>
+	<div id="app"></div>
+	<button id="goBack">Go back</button>
+	<button id="goForward">Go forward</button>
+	<script>
+
+	  function Menu() {
+		return `
+		<div>
+			<button onclick="changePage('page1')">page1</button>
+			<button onclick="changePage('page2')" >page2</button>
+			<button onclick="changePage('page4')" >page4</button>
+		</div>
+	`;
+	  }
+
+	  function Table() {
+		return `
+	<table>
+		<tbody>
+			<tr>
+				<td>1</td>
+			</tr>
+		</tbody>
+
+	</table>
+	`;
+	  }
+
+	  function Page1(data) {
+		return `
+	<div>
+		${Menu()}
+		<h1>Page 1</h1>
+		<p>
+			Tu as ${data.age}
+		</p>
+	<div>
+	`;
+	  }
+
+	  function Page2() {
+		return `
+		<div>
+		${Menu()}
+		<h1>Page 2</h1>
+			${Table()}
+		</div>
+	`;
+	  }
+
+	  function Page404() {
+		return `
+		${Menu()}
+		<div>404</div>    
+	`;
+	  }
+	  // pages est un objet qui va contenir les fonctions pour charger les pages
+	  let pages = {
+		page1: () => mountComponent(Page1, { age: 20 }),
+		page2: () => mountComponent(Page2),
+	  };
+	  let customHistory = [];
+	  // fonction pour changer la page actuelle
+	  function changePage(pageName) {
+		console.log("HELLO")
+		console.log("Changement de page vers", pageName);
+		if (typeof pages[pageName] === "undefined") {
+		  // Si la page demandée n'existe pas
+		  mountComponent(Page404);
+		  history.pushState({ page: "page404" }, "", "page404"); // Ajoute à l'historique
+		  return;
+		}
+		pages[pageName](); // Charge la page demandée
+		history.pushState({ page: pageName }, '', pageName);
+	  }
+
+	  function mountComponent(componentFunction, data) {
+		// Fonction pour charger un composant dans le div app
+		document.getElementById("app").innerHTML = componentFunction(data);
+	  }
+    
+	  //onpopstate est déclenché chaque fois que l'utilisateur clique sur les boutons Précédent ou Suivant du navigateur.
+	  window.onpopstate = function(event) {
+		if (event.state && event.state.page) {
+			if (typeof pages[event.state.page] === "function") {
+				pages[event.state.page](); // DOIT EXECUTER la fonction pour trouver le composant 
+			} else {
+				mountComponent(Page404); // Montre la page 404 si la fonction n'existe pas
+			}
+		} else {
+			mountComponent(Menu); // Recharge le menu initial sinon
+		}
+	};
+
+	  // Initialise l'application en chargeants le menu de navigation
+	  mountComponent(Menu);
+
+	  document.getElementById('goBack').addEventListener('click', function() {
+		window.history.back();
+	});
+
+	document.getElementById('goForward').addEventListener('click', function() {
+		window.history.forward();
+	});
+	
+	</script>
+  </body>
+</html>

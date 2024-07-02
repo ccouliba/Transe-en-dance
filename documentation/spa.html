@@ -1,0 +1,86 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+	<meta charset="UTF-8" />
+	<title>SPA</title>
+  </head>
+  <body>
+	<div id="app"></div>  
+
+	<script>
+	  function Menu() {
+		return `
+		<div>
+			<button onclick="changePage('page1')">page1</button>
+			<button onclick="changePage('page2')" >page2</button>
+			<button onclick="changePage('page4')" >page4</button>
+		</div>
+	`;
+	  }
+
+	  function Table() {
+		return `
+	<table>
+		<tbody>
+			<tr>
+				<td>1</td>
+			</tr>
+		</tbody>
+
+	</table>
+	`;
+	  }
+
+	  function Page1(data) {
+		return `
+	<div>
+		${Menu()}
+		<h1>Page 1</h1>
+		<p>
+			Tu as ${data.age}
+		</p>
+	<div>
+	`;
+	  }
+
+	  function Page2() {
+		return `
+		<div>
+		${Menu()}
+		<h1>Page 2</h1>
+			${Table()}
+		</div>
+	`;
+	  }
+
+	  function Page404() {
+		return `
+		${Menu()}
+		<div>404</div>    
+	`;
+	  }
+		// pages est un objet qui va contenir les fonctions pour charger les pages
+	  let pages = {
+		page1: () => mountComponent(Page1, { age: 20 }),
+		page2: () => mountComponent(Page2),
+	  };
+
+	  // fonction pour changer la page actuelle
+	  function changePage(pageName) {
+		if (typeof pages[pageName] === "undefined") { //utilise l'objet pages 
+		  mountComponent(Page404);
+		  return;
+		}
+		pages[pageName](); //un peu comme un pointeur sur fonction 
+	  }
+
+	  function mountComponent(componentFunction, data) {  // Fonction pour charger un composant dans le div app
+		document.getElementById("app").innerHTML = componentFunction(data);
+	  }
+
+	  // Initialise l'application en chargeants le menu de navigation
+	  mountComponent(Menu);
+	</script>
+  </body>
+</html>
