@@ -1,0 +1,275 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-06-25 18:13+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#######################################
+############ LITTLE WORD ##############
+#######################################
+
+#: context_variables_processors.py:11
+msgid "of"
+msgstr "de"
+
+#: context_variables_processors.py:12
+msgid "or"
+msgstr "o"
+
+
+#######################################
+###### REGISTRATION AND LOGIN #########
+#######################################
+
+#: context_variables_processors.py:15
+msgid "Register"
+msgstr "Registrarse"
+
+#: context_variables_processors.py:16
+msgid "Log in"
+msgstr "Iniciar sesión"
+
+#: context_variables_processors.py:17
+msgid "If you already have an account"
+msgstr "Si ya tienes una cuenta"
+
+#: context_variables_processors.py:18
+msgid "If you don't have an account"
+msgstr "Si no tienes una cuenta"
+
+#: context_variables_processors.py:19
+msgid "Log with"
+msgstr "Inicia sesión con"
+
+
+#######################################
+######### RELATED TO ACCOUNT ##########
+#######################################
+
+#: context_variables_processors.py:22
+msgid "Welcome"
+msgstr "Bienvenido"
+
+#: context_variables_processors.py:23
+msgid "Home"
+msgstr "Inicio"
+
+#: context_variables_processors.py:24
+msgid "Delete account"
+msgstr "Eliminar cuenta"
+
+#: context_variables_processors.py:25
+msgid "Do you confirm the deletion of your account?"
+msgstr "¿Confirma la eliminación de su cuenta?"
+
+#: context_variables_processors.py:26
+msgid "No i have changed my mind"
+msgstr "No, he cambiado de opinión"
+
+#: context_variables_processors.py:27
+msgid "Back to profile"
+msgstr "Volver al perfil"
+
+#: context_variables_processors.py:28
+msgid "Disconnect"
+msgstr "Desconectar"
+
+
+#######################################
+######### RELATED TO LANGUAGE #########
+#######################################
+
+#: context_variables_processors.py:31
+msgid "Language"
+msgstr "Idioma"
+
+#: context_variables_processors.py:32
+msgid "Select language"
+msgstr "Seleccionar idioma"
+
+#: context_variables_processors.py:33
+msgid "Change"
+msgstr "Cambiar"
+
+
+#######################################
+########### RELATED TO GAME ###########
+#######################################
+
+#: context_variables_processors.py:36
+msgid "Play"
+msgstr "Jugar"
+
+#: context_variables_processors.py:37
+msgid "start game"
+msgstr "iniciar juego"
+
+#: context_variables_processors.py:38
+msgid "stop game"
+msgstr "detener juego"
+
+
+#######################################
+############## USER LIST ##############
+#######################################
+
+#: context_variables_processors.py:41
+msgid "User list"
+msgstr "Lista de usuarios"
+
+
+#######################################
+######### RELATED TO PROFILE ##########
+#######################################
+
+#: context_variables_processors.py:44
+msgid "Profile Information"
+msgstr "Información del perfil"
+
+#: context_variables_processors.py:45
+msgid "Profile"
+msgstr "Perfil"
+
+#: context_variables_processors.py:46
+msgid "Name"
+msgstr "Nombre"
+
+#: context_variables_processors.py:47
+msgid "Username"
+msgstr "Nombre de usuario"
+
+#: context_variables_processors.py:48
+msgid "Email"
+msgstr "Correo electrónico"
+
+#: context_variables_processors.py:49
+msgid "User ID"
+msgstr "ID de usuario"
+
+#: context_variables_processors.py:50
+msgid "Change password"
+msgstr "Cambiar contraseña"
+
+#: context_variables_processors.py:51
+msgid "Hashed password"
+msgstr "Contraseña encriptada"
+
+#: context_variables_processors.py:52
+msgid "Update profile"
+msgstr "Actualizar perfil"
+
+#: context_variables_processors.py:53
+msgid "Download as PDF"
+msgstr "Descargar como PDF"
+
+
+#######################################
+############# FRIEND LIST #############
+#######################################
+
+#: context_variables_processors.py:56
+msgid "Friends list"
+msgstr "Lista de amigos"
+
+#: context_variables_processors.py:57
+msgid "Remove"
+msgstr "Eliminar"
+
+#: context_variables_processors.py:58
+msgid "No friend yet"
+msgstr "Aún no hay amigos"
+
+
+#######################################
+######### FRIEND REQUEST SENT #########
+#######################################
+
+#: context_variables_processors.py:61
+msgid "Friend requests sent"
+msgstr "Solicitudes de amistad enviadas"
+
+#: context_variables_processors.py:62
+msgid "No friend request sent yet"
+msgstr "Aún no se han enviado solicitudes de amistad"
+
+
+#######################################
+####### FRIEND REQUEST RECEIVED #######
+#######################################
+
+#: context_variables_processors.py:65
+msgid "Friend requests received"
+msgstr "Solicitudes de amistad recibidas"
+
+#: context_variables_processors.py:66
+msgid "Accept"
+msgstr "Aceptar"
+
+#: context_variables_processors.py:67
+msgid "Refuse"
+msgstr "Rechazar"
+
+#: context_variables_processors.py:68
+msgid "No friend request received yet"
+msgstr "Aún no se han recibido solicitudes de amistad"
+
+
+#######################################
+######### SEND FRIEND REQUEST #########
+#######################################
+
+#: context_variables_processors.py:71
+msgid "Send friend request"
+msgstr "Enviar solicitud de amistad"
+
+#: context_variables_processors.py:72
+msgid "Send"
+msgstr "Enviar"
+
+
+#######################################
+########### OTHER VARIABLES ###########
+#######################################
+
+#: context_variables_processors.py:75
+msgid "All rights reserved"
+msgstr "Todos los derechos reservados"
+
+
+#######################################
+#### OTHER VARIABLES FROM form.spy ####
+#######################################
+
+#: forms.py:13
+msgid "English"
+msgstr "Inglés"
+
+#: forms.py:14
+msgid "French"
+msgstr "Francés"
+
+#: forms.py:15
+msgid "Italian"
+msgstr "Italiano"
+
+#: forms.py:16
+msgid "Spanish"
+msgstr "Español"
+
+#: forms.py:17
+msgid "Deutsch"
+msgstr "Alemán"

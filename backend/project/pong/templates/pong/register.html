@@ -1,19 +1,14 @@
-<!-- templates/register.html -->
 {% extends 'pong/base.html' %}
-{% load static %}
+{% load i18n %}
 
 {% block title %}Register{% endblock %}
 
-{% block user_navigation %}
-    <!-- On surcharge ce bloc pour ne rien afficher (car sinon affiche le menu) -->
-{% endblock %}
-
 {% block content %}
-<h2>Register</h2>
+<h2>{{ register_txt }}</h2>
 <form method="post" action="{% url 'pong:register' %}">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Register</button>
+    <button type="submit">{{ register_txt }}</button>
 </form>
-<p>If you already have an account, please <a href="{% url 'pong:login' %}">Login here</a></p>
+<p>{{ have_account_txt }}-> <a href="{% url 'pong:login' %}">{{ login_txt }}</a></p>
 {% endblock %}

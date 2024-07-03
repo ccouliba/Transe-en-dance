@@ -1,11 +1,13 @@
-<!-- templates/pong/base.html -->
 <!DOCTYPE html>
 <html lang="en">
+{% load i18n %}
 <head>
-	<meta charset="UTF-8">
-	<title>{% block title %}PONG{% endblock %}</title>
-	{% load static %}
-	<link rel="stylesheet" href="{% static 'pong/css/style.css' %}">
+    <meta charset="UTF-8">
+    <title>{% block title %}PONG{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'pong/css/style.css' %}">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'pong/css/style.css' %}">
 </head>
 <body>
 	<header>
@@ -24,11 +26,11 @@
 		{% endblock %}
 	</main>
 
-	<!-- <footer>
-		<p>&copy; 2024 Pong. Tous droits réservés.</p>
-	</footer> -->
+    <footer>
+        <p>&copy; 2024 pong. {{ reserved_rights_txt }}</p>
+    </footer>
 
-	<script src="{% static 'pong/js/script.js' %}"></script>
+	<script src="{% static 'pong/js/game.js' %}"></script>
 	{% block scripts %}
 	{% endblock %}
 </body>

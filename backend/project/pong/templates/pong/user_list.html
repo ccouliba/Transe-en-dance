@@ -1,16 +1,17 @@
 {% extends 'pong/base.html' %}
+{% load i18n %}
 
-{% block title %}Liste des utilisateurs{% endblock %}
+{% block title %}User list{% endblock %}
 
 {% block content %}
 <div class="container mt-5">
-    <h1>Liste des utilisateurs</h1>
+    <h1>{{ user_list_txt }}</h1>
     <ul id="user-list" class="list-group">
         {% for user in users %}
         <li class="list-group-item">
-            <strong>ID:</strong> {{ user.id }}<br>
-            <strong>Username:</strong> {{ user.username }}<br>
-            <strong>Hashed Password:</strong> {{ user.hashed_password }}
+            <strong>{{ user_id_txt }}:</strong> {{ user.id }}<br>
+            <strong>{{ username_txt }}:</strong> {{ user.username }}<br>
+            <strong>{{ hashed_password_txt }}:</strong> {{ user.hashed_password }}
         </li>
         {% endfor %}
     </ul>
