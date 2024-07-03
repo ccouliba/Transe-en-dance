@@ -1,11 +1,14 @@
 <!-- templates/pong/base.html -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="text-align:center;">
 <head>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 	<title>{% block title %}PONG{% endblock %}</title>
 	{% load static %}
 	<link rel="stylesheet" href="{% static 'pong/css/style.css' %}">
+	<link rel="stylesheet" href="{% static 'pong/bootstrap/bootstrap.min.css' %}">
+	<link rel="stylesheet" href="{% static 'pong/css/TrajanPro.css' %}">
 </head>
 <body>
 	<header>
@@ -27,8 +30,10 @@
 	<!-- <footer>
 		<p>&copy; 2024 Pong. Tous droits réservés.</p>
 	</footer> -->
-
+	<canvas id="background"></canvas>
+	<script src="{% static 'pong/bootstrap/bootstrap.min.js' %}"></script>
 	<script src="{% static 'pong/js/script.js' %}"></script>
+	<script src="{% static 'pong/js/background.js' %}"></script>
 	{% block scripts %}
 	{% endblock %}
 </body>

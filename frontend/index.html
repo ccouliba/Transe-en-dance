@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html data-bs-theme="light" lang="en">
+<html lang="en">
 
 <head>
     <meta charset="utf-8">
@@ -7,14 +7,12 @@
     <title>Untitled</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/Trajan%20Pro.css">
-    <link rel="stylesheet" href="assets/css/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/css/styles.css">
 </head>
 
 <body><span>{% extends 'pong/base.html' %}{% load static %}{% block title %}Welcome{% endblock %}{% block content %} {% if not user.is_authenticated %} </span><input type="button" class="button_active menuButton" name="Login" value="Login"><input type="button" class="button_active menuButton" name="Register" value="Register">
     <p>Or log with 42 -&gt;<a href="{% url 'pong:external-login' %}">Login with 42 here</a></p><span> {% endif %}{% endblock %}</span>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="assets/js/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/js/script.js"></script>
 </body>
 

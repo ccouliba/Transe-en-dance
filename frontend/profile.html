@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html data-bs-theme="light" lang="en">
+<html lang="en">
 
 <head>
     <meta charset="utf-8">
@@ -7,7 +7,6 @@
     <title>Untitled</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/Trajan%20Pro.css">
-    <link rel="stylesheet" href="assets/css/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/css/styles.css">
 </head>
 
@@ -17,7 +16,6 @@
     <p>Email: {{ user.email }}</p><input type="button" class="button_active menuButton" name="Update profile" value="Update profile"><input type="button" class="button_active menuButton" name="Change password" value="Change password"><input type="button" class="button_active menuButton" name="Delete account" value="Delete account"><span> {% comment %} </span><a href="{% url 'pong:update_profile' %}">Update Profile</a><br><a href="{% url 'pong:change_password' %}">Change Password</a><br>
     <form action="{% url 'pong:delete_account' %}" method="post"><span> {% csrf_token %} </span><button class="menuButton" type="submit">Delete Account</button></form><span> {% endcomment %}{% endblock %}</span>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="assets/js/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/js/script.js"></script>
 </body>
 
