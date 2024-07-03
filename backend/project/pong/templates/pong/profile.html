@@ -37,7 +37,7 @@
 		</ul>
 	{% else %}
 		<ul class="list-group" id="sent-requests-list"></ul>
-		<p>Vous n'avez pas encore envoyé de demandes d'amis.</p>
+		<p id="noFriendRequestsMessage">Vous n'avez pas encore envoyé de demandes d'amis.</p>
 	{% endif %}
 
 	<h2>Demandes d'amis reçues</h2>
@@ -52,7 +52,7 @@
 			{% endfor %}
 		</ul>
 	{% else %}
-		<p>Vous n'avez pas encore reçu de demandes d'amis.</p>
+		<p id="noFriendRequestsMessage">Vous n'avez pas encore reçu de demandes d'amis.</p>
 	{% endif %}
 
 	<h2>Envoyer une demande d'ami</h2>
@@ -104,6 +104,7 @@
 					${data.requested_user.id} - ${data.requested_user.username} (${data.requested_user.email})
 					<button class="btn btn-danger btn-sm" onclick="removeFriendRequest(${data.request.id})">Retirer</button>
 				`;
+				document.getElementById("noFriendRequestsMessage".remove())
 				sentRequestsList.appendChild(newRequestItem); // Ajouter le nouvel element a la liste
 			} else { // Si la reponse indique une erreur
 				// Afficher le message d'erreur
