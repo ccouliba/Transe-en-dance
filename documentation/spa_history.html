@@ -77,7 +77,7 @@
 		  history.pushState({ page: "page404" }, "", "page404"); // Ajoute à l'historique
 		  return;
 		}
-		pages[pageName](); // Charge la page demandée
+		pages[pageName](); // Charge la page 
 		history.pushState({ page: pageName }, '', pageName);
 	  }
 
@@ -88,6 +88,9 @@
     
 	  //onpopstate est déclenché chaque fois que l'utilisateur clique sur les boutons Précédent ou Suivant du navigateur.
 	  window.onpopstate = function(event) {
+		console.log(event.state)
+		console.log(event.state.page)
+
 		if (event.state && event.state.page) {
 			if (typeof pages[event.state.page] === "function") {
 				pages[event.state.page](); // DOIT EXECUTER la fonction pour trouver le composant 
