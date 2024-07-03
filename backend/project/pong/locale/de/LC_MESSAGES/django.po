@@ -18,131 +18,241 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+#######################################
+############ LITTLE WORD ##############
+#######################################
+
+#: context_variables_processors.py:11
+msgid "of"
+msgstr "von"
+
 #: context_variables_processors.py:12
-msgid "Play"
-msgstr "Spielen"
-
-#: context_variables_processors.py:13
-msgid "Logout"
-msgstr "Ausloggen"
-
-#: context_variables_processors.py:14
-msgid "Update profile"
-msgstr "Profil aktualisieren"
-
-#: context_variables_processors.py:15
-msgid "Change password"
-msgstr "Kennwort ändern"
-
-#: context_variables_processors.py:16
-msgid "Delete account"
-msgstr "Konto löschen"
-
-#: context_variables_processors.py:19
-msgid "If you don't have an account"
-msgstr "Wenn Sie kein Konto haben"
-
-#: context_variables_processors.py:20
-msgid "Register"
-msgstr "Registrieren"
-
-#: context_variables_processors.py:21
 msgid "or"
 msgstr "oder"
 
-#: context_variables_processors.py:22
-#, fuzzy
-#| msgid "Login with"
-msgid "Log with"
-msgstr "Einloggen mit"
 
-#: context_variables_processors.py:23
+#######################################
+###### REGISTRATION AND LOGIN #########
+#######################################
+
+#: context_variables_processors.py:15
+msgid "Register"
+msgstr "Registrieren"
+
+#: context_variables_processors.py:16
 msgid "Log in"
-msgstr ""
+msgstr "Anmelden"
 
-#: context_variables_processors.py:24
+#: context_variables_processors.py:17
 msgid "If you already have an account"
 msgstr "Wenn Sie bereits ein Konto haben"
 
-#: context_variables_processors.py:26
-msgid "Profile Information"
-msgstr "Profil Information"
+#: context_variables_processors.py:18
+msgid "If you don't have an account"
+msgstr "Wenn Sie kein Konto haben"
 
-#: context_variables_processors.py:27
+#: context_variables_processors.py:19
+msgid "Log with"
+msgstr "Anmelden mit"
+
+
+#######################################
+######### RELATED TO ACCOUNT ##########
+#######################################
+
+#: context_variables_processors.py:22
 msgid "Welcome"
 msgstr "Willkommen"
 
-#: context_variables_processors.py:28
-msgid "Back to profile"
-msgstr "Zurück zum Profil"
+#: context_variables_processors.py:23
+msgid "Home"
+msgstr "Startseite"
 
-#: context_variables_processors.py:29
-msgid "No i have changed my mind"
-msgstr "Nein, ich habe meine Meinung geändert"
+#: context_variables_processors.py:24
+msgid "Delete account"
+msgstr "Konto löschen"
 
-#: context_variables_processors.py:30
+#: context_variables_processors.py:25
 msgid "Do you confirm the deletion of your account?"
 msgstr "Bestätigen Sie die Löschung Ihres Kontos?"
 
+#: context_variables_processors.py:26
+msgid "No i have changed my mind"
+msgstr "Nein, ich habe es mir anders überlegt"
+
+#: context_variables_processors.py:27
+msgid "Back to profile"
+msgstr "Zurück zum Profil"
+
+#: context_variables_processors.py:28
+msgid "Disconnect"
+msgstr "Abmelden"
+
+
+#######################################
+######### RELATED TO LANGUAGE #########
+#######################################
+
 #: context_variables_processors.py:31
-msgid "Select language"
-msgstr "Sprache auswählen"
-
-#: context_variables_processors.py:32
-msgid "Change"
-msgstr "Ändern"
-
-#: context_variables_processors.py:33
-msgid "Home"
-msgstr "Heim"
-
-#: context_variables_processors.py:34
-msgid "Profile"
-msgstr "Profil"
-
-#: context_variables_processors.py:35
 msgid "Language"
 msgstr "Sprache"
 
-#: context_variables_processors.py:36
-msgid "Disconnect"
-msgstr "Trennen"
+#: context_variables_processors.py:32
+msgid "Select language"
+msgstr "Sprache auswählen"
 
-#: context_variables_processors.py:39
+#: context_variables_processors.py:33
+msgid "Change"
+msgstr "Ändern"
+
+
+#######################################
+########### RELATED TO GAME ###########
+#######################################
+
+#: context_variables_processors.py:36
+msgid "Play"
+msgstr "Spielen"
+
+#: context_variables_processors.py:37
+msgid "start game"
+msgstr "Spiel starten"
+
+#: context_variables_processors.py:38
+msgid "stop game"
+msgstr "Spiel beenden"
+
+
+#######################################
+############## USER LIST ##############
+#######################################
+
+#: context_variables_processors.py:41
+msgid "User list"
+msgstr "Benutzerliste"
+
+
+#######################################
+######### RELATED TO PROFILE ##########
+#######################################
+
+#: context_variables_processors.py:44
+msgid "Profile Information"
+msgstr "Profilinformationen"
+
+#: context_variables_processors.py:45
+msgid "Profile"
+msgstr "Profil"
+
+#: context_variables_processors.py:46
+msgid "Name"
+msgstr "Name"
+
+#: context_variables_processors.py:47
+msgid "Username"
+msgstr "Benutzername"
+
+#: context_variables_processors.py:48
+msgid "Email"
+msgstr "E-Mail"
+
+#: context_variables_processors.py:49
+msgid "User ID"
+msgstr "Benutzer-ID"
+
+#: context_variables_processors.py:50
+msgid "Change password"
+msgstr "Passwort ändern"
+
+#: context_variables_processors.py:51
+msgid "Hashed password"
+msgstr "Verschlüsseltes Passwort"
+
+#: context_variables_processors.py:52
+msgid "Update profile"
+msgstr "Profil aktualisieren"
+
+#: context_variables_processors.py:53
+msgid "Download as PDF"
+msgstr "Als PDF herunterladen"
+
+
+#######################################
+############# FRIEND LIST #############
+#######################################
+
+#: context_variables_processors.py:56
+msgid "Friends list"
+msgstr "Freundesliste"
+
+#: context_variables_processors.py:57
+msgid "Remove"
+msgstr "Entfernen"
+
+#: context_variables_processors.py:58
+msgid "No friend yet"
+msgstr "Noch keine Freunde"
+
+
+#######################################
+######### FRIEND REQUEST SENT #########
+#######################################
+
+#: context_variables_processors.py:61
+msgid "Friend requests sent"
+msgstr "Freundschaftsanfragen gesendet"
+
+#: context_variables_processors.py:62
+msgid "No friend request sent yet"
+msgstr "Noch keine Freundschaftsanfragen gesendet"
+
+
+#######################################
+####### FRIEND REQUEST RECEIVED #######
+#######################################
+
+#: context_variables_processors.py:65
+msgid "Friend requests received"
+msgstr "Freundschaftsanfragen erhalten"
+
+#: context_variables_processors.py:66
+msgid "Accept"
+msgstr "Akzeptieren"
+
+#: context_variables_processors.py:67
+msgid "Refuse"
+msgstr "Ablehnen"
+
+#: context_variables_processors.py:68
+msgid "No friend request received yet"
+msgstr "Noch keine Freundschaftsanfragen erhalten"
+
+
+#######################################
+######### SEND FRIEND REQUEST #########
+#######################################
+
+#: context_variables_processors.py:71
+msgid "Send friend request"
+msgstr "Freundschaftsanfrage senden"
+
+#: context_variables_processors.py:72
+msgid "Send"
+msgstr "Senden"
+
+
+#######################################
+########### OTHER VARIABLES ###########
+#######################################
+
+#: context_variables_processors.py:75
 msgid "All rights reserved"
 msgstr "Alle Rechte vorbehalten"
 
-#: context_variables_processors.py:43
-msgid "Settings"
-msgstr "Einstellungen"
 
-#: context_variables_processors.py:44
-msgid "Single player"
-msgstr "Einzelspieler"
-
-#: context_variables_processors.py:45
-msgid "Multiplayer"
-msgstr "Mehrspieler"
-
-#: context_variables_processors.py:46
-msgid "Score to reach"
-msgstr "Punktzahl zu erreichen"
-
-#: context_variables_processors.py:47
-msgid "Ball color"
-msgstr "Ball color"
-
-#: context_variables_processors.py:48
-msgid "Palette color"
-msgstr "Palettenfarbe"
-
-#: context_variables_processors.py:49
-msgid "Background color"
-msgstr "Hintergrundfarbe"
-
-#: context_variables_processors.py:50
-msgid "Save"
-msgstr "Speichern"
+#######################################
+#### OTHER VARIABLES FROM form.spy ####
+#######################################
 
 #: forms.py:13
 msgid "English"
@@ -163,8 +273,3 @@ msgstr "Spanisch"
 #: forms.py:17
 msgid "Deutsch"
 msgstr "Deutsch"
-
-#: forms.py:19
-msgid "Select your language"
-msgstr "Wähle deine Sprache"
-

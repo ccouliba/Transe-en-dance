@@ -46,7 +46,7 @@ def texts_to_translate(request):
         'name_txt':_("Name"),
         'username_txt':_("Username"),
         'email_txt':_("Email"),
-        'user_id_txt':_("User id"),
+        'user_id_txt':_("User ID"),
         'change_password_txt': _("Change password"),
         'hashed_password_txt':_("Hashed password"),
         'update_profile_txt': _("Update profile"),

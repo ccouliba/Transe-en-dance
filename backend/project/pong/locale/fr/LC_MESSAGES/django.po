@@ -129,7 +129,7 @@ msgstr "Stopper le jeu"
 
 #: context_variables_processors.py:41
 msgid "User list"
-msgstr "Liste d'utilisateur"
+msgstr "Liste d'utilisateurs"
 
 
 #######################################

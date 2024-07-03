@@ -1,7 +1,6 @@
 <!-- templates/pong/game.html -->
 {% extends 'pong/base.html' %}
 {% load static %}
-{% load i18n %}
 
 {% block title %}Play{% endblock %}
 
@@ -9,21 +8,12 @@
     <div id="game-container">
         <canvas id="pong-canvas" width="800" height="400"></canvas>
         <div id="controls">
-            <button id="start-game">{{ start_game_txt }}</button>
-            <button id="stop-game">{{ stop_game_txt }}</button>
+            <button id="start-game">Commencer le Jeu</button>
+            <button id="stop-game">Arrêter le Jeu</button>
         </div>
     </div>
 
     <script>
-        const startButton = document.getElementById('start-game');
-        const stopButton = document.getElementById('stop-game');
-
-        startButton.onclick = function() {
-            
-            console.log();
-        }
-    </script>
-    {% comment %} <script>
         document.addEventListener('DOMContentLoaded', () => {
             const canvas = document.getElementById('pong-canvas');
             const ctx = canvas.getContext('2d');
@@ -171,5 +161,5 @@
                 gameLoop();
             }
         });
-    </script> {% endcomment %}
+    </script>
 {% endblock %}

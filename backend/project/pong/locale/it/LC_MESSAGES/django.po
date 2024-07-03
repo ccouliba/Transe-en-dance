@@ -18,131 +18,241 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+#######################################
+############ LITTLE WORD ##############
+#######################################
+
+#: context_variables_processors.py:11
+msgid "of"
+msgstr "di"
+
 #: context_variables_processors.py:12
-msgid "Play"
-msgstr "Giocare"
-
-#: context_variables_processors.py:13
-msgid "Logout"
-msgstr "Disconnettersi"
-
-#: context_variables_processors.py:14
-msgid "Update profile"
-msgstr "Aggiorna il profilo"
-
-#: context_variables_processors.py:15
-msgid "Change password"
-msgstr "Cambiare la password"
-
-#: context_variables_processors.py:16
-msgid "Delete account"
-msgstr "Eliminare l'account"
-
-#: context_variables_processors.py:19
-msgid "If you don't have an account"
-msgstr "Se non hai un account"
-
-#: context_variables_processors.py:20
-msgid "Register"
-msgstr "Registrati"
-
-#: context_variables_processors.py:21
 msgid "or"
 msgstr "o"
 
-#: context_variables_processors.py:22
-#, fuzzy
-#| msgid "Login with"
-msgid "Log with"
-msgstr "Entra con"
 
-#: context_variables_processors.py:23
+#######################################
+###### REGISTRATION AND LOGIN #########
+#######################################
+
+#: context_variables_processors.py:15
+msgid "Register"
+msgstr "Registrati"
+
+#: context_variables_processors.py:16
 msgid "Log in"
-msgstr ""
+msgstr "Accedi"
 
-#: context_variables_processors.py:24
+#: context_variables_processors.py:17
 msgid "If you already have an account"
 msgstr "Se hai già un account"
 
-#: context_variables_processors.py:26
-msgid "Profile Information"
-msgstr "Informazioni del profilo"
+#: context_variables_processors.py:18
+msgid "If you don't have an account"
+msgstr "Se non hai un account"
 
-#: context_variables_processors.py:27
+#: context_variables_processors.py:19
+msgid "Log with"
+msgstr "Accedi con"
+
+
+#######################################
+######### RELATED TO ACCOUNT ##########
+#######################################
+
+#: context_variables_processors.py:22
 msgid "Welcome"
-msgstr "Benvenut.o.a"
+msgstr "Benvenuto"
 
-#: context_variables_processors.py:28
-msgid "Back to profile"
-msgstr "Torna al profilo"
+#: context_variables_processors.py:23
+msgid "Home"
+msgstr "Home"
 
-#: context_variables_processors.py:29
+#: context_variables_processors.py:24
+msgid "Delete account"
+msgstr "Elimina account"
+
+#: context_variables_processors.py:25
+msgid "Do you confirm the deletion of your account?"
+msgstr "Confermi l'eliminazione del tuo account?"
+
+#: context_variables_processors.py:26
 msgid "No i have changed my mind"
 msgstr "No, ho cambiato idea"
 
-#: context_variables_processors.py:30
-msgid "Do you confirm the deletion of your account?"
-msgstr "Confermi la cancellazione del tuo account?"
+#: context_variables_processors.py:27
+msgid "Back to profile"
+msgstr "Torna al profilo"
 
-#: context_variables_processors.py:31
-msgid "Select language"
-msgstr "Seleziona la lingua"
-
-#: context_variables_processors.py:32
-msgid "Change"
-msgstr "Modifica"
-
-#: context_variables_processors.py:33
-msgid "Home"
-msgstr "accoglienza"
-
-#: context_variables_processors.py:34
-msgid "Profile"
-msgstr "Profilo"
-
-#: context_variables_processors.py:35
-msgid "Language"
-msgstr "Lingua"
-
-#: context_variables_processors.py:36
+#: context_variables_processors.py:28
 msgid "Disconnect"
 msgstr "Disconnetti"
 
-#: context_variables_processors.py:39
+
+#######################################
+######### RELATED TO LANGUAGE #########
+#######################################
+
+#: context_variables_processors.py:31
+msgid "Language"
+msgstr "Lingua"
+
+#: context_variables_processors.py:32
+msgid "Select language"
+msgstr "Seleziona lingua"
+
+#: context_variables_processors.py:33
+msgid "Change"
+msgstr "Cambia"
+
+
+#######################################
+########### RELATED TO GAME ###########
+#######################################
+
+#: context_variables_processors.py:36
+msgid "Play"
+msgstr "Gioca"
+
+#: context_variables_processors.py:37
+msgid "start game"
+msgstr "Avvia gioco"
+
+#: context_variables_processors.py:38
+msgid "stop game"
+msgstr "Ferma gioco"
+
+
+#######################################
+############## USER LIST ##############
+#######################################
+
+#: context_variables_processors.py:41
+msgid "User list"
+msgstr "Lista utenti"
+
+
+#######################################
+######### RELATED TO PROFILE ##########
+#######################################
+
+#: context_variables_processors.py:44
+msgid "Profile Information"
+msgstr "Informazioni profilo"
+
+#: context_variables_processors.py:45
+msgid "Profile"
+msgstr "Profilo"
+
+#: context_variables_processors.py:46
+msgid "Name"
+msgstr "Nome"
+
+#: context_variables_processors.py:47
+msgid "Username"
+msgstr "Nome utente"
+
+#: context_variables_processors.py:48
+msgid "Email"
+msgstr "Email"
+
+#: context_variables_processors.py:49
+msgid "User ID"
+msgstr "ID utente"
+
+#: context_variables_processors.py:50
+msgid "Change password"
+msgstr "Cambia password"
+
+#: context_variables_processors.py:51
+msgid "Hashed password"
+msgstr "Password crittografata"
+
+#: context_variables_processors.py:52
+msgid "Update profile"
+msgstr "Aggiorna profilo"
+
+#: context_variables_processors.py:53
+msgid "Download as PDF"
+msgstr "Scarica in PDF"
+
+
+#######################################
+############# FRIEND LIST #############
+#######################################
+
+#: context_variables_processors.py:56
+msgid "Friends list"
+msgstr "Lista amici"
+
+#: context_variables_processors.py:57
+msgid "Remove"
+msgstr "Rimuovi"
+
+#: context_variables_processors.py:58
+msgid "No friend yet"
+msgstr "Nessun amico ancora"
+
+
+#######################################
+######### FRIEND REQUEST SENT #########
+#######################################
+
+#: context_variables_processors.py:61
+msgid "Friend requests sent"
+msgstr "Richieste di amicizia inviate"
+
+#: context_variables_processors.py:62
+msgid "No friend request sent yet"
+msgstr "Nessuna richiesta di amicizia inviata"
+
+
+#######################################
+####### FRIEND REQUEST RECEIVED #######
+#######################################
+
+#: context_variables_processors.py:65
+msgid "Friend requests received"
+msgstr "Richieste di amicizia ricevute"
+
+#: context_variables_processors.py:66
+msgid "Accept"
+msgstr "Accetta"
+
+#: context_variables_processors.py:67
+msgid "Refuse"
+msgstr "Rifiuta"
+
+#: context_variables_processors.py:68
+msgid "No friend request received yet"
+msgstr "Nessuna richiesta di amicizia ricevuta"
+
+
+#######################################
+######### SEND FRIEND REQUEST #########
+#######################################
+
+#: context_variables_processors.py:71
+msgid "Send friend request"
+msgstr "Invia richiesta di amicizia"
+
+#: context_variables_processors.py:72
+msgid "Send"
+msgstr "Invia"
+
+
+#######################################
+########### OTHER VARIABLES ###########
+#######################################
+
+#: context_variables_processors.py:75
 msgid "All rights reserved"
 msgstr "Tutti i diritti riservati"
 
-#: context_variables_processors.py:43
-msgid "Settings"
-msgstr "Impostazioni"
 
-#: context_variables_processors.py:44
-msgid "Single player"
-msgstr "Giocatore singolo"
-
-#: context_variables_processors.py:45
-msgid "Multiplayer"
-msgstr "Multigiocatore"
-
-#: context_variables_processors.py:46
-msgid "Score to reach"
-msgstr "Punteggio da raggiungere"
-
-#: context_variables_processors.py:47
-msgid "Ball color"
-msgstr "Colore della palla"
-
-#: context_variables_processors.py:48
-msgid "Palette color"
-msgstr "Colore della tavolozza"
-
-#: context_variables_processors.py:49
-msgid "Background color"
-msgstr "Colore di sfondo"
-
-#: context_variables_processors.py:50
-msgid "Save"
-msgstr "Salva"
+#######################################
+#### OTHER VARIABLES FROM form.spy ####
+#######################################
 
 #: forms.py:13
 msgid "English"
@@ -154,7 +264,7 @@ msgstr "Francese"
 
 #: forms.py:15
 msgid "Italian"
-msgstr "italiano"
+msgstr "Italiano"
 
 #: forms.py:16
 msgid "Spanish"
@@ -163,7 +273,3 @@ msgstr "Spagnolo"
 #: forms.py:17
 msgid "Deutsch"
 msgstr "Tedesco"
-
-#: forms.py:19
-msgid "Select your language"
-msgstr "seleziona la tua lingua"
