@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="UTF-8">
+	<title>Test de l'historique</title>
+</head>
+<body>
+	<h1>Test de Navigation de l'historique</h1>
+	<button id="goPage1">Aller à page 1</button>
+	<button id="goPage2">Aller à page 2</button>
+	<button id="goBack">Retour</button>
+	<button id="goForward">Avancer</button>
+	<div id="content"></div>
+
+	<script>
+		const content = document.getElementById('content');
+
+		function changeContent(pageName) {
+			content.innerHTML = `<h2>Vous êtes sur ${pageName}</h2>`;
+			history.pushState({ page: pageName }, '', pageName);
+		}
+
+		window.onpopstate = function(event) {
+			if (event.state) {
+				content.innerHTML = `<h2>Vous êtes sur ${event.state.page}</h2>`;
+			}
+		};
+
+		document.getElementById('goPage1').addEventListener('click', function() {
+			changeContent('Page 1');
+		});
+
+		document.getElementById('goPage2').addEventListener('click', function() {
+			changeContent('Page 2');
+		});
+
+		document.getElementById('goBack').addEventListener('click', function() {
+			window.history.back();
+		});
+
+		document.getElementById('goForward').addEventListener('click', function() {
+			window.history.forward();
+		});
+	</script>
+</body>
+</html>
