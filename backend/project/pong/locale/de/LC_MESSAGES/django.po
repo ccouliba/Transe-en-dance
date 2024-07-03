@@ -168,5 +168,3 @@ msgstr "Deutsch"
 msgid "Select your language"
 msgstr "Wähle deine Sprache"
 
-#~ msgid "Login"
-#~ msgstr "Anmeldung"

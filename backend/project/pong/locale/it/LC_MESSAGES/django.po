@@ -167,6 +167,3 @@ msgstr "Tedesco"
 #: forms.py:19
 msgid "Select your language"
 msgstr "seleziona la tua lingua"
-
-#~ msgid "Login"
-#~ msgstr "Login"

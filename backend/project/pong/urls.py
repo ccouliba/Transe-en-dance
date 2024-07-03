@@ -1,5 +1,6 @@
 from django.urls import path
 from django.conf.urls.i18n import i18n_patterns
+from django.utils.translation import gettext as _
 from django.conf import settings
 from django.conf.urls.static import static
 from django.views.i18n import set_language

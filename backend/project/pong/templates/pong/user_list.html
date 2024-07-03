@@ -9,7 +9,7 @@
     <ul id="user-list" class="list-group">
         {% for user in users %}
         <li class="list-group-item">
-            <strong>ID:</strong> {{ user.id }}<br>
+            <strong>{{ user_id_txt }}:</strong> {{ user.id }}<br>
             <strong>{{ username_txt }}:</strong> {{ user.username }}<br>
             <strong>{{ hashed_password_txt }}:</strong> {{ user.hashed_password }}
         </li>

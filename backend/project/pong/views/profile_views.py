@@ -72,14 +72,6 @@ def user_password_changed(request):
 		form = PasswordChangeForm(user=request.user)
 	return render(request, 'pong/change_password.html', {'form': form})
 
-#  This view is causes some trouble on reverse html on success !
-# That is why i have done this ; for now we could use the view below instead
-# @login_required
-# def user_account_deleted(request):
-#     user = request.user
-#     user.delete()
-#     return redirect('pong/home.html')
-
 # Can be changed any time ! Just a simple view linked to a template/form that works
 # Cette vue permet a l'utilisateur connecte de supprimer son compte et de rediriger vers la page d'accueil
 @login_required
