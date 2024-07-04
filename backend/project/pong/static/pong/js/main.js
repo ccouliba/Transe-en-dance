@@ -8,13 +8,12 @@ function loadCSS(filename) {
 }
 
 // Appel de la fonction pour charger le CSS
-loadCSS("{% static 'pong/css/style.css' %}"); // Chemin relatif au fichier main.js
-
-
+loadCSS("{% static 'pong/css/style.css' %}"); 
 
 let routes = {
 	home: () => mountComponent(Home),
 	play: () => mountComponent(Play),
+	// login: () => mountComponent(Login),
 	404: () => mountComponent(Page404),
 };
 
@@ -46,6 +45,21 @@ function Play() {
 	</div>`;
 }
 
+// function Login() {
+// 	return `
+// 	<div>
+// 		<h1>Login</h1>
+// 		<form>
+// 			<label for="username">Username:</label>
+// 			<input type="text" id="username" name="username"><br><br>
+// 			<label for="password">Password:</label>
+// 			<input type="password" id="password" name="password"><br><br>
+// 			<input type="submit" value="Login">
+// 		</form>
+// 	</div>`;
+// }
+
+
 function Page404() {
 	return `
 	<div>
@@ -69,6 +83,7 @@ window.changePage = function (pageName) {
 	let urlMap = {
 		'home': '/pong/home/',
 		'play': '/pong/play/',
+		// 'login' : '/pong/login',
 		// 'profile': '/profile/',
 		// 'logout': '/logout/',
 		// 'user_list': '/user_list/'
@@ -93,3 +108,15 @@ function mountComponent(componentFunction, data) {
 	// Fonction pour charger un composant dans le div app
 	document.getElementById("app").innerHTML = componentFunction(data);
 }
+
+// // Vérifier l'URL au chargement de la page
+// window.onload = function() {
+// 	// Vérifier si l'URL est '/pong/'
+// 	if (window.location.pathname === '/pong/') {
+// 		changePage('login'); // Afficher la page de login par défaut
+// 	} else {
+// 		// Extraire la dernière partie de l'URL pour déterminer la page à afficher
+// 		const path = window.location.pathname.split('/').filter(part => part).pop();
+// 		changePage(path || '404'); // Afficher la page correspondante ou la 404 si la route n'existe pas
+// 	}
+// };

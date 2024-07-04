@@ -9,11 +9,13 @@
 {% endblock %}
 
 {% block content %}
+<!-- <script>changePage('login');</script> -->
+
 <h2>Login</h2>
 <form method="post" action="{% url 'pong:login' %}">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Login</button>
 </form>
-<p>If you don't have an account, please <a href="{% url 'pong:register' %}">Register here</a> or <a href="{% url 'pong:external_login' %}">Login with 42</a></p>
+<p>If you don't have an account, please <a href="{% url 'pong:register' %}">Register here</a> or <a href="{% url 'pong:external_login' %}">Login with 42</a></p> 
 {% endblock %}
