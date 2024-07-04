@@ -9,6 +9,8 @@ from .views.user_views import user_list_json, user_list, index, home_view
 app_name = 'pong'  # definir le namespace
 
 urlpatterns = [
+
+
 	path('', login_view, name='default_login'), 
 	path('register/', register_view, name='register'),
 	path('login/', login_view, name='login'),

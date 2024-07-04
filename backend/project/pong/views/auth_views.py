@@ -9,6 +9,11 @@ from . import auth
 
 import inspect
 
+
+
+def home_view(request):
+	return render(request, 'home.html')
+	
 def get_current_line():
 	return inspect.currentframe().f_lineno
 
