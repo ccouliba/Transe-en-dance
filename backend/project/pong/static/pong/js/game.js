@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     const canvas = document.getElementById('pong-canvas');
-    const ctx = canvas.getContext('2d');
+    // const ctx = canvas.getContext('2d');
     const startGameBtn = document.getElementById('start-game');
 
     let gameId = null;
