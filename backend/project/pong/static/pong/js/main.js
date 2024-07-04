@@ -1,26 +1,26 @@
+// Fonction pour charger un fichier CSS
+function loadCSS(filename) {
+	let link = document.createElement('link');
+	link.rel = 'stylesheet';
+	link.type = 'text/css';
+	link.href = filename;
+	document.getElementsByTagName('head')[0].appendChild(link);
+}
 
-// Définir les routes et les fonctions de rendu
+// Appel de la fonction pour charger le CSS
+loadCSS("{% static 'pong/css/style.css' %}"); // Chemin relatif au fichier main.js
+
+
+
 let routes = {
 	home: () => mountComponent(Home),
 	play: () => mountComponent(Play),
 	404: () => mountComponent(Page404),
 };
 
-// Fonction pour afficher le menu
-// function Menu() {
-// 	return `
-// 		<div>
-// 			<a href="#" onclick="changePage('home')">Home</a>
-// 			<a href="#" onclick="changePage('play')">Play</a>
-// 			<a href="#" onclick="changePage('profile')">Profile</a>
-// 			<a href="#" onclick="changePage('logout')">Déconnexion</a>
-// 			<a href="#" onclick="changePage('user_list')">Liste des utilisateurs - test</a>
-// 		</div>`;
-// }
-
 function Menu() {
 	return `
-		<div>
+		<div class="navbar">
 			<a href="#" onclick="changePage('home'); event.preventDefault();">Home</a>
 			<a href="#" onclick="changePage('play'); event.preventDefault();">Play</a>
 			<a href="#" onclick="changePage('profile'); event.preventDefault();">Profile</a>
@@ -57,15 +57,10 @@ function Page404() {
 
 // Fonction pour changer de page
 window.changePage = function (pageName) {
-	// console.log(pageName)
-	
 	if (typeof routes[pageName] === "undefined") {
 		console.log("page name is undefined so 404")
-		// Si la page demandée n'existe pas
-		// routes[404](); // Charger la page 404
 		mountComponent(Page404)
 		history.pushState({ page: "page404" }, "", "/404"); // Ajoute à l'historique
-
 		return;
 	}
 	console.log("what is being pushed", pageName)
@@ -80,7 +75,6 @@ window.changePage = function (pageName) {
 	};
 	console.log("urlMap[pageName]", urlMap[pageName])
 	history.pushState({ page: pageName }, "", urlMap[pageName]); // Ajoute à l'historique
-	// history.pushState({ page: pageName }, "", `/${pageName}`); // Ajoute à l'historique
 
 }
 // Gérer l'événement `popstate`
@@ -99,9 +93,3 @@ function mountComponent(componentFunction, data) {
 	// Fonction pour charger un composant dans le div app
 	document.getElementById("app").innerHTML = componentFunction(data);
 }
-
-
-// // Initialiser l'application
-// document.addEventListener('DOMContentLoaded', () => {
-// 	changePage('home'); // Charger la page d'accueil par défaut
-// });

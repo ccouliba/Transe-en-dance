@@ -6,7 +6,6 @@
 	<title>{% block title %}PONG{% endblock %}</title>
 	{% load static %}
 	<link rel="stylesheet" href="{% static 'pong/css/style.css' %}">
-	<!-- <script type="javascript" src="{% static 'pong/js/main.js' %}"></script> -->
 </head>
 <body>
 	<header>
@@ -19,15 +18,10 @@
 			{% endif %}
 		{% endblock %}
 	</header>
-	{% comment %}
-	<main>
-		{% block content %}
-		{% endblock %}
-	</main>
-	{% endcomment %}
+	
 
 	<script src="{% static 'pong/js/main.js' %}"></script>
-	
+
 	<main>
 		<div id="app">{% block content %}{% endblock %}</div>
 	</main>
@@ -41,3 +35,4 @@
 	{% endblock %}
 </body>
 </html>
+
