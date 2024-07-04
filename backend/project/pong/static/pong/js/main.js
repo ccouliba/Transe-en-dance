@@ -6,6 +6,7 @@ let routes = {
 	404: () => mountComponent(Page404),
 };
 
+document.addEventListener(onc)
 // Fonction pour afficher le menu
 // function Menu() {
 // 	return `
@@ -105,3 +106,8 @@ function mountComponent(componentFunction, data) {
 // document.addEventListener('DOMContentLoaded', () => {
 // 	changePage('home'); // Charger la page d'accueil par défaut
 // });
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////
+
+const home = document.getElementById()

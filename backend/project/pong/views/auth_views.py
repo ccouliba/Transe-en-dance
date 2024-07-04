@@ -4,6 +4,7 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from pong.forms import RegisterForm
 from django.middleware.csrf import get_token
+from django.http import JsonResponse
 import os
 from . import auth
 
@@ -59,6 +60,7 @@ def login_view(request):
 			user = authenticate(username=username, password=password)  # Compare les informations d'identification (nom d'utilisateur et mdp) avec les informations stockées dans la bdd
 			if user is not None:
 				login(request, user)
+				return JsonResponse({'messages:', 'redirect_url:'})
 				return redirect('/pong/home')  # Redirige vers la page d'accueil après la connexion
 			else:
 				print("Authentification échouée")
