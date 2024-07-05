@@ -5,17 +5,18 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Untitled</title>
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/Trajan%20Pro.css">
-    <link rel="stylesheet" href="assets/css/css/styles.css">
+    <link rel="stylesheet" href="assets/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/TrajanPro.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 
 <body><span>{% extends 'pong/base.html' %}{% load static %}{% block title %}Login{% endblock %}{% block user_navigation %} {# Ne rien afficher pour la navigation utilisateur sur la page de login #}{% endblock %}{% block content %}</span>
     <h2>Login</h2>
     <form method="post" action="{% url 'pong:login' %}"><span> {% csrf_token %} {{ form.as_p }} </span><button class="menuButton" type="submit">Login</button></form>
     <p>If you don't have an account, please <a href="{% url 'pong:register' %}">Register here</a> or <a href="{% url 'pong:external-login' %}">Login with 42</a></p><span>{% endblock %}</span>
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="assets/js/js/script.js"></script>
+    <canvas id="background"></canvas>
+    <script src="assets/bootstrap/bootstrap.min.js"></script>
+    <script src="assets/js/background.js"></script>
 </body>
 
 </html>

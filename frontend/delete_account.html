@@ -5,18 +5,18 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Untitled</title>
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/Trajan%20Pro.css">
-    <link rel="stylesheet" href="assets/css/css/styles.css">
+    <link rel="stylesheet" href="assets/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/TrajanPro.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 
 <body><span>{% extends 'pong/base.html' %}{% load static %}{% block title %}Delete account{% endblock %}{% block content %} </span>
     <h2>Delete Account</h2>
     <p>Do you your confirm the deletion of your account? </p>
     <form action="{% url 'pong:delete_account' %}" method="post"><span> {% csrf_token %} </span><button class="menuButton" type="submit">Delete Account</button><a href="{% url 'pong:profile' %}"> No, i've changed my mind</a></form><span>{% endblock %}</span>
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="assets/js/bootstrap/js/bootstrap.min.js"></script>
-    <script src="assets/js/js/script.js"></script>
+    <canvas id="background"></canvas>
+    <script src="assets/bootstrap/bootstrap.min.js"></script>
+    <script src="assets/js/background.js"></script>
 </body>
 
 </html>

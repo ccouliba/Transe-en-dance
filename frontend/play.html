@@ -5,15 +5,15 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Untitled</title>
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/Trajan%20Pro.css">
-    <link rel="stylesheet" href="assets/css/css/styles.css">
+    <link rel="stylesheet" href="assets/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/TrajanPro.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 
 <body><span>{% extends 'pong/base.html' %}{% load static %}{% block title %}Play{% endblock %}{% block content %} </span>
     <h1>PONG</h1><iframe src="{% static 'game/index.html' %}" width="900" height="600"></iframe><input type="button" class="button_active menuButton" name="Logout" value="Logout"><span>{% endblock %}</span>
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="assets/js/js/script.js"></script>
-</body>
+    <canvas id="background"></canvas>
+    <script src="assets/bootstrap/bootstrap.min.js"></script>
+    <script src="assets/js/background.js"></script></body>
 
 </html>

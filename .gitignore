@@ -3,3 +3,6 @@
 
 # Ignorer les dossiers __pycache__
 __pycache__/
+
+# Ignorer les fichiers d'identification WSL de Windows
+*:Zone.Identifier
