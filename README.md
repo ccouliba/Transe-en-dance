@@ -1,5 +1,12 @@
 # nachin's notes
-
+  SPA logic :
+    - function view python :
+        formulaire/button + redirection... => JSONresponse{message, redirect}
+    - spa function :
+        chaque function va afficher une fonction html et utiliser un fectch
+        pour recuperer un JSON.
+        => afficher
+    
 from localhost :
 
 - docker-compose up db 
