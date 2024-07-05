@@ -15,12 +15,23 @@ def profile_view(request):
 	friends = user.friends.all()
 	sent_requests = Friendship.objects.filter(id_user_1=user)
 	received_requests = Friendship.objects.filter(id_user_2=user)
-	return render(request, 'pong/profile.html', {
-		'user': user,
-		'friends': friends,
-		'sent_requests': sent_requests,
-		'received_requests': received_requests
+ 
+	return JsonResponse({
+		'username': user.username,
+		'email': user.email,
+		'first_name': user.first_name,
+		'last_name' : user.last_name,
+		'id' :user.id
+  
+  
 	})
+ 
+	# return render(request, 'pong/profile.html', {
+	# 	'user': user,
+	# 	'friends': friends,
+	# 	'sent_requests': sent_requests,
+	# 	'received_requests': received_requests
+	# })
 
 # @login_required
 # def profile_view(request):

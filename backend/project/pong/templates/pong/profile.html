@@ -3,7 +3,8 @@
 {% block title %}Profil{% endblock %}
 
 {% block content %}
-<div class="container mt-5">
+<script>changePage('profile');</script>
+{% comment %} <div class="container mt-5">
 	<h1>Profil de {{ user.username }}</h1>
 	<p>Email : {{ user.email }}</p>
 	<p>Nom : {{ user.first_name }} {{ user.last_name }}</p>
@@ -227,5 +228,5 @@
 			console.error('Error:', error); // Afficher l'erreur dans la console
 		});
 	}
-</script>
+</script> {% endcomment %}
 {% endblock %}

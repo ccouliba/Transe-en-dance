@@ -7,43 +7,33 @@ function loadCSS(filename) {
 	document.getElementsByTagName('head')[0].appendChild(link);
 }
 
+
 // Appel de la fonction pour charger le CSS
 loadCSS("{% static 'pong/css/style.css' %}"); 
+
+
+function bindEvent(state, cssSelector, event, callback){
+   
+	if (state.isLoaded){
+		document.querySelector(cssSelector).addEventListener(event, callback)
+		return	
+    }
+
+	setTimeout(() => bindEvent(state, cssSelector, event, callback), 500)
+	
+   
+}
+
+
 
 let routes = {
 	home: () => mountComponent(Home),
 	play: () => mountComponent(Play),
+	profile: () => mountComponent(Profile),
 	// login: () => mountComponent(Login),
 	404: () => mountComponent(Page404),
 };
 
-function Menu() {
-	return `
-		<div class="navbar">
-			<a href="#" onclick="changePage('home'); event.preventDefault();">Home</a>
-			<a href="#" onclick="changePage('play'); event.preventDefault();">Play</a>
-			<a href="#" onclick="changePage('profile'); event.preventDefault();">Profile</a>
-			<a href="#" onclick="changePage('logout'); event.preventDefault();">Déconnexion</a>
-			<a href="#" onclick="changePage('user_list'); event.preventDefault();">Liste des utilisateurs - test</a>
-		</div>`;
-}
-
-function Home() {
-	return `
-	<div>
-		${Menu()}
-		<h1>Welcome home</h1>
-	</div>`;
-}
-
-function Play() {
-	return `
-	<div>
-		${Menu()}
-		<h1>HELLO Play Page</h1>
-		<p>Tu es sur la page de jeu.</p>
-	</div>`;
-}
 
 // function Login() {
 // 	return `
@@ -60,31 +50,26 @@ function Play() {
 // }
 
 
-function Page404() {
-	return `
-	<div>
-		${Menu()}
-		<h1>my own 404</h1>
-		<p>Page non trouvée</p>
-	</div>`;
-}
-
 // Fonction pour changer de page
 window.changePage = function (pageName) {
+
+	console.log("what is being pushed", pageName)
+	console.log(routes)
+
 	if (typeof routes[pageName] === "undefined") {
 		console.log("page name is undefined so 404")
 		mountComponent(Page404)
 		history.pushState({ page: "page404" }, "", "/404"); // Ajoute à l'historique
 		return;
 	}
-	console.log("what is being pushed", pageName)
-
+	
 	routes[pageName](); // Charge la page demandée
 	let urlMap = {
 		'home': '/pong/home/',
 		'play': '/pong/play/',
+		'profile': '/pong/profile/',
+
 		// 'login' : '/pong/login',
-		// 'profile': '/profile/',
 		// 'logout': '/logout/',
 		// 'user_list': '/user_list/'
 	};
