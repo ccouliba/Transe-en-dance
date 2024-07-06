@@ -15,11 +15,30 @@ import json
 @csrf_exempt# TO DO : ENLEVER CELA C EST JUSTE POUR LES TESTS AVEC POSTMAN !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 @require_POST
 def	profile_update_view(request):
-	new_username = json.loads(request.body).get('username')
-	if new_username is not None:
-		request.user.username = new_username
-		request.user.save()
-		return JsonResponse({'status': 'success'})
+		data = json.loads(request.body)
+		user = request.user
+		updated = []
+
+		if 'username' in data:
+			user.username = data['username']
+			updated.append('username')
+
+		if 'email' in data:
+			user.email = data['email']
+			updated.append('email')
+
+		if updated:
+			user.save()
+			return JsonResponse({'status': 'success', 'updated': updated})
+		else:
+			return JsonResponse({'status': 'error', 'message': 'No valid fields to update'}, status=400)
+
+	# new_username = json.loads(request.body).get('username')
+	# if new_username is not None:
+	# 	request.user.username = new_username
+	# 	request.user.save()
+	# 	return JsonResponse({'status': 'success'})
+	
 
 #Cette vue affiche le profil de l'utilisateur connecte en rendant la page HTML appropriee
 @login_required
