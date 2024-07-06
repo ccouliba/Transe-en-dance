@@ -27,6 +27,10 @@ def	profile_update_view(request):
 			user.email = data['email']
 			updated.append('email')
 
+		if 'firstname' in data:
+			user.first_name = data['firstname']
+			updated.append('firstname')
+
 		if updated:
 			user.save()
 			return JsonResponse({'status': 'success', 'updated': updated})
@@ -51,8 +55,8 @@ def profile_view(request):
 	return JsonResponse({
 		'username': user.username,
 		'email': user.email,
-		'first_name': user.first_name,
-		'last_name' : user.last_name,
+		'firstname': user.first_name,
+		'lastname' : user.last_name,
 		'id' :user.id
   
   

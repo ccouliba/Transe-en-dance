@@ -9,16 +9,18 @@ function loadCSS(filename) {
 
 
 // Appel de la fonction pour charger le CSS
-loadCSS("{% static 'pong/css/style.css' %}"); 
+//loadCSS("{% static 'pong/css/style.css' %}"); 
 
 function bindEvent(state, cssSelector, event, callback){
    
-	if (state.isLoaded){
-		console.log(cssSelector)
-		document.querySelector(cssSelector).addEventListener(event, callback)
+	let target = document.querySelector(cssSelector)
+	if (target && state.isLoaded){
+		target.addEventListener(event, callback)
 		return	
+	
 	}
-
+	
+	
 	setTimeout(() => bindEvent(state, cssSelector, event, callback), 500)	
 }
 
@@ -49,7 +51,7 @@ let routes = {
 // Fonction pour changer de page
 window.changePage = function (url) {
 
-	resetLoaded()
+	//resetLoaded()
 	if (typeof routes[url] === "undefined") {
 		mountComponent(Page404)
 		history.pushState({ page: "#404" }, "", "#404"); // Ajoute à l'historique
@@ -63,7 +65,7 @@ window.changePage = function (url) {
 }
 // Gérer l'événement `popstate`
 window.onpopstate = function(event) {
-	resetLoaded()
+//	resetLoaded()
 	const page = event.state ? event.state.page : '404';
 	if (routes[page]) {
 		routes[page](); // Appeler la fonction appropriée pour monter le composant

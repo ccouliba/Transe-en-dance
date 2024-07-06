@@ -1,26 +1,18 @@
 var profileState = {
 	username:"",
 	email:"",
-	first_name:"",
-	last_name:"",
+	firstname:"",
+	lastname:"",
 	id:"",
 	isLoaded:false
 }
 
-const updateTypes = {
-	username: 'username',
-	email: 'email'
-};
 
-function sendProfileToBackend(type, value) {
-	if (!updateTypes[type]) {
-		console.error('Type de mise à jour non valide');
-		return;
-	}
 
+function sendProfileToBackend(payload) {
+	
 	let url = `/pong/api/profile/update`;
-	let payload = { [type]: value };
-
+	
 	fetch(url, {
 		method: "POST",
 		credentials: "include",
@@ -38,20 +30,25 @@ function EditUsername(){
 	
 	//ne peut pas utiliser addeventlistener. 
 	bindEvent(profileState, "#edit-username", "submit", event => {
-		event.preventDefault()
+		event.preventDefault() //pour ne pas que l'evenement submit soit execute par defaut
 		//const usernameInput = document.querySelector("#edit-username").value
 		const usernameInput = event.target.elements.username.value
-		console.log(usernameInput)
-		// alert("envoie " + usernameInput)
+		
 		profileState.username = usernameInput
-		sendProfileToBackend('username', usernameInput)
+		sendProfileToBackend({'username': usernameInput})
+		profileState.isLoaded = false
 		mountComponent(Profile)
 	})
 
 	return `
 		<form id="edit-username" class="mt-3">
 			<div class="input-group">
-				<input type="text" class="form-control" name="username" value="${profileState.username}" placeholder="Nouveau nom d'utilisateur" aria-label="Nouveau nom d'utilisateur">
+				<input 
+					type="text" 
+					class="form-control" 
+					name="username" 
+					value="${profileState.username}" 
+				/>
 				<button class="btn btn-primary" type="submit">Modifier</button>
 			</div>
 		</form>
@@ -64,18 +61,48 @@ function EditEmail()
 		event.preventDefault()
 		const emailInput = event.target.elements.email.value
 		profileState.email = emailInput
-		sendProfileToBackend('email', emailInput)
+		sendProfileToBackend({'email': emailInput})
+		profileState.isLoaded = false
 		mountComponent(Profile)
 	})
 	return `
 		<form id="edit-email" class="mt-3">
 			<div class="input-group">
-				<input type="text" class="form-control" name="email" value="${profileState.email}" placeholder="Nouvel email" aria-label="Nouvel email">
+				<input type="text" class="form-control" name="email" value="${profileState.email}" aria-label="Nouvel email">
 				<button class="btn btn-primary" type="submit">Modifier</button>
 			</div>
 		</form>
 	`	
 }
+
+function EditFirstname()
+{
+	bindEvent(profileState, "#edit-first-name", "submit", event =>
+	{
+		event.preventDefault()
+		const firstnameInput = event.target.elements.firstname.value
+		profileState.firstname = firstnameInput
+		sendProfileToBackend({firstname:firstnameInput})
+		profileState.isLoaded = false
+		mountComponent(Profile)
+	})
+	return `
+	<form id="edit-first-name" class="mt-3">
+		<div class="input-group">
+			<input 
+				type="text" 
+				class="form-control" 
+				name="firstname" 
+				value="${profileState.firstname}" 
+				aria-label="Nouveau prénom"
+			/>
+			<button class="btn btn-primary" type="submit">Modifier</button>
+		</div>
+	</form>
+`	
+}
+
+
 async function loadProfileFromBackend(){
 	
 	if (profileState.isLoaded){ //pour eviter des fetch infinis au backend
@@ -89,15 +116,12 @@ async function loadProfileFromBackend(){
 		return response.json()//transformer mon json en objet js (y'a le username a l'interieur)
 	}).then(profile => { //promesse
 		profileState.username = profile.username
-		console.log(profile.username, profile.email)
-		profileState.email = profile.email
-		profileState.first_name = profile.first_name
-		profileState.last_name = profile.last_name
-		profileState.id = profile.id
-		profileState.isLoaded = true
+		
+		profileState = {...profileState, ...profile}
 	
 		mountComponent(Profile) //ce qui provoque la boucle infinie 
-
+		profileState.isLoaded = true
+	
 		//repasse dans Profile avec isLoaded a true
 	
 	})
@@ -123,11 +147,11 @@ function Profile() {
 					</div>
 						<div class="row mb-3">
 							<div class="col-sm-3"><strong>Prénom :</strong></div>
-							<div class="col-sm-9">${profileState.first_name}</div>
+							<div class="col-sm-9">${profileState.firstname}</div>
 						</div>
 						<div class="row mb-3">
 							<div class="col-sm-3"><strong>Nom :</strong></div>
-							<div class="col-sm-9">${profileState.last_name}</div>
+							<div class="col-sm-9">${profileState.lastname}</div>
 						</div>
 					<div class="row">
 						<div class="col-sm-3"><strong>ID :</strong></div>
@@ -140,6 +164,12 @@ function Profile() {
 			${EditUsername()}
 			<h2 class="mt-4 mb-3">Modifier l'email</h2>
 			${EditEmail()}
+			<h2 class="mt-4 mb-3">Modifier le prénom</h2>
+			
+			${EditFirstname()}
+			<h2 class="mt-4 mb-3">Modifier le nom</h2>
+			<h2 class="mt-4 mb-3">Modifier le mot de passe</h2>
+
 			
 
 		</div>
