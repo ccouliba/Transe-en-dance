@@ -7,6 +7,19 @@ from io import BytesIO
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
 from pong.models import User, Friendship
+from django.views.decorators.http import require_POST
+from django.views.decorators.csrf import csrf_exempt
+import json
+# path('pong/api/profile/update', profile_update_view, name='profile_update'),
+@login_required
+@csrf_exempt# TO DO : ENLEVER CELA C EST JUSTE POUR LES TESTS AVEC POSTMAN !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+@require_POST
+def	profile_update_view(request):
+	new_username = json.loads(request.body).get('username')
+	if new_username is not None:
+		request.user.username = new_username
+		request.user.save()
+		return JsonResponse({'status': 'success'})
 
 #Cette vue affiche le profil de l'utilisateur connecte en rendant la page HTML appropriee
 @login_required

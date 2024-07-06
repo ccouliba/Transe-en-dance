@@ -3,7 +3,7 @@ from .views.auth_views import register_view, login_view, logout_view, auth_callb
 from .views.game_views import play, start_game, update_score, finish_game, cancel_game, game
 from .views.friend_views import send_friend_request, accept_friend_request, refuse_friend_request, remove_friend_request, unfriend
 from .views.tournament_views import create_tournament, player_joined_tournament, start_tournament, finish_tournament, cancel_tournament
-from .views.profile_views import profile_view, user_updated_profile, user_password_changed, user_account_deleted, get_user_info
+from .views.profile_views import profile_view, user_updated_profile, user_password_changed, user_account_deleted, get_user_info, profile_update_view
 from .views.user_views import user_list_json, user_list, index, home_view
 
 app_name = 'pong'  # definir le namespace
@@ -30,7 +30,6 @@ urlpatterns = [
 	path('start_tournament/', start_tournament, name='start_tournament'),
 	path('finish_tournament/', finish_tournament, name='finish_tournament'),
 	path('cancel_tournament/', cancel_tournament, name='cancel_tournament'),
-	path('api/profile/', profile_view, name='profile'),
 	path('update_profile/', user_updated_profile, name='update_profile'),
 	path('change_password/', user_password_changed, name='change_password'),
 	path('delete_account/', user_account_deleted, name='delete_account'),
@@ -42,4 +41,9 @@ urlpatterns = [
 	path('home/', home_view, name='home'),
 	path('game/', game, name='game'),
 	path('external_login/', external_login, name='external_login'),
+ 
+	path('api/profile/', profile_view, name='profile'),
+	path('api/profile/update', profile_update_view, name='profile_update'),
+ 
+ 
 ]
