@@ -12,22 +12,28 @@ import json
 @csrf_exempt# TO DO : ENLEVER CELA C EST JUSTE POUR LES TESTS AVEC POSTMAN !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 def send_friend_request(request):
 	payload = json.loads(request.body)
-	to_user_id = payload.get('to_user_id')
-	to_user = get_object_or_404(User, id=to_user_id)
-	
+	to_email = payload.get('email')
+	try:
+		to_user = User.objects.get(email=to_email)
+	except User.DoesNotExist:
+		return JsonResponse({'status': 'error', 'message': 'Utilisateur non trouvé.'}, status=404)
+   
 	# Vérifier si l'utilisateur essaie de s'envoyer une demande d'ami
 	if request.user == to_user:
 		return JsonResponse({'status': 'error', 'message': 'Vous ne pouvez pas vous envoyer une demande d\'ami à vous-même.'}, status=400)
-	
+   
 	# Vérifier si une demande existe déjà
 	existing_request = Friendship.objects.filter(id_user_1=request.user, id_user_2=to_user).first()
 	if existing_request:
 		return JsonResponse({'status': 'error', 'message': 'Demande d\'ami déjà envoyée.'}, status=400)
-	
+   
+	# Vérifier si les utilisateurs sont déjà amis
+	if request.user.friends.filter(id=to_user.id).exists():
+		return JsonResponse({'status': 'error', 'message': 'Vous êtes déjà amis avec cet utilisateur.'}, status=400)
+
 	# Créer une nouvelle demande d'ami
 	friend_request = Friendship.objects.create(id_user_1=request.user, id_user_2=to_user)
-	# return JsonResponse({'status': 'success', 'message': 'Demande d\'ami envoyée avec succès.'})
- 	# Retourner les informations nécessaires pour mettre à jour le DOM
+
 	return JsonResponse({
 		'status': 'success',
 		'message': 'Demande d\'ami envoyée avec succès.',
@@ -40,6 +46,36 @@ def send_friend_request(request):
 			'id': friend_request.id
 		}
 	})
+# def send_friend_request(request):
+# 	payload = json.loads(request.body)
+# 	to_user_id = payload.get('to_user_id')
+# 	to_user = get_object_or_404(User, id=to_user_id)
+	
+# 	# Vérifier si l'utilisateur essaie de s'envoyer une demande d'ami
+# 	if request.user == to_user:
+# 		return JsonResponse({'status': 'error', 'message': 'Vous ne pouvez pas vous envoyer une demande d\'ami à vous-même.'}, status=400)
+	
+# 	# Vérifier si une demande existe déjà
+# 	existing_request = Friendship.objects.filter(id_user_1=request.user, id_user_2=to_user).first()
+# 	if existing_request:
+# 		return JsonResponse({'status': 'error', 'message': 'Demande d\'ami déjà envoyée.'}, status=400)
+	
+# 	# Créer une nouvelle demande d'ami
+# 	friend_request = Friendship.objects.create(id_user_1=request.user, id_user_2=to_user)
+# 	# return JsonResponse({'status': 'success', 'message': 'Demande d\'ami envoyée avec succès.'})
+#  	# Retourner les informations nécessaires pour mettre à jour le DOM
+# 	return JsonResponse({
+# 		'status': 'success',
+# 		'message': 'Demande d\'ami envoyée avec succès.',
+# 		'requested_user': {
+# 			'id': to_user.id,
+# 			'username': to_user.username,
+# 			'email': to_user.email
+# 		},
+# 		'request': {
+# 			'id': friend_request.id
+# 		}
+# 	})
 
 @login_required
 @require_POST

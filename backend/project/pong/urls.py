@@ -20,7 +20,7 @@ urlpatterns = [
 	path('update_score/', update_score, name='update_score'),
 	path('finish_game/', finish_game, name='finish_game'),
 	path('cancel_game/', cancel_game, name='cancel_game'),
-	path('send_friend_request/', send_friend_request, name='send_friend_request'),
+	# path('send_friend_request/', send_friend_request, name='send_friend_request'),
 	path('accept_friend_request/', accept_friend_request, name='accept_friend_request'),
 	path('refuse_friend_request/', refuse_friend_request, name='refuse_friend_request'),
 	path('remove_friend_request/', remove_friend_request, name='remove_friend_request'),
@@ -44,6 +44,7 @@ urlpatterns = [
  
 	path('api/profile/', profile_view, name='profile'),
 	path('api/profile/update', profile_update_view, name='profile_update'),
+	path('api/profile/send_friend_request/', send_friend_request, name='send_friend_request'),
  
  
 ]

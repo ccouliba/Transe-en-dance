@@ -4,6 +4,8 @@ var profileState = {
 	firstname:"",
 	lastname:"",
 	id:"",
+	friends: ["toto", "titi", "tata"],
+	// friends: [],
 	isLoaded:false
 }
 
@@ -101,7 +103,50 @@ function EditFirstname()
 	</form>
 `	
 }
+function sendFriendRequest(email) {
+	console.log("0")
 
+	let url = `/pong/api/profile/send_friend_request/`;
+	fetch(url, {
+		method: "POST",
+		credentials: "include",
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify({ email: email })
+	})
+	.then(response => response.json())
+	.then(data => {
+		if (data.status === 'success') {
+			alert("Demande d'ami envoyée avec succès!");
+			profileState.isLoaded = false;
+			loadProfileFromBackend();
+		} else {
+			alert(data.message);
+		}
+	})
+	.catch(error => console.error('Error:', error));
+}
+
+function AddFriendForm() {
+
+	bindEvent(profileState, "#add-friend-form", "submit", event => {
+		event.preventDefault();
+		const friendEmail = event.target.elements.friendEmail.value;
+		sendFriendRequest(friendEmail);
+		event.target.reset(); // Réinitialise le formulaire après l'envoi
+	});
+
+	return `
+		<h2 class="mt-4 mb-3">Ajouter un ami</h2>
+		<form id="add-friend-form" class="mt-3">
+			<div class="input-group">
+				<input type="text" class="form-control" name="friendEmail" placeholder="Email de l'ami" />
+				<button class="btn btn-primary" type="submit">Ajouter</button>
+			</div>
+		</form>
+	`;
+}
 
 async function loadProfileFromBackend(){
 	
@@ -157,6 +202,10 @@ function Profile() {
 						<div class="col-sm-3"><strong>ID :</strong></div>
 						<div class="col-sm-9">${profileState.id}</div>
 					</div>
+					<div class="row">
+						<div class="col-sm-3"><strong>Mes amis :</strong></div>
+						<div class="col-sm-9">${profileState.friends}</div>
+					</div>
 				</div>
 			</div>
 			
@@ -170,6 +219,7 @@ function Profile() {
 			<h2 class="mt-4 mb-3">Modifier le nom</h2>
 			<h2 class="mt-4 mb-3">Modifier le mot de passe</h2>
 
+			${AddFriendForm()}
 			
 
 		</div>
