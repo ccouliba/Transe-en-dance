@@ -43,6 +43,7 @@ let routes = {
 	"#home": () => mountComponent(Home),
 	"#play": () => mountComponent(Play),
 	"#profile": () => mountComponent(Profile),
+	"#friends": () => mountComponent(FriendsList),
 	"#404":() => mountComponent(Page404)
 	// login: () => mountComponent(Login),
 };

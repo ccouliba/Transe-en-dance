@@ -104,7 +104,6 @@ function EditFirstname()
 `	
 }
 function sendFriendRequest(email) {
-	console.log("0")
 
 	let url = `/pong/api/profile/send_friend_request/`;
 	fetch(url, {
@@ -147,6 +146,94 @@ function AddFriendForm() {
 		</form>
 	`;
 }
+
+function AcceptFriendRequest(email) {
+
+	let url = `/pong/api/profile/accept_friend_request/`;
+	fetch(url, {
+		method: "POST",
+		credentials: "include",
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify({ email: email })
+	})
+	.then(response => response.json())
+	.then(data => {
+		if (data.status === 'success') {
+			alert("Demande d'ami acceptée avec succès!");
+			profileState.isLoaded = false;
+			loadProfileFromBackend();
+		} else {
+			alert(data.message);
+		}
+	})
+	.catch(error => console.error('Error:', error));
+}
+// Fonction pour accepter une demande d'ami
+function AcceptFriendForm(email) {
+
+	bindEvent(profileState, "#accept-friend-form", "submit", event => {
+		event.preventDefault();
+		const friendEmail = event.target.elements.friendEmail.value;
+		AcceptFriendRequest(friendEmail);
+		event.target.reset(); // Réinitialise le formulaire après l'envoi
+	});
+
+	return `
+		<h2 class="mt-4 mb-3">Accepter un ami</h2>
+		<form id="accept-friend-form" class="mt-3">
+			<div class="input-group">
+				<input type="text" class="form-control" name="friendEmail" placeholder="Email de l'ami" />
+				<button class="btn btn-primary" type="submit">Accepter</button>
+			</div>
+		</form>
+	`;
+}
+
+
+function removeFriend(email) {
+	let url = `/pong/api/profile/remove_friend/`;
+	fetch(url, {
+		method: "POST",
+		credentials: "include",
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify({ email: email })
+	})
+	.then(response => response.json())
+	.then(data => {
+		if (data.status === 'success') {
+			alert("Ami supprimé avec succès!");
+			profileState.isLoaded = false;
+			loadProfileFromBackend();
+		} else {
+			alert(data.message);
+		}
+	})
+	.catch(error => console.error('Error:', error));
+}
+
+function RemoveFriendForm() {
+	bindEvent(profileState, "#remove-friend-form", "submit", event => {
+		event.preventDefault();
+		const friendEmail = event.target.elements.friendEmail.value;
+		removeFriend(friendEmail);
+		event.target.reset(); 
+	});
+
+	return `
+		<h2 class="mt-4 mb-3">Supprimer un ami</h2>
+		<form id="remove-friend-form" class="mt-3">
+			<div class="input-group">
+				<input type="text" class="form-control" name="friendEmail" placeholder="Email de l'ami à supprimer" />
+				<button class="btn btn-danger" type="submit">Supprimer</button>
+			</div>
+		</form>
+	`;
+}
+
 
 async function loadProfileFromBackend(){
 	
@@ -220,7 +307,8 @@ function Profile() {
 			<h2 class="mt-4 mb-3">Modifier le mot de passe</h2>
 
 			${AddFriendForm()}
-			
+			${AcceptFriendForm()}
+			${RemoveFriendForm()}
 
 		</div>
 	`;

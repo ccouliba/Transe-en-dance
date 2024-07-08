@@ -1,7 +1,7 @@
 from django.urls import path
 from .views.auth_views import register_view, login_view, logout_view, auth_callback, external_login
 from .views.game_views import play, start_game, update_score, finish_game, cancel_game, game
-from .views.friend_views import send_friend_request, accept_friend_request, refuse_friend_request, remove_friend_request, unfriend
+from .views.friend_views import send_friend_request, accept_friend_request, remove_friend, friends_data
 from .views.tournament_views import create_tournament, player_joined_tournament, start_tournament, finish_tournament, cancel_tournament
 from .views.profile_views import profile_view, user_updated_profile, user_password_changed, user_account_deleted, get_user_info, profile_update_view
 from .views.user_views import user_list_json, user_list, index, home_view
@@ -21,10 +21,10 @@ urlpatterns = [
 	path('finish_game/', finish_game, name='finish_game'),
 	path('cancel_game/', cancel_game, name='cancel_game'),
 	# path('send_friend_request/', send_friend_request, name='send_friend_request'),
-	path('accept_friend_request/', accept_friend_request, name='accept_friend_request'),
-	path('refuse_friend_request/', refuse_friend_request, name='refuse_friend_request'),
-	path('remove_friend_request/', remove_friend_request, name='remove_friend_request'),
-	path('unfriend/', unfriend, name='unfriend'),
+	# path('accept_friend_request/', accept_friend_request, name='accept_friend_request'),
+	# path('refuse_friend_request/', refuse_friend_request, name='refuse_friend_request'),
+	# path('remove_friend_request/', remove_friend_request, name='remove_friend_request'),
+	# path('unfriend/', unfriend, name='unfriend'),
 	path('create_tournament/', create_tournament, name='create_tournament'),
 	path('player_joined_tournament/', player_joined_tournament, name='player_joined_tournament'),
 	path('start_tournament/', start_tournament, name='start_tournament'),
@@ -45,6 +45,7 @@ urlpatterns = [
 	path('api/profile/', profile_view, name='profile'),
 	path('api/profile/update', profile_update_view, name='profile_update'),
 	path('api/profile/send_friend_request/', send_friend_request, name='send_friend_request'),
- 
- 
+	path('api/profile/accept_friend_request/', accept_friend_request, name='accept_friend_request'),
+	path('api/profile/remove_friend/', remove_friend, name='remove_friend'),
+	path('api/friends_data/', friends_data, name='friends_data'),
 ]
