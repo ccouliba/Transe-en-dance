@@ -4,7 +4,7 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from pong.forms import RegisterForm
 from django.middleware.csrf import get_token
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 import os
 from . import auth
 
@@ -60,17 +60,22 @@ def login_view(request):
 			user = authenticate(username=username, password=password)  # Compare les informations d'identification (nom d'utilisateur et mdp) avec les informations stockées dans la bdd
 			if user is not None:
 				login(request, user)
-				return JsonResponse({'messages:', 'redirect_url:'})
+				# print('redirect_url=', '/pong/home')
+				# return JsonResponse({'messages':'success', 'redirect_url':'/home'})
 				return redirect('/pong/home')  # Redirige vers la page d'accueil après la connexion
 			else:
+				# return JsonResponse({'messages':'failure', 'redirect_url':'/login'})
 				print("Authentification échouée")
-		else:
-			print("Formulaire non valide")
+		# else:
+		# 	# return JsonResponse({'messages':'failure', 'redirect_url':'/pong/login'})
+		# 	print("Formulaire non valide")
 			# print(form.errors)  # Affiche les erreurs du formulaire pour le debug
+		# return JsonResponse({'messages':'failure', 'redirect_url':'/login'})
 		return redirect('/pong/login')
 	else:
 		form = AuthenticationForm()
 	csrf_token = get_token(request)  # genere et inclut un token CSRF dans la réponse
+	# return JsonResponse({'messages':'success', 'redirect_url':'/pong/home', 'html':'login.html', 'form':form})
 	return render(request, 'pong/login.html', {'form': form})
 
 # vue pour gerer la deconnexion de l'utilisateur

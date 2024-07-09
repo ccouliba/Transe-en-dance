@@ -16,6 +16,9 @@ def game(request):
 @login_required
 def play(request):
 	return render(request, 'pong/play.html')
+    # html = 'pong/play.html'
+    # return JsonResponse({'html':html})
+    # return JsonResponse(test={'message':'success', 'redirect_url':'/pong/play', 'html_file':'pong/play.html'},status=200)
 
 
 # Cette vue permet a l'utilisateur connecte de demarrer une nouvelle partie de pong avec un adversaire specifie

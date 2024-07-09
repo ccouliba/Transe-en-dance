@@ -4,13 +4,16 @@
 
 {% block title %}Login{% endblock %}
 
-{% block user_navigation %}
-    {# Ne rien afficher pour la navigation utilisateur sur la page de login #}
-{% endblock %}
-
+{% comment %} <!-- Votre formulaire de connexion -->
+<form id="login-form" method="post">
+    <!-- ... autres champs du formulaire ... -->
+    {% csrf_token %}
+    <button type="submit">Se connecter</button>
+</form> {% endcomment %}
 {% block content %}
+
 <h2>Login</h2>
-<form method="post" action="{% url 'pong:login' %}">
+<form id="login-form" method="post" action="{% url 'pong:login' %}">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Login</button>

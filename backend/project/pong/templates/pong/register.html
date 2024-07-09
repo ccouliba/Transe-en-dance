@@ -4,13 +4,9 @@
 
 {% block title %}Register{% endblock %}
 
-{% block user_navigation %}
-    <!-- On surcharge ce bloc pour ne rien afficher (car sinon affiche le menu) -->
-{% endblock %}
-
 {% block content %}
 <h2>Register</h2>
-<form method="post" action="{% url 'pong:register' %}">
+<form id=register-form method="post" action="{% url 'pong:register' %}">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Register</button>

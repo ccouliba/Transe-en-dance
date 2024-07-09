@@ -19,23 +19,12 @@
 			{% endif %}
 		{% endblock %}
 	</header>
-	{% comment %}
-	<main>
-		{% block content %}
-		{% endblock %}
-	</main>
-	{% endcomment %}
-
+	
 	<script src="{% static 'pong/js/main.js' %}"></script>
 	
 	<main>
 		<div id="app">{% block content %}{% endblock %}</div>
 	</main>
-	
-	<!-- <footer>
-		<p>&copy; 2024 Pong. Tous droits réservés.</p>
-	</footer> -->
-
 
 	{% block scripts %}
 	{% endblock %}
