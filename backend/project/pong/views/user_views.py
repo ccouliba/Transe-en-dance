@@ -40,5 +40,3 @@ def index(request):
 @login_required
 def home_view(request):
 	return render(request, 'pong/home.html')
-
-
