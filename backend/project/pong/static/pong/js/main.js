@@ -45,6 +45,7 @@ let routes = {
 	"#profile": () => mountComponent(Profile),
 	"#friends": () => mountComponent(FriendsList),
 	"#404":() => mountComponent(Page404)
+	
 	// login: () => mountComponent(Login),
 };
 
@@ -71,7 +72,8 @@ window.onpopstate = function(event) {
 	if (routes[page]) {
 		routes[page](); // Appeler la fonction appropriée pour monter le composant
 	} else {
-		routes[404](); // Si la route n'existe pas, afficher la page 404
+		mountComponent(Page404); 
+		// routes[Page404](); // Si la route n'existe pas, afficher la page 404
 	}
 };
 
