@@ -7,6 +7,8 @@ from django.middleware.csrf import get_token
 from django.http import JsonResponse, HttpResponse
 import os
 from . import auth
+from rest_framework.authtoken.models import Token
+
 
 import inspect
 
@@ -48,6 +50,19 @@ def auth_callback(request):
 #		- Si l'authentification reussit => l'utilisateur est connecte et redirige vers la page d'accueil
 #		- Si l'authentification echoue ou si le formulaire n'est pas valide => les erreurs sont affichees pour le debogage
 # - Si la methode HTTP n'est pas POST => elle affiche un formulaire de connexion vide
+
+## New function of back without form validation and all that stuff !!
+def get_log(request, token):
+    if request.method == 'POST':
+		username = request.data.get('username')
+		password = request.data.get('password')
+		user = authenticate(username=username, password=password)  # Compare les informations d'identification (nom d'utilisateur et mdp) avec les informations stockées dans la bdd
+		if user is not None:
+			login(request, user)
+			token = Token.objects.create(user=user)
+			return JsonResponse({'messages':'succcess', 'token':token, 'redirect_url':'/pong/home'})
+	return None
+    
 def login_view(request):
 	if request.method == 'POST':
 		form = AuthenticationForm(request, data=request.POST)  # AuthenticationForm = formulaire de Django pour gérer l'authentification 

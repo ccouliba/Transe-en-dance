@@ -1,22 +1,16 @@
 from django.urls import path
-from .views.auth_views import register_view, login_view, logout_view, auth_callback, external_login
-# from .views.game_views import play, start_game, update_score, finish_game, cancel_game, game
+from .views.auth_views import * #register_view, login_view, logout_view, auth_callback, external_login
+# from .views.game_views import *#play, start_game, update_score, finish_game, cancel_game, game
 from .views.game_views import create_game, update_game
-from .views.friend_views import send_friend_request, accept_friend_request, remove_friend, friends_data
-from .views.tournament_views import create_tournament, player_joined_tournament, start_tournament, finish_tournament, cancel_tournament
-from .views.profile_views import profile_view, user_updated_profile, user_password_changed, user_account_deleted, get_user_info, profile_update_view
-from .views.user_views import user_list_json, user_list, index, home_view
+from .views.friend_views import * #send_friend_request, accept_friend_request, remove_friend, friends_data
+from .views.tournament_views import * #create_tournament, player_joined_tournament, start_tournament, finish_tournament, cancel_tournament
+from .views.profile_views import * #profile_view, user_updated_profile, user_password_changed, user_account_deleted, get_user_info, profile_update_view
+from .views.user_views import * #user_list_json, user_list, index, home_view
+from .api.api_views import *
 
 app_name = 'pong'  # definir le namespace
 
 urlpatterns = [
-
-	## HERE our API views
-	# login
-	path('api/login', api_login_view, name='api_login'), 
-	# register
-	# with_42
-	# change_language
 
 	path('', login_view, name='default_login'), 
 	path('register/', register_view, name='register'),
@@ -58,5 +52,12 @@ urlpatterns = [
  
  
 	path('api/games/create', create_game, name='create_game'),
-	path('api/games/<int:game_id>/update', update_game, name='update_game')
+	path('api/games/<int:game_id>/update', update_game, name='update_game'),
+ 
+	## HERE our API views
+	# # Same routes for login, register 
+	path('api/login/', LoginAPIView.as_view, name='api_login'),
+	# path('api/register/', api_register_view, name='api_register'),
+	# path('api/external/<int:user_id>/', api_login_view, name='api_register'), 
+
 ]

@@ -50,6 +50,7 @@ INSTALLED_APPS = [
 	'django.contrib.messages',
 	'django.contrib.staticfiles',
 	'rest_framework',
+	'rest_framework.authtoken',
 ]
 
 MIDDLEWARE = [
@@ -164,3 +165,10 @@ STATICFILES_DIRS = [
 
 # Chemin pour les fichiers statiques collectés (utilisé avec collectstatic)
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ]
+}
