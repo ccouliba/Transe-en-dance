@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Untitled</title>
+    <link rel="stylesheet" href="assets/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/TrajanPro.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+
+<body><span>{% extends 'pong/base.html' %}{% load static %}{% block title %}Update Profile{% endblock %}{% block content %}</span>
+    <h1>Update Profile</h1>
+    <form method="post"><span> {% csrf_token %} {{ form.as_p }} </span><button class="menuButton" type="submit">Update</button></form><a href="{% url 'pong:profile' %}">Back to Profile</a><span>{% endblock %}</span>
+    <canvas id="background"></canvas>
+    <script src="assets/bootstrap/bootstrap.min.js"></script>
+    <script src="assets/js/background.js"></script>
+</body>
+
+</html>

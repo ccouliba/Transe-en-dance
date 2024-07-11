@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Untitled</title>
+    <link rel="stylesheet" href="assets/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/TrajanPro.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+
+<body><span>{% extends 'pong/base.html' %}{% load static %}{% block title %}Welcome{% endblock %}{% block content %} {% if not user.is_authenticated %} </span><input type="button" class="button_active menuButton" name="Login" value="Login"><input type="button" class="button_active menuButton" name="Register" value="Register">
+    <p>Or log with 42 -&gt;<a href="{% url 'pong:external-login' %}">Login with 42 here</a></p><span> {% endif %}{% endblock %}</span>
+    <canvas id="background"></canvas>
+    <script src="assets/bootstrap/bootstrap.min.js"></script>
+    <script src="assets/js/background.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" style="text-align:center;">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>{% block title %}PONG{% endblock %}</title>
+    <link rel="stylesheet" href="assets/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/TrajanPro.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+
+<body><span>{% load static %} </span>
+    <nav class="navbar navbar-expand-md text-center menuButton">
+        <div class="container-fluid"><a class="navbar-brand" href="#">Navigation</a><button data-bs-toggle="collapse" data-bs-target="#navcol-1" class="navbar-toggler"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navcol-1">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="play.html">Play</a></li>
+                    <li class="nav-item"><a class="nav-link" href="profile.html">Profil</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Deconnexion</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <header>
+        <h1 class="pong-title">PONG</h1><span> {% block user_navigation %} {% if user.is_authenticated %} {% include 'pong/menu.html' %} {% else %} </span><a href="{% url 'pong:index' %}"></a><span> {% endif %} {% endblock %} </span>
+    </header>
+    <main><span> {% block content %} {% endblock %} </span></main>
+    <footer>
+        <p>© 2024 Pong. Tous droits réservés.</p>
+    </footer><canvas id="background"></canvas>
+    <script src="assets/bootstrap/bootstrap.min.js"></script>
+    <script src="assets/js/background.js"></script>
+</body>
+
+</html>

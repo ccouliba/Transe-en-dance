@@ -58,10 +58,22 @@
               </nav>
             <!-- Fin bootstrap navigation-->
 
-<title>Welcome</title>
+{% extends 'pong/base.html' %}
+{% load i18n %}
 
-<div class="btn-group" role="group">
-  <a href="login.html" class="btn btn-primary" role="button">Login</a>
-  <a href="register.html" class="btn btn-primary" role="button">Register</a>
+{% block title %}User list{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1>{{ user_list_txt }}</h1>
+    <ul id="user-list" class="list-group">
+        {% for user in users %}
+        <li class="list-group-item">
+            <strong>{{ user_id_txt }}:</strong> {{ user.id }}<br>
+            <strong>{{ username_txt }}:</strong> {{ user.username }}<br>
+            <strong>{{ hashed_password_txt }}:</strong> {{ user.hashed_password }}
+        </li>
+        {% endfor %}
+    </ul>
 </div>
-<p>Or log with 42 -><a href="{% url 'pong:external_login' %}">Login with 42 here</a></p>
+{% endblock %}
