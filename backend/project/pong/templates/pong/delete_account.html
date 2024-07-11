@@ -4,11 +4,11 @@
 {% block title %}Delete account{% endblock %}
 
 {% block content %}
-    <h2>Delete Account</h2>
-    <p>Do you your confirm the deletion of your account? </p>
+    <h2>{{ delete_account_txt }}</h2>
+    <p>{{ confirm_deletion_txt }}</p>
     <form action="{% url 'pong:delete_account' %}" method="post">
         {% csrf_token %}
-        <button type="submit">Delete Account</button>
-        <a href="{% url 'pong:profile' %}"> No, i've changed my mind</a>
+        <button type="submit">{{ delete_account_txt }}</button>
+        <a href="{% url 'pong:profile' %}"> {{ no_change_txt }}</a>
     </form>
 {% endblock %}

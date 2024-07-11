@@ -6,3 +6,5 @@ __pycache__/
 
 # Ignorer les fichiers d'identification WSL de Windows
 *:Zone.Identifier
+
+./backend/project/.venv/

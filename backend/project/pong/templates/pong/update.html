@@ -1,15 +1,14 @@
-<!-- templates/profile/update.html -->
 {% extends 'pong/base.html' %}
-{% load static %}
+{% load i18n %}
 
 {% block title %}Update Profile{% endblock %}
 
 {% block content %}
-<h1>Update Profile</h1>
+<h1>{{ update_profile_txt }}</h1>
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Update</button>
+    <button type="submit">{{ update_profile_txt }}</button>
 </form>
-<a href="{% url 'pong:profile' %}">Back to Profile</a>
+<a href="{% url 'pong:profile' %}">{{ back_to_profile_txt }}</a>
 {% endblock %}

@@ -1,12 +1,31 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, redirect
+from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse, HttpResponse
 from django.contrib.auth.forms import UserChangeForm, PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
 from io import BytesIO
+from django.utils import translation
+from django.utils.translation import gettext as _
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
 from pong.models import User, Friendship
+from .. import forms
+
+# This view for multilang
+@login_required
+def change_language(request):
+    if request.method == 'POST':
+        form = forms.SetLanguageForm(request.POST)
+        if form.is_valid():
+            user_language = form.cleaned_data['language']
+            translation.activate(user_language)
+            response = redirect('/pong/home')
+            response.set_cookie(settings.LANGUAGE_COOKIE_NAME, user_language)
+            return response
+    else:
+        form = forms.SetLanguageForm()
+    return render(request, 'pong/change_language.html', {'form': form})
 
 #Cette vue affiche le profil de l'utilisateur connecte en rendant la page HTML appropriee
 @login_required
@@ -52,14 +71,6 @@ def user_password_changed(request):
 	else:
 		form = PasswordChangeForm(user=request.user)
 	return render(request, 'pong/change_password.html', {'form': form})
-
-#  This view is causes some trouble on reverse html on success !
-# That is why i have done this ; for now we could use the view below instead
-# @login_required
-# def user_account_deleted(request):
-#     user = request.user
-#     user.delete()
-#     return redirect('pong/home.html')
 
 # Can be changed any time ! Just a simple view linked to a template/form that works
 # Cette vue permet a l'utilisateur connecte de supprimer son compte et de rediriger vers la page d'accueil

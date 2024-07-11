@@ -1,9 +1,10 @@
-    <!-- Menu de navigation -->
-    <div class="navbar">
-        <a href="{% url 'pong:home' %}">Home</a>
-        <a href="{% url 'pong:play' %}">Play</a>
-        <a href="{% url 'pong:profile' %}">Profile</a>
-        <a href="{% url 'pong:logout' %}">Déconnexion</a>
-        <a href="{% url 'pong:user_list' %}">Liste des utilisateurs - test</a>
+{% load i18n %}
 
-    </div>
+<div class="navbar">
+    <a href="{% url 'pong:home' %}">{{ home_txt }}</a>
+    <a href="{% url 'pong:play' %}">{{ play_txt }}</a>
+    <a href="{% url 'pong:profile' %}">{{ profile_txt }}</a>
+    <a href="{% url 'pong:change_language' %}">{{ language_txt }}</a>
+    <a href="{% url 'pong:user_list' %}">{{ user_list_txt }}</a>
+    <a href="{% url 'pong:logout' %}">{{ disconnect_txt }}</a>
+</div>
