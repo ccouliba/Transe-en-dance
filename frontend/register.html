@@ -58,17 +58,17 @@
               </nav>
             <!-- Fin bootstrap navigation-->
 
-{% extends 'pong/base.html' %}
+<!-- {% extends 'pong/base.html' %} -->
 
 <form>
   <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">Email address</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+    <label for="registerInputEmail" class="form-label">Email address</label>
+    <input type="email" class="form-control" id="registerInputEmail" aria-describedby="emailHelp">
+    <div id="emailHelp" class="form-text">We'll never share your email with anyone else 'cept money guys.</div>
   </div>
   <div class="mb-3">
-    <label for="exampleInputPassword1" class="form-label">Password</label>
-    <input type="password" class="form-control" id="exampleInputPassword1">
+    <label for="registerInputPassword" class="form-label">Password</label>
+    <input type="password" class="form-control" id="registerInputPassword">
   </div>
   <div class="mb-3 form-check">
     <input type="checkbox" class="form-check-input" id="exampleCheck1">
@@ -77,32 +77,36 @@
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 
-{% block content %}
-<head>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
-</head>
-{% load i18n %}
+<!-- {% block content %} -->
+<!-- {% load i18n %} -->
 <html>
   <body>
-    <div class="container-md">
+    <div class="container-md position-relative">
       <h1 class="h1 text-center text-uppercase">Pong</h1>
       <div class="position-absolute top-0 start-50 translate-middle-x">
         <br /><br /><br />
         <h2 class="h2 text-center">Register</h2><br />
-        <form class="form" method="post" action="{% url 'pong:register' %}">
+        <form class="form" method="post" action="register.html">
           <!--<input class="form-label" type="hidden" name="csrfmiddlewaretoken" />-->
-          {% csrf_token %}
-          <label for="id_username" data-bs-toggle="tooltip" data-bs-html="true" title="150 characters or fewer. Letters, digits and @/./+/-/_ only.">Username:</label>
-          <input class="form-label" type="text" name="username" maxlength="150" id="id_username" required /><br />
-          <label for="id_email">Email address:</label>
-          <input class="form-label" type="email" name="email" maxlength="254" id="id_email" required /><br />
-          <label for="id_password">Password:</label>
-          <input class="form-label" type="password" name="password" id="id_password" required /><br />
+          <!-- {% csrf_token %} -->
+          <div class="mb-3">
+            <label for="usernameInput" data-bs-toggle="tooltip" data-bs-html="true">Username:</label>
+            <input class="form-label" type="text" name="usernameInput" maxlength="150" id="usernameInput" required />
+            <div id="usernameInputHelp" class="form-text">150 characters or fewer. Letters, digits and @/./+/-/_ only.</div>
+          </div>
+          <div class="mb-3">
+            <label for="id_email">Email address:</label>
+            <input class="form-label" type="email" name="email" maxlength="254" id="id_email" required />
+          </div>
+          <div class="mb-3">
+            <label for="id_password">Password:</label>
+            <input class="form-label" type="password" name="password" id="id_password" required />
+          </div>
           <button class="btn-btn" type="submit">Register</button>
         </form>
         <p>
           <br />
-          If you have an account : <a href="{% url 'pong:login' %}">Login</a>
+          If you have an account : <a href="login.html">Login</a>
         </p>
       </div>
     </div>
