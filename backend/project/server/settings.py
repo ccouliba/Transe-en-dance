@@ -12,7 +12,9 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 import os
 from django.utils.translation import gettext_lazy as _
 from pathlib import Path
-from logstash import LogstashHandler
+# from logstash import LogstashHandler
+from logging import FileHandler, StreamHandler
+# from elasticsearch import RequestsHttpConnection
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 # BASE_DIR = Path(__file__).resolve().parent.parent
@@ -52,7 +54,7 @@ INSTALLED_APPS = [
 	'django.contrib.sessions',
 	'django.contrib.messages',
 	'django.contrib.staticfiles',
-    # 'django_elasticsearch_dsl',
+    'django_elasticsearch_dsl',
     # 'django_elasticsearch_dsl_drf',
 ]
 
@@ -187,26 +189,41 @@ LOGGING = {
     # Defines the dict version for logging config ; Should always be 1 ; another value seems to cause issues
     'version': 1,
     'disable_existing_loggers': False, # ?q= false -> not activated
-    'formateurs': {
-        'simple': {
+    'formatters': {
+        'verbose': {
             'format': '[%(asctime)s]::[%(levelname)s]::| [%(funcName)s]::[%(name)s]=> %(message)s',
             'datefmt': '%Y/%m/%d %H:%M:%S',
         }
     },
+    
     'handlers': {
-        'logger': {
-            'class': 'logging.handlers.RotatingFileHandler', # logstash.TCPLogstashHandler
+        'file': {
             'level': 'DEBUG',
-            'filename': BASE_DIR + '/logs/pong.log',
-            'formatter': 'simple',
-            'port': 5959,
+            'class': 'logging.FileHandler',
+            'filename': '../project/logs/debug.log',
+        },
+        'console': {
+            'class': 'logging.StreamHandler',
         },
     },
+    
     'loggers': {
-        'signal': {
-            'handlers': ['logger'],
+        'django.request': {
+            'handlers': ['file', 'console'],
             'level': 'DEBUG',
-            # 'propagate': True, # If logs should be propagte to parent logs
+            'propagate': False, # If logs should be propagte to parent logs
         },
+    },
+}
+
+## FOR ELASTICSEARCH APP 
+
+ELASTICSEARCH_DSL = {
+    'default': {
+        'hosts': 'https://localhost:9200',
+        # 'http_auth': ('user', 'password'),
+        # 'use_ssl': True,
+        # 'verify_certs': True,
+        # 'connection_class': RequestsHttpConnection,
     },
 }

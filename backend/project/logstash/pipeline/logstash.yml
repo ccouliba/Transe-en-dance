@@ -1,6 +1,0 @@
-# Every interfaces should be listened
-http.host: "0.0.0.0" 
-# Active le monitoring de Logstash par X-Pack (qui est intégré à la suite Elastic).
-# xpack.monitoring.enabled: true
-# Define host and Elasticsearch port in order to store monitoring data in logstash
-xpack.monitoring.elasticsearch.hosts: [ "http://elasticsearch:9200" ]

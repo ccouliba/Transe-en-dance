@@ -57,7 +57,7 @@ services:
     volumes:
       - ./logstash/pipeline:/usr/share/logstash/pipeline
     ports:
-      - "5000:5000"
+      - "5959:5959"
     depends_on:
       - elasticsearch
     networks:
