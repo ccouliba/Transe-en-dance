@@ -1,12 +1,13 @@
+
+// Declare un objet 'profileState' pour stocker les informations du profil utilisateur
 var profileState = {
 	username:"",
 	email:"",
 	firstname:"",
 	lastname:"",
 	id:"",
-	friends: ["toto", "titi", "tata"],
-	// friends: [],
-	isLoaded:false
+	friends: [],
+	isLoaded:false  // indique si les donnees du profil ont ete chargees (initialement faux)
 }
 
 
@@ -247,9 +248,8 @@ async function loadProfileFromBackend(){
 	}).then(response => {
 		return response.json()//transformer mon json en objet js (y'a le username a l'interieur)
 	}).then(profile => { //promesse
-		profileState.username = profile.username
-		
-		profileState = {...profileState, ...profile}
+		// profileState.username = profile.username
+		profileState = {...profileState, ...profile}// utilisation d'un spread operator. Cree un nouvel objet profileState en combinant deux objets existants
 	
 		mountComponent(Profile) //ce qui provoque la boucle infinie 
 		profileState.isLoaded = true
@@ -261,8 +261,13 @@ async function loadProfileFromBackend(){
 
 function Profile() {
 
+	// Charge les donnees du profil depuis le backend
 	loadProfileFromBackend() //get
 
+	// Retourne une chaine de caracteres contenant le HTML du composant Profile :
+	// - inclut le menu de navigation
+	// - affiche les informations du profil en utilisant les donnees de profileState
+	// - sections pour modifier les informations du profil
 	return `
 		${Menu()}
 		<div class="container mt-5">
