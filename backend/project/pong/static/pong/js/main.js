@@ -8,11 +8,13 @@
 // 	document.getElementsByTagName('head')[0].appendChild(link);
 // }
 
-
 // Appel de la fonction pour charger le CSS
 //loadCSS("{% static 'pong/css/style.css' %}"); 
 
+
 // Cette fonction attache un evenement a un element DOM de maniere asynchrone
+// Pourquoi ? car addEventListener fonctionne sur des elements deja presents dans le DOM
+// Il gere les cas ou l'element n'existe pas encore dans le DOM 
 function bindEvent(state, cssSelector, event, callback){
    
 	// Recherche l'element DOM correspondant au selecteur CSS
@@ -55,7 +57,6 @@ let routes = {
 	"#profile": () => mountComponent(Profile),
 	"#friends": () => mountComponent(FriendsList),
 	"#404":() => mountComponent(Page404)
-	
 	// login: () => mountComponent(Login),
 };
 
@@ -82,14 +83,13 @@ window.onpopstate = function(event) {
 	if (routes[page]) {
 		routes[page](); // Appeler la fonction appropriée pour monter le composant
 	} else {
-		mountComponent(Page404); 
-		// routes[Page404](); // Si la route n'existe pas, afficher la page 404
+		mountComponent(Page404); // Si la route n'existe pas, afficher la page 404
 	}
 };
 
 // Fonction pour monter un composant
 function mountComponent(componentFunction, data) {
-	// Fonction pour charger un composant dans le div app
+	// Fonction pour charger un composant dans le div app qui se trouve dans base.html
 	document.getElementById("app").innerHTML = componentFunction(data);
 }
 
