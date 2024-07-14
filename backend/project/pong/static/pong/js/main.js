@@ -63,8 +63,9 @@ let routes = {
 
 // Fonction pour changer de page
 window.changePage = function (url) {
-
-	//resetLoaded()
+	if (url === "#play") {
+		playState.isLoaded = false;
+	  }
 	if (typeof routes[url] === "undefined") {
 		mountComponent(Page404)
 		history.pushState({ page: "#404" }, "", "#404"); // Ajoute à l'historique

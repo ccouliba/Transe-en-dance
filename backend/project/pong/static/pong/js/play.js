@@ -14,7 +14,7 @@ const PADDLE_WIDTH = 10;
 const BALL_SIZE = 10;
 const CANVAS_HEIGHT = 400;
 const CANVAS_WIDTH = 600;
-const WINNING_SCORE = 10; //A CHANGER OU PAS
+const WINNING_SCORE = 1; //A CHANGER OU PAS
 
 let paddle1Y = (CANVAS_HEIGHT - PADDLE_HEIGHT) / 2;
 let paddle2Y = (CANVAS_HEIGHT - PADDLE_HEIGHT) / 2;
@@ -24,6 +24,10 @@ let ballSpeedX = 5;
 let ballSpeedY = 2;
 
 function Play() {
+	if (playState.gameOver || !playState.isLoaded) {
+		playState.isLoaded = false;
+	}
+
 	if (!playState.isLoaded) {
 		loadPlayState();
 	}
@@ -119,6 +123,7 @@ function startGame(event) {
 	playState.player2Score = 0;    // Reinitialise le score du joueur 2
 	playState.gameOver = false;    // S'assure que l'etat de fin de jeu est false
 
+	playState.isLoaded = false; 
 	// Cree une nouvelle partie dans la base de donnees
 	createGameInDatabase();
 
@@ -309,6 +314,7 @@ function endGame() {
 	})
 	.then(response => response.json())
 	.then(data => {
+		playState.isLoaded = false; // Forcer le rechargement pour la prochaine partie
 		mountComponent(Play);
 	})
 	.catch(error => console.error('Error:', error));
