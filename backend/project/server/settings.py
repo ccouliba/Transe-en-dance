@@ -204,12 +204,14 @@ LOGGING = {
         },
         'console': {
             'class': 'logging.StreamHandler',
+            'stream': 'sys.stdout'
         },
     },
     
     'loggers': {
         'django.request': {
             'handlers': ['file', 'console'],
+            # 'handlers': ['console'],
             'level': 'DEBUG',
             'propagate': False, # If logs should be propagte to parent logs
         },
@@ -220,7 +222,7 @@ LOGGING = {
 
 ELASTICSEARCH_DSL = {
     'default': {
-        'hosts': 'https://localhost:9200',
+        'hosts': 'http://elasticsearch:9200',
         # 'http_auth': ('user', 'password'),
         # 'use_ssl': True,
         # 'verify_certs': True,
