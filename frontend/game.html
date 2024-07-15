@@ -1,216 +1,225 @@
 <!DOCTYPE html>
 <html lang="en">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script><!--Debut bootstrap navigation-->
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <div class="container-fluid">
-                    <a class="navbar-brand" href="base.html">Navbar (click me to go to base.html)</a>
-                  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                  </button>
-                  <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
-                      <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="change_language.html">Language</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="change_password.html">Password</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="delete_account.html">Removal</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="game.html">Game</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="home.html">Home</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="index.html">Index</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="login.html">Login</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="menu.html">Menu</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="play.html">Play</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="profile.html">Profile</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="register.html">Register</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="user_list.html">User list</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a> <!-- possibilite de rendre le bouton desactive selon l'etat du user (enrengistre ou pas, ect)-->
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </nav>
-            <!-- Fin bootstrap navigation-->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+  integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="assets/css/TrajanPro.css">
+	<link rel="stylesheet" href="assets/css/styles.css">
 
-<title>Play</title>
+  <!--Debut bootstrap navigation-->
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<div class="container-fluid">
+				<a class="navbar-brand" href="base.html" id="navbarHomeLink">Home</a>
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar"
+					aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbar">
+					<ul class="navbar-nav">
+						<li class="nav-item">
+							<a class="nav-link active" aria-current="page" href="profile.html"
+								id="navbarProfileLink">Profile</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link active" aria-current="page" href="change_language.html"
+								id="navbarLanguageLink">Language</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link active" aria-current="page" href="change_password.html"
+								id="navbarPasswordLink">Password</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link active" aria-current="page" href="delete_account.html"
+								id="navbarRemovalLink">Removal</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link active" aria-current="page" href="game.html" id="navbarGameLink">Game</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link active" aria-current="page" href="index.html"
+								id="navbarIndexLink">Index</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link active" aria-current="page" href="login.html"
+								id="navbarLoginLink">Login</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link active" aria-current="page" href="menu.html" id="navbarMenuLink">Menu</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link active" aria-current="page" href="register.html"
+								id="navbarRegisterLink">Register</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true"
+								id="navbarDisabled">Disabled</a>
+							<!-- possibilite de rendre le bouton desactive selon l'etat du user (enrengistre ou pas, ect)-->
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<!-- Fin bootstrap navigation-->
 
-    <div id="game-container" >
-        <canvas id="pong-canvas" width="800" height="400"></canvas>
-        <div id="controls">
-            <button id="start-game" class="btn btn-secondary">Start game</button>
-            <button id="stop-game" class="btn btn-secondary">Stop game</button>
-        </div>
-    </div>
+<title id="gameTitle">Play</title>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const canvas = document.getElementById('pong-canvas');
-            const ctx = canvas.getContext('2d');
-            const startGameBtn = document.getElementById('start-game');
-            const stopGameBtn = document.getElementById('stop-game');
+<div id="game-container">
+  <canvas id="pong-canvas" width="800" height="400"></canvas>
+  <div id="controls">
+    <button id="start-game" class="btn btn-secondary">Start game</button>
+    <button id="stop-game" class="btn btn-secondary">Stop game</button>
+  </div>
+</div>
 
-            const paddleWidth = 10, paddleHeight = 100, ballSize = 10;
-            let ballX = canvas.width / 2, ballY = canvas.height / 2, ballSpeedX = 5, ballSpeedY = 5;
-            let paddle1Y = (canvas.height - paddleHeight) / 2;
-            let paddle2Y = (canvas.height - paddleHeight) / 2;
-            let upPressed = false;
-            let downPressed = false;
-            let gameId = null;
-            let player1Score = 0;
-            let player2Score = 0;
-            let gameRunning = false;
-            let animationFrameId;
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const canvas = document.getElementById('pong-canvas');
+    const ctx = canvas.getContext('2d');
+    const startGameBtn = document.getElementById('start-game');
+    const stopGameBtn = document.getElementById('stop-game');
 
-            startGameBtn.addEventListener('click', () => {
-                startGame();
-            });
+    const paddleWidth = 10, paddleHeight = 100, ballSize = 10;
+    let ballX = canvas.width / 2, ballY = canvas.height / 2, ballSpeedX = 5, ballSpeedY = 5;
+    let paddle1Y = (canvas.height - paddleHeight) / 2;
+    let paddle2Y = (canvas.height - paddleHeight) / 2;
+    let upPressed = false;
+    let downPressed = false;
+    let gameId = null;
+    let player1Score = 0;changePass
+    let player2Score = 0;
+    let gameRunning = false;
+    let animationFrameId;
 
-            stopGameBtn.addEventListener('click', () => {
-                stopGame();
-            });
+    startGameBtn.addEventListener('click', () => {
+      startGame();
+    });
 
-            document.addEventListener('keydown', (event) => {
-                if (event.key === 'ArrowUp') {
-                    upPressed = true;
-                } else if (event.key === 'ArrowDown') {
-                    downPressed = true;
-                }
-            });
+    stopGameBtn.addEventListener('click', () => {
+      stopGame();
+    });
 
-            document.addEventListener('keyup', (event) => {
-                if (event.key === 'ArrowUp') {
-                    upPressed = false;
-                } else if (event.key === 'ArrowDown') {
-                    downPressed = false;
-                }
-            });
+    document.addEventListener('keydown',changePass (event) => {
+      if (event.key === 'ArrowUp') {
+        upPressed = true;
+      } else if (event.key === 'ArrowDown') {
+        downPressed = true;
+      }
+    });
 
-            function startGame() {
-                fetch('/pong/start_game/', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRFToken': getCookie('csrftoken')
-                    },
-                    body: JSON.stringify({
-                        opponent_id: 2  // Remplacez par l'ID de l'adversaire
-                    })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    gameId = data.game_id;
-                    console.log('Game started with ID:', gameId);
-                    // Commencez le jeu ici (affichez les scores, etc.)
-                    gameRunning = true;
-                    startPongGame();
-                });
-            }
+    document.addEventListener('keyup', (event) => {
+      if (event.key === 'ArrowUp') {
+        upPressed = false;
+      } else if (event.key === 'ArrowDown') {
+        downPressed = false;
+      }changePass
+    });
 
-            function stopGame() {
-                gameRunning = false;
-                cancelAnimationFrame(animationFrameId);
-                console.log('Game stopped');
-            }
-
-            function getCookie(name) {
-                let cookieValue = null;
-                if (document.cookie && document.cookie !== '') {
-                    const cookies = document.cookie.split(';');
-                    for (let i = 0; i < cookies.length; i++) {
-                        const cookie = cookies[i].trim();
-                        if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                            break;
-                        }
-                    }
-                }
-                return cookieValue;
-            }
-
-            function startPongGame() {
-                function draw() {
-                    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-                    // Dessiner les paddles
-                    ctx.fillRect(0, paddle1Y, paddleWidth, paddleHeight);
-                    ctx.fillRect(canvas.width - paddleWidth, paddle2Y, paddleWidth, paddleHeight);
-
-                    // Dessiner la balle
-                    ctx.fillRect(ballX, ballY, ballSize, ballSize);
-                }
-
-                function update() {
-                    if (!gameRunning) return;
-
-                    // Deplacer la balle
-                    ballX += ballSpeedX;
-                    ballY += ballSpeedY;
-
-                    // Collision avec les murs
-                    if (ballY <= 0 || ballY + ballSize >= canvas.height) {
-                        ballSpeedY = -ballSpeedY;
-                    }
-
-                    if (ballX <= 0) {
-                        player2Score++;
-                        resetBall();
-                    } else if (ballX + ballSize >= canvas.width) {
-                        player1Score++;
-                        resetBall();
-                    }
-
-                    // Collision avec les paddles
-                    if (ballX <= paddleWidth && ballY >= paddle1Y && ballY <= paddle1Y + paddleHeight) {
-                        ballSpeedX = -ballSpeedX;
-                    } else if (ballX + ballSize >= canvas.width - paddleWidth && ballY >= paddle2Y && ballY <= paddle2Y + paddleHeight) {
-                        ballSpeedX = -ballSpeedX;
-                    }
-
-                    // Mouvement des paddles
-                    if (upPressed && paddle1Y > 0) {
-                        paddle1Y -= 5;
-                    }
-                    if (downPressed && paddle1Y < canvas.height - paddleHeight) {
-                        paddle1Y += 5;
-                    }
-                }
-
-                function resetBall() {
-                    ballX = canvas.width / 2;
-                    ballY = canvas.height / 2;
-                    ballSpeedX = -ballSpeedX;
-                }
-
-                function gameLoop() {
-                    draw();
-                    update();
-                    animationFrameId = requestAnimationFrame(gameLoop);
-                }
-
-                gameLoop();
-            }
+    function startGame() {
+      fetch('/pong/start_game/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': getCookie('csrftoken')
+        },
+        body: JSON.stringify({
+          opponent_id: 2  // Remplacez par l'ID de l'adversaire
+        })
+      })
+        .then(response => response.json())
+        .then(data => {
+          gameId = data.game_id;changePass
+          console.log('Game started with ID:', gameId);
+          // Commencez le jeu ici (affichez les scores, etc.)
+          gameRunning = true;
+          startPongGame();
         });
-    </script>
+    }
+
+    function stopGame() {
+      gameRunning = false;
+      cancelAnimationFrame(animationFrameId);
+      console.log('Game stopped');
+    }
+
+    function getCookie(name) {
+      let cookieValue = null;
+      if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+          const cookie = cookies[i].trim();
+          if (cookie.substring(0, name.length + 1) === (name + '=')) {
+            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+            break;
+          }
+        }
+      }
+      return cookieValue;
+    }
+
+    function startPongGame() {
+      function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Dessiner les paddles
+        ctx.fillRect(0, paddle1Y, paddleWidth, paddleHeight);
+        ctx.fillRect(canvas.width - paddleWidth, paddle2Y, paddleWidth, paddleHeight);
+
+        // Dessiner la balle
+        ctx.fillRect(ballX, ballY, ballSize, ballSize);
+      }
+
+      function update() {
+        if (!gameRunning) return;
+
+        // Deplacer la balle
+        ballX += ballSpeedX;
+        ballY += ballSpeedY;
+
+        // Collision avec les murs
+        if (ballY <= 0 || ballY + ballSize >= canvas.height) {
+          ballSpeedY = -ballSpeedY;
+        }
+
+        if (ballX <= 0) {
+          player2Score++;
+          resetBall();
+        } else if (ballX + ballSize >= canvas.width) {
+          player1Score++;
+          resetBall();
+        }
+
+        // Collision avec les paddles
+        if (ballX <= paddleWidth && ballY >= paddle1Y && ballY <= paddle1Y + paddleHeight) {
+          ballSpeedX = -ballSpeedX;
+        } else if (ballX + ballSize >= canvas.width - paddleWidth && ballY >= paddle2Y && ballY <= paddle2Y + paddleHeight) {
+          ballSpeedX = -ballSpeedX;
+        }
+
+        // Mouvement des paddles
+        if (upPressed && paddle1Y > 0) {
+          paddle1Y -= 5;
+        }
+        if (downPressed && paddle1Y < canvas.height - paddleHeight) {
+          paddle1Y += 5;
+        }
+      }
+
+      function resetBall() {
+        ballX = canvas.width / 2;
+        ballY = canvas.height / 2;
+        ballSpeedX = -ballSpeedX;
+      }
+
+      function gameLoop() {
+        draw();
+        update();
+        animationFrameId = requestAnimationFrame(gameLoop);
+      }
+
+      gameLoop();
+    }
+  });
+</script>
+<canvas id="background"></canvas>
+<script src="assets/js/background.js"></script>

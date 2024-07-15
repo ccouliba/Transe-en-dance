@@ -12,7 +12,9 @@
 
 <body><span>{% load static %} </span>
     <nav class="navbar navbar-expand-md text-center menuButton">
-        <div class="container-fluid"><a class="navbar-brand" href="#">Navigation</a><button data-bs-toggle="collapse" data-bs-target="#navcol-1" class="navbar-toggler"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+        <div class="container-fluid"><a class="navbar-brand" href="#">Navigation</a><button data-bs-toggle="collapse"
+                data-bs-target="#navcol-1" class="navbar-toggler"><span class="visually-hidden">Toggle
+                    navigation</span><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="navbar-nav">
                     <li class="nav-item"><a class="nav-link" href="play.html">Play</a></li>
@@ -23,7 +25,9 @@
         </div>
     </nav>
     <header>
-        <h1 class="pong-title">PONG</h1><span> {% block user_navigation %} {% if user.is_authenticated %} {% include 'pong/menu.html' %} {% else %} </span><a href="{% url 'pong:index' %}"></a><span> {% endif %} {% endblock %} </span>
+        <h1 class="pong-title">PONG</h1><span> {% block user_navigation %} {% if user.is_authenticated %} {% include
+            'pong/menu.html' %} {% else %} </span><a href="{% url 'pong:index' %}"></a><span> {% endif %} {% endblock %}
+        </span>
     </header>
     <main><span> {% block content %} {% endblock %} </span></main>
     <footer>
