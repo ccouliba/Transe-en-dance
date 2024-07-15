@@ -56,7 +56,8 @@ let routes = {
 	"#play": () => mountComponent(Play),
 	"#profile": () => mountComponent(Profile),
 	"#friends": () => mountComponent(FriendsList),
-	"#404":() => mountComponent(Page404)
+	"#404":() => mountComponent(Page404),
+	"#tournament":() => mountComponent(Tournament)
 	// login: () => mountComponent(Login),
 };
 

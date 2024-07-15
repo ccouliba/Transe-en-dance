@@ -3,10 +3,15 @@ from .views.auth_views import register_view, login_view, logout_view, auth_callb
 # from .views.game_views import play, start_game, update_score, finish_game, cancel_game, game
 from .views.game_views import create_game, update_game
 from .views.friend_views import send_friend_request, accept_friend_request, remove_friend, friends_data
-from .views.tournament_views import create_tournament, player_joined_tournament, start_tournament, finish_tournament, cancel_tournament
 from .views.profile_views import profile_view, user_updated_profile, user_password_changed, user_account_deleted, get_user_info, profile_update_view
 from .views.user_views import user_list_json, user_list, index, home_view
-
+# from .views.tournament_views import (
+# 	create_tournament, get_tournament_state, register_player,
+# 	start_tournament, end_tournament_match, finish_tournament, cancel_tournament
+# )
+from .views.tournament_views import (
+	get_tournament_state, register_player,
+)
 app_name = 'pong'  # definir le namespace
 
 urlpatterns = [
@@ -26,11 +31,11 @@ urlpatterns = [
 	# path('refuse_friend_request/', refuse_friend_request, name='refuse_friend_request'),
 	# path('remove_friend_request/', remove_friend_request, name='remove_friend_request'),
 	# path('unfriend/', unfriend, name='unfriend'),
-	path('create_tournament/', create_tournament, name='create_tournament'),
-	path('player_joined_tournament/', player_joined_tournament, name='player_joined_tournament'),
-	path('start_tournament/', start_tournament, name='start_tournament'),
-	path('finish_tournament/', finish_tournament, name='finish_tournament'),
-	path('cancel_tournament/', cancel_tournament, name='cancel_tournament'),
+	# path('create_tournament/', create_tournament, name='create_tournament'),
+	# path('player_joined_tournament/', player_joined_tournament, name='player_joined_tournament'),
+	# path('start_tournament/', start_tournament, name='start_tournament'),
+	# path('finish_tournament/', finish_tournament, name='finish_tournament'),
+	# path('cancel_tournament/', cancel_tournament, name='cancel_tournament'),
 	path('update_profile/', user_updated_profile, name='update_profile'),
 	path('change_password/', user_password_changed, name='change_password'),
 	path('delete_account/', user_account_deleted, name='delete_account'),
@@ -52,5 +57,13 @@ urlpatterns = [
  
  
 	path('api/games/create', create_game, name='create_game'),
-	path('api/games/<int:game_id>/update', update_game, name='update_game')
+	path('api/games/<int:game_id>/update', update_game, name='update_game'),
+ 
+	# path('api/tournament/create', create_tournament, name='create_tournament'),
+	path('api/tournament/state', get_tournament_state, name='get_tournament_state'),
+	path('api/tournament/register', register_player, name='register_player'),
+	# path('api/tournament/start', start_tournament, name='start_tournament'),
+	# path('api/tournament/endmatch', end_tournament_match, name='end_tournament_match'),
+	# path('api/tournament/finish', finish_tournament, name='finish_tournament'),
+	# path('api/tournament/cancel', cancel_tournament, name='cancel_tournament'),
 ]

@@ -14,7 +14,7 @@ const PADDLE_WIDTH = 10;
 const BALL_SIZE = 10;
 const CANVAS_HEIGHT = 400;
 const CANVAS_WIDTH = 600;
-const WINNING_SCORE = 1; //A CHANGER OU PAS
+const WINNING_SCORE = 5; //A CHANGER OU PAS
 
 let paddle1Y = (CANVAS_HEIGHT - PADDLE_HEIGHT) / 2;
 let paddle2Y = (CANVAS_HEIGHT - PADDLE_HEIGHT) / 2;
@@ -296,10 +296,34 @@ function initializeGame() //appelee apres que le DOM soit charge et que le canva
 	update();
 }
 
+// function endGame() {
+// 	playState.gameOver = true;
+// 	const winner = playState.player1Score > playState.player2Score ? playState.player1Email : playState.player2Email;
+	
+// 	fetch(`/pong/api/games/${playState.gameId}/update`, {
+// 		method: 'POST',
+// 		headers: {
+// 			'Content-Type': 'application/json',
+// 		},
+// 		body: JSON.stringify({
+// 			player1Score: playState.player1Score,
+// 			player2Score: playState.player2Score,
+// 			winner: winner
+// 		}),
+// 		credentials: 'include'
+// 	})
+// 	.then(response => response.json())
+// 	.then(data => {
+// 		playState.isLoaded = false; // Forcer le rechargement pour la prochaine partie
+// 		mountComponent(Play);
+// 	})
+// 	.catch(error => console.error('Error:', error));
+// }
+
 function endGame() {
 	playState.gameOver = true;
 	const winner = playState.player1Score > playState.player2Score ? playState.player1Email : playState.player2Email;
-	
+   
 	fetch(`/pong/api/games/${playState.gameId}/update`, {
 		method: 'POST',
 		headers: {
@@ -314,9 +338,8 @@ function endGame() {
 	})
 	.then(response => response.json())
 	.then(data => {
-		playState.isLoaded = false; // Forcer le rechargement pour la prochaine partie
-		mountComponent(Play);
+		playState.isLoaded = false;
+		notifyTournamentEnd();
 	})
 	.catch(error => console.error('Error:', error));
 }
-
