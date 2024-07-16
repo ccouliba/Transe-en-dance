@@ -16,42 +16,48 @@ body, html {
   overflow: auto;
   height: 100%;
   width: 100%;
-  background: rgb(42, 0, 6);
+  background: rgb(42, 0, 0);
   position: relative;
   font-family: 'Trajan Pro', sans-serif;
-  /* border: 0.1px solid #ff4500; */
-  color: rgb(172, 171, 176);
-  background-image: linear-gradient(to top, rgb(38,8,16), rgb(101,19,21));
+  color: rgb(200, 200, 200);
+  background-image: linear-gradient(to top, rgb(42,0,0), rgb(100,20,20));
 }
 
 #profilePage {
-  color: rgb(114, 116, 115);
-  background-color: rgba(33,32,37,150);
-  background-image: linear-gradient(to top, rgb(28,30,31) 80%, rgb(43,52,80));
+  color: rgb(115, 115, 115);
+  background-color: rgba(30,30,30);
+  background-image: linear-gradient(to top, rgb(30,30,30) 80%, rgb(42,50,80));
 }
 
 #profileValue {
-  color: rgb(219, 247, 144);
+  color: rgb(220, 250, 145);
 }
 
 #profileUsernameHeader {
-  color: rgb(98,139,181);
+  color: rgb(100,140,180);
+}
+
+#registerUsernameInputHelp {
+  color: rgb(145, 142, 112);
 }
 
 .navbar-custom {
-  background-color: rgb(11,12,16);
+  background-color: slategray;
+  background-image: linear-gradient(to left, rgb(30,30,30) 80%, rgb(70, 70, 85));
+  /* Pour plus tard couleur du hover d'un bouton */
+  /* background-image: radial-gradient(closest-side at 10%,rgb(252,205,98), rgb(196,73,46));  */
 }
 
 .navbar-custom .navbar-brand {
-  color: rgb(131, 123, 118)
+  color: rgb(160, 150, 140)
 }
 
 .navbar-custom .navbar-text {
-  color: rgb(94, 92, 72);
+  color: rgb(100, 90, 70);
 }
 
 #languageSelector {
-  background-color: rgb(42, 43, 48);
+  background-color: rgb(42, 42, 50);
   color: white;
 }
 
@@ -59,49 +65,12 @@ body, html {
   color: grey;
 }
 
-.nav-link active {
-  color: black;
-}
-
-.playButton {
-  position: relative;
-  top: 10px;
-  right: 10px;
-  font-size: 12px;
-  padding: 5px 10px;
-  cursor: pointer;
-  border: none;
-  background-color: #333;
-  color: white;
-  border-radius: 5px;
-  z-index: 100;
-}
-
-#menu {
-  position: relative;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  color: transparent;
-  z-index: 10;
-}
-
-#menu h1 {
-  font-size: 3em;
-  font-family: 'Trajan Pro', sans-serif;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  margin-bottom: 20px;
-}
-
-#menu ul {
-  list-style: none;
-  padding: 0;
+.navbar-custom .navbar-text .nav-link .active {
+  color: gold;
 }
 
 .menuStructureTop {
-background-color: rgb(42, 43, 48);
+background-color: rgb(42, 42, 50);
 }
 
 .menuButton {
@@ -117,45 +86,6 @@ background-color: rgb(42, 43, 48);
   transition: all 0.3s ease;
 }
 
-.menuButton:hover {
-  background-color: #ff4500;
-  color: black;
-}
-
 .hidden {
   display: none;
 }
-
-#levelSelection {
-  margin-top: 20px;
-}
-
-#levelSelection h2 {
-  font-family: 'Trajan Pro', sans-serif;
-  font-size: 1.5em;
-  margin-bottom: 10px;
-}
-
-#levelSelection button {
-  font-family: 'Trajan Pro', sans-serif;
-  font-size: 1.5em;
-  padding: 10px 20px;
-  cursor: pointer;
-  border: 2px solid #ff4500;
-  background-color: transparent;
-  color: white;
-  margin: 10px;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-#levelSelection button:hover {
-  background-color: #ff4500;
-  color: black;
-}
-
-/* canvas {
-  position: absolute;
-  top: 0;
-  left: 0;
-}
- */
