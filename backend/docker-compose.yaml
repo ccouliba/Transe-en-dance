@@ -25,7 +25,7 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     ports:
-      - 5433:5432
+      - 5432:5432
     environment:
       - POSTGRES_USER=ccouliba
       - POSTGRES_PASSWORD=password
@@ -40,8 +40,8 @@ services:
     container_name: elasticsearch
     image: docker.elastic.co/elasticsearch/elasticsearch:8.3.1
     environment:
-      - xpack.security.enabled=false #for anonymous request
       - discovery.type=single-node #for development mode
+      - xpack.security.enabled=false #for anonymous request
     ports: #several ports
       - "9200:9200"
       - "9300:9300"
@@ -53,7 +53,7 @@ services:
   # Logstash is a server-side data processing pipeline
   logstash:
     container_name: logstash
-    image: docker.elastic.co/logstash/logstash:7.17.1
+    image: docker.elastic.co/logstash/logstash:8.3.1
     volumes:
       - ./logstash/pipeline:/usr/share/logstash/pipeline
     ports:
@@ -66,7 +66,7 @@ services:
   # Kibana is used for data visualization
   kibana:
     container_name: kibana
-    image: docker.elastic.co/kibana/kibana:7.17.1
+    image: docker.elastic.co/kibana/kibana:8.3.1
     ports:
       - "5601:5601"
     depends_on:

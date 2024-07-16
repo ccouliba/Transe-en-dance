@@ -75,6 +75,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'logstash.middleware.LogMiddleware.UserLoginMiddleware',
+    'logstash.middleware.LogMiddleware.UserRegistrationMiddleware', 
 ]
 
 ROOT_URLCONF = 'server.urls'
@@ -190,30 +192,34 @@ LOGGING = {
     'version': 1,
     'disable_existing_loggers': False, # ?q= false -> not activated
     'formatters': {
-        'verbose': {
-            'format': '[%(asctime)s]::[%(levelname)s]::| [%(funcName)s]::[%(name)s]=> %(message)s',
-            'datefmt': '%Y/%m/%d %H:%M:%S',
-        }
+        # 'verbose': {
+        #     'format': '[%(asctime)s]::[%(levelname)s]::| [%(funcName)s]::[%(name)s]=> %(message)s',
+        #     'datefmt': '%Y/%m/%d %H:%M:%S',
+        # },
+        'simple': {
+            'format': '[%(levelname)s] => %(message)s',
+        },
     },
     
     'handlers': {
         'file': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
-            'filename': '../project/logs/debug.log',
-        },
-        'console': {
-            'class': 'logging.StreamHandler',
-            'stream': 'sys.stdout'
+            'filename': '../project/logs/pong.log',
+            'formatter': 'simple',
         },
     },
     
     'loggers': {
-        'django.request': {
-            'handlers': ['file', 'console'],
-            # 'handlers': ['console'],
+        'pong': {
+            'handlers': ['file'],
+            'level': 'INFO',
+            'propagate': True, # If logs should be propagte to parent logs
+        },
+        'django.db.backends': {
+            'handlers': ['file'],
             'level': 'DEBUG',
-            'propagate': False, # If logs should be propagte to parent logs
+            'propagate': True,
         },
     },
 }
@@ -226,6 +232,6 @@ ELASTICSEARCH_DSL = {
         # 'http_auth': ('user', 'password'),
         # 'use_ssl': True,
         # 'verify_certs': True,
-        # 'connection_class': RequestsHttpConnection,
+        # 'connection_class': 'RequestsHttpConnection',
     },
 }

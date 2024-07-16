@@ -3,7 +3,7 @@ include ./.utils/.ANSI_color.txt
 BUILD	= docker-compose build
 # FLUSH	= docker-compose exec server python manage.py flush --no-input
 MIGRATE	= docker-compose exec web python3 manage.py migrate
-RUN		= docker-compose up
+RUN		= docker-compose up # without the flag '-d', you should see in verbose server running
 DOWN	= docker-compose down
 DOWN_ALL= docker-compose down -v
 PRUNE	= docker system prune -af

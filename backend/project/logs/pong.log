@@ -1,0 +1,103 @@
+[DEBUG] => (0.005) 
+            SELECT
+                c.relname,
+                CASE
+                    WHEN c.relispartition THEN 'p'
+                    WHEN c.relkind IN ('m', 'v') THEN 'v'
+                    ELSE 't'
+                END,
+                obj_description(c.oid, 'pg_class')
+            FROM pg_catalog.pg_class c
+            LEFT JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace
+            WHERE c.relkind IN ('f', 'm', 'p', 'r', 'v')
+                AND n.nspname NOT IN ('pg_catalog', 'pg_toast')
+                AND pg_catalog.pg_table_is_visible(c.oid)
+        ; args=None; alias=default
+[DEBUG] => (0.001) SELECT "django_migrations"."id", "django_migrations"."app", "django_migrations"."name", "django_migrations"."applied" FROM "django_migrations"; args=(); alias=default
+[DEBUG] => (0.007) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2024-07-16T18:13:46.750549+00:00'::timestamptz AND "django_session"."session_key" = 'qbwp8fr2kjtdg8jd3qbbaciqsri63g8n') LIMIT 21; args=(datetime.datetime(2024, 7, 16, 18, 13, 46, 750549, tzinfo=datetime.timezone.utc), 'qbwp8fr2kjtdg8jd3qbbaciqsri63g8n'); alias=default
+[DEBUG] => (0.002) SELECT "pong_user"."id", "pong_user"."password", "pong_user"."last_login", "pong_user"."is_superuser", "pong_user"."username", "pong_user"."first_name", "pong_user"."last_name", "pong_user"."email", "pong_user"."is_staff", "pong_user"."is_active", "pong_user"."date_joined", "pong_user"."creation_date", "pong_user"."langue", "pong_user"."avatar" FROM "pong_user" WHERE "pong_user"."id" = 2 LIMIT 21; args=(2,); alias=default
+[DEBUG] => (0.000) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE "django_session"."session_key" = 'qbwp8fr2kjtdg8jd3qbbaciqsri63g8n' LIMIT 21; args=('qbwp8fr2kjtdg8jd3qbbaciqsri63g8n',); alias=default
+[DEBUG] => (0.000) BEGIN; args=None; alias=default
+[DEBUG] => (0.000) DELETE FROM "django_session" WHERE "django_session"."session_key" IN ('qbwp8fr2kjtdg8jd3qbbaciqsri63g8n'); args=('qbwp8fr2kjtdg8jd3qbbaciqsri63g8n',); alias=default
+[DEBUG] => (0.000) COMMIT; args=None; alias=default
+[DEBUG] => (0.001) SELECT "pong_user"."id", "pong_user"."password", "pong_user"."last_login", "pong_user"."is_superuser", "pong_user"."username", "pong_user"."first_name", "pong_user"."last_name", "pong_user"."email", "pong_user"."is_staff", "pong_user"."is_active", "pong_user"."date_joined", "pong_user"."creation_date", "pong_user"."langue", "pong_user"."avatar" FROM "pong_user" WHERE "pong_user"."username" = 'cc' LIMIT 21; args=('cc',); alias=default
+[DEBUG] => (0.000) SELECT "pong_user"."id", "pong_user"."password", "pong_user"."last_login", "pong_user"."is_superuser", "pong_user"."username", "pong_user"."first_name", "pong_user"."last_name", "pong_user"."email", "pong_user"."is_staff", "pong_user"."is_active", "pong_user"."date_joined", "pong_user"."creation_date", "pong_user"."langue", "pong_user"."avatar" FROM "pong_user" WHERE "pong_user"."username" = 'cc' LIMIT 21; args=('cc',); alias=default
+[DEBUG] => (0.000) SELECT 1 AS "a" FROM "django_session" WHERE "django_session"."session_key" = 'wfsozvr3jp8n40wxhu8t6pq1c779m0d2' LIMIT 1; args=(1, 'wfsozvr3jp8n40wxhu8t6pq1c779m0d2'); alias=default
+[DEBUG] => (0.000) BEGIN; args=None; alias=default
+[DEBUG] => (0.016) INSERT INTO "django_session" ("session_key", "session_data", "expire_date") VALUES ('wfsozvr3jp8n40wxhu8t6pq1c779m0d2', 'e30:1sTmgQ:fnN-qgyBrk2ymR2E_nIkF5Z-aBRYfNn2PnwPe-lZ9Gw', '2024-07-30T18:13:50.588776+00:00'::timestamptz); args=('wfsozvr3jp8n40wxhu8t6pq1c779m0d2', 'e30:1sTmgQ:fnN-qgyBrk2ymR2E_nIkF5Z-aBRYfNn2PnwPe-lZ9Gw', datetime.datetime(2024, 7, 30, 18, 13, 50, 588776, tzinfo=datetime.timezone.utc)); alias=default
+[DEBUG] => (0.003) COMMIT; args=None; alias=default
+[DEBUG] => (0.008) UPDATE "pong_user" SET "last_login" = '2024-07-16T18:13:50.608574+00:00'::timestamptz WHERE "pong_user"."id" = 2; args=(datetime.datetime(2024, 7, 16, 18, 13, 50, 608574, tzinfo=datetime.timezone.utc), 2); alias=default
+[DEBUG] => (0.000) BEGIN; args=None; alias=default
+[DEBUG] => (0.000) UPDATE "django_session" SET "session_data" = '.eJxVzEEOwiAQheG7sDYEOlDBpXvPQAYYpGogKe3K9O6lSRe6ne9_82UO1yW7tdHspshubGCX35vH8KZyQHxheVYealnmyfMj4ac2_qiRPvez_XuQseW-tt5brQCTvYqA0ghQmAYMEHUCQurkRzBj1EBSSNNLgt6oTlqSYNsO77w4Fw:1sTmgQ:vLbpUSuC-0qdpbzJJ5RM3X1i4l8epHPyIPRqtUUYYk4', "expire_date" = '2024-07-30T18:13:50.617842+00:00'::timestamptz WHERE "django_session"."session_key" = 'wfsozvr3jp8n40wxhu8t6pq1c779m0d2'; args=('.eJxVzEEOwiAQheG7sDYEOlDBpXvPQAYYpGogKe3K9O6lSRe6ne9_82UO1yW7tdHspshubGCX35vH8KZyQHxheVYealnmyfMj4ac2_qiRPvez_XuQseW-tt5brQCTvYqA0ghQmAYMEHUCQurkRzBj1EBSSNNLgt6oTlqSYNsO77w4Fw:1sTmgQ:vLbpUSuC-0qdpbzJJ5RM3X1i4l8epHPyIPRqtUUYYk4', datetime.datetime(2024, 7, 30, 18, 13, 50, 617842, tzinfo=datetime.timezone.utc), 'wfsozvr3jp8n40wxhu8t6pq1c779m0d2'); alias=default
+[DEBUG] => (0.000) COMMIT; args=None; alias=default
+[DEBUG] => (0.001) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2024-07-16T18:13:50.630086+00:00'::timestamptz AND "django_session"."session_key" = 'wfsozvr3jp8n40wxhu8t6pq1c779m0d2') LIMIT 21; args=(datetime.datetime(2024, 7, 16, 18, 13, 50, 630086, tzinfo=datetime.timezone.utc), 'wfsozvr3jp8n40wxhu8t6pq1c779m0d2'); alias=default
+[DEBUG] => (0.000) SELECT "pong_user"."id", "pong_user"."password", "pong_user"."last_login", "pong_user"."is_superuser", "pong_user"."username", "pong_user"."first_name", "pong_user"."last_name", "pong_user"."email", "pong_user"."is_staff", "pong_user"."is_active", "pong_user"."date_joined", "pong_user"."creation_date", "pong_user"."langue", "pong_user"."avatar" FROM "pong_user" WHERE "pong_user"."id" = 2 LIMIT 21; args=(2,); alias=default
+[DEBUG] => (0.001) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2024-07-16T18:14:04.794428+00:00'::timestamptz AND "django_session"."session_key" = 'wfsozvr3jp8n40wxhu8t6pq1c779m0d2') LIMIT 21; args=(datetime.datetime(2024, 7, 16, 18, 14, 4, 794428, tzinfo=datetime.timezone.utc), 'wfsozvr3jp8n40wxhu8t6pq1c779m0d2'); alias=default
+[DEBUG] => (0.000) SELECT "pong_user"."id", "pong_user"."password", "pong_user"."last_login", "pong_user"."is_superuser", "pong_user"."username", "pong_user"."first_name", "pong_user"."last_name", "pong_user"."email", "pong_user"."is_staff", "pong_user"."is_active", "pong_user"."date_joined", "pong_user"."creation_date", "pong_user"."langue", "pong_user"."avatar" FROM "pong_user" WHERE "pong_user"."id" = 2 LIMIT 21; args=(2,); alias=default
+[DEBUG] => (0.000) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE "django_session"."session_key" = 'wfsozvr3jp8n40wxhu8t6pq1c779m0d2' LIMIT 21; args=('wfsozvr3jp8n40wxhu8t6pq1c779m0d2',); alias=default
+[DEBUG] => (0.000) BEGIN; args=None; alias=default
+[DEBUG] => (0.000) DELETE FROM "django_session" WHERE "django_session"."session_key" IN ('wfsozvr3jp8n40wxhu8t6pq1c779m0d2'); args=('wfsozvr3jp8n40wxhu8t6pq1c779m0d2',); alias=default
+[DEBUG] => (0.000) COMMIT; args=None; alias=default
+[DEBUG] => (0.007) 
+            SELECT
+                c.relname,
+                CASE
+                    WHEN c.relispartition THEN 'p'
+                    WHEN c.relkind IN ('m', 'v') THEN 'v'
+                    ELSE 't'
+                END,
+                obj_description(c.oid, 'pg_class')
+            FROM pg_catalog.pg_class c
+            LEFT JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace
+            WHERE c.relkind IN ('f', 'm', 'p', 'r', 'v')
+                AND n.nspname NOT IN ('pg_catalog', 'pg_toast')
+                AND pg_catalog.pg_table_is_visible(c.oid)
+        ; args=None; alias=default
+[DEBUG] => (0.001) SELECT "django_migrations"."id", "django_migrations"."app", "django_migrations"."name", "django_migrations"."applied" FROM "django_migrations"; args=(); alias=default
+[DEBUG] => (0.002) SELECT "pong_user"."id", "pong_user"."password", "pong_user"."last_login", "pong_user"."is_superuser", "pong_user"."username", "pong_user"."first_name", "pong_user"."last_name", "pong_user"."email", "pong_user"."is_staff", "pong_user"."is_active", "pong_user"."date_joined", "pong_user"."creation_date", "pong_user"."langue", "pong_user"."avatar" FROM "pong_user" WHERE "pong_user"."username" = 'cc' LIMIT 21; args=('cc',); alias=default
+[DEBUG] => (0.000) SELECT "pong_user"."id", "pong_user"."password", "pong_user"."last_login", "pong_user"."is_superuser", "pong_user"."username", "pong_user"."first_name", "pong_user"."last_name", "pong_user"."email", "pong_user"."is_staff", "pong_user"."is_active", "pong_user"."date_joined", "pong_user"."creation_date", "pong_user"."langue", "pong_user"."avatar" FROM "pong_user" WHERE "pong_user"."username" = 'cc' LIMIT 21; args=('cc',); alias=default
+[DEBUG] => (0.001) SELECT 1 AS "a" FROM "django_session" WHERE "django_session"."session_key" = 'uqvfj5q5sy3i7s0xydgiisuibk8mh1nw' LIMIT 1; args=(1, 'uqvfj5q5sy3i7s0xydgiisuibk8mh1nw'); alias=default
+[DEBUG] => (0.000) BEGIN; args=None; alias=default
+[DEBUG] => (0.001) INSERT INTO "django_session" ("session_key", "session_data", "expire_date") VALUES ('uqvfj5q5sy3i7s0xydgiisuibk8mh1nw', 'e30:1sTmiH:S5JZs2kWaZhSM3ENlnmBoeMqCIhmyrPM5935SQq72Hg', '2024-07-30T18:15:45.041394+00:00'::timestamptz); args=('uqvfj5q5sy3i7s0xydgiisuibk8mh1nw', 'e30:1sTmiH:S5JZs2kWaZhSM3ENlnmBoeMqCIhmyrPM5935SQq72Hg', datetime.datetime(2024, 7, 30, 18, 15, 45, 41394, tzinfo=datetime.timezone.utc)); alias=default
+[DEBUG] => (0.000) COMMIT; args=None; alias=default
+[DEBUG] => (0.001) UPDATE "pong_user" SET "last_login" = '2024-07-16T18:15:45.043183+00:00'::timestamptz WHERE "pong_user"."id" = 2; args=(datetime.datetime(2024, 7, 16, 18, 15, 45, 43183, tzinfo=datetime.timezone.utc), 2); alias=default
+[DEBUG] => (0.000) BEGIN; args=None; alias=default
+[DEBUG] => (0.000) UPDATE "django_session" SET "session_data" = '.eJxVzEEOwiAQheG7sDYEOlDBpXvPQAYYpGogKe3K9O6lSRe6ne9_82UO1yW7tdHspshubGCX35vH8KZyQHxheVYealnmyfMj4ac2_qiRPvez_XuQseW-tt5brQCTvYqA0ghQmAYMEHUCQurkRzBj1EBSSNNLgt6oTlqSYNsO77w4Fw:1sTmiH:yb2L-Gc7dwAm0q4XHY67JQmOqgtumx3xHYT8mYdqr1M', "expire_date" = '2024-07-30T18:15:45.044749+00:00'::timestamptz WHERE "django_session"."session_key" = 'uqvfj5q5sy3i7s0xydgiisuibk8mh1nw'; args=('.eJxVzEEOwiAQheG7sDYEOlDBpXvPQAYYpGogKe3K9O6lSRe6ne9_82UO1yW7tdHspshubGCX35vH8KZyQHxheVYealnmyfMj4ac2_qiRPvez_XuQseW-tt5brQCTvYqA0ghQmAYMEHUCQurkRzBj1EBSSNNLgt6oTlqSYNsO77w4Fw:1sTmiH:yb2L-Gc7dwAm0q4XHY67JQmOqgtumx3xHYT8mYdqr1M', datetime.datetime(2024, 7, 30, 18, 15, 45, 44749, tzinfo=datetime.timezone.utc), 'uqvfj5q5sy3i7s0xydgiisuibk8mh1nw'); alias=default
+[DEBUG] => (0.000) COMMIT; args=None; alias=default
+[DEBUG] => (0.001) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2024-07-16T18:15:45.054593+00:00'::timestamptz AND "django_session"."session_key" = 'uqvfj5q5sy3i7s0xydgiisuibk8mh1nw') LIMIT 21; args=(datetime.datetime(2024, 7, 16, 18, 15, 45, 54593, tzinfo=datetime.timezone.utc), 'uqvfj5q5sy3i7s0xydgiisuibk8mh1nw'); alias=default
+[DEBUG] => (0.000) SELECT "pong_user"."id", "pong_user"."password", "pong_user"."last_login", "pong_user"."is_superuser", "pong_user"."username", "pong_user"."first_name", "pong_user"."last_name", "pong_user"."email", "pong_user"."is_staff", "pong_user"."is_active", "pong_user"."date_joined", "pong_user"."creation_date", "pong_user"."langue", "pong_user"."avatar" FROM "pong_user" WHERE "pong_user"."id" = 2 LIMIT 21; args=(2,); alias=default
+[DEBUG] => (0.001) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2024-07-16T18:16:03.531390+00:00'::timestamptz AND "django_session"."session_key" = 'uqvfj5q5sy3i7s0xydgiisuibk8mh1nw') LIMIT 21; args=(datetime.datetime(2024, 7, 16, 18, 16, 3, 531390, tzinfo=datetime.timezone.utc), 'uqvfj5q5sy3i7s0xydgiisuibk8mh1nw'); alias=default
+[DEBUG] => (0.000) SELECT "pong_user"."id", "pong_user"."password", "pong_user"."last_login", "pong_user"."is_superuser", "pong_user"."username", "pong_user"."first_name", "pong_user"."last_name", "pong_user"."email", "pong_user"."is_staff", "pong_user"."is_active", "pong_user"."date_joined", "pong_user"."creation_date", "pong_user"."langue", "pong_user"."avatar" FROM "pong_user" WHERE "pong_user"."id" = 2 LIMIT 21; args=(2,); alias=default
+[DEBUG] => (0.000) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE "django_session"."session_key" = 'uqvfj5q5sy3i7s0xydgiisuibk8mh1nw' LIMIT 21; args=('uqvfj5q5sy3i7s0xydgiisuibk8mh1nw',); alias=default
+[DEBUG] => (0.000) BEGIN; args=None; alias=default
+[DEBUG] => (0.000) DELETE FROM "django_session" WHERE "django_session"."session_key" IN ('uqvfj5q5sy3i7s0xydgiisuibk8mh1nw'); args=('uqvfj5q5sy3i7s0xydgiisuibk8mh1nw',); alias=default
+[DEBUG] => (0.000) COMMIT; args=None; alias=default
+[DEBUG] => (0.005) 
+            SELECT
+                c.relname,
+                CASE
+                    WHEN c.relispartition THEN 'p'
+                    WHEN c.relkind IN ('m', 'v') THEN 'v'
+                    ELSE 't'
+                END,
+                obj_description(c.oid, 'pg_class')
+            FROM pg_catalog.pg_class c
+            LEFT JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace
+            WHERE c.relkind IN ('f', 'm', 'p', 'r', 'v')
+                AND n.nspname NOT IN ('pg_catalog', 'pg_toast')
+                AND pg_catalog.pg_table_is_visible(c.oid)
+        ; args=None; alias=default
+[DEBUG] => (0.001) SELECT "django_migrations"."id", "django_migrations"."app", "django_migrations"."name", "django_migrations"."applied" FROM "django_migrations"; args=(); alias=default
+[DEBUG] => (0.002) SELECT "pong_user"."id", "pong_user"."password", "pong_user"."last_login", "pong_user"."is_superuser", "pong_user"."username", "pong_user"."first_name", "pong_user"."last_name", "pong_user"."email", "pong_user"."is_staff", "pong_user"."is_active", "pong_user"."date_joined", "pong_user"."creation_date", "pong_user"."langue", "pong_user"."avatar" FROM "pong_user" WHERE "pong_user"."username" = 'cc' LIMIT 21; args=('cc',); alias=default
+[DEBUG] => (0.001) SELECT "pong_user"."id", "pong_user"."password", "pong_user"."last_login", "pong_user"."is_superuser", "pong_user"."username", "pong_user"."first_name", "pong_user"."last_name", "pong_user"."email", "pong_user"."is_staff", "pong_user"."is_active", "pong_user"."date_joined", "pong_user"."creation_date", "pong_user"."langue", "pong_user"."avatar" FROM "pong_user" WHERE "pong_user"."username" = 'cc' LIMIT 21; args=('cc',); alias=default
+[DEBUG] => (0.001) SELECT 1 AS "a" FROM "django_session" WHERE "django_session"."session_key" = '193pel7cmrozfoeiy2pufb63ema1floj' LIMIT 1; args=(1, '193pel7cmrozfoeiy2pufb63ema1floj'); alias=default
+[DEBUG] => (0.000) BEGIN; args=None; alias=default
+[DEBUG] => (0.001) INSERT INTO "django_session" ("session_key", "session_data", "expire_date") VALUES ('193pel7cmrozfoeiy2pufb63ema1floj', 'e30:1sTmk5:uTuRdVz-MwUIkdE_JLkOSfa7d3FiQMYAont3DLwNaT8', '2024-07-30T18:17:37.361152+00:00'::timestamptz); args=('193pel7cmrozfoeiy2pufb63ema1floj', 'e30:1sTmk5:uTuRdVz-MwUIkdE_JLkOSfa7d3FiQMYAont3DLwNaT8', datetime.datetime(2024, 7, 30, 18, 17, 37, 361152, tzinfo=datetime.timezone.utc)); alias=default
+[DEBUG] => (0.000) COMMIT; args=None; alias=default
+[DEBUG] => (0.001) UPDATE "pong_user" SET "last_login" = '2024-07-16T18:17:37.363280+00:00'::timestamptz WHERE "pong_user"."id" = 2; args=(datetime.datetime(2024, 7, 16, 18, 17, 37, 363280, tzinfo=datetime.timezone.utc), 2); alias=default
+[INFO] => Log-in operation completed successfully
+[DEBUG] => (0.000) BEGIN; args=None; alias=default
+[DEBUG] => (0.001) UPDATE "django_session" SET "session_data" = '.eJxVzEEOwiAQheG7sDYEOlDBpXvPQAYYpGogKe3K9O6lSRe6ne9_82UO1yW7tdHspshubGCX35vH8KZyQHxheVYealnmyfMj4ac2_qiRPvez_XuQseW-tt5brQCTvYqA0ghQmAYMEHUCQurkRzBj1EBSSNNLgt6oTlqSYNsO77w4Fw:1sTmk5:5EFjYEsYYC-Ytxs3scofiJ-yvNsHMSC8FQOieP1xKA4', "expire_date" = '2024-07-30T18:17:37.373837+00:00'::timestamptz WHERE "django_session"."session_key" = '193pel7cmrozfoeiy2pufb63ema1floj'; args=('.eJxVzEEOwiAQheG7sDYEOlDBpXvPQAYYpGogKe3K9O6lSRe6ne9_82UO1yW7tdHspshubGCX35vH8KZyQHxheVYealnmyfMj4ac2_qiRPvez_XuQseW-tt5brQCTvYqA0ghQmAYMEHUCQurkRzBj1EBSSNNLgt6oTlqSYNsO77w4Fw:1sTmk5:5EFjYEsYYC-Ytxs3scofiJ-yvNsHMSC8FQOieP1xKA4', datetime.datetime(2024, 7, 30, 18, 17, 37, 373837, tzinfo=datetime.timezone.utc), '193pel7cmrozfoeiy2pufb63ema1floj'); alias=default
+[DEBUG] => (0.000) COMMIT; args=None; alias=default
+[DEBUG] => (0.002) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2024-07-16T18:17:37.390841+00:00'::timestamptz AND "django_session"."session_key" = '193pel7cmrozfoeiy2pufb63ema1floj') LIMIT 21; args=(datetime.datetime(2024, 7, 16, 18, 17, 37, 390841, tzinfo=datetime.timezone.utc), '193pel7cmrozfoeiy2pufb63ema1floj'); alias=default
+[DEBUG] => (0.001) SELECT "pong_user"."id", "pong_user"."password", "pong_user"."last_login", "pong_user"."is_superuser", "pong_user"."username", "pong_user"."first_name", "pong_user"."last_name", "pong_user"."email", "pong_user"."is_staff", "pong_user"."is_active", "pong_user"."date_joined", "pong_user"."creation_date", "pong_user"."langue", "pong_user"."avatar" FROM "pong_user" WHERE "pong_user"."id" = 2 LIMIT 21; args=(2,); alias=default
