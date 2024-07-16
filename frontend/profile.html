@@ -69,12 +69,12 @@
 	</header>
 <title id="profileTitle">Profile</title>
 
-<div class="container mt-5">
-	<h1 id="profileUsernameHeader">Profile of {{ user.username }}</h1>
-	<p id="profileEmailTxt">e-mail : {{ user.email }}</p>
-	<p id="profileNameTxt">Name : {{ user.first_name }} {{ user.last_name }}</p>
-	<p id="profileIdTxt">ID : {{ user.id }}</p>
-	<button class="btn btn-primary mt-3" id="download-pdf">Download userdata as PDF</button>
+<div class="container mt-5" id="profilePage">
+	<h1 id="profileUsernameHeader">Profile of <span id="profileValue">{{ user.username }}</span></h1>
+	<p id="profileEmailTxt">e-mail : <span id="profileValue">{{ user.email }}</span></p>
+	<p id="profileNameTxt">Name : <span id="profileValue">{{ user.first_name }} {{ user.last_name }}</span></p>
+	<p id="profileIdTxt">ID : <span id="profileValue">{{ user.id }}</span></p>
+	<button class="btn btn-primary mt-3 menuStructureTop" id="download-pdf">Download userdata as PDF</button>
 
 	<h2 id="profileFriendsHeader">Friends</h2>
 	<!--	{% if friends %} -->
@@ -82,7 +82,7 @@
 		<!-- {% for friend in friends %} -->
 		<li class="list-group-item">
 			<!-- {{ friend.id }} - {{ friend.username }} ({{ friend.email }}) -->
-			<button class="btn btn-danger btn-sm" onclick="unfriend({{ friend.id }})" id="profileRemoveFriendButton" >Remove from friendlist</button>
+			<button class="btn btn-danger btn-sm menuStructureTop" onclick="unfriend({{ friend.id }})" id="profileRemoveFriendButton" >Remove from friendlist</button>
 		</li>
 		<!-- {% endfor %} -->
 	</ul>
