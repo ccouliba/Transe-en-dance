@@ -26,6 +26,7 @@ body, html {
 #profilePage {
   color: rgb(114, 116, 115);
   background-color: rgba(33,32,37,150);
+  background-image: linear-gradient(rgb(43,52,80), rgb(28,30,31));
 }
 
 #profileValue {
