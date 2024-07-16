@@ -1,6 +1,7 @@
 /*  DOTA 2 MENU COLORS
-    background dark red rgb(42, 0, 6)
-    menu structure dark grey rgb(42, 43, 48)
+    background rgb(42, 0, 6)
+    menu structure rgb(42, 43, 48)
+    top menu bar rgb(11,12,16)
     menu button hover light red regb(151, 70, 69)
     top menu font dark greyish gold rgb(94, 92, 73)
     general font light grey rgb(172, 171, 176)
@@ -18,7 +19,7 @@ body, html {
   background: rgb(42, 0, 6);
   position: relative;
   font-family: 'Trajan Pro', sans-serif;
-  border: 0.5px solid #ff4500;
+  /* border: 0.1px solid #ff4500; */
   color: rgb(172, 171, 176);
   background-image: linear-gradient(to top, rgb(38,8,16), rgb(101,19,21));
 }
@@ -26,15 +27,19 @@ body, html {
 #profilePage {
   color: rgb(114, 116, 115);
   background-color: rgba(33,32,37,150);
-  background-image: linear-gradient(rgb(43,52,80), rgb(28,30,31));
+  background-image: linear-gradient(to top, rgb(28,30,31) 80%, rgb(43,52,80));
 }
 
 #profileValue {
   color: rgb(219, 247, 144);
 }
 
+#profileUsernameHeader {
+  color: rgb(98,139,181);
+}
+
 .navbar-custom {
-  background-color: rgb(42, 43, 48);
+  background-color: rgb(11,12,16);
 }
 
 .navbar-custom .navbar-brand {
