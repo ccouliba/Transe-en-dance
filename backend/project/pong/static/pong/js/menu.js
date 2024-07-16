@@ -5,6 +5,8 @@ function Menu() {
 			<a href="#home" onclick="changePage('#home'); event.preventDefault();">Home</a>
 			<a href="#play" onclick="changePage('#play'); event.preventDefault();">Play</a>
 			<a href="#play" onclick="changePage('#tournament'); event.preventDefault();">Tournament</a>
+			
+			<a href="#ia" onclick="changePage('#ia'); event.preventDefault();">IA</a>
 
 			<a href="#profile" onclick="changePage('#profile'); event.preventDefault();">Profile</a>
 			<a href="#friends" onclick="changePage('#friends'); event.preventDefault();">Liste des amis</a>
