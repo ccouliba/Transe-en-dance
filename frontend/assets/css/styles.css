@@ -17,10 +17,10 @@ body, html {
   width: 100%;
   background: rgb(42, 0, 6);
   position: relative;
-  font-size: 1.5em;
   font-family: 'Trajan Pro', sans-serif;
   border: 0.5px solid #ff4500;
   color: rgb(172, 171, 176);
+  background-image: linear-gradient(to top, rgb(38,8,16), rgb(101,19,21));
 }
 
 #profilePage {
@@ -44,6 +44,10 @@ body, html {
   color: rgb(94, 92, 72);
 }
 
+#languageSelector {
+  background-color: rgb(42, 43, 48);
+  color: white;
+}
 
 .nav-link {
   color: grey;
