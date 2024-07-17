@@ -9,8 +9,7 @@ function Menu() {
 
 			<a href="#profile" onclick="changePage('#profile'); event.preventDefault();">Profil</a>
 			<a href="#friends" onclick="changePage('#friends'); event.preventDefault();">Friends list</a>
-			<a href="#logout" onclick="changePage('#logout'); event.preventDefault(); ">Logout</a>
-			
+			<a href="#" onclick="changePage('logout'); event.preventDefault(); ">Logout</a>
 		</div>`;
 }
 

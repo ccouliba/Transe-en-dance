@@ -27,7 +27,8 @@ function logout() {
 		if (data.status === 'success') {
 			console.log('Successfully logged out');
 			logoutState.isLoggedOut = true;
-			window.location.href = '/login';  // todo : mettre url pour la page login (qui est a faire)
+			changePage("#login");
+			
 		} else {
 			console.error('Logout failed:', data.message);
 			alert('Logout failed: ' + data.message);
@@ -43,7 +44,7 @@ function Logout() {
 	return `
 		<div>
 			<h2>You have been logged out</h2>
-			<p>Click <a href="/login">here</a> to log in again.</p>
+			<p>Click <a href="#login" onclick="changePage('#login')">here</a> to log in again.</p>
 		</div>
 	`;
 }

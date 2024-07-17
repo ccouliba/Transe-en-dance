@@ -10,6 +10,18 @@ var profileState = {
 	isLoaded:false  // indique si les donnees du profil ont ete chargees (initialement faux)
 }
 
+function checkAuth() {
+    fetch('/pong/api/check_auth/', {
+        method: 'GET',
+        credentials: 'include',
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (!data.isAuthenticated) {
+            changePage('#login');
+        }
+    });
+}
 
 function Profile() {
 

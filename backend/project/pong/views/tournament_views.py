@@ -20,7 +20,7 @@ def get_tournament_state(request):
 
 @login_required
 @require_POST
-@csrf_exempt
+# @csrf_exempt
 def register_player(request):
 	tournament = Tournament.objects.filter(is_started=False).first()
 	if not tournament:

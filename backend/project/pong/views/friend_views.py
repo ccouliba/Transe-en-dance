@@ -9,7 +9,7 @@ import json
 # Cette vue gere l'envoi d'une demande d'ami entre deux utilisateurs en verifiant d'abord si une demande existe deja puis en creant une nouvelle demande si necessaire
 @login_required
 @require_POST
-@csrf_exempt# TO DO : ENLEVER CELA C EST JUSTE POUR LES TESTS AVEC POSTMAN !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+# @csrf_exempt# TO DO : ENLEVER CELA C EST JUSTE POUR LES TESTS AVEC POSTMAN !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 def send_friend_request(request):
 	payload = json.loads(request.body)
 	to_email = payload.get('email')
@@ -49,7 +49,7 @@ def send_friend_request(request):
 
 @login_required
 @require_POST
-@csrf_exempt
+# @csrf_exempt
 def accept_friend_request(request):
 	try:
 		payload = json.loads(request.body)
@@ -86,7 +86,7 @@ def accept_friend_request(request):
 
 @login_required
 @require_POST
-@csrf_exempt
+# @csrf_exempt
 def remove_friend(request):
 	try:
 		payload = json.loads(request.body)
@@ -110,7 +110,7 @@ def remove_friend(request):
 		return JsonResponse({'status': 'error', 'message': str(e)}, status=500)
 
 @login_required
-@csrf_exempt
+# @csrf_exempt
 def friends_data(request):
 	user = request.user
 	

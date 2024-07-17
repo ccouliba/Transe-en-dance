@@ -1,5 +1,5 @@
 from django.urls import path
-from .views.auth_views import register_view, login_view, logout_view, auth_callback, external_login
+from .views.auth_views import base_view,check_auth, register_view, login_view, logout_view, auth_callback, external_login
 from .views.game_views import create_game, update_game
 from .views.friend_views import send_friend_request, accept_friend_request, remove_friend, friends_data
 from .views.profile_views import profile_view, user_updated_profile, user_account_deleted,edit_password_view, get_user_info, profile_update_view
@@ -15,8 +15,9 @@ app_name = 'pong'  # definir le namespace
 
 urlpatterns = [
 
-
-	path('', login_view, name='default_login'), 
+	path('', base_view, name='base'), 
+ 
+	# path('', login_view, name='default_login'), 
 	path('register/', register_view, name='register'),
 	path('login/', login_view, name='login'),
 	# path('logout/', logout_view, name='logout'),
@@ -34,6 +35,9 @@ urlpatterns = [
 
 	path('external_login/', external_login, name='external_login'),
  
+	path('api/login/', login_view, name='api_login'),
+	path('api/register/', register_view, name='api_register'),
+	path('api/check_auth/', check_auth, name='check_auth'),
 	path('api/profile/', profile_view, name='profile'),
 	path('api/profile/update', profile_update_view, name='profile_update'),
 	path('api/profile/change-password', edit_password_view, name='change_password'),

@@ -13,7 +13,7 @@ import json
 
 # path('pong/api/profile/update', profile_update_view, name='profile_update'),
 @login_required
-@csrf_exempt# TO DO : ENLEVER CELA C EST JUSTE POUR LES TESTS AVEC POSTMAN !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+# @csrf_exempt# TO DO : ENLEVER CELA C EST JUSTE POUR LES TESTS AVEC POSTMAN !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 @require_POST
 def	profile_update_view(request):
 		data = json.loads(request.body)
@@ -93,7 +93,7 @@ def user_updated_profile(request):
 
 # Cette vue permet a l'utilisateur connecte de changer son mot de passe en utilisant un formulaire fourni par Django
 @login_required
-@csrf_exempt  #todo
+# @csrf_exempt  #todo
 @require_POST
 def edit_password_view(request):
 	print(f"User authenticated: {request.user.is_authenticated}")

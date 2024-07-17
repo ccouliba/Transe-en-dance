@@ -58,9 +58,9 @@ let routes = {
 	"#friends": () => mountComponent(FriendsList),
 	"#404":() => mountComponent(Page404),
 	"#tournament":() => mountComponent(Tournament),
-	"#logout":() => mountComponent(Logout)
-
-	// login: () => mountComponent(Login),
+	"#logout":() => mountComponent(Logout),
+	"#login": () => mountComponent(Login),
+	"#register": () => mountComponent(Register),
 };
 
 
@@ -95,6 +95,7 @@ window.onpopstate = function(event) {
 function mountComponent(componentFunction, data) {
 	// Fonction pour charger un composant dans le div app qui se trouve dans base.html
 	document.getElementById("app").innerHTML = componentFunction(data);
+
 }
 
 function getCookie(name) {
@@ -111,3 +112,4 @@ function getCookie(name) {
 	}
 	return cookieValue;
 }
+
