@@ -19,8 +19,9 @@ urlpatterns = [
 	path('', login_view, name='default_login'), 
 	path('register/', register_view, name='register'),
 	path('login/', login_view, name='login'),
-	path('logout/', logout_view, name='logout'),
-
+	# path('logout/', logout_view, name='logout'),
+	path('api/logout', logout_view, name='logout'),
+ 
 	path('update_profile/', user_updated_profile, name='update_profile'),
 	path('delete_account/', user_account_deleted, name='delete_account'),
 	path('get_user_info/', get_user_info, name='get_user_info'),

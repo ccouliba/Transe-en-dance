@@ -72,12 +72,14 @@ def login_view(request):
 	return render(request, 'pong/login.html', {'form': form})
 
 # vue pour gerer la deconnexion de l'utilisateur
+# @login_required
+# def logout_view(request):
+# 	logout(request) #fonction de django
+# 	return redirect('/pong/login')
 @login_required
 def logout_view(request):
-	logout(request) #fonction de django
-	return redirect('/pong/login')
-
-
+	logout(request)
+	return JsonResponse({'status': 'success'})
 
 # Cette vue gere l'inscription des nouveaux utilisateurs
 # User clique sur bouton pour s'inscrire. GET -> recuperer formulaire d'inscription (RegisterForm())
