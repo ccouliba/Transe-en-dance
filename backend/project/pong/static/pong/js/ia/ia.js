@@ -47,15 +47,6 @@ window.onload = function() {
             if (player.y < 0) player.y = 0;
             if (player.y + paddleHeight > canvas.height) player.y = canvas.height - paddleHeight;
 
-            // Logique de l'IA pour déplacer le paddle
-            if (ball.x > canvas.width / 2) {
-                if (ball.y < ai.y + paddleHeight / 2) {
-                    simulateKey('+'); // Monte le paddle
-                } else if (ball.y > ai.y + paddleHeight / 2) {
-                    simulateKey('-'); // Descend le paddle
-                }
-            }
-
             ai.y += ai.dy;
             if (ai.y < 0) ai.y = 0;
             if (ai.y + paddleHeight > canvas.height) ai.y = canvas.height - paddleHeight;
@@ -68,18 +59,34 @@ window.onload = function() {
             if (checkCollision(ball, player)) {
                 ball.dx = -ball.dx;
                 ball.dy = (ball.y - (player.y + paddleHeight / 2)) * 0.1;
-                ball.speed *= 1.01; // Augmente légèrement la vitesse
+                ball.speed *= 1.05; // Augmente légèrement la vitesse
             }
 
             if (checkCollision(ball, ai)) {
                 ball.dx = -ball.dx;
                 ball.dy = (ball.y - (ai.y + paddleHeight / 2)) * 0.1;
-                ball.speed *= 1.01; // Augmente légèrement la vitesse
+                ball.speed *= 1.05; // Augmente légèrement la vitesse
             }
 
             if (ball.x + ball.radius > canvas.width) resetBall();
             if (ball.x - ball.radius < 0) resetBall();
         }
+
+        function updateAI() {
+            // Logique de l'IA pour déplacer le paddle
+            if (ball.x > canvas.width / 2) {
+                if (ball.y < ai.y + paddleHeight / 2) {
+                    simulateKey('+'); // Monte le paddle
+                } else if (ball.y > ai.y + paddleHeight / 2) {
+                    simulateKey('-'); // Descend le paddle
+                }
+            } else {
+                simulateKey('+', false); // Relâche la touche
+                simulateKey('-', false); // Relâche la touche
+            }
+        }
+
+        setInterval(updateAI, 1000); // Met à jour l'IA toutes les secondes
 
         function checkCollision(ball, paddle) {
             return ball.x - ball.radius < paddle.x + paddleWidth &&
