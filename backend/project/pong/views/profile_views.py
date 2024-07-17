@@ -99,23 +99,30 @@ def edit_password_view(request):
 	print(f"User authenticated: {request.user.is_authenticated}")
 	print(f"Username: {request.user.username}")
 	try:
+		# tente de charger les donnees JSON du corps de la requete
 		data = json.loads(request.body)
+		# creer un formulaire de changement de mot de passe avec les donnees de l'utilisateur
 		form = PasswordChangeForm(user=request.user, data={
 			'old_password': data.get('old_password'),
 			'new_password1': data.get('new_password1'),
 			'new_password2': data.get('new_password2')
 		})
+		# verifie si le formulaire est valide
 		if form.is_valid():
+			# Si le formulaire est valide => enregistre le nouveau mot de passe
 			form.save()
-			update_session_auth_hash(request, form.user)
+			# Mise a jour de la session d'authentification de l'utilisateur pour eviter la deconnexion
+			update_session_auth_hash(request, form.user) #methode Django
 			return JsonResponse({'status': 'success'})
 		else:
+			# Si le formulaire n'est pas valide :
 			return JsonResponse({'status': 'error', 'errors': form.errors}, status=400)
 	except json.JSONDecodeError:
+		# Si une erreur de decodage JSON se produit :
 		return JsonResponse({'status': 'error', 'message': 'Invalid JSON'}, status=400)
 	except Exception as e:
+		# Si une autre erreur se produit :
 		return JsonResponse({'status': 'error', 'message': str(e)}, status=500)
-
 
 #  This view is causes some trouble on reverse html on success !
 # That is why i have done this ; for now we could use the view below instead

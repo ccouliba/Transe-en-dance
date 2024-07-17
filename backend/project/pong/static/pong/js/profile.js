@@ -219,40 +219,56 @@ function EditLastname()
 `	
 }
 
-
-
 function EditPassword() {
+	// Attache un evenement submit au formulaire avec l'id => edit-password-form
 	bindEvent(profileState, "#edit-password-form", "submit", event => {
+		// Empeche le comportement par defaut du formulaire ie soumission et rechargement de la page
 		event.preventDefault();
+		// Recupere la valeur du champ 'old_password' du formulaire
 		const oldPassword = event.target.elements.old_password.value;
+		// Recupere la valeur du champ 'new_password1' du formulaire
 		const newPassword1 = event.target.elements.new_password1.value;
+		// Recupere la valeur du champ 'new_password2' du formulaire
 		const newPassword2 = event.target.elements.new_password2.value;
+
 		let url = `/pong/api/profile/change-password`;
 						
+		// Envoie une requete POST a l'API pour changer le mot de passe
 		fetch(url, {
 			method: 'POST',
+			// Headers de la requete en incluant le type de contenu et le token CSRF
 			headers: {
 				'Content-Type': 'application/json',
 				'X-CSRFToken': getCookie('csrftoken')
 			},
+			// Corps de la requete converti en JSON
 			body: JSON.stringify({
 				old_password: oldPassword,
 				new_password1: newPassword1,
 				new_password2: newPassword2
 			}),
+			// Inclut les cookies avec la requete pour l'authentification
 			credentials: 'include'
 		})
+		// Parse la reponse en JSON
 		.then(response => response.json())
+		// Traite les donnees recues de l'API
 		.then(data => {
+			// Si le changement de mot de passe est reussi
 			if (data.status === 'success') {
 				alert('Password changed successfully');
+				// Marque les donnees de profil comme non chargees
 				profileState.isLoaded = false;
+				// Recharge le composant du profil
 				mountComponent(Profile);
 			} else {
+				// Prepare un message d'erreur en cas d'echec
 				let errorMessage = "There were errors changing your password:\n\n";
+				// Si l'ancien mot de passe est incorrect
 				if (data.errors.old_password) {
 					errorMessage += "- Your old password was entered incorrectly. Please try again.\n";
 				}
+				// Si le nouveau mot de passe ne repond pas aux criteres de securite
 				if (data.errors.new_password2) {
 					errorMessage += "- Please choose a more secure password.\n";
 					errorMessage += "\nFor a strong password:\n";
@@ -260,15 +276,18 @@ function EditPassword() {
 					errorMessage += "- Avoid using personal information like birthdates or names\n";
 					errorMessage += "- Make it at least 12 characters long\n";
 				}
+				// Affiche le message d'erreur
 				alert(errorMessage);
 			}
 		})
+		// Traite les erreurs de la requete
 		.catch(error => {
 			console.error('Error:', error);
 			alert('An error occurred. Please try again.');
 		});
 	});
 
+	// Retourne le formulaire HTML pour changer le mot de passe
 	return `
 	<form id="edit-password-form" class="mt-3">
 		<div class="input-group mt-3">
