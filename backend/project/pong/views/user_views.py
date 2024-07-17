@@ -37,6 +37,9 @@ def index(request):
 
 # vue pour afficher la page d'accueil
 # render => combines a template with a given context dictionary and returns an HttpResponse object with that rendered tex
+# @login_required
+# def home_view(request):
+# 	return render(request, 'pong/home.html')
 @login_required
 def home_view(request):
-	return render(request, 'pong/home.html')
+	return render(request, 'pong/base.html')

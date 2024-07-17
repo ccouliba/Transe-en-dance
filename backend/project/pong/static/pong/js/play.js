@@ -20,8 +20,8 @@ let paddle1Y = (CANVAS_HEIGHT - PADDLE_HEIGHT) / 2;
 let paddle2Y = (CANVAS_HEIGHT - PADDLE_HEIGHT) / 2;
 let ballX = CANVAS_WIDTH / 2;
 let ballY = CANVAS_HEIGHT / 2;
-let ballSpeedX = 5;
-let ballSpeedY = 2;
+let ballSpeedX = 2.5;
+let ballSpeedY = 1;
 
 function Play() {
 	if (playState.gameOver || !playState.isLoaded) {
@@ -39,7 +39,7 @@ function Play() {
 			<div class="container mt-5">
 				<h1>Game ended. Bye !</h1>
 				<div class="mt-4">
-					<h2>Final Scores:</h2>
+					<h2>Final scores:</h2>
 					<p>${playState.player1Email}: ${playState.player1Score}</p>
 					<p>${playState.player2Email}: ${playState.player2Score}</p>
 				</div>
@@ -172,9 +172,9 @@ function restartGame() {
 	paddle2Y = (CANVAS_HEIGHT - PADDLE_HEIGHT) / 2;
 	ballX = CANVAS_WIDTH / 2;
 	ballY = CANVAS_HEIGHT / 2;
-	ballSpeedX = 5;
-	ballSpeedY = 2;
-
+	let ballSpeedX = 2.5;
+	let ballSpeedY = 1;
+	
 	// Utiliser changePage pour revenir à l'écran de démarrage du jeu
 	changePage("#play");
 }
@@ -269,20 +269,24 @@ function initializeGame() //appelee apres que le DOM soit charge et que le canva
 			switch(event.code) {
 				case 'KeyW':
 					// Deplace la raquette 1 vers le haut
-					paddle1Y = Math.max(paddle1Y - 20, 0);
+					// paddle1Y = Math.max(paddle1Y - 20, 0);
+					paddle1Y = Math.max(paddle1Y - 30, 0);
 					break;
 				case 'KeyS':
 					// Deplace la raquette 1 vers le bas
-					paddle1Y = Math.min(paddle1Y + 20, CANVAS_HEIGHT - PADDLE_HEIGHT);
+					// paddle1Y = Math.min(paddle1Y + 20, CANVAS_HEIGHT - PADDLE_HEIGHT);
+					paddle1Y = Math.min(paddle1Y + 30, CANVAS_HEIGHT - PADDLE_HEIGHT);
 					break;
 				case 'ArrowUp':
 					// Deplace la raquette 2 vers le haut
-					paddle2Y = Math.max(paddle2Y - 20, 0);
+					// paddle2Y = Math.max(paddle2Y - 20, 0);
+					paddle2Y = Math.max(paddle2Y - 30, 0);
 					preventDefaultForScrollKeys(event);
 					break;
 				case 'ArrowDown':
 					// Deplace la raquette 2 vers le bas
-					paddle2Y = Math.min(paddle2Y + 20, CANVAS_HEIGHT - PADDLE_HEIGHT);
+					// paddle2Y = Math.min(paddle2Y + 20, CANVAS_HEIGHT - PADDLE_HEIGHT);
+					paddle2Y = Math.min(paddle2Y + 30, CANVAS_HEIGHT - PADDLE_HEIGHT);
 					preventDefaultForScrollKeys(event);
 					break;
 			}
@@ -296,34 +300,10 @@ function initializeGame() //appelee apres que le DOM soit charge et que le canva
 	update();
 }
 
-// function endGame() {
-// 	playState.gameOver = true;
-// 	const winner = playState.player1Score > playState.player2Score ? playState.player1Email : playState.player2Email;
-	
-// 	fetch(`/pong/api/games/${playState.gameId}/update`, {
-// 		method: 'POST',
-// 		headers: {
-// 			'Content-Type': 'application/json',
-// 		},
-// 		body: JSON.stringify({
-// 			player1Score: playState.player1Score,
-// 			player2Score: playState.player2Score,
-// 			winner: winner
-// 		}),
-// 		credentials: 'include'
-// 	})
-// 	.then(response => response.json())
-// 	.then(data => {
-// 		playState.isLoaded = false; // Forcer le rechargement pour la prochaine partie
-// 		mountComponent(Play);
-// 	})
-// 	.catch(error => console.error('Error:', error));
-// }
-
 function endGame() {
 	playState.gameOver = true;
 	const winner = playState.player1Score > playState.player2Score ? playState.player1Email : playState.player2Email;
-   
+	
 	fetch(`/pong/api/games/${playState.gameId}/update`, {
 		method: 'POST',
 		headers: {
@@ -338,8 +318,8 @@ function endGame() {
 	})
 	.then(response => response.json())
 	.then(data => {
-		playState.isLoaded = false;
-		notifyTournamentEnd();
+		playState.isLoaded = false; // Forcer le rechargement pour la prochaine partie
+		mountComponent(Play);
 	})
 	.catch(error => console.error('Error:', error));
 }

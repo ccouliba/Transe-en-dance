@@ -27,7 +27,7 @@ function Profile() {
 			<div class="card">
 				<div class="card-body">
 					<div class="row mb-3">
-						<div class="col-sm-3"><strong>Nom d'utilisateur :</strong></div>
+						<div class="col-sm-3"><strong>Username :</strong></div>
 						<div class="col-sm-9">${profileState.username}</div>
 					</div>
 					<div class="row mb-3">
@@ -35,11 +35,11 @@ function Profile() {
 						<div class="col-sm-9">${profileState.email}</div>
 					</div>
 						<div class="row mb-3">
-							<div class="col-sm-3"><strong>Prénom :</strong></div>
+							<div class="col-sm-3"><strong>First name :</strong></div>
 							<div class="col-sm-9">${profileState.firstname}</div>
 						</div>
 						<div class="row mb-3">
-							<div class="col-sm-3"><strong>Nom :</strong></div>
+							<div class="col-sm-3"><strong>Last name :</strong></div>
 							<div class="col-sm-9">${profileState.lastname}</div>
 						</div>
 					<div class="row">
@@ -47,21 +47,24 @@ function Profile() {
 						<div class="col-sm-9">${profileState.id}</div>
 					</div>
 					<div class="row">
-						<div class="col-sm-3"><strong>Mes amis :</strong></div>
+						<div class="col-sm-3"><strong>My friends :</strong></div>
 						<div class="col-sm-9">${profileState.friends}</div>
 					</div>
 				</div>
 			</div>
 			
-			<h2 class="mt-4 mb-3">Modifier le nom d'utilisateur</h2>
+			<h2 class="mt-4 mb-3">Modify username</h2>
 			${EditUsername()}
-			<h2 class="mt-4 mb-3">Modifier l'email</h2>
+			<h2 class="mt-4 mb-3">Modify email</h2>
 			${EditEmail()}
-			<h2 class="mt-4 mb-3">Modifier le prénom</h2>
+			<h2 class="mt-4 mb-3">Modify first name</h2>
 			
 			${EditFirstname()}
-			<h2 class="mt-4 mb-3">Modifier le nom</h2>
-			<h2 class="mt-4 mb-3">Modifier le mot de passe</h2>
+			<h2 class="mt-4 mb-3">Modify last name</h2>
+			${EditLastname()}
+
+			<h2 class="mt-4 mb-3">Modify password</h2>
+			${EditPassword()}
 
 			${AddFriendForm()}
 			${AcceptFriendForm()}
@@ -136,7 +139,7 @@ function EditUsername(){
 					name="username" 
 					value="${profileState.username}" 
 				/>
-				<button class="btn btn-primary" type="submit">Modifier</button>
+				<button class="btn btn-primary" type="submit">Modify</button>
 			</div>
 		</form>
 	`
@@ -155,7 +158,7 @@ function EditEmail()
 	return `
 		<form id="edit-email" class="mt-3">
 			<div class="input-group">
-				<input type="text" class="form-control" name="email" value="${profileState.email}" aria-label="Nouvel email">
+				<input type="text" class="form-control" name="email" value="${profileState.email}" aria-label="New email">
 				<button class="btn btn-primary" type="submit">Modifier</button>
 			</div>
 		</form>
@@ -169,7 +172,7 @@ function EditFirstname()
 		event.preventDefault()
 		const firstnameInput = event.target.elements.firstname.value
 		profileState.firstname = firstnameInput
-		sendProfileToBackend({firstname:firstnameInput})
+		sendProfileToBackend({'firstname':firstnameInput})
 		profileState.isLoaded = false
 		mountComponent(Profile)
 	})
@@ -181,13 +184,143 @@ function EditFirstname()
 				class="form-control" 
 				name="firstname" 
 				value="${profileState.firstname}" 
-				aria-label="Nouveau prénom"
+				aria-label="New first name"
 			/>
 			<button class="btn btn-primary" type="submit">Modifier</button>
 		</div>
 	</form>
 `	
 }
+
+function EditLastname()
+{
+	bindEvent(profileState, "#edit-last-name", "submit", event =>
+	{
+		event.preventDefault()
+		const lastnameInput = event.target.elements.lastname.value
+		profileState.lastname = lastnameInput
+		sendProfileToBackend({'lastname': lastnameInput})
+		profileState.isLoaded = false
+		mountComponent(Profile)
+	})
+	return `
+	<form id="edit-last-name" class="mt-3">
+		<div class="input-group">
+			<input 
+				type="text" 
+				class="form-control" 
+				name="lastname" 
+				value="${profileState.lastname}" 
+				aria-label="New last name"
+			/>
+			<button class="btn btn-primary" type="submit">Modifier</button>
+		</div>
+	</form>
+`	
+}
+
+
+
+function EditPassword() {
+	bindEvent(profileState, "#edit-password-form", "submit", event => {
+		event.preventDefault();
+		const oldPassword = event.target.elements.old_password.value;
+		const newPassword1 = event.target.elements.new_password1.value;
+		const newPassword2 = event.target.elements.new_password2.value;
+		let url = `/pong/api/profile/change-password`;
+						
+		fetch(url, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				'X-CSRFToken': getCookie('csrftoken')
+			},
+			body: JSON.stringify({
+				old_password: oldPassword,
+				new_password1: newPassword1,
+				new_password2: newPassword2
+			}),
+			credentials: 'include'
+		})
+		.then(response => response.json())
+		.then(data => {
+			if (data.status === 'success') {
+				alert('Password changed successfully');
+				profileState.isLoaded = false;
+				mountComponent(Profile);
+			} else {
+				let errorMessage = "There were errors changing your password:\n\n";
+				if (data.errors.old_password) {
+					errorMessage += "- Your old password was entered incorrectly. Please try again.\n";
+				}
+				if (data.errors.new_password2) {
+					errorMessage += "- Please choose a more secure password.\n";
+					errorMessage += "\nFor a strong password:\n";
+					errorMessage += "- Use a mix of uppercase and lowercase letters, numbers, and symbols\n";
+					errorMessage += "- Avoid using personal information like birthdates or names\n";
+					errorMessage += "- Make it at least 12 characters long\n";
+				}
+				alert(errorMessage);
+			}
+		})
+		.catch(error => {
+			console.error('Error:', error);
+			alert('An error occurred. Please try again.');
+		});
+	});
+
+	return `
+	<form id="edit-password-form" class="mt-3">
+		<div class="input-group mt-3">
+			<input 
+				type="password" 
+				class="form-control" 
+				name="old_password" 
+				placeholder="Old password" 
+				required
+			/>
+		</div>
+		<div class="input-group mt-3">
+			<input 
+				type="password" 
+				class="form-control" 
+				name="new_password1" 
+				placeholder="New password" 
+				required
+			/>
+		</div>
+		<div class="input-group mt-3">
+			<input 
+				type="password" 
+				class="form-control" 
+				name="new_password2" 
+				placeholder="Confirm new password" 
+				required
+			/>
+		</div>
+		<button class="btn btn-primary mt-3" type="submit">Change Password</button>
+	</form>
+
+	`;
+}
+function getCookie(name) {
+	let cookieValue = null;
+	if (document.cookie && document.cookie !== '') {
+		const cookies = document.cookie.split(';');
+		for (let i = 0; i < cookies.length; i++) {
+			const cookie = cookies[i].trim();
+			if (cookie.substring(0, name.length + 1) === (name + '=')) {
+				cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+				break;
+			}
+		}
+	}
+	return cookieValue;
+}
+
+
+
+
 
 function sendFriendRequest(email) {
 
@@ -223,11 +356,11 @@ function AddFriendForm() {
 	});
 
 	return `
-		<h2 class="mt-4 mb-3">Ajouter un ami</h2>
+		<h2 class="mt-4 mb-3">Add a friend</h2>
 		<form id="add-friend-form" class="mt-3">
 			<div class="input-group">
-				<input type="text" class="form-control" name="friendEmail" placeholder="Email de l'ami" />
-				<button class="btn btn-primary" type="submit">Ajouter</button>
+				<input type="text" class="form-control" name="friendEmail" placeholder="Friend's email" />
+				<button class="btn btn-primary" type="submit">Add</button>
 			</div>
 		</form>
 	`;
@@ -268,11 +401,11 @@ function AcceptFriendForm(email) {
 	});
 
 	return `
-		<h2 class="mt-4 mb-3">Accepter un ami</h2>
+		<h2 class="mt-4 mb-3">Accept a friend</h2>
 		<form id="accept-friend-form" class="mt-3">
 			<div class="input-group">
-				<input type="text" class="form-control" name="friendEmail" placeholder="Email de l'ami" />
-				<button class="btn btn-primary" type="submit">Accepter</button>
+				<input type="text" class="form-control" name="friendEmail" placeholder="Friend's email" />
+				<button class="btn btn-primary" type="submit">Accept</button>
 			</div>
 		</form>
 	`;
@@ -311,11 +444,11 @@ function RemoveFriendForm() {
 	});
 
 	return `
-		<h2 class="mt-4 mb-3">Supprimer un ami</h2>
+		<h2 class="mt-4 mb-3">Delete a friend</h2>
 		<form id="remove-friend-form" class="mt-3">
 			<div class="input-group">
-				<input type="text" class="form-control" name="friendEmail" placeholder="Email de l'ami à supprimer" />
-				<button class="btn btn-danger" type="submit">Supprimer</button>
+				<input type="text" class="form-control" name="friendEmail" placeholder="Friend's email to delete" />
+				<button class="btn btn-danger" type="submit">Delete</button>
 			</div>
 		</form>
 	`;
