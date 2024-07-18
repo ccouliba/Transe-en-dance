@@ -10,8 +10,7 @@ function Menu() {
 				<a href="#friends" onclick="changePage('#friends'); return false;">Friends</a>
 				<a href="#" onclick="logout(); return false;">Logout</a>
 			` : `
-				<a href="#login" onclick="changePage('#login'); return false;">Login</a>
-				<a href="#register" onclick="changePage('#register'); return false;">Register</a>
+				
 			`}
 		</nav>
 	`;
