@@ -67,10 +67,16 @@ let routes = {
 
 // }
 
+let isCheckingAuth = false;
+
 window.changePage = function (url) {
-	fetch('/pong/api/check_auth')
+	if (isCheckingAuth) return;
+	isCheckingAuth = true;
+
+	fetch('/pong/api/check_auth/')
 		.then(response => response.json())
 		.then(data => {
+			isCheckingAuth = false;
 			if (data.is_authenticated) {
 				localStorage.setItem('userToken', 'true');
 				localStorage.setItem('username', data.username);
@@ -78,9 +84,11 @@ window.changePage = function (url) {
 				localStorage.removeItem('userToken');
 				localStorage.removeItem('username');
 			}
-			updateMenu(); 
+			
+			updateMenu();
+			
 			if (!data.is_authenticated && url !== "#login" && url !== "#register") {
-				changePage("#login");
+				window.location.href = '/pong/';
 			} else {
 				if (url === "#play") {
 					playState.isLoaded = false;
@@ -93,11 +101,11 @@ window.changePage = function (url) {
 				routes[url]();
 				history.pushState({ page: url }, "", url);
 			}
-			updateMenu();
 		})
 		.catch(error => {
+			isCheckingAuth = false;
 			console.error('Error:', error);
-			changePage("#login");
+			window.location.href = '/pong/';
 		});
 }
 

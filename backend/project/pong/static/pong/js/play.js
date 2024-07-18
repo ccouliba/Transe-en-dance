@@ -20,8 +20,8 @@ let paddle1Y = (CANVAS_HEIGHT - PADDLE_HEIGHT) / 2;
 let paddle2Y = (CANVAS_HEIGHT - PADDLE_HEIGHT) / 2;
 let ballX = CANVAS_WIDTH / 2;
 let ballY = CANVAS_HEIGHT / 2;
-let ballSpeedX = 2.5;
-let ballSpeedY = 1;
+let ballSpeedX = 5;
+let ballSpeedY = 3;
 
 function Play() {
 	if (playState.gameOver || !playState.isLoaded) {
@@ -172,8 +172,8 @@ function restartGame() {
 	paddle2Y = (CANVAS_HEIGHT - PADDLE_HEIGHT) / 2;
 	ballX = CANVAS_WIDTH / 2;
 	ballY = CANVAS_HEIGHT / 2;
-	let ballSpeedX = 2.5;
-	let ballSpeedY = 1;
+	let ballSpeedX = 5;
+	let ballSpeedY = 3;
 	
 	// Utiliser changePage pour revenir à l'écran de démarrage du jeu
 	changePage("#play");
@@ -209,20 +209,30 @@ function initializeGame() //appelee apres que le DOM soit charge et que le canva
 	}
 
 	function moveBall() {
+		// deplacer la balle
 		ballX += ballSpeedX;
 		ballY += ballSpeedY;
-
+	
+		// pour le rebond sur les bords superieur et inferieur (ne pas faire glisse la balle sur le paddle)
 		if (ballY < 0 || ballY > CANVAS_HEIGHT) {
 			ballSpeedY = -ballSpeedY;
 		}
-
-		if (
-			(ballX < PADDLE_WIDTH && ballY > paddle1Y && ballY < paddle1Y + PADDLE_HEIGHT) ||
-			(ballX > CANVAS_WIDTH - PADDLE_WIDTH - BALL_SIZE && ballY > paddle2Y && ballY < paddle2Y + PADDLE_HEIGHT)
-		) {
-			ballSpeedX = -ballSpeedX;
+	
+		// gerer la collision avec le paddle gauche ( pour le joueur 1)
+		if (ballX < PADDLE_WIDTH && ballY > paddle1Y && ballY < paddle1Y + PADDLE_HEIGHT) {
+			if (ballSpeedX < 0) {  // Seulement si la balle se dirige vers la gauche
+				ballSpeedX = -ballSpeedX;
+			}
 		}
-
+	
+		// gerer la collision avec le paddle droit (pour le joueur 2)
+		if (ballX > CANVAS_WIDTH - PADDLE_WIDTH - BALL_SIZE && ballY > paddle2Y && ballY < paddle2Y + PADDLE_HEIGHT) {
+			if (ballSpeedX > 0) {  // seulement si la balle se dirige vers la droite
+				ballSpeedX = -ballSpeedX;
+			}
+		}
+	
+		// Vérification des points marques par les joueurs
 		if (ballX < 0) {
 			playState.player2Score++;
 			resetBall();
@@ -230,12 +240,11 @@ function initializeGame() //appelee apres que le DOM soit charge et que le canva
 			playState.player1Score++;
 			resetBall();
 		}
-
+	
 		if (playState.player1Score >= WINNING_SCORE || playState.player2Score >= WINNING_SCORE) {
 			endGame();
 		}
 	}
-
 	function resetBall() {
 		ballX = CANVAS_WIDTH / 2;
 		ballY = CANVAS_HEIGHT / 2;
@@ -249,6 +258,8 @@ function initializeGame() //appelee apres que le DOM soit charge et que le canva
 			moveBall();
 			drawGame();
 			requestAnimationFrame(update); // methode JS qui demande au navigateur d'executer une fonction specifique avant le prochain rafraichissement de l'ecran (generalement 60 fps)
+		} else {
+			changePage("#play"); //si jeu est termine => forcer le rechargement de la page
 		}
 	}
 
@@ -319,7 +330,7 @@ function endGame() {
 	.then(response => response.json())
 	.then(data => {
 		playState.isLoaded = false; // Forcer le rechargement pour la prochaine partie
-		mountComponent(Play);
+		changePage("#play");
 	})
 	.catch(error => console.error('Error:', error));
 }

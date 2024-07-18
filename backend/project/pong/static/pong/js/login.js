@@ -9,7 +9,6 @@ function Login() {
 	}
 
 	return `
-		
 		<div class="container mt-5">
 			<h1>${loginState.showRegister ? 'Register' : 'Login'}</h1>
 			${loginState.showRegister ? RegisterForm() : LoginForm()}
@@ -20,14 +19,6 @@ function Login() {
 			</p>
 		</div>
 	`;
-}
-
-function loadLoginState() {
-	bindEvent(loginState, "#loginForm", "submit", handleLogin);
-	bindEvent(loginState, "#registerForm", "submit", handleRegister);
-	bindEvent(loginState, "#showRegister", "click", toggleRegister);
-	bindEvent(loginState, "#showLogin", "click", toggleRegister);
-	loginState.isLoaded = true;
 }
 
 function LoginForm() {
@@ -43,6 +34,27 @@ function LoginForm() {
 		</form>
 	`;
 }
+function loadLoginState() {
+	bindEvent(loginState, "#loginForm", "submit", handleLogin);
+	bindEvent(loginState, "#registerForm", "submit", handleRegister);
+	bindEvent(loginState, "#showRegister", "click", toggleRegister);
+	bindEvent(loginState, "#showLogin", "click", toggleRegister);
+	loginState.isLoaded = true;
+}
+function LoginForm() {
+	return `
+		<form id="loginForm">
+			<div class="mb-3">
+				<input type="text" class="form-control" name="username" placeholder="Username" required>
+			</div>
+			<div class="mb-3">
+				<input type="password" class="form-control" name="password" placeholder="Password" required>
+			</div>
+			<button type="submit" class="btn btn-primary">Login</button>
+		</form>
+	`;
+}
+
 
 function RegisterForm() {
 	return `
@@ -68,23 +80,28 @@ function handleLogin(event) {
 	event.preventDefault();
 	const username = event.target.elements.username.value;
 	const password = event.target.elements.password.value;
+	const csrfToken = getCookie('csrftoken');
+   
+	console.log('CSRF Token:', csrfToken); 
 	let url = `/pong/api/login/`;
-
 	fetch(url, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
-			'X-CSRFToken': getCookie('csrftoken')
+			'X-CSRFToken': csrfToken
 		},
 		body: JSON.stringify({ username, password }),
 		credentials: 'include'
 	})
-	.then(response => response.json())
+	.then(response => {
+		if (!response.ok) throw new Error('Network response was not ok');
+		return response.json();
+	})
 	.then(data => {
 		if (data.status === 'success') {
 			localStorage.setItem('userToken', 'true');
 			alert('Login successful!');
-			changePage('#home');
+			changePage('#profile');
 		} else {
 			alert('Login failed: ' + data.message);
 		}
