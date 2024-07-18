@@ -1,19 +1,20 @@
-# logs_middleware.py
-from django.utils.deprecation import MiddlewareMixin
-import logging
+# # logs_middleware.py
+# from django.utils.deprecation import MiddlewareMixin
+# import logging
 
-logger = logging.getLogger('pong')
+# logger = logging.getLogger('pong')
+# logger1 = logging.getLogger('django.db.backend')
 
-class UserLoginMiddleware(MiddlewareMixin):
-    def login_request(self, request):
-        if request.user.is_authenticated:
-            logger.info(f"L'utilisateur {request.user.username} s'est connecté.")
-    
-    # def register_request(self, request):
-    #     if request.user.is_authenticated:
-    #         logger.info(f"L'utilisateur {request.user.username} s'est enregistre.")
+# class UserLoginLogMiddleware(MiddlewareMixin):
+#     def login_request(self, request):
+#         if request.user.is_authenticated:
+#                 logger.info(f"Middleware-operation::[log in]::[{request.user.username}] => [success]")
+#                 logger1.info(f"Middleware-operation::[log in]::[{request.user.username}] => [success]")
+#         else:
+#             logger.info(f"Middleware-operation::[log in]::[{request.user.username}] => [error]")
+#             logger1.info(f"Middleware-operation::[log in]::[{request.user.username}] => [error]")
 
-class UserRegistrationMiddleware(MiddlewareMixin):
-    def process_view(self, request, view_func, view_args, view_kwargs):
-        if view_func.__name__ == 'RegisterForm':  # Remplacez par le nom de votre vue d'inscription
-            logger.info(f"Nouvel utilisateur inscrit : {request.POST.get('username')}")
+# class UserRegisterLogMiddleware(MiddlewareMixin):
+#     def register_request(self, request, view_func):
+#         if view_func.__name__ == 'register_view':
+#             logger.info(f"Middleware-operation::[registration]::[{request.POST.get('username')}] => [on going]")

@@ -13,7 +13,7 @@ import os
 from django.utils.translation import gettext_lazy as _
 from pathlib import Path
 # from logstash import LogstashHandler
-from logging import FileHandler, StreamHandler
+# from logging import FileHandler, StreamHandler
 # from elasticsearch import RequestsHttpConnection
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -54,7 +54,7 @@ INSTALLED_APPS = [
 	'django.contrib.sessions',
 	'django.contrib.messages',
 	'django.contrib.staticfiles',
-    'django_elasticsearch_dsl',
+    # 'django_elasticsearch_dsl',
     # 'django_elasticsearch_dsl_drf',
 ]
 
@@ -67,6 +67,8 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     # 'elasticapm.contrib.django.middleware.TracingMiddleware',
+    # 'logstash.middleware.LogMiddleware.UserLoginLogMiddleware',
+    # 'logstash.middleware.LogMiddleware.UserRegisterLogMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',
@@ -75,8 +77,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'logstash.middleware.LogMiddleware.UserLoginMiddleware',
-    'logstash.middleware.LogMiddleware.UserRegistrationMiddleware', 
 ]
 
 ROOT_URLCONF = 'server.urls'
@@ -192,10 +192,10 @@ LOGGING = {
     'version': 1,
     'disable_existing_loggers': False, # ?q= false -> not activated
     'formatters': {
-        # 'verbose': {
-        #     'format': '[%(asctime)s]::[%(levelname)s]::| [%(funcName)s]::[%(name)s]=> %(message)s',
-        #     'datefmt': '%Y/%m/%d %H:%M:%S',
-        # },
+        'verbose': {
+            'format': '[%(asctime)s]::[%(levelname)s]::[%(funcName)s]::[%(name)s] => %(message)s',
+            'datefmt': '%Y/%m/%d %H:%M:%S',
+        },
         'simple': {
             'format': '[%(levelname)s] => %(message)s',
         },
@@ -203,21 +203,39 @@ LOGGING = {
     
     'handlers': {
         'file': {
-            'level': 'DEBUG',
+            'level': 'INFO',
             'class': 'logging.FileHandler',
             'filename': '../project/logs/pong.log',
-            'formatter': 'simple',
+            'formatter': 'verbose',
         },
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'stream': 'sys.stdout',
+            'formatter': 'simple',
+            # 'port': 5959, # Default
+            # 'version': 1,
+            # 'message_type': 'django', 
+            # 'fqdn': False,
+            # 'tags': ['django.request'],
+        },
+        # 'logstash': {
+        #     'level': 'DEBUG',
+        #     'class': 'logstash.LogstashTCPHandler',
+        #     # 'host': 'adresse_IP_de_Logstash',
+        #     'port': 5959,
+        #     'formatter': 'simple',
+        # },
     },
     
     'loggers': {
         'pong': {
-            'handlers': ['file'],
+            'handlers': ['console', 'file'],
             'level': 'INFO',
             'propagate': True, # If logs should be propagte to parent logs
         },
-        'django.db.backends': {
-            'handlers': ['file'],
+        'django.db.backend': {
+            'handlers': ['console'],
             'level': 'DEBUG',
             'propagate': True,
         },
@@ -228,7 +246,10 @@ LOGGING = {
 
 ELASTICSEARCH_DSL = {
     'default': {
-        'hosts': 'http://elasticsearch:9200',
+        'hosts': {
+            'http://elasticsearch:9200',
+            'http://elasticsearch:9300',
+        },
         # 'http_auth': ('user', 'password'),
         # 'use_ssl': True,
         # 'verify_certs': True,

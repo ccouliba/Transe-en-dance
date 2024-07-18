@@ -1,9 +1,9 @@
 from django.urls import path
-from django.conf.urls.i18n import i18n_patterns
+# from django.conf.urls.i18n import i18n_patterns
 from django.utils.translation import gettext as _
-from django.conf import settings
-from django.conf.urls.static import static
-from django.views.i18n import set_language
+# from django.conf import settings
+# from django.conf.urls.static import static
+# from django.views.i18n import set_language
 from . import views
 from .views.auth_views import register_view, login_view, logout_view, auth_callback, external_login
 from .views.game_views import play, start_game, update_score, finish_game, cancel_game, game

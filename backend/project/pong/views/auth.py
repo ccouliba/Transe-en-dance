@@ -36,4 +36,4 @@ def get_user_from_api(request, access_token):
         user, created = User.objects.get_or_create(username=user_info['login'])
         login(request, user)
         return redirect('/pong/home')
-    # return redirect('/pong/login')
+    return redirect('/pong/login')
