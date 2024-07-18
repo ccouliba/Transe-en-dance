@@ -18,10 +18,9 @@ urlpatterns = [
 	path('', base_view, name='base'), 
  
 	# path('register/', register_view, name='register'),
-	# path('api/register/', register_view, name='api_register'),
-
 	path('api/login/', login_view, name='login'),
 	path('api/logout/', logout_view, name='logout'),
+	path('api/register/', register_view, name='api_register'),
  
 	path('update_profile/', user_updated_profile, name='update_profile'),
 	path('delete_account/', user_account_deleted, name='delete_account'),

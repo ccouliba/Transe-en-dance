@@ -119,7 +119,7 @@ function handleRegister(event) {
 	const email = event.target.elements.email.value;
 	const password1 = event.target.elements.password1.value;
 	const password2 = event.target.elements.password2.value;
-	let url = `/pong/api/register`;
+	let url = `/pong/api/register/`;
 
 	fetch(url, {
 		method: 'POST',
