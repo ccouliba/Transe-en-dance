@@ -100,6 +100,7 @@ function handleLogin(event) {
 	.then(data => {
 		if (data.status === 'success') {
 			localStorage.setItem('userToken', 'true');
+			console.log("Token set:", localStorage.getItem('userToken'));
 			alert('Login successful!');
 			changePage('#profile');
 		} else {

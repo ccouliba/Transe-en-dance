@@ -109,21 +109,49 @@ async function loadProfileFromBackend(){
 }
 
 // envoie des donnees de mise a jour du profil au backend
-function sendProfileToBackend(payload) { //payload = un objet contenant les donnees a mettre a jour dans le profil
+// function sendProfileToBackend(payload) { //payload = un objet contenant les donnees a mettre a jour dans le profil
+// 	console.log("Authenticated:", !!localStorage.getItem('userToken'));
+// 	let url = `/pong/api/profile/update`;
 	
+// 	fetch(url, {
+// 		method: "POST",
+// 		credentials: "include", 
+// 		headers: { 
+// 			'Content-Type': 'application/json', 
+// 		},
+// 		body: JSON.stringify(payload) // convertit l'objet payload en chaine JSON
+// 	})
+// 	.then(response => response.json())  
+// 	.then(data => console.log('Success:', data))
+// 	.catch(error => console.error('Error:', error));
+// }
+
+function sendProfileToBackend(payload) {
+	console.log("Authenticated:", !!localStorage.getItem('userToken'));
 	let url = `/pong/api/profile/update`;
 	
 	fetch(url, {
 		method: "POST",
-		credentials: "include", // envoie les cookies avec la requete = important pour l'authentification
+		credentials: "include",// envoie les cookies avec la requete = important pour l'authentification
 		headers: { 
-			'Content-Type': 'application/json', // specifie que le contenu envoye est au format JSON
+			'Content-Type': 'application/json',// specifie que le contenu envoye est au format JSON
+			'Authorization': `Bearer ${localStorage.getItem('userToken')}`
 		},
-		body: JSON.stringify(payload) // convertit l'objet payload en chaine JSON
+		body: JSON.stringify(payload)
 	})
-	.then(response => response.json())  // parse la reponse du serveur en JSON
+	.then(response => {
+		if (!response.ok) {
+			return response.text().then(text => {
+				throw new Error(`HTTP error! status: ${response.status}, message: ${text}`);
+			});
+		}
+		return response.json();
+	})
 	.then(data => console.log('Success:', data))
-	.catch(error => console.error('Error:', error));
+	.catch(error => {
+		console.error('Error:', error);
+		alert('An error occurred while updating the profile. Please try again.');
+	});
 }
 
 function EditUsername(){

@@ -13,7 +13,7 @@ import json
 
 # path('pong/api/profile/update', profile_update_view, name='profile_update'),
 @login_required
-# @csrf_exempt# TO DO : ENLEVER CELA C EST JUSTE POUR LES TESTS AVEC POSTMAN !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+@csrf_exempt
 @require_POST
 def	profile_update_view(request):
 		data = json.loads(request.body)
