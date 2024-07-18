@@ -1,22 +1,55 @@
 // Cette fonction attache un evenement a un element DOM de maniere asynchrone
 // Pourquoi ? car addEventListener fonctionne sur des elements deja presents dans le DOM
 // Il gere les cas ou l'element n'existe pas encore dans le DOM 
-function bindEvent(state, cssSelector, event, callback){
+// function bindEvent(state, cssSelector, event, callback){
    
-	// Recherche l'element DOM correspondant au selecteur CSS
-	let target = document.querySelector(cssSelector)
+// 	// Recherche l'element DOM correspondant au selecteur CSS
+// 	let target = document.querySelector(cssSelector)
 
-	// Verifie si l'element existe et si l'etat du composant est charge
-	if (target && state.isLoaded){
-		// Si les conditions sont remplies, attache l'evenement a l'element
-		target.addEventListener(event, callback)
-		// Termine l'execution de la fonction
-		return  
-	}
+// 	// Verifie si l'element existe et si l'etat du composant est charge
+// 	if (target && state.isLoaded){
+// 		// Si les conditions sont remplies, attache l'evenement a l'element
+// 		target.addEventListener(event, callback)
+// 		// Termine l'execution de la fonction
+// 		return  
+// 	}
    
-	// Si l'element n'existe pas ou si l'etat n'est pas charge,
-	// programme une nouvelle tentative dans 500 millisecondes
-	setTimeout(() => bindEvent(state, cssSelector, event, callback), 500)  
+// 	// Si l'element n'existe pas ou si l'etat n'est pas charge,
+// 	// programme une nouvelle tentative dans 500 millisecondes
+// 	setTimeout(() => bindEvent(state, cssSelector, event, callback), 500)  
+// }
+
+function bindEvent(state, cssSelector, event, callback) {
+	function attachEvent() {
+		// utilise querySelectorAll pour obtenir tous les elements 
+		let targets = document.querySelectorAll(cssSelector);
+		
+		if (targets.length > 0 && state.isLoaded) {
+			// Attache l'event à tous les elements 
+			targets.forEach(target => {
+				// Vérifie si l'event n'est pas deja attache
+				if (!target.hasAttribute('data-event-attached')) {
+					target.addEventListener(event, callback);
+					target.setAttribute('data-event-attached', 'true');
+				}
+			});
+			return;
+		}
+		
+		// Si les elements n'existent pas ou si l'etat n'est pas charge,
+		// programme une nouvelle tentative dans 500 millisecondes
+		setTimeout(attachEvent, 500);
+	}
+
+	// demarre le processus d'attachement
+	attachEvent();
+
+	// Ajoute un ecouteur pour les changements futurs du DOM
+	document.addEventListener('DOMContentLoaded', attachEvent);
+	if (window.MutationObserver) {
+		const observer = new MutationObserver(attachEvent);
+		observer.observe(document.body, { childList: true, subtree: true });
+	}
 }
 
 // Cette fonction reinitialise l'etat 'isLoaded' de tous les composants enregistres dans les routes
