@@ -17,11 +17,11 @@ urlpatterns = [
 
 	path('', base_view, name='base'), 
  
-	# path('', login_view, name='default_login'), 
-	path('register/', register_view, name='register'),
-	path('login/', login_view, name='login'),
-	# path('logout/', logout_view, name='logout'),
-	path('api/logout', logout_view, name='logout'),
+	# path('register/', register_view, name='register'),
+	# path('api/register/', register_view, name='api_register'),
+
+	path('api/login/', login_view, name='login'),
+	path('api/logout/', logout_view, name='logout'),
  
 	path('update_profile/', user_updated_profile, name='update_profile'),
 	path('delete_account/', user_account_deleted, name='delete_account'),
@@ -35,8 +35,6 @@ urlpatterns = [
 
 	path('external_login/', external_login, name='external_login'),
  
-	path('api/login/', login_view, name='api_login'),
-	path('api/register/', register_view, name='api_register'),
 	path('api/check_auth/', check_auth, name='check_auth'),
 	path('api/profile/', profile_view, name='profile'),
 	path('api/profile/update', profile_update_view, name='profile_update'),

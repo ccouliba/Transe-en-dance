@@ -8,7 +8,7 @@ function logout() {
 		return;
 	}
 
-	let url = `/pong/api/logout`;
+	let url = `/pong/api/logout/`;
 	fetch(url, {
 		method: "POST",
 		credentials: "include",
