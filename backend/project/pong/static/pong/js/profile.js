@@ -1,4 +1,3 @@
-
 // Declare un objet 'profileState' pour stocker les informations du profil utilisateur
 var profileState = {
 	username:"",
@@ -11,16 +10,16 @@ var profileState = {
 }
 
 function checkAuth() {
-    fetch('/pong/api/check_auth/', {
-        method: 'GET',
-        credentials: 'include',
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (!data.isAuthenticated) {
-            changePage('#login');
-        }
-    });
+	fetch('/pong/api/check_auth/', {
+		method: 'GET',
+		credentials: 'include',
+	})
+	.then(response => response.json())
+	.then(data => {
+		if (!data.isAuthenticated) {
+			changePage('#login');
+		}
+	});
 }
 
 function Profile() {
@@ -33,7 +32,7 @@ function Profile() {
 	// - affiche les informations du profil en utilisant les donnees de profileState
 	// - sections pour modifier les informations du profil
 	return `
-		${Menu()}
+		
 		<div class="container mt-5">
 			<h1 class="mb-4">Profil</h1>
 			<div class="card">

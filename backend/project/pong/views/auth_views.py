@@ -17,9 +17,14 @@ def base_view(request):
 	return render(request, 'pong/base.html')
 
 # Cette vue verifie si un utilisateur est authentifie ou pas. Elle est utilise dans base.html
+# def check_auth(request):
+# 	return JsonResponse({'is_authenticated': request.user.is_authenticated})
 def check_auth(request):
-	return JsonResponse({'is_authenticated': request.user.is_authenticated})
-
+	return JsonResponse({
+		'is_authenticated': request.user.is_authenticated,
+		'username': request.user.username if request.user.is_authenticated else None
+	})
+ 
 # Cette vue gere l'authentification via l'API d'Intra 42 en redirigeant l'utilisateur vers l'URL d'authentification appropriee
 def external_login(request):
 	forty2_auth_url = os.getenv('API_AUTH_URL', 'https://api.intra.42.fr/oauth/authorize')
@@ -59,9 +64,14 @@ def login_view(request):
 
 
 # vue pour gerer la deconnexion de l'utilisateur
+# @login_required
+# def logout_view(request):
+# 	logout(request) #methode Django
+# 	return JsonResponse({'status': 'success'})
 @login_required
 def logout_view(request):
-	logout(request) #methode Django
+	logout(request)
+	request.session.flush()
 	return JsonResponse({'status': 'success'})
 
 # Cette vue gere l'inscription des nouveaux utilisateurs

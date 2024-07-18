@@ -84,7 +84,7 @@ function Play() {
 	}
 
 	return `
-		${Menu()}
+		
 		${content}
 	`;
 }

@@ -28,7 +28,7 @@ function FriendsList() {
 	}
 
 	return `
-		${Menu()}
+		
 		<div class="container mt-5">
 			<h1 class="mb-4">Friends list</h1>
 			

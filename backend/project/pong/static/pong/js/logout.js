@@ -7,7 +7,6 @@ function logout() {
 		console.log("Already logged out");
 		return;
 	}
-
 	let url = `/pong/api/logout/`;
 	fetch(url, {
 		method: "POST",
@@ -27,8 +26,11 @@ function logout() {
 		if (data.status === 'success') {
 			console.log('Successfully logged out');
 			logoutState.isLoggedOut = true;
-			changePage("#login");
-			
+			localStorage.clear();
+			sessionStorage.clear();
+			resetAllStates();
+			updateMenu();
+			changePage('#home')
 		} else {
 			console.error('Logout failed:', data.message);
 			alert('Logout failed: ' + data.message);
@@ -40,7 +42,22 @@ function logout() {
 	});
 }
 
+function resetAllStates() {
+	// Reinitialiser tous les etats 
+	profileState = {
+		username: "",
+		email: "",
+		firstname: "",
+		lastname: "",
+		id: "",
+		friends: [],
+		isLoaded: false
+	};
+	logoutState.isLoggedOut = false;
+}
+
 function Logout() {
+	logout(); 
 	return `
 		<div>
 			<h2>You have been logged out</h2>

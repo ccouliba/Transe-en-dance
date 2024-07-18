@@ -6,7 +6,6 @@ let tournamentState = {
 
 function Tournament() {
 	return `
-		${Menu()}
 		<h1>
 		to do
 		</h1>

@@ -1,17 +1,3 @@
-// // Fonction pour charger un fichier CSS. Pour l'instant le CSS est charge dans base.html
-
-// function loadCSS(filename) {
-// 	let link = document.createElement('link');
-// 	link.rel = 'stylesheet';
-// 	link.type = 'text/css';
-// 	link.href = filename;
-// 	document.getElementsByTagName('head')[0].appendChild(link);
-// }
-
-// Appel de la fonction pour charger le CSS
-//loadCSS("{% static 'pong/css/style.css' %}"); 
-
-
 // Cette fonction attache un evenement a un element DOM de maniere asynchrone
 // Pourquoi ? car addEventListener fonctionne sur des elements deja presents dans le DOM
 // Il gere les cas ou l'element n'existe pas encore dans le DOM 
@@ -65,21 +51,56 @@ let routes = {
 
 
 // Fonction pour changer de page
-window.changePage = function (url) {
-	if (url === "#play") {
-		playState.isLoaded = false;
-	  }
-	if (typeof routes[url] === "undefined") {
-		mountComponent(Page404)
-		history.pushState({ page: "#404" }, "", "#404"); // Ajoute à l'historique
-		return;
-	}
+// window.changePage = function (url) {
+// 	if (url === "#play") {
+// 		playState.isLoaded = false;
+// 	  }
+// 	if (typeof routes[url] === "undefined") {
+// 		mountComponent(Page404)
+// 		history.pushState({ page: "#404" }, "", "#404"); // Ajoute à l'historique
+// 		return;
+// 	}
 	
-	routes[url](); // Charge la page demandée
+// 	routes[url](); // Charge la page demandée
 	
-	history.pushState({ page: url }, "", url); // Ajoute à l'historique
+// 	history.pushState({ page: url }, "", url); // Ajoute à l'historique
 
+// }
+
+window.changePage = function (url) {
+	fetch('/pong/api/check_auth')
+		.then(response => response.json())
+		.then(data => {
+			if (data.is_authenticated) {
+				localStorage.setItem('userToken', 'true');
+				localStorage.setItem('username', data.username);
+			} else {
+				localStorage.removeItem('userToken');
+				localStorage.removeItem('username');
+			}
+			updateMenu(); 
+			if (!data.is_authenticated && url !== "#login" && url !== "#register") {
+				changePage("#login");
+			} else {
+				if (url === "#play") {
+					playState.isLoaded = false;
+				}
+				if (typeof routes[url] === "undefined") {
+					mountComponent(Page404);
+					history.pushState({ page: "#404" }, "", "#404");
+					return;
+				}
+				routes[url]();
+				history.pushState({ page: url }, "", url);
+			}
+			updateMenu();
+		})
+		.catch(error => {
+			console.error('Error:', error);
+			changePage("#login");
+		});
 }
+
 // Gérer l'événement `popstate`
 window.onpopstate = function(event) {
 //	resetLoaded()
@@ -92,10 +113,16 @@ window.onpopstate = function(event) {
 };
 
 // Fonction pour monter un composant
-function mountComponent(componentFunction, data) {
-	// Fonction pour charger un composant dans le div app qui se trouve dans base.html
-	document.getElementById("app").innerHTML = componentFunction(data);
+// function mountComponent(componentFunction, data) {
+// 	// Fonction pour charger un composant dans le div app qui se trouve dans base.html
+// 	document.getElementById("app").innerHTML = componentFunction(data);
 
+// }
+
+function mountComponent(componentFunction, data) {
+	const appContainer = document.getElementById("app");
+	appContainer.innerHTML = componentFunction(data);
+	updateMenu();  //pour ne pas avoir le menu en double
 }
 
 function getCookie(name) {
@@ -111,5 +138,12 @@ function getCookie(name) {
 		}
 	}
 	return cookieValue;
+}
+
+function updateMenu() {
+	const menuContainer = document.getElementById('menu-container');
+	if (menuContainer) {
+		menuContainer.innerHTML = Menu();
+	}
 }
 

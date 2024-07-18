@@ -9,7 +9,7 @@ function Login() {
 	}
 
 	return `
-		${Menu()}
+		
 		<div class="container mt-5">
 			<h1>${loginState.showRegister ? 'Register' : 'Login'}</h1>
 			${loginState.showRegister ? RegisterForm() : LoginForm()}
@@ -82,8 +82,9 @@ function handleLogin(event) {
 	.then(response => response.json())
 	.then(data => {
 		if (data.status === 'success') {
+			localStorage.setItem('userToken', 'true');
 			alert('Login successful!');
-			changePage('#profile');
+			changePage('#home');
 		} else {
 			alert('Login failed: ' + data.message);
 		}
@@ -115,7 +116,7 @@ function handleRegister(event) {
 	.then(data => {
 		if (data.status === 'success') {
 			alert('Registration successful!');
-			changePage('#profile');
+			changePage('#home');
 		} else {
 			alert('Registration failed: ' + JSON.stringify(data.message));
 		}
