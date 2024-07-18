@@ -188,3 +188,19 @@ function updateMenu() {
 	}
 }
 
+// Gestion du login externe
+window.addEventListener('load', function() {
+	const urlParams = new URLSearchParams(window.location.search);
+	const loginSuccess = urlParams.get('login_success');
+	if (loginSuccess === 'true') {
+		localStorage.setItem('userToken', 'true');
+		alert('Login successful!');
+		if (typeof changePage === 'function') {
+			changePage('#profile');
+		} else {
+			console.error('changePage function is not defined');
+			// Fallback si changePage n'est pas definie
+			window.location.hash = '#profile';
+		}
+	}
+});

@@ -17,6 +17,15 @@ function Login() {
 					? 'Already have an account? <a href="#" id="showLogin">Login</a>' 
 					: 'Don\'t have an account? <a href="#" id="showRegister">Register</a>'}
 			</p>
+			${!loginState.showRegister ? '<a href="/pong/external_login/" class="btn btn-secondary">Login with 42</a>' : ''}
+		</div>
+	`;
+}
+
+function ExternalLoginButton() {
+	return `
+		<div class="mt-3">
+			<a href="/pong/external_login/" class="btn btn-secondary">Login with 42</a>
 		</div>
 	`;
 }

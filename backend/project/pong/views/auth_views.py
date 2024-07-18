@@ -35,18 +35,28 @@ def external_login(request):
 	return redirect(f"{forty2_auth_url}?client_id={client_id}&redirect_uri={redirect_uri}&response_type=code")
 
 # Cette vue gere le callback de l'authentification (ie la reponse recue apres que l'utilisateur ait autorise l'application via l'authentification via l'API d'Intra 42)
+# def auth_callback(request):
+# 	api_response = auth.get_response_from_api(request)
+# 	if api_response is None:
+# 		# print(api_response, "response_code =", api_response.status_code)
+# 		return redirect('/pong/login')    
+# 	elif api_response.status_code == 200:
+# 		token_data = api_response.json()
+# 		access_token = token_data.get('access_token')
+# 		# request.session['access_token'] = access_token # a rajouter pour pour sauvegarder l'access_token dans la session ?
+# 		return auth.get_user_from_api(request, access_token)
+# 	return HttpResponse("Authentication failed", status=401)
 def auth_callback(request):
 	api_response = auth.get_response_from_api(request)
 	if api_response is None:
 		# print(api_response, "response_code =", api_response.status_code)
 		return redirect('/pong/login')    
-	elif api_response.status_code == 200:
-		token_data = api_response.json()
-		access_token = token_data.get('access_token')
-		# request.session['access_token'] = access_token # a rajouter pour pour sauvegarder l'access_token dans la session ?
-		return auth.get_user_from_api(request, access_token)
-	return HttpResponse("Authentication failed", status=401)
-
+	if user_info_response.status_code == 200:
+		user_info = user_info_response.json()
+		user, created = User.objects.get_or_create(username=user_info['login'])
+		login(request, user)
+		return redirect('/pong/?login_success=true')
+	return redirect('/pong/login')
 # Cette vue gere la connexion des utilisateurs
 @require_POST
 # @ensure_csrf_cookie
