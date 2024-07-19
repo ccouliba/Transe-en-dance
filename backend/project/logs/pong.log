@@ -1,5 +1,2 @@
-[2024/07/18 16:04:22]::[INFO]::[register_view]::[pong.views.auth_views] => operation::[registration] => [error II]
-[2024/07/18 16:20:44]::[INFO]::[register_view]::[pong.views.auth_views] => operation::[registration] => [error II]
-[2024/07/18 16:21:24]::[INFO]::[login_view]::[pong.views.auth_views] => operation::[log in] => [error II]
-[2024/07/18 16:21:50]::[INFO]::[login_view]::[pong.views.auth_views] => operation::[log in] => [error II]
-[2024/07/18 16:22:00]::[INFO]::[login_view]::[pong.views.auth_views] => operation::[log in] => [success]
+[2024/07/19 12:03:25]::[INFO]::[login_view]::[pong.views.auth_views] => operation::[log in] => [error II]
+[2024/07/19 12:03:41]::[INFO]::[register_view]::[pong.views.auth_views] => operation::[registration] => [error II]
