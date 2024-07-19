@@ -13,6 +13,7 @@ import os
 from django.utils.translation import gettext_lazy as _
 # from django.utils.translation import gettext as _
 from pathlib import Path
+from corsheaders.defaults import default_headers
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 # BASE_DIR = Path(__file__).resolve().parent.parent
@@ -41,6 +42,20 @@ ALLOWE_HOSTS = []
 # CSRF_COOKIE_SECURE = True
 # SESSION_COOKIE_SECURE = True
 
+# CORS_ALLOW_ALL_ORIGINS = True  #todo : a enlever en prod
+# CORS_ALLOW_CREDENTIALS = True
+# CSRF_TRUSTED_ORIGINS = [
+# 	'http://localhost:8000',
+# 	'http://127.0.0.1:8000',
+# ]
+# CORS_ALLOW_HEADERS = list(default_headers) + [
+# 	'X-CSRFToken',
+# ]
+
+# CSRF_COOKIE_SAMESITE = 'Lax'  # ou 'None' si nécessaire, mais cela nécessite HTTPS
+# CSRF_COOKIE_HTTPONLY = False  # Permet l'accès au cookie CSRF via JavaScript
+# SESSION_COOKIE_SAMESITE = 'Lax'  # ou 'None' si nécessaire, mais cela nécessite HTTPS
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -52,6 +67,7 @@ INSTALLED_APPS = [
 	'django.contrib.sessions',
 	'django.contrib.messages',
 	'django.contrib.staticfiles',
+	# 'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -89,28 +105,28 @@ WSGI_APPLICATION = 'server.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': os.getenv('SQL_ENGINE', 'django.db.backends.postgresql_psycopg2'),
-        'NAME': os.getenv('SQL_DATABASE', 'db1'),
-        'USER': os.getenv('SQL_USER', 'ccouliba'),
-        'PASSWORD': os.getenv('SQL_PASSWORD'),
-        'HOST': os.getenv('SQL_HOST', 'db'),
-        'PORT': os.getenv('SQL_PORT', '5432'),
-    }
-}
-
-# # on localhost
 # DATABASES = {
-# 	'default': {
-# 		'ENGINE': 'django.db.backends.postgresql_psycopg2',
-# 		'NAME': 'db1',
-# 		'USER': 'ccouliba',
-# 		'PASSWORD': 'password',
-# 		'HOST': 'localhost',
-# 		'PORT': '5432',
-# 	}
+#     'default': {
+#         'ENGINE': os.getenv('SQL_ENGINE', 'django.db.backends.postgresql_psycopg2'),
+#         'NAME': os.getenv('SQL_DATABASE', 'db1'),
+#         'USER': os.getenv('SQL_USER', 'ccouliba'),
+#         'PASSWORD': os.getenv('SQL_PASSWORD'),
+#         'HOST': os.getenv('SQL_HOST', 'db'),
+#         'PORT': os.getenv('SQL_PORT', '5432'),
+#     }
 # }
+
+# on localhost
+DATABASES = {
+	'default': {
+		'ENGINE': 'django.db.backends.postgresql_psycopg2',
+		'NAME': 'db1',
+		'USER': 'ccouliba',
+		'PASSWORD': 'password',
+		'HOST': 'localhost',
+		'PORT': '5432',
+	}
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators

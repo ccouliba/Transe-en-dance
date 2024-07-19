@@ -10,6 +10,7 @@ from django.utils.translation import gettext as _
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
 from pong.models import User, Friendship
+<<<<<<< HEAD
 from .. import forms
 
 # This view for multilang
@@ -26,6 +27,49 @@ def change_language(request):
     else:
         form = forms.SetLanguageForm()
     return render(request, 'pong/change_language.html', {'form': form})
+=======
+from django.views.decorators.http import require_POST
+from django.views.decorators.csrf import csrf_exempt
+import json
+
+# path('pong/api/profile/update', profile_update_view, name='profile_update'),
+@login_required
+@csrf_exempt
+@require_POST
+def	profile_update_view(request):
+		data = json.loads(request.body)
+		user = request.user
+		updated = []
+
+		if 'username' in data:
+			user.username = data['username']
+			updated.append('username')
+
+		if 'email' in data:
+			user.email = data['email']
+			updated.append('email')
+
+		if 'firstname' in data:
+			user.first_name = data['firstname']
+			updated.append('firstname')
+
+		if 'lastname' in data:
+			user.last_name = data['lastname']
+			updated.append('lastname')
+
+		if updated:
+			user.save()
+			return JsonResponse({'status': 'success', 'updated': updated})
+		else:
+			return JsonResponse({'status': 'error', 'message': 'No valid fields to update'}, status=400)
+
+	# new_username = json.loads(request.body).get('username')
+	# if new_username is not None:
+	# 	request.user.username = new_username
+	# 	request.user.save()
+	# 	return JsonResponse({'status': 'success'})
+	
+>>>>>>> spa
 
 #Cette vue affiche le profil de l'utilisateur connecte en rendant la page HTML appropriee
 @login_required
@@ -34,12 +78,23 @@ def profile_view(request):
 	friends = user.friends.all()
 	sent_requests = Friendship.objects.filter(id_user_1=user)
 	received_requests = Friendship.objects.filter(id_user_2=user)
-	return render(request, 'pong/profile.html', {
-		'user': user,
-		'friends': friends,
-		'sent_requests': sent_requests,
-		'received_requests': received_requests
+ 
+	return JsonResponse({
+		'username': user.username,
+		'email': user.email,
+		'firstname': user.first_name,
+		'lastname' : user.last_name,
+		'id' :user.id
+  
+  
 	})
+ 
+	# return render(request, 'pong/profile.html', {
+	# 	'user': user,
+	# 	'friends': friends,
+	# 	'sent_requests': sent_requests,
+	# 	'received_requests': received_requests
+	# })
 
 # @login_required
 # def profile_view(request):
@@ -60,17 +115,36 @@ def user_updated_profile(request):
 
 # Cette vue permet a l'utilisateur connecte de changer son mot de passe en utilisant un formulaire fourni par Django
 @login_required
-def user_password_changed(request):
-	if request.method == 'POST':
-		form = PasswordChangeForm(user=request.user, data=request.POST) # CECI EST DE LA MAGIE : formulaire fourni par django
+# @csrf_exempt  #todo
+@require_POST
+def edit_password_view(request):
+	print(f"User authenticated: {request.user.is_authenticated}")
+	print(f"Username: {request.user.username}")
+	try:
+		# tente de charger les donnees JSON du corps de la requete
+		data = json.loads(request.body)
+		# creer un formulaire de changement de mot de passe avec les donnees de l'utilisateur
+		form = PasswordChangeForm(user=request.user, data={
+			'old_password': data.get('old_password'),
+			'new_password1': data.get('new_password1'),
+			'new_password2': data.get('new_password2')
+		})
+		# verifie si le formulaire est valide
 		if form.is_valid():
+			# Si le formulaire est valide => enregistre le nouveau mot de passe
 			form.save()
-			update_session_auth_hash(request, form.user)  # Important pour maintenir la session active
-			return redirect('/pong/profile')  
-			# return redirect('pong/profile.html')  
-	else:
-		form = PasswordChangeForm(user=request.user)
-	return render(request, 'pong/change_password.html', {'form': form})
+			# Mise a jour de la session d'authentification de l'utilisateur pour eviter la deconnexion
+			update_session_auth_hash(request, form.user) #methode Django
+			return JsonResponse({'status': 'success'})
+		else:
+			# Si le formulaire n'est pas valide :
+			return JsonResponse({'status': 'error', 'errors': form.errors}, status=400)
+	except json.JSONDecodeError:
+		# Si une erreur de decodage JSON se produit :
+		return JsonResponse({'status': 'error', 'message': 'Invalid JSON'}, status=400)
+	except Exception as e:
+		# Si une autre erreur se produit :
+		return JsonResponse({'status': 'error', 'message': str(e)}, status=500)
 
 # Can be changed any time ! Just a simple view linked to a template/form that works
 # Cette vue permet a l'utilisateur connecte de supprimer son compte et de rediriger vers la page d'accueil

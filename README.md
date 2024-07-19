@@ -1,6 +1,39 @@
-# nachin's notes
+# Notes
 
-from localhost :
+#### SPA from hell
+
+What is happening when we want data from backend : 
+- URL : http://localhost:8000/pong/profile/
+- Le fichier profile.html étend base.html
+- La fonction changePage() se trouve dans main.js
+- La fonction Profile() se trouve dans profile.js :
+  - La fonction loadProfileFromBackend() :
+      - Utilise fetch sur l'URL de Profile => fait appel à la vue associée à l'URL (// urls.py)
+      - ATTENTION fetch est non bloquant. Donc ce batard n'empêche pas l'exécution du reste du code pendant qu'il attend une réponse du serveur
+      Donc comment faire ? 
+      - Récupère les informations du backend et les assigne à une variable JS globale (profileState)
+  - Retourne le HTML de la page avec les informations obtenues du backend grâce à la variable globale profileState
+
+What is happening when we want to send data to the backend : 
+- URL : http://localhost:8000/pong/profile/
+- Le fichier profile.html étend base.html
+- La fonction changePage() se trouve dans main.js
+- La fonction Profile() se trouve dans profile.js :
+  - La fonction loadProfileFromBackend() retourne le HTML de la page. 
+  - Dans ce HTML => ${EditUsername()}
+
+- function EditUsername() : 
+  - Retourne le HTML du formulaire pour changer le username de l'utilisateur. 
+  - On aimerait utiliser addeventlistener MAIS addeventlistener ne peut s'utiliser que si le HTML est deja charge. Or, le HTML du formulaire ne se charge qu'a la fin car c'est la valeur de retour de la fonction EditUsername(). 
+  - DONC => utilisation de la fonction bindEvent()
+- bindEvent() dans main.js
+  - On utilise isLoaded de la variable globale profileState. Cette variable est a true lorsqu'on passe dans la fonction loadProfileFromBackend(). 
+  - Donc si isLoaded est a true, cela veut dire qu'on a charge une premiere fois le html. Et on peut donc utiliser addeventlistener().
+
+
+
+
+#### from localhost :
 
 - docker-compose up db 
 - Si erreur : `django.core.exceptions.ImproperlyConfigured: Error loading psycopg2 or psycopg module` alors : 
