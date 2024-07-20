@@ -21,7 +21,7 @@
 	<div class="menuStructureTop">
 		<nav class="navbar navbar-expand-lg navbar-custom menuStructureTop">
 			<div class="container-fluid">
-				<a class="navbar-brand active" href="base.html" id="navbarHomeLink">Home</a>
+				<a class="navbar-brand active" href="#home" onclick="changePage('#home'); return false;" id="navbarHomeLink"; >Home</a>
 				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar"
 					aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
@@ -29,38 +29,23 @@
 				<div class="collapse navbar-collapse" id="navbar">
 					<ul class="navbar-nav">
 						<li class="nav-item">
-							<a class="nav-link" aria-current="page" href="profile.html"
-								id="navbarProfileLink">Profile</a>
+							<a class="nav-link" aria-current="page" href="#play" id="navbarPlayLink" onclick="changePage('#play'); return false;">Play</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" aria-current="page" href="change_language.html"
-								id="navbarLanguageLink">Language</a>
+							<a class="nav-link" aria-current="page" href="#tournament"
+								id="navbarTournamentLink" onclick="changePage('#tournament'); return false;">Tournament</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" aria-current="page" href="change_password.html"
-								id="navbarPasswordLink">Password</a>
+							<a class="nav-link" aria-current="page" href="#profile"
+								id="navbarProfileLink" onclick="changePage('#profile'); return false;">Profile</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" aria-current="page" href="delete_account.html"
-								id="navbarRemovalLink">Removal</a>
+							<a class="nav-link" aria-current="page" href="#friends"
+								onclick="changePage('#friends'); return false;" id="navbarFriendsLink">Friends</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" aria-current="page" href="game.html" id="navbarGameLink">Game</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" aria-current="page" href="index.html"
-								id="navbarIndexLink">Index</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" aria-current="page" href="login.html"
-								id="navbarLoginLink">Login</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" aria-current="page" href="menu.html" id="navbarMenuLink">Menu</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" aria-current="page" href="register.html"
-								id="navbarRegisterLink">Register</a>
+							<a class="nav-link" aria-current="page" href="#" onclick="logout(); return false;"
+								id="navbarLogoutLink">Log Out</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true"
