@@ -51,8 +51,8 @@ services:
       - POSTGRES_PORT='5432'
       # - POSTGRES_HOST_AUTH_METHOD=trust
     restart: always
-    #networks:
-    #  - transcendance
+    networks:
+     - transcendance
 
 volumes:
   postgres_data:
