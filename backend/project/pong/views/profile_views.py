@@ -10,6 +10,22 @@ from django.utils.translation import gettext as _
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
 from pong.models import User, Friendship
+from .. import forms
+
+# This view for multilang
+@login_required
+def change_language(request):
+    if request.method == 'POST':
+        form = forms.SetLanguageForm(request.POST)
+        if form.is_valid():
+            user_language = form.cleaned_data['language']
+            translation.activate(user_language)
+            response = redirect('/pong/home')
+            response.set_cookie(settings.LANGUAGE_COOKIE_NAME, user_language)
+            return response
+    else:
+        form = forms.SetLanguageForm()
+    return render(request, 'pong/change_language.html', {'form': form})
 from django.views.decorators.http import require_POST
 from django.views.decorators.csrf import csrf_exempt
 import json
