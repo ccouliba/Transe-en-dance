@@ -54,6 +54,8 @@ INSTALLED_APPS = [
 	'django.contrib.sessions',
 	'django.contrib.messages',
 	'django.contrib.staticfiles',
+	'rest_framework',
+	'rest_framework.authtoken',
     # 'django_elasticsearch_dsl',
     # 'django_elasticsearch_dsl_drf',
 ]
@@ -67,8 +69,8 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     # 'elasticapm.contrib.django.middleware.TracingMiddleware',
-    # 'logstash.middleware.LogMiddleware.UserLoginLogMiddleware',
-    # 'logstash.middleware.LogMiddleware.UserRegisterLogMiddleware',
+    'logstash.middleware.LogMiddleware.UserLoginLogMiddleware',
+    'logstash.middleware.LogMiddleware.UserRegisterLogMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',
@@ -103,6 +105,18 @@ WSGI_APPLICATION = 'server.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': os.getenv('SQL_ENGINE', 'django.db.backends.postgresql_psycopg2'),
+#         'NAME': os.getenv('SQL_DATABASE', 'db1'),
+#         'USER': os.getenv('SQL_USER', 'ccouliba'),
+#         'PASSWORD': os.getenv('SQL_PASSWORD'),
+#         'HOST': os.getenv('SQL_HOST', 'db'),
+#         'PORT': os.getenv('SQL_PORT', '5432'),
+#     }
+# }
+
+# on localhost
 DATABASES = {
     'default': {
         'ENGINE': os.getenv('SQL_ENGINE', 'django.db.backends.postgresql_psycopg2'),
@@ -186,6 +200,12 @@ STATICFILES_DIRS = [
 # Chemin pour les fichiers statiques collectés (utilisé avec collectstatic)
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ]
+}
 # For logging (devops)
 LOGGING = {
     # Defines the dict version for logging config ; Should always be 1 ; another value seems to cause issues
@@ -211,7 +231,7 @@ LOGGING = {
         'console': {
             'level': 'DEBUG',
             'class': 'logging.StreamHandler',
-            'stream': 'sys.stdout',
+            'stream': 'sys.stderr',
             'formatter': 'simple',
             # 'port': 5959, # Default
             # 'version': 1,

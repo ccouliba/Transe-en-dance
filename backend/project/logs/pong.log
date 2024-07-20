@@ -1,2 +1,2 @@
-[2024/07/19 12:03:25]::[INFO]::[login_view]::[pong.views.auth_views] => operation::[log in] => [error II]
-[2024/07/19 12:03:41]::[INFO]::[register_view]::[pong.views.auth_views] => operation::[registration] => [error II]
+[2024/07/19 17:21:44]::[INFO]::[LoggingFunction]::[pong] => operation::[Log-in]::[aa] => [success]
+[2024/07/19 17:22:09]::[INFO]::[LoggingFunction]::[pong] => operation::[Log-in]::[aa] => [success]

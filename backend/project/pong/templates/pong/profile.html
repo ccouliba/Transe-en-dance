@@ -4,18 +4,20 @@
 {% block title %}Profil{% endblock %}
 
 {% block content %}
-<div class="container mt-5">
-	<h1>{{ profile_txt }} {{ of_txt }} {{ user.username }}</h1>
-	<p>{{ email_txt }} : {{ user.email }}</p>
-	<p>{{ name_txt }} : {{ user.first_name }} {{ user.last_name }}</p>
-	<p>{{ user_id_txt }} : {{ user.id }}</p>
-	<button class="btn btn-primary mt-3" id="download-pdf">{{ download_pdf_txt }}</button>
+<script>changePage('profile');</script>
+{% comment %} <div class="container mt-5">
+	<h1>Profil de {{ user.username }}</h1>
+	<p>Email : {{ user.email }}</p>
+	<p>Nom : {{ user.first_name }} {{ user.last_name }}</p>
+	<p>ID : {{ user.id }}</p>
+	<button class="btn btn-primary mt-3" id="download-pdf">Télécharger en PDF</button>
 
 	<h2>{{ friends_list_txt }}</h2>
 	{% if friends %}
-		<ul class="list-group">
+		<!-- https://getbootstrap.com/docs/4.0/components/list-group/ -->
+		<ul class="list-group"> 
 			{% for friend in friends %}
-				<li class="list-group-item">
+				<li class="list-group-item"> 
 					{{ friend.id }} - {{ friend.username }} ({{ friend.email }})
 					<button class="btn btn-danger btn-sm" onclick="unfriend({{ friend.id }})"> {{ remove_txt }}</button>
 				</li>
@@ -27,7 +29,7 @@
 
 	<h2>{{ friend_request_txt }}</h2>
 	{% if sent_requests %}
-		<ul class="list-group">
+		<ul class="list-group" id="sent-requests-list">
 			{% for request in sent_requests %}
 				<li class="list-group-item">
 					{{ request.id_user_2.id }} - {{ request.id_user_2.username }} ({{ request.id_user_2.email }})
@@ -36,7 +38,8 @@
 			{% endfor %}
 		</ul>
 	{% else %}
-		<p>{{ no_request_send_text }}.</p>
+		<ul class="list-group" id="sent-requests-list"></ul>
+		<p id="noFriendRequestsMessage">Vous n'avez pas encore envoyé de demandes d'amis.</p>
 	{% endif %}
 
 	<h2>{{ friends_request_rec_txt }}</h2>
@@ -51,7 +54,7 @@
 			{% endfor %}
 		</ul>
 	{% else %}
-		<p>{{ no_request_rec_txt }}.</p>
+		<p id="noFriendRequestsMessage">Vous n'avez pas encore reçu de demandes d'amis.</p>
 	{% endif %}
 
 	<h2>{{ friend_request_sent_txt }}</h2>
@@ -69,135 +72,162 @@
 
 {% block scripts %}
 <script>
+	// Ajouter un event listener pour gerer l'envoi du formulaire
 	document.getElementById('send-friend-request-form').addEventListener('submit', function(event) {
+		// Prevenir le rechargement de la page
 		event.preventDefault();
+
+		// Recueillir les donnees du formulaire
 		const formData = new FormData(this);
 		const data = Object.fromEntries(formData.entries());
+
+		// Envoyer les donnees au serveur via fetch. Permet d'envoyer une requete au serveur de maniere asynchrone
 		fetch('{% url "pong:send_friend_request" %}', {
-			method: 'POST',
-			body: JSON.stringify(data),
+			method: 'POST', // Methode HTTP POST
+			body: JSON.stringify(data), // Convertir les donnees en JSON
 			headers: {
-				'Content-Type': 'application/json',
-				'X-CSRFToken': '{{ csrf_token }}'
+				'Content-Type': 'application/json', // Type de contenu JSON
+				'X-CSRFToken': '{{ csrf_token }}' // Token CSRF pour la securite
 			}
-		})
-		.then(response => response.json())
+		}) // then => permet de gerer la reponse du serveur
+		.then(response => response.json()) // Convertir la reponse en JSON
 		.then(data => {
-			const responseDiv = document.getElementById('response');
-			const errorMessageDiv = document.getElementById('error-message');
-			if (data.status === 'success') {
+			const responseDiv = document.getElementById('response'); // Element pour afficher la reponse
+			const errorMessageDiv = document.getElementById('error-message'); // Element pour afficher les erreurs
+			if (data.status === 'success') { // Si la reponse indique un succes
+				// Afficher un message de succes
 				responseDiv.innerHTML = `<div class="alert alert-success">${data.message}</div>`;
 				errorMessageDiv.innerHTML = '';
-			} else {
+				// Ajouter la nouvelle demande a la liste des demandes envoyees
+				const sentRequestsList = document.getElementById('sent-requests-list');
+				const newRequestItem = document.createElement('li'); // Creer un nouvel element <li>
+				newRequestItem.className = 'list-group-item'; // Ajouter une classe CSS
+				newRequestItem.innerHTML = `
+					${data.requested_user.id} - ${data.requested_user.username} (${data.requested_user.email})
+					<button class="btn btn-danger btn-sm" onclick="removeFriendRequest(${data.request.id})">Retirer</button>
+				`;
+				document.getElementById("noFriendRequestsMessage".remove())
+				sentRequestsList.appendChild(newRequestItem); // Ajouter le nouvel element a la liste
+			} else { // Si la reponse indique une erreur
+				// Afficher le message d'erreur
 				responseDiv.innerHTML = '';
 				errorMessageDiv.innerHTML = data.message;
 			}
 		})
-		.catch(error => {
-			const responseDiv = document.getElementById('response');
-			const errorMessageDiv = document.getElementById('error-message');
+		.catch(error => { // En cas d'erreur de requete
+			const responseDiv = document.getElementById('response'); // Element pour afficher la reponse
+			const errorMessageDiv = document.getElementById('error-message'); // Element pour afficher les erreurs
 			responseDiv.innerHTML = '';
 			errorMessageDiv.innerHTML = 'Erreur lors de l\'envoi de la demande d\'ami.';
-			console.error('Error:', error);
+			console.error('Error:', error); // Afficher l'erreur dans la console
 		});
 	});
 
+	// Ajouter un event listener pour telecharger un fichier PDF
 	document.getElementById('download-pdf').addEventListener('click', function() {
-		window.location.href = '{% url "pong:get_user_info" %}?format=pdf';
+		window.location.href = '{% url "pong:get_user_info" %}?format=pdf'; // Rediriger l'utilisateur pour telecharger le PDF
 	});
 
+	// Fonction pour accepter une demande d'ami
 	function acceptFriendRequest(requestId) {
 		fetch('{% url "pong:accept_friend_request" %}', {
-			method: 'POST',
-			body: JSON.stringify({ request_id: requestId }),
+			method: 'POST', // Methode HTTP POST
+			body: JSON.stringify({ request_id: requestId }), // Envoyer l'ID de la demande
 			headers: {
-				'Content-Type': 'application/json',
-				'X-CSRFToken': '{{ csrf_token }}'
+				'Content-Type': 'application/json', // Type de contenu JSON
+				'X-CSRFToken': '{{ csrf_token }}' // Token CSRF pour la securite
 			}
 		})
-		.then(response => response.json())
+		.then(response => response.json()) // Convertir la reponse en JSON
 		.then(data => {
-			location.reload();
+			location.reload(); // Recharger la page pour mettre a jour l'interface
 		})
-		.catch(error => console.error('Error:', error));
+		.catch(error => console.error('Error:', error)); // Afficher l'erreur dans la console
 	}
 
+	// Fonction pour refuser une demande d'ami
 	function refuseFriendRequest(requestId) {
 		fetch('{% url "pong:refuse_friend_request" %}', {
-			method: 'POST',
-			body: JSON.stringify({ request_id: requestId }),
+			method: 'POST', // Methode HTTP POST
+			body: JSON.stringify({ request_id: requestId }), // Envoyer l'ID de la demande
 			headers: {
-				'Content-Type': 'application/json',
-				'X-CSRFToken': '{{ csrf_token }}'
+				'Content-Type': 'application/json', // Type de contenu JSON
+				'X-CSRFToken': '{{ csrf_token }}' // Token CSRF pour la securite
 			}
 		})
-		.then(response => response.json())
+		.then(response => response.json()) // Convertir la reponse en JSON
 		.then(data => {
-			location.reload();
+			location.reload(); // Recharger la page pour mettre a jour l'interface
 		})
-		.catch(error => console.error('Error:', error));
+		.catch(error => console.error('Error:', error)); // Afficher l'erreur dans la console
 	}
 
+	// Fonction pour retirer une demande d'ami envoyee
 	function removeFriendRequest(requestId) {
 		fetch('{% url "pong:remove_friend_request" %}', {
-			method: 'POST',
-			body: JSON.stringify({ request_id: requestId }),
+			method: 'POST', // Methode HTTP POST
+			body: JSON.stringify({ request_id: requestId }), // Envoyer l'ID de la demande
 			headers: {
-				'Content-Type': 'application/json',
-				'X-CSRFToken': '{{ csrf_token }}'
+				'Content-Type': 'application/json', // Type de contenu JSON
+				'X-CSRFToken': '{{ csrf_token }}' // Token CSRF pour la securite
 			}
 		})
-		.then(response => response.json())
+		.then(response => response.json()) // Convertir la reponse en JSON
 		.then(data => {
-			const responseDiv = document.getElementById('response');
-			const errorMessageDiv = document.getElementById('error-message');
-			if (data.status === 'success') {
+			const responseDiv = document.getElementById('response'); // Element pour afficher la reponse
+			const errorMessageDiv = document.getElementById('error-message'); // Element pour afficher les erreurs
+			if (data.status === 'success') { // Si la reponse indique un succes
+				// Afficher un message de succes
 				responseDiv.innerHTML = `<div class="alert alert-success">${data.message}</div>`;
 				errorMessageDiv.innerHTML = '';
-				location.reload();
-			} else {
+				location.reload(); // Recharger la page pour mettre a jour l'interface
+			} else { // Si la reponse indique une erreur
+				// Afficher le message d'erreur
 				responseDiv.innerHTML = '';
 				errorMessageDiv.innerHTML = data.message;
 			}
 		})
-		.catch(error => {
-			const responseDiv = document.getElementById('response');
-			const errorMessageDiv = document.getElementById('error-message');
+		.catch(error => { // En cas d'erreur de requete
+			const responseDiv = document.getElementById('response'); // Element pour afficher la reponse
+			const errorMessageDiv = document.getElementById('error-message'); // Element pour afficher les erreurs
 			responseDiv.innerHTML = '';
 			errorMessageDiv.innerHTML = 'Erreur lors du retrait de la demande d\'ami.';
-			console.error('Error:', error);
+			console.error('Error:', error); // Afficher l'erreur dans la console
 		});
 	}
 
+	// Fonction pour retirer un ami de la liste
 	function unfriend(friendId) {
 		fetch('{% url "pong:unfriend" %}', {
-			method: 'POST',
-			body: JSON.stringify({ friend_id: friendId }),
+			method: 'POST', // Methode HTTP POST
+			body: JSON.stringify({ friend_id: friendId }), // Envoyer l'ID de l'ami
 			headers: {
-				'Content-Type': 'application/json',
-				'X-CSRFToken': '{{ csrf_token }}'
+				'Content-Type': 'application/json', // Type de contenu JSON
+				'X-CSRFToken': '{{ csrf_token }}' // Token CSRF pour la securite
 			}
 		})
-		.then(response => response.json())
+		.then(response => response.json()) // Convertir la reponse en JSON
 		.then(data => {
-			const responseDiv = document.getElementById('response');
-			const errorMessageDiv = document.getElementById('error-message');
-			if (data.status === 'success') {
+			const responseDiv = document.getElementById('response'); // Element pour afficher la reponse
+			const errorMessageDiv = document.getElementById('error-message'); // Element pour afficher les erreurs
+			if (data.status === 'success') { // Si la reponse indique un succes
+				// Afficher un message de succes
 				responseDiv.innerHTML = `<div class="alert alert-success">${data.message}</div>`;
 				errorMessageDiv.innerHTML = '';
-				location.reload();
-			} else {
+				location.reload(); // Recharger la page pour mettre a jour l'interface
+			} else { // Si la reponse indique une erreur
+				// Afficher le message d'erreur
 				responseDiv.innerHTML = '';
 				errorMessageDiv.innerHTML = data.message;
 			}
 		})
-		.catch(error => {
-			const responseDiv = document.getElementById('response');
-			const errorMessageDiv = document.getElementById('error-message');
+		.catch(error => { // En cas d'erreur de requete
+			const responseDiv = document.getElementById('response'); // Element pour afficher la reponse
+			const errorMessageDiv = document.getElementById('error-message'); // Element pour afficher les erreurs
 			responseDiv.innerHTML = '';
 			errorMessageDiv.innerHTML = 'Erreur lors de la suppression de l\'ami.';
-			console.error('Error:', error);
+			console.error('Error:', error); // Afficher l'erreur dans la console
 		});
 	}
-</script>
+</script> {% endcomment %}
 {% endblock %}

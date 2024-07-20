@@ -12,26 +12,33 @@
 <body>
 	<header>
 		<h1 class="pong-title">PONG</h1>
-		{% block user_navigation %}
+		{% comment %} {% block user_navigation %}
 			{% if user.is_authenticated %}
 				{% include 'pong/menu.html' %}
 			{% else %}
 				<a href="{% url 'pong:index' %}"></a>
 			{% endif %}
-		{% endblock %}
+		{% endblock %} {% endcomment %}
 	</header>
 
+
+
+	<script src="{% static 'pong/js/menu.js' %}"></script>
+	<script src="{% static 'pong/js/home.js' %}"></script>	
+	<script src="{% static 'pong/js/play.js' %}"></script>
+	
+	<script src="{% static 'pong/js/friends.js' %}"></script>
+
+	<script src="{% static 'pong/js/404.js' %}"></script>
+	<script src="{% static 'pong/js/profile.js' %}"></script>	
+	<script src="{% static 'pong/js/main.js' %}"></script>
+
 	<main>
-		{% block content %}
-		{% endblock %}
+		<div id="app">{% block content %}{% endblock %}</div>
 	</main>
 
-    <footer>
-        <p>&copy; 2024 pong. {{ reserved_rights_txt }}</p>
-    </footer>
-
-	{% comment %} <script src="{% static 'pong/js/game.js' %}"></script> {% endcomment %}
-	{% comment %} {% block scripts %}
-	{% endblock %} {% endcomment %}
+	{% block scripts %}
+	{% endblock %}
 </body>
 </html>
+

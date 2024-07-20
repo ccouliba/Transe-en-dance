@@ -10,6 +10,9 @@ from django.utils.translation import gettext as _
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
 from pong.models import User, Friendship
+from django.views.decorators.http import require_POST
+from django.views.decorators.csrf import csrf_exempt
+import json
 from .. import forms
 
 # This view for multilang
@@ -27,6 +30,40 @@ def change_language(request):
         form = forms.SetLanguageForm()
     return render(request, 'pong/change_language.html', {'form': form})
 
+# path('pong/api/profile/update', profile_update_view, name='profile_update'),
+@login_required
+@csrf_exempt# TO DO : ENLEVER CELA C EST JUSTE POUR LES TESTS AVEC POSTMAN !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+@require_POST
+def	profile_update_view(request):
+		data = json.loads(request.body)
+		user = request.user
+		updated = []
+
+		if 'username' in data:
+			user.username = data['username']
+			updated.append('username')
+
+		if 'email' in data:
+			user.email = data['email']
+			updated.append('email')
+
+		if 'firstname' in data:
+			user.first_name = data['firstname']
+			updated.append('firstname')
+
+		if updated:
+			user.save()
+			return JsonResponse({'status': 'success', 'updated': updated})
+		else:
+			return JsonResponse({'status': 'error', 'message': 'No valid fields to update'}, status=400)
+
+	# new_username = json.loads(request.body).get('username')
+	# if new_username is not None:
+	# 	request.user.username = new_username
+	# 	request.user.save()
+	# 	return JsonResponse({'status': 'success'})
+	
+
 #Cette vue affiche le profil de l'utilisateur connecte en rendant la page HTML appropriee
 @login_required
 def profile_view(request):
@@ -34,12 +71,23 @@ def profile_view(request):
 	friends = user.friends.all()
 	sent_requests = Friendship.objects.filter(id_user_1=user)
 	received_requests = Friendship.objects.filter(id_user_2=user)
-	return render(request, 'pong/profile.html', {
-		'user': user,
-		'friends': friends,
-		'sent_requests': sent_requests,
-		'received_requests': received_requests
+ 
+	return JsonResponse({
+		'username': user.username,
+		'email': user.email,
+		'firstname': user.first_name,
+		'lastname' : user.last_name,
+		'id' :user.id
+  
+  
 	})
+ 
+	# return render(request, 'pong/profile.html', {
+	# 	'user': user,
+	# 	'friends': friends,
+	# 	'sent_requests': sent_requests,
+	# 	'received_requests': received_requests
+	# })
 
 # @login_required
 # def profile_view(request):
