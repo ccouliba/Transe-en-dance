@@ -1,20 +1,13 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
-from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from pong.forms import RegisterForm
-from django.middleware.csrf import get_token
 from ..models import User
-from django.contrib.auth.forms import UserCreationForm
 import os
-from . import auth
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
-from django.views.decorators.csrf import ensure_csrf_cookie
 from django.views.decorators.csrf import csrf_exempt
 import json
-import inspect
 
 def base_view(request):
 	return render(request, 'pong/base.html')
