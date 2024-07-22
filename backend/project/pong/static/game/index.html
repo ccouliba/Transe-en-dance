@@ -3,6 +3,7 @@
 <head>
     <title>Pong Game</title>
     <link rel="stylesheet" type="text/css" href="style.css">
+
 </head>
 <body>
     <div id="scoreboard">
@@ -10,37 +11,37 @@
     </div>
     <canvas id="pong" width="800" height="400"></canvas>
     <div id="startScreen">
-        <button id="settingsButton">Réglages</button>
-        <button id="singlePlayerButton">Single Player</button>
-        <button id="multiplayerButton">Multijoueur</button>
+        <button id="settingsButton">Settings</button>
+        <button id="singlePlayerButton">Single player</button>
+        <button id="multiplayerButton">Multiplayer</button>
     </div>
     
     <!-- Boîte de dialogue pour les réglages -->
     <div id="settingsDialog" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
-            <h2>Réglages</h2>
             <div class="setting">
-                <label for="scoreLimit">Score à atteindre :</label>
+                <label id="scoreLimitLabel" for="scoreLimit">Score to reach :</label>
                 <input type="range" id="scoreLimit" min="1" max="21" value="21">
                 <span id="scoreLimitDisplay">21</span>
             </div>
             <div class="setting">
-                <label for="ballColor">Couleur de la balle :</label>
+                <label id="ballColorLabel" for="ballColor">Ball color :</label>
                 <input type="color" id="ballColor" value="#FFFFFF">
             </div>
             <div class="setting">
-                <label for="paddleColor">Couleur des palettes :</label>
+                <label id="paddleColorLabel" for="paddleColor">Paddle color :</label>
                 <input type="color" id="paddleColor" value="#FFFFFF">
             </div>
             <div class="setting">
-                <label for="backgroundColor">Couleur du fond :</label>
+                <label id="backgroundColorLabel" for="backgroundColor">Background color :</label>
                 <input type="color" id="backgroundColor" value="#000000">
             </div>
-            <button id="saveSettingsButton">Enregistrer</button>
+            <button id="saveSettingsButton">Save</button>
         </div>
     </div>
     
+    <script type=text/javascript src="translation.js"></script>
     <script src="paddle.js"></script>
     <script src="ball.js"></script>
     <script src="draw.js"></script>
@@ -48,3 +49,4 @@
     <script src="main.js"></script>
 </body>
 </html>
+
