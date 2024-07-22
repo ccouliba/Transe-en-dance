@@ -53,7 +53,6 @@ re: fclean all
 
 # .INIT : <commande à exécuter au début du make>
 .INIT:
-<<<<<<< HEAD
 	echo "\n \t$(_UL_WHITE)make$(_END)\t $(_YELLOW)=>$(_END) [$(_BLUE)all$(_END)] [$(_BLUE)build$(_END)] [$(_BLUE)run$(_END)] [$(_BLUE)create$(_END)] [$(_BLUE)clean$(_END)] [$(_BLUE)fclean$(_END)] [$(_BLUE)re$(_END)] $(_YELLOW)<=$(_END)\n";
 
 # .DONE : <commande exécuter à la fin de make>
@@ -66,6 +65,3 @@ re: fclean all
 
 # .PRECIOUS: <fichier>* Ne pas détruit pas les fichiers ..
 # .PRECIOUS:%
-=======
-	echo "\n \t$(_UL_WHITE)make$(_END)\t $(_YELLOW)=>$(_END) [$(_BLUE)all$(_END)] [$(_BLUE)build$(_END)] [$(_BLUE)run$(_END)] [$(_BLUE)create$(_END)] [$(_BLUE)clean$(_END)] [$(_BLUE)fclean$(_END)] [$(_BLUE)re$(_END)] $(_YELLOW)<=$(_END)\n"
->>>>>>> master

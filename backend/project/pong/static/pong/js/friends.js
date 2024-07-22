@@ -1,36 +1,34 @@
 var friendsState = {
-	friends: [], // Liste des amis
-	sentRequests: [], // Demandes d'amis envoyees
-	receivedRequests: [], // Demandes d'amis recues
-	isLoaded: false // indique si les donnees de cette page ont ete chargees (initialement faux)
+	friends: [],
+	sentRequests: [],
+	receivedRequests: [],
+	isLoaded: false
 };
 
-// Fonction pour charger les donnees des amis du backend
 function loadFriendsData() {
-	let url = `/pong/api/friends_data/`; 
+	let url = `/pong/api/friends_data/`;
 	fetch(url, {
-		credentials: "include" // inclure les cookies pour l'authentification
+		credentials: "include"
 	})
-	.then(response => response.json()) // Convertir la reponse en JSON
+	.then(response => response.json())
 	.then(data => {
-		friendsState.friends = data.friends; // mise a jour de la liste des amis
-		friendsState.sentRequests = data.sentRequests; // mise a jour des demandes envoyees
-		friendsState.receivedRequests = data.receivedRequests; // mise a jour des demandes recues
-		friendsState.isLoaded = true; // indiquer que les donnees sont chargees
-		mountComponent(FriendsList); // mise a jour de l'interface avec la liste des amis
+		friendsState.friends = data.friends;
+		friendsState.sentRequests = data.sentRequests;
+		friendsState.receivedRequests = data.receivedRequests;
+		friendsState.isLoaded = true;
+		mountComponent(FriendsList);
 	})
-	.catch(error => console.error('Error:', error)); 
+	.catch(error => console.error('Error:', error));
 }
 
-// Fonction pour afficher la liste des amis
 function FriendsList() {
 	if (!friendsState.isLoaded) {
-		loadFriendsData(); // Charger les donnees des amis si non chargees
-		return `<div>Loading...</div>`; // Afficher un message de chargement
+		loadFriendsData();
+		return `<div>Loading...</div>`;
 	}
 
-	// Retourner le HTML pour afficher la liste des amis et les formulaires (ajouter, accepter, supprimer un ami)
 	return `
+		
 		<div class="container mt-5">
 			${AddFriendForm()}
 			${AcceptFriendForm()}
@@ -66,47 +64,43 @@ function FriendsList() {
 	`;
 }
 
-// Fonction pour rafraichir la liste des amis
 function refreshFriendsList() {
-	friendsState.isLoaded = false; // indiquer que les donnees ne sont plus chargees
-	loadFriendsData(); // recharger les donnees des amis
+	friendsState.isLoaded = false;
+	loadFriendsData();
 }
 
-// Fonction pour envoyer une demande d'ami
 function sendFriendRequest(email) {
-	let url = `/pong/api/profile/send_friend_request/`; 
+	let url = `/pong/api/profile/send_friend_request/`;
 	fetch(url, {
-		method: "POST", 
-		credentials: "include", // Inclure les cookies pour l'authentification
+		method: "POST",
+		credentials: "include",
 		headers: {
-			'Content-Type': 'application/json', // Type de contenu JSON
+			'Content-Type': 'application/json',
 		},
-		body: JSON.stringify({ email: email }) // Corps de la requete avec l'email de l'ami
+		body: JSON.stringify({ email: email })
 	})
-	.then(response => response.json()) // Convertir la reponse en JSON
+	.then(response => response.json())
 	.then(data => {
 		if (data.status === 'success') {
-			alert("Demande d'ami envoyee avec succes!"); // modale pour alerter l'utilisateur du succes
-			refreshFriendsList(); // rafraichir la liste des amis !!! pas besoin de websockets ou autres
+			alert("Demande d'ami envoyée avec succès!");
+			refreshFriendsList();
 		} else {
-			alert(data.message); // modale pour alerter l'utilisateur de l'echec
+			alert(data.message);
 		}
 	})
-	.catch(error => console.error('Error:', error)); 
+	.catch(error => console.error('Error:', error));
 }
 
-// Fonction pour afficher le formulaire d'ajout d'ami
+
 function AddFriendForm() {
 
-	// Attacher l'evenement submit au formulaire d'ajout d'ami
 	bindEvent(friendsState, "#add-friend-form", "submit", event => {
-		event.preventDefault(); // Empecher le comportement par defaut du formulaire
-		const friendEmail = event.target.elements.friendEmail.value; // Obtenir l'email de l'ami
-		sendFriendRequest(friendEmail); // Envoyer la demande d'ami
-		event.target.reset(); // Reinitialiser le formulaire apres l'envoi
+		event.preventDefault();
+		const friendEmail = event.target.elements.friendEmail.value;
+		sendFriendRequest(friendEmail);
+		event.target.reset(); // reinitialise le formulaire apres l'envoi
 	});
 
-	// Retourner le HTML du formulaire d'ajout d'ami
 	return `
 		<h2 class="mt-4 mb-3">Add a friend</h2>
 		<form id="add-friend-form" class="mt-3">
@@ -118,41 +112,39 @@ function AddFriendForm() {
 	`;
 }
 
-// Fonction pour accepter une demande d'ami
 function AcceptFriendRequest(email) {
 	let url = `/pong/api/profile/accept_friend_request/`;
 	fetch(url, {
-		method: "POST", 
-		credentials: "include", // Inclure les cookies pour l'authentification
+		method: "POST",
+		credentials: "include",
 		headers: {
-			'Content-Type': 'application/json', // Type de contenu JSON
+			'Content-Type': 'application/json',
 		},
-		body: JSON.stringify({ email: email }) // Corps de la requete avec l'email de l'ami
+		body: JSON.stringify({ email: email })
 	})
-	.then(response => response.json()) // Convertir la reponse en JSON
+	.then(response => response.json())
 	.then(data => {
 		if (data.status === 'success') {
-			alert("Demande d'ami acceptee avec succes!"); //modale pour alerter l'utilisateur du succes
-			refreshFriendsList(); // Rafraichir la liste des amis !
+			alert("Demande d'ami acceptée avec succès!");
+			refreshFriendsList();
 		} else {
-			alert(data.message); // modale pour alerter l'utilisateur de l'echec
+			alert(data.message);
 		}
 	})
-	.catch(error => console.error('Error:', error)); 
+	.catch(error => console.error('Error:', error));
 }
 
-// Fonction pour afficher le formulaire d'acceptation d'ami
+
+// Fonction pour accepter une demande d'ami
 function AcceptFriendForm(email) {
 
-	// Attacher l'evenement submit au formulaire d'acceptation d'ami
 	bindEvent(friendsState, "#accept-friend-form", "submit", event => {
-		event.preventDefault(); // Empecher le comportement par defaut du formulaire
-		const friendEmail = event.target.elements.friendEmail.value; // Obtenir l'email de l'ami
-		AcceptFriendRequest(friendEmail); // Accepter la demande d'ami
-		event.target.reset(); // Reinitialiser le formulaire apres l'envoi
+		event.preventDefault();
+		const friendEmail = event.target.elements.friendEmail.value;
+		AcceptFriendRequest(friendEmail);
+		event.target.reset(); // reinitialise le formulaire apres l'envoi
 	});
 
-	// Retourner le HTML du formulaire d'acceptation d'ami
 	return `
 		<h2 class="mt-4 mb-3">Accept a friend</h2>
 		<form id="accept-friend-form" class="mt-3">
@@ -164,40 +156,36 @@ function AcceptFriendForm(email) {
 	`;
 }
 
-// Fonction pour supprimer un ami
+
 function removeFriend(email) {
-	let url = `/pong/api/profile/remove_friend/`; 
+	let url = `/pong/api/profile/remove_friend/`;
 	fetch(url, {
-		method: "POST", 
-		credentials: "include", 
+		method: "POST",
+		credentials: "include",
 		headers: {
-			'Content-Type': 'application/json', 
+			'Content-Type': 'application/json',
 		},
 		body: JSON.stringify({ email: email })
 	})
-	.then(response => response.json()) 
+	.then(response => response.json())
 	.then(data => {
 		if (data.status === 'success') {
-			alert("Ami supprime avec succes!"); // modale pour alerter l'utilisateur du succes
-			refreshFriendsList(); // Rafraichir la liste des amis
+			alert("Ami supprimé avec succès!");
+			refreshFriendsList();
 		} else {
-			alert(data.message); // modale pour alerter l'utilisateur de l'echec
+			alert(data.message);
 		}
 	})
-	.catch(error => console.error('Error:', error)); 
+	.catch(error => console.error('Error:', error));
 }
-
-// Fonction pour afficher le formulaire de suppression d'ami
 function RemoveFriendForm() {
-	// Attacher l'evenement submit au formulaire de suppression d'ami
 	bindEvent(friendsState, "#remove-friend-form", "submit", event => {
-		event.preventDefault(); // Empecher le comportement par defaut du formulaire
-		const friendEmail = event.target.elements.friendEmail.value; // Obtenir l'email de l'ami
-		removeFriend(friendEmail); // Supprimer l'ami
-		event.target.reset(); // Reinitialiser le formulaire apres l'envoi
+		event.preventDefault();
+		const friendEmail = event.target.elements.friendEmail.value;
+		removeFriend(friendEmail);
+		event.target.reset(); 
 	});
 
-	// Retourner le HTML du formulaire de suppression d'ami
 	return `
 		<h2 class="mt-4 mb-3">Delete a friend</h2>
 		<form id="remove-friend-form" class="mt-3">
@@ -208,3 +196,6 @@ function RemoveFriendForm() {
 		</form>
 	`;
 }
+
+
+
