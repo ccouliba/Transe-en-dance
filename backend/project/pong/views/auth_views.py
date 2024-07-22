@@ -6,26 +6,41 @@ from django.contrib.auth.forms import AuthenticationForm
 from pong.forms import RegisterForm
 from django.http import HttpResponse
 from django.http import JsonResponse, HttpResponse
+from ..models import User
+from django.contrib.auth.forms import UserCreationForm
 import os
 from pong.views import auth
+from django.http import JsonResponse
+from django.views.decorators.http import require_POST
+from django.views.decorators.csrf import ensure_csrf_cookie
+from django.views.decorators.csrf import csrf_exempt
+import json
 from rest_framework.authtoken.models import Token
 import logging
-# from logstash.middleware.LogMiddleware import LoggingFunction
+from logstash.middleware.LogMiddleware import LoggingFunction
 
 # from ... logstash.middleware import LogMiddleware
 import inspect
 
-logger = logging.getLogger(__name__)
+def base_view(request):
+	return render(request, 'pong/base.html')
 
-def get_current_line():
-	return inspect.currentframe().f_lineno
-
+# Cette vue verifie si un utilisateur est authentifie ou pas. Elle est utilise dans base.html
+# def check_auth(request):
+# 	return JsonResponse({'is_authenticated': request.user.is_authenticated})
+def check_auth(request):
+	return JsonResponse({
+		'is_authenticated': request.user.is_authenticated,
+		'username': request.user.username if request.user.is_authenticated else None
+	})
+ 
+# Cette vue gere l'authentification via l'API d'Intra 42 en redirigeant l'utilisateur vers l'URL d'authentification appropriee
 def external_login(request):
 	forty2_auth_url = os.getenv('API_AUTH_URL', 'https://api.intra.42.fr/oauth/authorize')
 	redirect_uri = os.getenv('REDIRECT_URI', 'http://127.0.0.1:8000/pong/auth/callback')
 	client_id = os.getenv('UID')
 	request.session['client_id'] = client_id 
-	response_type = 'code'
+	# response_type = 'code'
 	LoggingFunction(request=request, opname='External log-in')
 	return redirect(f"{forty2_auth_url}?client_id={client_id}&redirect_uri={redirect_uri}&response_type=code")
 
@@ -42,12 +57,9 @@ def auth_callback(request):
 	return HttpResponse("Authentication failed", status=401)
 
 # Cette vue gere la connexion des utilisateurs
-# - Si la methode HTTP est POST => elle traite le formulaire de connexion
-# 	- Si le formulaire est valide => elle authentifie l'utilisateur avec les informations 
-#		- Si l'authentification reussit => l'utilisateur est connecte et redirige vers la page d'accueil
-#		- Si l'authentification echoue ou si le formulaire n'est pas valide => les erreurs sont affichees pour le debogage
-# - Si la methode HTTP n'est pas POST => elle affiche un formulaire de connexion vide
-
+@require_POST
+# @ensure_csrf_cookie
+@csrf_exempt
 ## New function of back without form validation and all that stuff !!
 def get_log(request, token):
 	if request.method == 'POST':
@@ -61,60 +73,37 @@ def get_log(request, token):
 	return None
 	
 def login_view(request):
-	if request.method == 'POST':
-		# logger.info("Method of received request => [%s]", request.method)
-		# logger.info("operation::[log in] => [beginning]")
-		form = AuthenticationForm(request, data=request.POST)
-		if form.is_valid():
-			username = form.cleaned_data['username']  
-			password = form.cleaned_data['password']
-			user = authenticate(username=username, password=password)  
-			if user is not None:
-				login(request, user)
-				LoggingFunction(request=request, opname='Log-in')
-				# logger.info("operation::[log in] => [success]")
-				return redirect('/pong/home')  
-			# else:
-				# logger.info("operation::[log in] => [error I]")	
-		# else:
+	data = json.loads(request.body)
+	username = data.get('username')
+	password = data.get('password')
+	user = authenticate(username=username, password=password)
+	if user is not None:
+		login(request, user)
 		LoggingFunction(request=request, opname='Log-in')
-		return redirect('/pong/login')
+		return JsonResponse({'status': 'success'})
 	else:
-		form = AuthenticationForm()
-	csrf_token = get_token(request)  # genere et inclut un token CSRF dans la réponse
-	# return JsonResponse({'messages':'success', 'redirect_url':'/pong/home', 'html':'login.html', 'form':form})
-	return render(request, 'pong/login.html', {'form': form})
+		return JsonResponse({'status': 'error', 'message': 'Invalid credentials'}, status=400)
+
 
 @login_required
 def logout_view(request):
-	logout(request) 
-	return redirect('/pong/login')
+	logout(request)
+	LoggingFunction(request=request, opname='Log-out')
+	request.session.flush()
+	return JsonResponse({'status': 'success'})
 
+# Cette vue gere l'inscription des nouveaux utilisateurs
 def register_view(request):
-	# logger = logging.getLogger(__name__)
-	if request.method == 'POST':
-		# logger.info("Method of received request => [%s]", request.method)
-		# logger.info("operation::[registration] => [beginning]")
-		form = RegisterForm(request.POST)
+	try:
+		data = json.loads(request.body)
+		form = RegisterForm(data)
 		if form.is_valid():
-			user = form.save(commit=False)
-			user.set_password(form.cleaned_data['password'])
-			user.save()
-			login(request, user)
-			logger.info("operation::[registration] => [success]")
-			return redirect('/pong/home')
-		# else:
-			# logger.info('Processed request [LOGIN]',
-		# 	logger.info("operation::[registration] => [error I]")
-			# 		extra= {
-			# 			'user_id': user.id,
-			# 			'path': request.path,
-			# },)
-		LoggingFunction(request=request, opname='Regestration')
-		return redirect('/pong/login')
-	else:
-		logger.info("operation::[registration] => [error II]")
-		form = RegisterForm()
-		# print("Affichage du formulaire d'inscription") 
-	csrf_token = get_token(request)
-	return render(request, 'pong/register.html', {'form': form})  
+			user = form.save()
+			LoggingFunction(request=request, opname='Registration')
+			return JsonResponse({'status': 'success'})
+		else:
+			return JsonResponse({'status': 'error', 'message': form.errors}, status=400)
+	except json.JSONDecodeError:
+		return JsonResponse({'status': 'error', 'message': 'Invalid JSON'}, status=400)
+	except Exception as e:
+		return JsonResponse({'status': 'error', 'message': str(e)}, status=500)

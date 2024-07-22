@@ -57,9 +57,10 @@ services:
     image: docker.elastic.co/logstash/logstash:8.3.1
     command: logstash -f ./project/logstash/pipeline/logstash.conf
     volumes:
-      - ./project/logstash/pipeline:/usr/share/logstash/pipeline
+      - ./project/logstash/pipelines:/usr/share/logstash/pipelines
     ports:
-      - "5959:5959"
+      - "5959:5959/tcp"
+      - "5959:5959/udp"
     depends_on:
       - elasticsearch
     networks:

@@ -10,10 +10,10 @@ from django.utils.translation import gettext as _
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
 from pong.models import User, Friendship
+from .. import forms
 from django.views.decorators.http import require_POST
 from django.views.decorators.csrf import csrf_exempt
 import json
-from .. import forms
 
 # This view for multilang
 @login_required
@@ -32,7 +32,7 @@ def change_language(request):
 
 # path('pong/api/profile/update', profile_update_view, name='profile_update'),
 @login_required
-@csrf_exempt# TO DO : ENLEVER CELA C EST JUSTE POUR LES TESTS AVEC POSTMAN !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+@csrf_exempt
 @require_POST
 def	profile_update_view(request):
 		data = json.loads(request.body)
@@ -50,6 +50,10 @@ def	profile_update_view(request):
 		if 'firstname' in data:
 			user.first_name = data['firstname']
 			updated.append('firstname')
+
+		if 'lastname' in data:
+			user.last_name = data['lastname']
+			updated.append('lastname')
 
 		if updated:
 			user.save()
@@ -108,17 +112,36 @@ def user_updated_profile(request):
 
 # Cette vue permet a l'utilisateur connecte de changer son mot de passe en utilisant un formulaire fourni par Django
 @login_required
-def user_password_changed(request):
-	if request.method == 'POST':
-		form = PasswordChangeForm(user=request.user, data=request.POST) # CECI EST DE LA MAGIE : formulaire fourni par django
+# @csrf_exempt  #todo
+@require_POST
+def edit_password_view(request):
+	print(f"User authenticated: {request.user.is_authenticated}")
+	print(f"Username: {request.user.username}")
+	try:
+		# tente de charger les donnees JSON du corps de la requete
+		data = json.loads(request.body)
+		# creer un formulaire de changement de mot de passe avec les donnees de l'utilisateur
+		form = PasswordChangeForm(user=request.user, data={
+			'old_password': data.get('old_password'),
+			'new_password1': data.get('new_password1'),
+			'new_password2': data.get('new_password2')
+		})
+		# verifie si le formulaire est valide
 		if form.is_valid():
+			# Si le formulaire est valide => enregistre le nouveau mot de passe
 			form.save()
-			update_session_auth_hash(request, form.user)  # Important pour maintenir la session active
-			return redirect('/pong/profile')  
-			# return redirect('pong/profile.html')  
-	else:
-		form = PasswordChangeForm(user=request.user)
-	return render(request, 'pong/change_password.html', {'form': form})
+			# Mise a jour de la session d'authentification de l'utilisateur pour eviter la deconnexion
+			update_session_auth_hash(request, form.user) #methode Django
+			return JsonResponse({'status': 'success'})
+		else:
+			# Si le formulaire n'est pas valide :
+			return JsonResponse({'status': 'error', 'errors': form.errors}, status=400)
+	except json.JSONDecodeError:
+		# Si une erreur de decodage JSON se produit :
+		return JsonResponse({'status': 'error', 'message': 'Invalid JSON'}, status=400)
+	except Exception as e:
+		# Si une autre erreur se produit :
+		return JsonResponse({'status': 'error', 'message': str(e)}, status=500)
 
 # Can be changed any time ! Just a simple view linked to a template/form that works
 # Cette vue permet a l'utilisateur connecte de supprimer son compte et de rediriger vers la page d'accueil

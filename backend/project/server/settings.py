@@ -12,9 +12,9 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 import os
 from django.utils.translation import gettext_lazy as _
 from pathlib import Path
-# from logstash import LogstashHandler
-# from logging import FileHandler, StreamHandler
-# from elasticsearch import RequestsHttpConnection
+import logging
+import logstash
+# from corsheaders.defaults import default_headers
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 # BASE_DIR = Path(__file__).resolve().parent.parent
@@ -43,6 +43,20 @@ ALLOWE_HOSTS = []
 # CSRF_COOKIE_SECURE = True
 # SESSION_COOKIE_SECURE = True
 
+# CORS_ALLOW_ALL_ORIGINS = True  #todo : a enlever en prod
+# CORS_ALLOW_CREDENTIALS = True
+# CSRF_TRUSTED_ORIGINS = [
+# 	'http://localhost:8000',
+# 	'http://127.0.0.1:8000',
+# ]
+# CORS_ALLOW_HEADERS = list(default_headers) + [
+# 	'X-CSRFToken',
+# ]
+
+# CSRF_COOKIE_SAMESITE = 'Lax'  # ou 'None' si nécessaire, mais cela nécessite HTTPS
+# CSRF_COOKIE_HTTPONLY = False  # Permet l'accès au cookie CSRF via JavaScript
+# SESSION_COOKIE_SAMESITE = 'Lax'  # ou 'None' si nécessaire, mais cela nécessite HTTPS
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -56,7 +70,7 @@ INSTALLED_APPS = [
 	'django.contrib.staticfiles',
 	'rest_framework',
 	'rest_framework.authtoken',
-    # 'django_elasticsearch_dsl',
+    'django_elasticsearch_dsl',
     # 'django_elasticsearch_dsl_drf',
 ]
 
@@ -105,18 +119,6 @@ WSGI_APPLICATION = 'server.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': os.getenv('SQL_ENGINE', 'django.db.backends.postgresql_psycopg2'),
-#         'NAME': os.getenv('SQL_DATABASE', 'db1'),
-#         'USER': os.getenv('SQL_USER', 'ccouliba'),
-#         'PASSWORD': os.getenv('SQL_PASSWORD'),
-#         'HOST': os.getenv('SQL_HOST', 'db'),
-#         'PORT': os.getenv('SQL_PORT', '5432'),
-#     }
-# }
-
-# on localhost
 DATABASES = {
     'default': {
         'ENGINE': os.getenv('SQL_ENGINE', 'django.db.backends.postgresql_psycopg2'),
@@ -127,6 +129,18 @@ DATABASES = {
         'PORT': os.getenv('SQL_PORT', '5432'),
     }
 }
+
+# on localhost
+# DATABASES = {
+# 	'default': {
+# 		'ENGINE': 'django.db.backends.postgresql_psycopg2',
+# 		'NAME': 'db1',
+# 		'USER': 'ccouliba',
+# 		'PASSWORD': 'password',
+# 		'HOST': 'localhost',
+# 		'PORT': '5432',
+# 	}
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -206,6 +220,7 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
     ]
 }
+
 # For logging (devops)
 LOGGING = {
     # Defines the dict version for logging config ; Should always be 1 ; another value seems to cause issues
@@ -225,37 +240,41 @@ LOGGING = {
         'file': {
             'level': 'INFO',
             'class': 'logging.FileHandler',
-            'filename': '../project/logs/pong.log',
+            'filename': '../project/logs/pong.logs',
             'formatter': 'verbose',
         },
         'console': {
             'level': 'DEBUG',
             'class': 'logging.StreamHandler',
-            'stream': 'sys.stderr',
-            'formatter': 'simple',
-            # 'port': 5959, # Default
-            # 'version': 1,
-            # 'message_type': 'django', 
-            # 'fqdn': False,
-            # 'tags': ['django.request'],
+            'stream': 'sys.stdout',
+            # 'formatter': 'simple',
         },
         # 'logstash': {
         #     'level': 'DEBUG',
-        #     'class': 'logstash.LogstashTCPHandler',
-        #     # 'host': 'adresse_IP_de_Logstash',
-        #     'port': 5959,
-        #     'formatter': 'simple',
+        #     'class': 'logstash.TCPLogstashHandler',
+        #     'host': 'localhost',  # Adresse de votre serveur Logstash
+        #     'port': 5959,  # Port utilisé par Logstash
         # },
+    },
+    
+    'root': {
+        'handlers': ['console', 'file'],
+        'level': 'WARNING',
     },
     
     'loggers': {
         'pong': {
-            'handlers': ['console', 'file'],
+            'handlers': ['file'],
             'level': 'INFO',
             'propagate': True, # If logs should be propagte to parent logs
         },
+        'django.request': {
+            'handlers': ['console', 'file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
         'django.db.backend': {
-            'handlers': ['console'],
+            'handlers': ['console', 'file'],
             'level': 'DEBUG',
             'propagate': True,
         },

@@ -2,12 +2,12 @@
 from django.utils.deprecation import MiddlewareMixin
 import logging
 
-# def LoggingFunction(request, opname):
-#     logger = logging.getLogger('pong')
-#     if request.user.is_authenticated:
-#         logger.info(f"operation::[{opname}]::[{request.user.username}] => [success]")
-#     else:
-#         logger.info(f"operation::[{opname}]::[{request.user.username}] => [error]")
+def LoggingFunction(request, opname):
+    logger = logging.getLogger('pong')
+    if request.user.is_authenticated:
+        logger.info(f"operation::[{opname}]::[{request.user.username}] => [success]")
+    else:
+        logger.info(f"operation::[{opname}]::[{request.user.username}] => [error]")
 
 
 class UserLoginLogMiddleware(MiddlewareMixin):

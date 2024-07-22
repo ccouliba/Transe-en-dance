@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-25 18:13+0200\n"
+"POT-Creation-Date: 2024-07-04 22:50+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,10 +18,9 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#######################################
-############ LITTLE WORD ##############
-#######################################
-
+# ######################################
+# ########### LITTLE WORD ##############
+# ######################################
 #: context_variables_processors.py:11
 msgid "of"
 msgstr "di"
@@ -30,11 +29,9 @@ msgstr "di"
 msgid "or"
 msgstr "o"
 
-
-#######################################
-###### REGISTRATION AND LOGIN #########
-#######################################
-
+# ######################################
+# ##### REGISTRATION AND LOGIN #########
+# ######################################
 #: context_variables_processors.py:15
 msgid "Register"
 msgstr "Registrati"
@@ -55,11 +52,9 @@ msgstr "Se non hai un account"
 msgid "Log with"
 msgstr "Accedi con"
 
-
-#######################################
-######### RELATED TO ACCOUNT ##########
-#######################################
-
+# ######################################
+# ######## RELATED TO ACCOUNT ##########
+# ######################################
 #: context_variables_processors.py:22
 msgid "Welcome"
 msgstr "Benvenuto"
@@ -88,11 +83,9 @@ msgstr "Torna al profilo"
 msgid "Disconnect"
 msgstr "Disconnetti"
 
-
-#######################################
-######### RELATED TO LANGUAGE #########
-#######################################
-
+# ######################################
+# ######## RELATED TO LANGUAGE #########
+# ######################################
 #: context_variables_processors.py:31
 msgid "Language"
 msgstr "Lingua"
@@ -105,37 +98,35 @@ msgstr "Seleziona lingua"
 msgid "Change"
 msgstr "Cambia"
 
-
-#######################################
-########### RELATED TO GAME ###########
-#######################################
-
+# ######################################
+# ########## RELATED TO GAME ###########
+# ######################################
 #: context_variables_processors.py:36
 msgid "Play"
 msgstr "Gioca"
 
 #: context_variables_processors.py:37
-msgid "start game"
+#, fuzzy
+#| msgid "start game"
+msgid "Start game"
 msgstr "Avvia gioco"
 
 #: context_variables_processors.py:38
-msgid "stop game"
+#, fuzzy
+#| msgid "stop game"
+msgid "Stop game"
 msgstr "Ferma gioco"
 
-
-#######################################
-############## USER LIST ##############
-#######################################
-
+# ######################################
+# ############# USER LIST ##############
+# ######################################
 #: context_variables_processors.py:41
 msgid "User list"
 msgstr "Lista utenti"
 
-
-#######################################
-######### RELATED TO PROFILE ##########
-#######################################
-
+# ######################################
+# ######## RELATED TO PROFILE ##########
+# ######################################
 #: context_variables_processors.py:44
 msgid "Profile Information"
 msgstr "Informazioni profilo"
@@ -176,11 +167,9 @@ msgstr "Aggiorna profilo"
 msgid "Download as PDF"
 msgstr "Scarica in PDF"
 
-
-#######################################
-############# FRIEND LIST #############
-#######################################
-
+# ######################################
+# ############ FRIEND LIST #############
+# ######################################
 #: context_variables_processors.py:56
 msgid "Friends list"
 msgstr "Lista amici"
@@ -193,11 +182,9 @@ msgstr "Rimuovi"
 msgid "No friend yet"
 msgstr "Nessun amico ancora"
 
-
-#######################################
-######### FRIEND REQUEST SENT #########
-#######################################
-
+# ######################################
+# ######## FRIEND REQUEST SENT #########
+# ######################################
 #: context_variables_processors.py:61
 msgid "Friend requests sent"
 msgstr "Richieste di amicizia inviate"
@@ -206,11 +193,9 @@ msgstr "Richieste di amicizia inviate"
 msgid "No friend request sent yet"
 msgstr "Nessuna richiesta di amicizia inviata"
 
-
-#######################################
-####### FRIEND REQUEST RECEIVED #######
-#######################################
-
+# ######################################
+# ###### FRIEND REQUEST RECEIVED #######
+# ######################################
 #: context_variables_processors.py:65
 msgid "Friend requests received"
 msgstr "Richieste di amicizia ricevute"
@@ -227,11 +212,9 @@ msgstr "Rifiuta"
 msgid "No friend request received yet"
 msgstr "Nessuna richiesta di amicizia ricevuta"
 
-
-#######################################
-######### SEND FRIEND REQUEST #########
-#######################################
-
+# ######################################
+# ######## SEND FRIEND REQUEST #########
+# ######################################
 #: context_variables_processors.py:71
 msgid "Send friend request"
 msgstr "Invia richiesta di amicizia"
@@ -240,36 +223,38 @@ msgstr "Invia richiesta di amicizia"
 msgid "Send"
 msgstr "Invia"
 
-
-#######################################
-########### OTHER VARIABLES ###########
-#######################################
-
+# ######################################
+# ########## OTHER VARIABLES ###########
+# ######################################
 #: context_variables_processors.py:75
 msgid "All rights reserved"
 msgstr "Tutti i diritti riservati"
 
-
-#######################################
-#### OTHER VARIABLES FROM form.spy ####
-#######################################
-
-#: forms.py:13
+# ######################################
+# ### OTHER VARIABLES FROM form.spy ####
+# ######################################
+#: forms.py:15
 msgid "English"
 msgstr "Inglese"
 
-#: forms.py:14
+#: forms.py:16
 msgid "French"
 msgstr "Francese"
 
-#: forms.py:15
+#: forms.py:17
 msgid "Italian"
 msgstr "Italiano"
 
-#: forms.py:16
+#: forms.py:18
 msgid "Spanish"
 msgstr "Spagnolo"
 
-#: forms.py:17
+#: forms.py:19
 msgid "Deutsch"
 msgstr "Tedesco"
+
+#: forms.py:21
+#, fuzzy
+#| msgid "Select language"
+msgid "Select your language"
+msgstr "Seleziona lingua"

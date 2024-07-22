@@ -1,44 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-{% load i18n %}
-<head>
-    <meta charset="UTF-8">
-    <title>{% block title %}PONG{% endblock %}</title>
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'pong/css/style.css' %}">
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'pong/css/style.css' %}">
-</head>
-<body>
-	<header>
-		<h1 class="pong-title">PONG</h1>
-		{% comment %} {% block user_navigation %}
-			{% if user.is_authenticated %}
-				{% include 'pong/menu.html' %}
-			{% else %}
-				<a href="{% url 'pong:index' %}"></a>
-			{% endif %}
-		{% endblock %} {% endcomment %}
-	</header>
-
-
-
+  <head>
+	<meta charset="UTF-8" />
+	<title>{% block title %}PONG{% endblock %}</title>
+	{% load static %}
+	<link rel="stylesheet" href="{% static 'pong/css/style.css' %}" />
+  </head>
+  <body>
+    <header>
+        <h1 class="pong-title">PONG</h1>
+        <div id="menu-container"></div>
+    </header>
 	<script src="{% static 'pong/js/menu.js' %}"></script>
-	<script src="{% static 'pong/js/home.js' %}"></script>	
+	<script src="{% static 'pong/js/home.js' %}"></script>
 	<script src="{% static 'pong/js/play.js' %}"></script>
-	
 	<script src="{% static 'pong/js/friends.js' %}"></script>
-
+	<script src="{% static 'pong/js/tournament.js' %}"></script>
+	<script src="{% static 'pong/js/logout.js' %}"></script>
 	<script src="{% static 'pong/js/404.js' %}"></script>
-	<script src="{% static 'pong/js/profile.js' %}"></script>	
+	<script src="{% static 'pong/js/profile.js' %}"></script>
+	<script src="{% static 'pong/js/login.js' %}"></script>
 	<script src="{% static 'pong/js/main.js' %}"></script>
-
 	<main>
-		<div id="app">{% block content %}{% endblock %}</div>
+	  <div id="app">
+		{% block content %}
+		<script>
+		  // est ce que l'utilisateur est connecte ?
+		  fetch('/pong/api/check_auth')
+			.then(response => response.json())
+			.then(data => {
+			  if (data.is_authenticated) {
+				changePage("#home");
+			  } else {
+				changePage("#login");
+			  }
+			})
+			.catch(error => {
+			  console.error('Error:', error);
+			  changePage("#login");
+			});
+		</script>
+		{% endblock %}
+	  </div>
 	</main>
-
-	{% block scripts %}
-	{% endblock %}
-</body>
+	{% block scripts %} {% endblock %}
+  </body>
 </html>
-

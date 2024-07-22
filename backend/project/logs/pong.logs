@@ -1,0 +1,8 @@
+[2024/07/22 13:27:50]::[INFO]::[run_with_reloader]::[django.utils.autoreload] => Watching for file changes with StatReloader
+[2024/07/22 13:28:26]::[INFO]::[LoggingFunction]::[pong] => operation::[Log-in]::[cc] => [success]
+[2024/07/22 13:28:26]::[INFO]::[LoggingFunction]::[pong] => operation::[Log-in]::[cc] => [success]
+[2024/07/22 15:07:56]::[INFO]::[run_with_reloader]::[django.utils.autoreload] => Watching for file changes with StatReloader
+[2024/07/22 15:08:06]::[WARNING]::[log_response]::[django.request] => Not Found: /pong/login/
+[2024/07/22 15:08:06]::[WARNING]::[log_response]::[django.request] => Not Found: /pong/login/
+[2024/07/22 15:08:07]::[WARNING]::[log_response]::[django.request] => Not Found: /favicon.ico
+[2024/07/22 15:08:07]::[WARNING]::[log_response]::[django.request] => Not Found: /favicon.ico

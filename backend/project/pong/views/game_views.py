@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from pong.models import Game, User
 import json
 
-@csrf_exempt
+# @csrf_exempt
 @login_required
 def create_game(request):
 	if request.method == 'POST':
@@ -28,7 +28,7 @@ def create_game(request):
 	else:
 		return JsonResponse({'error': 'Invalid request method'}, status=405)
 
-@csrf_exempt
+# @csrf_exempt
 @login_required
 def update_game(request, game_id):
 	if request.method == 'POST':
