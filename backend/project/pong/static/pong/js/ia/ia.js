@@ -98,12 +98,23 @@ window.onload = function() {
 
 		let animatingAiPaddle = false;
 
-		function animateCenteringAiPaddle() {
+		function animateCenteringAiPaddle(pos) {
 			if (!animatingAiPaddle) {
 				animatingAiPaddle = true;
-				let targetY = canvas.height / 2 - paddleHeight / 2;
-				let startY = ai.y;
 
+				let targetY;
+				if (pos === 0)
+					targetY = canvas.height / 2 - paddleHeight / 2 - (paddleHeight * 2);
+				else if (pos === 1)
+					targetY = canvas.height / 2 - paddleHeight / 2 - paddleHeight;
+				else if (pos === 2)
+					targetY = canvas.height / 2 - paddleHeight / 2;
+				else if (pos === 3)
+					targetY = canvas.height / 2 - paddleHeight / 2 + paddleHeight;
+				else
+					targetY = canvas.height / 2 - paddleHeight / 2 + (paddleHeight * 2);
+				
+				let startY = ai.y;
 				function animateStep() {
 					if (startY <= targetY) {
 						simulateKey('-'); // Monte le paddle
@@ -130,12 +141,12 @@ window.onload = function() {
 
 
 
-		function centerAiPaddle() {
+		function centerAiPaddle(pos) {
 			simulateKey('+', false); // Relâche la touche
 			simulateKey('-', false); // Relâche la touche
 			const canvas = document.getElementById('myCanvas');
 			const paddleHeight = canvas.height / 5;
-			animateCenteringAiPaddle();
+			animateCenteringAiPaddle(pos);
 		}
 
 
@@ -151,8 +162,7 @@ window.onload = function() {
 		// Fonction pour mettre à jour le mouvement de l'IA
 		function updateAI() {
 		    if (ball.dx < 0) {
-				centerAiPaddle();
-				//return ;
+				centerAiPaddle(2);
 		  } else {
 				// Logique de l'IA pour déplacer le paddle lorsque la balle est dans sa direction
 				if (ball.x > canvas.width / 2) {
