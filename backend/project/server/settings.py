@@ -105,6 +105,8 @@ WSGI_APPLICATION = 'server.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+
+
 DATABASES = {
     'default': {
         'ENGINE': os.getenv('SQL_ENGINE', 'django.db.backends.postgresql_psycopg2'),
@@ -112,9 +114,11 @@ DATABASES = {
         'USER': os.getenv('SQL_USER', 'ccouliba'),
         'PASSWORD': os.getenv('SQL_PASSWORD'),
         'HOST': os.getenv('SQL_HOST', 'db'),
+        # 'HOST': 'localhost', #todo : A MODIFIER (juste pour pouvoir executer django localement)
         'PORT': os.getenv('SQL_PORT', '5432'),
     }
 }
+
 
 # on localhost
 # DATABASES = {

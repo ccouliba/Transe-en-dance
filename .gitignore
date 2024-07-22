@@ -3,3 +3,6 @@
 
 # Ignorer les dossiers __pycache__
 __pycache__/
+
+# Ignorer le fichier de configuration de prettier
+.prettierrc
