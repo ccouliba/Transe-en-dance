@@ -113,8 +113,8 @@ DATABASES = {
         'NAME': os.getenv('SQL_DATABASE', 'db1'),
         'USER': os.getenv('SQL_USER', 'ccouliba'),
         'PASSWORD': os.getenv('SQL_PASSWORD'),
-        # 'HOST': os.getenv('SQL_HOST', 'db'),
-        'HOST': 'localhost', #todo : A MODIFIER (juste pour pouvoir executer django localement)
+        'HOST': os.getenv('SQL_HOST', 'db'),
+        # 'HOST': 'localhost', #todo : A MODIFIER (juste pour pouvoir executer django localement)
         'PORT': os.getenv('SQL_PORT', '5432'),
     }
 }
