@@ -1,13 +1,12 @@
 Bug:        Rase le mur en continue.
 
 Ia:         Prevoire ou la balle ira (5 position possibles).
+cree une copy de lobjet balle POUR ca.
+
 
 Interface:  Ajouter les scores, une limite et un message informatif WIN/LOSE.
 
 __________________________________________________________________________________
 
 BONUS:      Un mode custum avec pouvoir.
-
-
-
 
