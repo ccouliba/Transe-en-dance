@@ -1,7 +1,6 @@
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST, require_GET
 from django.contrib.auth.decorators import login_required
-from django.views.decorators.csrf import csrf_exempt
 from pong.models import Tournament, Participate
 import json
 
@@ -20,7 +19,7 @@ def get_tournament_state(request):
 
 @login_required
 @require_POST
-@csrf_exempt
+# @csrf_exempt
 def register_player(request):
 	tournament = Tournament.objects.filter(is_started=False).first()
 	if not tournament:

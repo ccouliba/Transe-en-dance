@@ -1,13 +1,199 @@
-// function Login() {
-// 	return `
-// 	<div>
-// 		<h1>Login</h1>
-// 		<form>
-// 			<label for="username">Username:</label>
-// 			<input type="text" id="username" name="username"><br><br>
-// 			<label for="password">Password:</label>
-// 			<input type="password" id="password" name="password"><br><br>
-// 			<input type="submit" value="Login">
-// 		</form>
-// 	</div>`;
-// }
+let loginState = {
+	isLoaded: false, // indique si les donnees de cette page ont ete chargees (initialement faux)
+	showRegister: false // Indique si le formulaire d'inscription est affiche
+};
+
+// Fonction pour charger la page
+function loadLoginState() {
+	// Attacher des evenements aux formulaires et liens
+	bindEvent(loginState, "#loginForm", "submit", handleLogin); // Attacher l'evenement submit au formulaire de connexion
+	bindEvent(loginState, "#registerForm", "submit", handleRegister); // Attacher l'evenement submit au formulaire d'inscription
+	bindEvent(loginState, "#showRegister", "click", toggleRegister); // Attacher l'evenement click au lien pour afficher l'inscription
+	bindEvent(loginState, "#showLogin", "click", toggleRegister); // Attacher l'evenement click au lien pour afficher la connexion
+	loginState.isLoaded = true; // indique que la page est chargee
+}
+
+// Fonction pour afficher le formulaire de connexion
+function LoginForm() {
+	return `
+		<form id="loginForm">
+			<div class="mb-3">
+				<input type="text" class="form-control" name="username" placeholder="Username" required>
+			</div>
+			<div class="mb-3">
+				<input type="password" class="form-control" name="password" placeholder="Password" required>
+			</div>
+			<button type="submit" class="btn btn-primary">Login</button>
+		</form>
+	`;
+}
+
+// Fonction pour afficher le formulaire d'inscription
+function RegisterForm() {
+	return `
+		<form id="registerForm">
+			<div class="mb-3">
+				<input type="text" class="form-control" name="username" placeholder="Username" required>
+			</div>
+			<div class="mb-3">
+				<input type="email" class="form-control" name="email" placeholder="Email" required>
+			</div>
+			<div class="mb-3">
+				<input type="password" class="form-control" name="password1" placeholder="Password" required>
+			</div>
+			<div class="mb-3">
+				<input type="password" class="form-control" name="password2" placeholder="Confirm Password" required>
+			</div>
+			<button type="submit" class="btn btn-primary">Register</button>
+		</form>
+	`;
+}
+
+// Fonction pour afficher le formulaire de connexion ou d'inscription 
+// Par defaut =? loginState.showRegister = false. Donc affiche formulaire de connexion (LoginForm)
+// a) Si le user clique sur le lien "Don't have an account? Register" alors loginState.showRegister = true grace a la fonction toggleRegister
+// Donc le formulaire d'inscription (RegisterForm) sera affiche
+// b) Si le user clique sur le lien "Already have an account? Login" alors loginState.showRegister = false grace a la fonction toggleRegister
+// Donc le formulaire de connexion (LoginForm) sera affiche
+function Login() {
+	if (!loginState.isLoaded) {
+		loadLoginState(); // Charger la page si non chargee
+	}
+
+	return `
+		<div class="container mt-5">
+			<h1>${loginState.showRegister ? 'Register' : 'Login'}</h1> 
+			${loginState.showRegister ? RegisterForm() : LoginForm()}
+			<p class="mt-3">
+				${loginState.showRegister 
+					? 'Already have an account? <a href="#" id="showLogin">Login</a>' 
+					: 'Don\'t have an account? <a href="#" id="showRegister">Register</a>'}
+			</p>
+			${!loginState.showRegister ? ExternalLoginButton() : ''}
+		</div>
+	`;
+}
+
+// Fonction pour afficher le bouton de connexion externe avec api 42
+function ExternalLoginButton() {
+	return `
+		<div class="mt-3">
+			<a href="/pong/external_login/" class="btn btn-secondary">Login with 42</a>
+		</div>
+	`;
+}
+
+// Fonction pour gerer la soumission du formulaire de connexion
+function handleLogin(event) {
+	event.preventDefault(); // empecher le comportement par defaut du formulaire
+	const username = event.target.elements.username.value; // obtenir le nom d'utilisateur
+	const password = event.target.elements.password.value; // obtenir le mot de passe
+	const csrfToken = getCookie('csrftoken'); // obtenir le token CSRF. todo : a garder ou pas
+
+	let url = `/pong/api/login/`;
+	fetch(url, {
+		method: 'POST', 
+		headers: {
+			'Content-Type': 'application/json', 
+			'X-CSRFToken': csrfToken // Ajouter le token CSRF aux headers. todo : a garder ou pas
+		},
+		body: JSON.stringify({ username, password }), // Corps de la requete avec les identifiants
+		credentials: 'include' // Inclure les cookies pour l'authentification
+	})
+	.then(response => {
+		if (!response.ok) throw new Error('Network response was not ok'); // Verifier si la reponse est OK
+		return response.json(); // Convertir la reponse en JSON
+	})
+	.then(data => {
+		if (data.status === 'success') {
+			localStorage.setItem('userToken', 'true'); // Stocker le token de l'utilisateur
+			alert('Login successful!'); 
+			changePage('#profile'); // Rediriger vers la page de profil
+		} else {
+			alert('Login failed: ' + data.message); 
+		}
+	})
+	.catch(error => {
+		console.error('Error:', error); 
+		alert('An error occurred during login. Please try again.'); 
+	});
+}
+
+// Fonction pour gerer la soumission du formulaire d'inscription
+function handleRegister(event) {
+	event.preventDefault(); // Empecher le comportement par defaut du formulaire
+	const username = event.target.elements.username.value; // Obtenir le nom d'utilisateur
+	const email = event.target.elements.email.value; // Obtenir l'email
+	const password1 = event.target.elements.password1.value; // Obtenir le mot de passe
+	const password2 = event.target.elements.password2.value; // Obtenir la confirmation du mot de passe
+	let url = `/pong/api/register/`; 
+
+	fetch(url, {
+		method: 'POST', 
+		headers: {
+			'Content-Type': 'application/json', // Type de contenu JSON
+			'X-CSRFToken': getCookie('csrftoken') // Ajouter le token CSRF aux headers. todo : a garder ou pas
+		},
+		body: JSON.stringify({ username, email, password1, password2 }), // Corps de la requete avec les informations d'inscription
+		credentials: 'include' // Inclure les cookies pour l'authentification
+	})
+	.then(response => response.json()) // Convertir la reponse en JSON
+	.then(data => {
+		if (data.status === 'success') {
+			alert('Registration successful!'); 
+			changePage('#home'); // Rediriger vers la page d'accueil
+		} else {
+			alert('Registration failed: ' + JSON.stringify(data.message));
+		}
+	})
+	.catch(error => {
+		console.error('Error:', error);
+		alert('An error occurred during registration. Please try again.');
+	});
+}
+
+// Fonction pour basculer entre les formulaires de connexion et d'inscription
+function toggleRegister(event) {
+	event.preventDefault(); // Empecher le comportement par defaut du lien
+	loginState.showRegister = !loginState.showRegister; // Inverser l'etat d'affichage
+	mountComponent(Login); // Mettre a jour l'interface avec le formulaire approprie
+}
+
+
+//Authentification externe : 
+// - user clique sur bouton => declenche la vue external_login
+// - la vue external_login redirige le user vers l'URL d'authentification de l'api de 42 avec les parametres => client_id, redirect_uri, response_type
+// - si user est authentifie via l'api de 42 alors redirection vers l'url de callback specifiee (auth_callback)
+// - la vue auth_callback traite le retour de l'apie, obtient le token d'acces, recupere les infos du user et connecte le user a l'app
+// - lorsque l'utilisateur est redirige vers l'app apres un login réussi, l'url contient un login_success=true.
+// - la fonction js attachée à l'event load verifie ce parametre pour effectuer les actions necessaires (stocker le token de session, redirection du user etc)
+
+// Gestion du login externe : va verifier la valeur de login_success
+window.addEventListener("load", function () {
+	// Recuperer les parametres de l'URL
+	const urlParams = new URLSearchParams(window.location.search);
+
+	// Obtenir la valeur du parametre 'login_success' de l'URL
+	const loginSuccess = urlParams.get("login_success");
+
+	// Verifier si 'login_success' est egal a "true"
+	if (loginSuccess === "true") {
+		// Stocker un token de connexion dans le localStorage
+		localStorage.setItem("userToken", "true");
+
+		// Afficher une alerte pour informer l'utilisateur du succes de la connexion
+		alert("Login successful!");
+
+		// Verifier si la fonction changePage est definie
+		if (typeof changePage === "function") {
+			// Appeler la fonction changePage pour naviguer vers la page du profil
+			changePage("#profile");
+		} else {
+			// Afficher une erreur dans la console si changePage n'est pas definie
+			console.error("changePage function is not defined");
+
+			// Fallback : Changer directement le hash de l'URL pour naviguer vers la page du profil
+			window.location.hash = "#profile";
+		}
+	}
+});

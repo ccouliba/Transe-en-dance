@@ -10,11 +10,15 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 import os
+from django.utils.translation import gettext_lazy as _
+# from django.utils.translation import gettext as _
 from pathlib import Path
+from corsheaders.defaults import default_headers
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 # BASE_DIR = Path(__file__).resolve().parent.parent
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -38,6 +42,20 @@ ALLOWE_HOSTS = []
 # CSRF_COOKIE_SECURE = True
 # SESSION_COOKIE_SECURE = True
 
+# CORS_ALLOW_ALL_ORIGINS = True  #todo : a enlever en prod
+# CORS_ALLOW_CREDENTIALS = True
+# CSRF_TRUSTED_ORIGINS = [
+# 	'http://localhost:8000',
+# 	'http://127.0.0.1:8000',
+# ]
+# CORS_ALLOW_HEADERS = list(default_headers) + [
+# 	'X-CSRFToken',
+# ]
+
+# CSRF_COOKIE_SAMESITE = 'Lax'  # ou 'None' si nécessaire, mais cela nécessite HTTPS
+# CSRF_COOKIE_HTTPONLY = False  # Permet l'accès au cookie CSRF via JavaScript
+# SESSION_COOKIE_SAMESITE = 'Lax'  # ou 'None' si nécessaire, mais cela nécessite HTTPS
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -49,34 +67,37 @@ INSTALLED_APPS = [
 	'django.contrib.sessions',
 	'django.contrib.messages',
 	'django.contrib.staticfiles',
+	# 'corsheaders',
 ]
 
 MIDDLEWARE = [
-	'django.middleware.security.SecurityMiddleware',
-	'django.contrib.sessions.middleware.SessionMiddleware',
-	'django.middleware.common.CommonMiddleware',
-	'django.middleware.csrf.CsrfViewMiddleware',
-	'django.contrib.auth.middleware.AuthenticationMiddleware',
-	'django.contrib.messages.middleware.MessageMiddleware',
-	'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.security.SecurityMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
 ROOT_URLCONF = 'server.urls'
 
 TEMPLATES = [
-	{
-		'BACKEND': 'django.template.backends.django.DjangoTemplates',
-		'DIRS': [os.path.join(BASE_DIR, 'pong', 'templates')],
-		'APP_DIRS': True,
-		'OPTIONS': {
-			'context_processors': [
-				'django.template.context_processors.debug',
-				'django.template.context_processors.request',
-				'django.contrib.auth.context_processors.auth',
-				'django.contrib.messages.context_processors.messages',
-			],
-		},
-	},
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [os.path.join(BASE_DIR, 'pong', 'templates')],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+                'pong.context_variables_processors.texts_to_translate',
+            ],
+        },
+    },
 ]
 
 WSGI_APPLICATION = 'server.wsgi.application'
@@ -84,28 +105,32 @@ WSGI_APPLICATION = 'server.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': os.getenv('SQL_ENGINE', 'django.db.backends.postgresql_psycopg2'),
-#         'NAME': os.getenv('SQL_DATABASE', 'db1'),
-#         'USER': os.getenv('SQL_USER', 'ccouliba'),
-#         'PASSWORD': os.getenv('SQL_PASSWORD'),
-#         'HOST': os.getenv('SQL_HOST', 'db'),
-#         'PORT': os.getenv('SQL_PORT', '5432'),
-#     }
-# }
+
+
+DATABASES = {
+    'default': {
+        'ENGINE': os.getenv('SQL_ENGINE', 'django.db.backends.postgresql_psycopg2'),
+        'NAME': os.getenv('SQL_DATABASE', 'db1'),
+        'USER': os.getenv('SQL_USER', 'ccouliba'),
+        'PASSWORD': os.getenv('SQL_PASSWORD'),
+        'HOST': os.getenv('SQL_HOST', 'db'),
+        # 'HOST': 'localhost', #todo : A MODIFIER (juste pour pouvoir executer django localement)
+        'PORT': os.getenv('SQL_PORT', '5432'),
+    }
+}
+
 
 # on localhost
-DATABASES = {
-	'default': {
-		'ENGINE': 'django.db.backends.postgresql_psycopg2',
-		'NAME': 'db1',
-		'USER': 'ccouliba',
-		'PASSWORD': 'password',
-		'HOST': 'localhost',
-		'PORT': '5432',
-	}
-}
+# DATABASES = {
+# 	'default': {
+# 		'ENGINE': 'django.db.backends.postgresql_psycopg2',
+# 		'NAME': 'db1',
+# 		'USER': 'ccouliba',
+# 		'PASSWORD': 'password',
+# 		'HOST': 'localhost',
+# 		'PORT': '5432',
+# 	}
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -128,14 +153,28 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
+LANGUAGES = [
+    ('en', _('English')),
+    ('fr', _('French')),
+    ('it', _('Italian')),
+    ('es', _('Spanish')),
+    ('de', _('Deutsch')),
+    ]
+
+LANGUAGE_COOKIE_NAME = 'language'
+
+# Path to translation files (.po and .mo once compilation is done)
+LOCALE_PATHS = [ os.path.join(BASE_DIR, 'locale'), ]
+
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
-USE_TZ = True
+USE_L10N = True
 
+USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
