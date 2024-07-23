@@ -30,12 +30,18 @@ window.onload = function() {
     const ballColor = '#0f0'; // Vert pour la balle
     const backgroundColor = '#000'; // Noir pour le fond du canvas
 
+    // Variables de score
+    let playerScore = 0;
+    let aiScore = 0;
+    const maxScore = 5;
+
     // Gestion des événements de pression de touche
     document.addEventListener('keydown', function(e) {
         if (e.key === 'ArrowUp') player.dy = -8;
         if (e.key === 'ArrowDown') player.dy = 8;
         if (e.key === '+') ai.dy = -8;
         if (e.key === '-') ai.dy = 8;
+        if (e.key === 'Enter' && gameOver) resetGame(); // Redémarrer le jeu
     });
 
     document.addEventListener('keyup', function(e) {
@@ -43,15 +49,15 @@ window.onload = function() {
         if (e.key === '+' || e.key === '-') ai.dy = 0;
     });
 
-    // Fonction pour simuler la pression des touches
     function simulateKey(key, isKeyDown = true) {
         const eventType = isKeyDown ? 'keydown' : 'keyup';
         const event = new KeyboardEvent(eventType, { key });
         document.dispatchEvent(event);
     }
 
-    // Fonction pour mettre à jour les positions du jeu
     function update() {
+        if (gameOver) return; // Ne pas mettre à jour si le jeu est terminé
+
         player.y += player.dy;
         if (player.y < 0) player.y = 0;
         if (player.y + paddleHeight > canvas.height) player.y = canvas.height - paddleHeight;
@@ -63,7 +69,6 @@ window.onload = function() {
         ball.x += ball.dx * ball.speed / 2;
         ball.y += ball.dy * ball.speed / 2;
 
-        // Correction des collisions avec les murs
         if (ball.y + ball.radius > canvas.height) {
             ball.y = canvas.height - ball.radius;
             ball.dy *= -1;
@@ -72,25 +77,42 @@ window.onload = function() {
             ball.dy *= -1;
         }
 
-        // Correction des collisions avec les paddles
         if (checkCollision(ball, player)) {
             ball.x = player.x + paddleWidth + ball.radius;
             ball.dx *= -1;
             ball.dy = (ball.y - (player.y + paddleHeight / 2)) * 0.2;
-            ball.speed = Math.min(ball.speed + 0.2, 6); // Augmente légèrement la vitesse et limite la vitesse maximale
+            ball.speed = Math.min(ball.speed + 0.2, 6);
         }
 
         if (checkCollision(ball, ai)) {
             ball.x = ai.x - ball.radius;
             ball.dx *= -1;
             ball.dy = (ball.y - (ai.y + paddleHeight / 2)) * 0.2;
-            ball.speed = Math.min(ball.speed + 0.2, 6); // Augmente légèrement la vitesse et limite la vitesse maximale
+            ball.speed = Math.min(ball.speed + 0.2, 6);
         }
 
-        if (ball.x + ball.radius > canvas.width || ball.x - ball.radius < 0) resetBall();
+        if (ball.x + ball.radius > canvas.width) {
+            playerScore++;
+            if (playerScore >= maxScore) {
+                gameOver = true;
+                winner = 'Player';
+            } else {
+                resetBall();
+            }
+        } else if (ball.x - ball.radius < 0) {
+            aiScore++;
+            if (aiScore >= maxScore) {
+                gameOver = true;
+                winner = 'AI';
+            } else {
+                resetBall();
+            }
+        }
     }
 
     let animatingAiPaddle = false;
+    let gameOver = false;
+    let winner = '';
 
     function animateCenteringAiPaddle(pos) {
         if (!animatingAiPaddle) {
@@ -139,7 +161,6 @@ window.onload = function() {
         animateCenteringAiPaddle(pos);
     }
 
-    // Fonction pour mettre à jour le mouvement de l'IA
     function updateAI() {
         if (ball.dx < 0)
             centerAiPaddle(2);
@@ -150,7 +171,6 @@ window.onload = function() {
 
     setInterval(updateAI, 1000);
 
-    // Fonction pour vérifier la collision entre la balle et le paddle
     function checkCollision(ball, paddle) {
         return ball.x - ball.radius < paddle.x + paddleWidth &&
             ball.x + ball.radius > paddle.x &&
@@ -158,16 +178,14 @@ window.onload = function() {
             ball.y < paddle.y + paddleHeight;
     }
 
-    // Fonction pour réinitialiser la position de la balle
     function resetBall() {
         ball.x = canvas.width / 2;
         ball.y = canvas.height / 2;
         ball.dx = 2 * (Math.random() > 0.5 ? 1 : -1);
         ball.dy = 2 * (Math.random() > 0.5 ? 1 : -1);
-        ball.speed = 2; // Réinitialise la vitesse de la balle
+        ball.speed = 2;
     }
 
-    // Fonction pour dessiner les éléments du jeu
     function draw() {
         // Remplir le fond du canvas
         ctx.fillStyle = backgroundColor;
@@ -187,11 +205,25 @@ window.onload = function() {
         ctx.fill();
 
         // Dessiner la ligne centrale
-        ctx.fillStyle = '#fff'; // Blanc pour la ligne centrale
+        ctx.fillStyle = '#fff';
         ctx.fillRect(canvas.width / 2 - 1, 0, 2, canvas.height);
+
+        // Afficher le score
+        ctx.fillStyle = '#fff';
+        ctx.font = '24px Arial';
+        ctx.textAlign = 'center';
+        ctx.fillText(`Player: ${playerScore} - AI: ${aiScore}`, canvas.width / 2, 30);
+
+        // Afficher message de fin de jeu
+        if (gameOver) {
+            ctx.font = '48px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText(winner + " Wins!", canvas.width / 2, canvas.height / 2);
+            ctx.font = '24px Arial';
+            ctx.fillText("Press Enter to Restart", canvas.width / 2, canvas.height / 2 + 40);
+        }
     }
 
-    // Boucle de jeu
     function gameLoop() {
         update();
         draw();
@@ -207,25 +239,24 @@ window.onload = function() {
     }
 
     function predictBallY() {
-        // Crée une copie de l'objet ball pour simuler son mouvement
         let tempBall = { ...ball };
-        
-        // Simule le mouvement de la balle jusqu'à ce qu'elle atteigne le côté droit du canvas
         while (tempBall.x + tempBall.radius < canvas.width && tempBall.x - tempBall.radius > 0) {
-            // Met à jour la position X de la balle
             tempBall.x += tempBall.dx * tempBall.speed / 2;
-            // Met à jour la position Y de la balle
             tempBall.y += tempBall.dy * tempBall.speed / 2;
-    
-            // Inverse la direction Y si la balle touche le haut ou le bas du canvas
             if (tempBall.y + tempBall.radius > canvas.height || tempBall.y - tempBall.radius < 0) {
                 tempBall.dy *= -1;
             }
         }
-        // Retourne la position Y prévue de la balle
         return getBallSection(tempBall.y);
     }
 
-    // Démarrage de la boucle de jeu
+    function resetGame() {
+        playerScore = 0;
+        aiScore = 0;
+        gameOver = false;
+        winner = '';
+        resetBall();
+    }
+
     setInterval(gameLoop, 1000 / 60);
 };
