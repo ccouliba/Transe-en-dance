@@ -4,7 +4,7 @@ var profileState = {
 	email: "", // email de l'utilisateur
 	firstname: "", // prenom de l'utilisateur
 	lastname: "", // nom de famille de l'utilisateur
-	id: "", // identifiant de l'utilisateur
+	avatar: "",
 	isLoaded: false // indique si les donnees du profil ont ete chargees (initialement faux)
 }
 
@@ -35,9 +35,15 @@ function Profile() {
 						<div class="col-sm-3"><strong>last name :</strong></div>
 						<div class="col-sm-9">${profileState.lastname}</div>
 					</div>
-					<div class="row">
-						<div class="col-sm-3"><strong>id :</strong></div>
-						<div class="col-sm-9">${profileState.id}</div>
+					<div class="row mb-3">
+						<div class="col-sm-3"><strong>language :</strong></div>
+						<div class="col-sm-9">${profileState.langue}</div>
+					</div>
+					<div class="row mb-3">
+						<div class="col-sm-3"><strong>avatar :</strong></div>
+						<div class="col-sm-9">
+							<img src="${profileState.avatar_url}" alt="Avatar" style="width: 100px; height: 100px;">
+						</div>
 					</div>
 				</div>
 			</div>
@@ -49,6 +55,10 @@ function Profile() {
 			${EditFirstname()}
 			<h2 class="mt-4 mb-3">modify last name</h2>
 			${EditLastname()}
+			<h2 class="mt-4 mb-3">modify langue</h2>
+			${EditLangue()}
+			<h2 class="mt-4 mb-3">modify avatar</h2>
+			${EditAvatar()}
 			<h2 class="mt-4 mb-3">modify password</h2>
 			${EditPassword()}
 		</div>
@@ -69,8 +79,11 @@ async function loadProfileFromBackend() {
 		return response.json(); // transformer la reponse en JSON
 	}).then(profile => { // promesse
 		// mise a jour de profileState avec les donnees recues
-		profileState = { ...profileState, ...profile }; // utilisation d'un spread operator
-		profileState.isLoaded = true; 
+		profileState = {
+			...profileState,
+			...profile
+		}; // utilisation d'un spread operator
+		profileState.isLoaded = true;
 		mountComponent(Profile); // monter le composant Profile
 		// marquer les donnees du profil comme chargees
 	});
@@ -78,31 +91,31 @@ async function loadProfileFromBackend() {
 
 // fonction pour envoyer les donnees de mise a jour du profil au backend
 function sendProfileToBackend(payload) {
-	console.log("authenticated:", !!localStorage.getItem('userToken'));
+	// console.log("authenticated:", !!localStorage.getItem('userToken'));
 	let url = `/pong/api/profile/update`; // url de l'API pour mettre a jour le profil
 
 	fetch(url, {
-		method: "POST", // methode POST pour envoyer les donnees
-		credentials: "include", // envoie les cookies avec la requete = important pour l'authentification
-		headers: {
-			'Content-Type': 'application/json', // specifie que le contenu envoye est au format JSON
-			'Authorization': `Bearer ${localStorage.getItem('userToken')}`
-		},
-		body: JSON.stringify(payload) // convertir l'objet payload en chaine JSON
-	})
-	.then(response => {
-		if (!response.ok) {
-			return response.text().then(text => {
-				throw new Error(`http error! status: ${response.status}, message: ${text}`);
-			});
-		}
-		return response.json(); // transformer la reponse en JSON
-	})
-	.then(data => console.log('success:', data))
-	.catch(error => {
-		console.error('error:', error);
-		alert('an error occurred while updating the profile. please try again.');
-	});
+			method: "POST", // methode POST pour envoyer les donnees
+			credentials: "include", // envoie les cookies avec la requete = important pour l'authentification
+			headers: {
+				'Content-Type': 'application/json', // specifie que le contenu envoye est au format JSON
+				'Authorization': `Bearer ${localStorage.getItem('userToken')}`
+			},
+			body: JSON.stringify(payload) // convertir l'objet payload en chaine JSON
+		})
+		.then(response => {
+			if (!response.ok) {
+				return response.text().then(text => {
+					throw new Error(`http error! status: ${response.status}, message: ${text}`);
+				});
+			}
+			return response.json(); // transformer la reponse en JSON
+		})
+		.then(data => console.log('success:', data))
+		.catch(error => {
+			console.error('error:', error);
+			alert('an error occurred while updating the profile. please try again.');
+		});
 }
 
 // fonction pour modifier le nom d'utilisateur
@@ -115,7 +128,9 @@ function EditUsername() {
 		const usernameInput = event.target.elements.username.value; // recuperer la nouvelle valeur du nom d'utilisateur
 
 		profileState.username = usernameInput; // mettre a jour profileState
-		sendProfileToBackend({ 'username': usernameInput }); // envoyer les donnees au backend
+		sendProfileToBackend({
+			'username': usernameInput
+		}); // envoyer les donnees au backend
 		profileState.isLoaded = false; // marquer les donnees du profil comme non chargees
 		mountComponent(Profile); // monter le composant Profile
 	});
@@ -142,7 +157,9 @@ function EditEmail() {
 		const emailInput = event.target.elements.email.value; // recuperer la nouvelle valeur de l'email
 
 		profileState.email = emailInput; // mettre a jour profileState
-		sendProfileToBackend({ 'email': emailInput }); // envoyer les donnees au backend
+		sendProfileToBackend({
+			'email': emailInput
+		}); // envoyer les donnees au backend
 		profileState.isLoaded = false; // marquer les donnees du profil comme non chargees
 		mountComponent(Profile); // monter le composant Profile
 	});
@@ -163,7 +180,9 @@ function EditFirstname() {
 		const firstnameInput = event.target.elements.firstname.value; // recuperer la nouvelle valeur du prenom
 
 		profileState.firstname = firstnameInput; // mettre a jour profileState
-		sendProfileToBackend({ 'firstname': firstnameInput }); // envoyer les donnees au backend
+		sendProfileToBackend({
+			'firstname': firstnameInput
+		}); // envoyer les donnees au backend
 		profileState.isLoaded = false; // marquer les donnees du profil comme non chargees
 		mountComponent(Profile); // monter le composant Profile
 	});
@@ -190,7 +209,9 @@ function EditLastname() {
 		const lastnameInput = event.target.elements.lastname.value; // recuperer la nouvelle valeur du nom de famille
 
 		profileState.lastname = lastnameInput; // mettre a jour profileState
-		sendProfileToBackend({ 'lastname': lastnameInput }); // envoyer les donnees au backend
+		sendProfileToBackend({
+			'lastname': lastnameInput
+		}); // envoyer les donnees au backend
 		profileState.isLoaded = false; // marquer les donnees du profil comme non chargees
 		mountComponent(Profile); // monter le composant Profile
 	});
@@ -205,6 +226,78 @@ function EditLastname() {
 				aria-label="new last name"
 			/>
 			<button class="btn btn-primary" type="submit">modifier</button>
+		</div>
+	</form>
+	`;
+}
+
+//todo : juste un modele a modifier
+function EditLangue() {
+	bindEvent(profileState, "#edit-langue", "submit", event => {
+		event.preventDefault();
+		const langueInput = event.target.elements.langue.value;
+
+		profileState.langue = langueInput;
+		sendProfileToBackend({ 'langue': langueInput });
+		profileState.isLoaded = false;
+		mountComponent(Profile);
+	});
+	return `
+	<form id="edit-langue" class="mt-3">
+		<div class="input-group">
+			<input 
+				type="text" 
+				class="form-control" 
+				name="langue" 
+				value="${profileState.langue}" 
+				aria-label="New langue"
+			/>
+			<button class="btn btn-primary" type="submit">Modify</button>
+		</div>
+	</form>
+	`;
+}
+
+function EditAvatar() {
+	bindEvent(profileState, "#edit-avatar", "submit", event => {
+		event.preventDefault();
+		const avatarInput = event.target.elements.avatar;
+		
+		if (avatarInput.files && avatarInput.files[0]) {
+			const formData = new FormData();
+			formData.append('avatar', avatarInput.files[0]);
+			fetch('/pong/api/profile/upload-avatar/', {
+				method: 'POST',
+				body: formData,
+				credentials: 'include',
+			})
+			.then(response => response.json())
+			.then(data => {
+				if (data.status === 'success') {
+					profileState.avatar = data.avatar_url;
+					profileState.isLoaded = false;
+					mountComponent(Profile);
+				} else {
+					alert('Error uploading avatar: ' + JSON.stringify(data.errors));
+				}
+			})
+			.catch(error => {
+				console.error('Error:', error);
+				alert('An error occurred while uploading the avatar. Please try again.');
+			});
+		}
+	});
+
+	return `
+	<form id="edit-avatar" class="mt-3">
+		<div class="input-group">
+			<input 
+				type="file" 
+				class="form-control" 
+				name="avatar" 
+				accept="image/*"
+			/>
+			<button class="btn btn-primary" type="submit">Upload Avatar</button>
 		</div>
 	</form>
 	`;
@@ -227,56 +320,56 @@ function EditPassword() {
 
 		// envoie une requete POST a l'API pour changer le mot de passe
 		fetch(url, {
-			method: 'POST',
-			// headers de la requete en incluant le type de contenu et le token csrf
-			headers: {
-				'Content-Type': 'application/json',
-				'X-CSRFToken': getCookie('csrftoken')
-			},
-			// corps de la requete converti en JSON
-			body: JSON.stringify({
-				old_password: oldPassword,
-				new_password1: newPassword1,
-				new_password2: newPassword2
-			}),
-			// inclut les cookies avec la requete pour l'authentification
-			credentials: 'include'
-		})
-		// parse la reponse en JSON
-		.then(response => response.json())
-		// traite les donnees recues de l'API
-		.then(data => {
-			// si le changement de mot de passe est reussi
-			if (data.status === 'success') {
-				alert('password changed successfully');
-				// marque les donnees de profil comme non chargees
-				profileState.isLoaded = false;
-				// recharge le composant du profil
-				mountComponent(Profile);
-			} else {
-				// prepare un message d'erreur en cas d'echec
-				let errorMessage = "there were errors changing your password:\n\n";
-				// si l'ancien mot de passe est incorrect
-				if (data.errors.old_password) {
-					errorMessage += "- your old password was entered incorrectly. please try again.\n";
+				method: 'POST',
+				// headers de la requete en incluant le type de contenu et le token csrf
+				headers: {
+					'Content-Type': 'application/json',
+					'X-CSRFToken': getCookie('csrftoken')
+				},
+				// corps de la requete converti en JSON
+				body: JSON.stringify({
+					old_password: oldPassword,
+					new_password1: newPassword1,
+					new_password2: newPassword2
+				}),
+				// inclut les cookies avec la requete pour l'authentification
+				credentials: 'include'
+			})
+			// parse la reponse en JSON
+			.then(response => response.json())
+			// traite les donnees recues de l'API
+			.then(data => {
+				// si le changement de mot de passe est reussi
+				if (data.status === 'success') {
+					alert('password changed successfully');
+					// marque les donnees de profil comme non chargees
+					profileState.isLoaded = false;
+					// recharge le composant du profil
+					mountComponent(Profile);
+				} else {
+					// prepare un message d'erreur en cas d'echec
+					let errorMessage = "there were errors changing your password:\n\n";
+					// si l'ancien mot de passe est incorrect
+					if (data.errors.old_password) {
+						errorMessage += "- your old password was entered incorrectly. please try again.\n";
+					}
+					// si le nouveau mot de passe ne repond pas aux criteres de securite
+					if (data.errors.new_password2) {
+						errorMessage += "- please choose a more secure password.\n";
+						errorMessage += "\nfor a strong password:\n";
+						errorMessage += "- use a mix of uppercase and lowercase letters, numbers, and symbols\n";
+						errorMessage += "- avoid using personal information like birthdates or names\n";
+						errorMessage += "- make it at least 12 characters long\n";
+					}
+					// affiche le message d'erreur
+					alert(errorMessage);
 				}
-				// si le nouveau mot de passe ne repond pas aux criteres de securite
-				if (data.errors.new_password2) {
-					errorMessage += "- please choose a more secure password.\n";
-					errorMessage += "\nfor a strong password:\n";
-					errorMessage += "- use a mix of uppercase and lowercase letters, numbers, and symbols\n";
-					errorMessage += "- avoid using personal information like birthdates or names\n";
-					errorMessage += "- make it at least 12 characters long\n";
-				}
-				// affiche le message d'erreur
-				alert(errorMessage);
-			}
-		})
-		// traite les erreurs de la requete
-		.catch(error => {
-			console.error('error:', error);
-			alert('an error occurred. please try again.');
-		});
+			})
+			// traite les erreurs de la requete
+			.catch(error => {
+				console.error('error:', error);
+				alert('an error occurred. please try again.');
+			});
 	});
 
 	// retourne le formulaire html pour changer le mot de passe

@@ -202,3 +202,8 @@ STATICFILES_DIRS = [
 # Chemin pour les fichiers statiques collectés (utilisé avec collectstatic)
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
+# pour l'avatar
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+

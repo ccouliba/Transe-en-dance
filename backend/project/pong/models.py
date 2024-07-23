@@ -3,6 +3,7 @@ from django.utils import timezone
 from django.contrib.auth.models import AbstractUser, Group, Permission
 from django.db.models import UniqueConstraint
 from django.utils import timezone
+from django.conf import settings
 
 # class User(AbstractUser): #https://openclassrooms.com/fr/courses/7192426-allez-plus-loin-avec-le-framework-django/7386368-personnalisez-le-modele-utilisateur
 
@@ -12,6 +13,8 @@ class User(AbstractUser):
 	avatar = models.CharField(max_length=255, blank=True, null=True)  # URL ou chemin de l'avatar de l'utilisateur
 	friends = models.ManyToManyField('self', symmetrical=True, blank=True)  # Champ pour les amis
 	
+	avatar = models.ImageField(upload_to='avatars/', null=True, blank=True)
+
 	last_activity = models.DateTimeField(default=timezone.now)
 
 
@@ -36,7 +39,11 @@ class User(AbstractUser):
 		return self.username 
 	def was_active_now(self):
 		self.last_activity = timezone.now()
-
+	def get_avatar_url(self):
+		if self.avatar and hasattr(self.avatar, 'url'):
+			return self.avatar.url
+		else:
+			return f"{settings.STATIC_URL}pong/images/default_avatar.png"
 
 #class qui permet de gerer les demandes d'amis. Si demande acceptee alors sauvegarde l'ami dans friends (cf. class user et dans bdd : `pong_user_friends``) 
 class Friendship(models.Model):
