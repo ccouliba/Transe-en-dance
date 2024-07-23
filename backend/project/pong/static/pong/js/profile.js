@@ -58,7 +58,7 @@ function Profile() {
 // fonction pour charger les donnees du profil depuis le backend
 async function loadProfileFromBackend() {
 	// verifier si les donnees du profil sont deja chargees
-	if (profileState.isLoaded == true) { // pour eviter des fetch infinis au backend
+	if (profileState.isLoaded) { // pour eviter des fetch infinis au backend
 		return;
 	}
 
@@ -70,8 +70,9 @@ async function loadProfileFromBackend() {
 	}).then(profile => { // promesse
 		// mise a jour de profileState avec les donnees recues
 		profileState = { ...profileState, ...profile }; // utilisation d'un spread operator
+		profileState.isLoaded = true; 
 		mountComponent(Profile); // monter le composant Profile
-		profileState.isLoaded = true; // marquer les donnees du profil comme chargees
+		// marquer les donnees du profil comme chargees
 	});
 }
 

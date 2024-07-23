@@ -81,6 +81,18 @@ let routes = {
 	"#register": () => mountComponent(Register),
 };
 
+function cleanStates(){
+	if (friendsState.friendStatusInterval){
+		clearInterval(friendsState.friendStatusInterval)
+	}
+
+	if (playState.checkInterval){
+		clearInterval(playState.checkInterval)
+	}
+
+	resetLoaded()
+}
+
 function checkAuth(){
 	return 	fetch("/pong/api/check_auth/")
 	// Transformer la reponse en JSON
@@ -92,15 +104,13 @@ let isCheckingAuth = false;
 
 // Fonction pour changer de page
 window.changePage = function (url) {
-	// Si une verification d'authentification est deja en cours => sortir de la fonction
 	
-	
+	cleanStates()
 	if (url === ''){
 		changePage("#login")
 		return 
 	}
 	if (url === "#login" || url === "#register"  ){
-		console.log(url)
 		url = "#login"
 		routes[url]();
 		// Mettre a jour l'historique du navigateur avec la nouvelle page
@@ -110,10 +120,8 @@ window.changePage = function (url) {
 		return
 	}
 
-	
 	// Faire une requete pour verifier l'authentification de l'utilisateur
 	checkAuth()
-		// Traiter les donnees recues
 		.then((data) => {
 			// La verification est terminee
 		

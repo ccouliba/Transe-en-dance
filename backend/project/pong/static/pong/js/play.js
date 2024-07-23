@@ -45,6 +45,7 @@ function Play() {
 
 	// si le jeu est termine => afficher les scores finaux
 	if (playState.gameOver) {
+		clearInterval(playState.checkInterval)
 		content = `
 			<div class="container mt-5">
 				<h1>game ended. bye !</h1>
@@ -100,8 +101,8 @@ function Play() {
 // fonction pour charger la page du jeu
 function loadPlayState() {
 	// verifier si la page n'a pas ete chargee deja
-	if (!playState.checkInterval){
-		playState.checkInterval = setInterval(checkAuth, 5 * 1000)
+	 if (!playState.checkInterval){
+	 	playState.checkInterval = setInterval(checkAuth, 5 * 1000)
 	
 	}
 	if (!playState.isLoaded) {

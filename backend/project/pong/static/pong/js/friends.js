@@ -3,7 +3,8 @@ var friendsState = {
 	sentRequests: [], // Demandes d'amis envoyees
 	receivedRequests: [], // Demandes d'amis recues
 	friendsStatus: [],
-	isLoaded: false // indique si les donnees de cette page ont ete chargees (initialement faux)
+	friendStatusInterval: null,
+	isLoaded: false, // indique si les donnees de cette page ont ete chargees (initialement faux)
 };
 
 // Fonction pour charger les donnees des amis du backend
@@ -191,7 +192,7 @@ function RemoveFriendForm() {
 
 function FriendsList() {
 	if (!friendsState.isLoaded) {
-		setInterval(getFriendsStatus, 10 * 1000)
+		friendsState.friendStatusInterval = setInterval(getFriendsStatus, 10 * 1000)
 		
 		loadFriendsData();
 		return `<div>Loading...</div>`;
