@@ -2,24 +2,33 @@ var friendsState = {
 	friends: [], // Liste des amis
 	sentRequests: [], // Demandes d'amis envoyees
 	receivedRequests: [], // Demandes d'amis recues
+	friendsStatus: [],
 	isLoaded: false // indique si les donnees de cette page ont ete chargees (initialement faux)
 };
 
 // Fonction pour charger les donnees des amis du backend
 function loadFriendsData() {
-	let url = `/pong/api/friends_data/`; 
+	let url = `/pong/api/friends_data/`;
 	fetch(url, {
-		credentials: "include" // inclure les cookies pour l'authentification
-	})
-	.then(response => response.json()) // Convertir la reponse en JSON
-	.then(data => {
-		friendsState.friends = data.friends; // mise a jour de la liste des amis
-		friendsState.sentRequests = data.sentRequests; // mise a jour des demandes envoyees
-		friendsState.receivedRequests = data.receivedRequests; // mise a jour des demandes recues
-		friendsState.isLoaded = true; // indiquer que les donnees sont chargees
-		mountComponent(FriendsList); // mise a jour de l'interface avec la liste des amis
-	})
-	.catch(error => console.error('Error:', error)); 
+			credentials: "include" // inclure les cookies pour l'authentification
+		})
+		.then(response => response.json()) // Convertir la reponse en JSON
+		.then(data => {
+			friendsState.friends = data.friends; // mise a jour de la liste des amis
+			friendsState.sentRequests = data.sentRequests; // mise a jour des demandes envoyees
+			friendsState.receivedRequests = data.receivedRequests; // mise a jour des demandes recues
+			friendsState.isLoaded = true; // indiquer que les donnees sont chargees
+			mountComponent(FriendsList); // mise a jour de l'interface avec la liste des amis
+		})
+		.catch(error => console.error('Error:', error));
+
+	fetch('/pong/api/get_friends_status/')
+		.then(response => response.json())
+		.then(data => {
+			friendsState.friendsStatus = data.friends_status;
+			mountComponent(FriendsList);
+		})
+		.catch(error => console.error('Error:', error));
 }
 
 // Fonction pour afficher la liste des amis
@@ -74,25 +83,27 @@ function refreshFriendsList() {
 
 // Fonction pour envoyer une demande d'ami
 function sendFriendRequest(email) {
-	let url = `/pong/api/profile/send_friend_request/`; 
+	let url = `/pong/api/profile/send_friend_request/`;
 	fetch(url, {
-		method: "POST", 
-		credentials: "include", // Inclure les cookies pour l'authentification
-		headers: {
-			'Content-Type': 'application/json', // Type de contenu JSON
-		},
-		body: JSON.stringify({ email: email }) // Corps de la requete avec l'email de l'ami
-	})
-	.then(response => response.json()) // Convertir la reponse en JSON
-	.then(data => {
-		if (data.status === 'success') {
-			alert("Demande d'ami envoyee avec succes!"); // modale pour alerter l'utilisateur du succes
-			refreshFriendsList(); // rafraichir la liste des amis !!! pas besoin de websockets ou autres
-		} else {
-			alert(data.message); // modale pour alerter l'utilisateur de l'echec
-		}
-	})
-	.catch(error => console.error('Error:', error)); 
+			method: "POST",
+			credentials: "include", // Inclure les cookies pour l'authentification
+			headers: {
+				'Content-Type': 'application/json', // Type de contenu JSON
+			},
+			body: JSON.stringify({
+				email: email
+			}) // Corps de la requete avec l'email de l'ami
+		})
+		.then(response => response.json()) // Convertir la reponse en JSON
+		.then(data => {
+			if (data.status === 'success') {
+				alert("Demande d'ami envoyee avec succes!"); // modale pour alerter l'utilisateur du succes
+				refreshFriendsList(); // rafraichir la liste des amis !!! pas besoin de websockets ou autres
+			} else {
+				alert(data.message); // modale pour alerter l'utilisateur de l'echec
+			}
+		})
+		.catch(error => console.error('Error:', error));
 }
 
 // Fonction pour afficher le formulaire d'ajout d'ami
@@ -122,23 +133,25 @@ function AddFriendForm() {
 function AcceptFriendRequest(email) {
 	let url = `/pong/api/profile/accept_friend_request/`;
 	fetch(url, {
-		method: "POST", 
-		credentials: "include", // Inclure les cookies pour l'authentification
-		headers: {
-			'Content-Type': 'application/json', // Type de contenu JSON
-		},
-		body: JSON.stringify({ email: email }) // Corps de la requete avec l'email de l'ami
-	})
-	.then(response => response.json()) // Convertir la reponse en JSON
-	.then(data => {
-		if (data.status === 'success') {
-			alert("Demande d'ami acceptee avec succes!"); //modale pour alerter l'utilisateur du succes
-			refreshFriendsList(); // Rafraichir la liste des amis !
-		} else {
-			alert(data.message); // modale pour alerter l'utilisateur de l'echec
-		}
-	})
-	.catch(error => console.error('Error:', error)); 
+			method: "POST",
+			credentials: "include", // Inclure les cookies pour l'authentification
+			headers: {
+				'Content-Type': 'application/json', // Type de contenu JSON
+			},
+			body: JSON.stringify({
+				email: email
+			}) // Corps de la requete avec l'email de l'ami
+		})
+		.then(response => response.json()) // Convertir la reponse en JSON
+		.then(data => {
+			if (data.status === 'success') {
+				alert("Demande d'ami acceptee avec succes!"); //modale pour alerter l'utilisateur du succes
+				refreshFriendsList(); // Rafraichir la liste des amis !
+			} else {
+				alert(data.message); // modale pour alerter l'utilisateur de l'echec
+			}
+		})
+		.catch(error => console.error('Error:', error));
 }
 
 // Fonction pour afficher le formulaire d'acceptation d'ami
@@ -166,25 +179,27 @@ function AcceptFriendForm(email) {
 
 // Fonction pour supprimer un ami
 function removeFriend(email) {
-	let url = `/pong/api/profile/remove_friend/`; 
+	let url = `/pong/api/profile/remove_friend/`;
 	fetch(url, {
-		method: "POST", 
-		credentials: "include", 
-		headers: {
-			'Content-Type': 'application/json', 
-		},
-		body: JSON.stringify({ email: email })
-	})
-	.then(response => response.json()) 
-	.then(data => {
-		if (data.status === 'success') {
-			alert("Ami supprime avec succes!"); // modale pour alerter l'utilisateur du succes
-			refreshFriendsList(); // Rafraichir la liste des amis
-		} else {
-			alert(data.message); // modale pour alerter l'utilisateur de l'echec
-		}
-	})
-	.catch(error => console.error('Error:', error)); 
+			method: "POST",
+			credentials: "include",
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				email: email
+			})
+		})
+		.then(response => response.json())
+		.then(data => {
+			if (data.status === 'success') {
+				alert("Ami supprime avec succes!"); // modale pour alerter l'utilisateur du succes
+				refreshFriendsList(); // Rafraichir la liste des amis
+			} else {
+				alert(data.message); // modale pour alerter l'utilisateur de l'echec
+			}
+		})
+		.catch(error => console.error('Error:', error));
 }
 
 // Fonction pour afficher le formulaire de suppression d'ami
@@ -208,3 +223,55 @@ function RemoveFriendForm() {
 		</form>
 	`;
 }
+
+function FriendsList() {
+	if (!friendsState.isLoaded) {
+		loadFriendsData();
+		return `<div>Loading...</div>`;
+	}
+
+	return `
+		
+		<div class="container mt-5">
+			${AddFriendForm()}
+			${AcceptFriendForm()}
+			${RemoveFriendForm()}
+
+			<h1 class="mb-4">Friends list</h1>
+			
+			<button class="btn btn-primary mb-3" onclick="refreshFriendsList()">Refresh list</button>
+			
+			<h2>My friends</h2>
+			<ul class="list-group mb-4">
+				${friendsState.friends.map(friend => {
+					const status = friendsState.friendsStatus.find(s => s.username === friend.username);
+					const statusClass = status && status.is_online ? 'text-success' : 'text-secondary';
+					const statusText = status && status.is_online ? 'Online' : 'Offline';
+					return `
+						<li class="list-group-item d-flex justify-content-between align-items-center">
+							${friend.username} (${friend.email})
+							<span class="${statusClass}">${statusText}</span>
+						</li>
+					`;
+				}).join('')}
+			</ul>
+			
+			<h2>Friend requests sent</h2>
+			<ul class="list-group mb-4">
+				${friendsState.sentRequests.map(request => `
+					<li class="list-group-item">${request.username} (${request.email})</li>
+				`).join('')}
+			</ul>
+			
+			<h2>Friend requests received</h2>
+			<ul class="list-group mb-4">
+				${friendsState.receivedRequests.map(request => `
+					<li class="list-group-item">
+						${request.username} (${request.email})
+					</li>
+				`).join('')}
+			</ul>
+		</div>
+	`;
+}
+

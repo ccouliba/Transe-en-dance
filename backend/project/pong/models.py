@@ -12,6 +12,10 @@ class User(AbstractUser):
 	langue = models.CharField(max_length=10, blank=True, null=True)  # Langue de l'utilisateur
 	avatar = models.CharField(max_length=255, blank=True, null=True)  # URL ou chemin de l'avatar de l'utilisateur
 	friends = models.ManyToManyField('self', symmetrical=True, blank=True)  # Champ pour les amis
+	
+	# is_online = models.BooleanField(default=False)
+	# last_activity = models.DateTimeField(default=timezone.now)
+
 
 	# Ajout d'un champ many-to-many pour les groupes auxquels cet utilisateur appartient
 	groups = models.ManyToManyField(

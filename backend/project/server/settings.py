@@ -13,7 +13,6 @@ import os
 from django.utils.translation import gettext_lazy as _
 # from django.utils.translation import gettext as _
 from pathlib import Path
-from corsheaders.defaults import default_headers
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 # BASE_DIR = Path(__file__).resolve().parent.parent
@@ -71,33 +70,33 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.locale.LocaleMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+	'django.middleware.security.SecurityMiddleware',
+	'django.contrib.sessions.middleware.SessionMiddleware',
+	'django.middleware.locale.LocaleMiddleware',
+	'django.middleware.common.CommonMiddleware',
+	'django.middleware.csrf.CsrfViewMiddleware',
+	'django.contrib.auth.middleware.AuthenticationMiddleware',
+	'django.contrib.messages.middleware.MessageMiddleware',
+	'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
 ROOT_URLCONF = 'server.urls'
 
 TEMPLATES = [
-    {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'pong', 'templates')],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
-                'pong.context_variables_processors.texts_to_translate',
-            ],
-        },
-    },
+	{
+		'BACKEND': 'django.template.backends.django.DjangoTemplates',
+		'DIRS': [os.path.join(BASE_DIR, 'pong', 'templates')],
+		'APP_DIRS': True,
+		'OPTIONS': {
+			'context_processors': [
+				'django.template.context_processors.debug',
+				'django.template.context_processors.request',
+				'django.contrib.auth.context_processors.auth',
+				'django.contrib.messages.context_processors.messages',
+				'pong.context_variables_processors.texts_to_translate',
+			],
+		},
+	},
 ]
 
 WSGI_APPLICATION = 'server.wsgi.application'
@@ -108,15 +107,15 @@ WSGI_APPLICATION = 'server.wsgi.application'
 
 
 DATABASES = {
-    'default': {
-        'ENGINE': os.getenv('SQL_ENGINE', 'django.db.backends.postgresql_psycopg2'),
-        'NAME': os.getenv('SQL_DATABASE', 'db1'),
-        'USER': os.getenv('SQL_USER', 'ccouliba'),
-        'PASSWORD': os.getenv('SQL_PASSWORD'),
-        'HOST': os.getenv('SQL_HOST', 'db'),
-        # 'HOST': 'localhost', #todo : A MODIFIER (juste pour pouvoir executer django localement)
-        'PORT': os.getenv('SQL_PORT', '5432'),
-    }
+	'default': {
+		'ENGINE': os.getenv('SQL_ENGINE', 'django.db.backends.postgresql_psycopg2'),
+		'NAME': os.getenv('SQL_DATABASE', 'db1'),
+		'USER': os.getenv('SQL_USER', 'ccouliba'),
+		'PASSWORD': os.getenv('SQL_PASSWORD'),
+		# 'HOST': os.getenv('SQL_HOST', 'db'),
+		'HOST': 'localhost', #todo : A MODIFIER (juste pour pouvoir executer django localement)
+		'PORT': os.getenv('SQL_PORT', '5432'),
+	}
 }
 
 
@@ -154,12 +153,12 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
 LANGUAGES = [
-    ('en', _('English')),
-    ('fr', _('French')),
-    ('it', _('Italian')),
-    ('es', _('Spanish')),
-    ('de', _('Deutsch')),
-    ]
+	('en', _('English')),
+	('fr', _('French')),
+	('it', _('Italian')),
+	('es', _('Spanish')),
+	('de', _('Deutsch')),
+	]
 
 LANGUAGE_COOKIE_NAME = 'language'
 
@@ -202,3 +201,4 @@ STATICFILES_DIRS = [
 
 # Chemin pour les fichiers statiques collectés (utilisé avec collectstatic)
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
