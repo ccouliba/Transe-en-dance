@@ -130,21 +130,13 @@ window.onload = function() {
 
     // Fonction pour mettre à jour le mouvement de l'IA
     function updateAI() {
-        if (ball.dx < 0) {
+        if (ball.dx < 0)
             centerAiPaddle(2);
-        } else {
-            if (ball.x > canvas.width / 2) {
-                if (ball.y < ai.y + paddleHeight / 2) {
-                    simulateKey('+'); // Monte le paddle
-                } else if (ball.y > ai.y + paddleHeight / 2) {
-                    simulateKey('-'); // Descend le paddle
-                }
-            } else {
-                simulateKey('+', false); // Relâche la touche
-                simulateKey('-', false); // Relâche la touche
-            }
+        else {
+            centerAiPaddle(predictBallY());
         }
     }
+
 
     setInterval(updateAI, 1000);
 
@@ -193,6 +185,35 @@ window.onload = function() {
     function gameLoop() {
         update();
         draw();
+    }
+    
+    function getBallSection(ballY) {
+        const sectionHeight = canvas.height / 5;
+        if (ballY < sectionHeight) return 0;
+        if (ballY < sectionHeight * 2) return 1;
+        if (ballY < sectionHeight * 3) return 2;
+        if (ballY < sectionHeight * 4) return 3;
+        return 4;
+    }
+
+    function predictBallY() {
+        // Crée une copie de l'objet ball pour simuler son mouvement
+        let tempBall = { ...ball };
+        
+        // Simule le mouvement de la balle jusqu'à ce qu'elle atteigne le côté droit du canvas
+        while (tempBall.x + tempBall.radius < canvas.width && tempBall.x - tempBall.radius > 0) {
+            // Met à jour la position X de la balle
+            tempBall.x += tempBall.dx * tempBall.speed;
+            // Met à jour la position Y de la balle
+            tempBall.y += tempBall.dy * tempBall.speed;
+    
+            // Inverse la direction Y si la balle touche le haut ou le bas du canvas
+            if (tempBall.y + tempBall.radius > canvas.height || tempBall.y - tempBall.radius < 0) {
+                tempBall.dy *= -1;
+            }
+        }
+        // Retourne la position Y prévue de la balle
+        return getBallSection(tempBall.y);
     }
 
     // Démarrage de la boucle de jeu
