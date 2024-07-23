@@ -33,10 +33,10 @@ function ExternalLoginButton() {
 function LoginForm() {
 	return `
 		<form id="loginForm">
-			<div class="mb-3">
+			<div class="mb-3 col-xs-3">
 				<input type="text" class="form-control" name="username" placeholder="Username" required>
 			</div>
-			<div class="mb-3">
+			<div class="mb-3 col-xs-3">
 				<input type="password" class="form-control" name="password" placeholder="Password" required>
 			</div>
 			<button type="submit" class="btn btn-primary">Login</button>
@@ -53,10 +53,10 @@ function loadLoginState() {
 function LoginForm() {
 	return `
 		<form id="loginForm">
-			<div class="mb-3">
+			<div class="col-xs-3">
 				<input type="text" class="form-control" name="username" placeholder="Username" required>
 			</div>
-			<div class="mb-3">
+			<div class="col-xs-3">
 				<input type="password" class="form-control" name="password" placeholder="Password" required>
 			</div>
 			<button type="submit" class="btn btn-primary">Login</button>
@@ -68,16 +68,19 @@ function LoginForm() {
 function RegisterForm() {
 	return `
 		<form id="registerForm">
-			<div class="mb-3">
+			<div class="col-xs-3">
 				<input type="text" class="form-control" name="username" placeholder="Username" required>
 			</div>
-			<div class="mb-3">
+			<div class="col-xs-3">
 				<input type="email" class="form-control" name="email" placeholder="Email" required>
 			</div>
-			<div class="mb-3">
+			<div class="col-xs-3">
 				<input type="password" class="form-control" name="password1" placeholder="Password" required>
+				<div id="passwordHelpBlock" class="form-text">
+					Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.
+				</div>
 			</div>
-			<div class="mb-3">
+			<div class="col-xs-3">
 				<input type="password" class="form-control" name="password2" placeholder="Confirm Password" required>
 			</div>
 			<button type="submit" class="btn btn-primary">Register</button>
