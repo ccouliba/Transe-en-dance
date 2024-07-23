@@ -10,10 +10,11 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 import os
+import sys
 from django.utils.translation import gettext_lazy as _
 from pathlib import Path
-import logging
-import logstash
+# import logging
+# import logstash
 # from corsheaders.defaults import default_headers
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -83,8 +84,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     # 'elasticapm.contrib.django.middleware.TracingMiddleware',
-    'logstash.middleware.LogMiddleware.UserLoginLogMiddleware',
-    'logstash.middleware.LogMiddleware.UserRegisterLogMiddleware',
+    'pong.middleware.LogMiddleware.LoggingMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',
@@ -246,8 +246,8 @@ LOGGING = {
         'console': {
             'level': 'DEBUG',
             'class': 'logging.StreamHandler',
-            'stream': 'sys.stdout',
-            # 'formatter': 'simple',
+            'stream': sys.stdout,
+            'formatter': 'simple',
         },
         # 'logstash': {
         #     'level': 'DEBUG',
@@ -269,13 +269,13 @@ LOGGING = {
             'propagate': True, # If logs should be propagte to parent logs
         },
         'django.request': {
-            'handlers': ['console', 'file'],
+            'handlers': ['console'],
             'level': 'DEBUG',
             'propagate': True,
         },
         'django.db.backend': {
-            'handlers': ['console', 'file'],
-            'level': 'DEBUG',
+            'handlers': ['console'],
+            'level': 'CRITICAL',
             'propagate': True,
         },
     },

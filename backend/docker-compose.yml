@@ -14,6 +14,16 @@ services:
     depends_on:
       - db
     restart: unless-stopped
+    develop:
+      watch:
+        - action: sync
+          path: ./project
+          target: /usr/src/project
+          # ignore:
+          #   - node_modules/
+        # - action: rebuild
+        #   path: ./proxy/nginx.conf
+        #   target: /etc/nginx/conf.d/default.conf
     links:
       - db:db
     networks:
@@ -55,7 +65,7 @@ services:
   logstash:
     container_name: logstash
     image: docker.elastic.co/logstash/logstash:8.3.1
-    command: logstash -f ./project/logstash/pipeline/logstash.conf
+    command: logstash -f ./project/logstash/pipelines/logstash.conf ; logstash -f ./project/logstash/pipelines/logstash_2.conf
     volumes:
       - ./project/logstash/pipelines:/usr/share/logstash/pipelines
     ports:

@@ -1,7 +1,0 @@
-- pipeline.id: pipeline1
-  path.config: "../pipelines/logstash.conf"
-  pipeline.workers: 2
-
-- pipeline.id: pipeline2
-  path.config: "../pipelines/logstash_2.conf"
-  pipeline.workers: 3
