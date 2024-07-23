@@ -11,13 +11,7 @@
 */
 
 body, html {
-  margin: 0;
-  padding: 0;
-  overflow: auto;
-  height: 100%;
-  width: 100%;
   background: rgb(42, 0, 0);
-  position: relative;
   font-family: 'Trajan Pro', sans-serif;
   color: rgb(200, 200, 200);
   background-image: linear-gradient(to top, rgb(42,0,0), rgb(100,20,20));
@@ -41,7 +35,7 @@ a {
   color: rgb(100,140,180);
 }
 
-#registerUsernameInputHelp {
+#passwordHelpBlock {
   color: rgb(145, 142, 112);
 }
 

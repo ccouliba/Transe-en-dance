@@ -32,29 +32,29 @@ function Profile() {
 	// - sections pour modifier les informations du profil
 	return `
 		
-		<div class="container mt-5">
+		<div class="container mt-5" id="profilePage">
 			<h1 class="mb-4">Profil</h1>
 			<div class="card">
 				<div class="card-body">
 					<div class="row mb-3">
 						<div class="col-sm-3"><strong>Username :</strong></div>
-						<div class="col-sm-9">${profileState.username}</div>
+						<div class="col-sm-9"><span id="profileValue>${profileState.username}</span></div>
 					</div>
 					<div class="row mb-3">
 						<div class="col-sm-3"><strong>Email :</strong></div>
-						<div class="col-sm-9">${profileState.email}</div>
+						<div class="col-sm-9"><span id="profileValue>${profileState.email}</span></div>
 					</div>
 						<div class="row mb-3">
 							<div class="col-sm-3"><strong>First name :</strong></div>
-							<div class="col-sm-9">${profileState.firstname}</div>
+							<div class="col-sm-9"><span id="profileValue>${profileState.firstname}</span></div>
 						</div>
 						<div class="row mb-3">
 							<div class="col-sm-3"><strong>Last name :</strong></div>
-							<div class="col-sm-9">${profileState.lastname}</div>
+							<div class="col-sm-9"><span id="profileValue>${profileState.lastname}</span></div>
 						</div>
 					<div class="row">
 						<div class="col-sm-3"><strong>ID :</strong></div>
-						<div class="col-sm-9">${profileState.id}</div>
+						<div class="col-sm-9"><span id="profileValue>${profileState.id}</span></div>
 					</div>
 				</div>
 			</div>
