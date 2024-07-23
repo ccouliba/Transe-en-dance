@@ -129,3 +129,36 @@ def friends_data(request):
 		'receivedRequests': [{'username': req.id_user_1.username, 'email': req.id_user_1.email} for req in received_requests],
 	})
 
+from typing import List
+from django.utils import timezone
+from datetime import timedelta
+
+def	are_user_online(friends:List[User]):
+	statuses = []
+	now = timezone.now()
+	threshold = timedelta(seconds=100)  #definir la periode pour considerer un user comme en ligne 
+	for friend in friends:
+		if friend.last_activity is None:
+			is_online = False
+		else:
+			time_since_last_activity = now - friend.last_activity #difference entre maintenant et derniere activite du user
+			print(time_since_last_activity, friend.last_activity)
+			is_online = time_since_last_activity < threshold #verifier si cette différence est inferieure au seuil (threshold)
+		statuses.append(is_online) 
+	return statuses
+
+# def	are_user_online(friends:List[User]):
+# 	statuses = []
+# 	for friend in friends:
+# 		is_online = friend.last_activity
+# 		statuses.append(is_online) 
+# 	return statuses
+
+@login_required
+@csrf_exempt
+def friends_online_status(request):
+	user = request.user
+	friends = user.friends.all()
+	statuses = are_user_online(friends)
+	payload = {"statuses":statuses}
+	return JsonResponse(payload)

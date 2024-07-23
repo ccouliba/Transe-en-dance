@@ -4,7 +4,6 @@ from django.template import loader
 from django.contrib.auth.decorators import login_required
 from pong.models import User
 
-
 # view pour afficher la liste des utilisateurs. Test pour fetch() des donnees du backend/bdd
 # @login_required
 def user_list_json(request):
@@ -42,4 +41,7 @@ def index(request):
 # 	return render(request, 'pong/home.html')
 @login_required
 def home_view(request):
+	user = request.user
+	user.was_active_now()
+	user.save()
 	return render(request, 'pong/base.html')

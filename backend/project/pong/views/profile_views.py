@@ -72,6 +72,11 @@ def	profile_update_view(request):
 @login_required
 def profile_view(request):
 	user = request.user
+
+	user.was_active_now()
+	user.save()
+	print("user er", user.last_activity)
+
 	friends = user.friends.all()
 	sent_requests = Friendship.objects.filter(id_user_1=user)
 	received_requests = Friendship.objects.filter(id_user_2=user)

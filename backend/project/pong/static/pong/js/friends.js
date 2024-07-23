@@ -21,58 +21,23 @@ function loadFriendsData() {
 			mountComponent(FriendsList); // mise a jour de l'interface avec la liste des amis
 		})
 		.catch(error => console.error('Error:', error));
-
-	fetch('/pong/api/get_friends_status/')
-		.then(response => response.json())
-		.then(data => {
-			friendsState.friendsStatus = data.friends_status;
-			mountComponent(FriendsList);
-		})
-		.catch(error => console.error('Error:', error));
 }
 
-// Fonction pour afficher la liste des amis
-function FriendsList() {
-	if (!friendsState.isLoaded) {
-		loadFriendsData(); // Charger les donnees des amis si non chargees
-		return `<div>Loading...</div>`; // Afficher un message de chargement
-	}
+function getFriendsStatus(){
+	let url = `/pong/api/friends/get-status/`;
+	return fetch(url, {
+			credentials: "include" // inclure les cookies pour l'authentification
+		})
+		.then(response => response.json()) // Convertir la reponse en JSON
+		.then(payload=>{
+			payload.statuses.forEach((isOnline, i) => {
+				friendsState.friends[i].isOnline = isOnline	
+			});
 
-	// Retourner le HTML pour afficher la liste des amis et les formulaires (ajouter, accepter, supprimer un ami)
-	return `
-		<div class="container mt-5">
-			${AddFriendForm()}
-			${AcceptFriendForm()}
-			${RemoveFriendForm()}
-
-			<h1 class="mb-4">Friends list</h1>
+			mountComponent(FriendsList)
 			
-			<button class="btn btn-primary mb-3" onclick="refreshFriendsList()">Refresh list</button>
-			
-			<h2>My friends</h2>
-			<ul class="list-group mb-4">
-				${friendsState.friends.map(friend => `
-					<li class="list-group-item">${friend.username} (${friend.email})</li>
-				`).join('')}
-			</ul>
-			
-			<h2>Friend requests sent</h2>
-			<ul class="list-group mb-4">
-				${friendsState.sentRequests.map(request => `
-					<li class="list-group-item">${request.username} (${request.email})</li>
-				`).join('')}
-			</ul>
-			
-			<h2>Friend requests received</h2>
-			<ul class="list-group mb-4">
-				${friendsState.receivedRequests.map(request => `
-					<li class="list-group-item">
-						${request.username} (${request.email})
-					</li>
-				`).join('')}
-			</ul>
-		</div>
-	`;
+		})
+		.catch(error => console.error('Error:', error));
 }
 
 // Fonction pour rafraichir la liste des amis
@@ -226,6 +191,8 @@ function RemoveFriendForm() {
 
 function FriendsList() {
 	if (!friendsState.isLoaded) {
+		setInterval(getFriendsStatus, 10 * 1000)
+		
 		loadFriendsData();
 		return `<div>Loading...</div>`;
 	}
@@ -244,13 +211,9 @@ function FriendsList() {
 			<h2>My friends</h2>
 			<ul class="list-group mb-4">
 				${friendsState.friends.map(friend => {
-					const status = friendsState.friendsStatus.find(s => s.username === friend.username);
-					const statusClass = status && status.is_online ? 'text-success' : 'text-secondary';
-					const statusText = status && status.is_online ? 'Online' : 'Offline';
 					return `
 						<li class="list-group-item d-flex justify-content-between align-items-center">
-							${friend.username} (${friend.email})
-							<span class="${statusClass}">${statusText}</span>
+							${friend.username} (${friend.email}) - ${friend.isOnline ? "online":"offline"}
 						</li>
 					`;
 				}).join('')}
@@ -274,4 +237,5 @@ function FriendsList() {
 		</div>
 	`;
 }
+
 
