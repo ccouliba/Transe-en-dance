@@ -16,5 +16,3 @@ function Menu() {
 		</nav>
 	`;
 }
-
-// a voir si jamais pas logged in, ce que l'on veut afficher
