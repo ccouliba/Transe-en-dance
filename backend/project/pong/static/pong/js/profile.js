@@ -32,7 +32,7 @@ function Profile() {
 	// - sections pour modifier les informations du profil
 	return `
 		
-		<div class="container mt-5">
+		<div id="profilePage">
 			<h1 class="mb-4">Profil</h1>
 			<div class="card">
 				<div class="card-body">

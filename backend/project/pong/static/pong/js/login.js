@@ -30,19 +30,6 @@ function ExternalLoginButton() {
 	`;
 }
 
-function LoginForm() {
-	return `
-		<form id="loginForm">
-			<div class="mb-3">
-				<input type="text" class="form-control" name="username" placeholder="Username" required>
-			</div>
-			<div class="mb-3">
-				<input type="password" class="form-control" name="password" placeholder="Password" required>
-			</div>
-			<button type="submit" class="btn btn-primary">Login</button>
-		</form>
-	`;
-}
 function loadLoginState() {
 	bindEvent(loginState, "#loginForm", "submit", handleLogin);
 	bindEvent(loginState, "#registerForm", "submit", handleRegister);
