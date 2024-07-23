@@ -6,7 +6,8 @@ let playState = {
 	gameStarted: false, // indique si le jeu a commence
 	gameId: null, // identifiant de la partie
 	isLoaded: false, // indique si la page est chargee
-	gameOver: false // indique si le jeu est termine
+	gameOver: false, // indique si le jeu est termine,
+	checkInterval: null
 };
 
 // constantes pour les dimensions du jeu
@@ -38,7 +39,7 @@ function Play() {
 		loadPlayState();
 	}
 	
-	setInterval(checkAuth, 5 * 1000)
+	
 	
 	let content = '';
 
@@ -99,6 +100,10 @@ function Play() {
 // fonction pour charger la page du jeu
 function loadPlayState() {
 	// verifier si la page n'a pas ete chargee deja
+	if (!playState.checkInterval){
+		playState.checkInterval = setInterval(checkAuth, 5 * 1000)
+	
+	}
 	if (!playState.isLoaded) {
 		// attacher l'event de soumission du formulaire pour demarrer le jeu
 		bindEvent(playState, "#start-game-form", "submit", startGame);
@@ -324,6 +329,7 @@ function initializeGame() {
 
 	// demarre la boucle du jeu
 	update();
+	
 }
 
 // fonction pour terminer le jeu

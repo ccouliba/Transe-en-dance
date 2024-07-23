@@ -145,8 +145,10 @@ def logout_view(request):
 def register_view(request):
 	try:
 		data = json.loads(request.body)
+		data["is_online"] = False
 		form = RegisterForm(data)
 		if form.is_valid():
+			# form.is_online = False
 			user = form.save()
 			return JsonResponse({'status': 'success'})
 		else:

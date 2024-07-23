@@ -111,18 +111,12 @@ window.changePage = function (url) {
 	}
 
 	
-	
-	if (isCheckingAuth) return;
-
-	isCheckingAuth = true;
-	
 	// Faire une requete pour verifier l'authentification de l'utilisateur
 	checkAuth()
 		// Traiter les donnees recues
 		.then((data) => {
 			// La verification est terminee
-			isCheckingAuth = false;
-
+		
 			// Si l'utilisateur est authentifie
 			if (data.is_authenticated) {
 				// Stocker un token et le nom d'utilisateur dans le localStorage (=> une fonctionnalité de l'API Web Storage qui permet de stocker des données de manière persistante dans le navigateur)
@@ -163,7 +157,7 @@ window.changePage = function (url) {
 		})
 		.catch((error) => {
 			// La verification est terminee meme en cas d'erreur
-			isCheckingAuth = false;
+		
 			// Afficher l'erreur dans la console
 			console.error("Error:", error);
 			
