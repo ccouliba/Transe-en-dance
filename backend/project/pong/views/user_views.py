@@ -41,7 +41,7 @@ def index(request):
 # 	return render(request, 'pong/home.html')
 @login_required
 def home_view(request):
-	user = request.user
-	user.was_active_now()
-	user.save()
+	# user = request.user
+	# user.was_active_now()
+	# user.save()
 	return render(request, 'pong/base.html')

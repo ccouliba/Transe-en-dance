@@ -15,7 +15,7 @@ const PADDLE_WIDTH = 10;
 const BALL_SIZE = 10;
 const CANVAS_HEIGHT = 400;
 const CANVAS_WIDTH = 600;
-const WINNING_SCORE = 5; // a changer ou pas
+const WINNING_SCORE = 15; // a changer ou pas
 
 // positions initiales des raquettes et de la balle
 let paddle1Y = (CANVAS_HEIGHT - PADDLE_HEIGHT) / 2;
@@ -27,6 +27,7 @@ let ballSpeedY = 3;
 
 // fonction pour afficher l'ecran de jeu
 function Play() {
+
 	// verifier si le jeu est termine ou non charge
 	if (playState.gameOver || !playState.isLoaded) {
 		playState.isLoaded = false;
@@ -36,7 +37,9 @@ function Play() {
 	if (!playState.isLoaded) {
 		loadPlayState();
 	}
-
+	
+	setInterval(checkAuth, 5 * 1000)
+	
 	let content = '';
 
 	// si le jeu est termine => afficher les scores finaux

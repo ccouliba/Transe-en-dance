@@ -8,22 +8,6 @@ var profileState = {
 	isLoaded: false // indique si les donnees du profil ont ete chargees (initialement faux)
 }
 
-// fonction pour verifier l'authentification de l'utilisateur
-function checkAuth() {
-	// envoie une requete GET a l'API pour verifier si l'utilisateur est authentifie
-	fetch('/pong/api/check_auth/', {
-		method: 'GET', // methode GET pour recuperer les donnees
-		credentials: 'include', // inclure les cookies pour l'authentification
-	})
-	.then(response => response.json()) // transformer la reponse en JSON
-	.then(data => {
-		// si l'utilisateur n'est pas authentifie => le rediriger vers la page de connexion
-		if (!data.isAuthenticated) {
-			changePage('#login');
-		}
-	});
-}
-
 // fonction pour afficher le profil utilisateur
 function Profile() {
 	// charge les donnees du profil depuis le backend
