@@ -13,7 +13,12 @@ def create_game(request):
 		data = json.loads(request.body)
 		player1_email = data.get('player1Email')
 		player2_email = data.get('player2Email')
+  
+		if not User.objects.filter(email=player1_email).exists() or not User.objects.filter(email=player2_email).exists():
+			return JsonResponse({'error': 'One or both players not found'}, status=404)
 
+		print(User.objects.filter(email=player1_email).exists())
+  
 		try:
 			player1 = User.objects.get(email=player1_email)
 			player2 = User.objects.get(email=player2_email)

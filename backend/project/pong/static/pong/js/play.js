@@ -80,6 +80,7 @@ function Play() {
 						<li class="list-group-item">player 1 controls their paddle using the w (up) and s (down) keys.</li>
 						<li class="list-group-item">player 2 controls their paddle using the up (↑) and down (↓) arrow keys.</li>
 						<li class="list-group-item">the first player to reach a set number of points wins the game.</li>
+						<li class="list-group-item">a player cannot play against themselves.</li>
 						<li class="list-group-item">good luck and have fun!</li>
 					</ul>
 				</div>
@@ -132,6 +133,11 @@ function startGame(event) {
 	playState.player1Email = document.getElementById("player1Email").value;
 	playState.player2Email = document.getElementById("player2Email").value;
 
+	// verifier que les 2 email ne sont pas identiques
+	if (playState.player1Email === playState.player2Email) {
+		alert("A player cannot play against themselves. Please enter different emails.");
+		return;
+	}
 	// initialiser l'etat du jeu
 	playState.gameStarted = true; // indique que le jeu a commence
 	playState.player1Score = 0; // reinitialise le score du joueur 1
@@ -153,7 +159,7 @@ function startGame(event) {
 // fonction pour creer une nouvelle partie dans la base de donnees
 function createGameInDatabase() {
 	// envoie une requete post a l'api pour creer une nouvelle partie
-	fetch('/pong/api/games/create', {
+	fetch('/pong/api/games/create_game/', {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json', // indique que le corps de la requete est en json
@@ -166,10 +172,26 @@ function createGameInDatabase() {
 		// inclut les cookies dans la requete pour l'authentification
 		credentials: 'include'
 	})
-	.then(response => response.json()) // parse la reponse json
-	.then(data => {
-		// stocke l'id de la partie retourne par le serveur
-		playState.gameId = data.gameId;
+	.then(response => {
+		return response.json().then(data => {
+			return { status: response.status, body: data };
+		});
+	}) // parse la reponse json
+	// .then(data => {
+	// 	// stocke l'id de la partie retourne par le serveur
+	// 	playState.gameId = data.gameId;
+	// })
+	.then(({ status, body }) => {
+		if (status === 201) {
+			playState.gameId = body.gameId;
+		} else if (status === 404 && body.error === 'One or both players not found') {
+			// affiche une alerte si un ou les deux joueurs ne sont pas trouvés
+			alert('One or both players not found');
+			playState.gameStarted = false; 
+		} else {
+			// gere les autres erreurs
+			console.error('Error:', body.error);
+		}
 	})
 	.catch(error => console.error('error:', error));
 }
@@ -198,6 +220,8 @@ function restartGame() {
 function initializeGame() {
 	// selectionner le canvas et son contexte de dessin
 	const canvas = document.getElementById('pongCanvas');
+	if (canvas == null)
+		return
 	const ctx = canvas.getContext('2d');
 
 	// fonction pour dessiner un rectangle

@@ -50,7 +50,7 @@ urlpatterns = [
 	path('api/friends/get-status/', friends_online_status, name='friends_online_status'),
  
  
-	path('api/games/create', create_game, name='create_game'),
+	path('api/games/create_game/', create_game, name='create_game'),
 	path('api/games/<int:game_id>/update', update_game, name='update_game'),
 	path('api/games/finish_game/<int:game_id>/', finish_game, name='finish_game'),
 	path('api/games/match_history/', match_history, name='match_history'),
