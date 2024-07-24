@@ -5,6 +5,10 @@ var profileState = {
 	firstname: "", // prenom de l'utilisateur
 	lastname: "", // nom de famille de l'utilisateur
 	avatar: "",
+	wins: 0,
+	losses: 0,
+	total_games: 0,
+	win_rate: 0,
 	isLoaded: false // indique si les donnees du profil ont ete chargees (initialement faux)
 }
 
@@ -19,6 +23,7 @@ function Profile() {
 			<h1 class="mb-4">profil</h1>
 			<div class="card">
 				<div class="card-body">
+				<h2 class="mt-4 mb-3" style="text-decoration: underline;">your information</h2>
 					<div class="row mb-3">
 						<div class="col-sm-3"><strong>username :</strong></div>
 						<div class="col-sm-9">${profileState.username}</div>
@@ -45,21 +50,40 @@ function Profile() {
 							<img src="${profileState.avatar_url}" alt="Avatar" style="width: 100px; height: 100px;">
 						</div>
 					</div>
+					<h2 class="mt-4 mb-3" style="text-decoration: underline;">your game statistics</h2>
+					<div class="row mb-3">
+						<div class="col-sm-3"><strong>wins :</strong></div>
+						<div class="col-sm-9">${profileState.wins}</div>
+					</div>
+					<div class="row mb-3">
+						<div class="col-sm-3"><strong>losses :</strong></div>
+						<div class="col-sm-9">${profileState.losses}</div>
+					</div>
+					<div class="row mb-3">
+						<div class="col-sm-3"><strong>total games played :</strong></div>
+						<div class="col-sm-9">${profileState.total_games}</div>
+					</div>
+					<div class="row mb-3">
+						<div class="col-sm-3"><strong>winning rate :</strong></div>
+						<div class="col-sm-9">${profileState.win_rate.toFixed(2)}%</div>
+					</div>
 				</div>
 			</div>
-			<h2 class="mt-4 mb-3">modify username</h2>
+			<h2 class="mt-4 mb-3" style="text-decoration: underline;">edit your information</h2>
+
+			<h3 class="mt-4 mb-3">modify username</h2>
 			${EditUsername()}
-			<h2 class="mt-4 mb-3">modify email</h2>
+			<h3 class="mt-4 mb-3">modify email</h2>
 			${EditEmail()}
-			<h2 class="mt-4 mb-3">modify first name</h2>
+			<h3 class="mt-4 mb-3">modify first name</h2>
 			${EditFirstname()}
-			<h2 class="mt-4 mb-3">modify last name</h2>
+			<h3 class="mt-4 mb-3">modify last name</h2>
 			${EditLastname()}
-			<h2 class="mt-4 mb-3">todo : modify langue</h2>
+			<h3 class="mt-4 mb-3">todo : modify langue</h2>
 			${EditLangue()}
-			<h2 class="mt-4 mb-3">modify avatar</h2>
+			<h3 class="mt-4 mb-3">modify avatar</h2>
 			${EditAvatar()}
-			<h2 class="mt-4 mb-3">modify password</h2>
+			<h3 class="mt-4 mb-3">modify password</h2>
 			${EditPassword()}
 		</div>
 	`;
@@ -81,7 +105,9 @@ async function loadProfileFromBackend() {
 		// mise a jour de profileState avec les donnees recues
 		profileState = {
 			...profileState,
-			...profile
+			...profile,
+			total_games: profile.wins + profile.losses,
+			win_rate: profile.total_games > 0 ? (profile.wins / profile.total_games) * 100 : 0
 		}; // utilisation d'un spread operator
 		profileState.isLoaded = true;
 		mountComponent(Profile); // monter le composant Profile

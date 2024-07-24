@@ -16,7 +16,9 @@ class User(AbstractUser):
 	avatar = models.ImageField(upload_to='avatars/', null=True, blank=True)
 
 	last_activity = models.DateTimeField(default=timezone.now)
-
+ 
+	wins = models.IntegerField(default=0)
+	losses = models.IntegerField(default=0)
 
 	# Ajout d'un champ many-to-many pour les groupes auxquels cet utilisateur appartient
 	groups = models.ManyToManyField(
@@ -44,6 +46,14 @@ class User(AbstractUser):
 			return self.avatar.url
 		else:
 			return f"{settings.STATIC_URL}pong/images/default_avatar.png"
+	@property #https://docs.python.org/3/library/functions.html#property
+	def total_games(self):
+		return self.wins + self.losses
+	@property
+	def win_rate(self):
+		if self.total_games > 0:
+			return (self.wins / self.total_games) * 100
+		return 0
 
 #class qui permet de gerer les demandes d'amis. Si demande acceptee alors sauvegarde l'ami dans friends (cf. class user et dans bdd : `pong_user_friends``) 
 class Friendship(models.Model):

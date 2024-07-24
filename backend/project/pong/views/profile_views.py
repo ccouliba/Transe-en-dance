@@ -98,7 +98,11 @@ def profile_view(request):
 		'firstname': user.first_name,
 		'lastname' : user.last_name,
 		'id' :user.id,
-  		'avatar_url': user.get_avatar_url()
+		'avatar_url': user.get_avatar_url(),
+		'wins': user.wins,
+		'losses': user.losses,
+		'total_games': user.total_games,
+		'win_rate': round(user.win_rate, 2)
   
 	})
  

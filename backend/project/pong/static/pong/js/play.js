@@ -16,7 +16,7 @@ const PADDLE_WIDTH = 10;
 const BALL_SIZE = 10;
 const CANVAS_HEIGHT = 400;
 const CANVAS_WIDTH = 600;
-const WINNING_SCORE = 15; // a changer ou pas
+const WINNING_SCORE = 5; // a changer ou pas
 
 // positions initiales des raquettes et de la balle
 let paddle1Y = (CANVAS_HEIGHT - PADDLE_HEIGHT) / 2;
@@ -338,7 +338,7 @@ function endGame() {
 	playState.gameOver = true; // indique que le jeu est termine
 	// determine le gagnant
 	const winner = playState.player1Score > playState.player2Score ? playState.player1Email : playState.player2Email;
-
+	finishGame(playState.gameId, winner); //pour les stats
 	// envoie une requete post a l'api pour mettre a jour la partie
 	fetch(`/pong/api/games/${playState.gameId}/update`, {
 		method: 'POST',
@@ -358,4 +358,20 @@ function endGame() {
 		changePage("#play");
 	})
 	.catch(error => console.error('error:', error));
+}
+
+function finishGame(gameId, winnerEmail) {
+	fetch(`/pong/api/games/finish_game/${gameId}/`, {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify({ winner: winnerEmail }),
+		credentials: 'include'
+	})
+	.then(response => response.json())
+	.then(data => {
+		console.log('Game finished:', data);
+	})
+	.catch(error => console.error('Error finishing game:', error));
 }

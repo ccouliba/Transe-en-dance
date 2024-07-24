@@ -1,6 +1,6 @@
 from django.urls import path
 from .views.auth_views import base_view,check_auth, register_view, login_view, logout_view, auth_callback, external_login
-from .views.game_views import create_game, update_game
+from .views.game_views import create_game, update_game, finish_game
 from .views.friend_views import send_friend_request, accept_friend_request, remove_friend, friends_data, friends_online_status
 from .views.profile_views import profile_view, user_updated_profile, user_account_deleted,edit_password_view, get_user_info, profile_update_view, upload_avatar
 from .views.user_views import user_list_json, user_list, index, home_view
@@ -52,6 +52,7 @@ urlpatterns = [
  
 	path('api/games/create', create_game, name='create_game'),
 	path('api/games/<int:game_id>/update', update_game, name='update_game'),
+	path('api/games/finish_game/<int:game_id>/', finish_game, name='finish_game'),
  
 	# path('api/tournament/create', create_tournament, name='create_tournament'),
 	path('api/tournament/state', get_tournament_state, name='get_tournament_state'),
