@@ -106,6 +106,8 @@ def finish_game(request, game_id):
 	else:
 		return JsonResponse({'error': 'Invalid request method'}, status=405)
 
+import pytz
+from django.utils import timezone
 
 @login_required
 def match_history(request):
@@ -114,16 +116,19 @@ def match_history(request):
 		Q(player1=user) | Q(player2=user),
 		status='finished'
 	).order_by('-created_at')  
-	
+	paris_tz = pytz.timezone('Europe/Paris')
+	print(paris_tz)
 	history = []
 	for game in games:
+		game_time = game.finished_at or game.created_at
+		game_time_paris = game_time.astimezone(paris_tz)
 		history.append({
 			'id': game.id,
 			'opponent': game.player2.email if game.player1 == user else game.player1.email,
 			'user_score': game.player1_score if game.player1 == user else game.player2_score,
 			'opponent_score': game.player2_score if game.player1 == user else game.player1_score,
 			'result': 'Win' if game.winner == user else 'Loss',
-			'date': game.finished_at.strftime("%Y-%m-%d %H:%M:%S") if game.finished_at else game.created_at.strftime("%Y-%m-%d %H:%M:%S")
+			'date': game_time_paris.strftime("%Y-%m-%d %H:%M:%S")
 		})
 	
 	return JsonResponse({'match_history': history})
