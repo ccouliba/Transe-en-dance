@@ -36,7 +36,7 @@ function Profile() {
 						<div class="col-sm-9">${profileState.lastname}</div>
 					</div>
 					<div class="row mb-3">
-						<div class="col-sm-3"><strong>language :</strong></div>
+						<div class="col-sm-3"><strong>todo : language :</strong></div>
 						<div class="col-sm-9">${profileState.langue}</div>
 					</div>
 					<div class="row mb-3">
@@ -55,7 +55,7 @@ function Profile() {
 			${EditFirstname()}
 			<h2 class="mt-4 mb-3">modify last name</h2>
 			${EditLastname()}
-			<h2 class="mt-4 mb-3">modify langue</h2>
+			<h2 class="mt-4 mb-3">todo : modify langue</h2>
 			${EditLangue()}
 			<h2 class="mt-4 mb-3">modify avatar</h2>
 			${EditAvatar()}
