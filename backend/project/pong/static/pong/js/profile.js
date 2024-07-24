@@ -32,48 +32,27 @@ function Profile() {
 	// - sections pour modifier les informations du profil
 	return `
 		
-		<div class="container mt-5" id="profilePage">
-			<h1 class="mb-4">Profil</h1>
-			<div class="card">
-				<div class="card-body">
-					<div class="row mb-3">
-						<div class="col-sm-3"><strong>Username :</strong></div>
-						<div class="col-sm-9"><span id="profileValue>${profileState.username}</span></div>
-					</div>
-					<div class="row mb-3">
-						<div class="col-sm-3"><strong>Email :</strong></div>
-						<div class="col-sm-9"><span id="profileValue>${profileState.email}</span></div>
-					</div>
-						<div class="row mb-3">
-							<div class="col-sm-3"><strong>First name :</strong></div>
-							<div class="col-sm-9"><span id="profileValue>${profileState.firstname}</span></div>
-						</div>
-						<div class="row mb-3">
-							<div class="col-sm-3"><strong>Last name :</strong></div>
-							<div class="col-sm-9"><span id="profileValue>${profileState.lastname}</span></div>
-						</div>
-					<div class="row">
-						<div class="col-sm-3"><strong>ID :</strong></div>
-						<div class="col-sm-9"><span id="profileValue>${profileState.id}</span></div>
-					</div>
+		<div>
+			<h1>Profile</h1>
+				<div class="container mt-5" id="profilePage">
+				<h1 id="profileUsernameHeader">Profile of ${ profileState.username }</h1>
+				<p id="profileEmailTxt">e-mail : <span id="profileValue">${ profileState.email }</span></p>
+				<p id="profileNameTxt">Name : <span id="profileValue">${ profileState.firstname } ${ profileState.lastname }</span></p>
+				<p id="profileIdTxt">ID : <span id="profileValue">${ profileState.id }</span></p>
 				</div>
-			</div>
-			
+		</div>
+		<br>
+		<div class="container">
 			<h2 class="mt-4 mb-3">Modify username</h2>
 			${EditUsername()}
 			<h2 class="mt-4 mb-3">Modify email</h2>
 			${EditEmail()}
 			<h2 class="mt-4 mb-3">Modify first name</h2>
-			
 			${EditFirstname()}
 			<h2 class="mt-4 mb-3">Modify last name</h2>
 			${EditLastname()}
-
 			<h2 class="mt-4 mb-3">Modify password</h2>
 			${EditPassword()}
-
-
-
 		</div>
 	`;
 }
@@ -191,7 +170,7 @@ function EditEmail()
 		<form id="edit-email" class="mt-3">
 			<div class="input-group">
 				<input type="text" class="form-control" name="email" value="${profileState.email}" aria-label="New email">
-				<button class="btn btn-primary" type="submit">Modifier</button>
+				<button class="btn btn-primary" type="submit">Modify</button>
 			</div>
 		</form>
 	`	
@@ -218,7 +197,7 @@ function EditFirstname()
 				value="${profileState.firstname}" 
 				aria-label="New first name"
 			/>
-			<button class="btn btn-primary" type="submit">Modifier</button>
+			<button class="btn btn-primary" type="submit">Modify</button>
 		</div>
 	</form>
 `	
@@ -245,7 +224,7 @@ function EditLastname()
 				value="${profileState.lastname}" 
 				aria-label="New last name"
 			/>
-			<button class="btn btn-primary" type="submit">Modifier</button>
+			<button class="btn btn-primary" type="submit">Modify</button>
 		</div>
 	</form>
 `	
