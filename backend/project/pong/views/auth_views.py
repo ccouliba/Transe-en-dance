@@ -16,6 +16,7 @@ from django.views.decorators.csrf import ensure_csrf_cookie
 from django.views.decorators.csrf import csrf_exempt
 import json
 from rest_framework.authtoken.models import Token
+from pong.decorators.Logging import loggingFunction
 # import logging
 # from logstash.middleware.LogMiddleware import LoggingFunction
 
@@ -43,12 +44,12 @@ def external_login(request):
 	# LoggingFunction(request=request, opname='External log-in')
 	return redirect(f"{forty2_auth_url}?client_id={client_id}&redirect_uri={redirect_uri}&response_type=code")
 
-
+@loggingFunction
 def auth_callback(request):
 	api_response = auth.get_response_from_api(request)
 	if api_response is None:
 		# LoggingFunction(request=request, opname='Auth API callback')		
-		return redirect('/pong/login')
+		return redirect('/pong/#login')
 	elif api_response.status_code == 200:
 		token_data = api_response.json()
 		access_token = token_data.get('access_token')
@@ -68,7 +69,7 @@ def get_log(request, token):
 		if user is not None:
 			login(request, user)
 			token = Token.objects.create(user=user)
-			return JsonResponse({'messages':'succcess', 'token':token, 'redirect_url':'/pong/home'})
+			return JsonResponse({'messages':'succcess', 'token':token, 'redirect_url':'/pong/#home'})
 	return None
 	
 def login_view(request):

@@ -5,4 +5,4 @@ http.host: "0.0.0.0"
 xpack.monitoring.enabled: true
 
 # # Define host and Elasticsearch port in order to store monitoring data in logstash
-xpack.monitoring.elasticsearch.hosts: [ "http://elasticsearch:9200", "http://elasticsearch:9300" ]
+xpack.monitoring.elasticsearch.hosts: [ "http://elasticsearch:9200" ] #, "http://elasticsearch:9300" ]

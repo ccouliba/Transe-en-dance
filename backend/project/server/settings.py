@@ -84,7 +84,6 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     # 'elasticapm.contrib.django.middleware.TracingMiddleware',
-    'pong.middleware.LogMiddleware.LoggingMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',
@@ -93,6 +92,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 'pong.middleware.Logging.LoggingMiddleware',
 ]
 
 ROOT_URLCONF = 'server.urls'
@@ -228,11 +228,11 @@ LOGGING = {
     'disable_existing_loggers': False, # ?q= false -> not activated
     'formatters': {
         'verbose': {
-            'format': '[%(asctime)s]::[%(levelname)s]::[%(funcName)s]::[%(name)s] => %(message)s',
+            'format': '[%(asctime)s]::[%(levelname)s]::[%(name)s]=> (%(message)s)', # [%(funcName)s]::
             'datefmt': '%Y/%m/%d %H:%M:%S',
         },
         'simple': {
-            'format': '[%(levelname)s] => %(message)s',
+            'format': '[%(name)s]=> (%(message)s)',
         },
     },
     
@@ -270,12 +270,12 @@ LOGGING = {
         },
         'django.request': {
             'handlers': ['console'],
-            'level': 'DEBUG',
+            'level': 'INFO',
             'propagate': True,
         },
         'django.db.backend': {
             'handlers': ['console'],
-            'level': 'CRITICAL',
+            'level': 'INFO',
             'propagate': True,
         },
     },
