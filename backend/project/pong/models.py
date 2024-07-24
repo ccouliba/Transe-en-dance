@@ -75,7 +75,12 @@ class Game(models.Model):
 	status = models.CharField(max_length=20, choices=[('started', 'Started'), ('finished', 'Finished'), ('canceled', 'Canceled')])
 	winner = models.ForeignKey(User, related_name='won_games', on_delete=models.SET_NULL, null=True, blank=True)
 	created_at = models.DateTimeField(auto_now_add=True,  null=True, blank=True)
-
+	finished_at = models.DateTimeField(null=True, blank=True)
+	def finish(self, winner):
+		self.winner = winner
+		self.status = 'finished'
+		self.finished_at = self.finished_at or timezone.now()
+		self.save()
 	def __str__(self):
 		return f"Game {self.id}: {self.player1} vs {self.player2}"
 	

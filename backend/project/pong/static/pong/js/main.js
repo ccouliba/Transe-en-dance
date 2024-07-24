@@ -79,6 +79,7 @@ let routes = {
 	"#logout": () => mountComponent(Logout),
 	"#login": () => mountComponent(Login),
 	"#register": () => mountComponent(Register),
+	"#match_history": () => mountComponent(MatchHistory)
 };
 
 function cleanStates(){

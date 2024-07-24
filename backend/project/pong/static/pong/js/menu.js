@@ -8,6 +8,7 @@ function Menu() {
 				<a href="#tournament" onclick="changePage('#tournament'); return false;">Tournament</a>
 				<a href="#profile" onclick="changePage('#profile'); return false;">Profil</a>
 				<a href="#friends" onclick="changePage('#friends'); return false;">Friends</a>
+				<a href="#profile" onclick="changePage('#match_history'); return false;">Match history</a>
 				<a href="#" onclick="logout(); return false;">Logout</a>
 			` : `
 				

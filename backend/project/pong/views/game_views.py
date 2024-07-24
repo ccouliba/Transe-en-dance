@@ -4,6 +4,7 @@ from pong.models import Game, User
 import json
 from django.views.decorators.csrf import csrf_exempt
 from django.db.models import F #pour effectuer des opérations de mise à jour directement au niveau de la base de données sans d'abord récupérer les objets en mémoire
+from django.db.models import Q #pour construire des requêtes qui nécessitent des opérations logiques telles que OR et AND
 
 @csrf_exempt
 @login_required
@@ -99,3 +100,25 @@ def finish_game(request, game_id):
 			return JsonResponse({'error': 'Winner not found'}, status=404)
 	else:
 		return JsonResponse({'error': 'Invalid request method'}, status=405)
+
+
+@login_required
+def match_history(request):
+	user = request.user
+	games = Game.objects.filter(
+		Q(player1=user) | Q(player2=user),
+		status='finished'
+	).order_by('-created_at')  
+	
+	history = []
+	for game in games:
+		history.append({
+			'id': game.id,
+			'opponent': game.player2.email if game.player1 == user else game.player1.email,
+			'user_score': game.player1_score if game.player1 == user else game.player2_score,
+			'opponent_score': game.player2_score if game.player1 == user else game.player1_score,
+			'result': 'Win' if game.winner == user else 'Loss',
+			'date': game.finished_at.strftime("%Y-%m-%d %H:%M:%S") if game.finished_at else game.created_at.strftime("%Y-%m-%d %H:%M:%S")
+		})
+	
+	return JsonResponse({'match_history': history})
