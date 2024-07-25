@@ -1,0 +1,14 @@
+{% extends 'pong/base.html' %}
+{% load i18n %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<h2>{{ login_txt }}</h2>
+<form method="post" action="{% url 'pong:login' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">{{ login_txt }}</button>
+</form>
+<p>{{ no_account_txt }}-> <a href="{% url 'pong:register' %}">{{ register_txt }}</a> {{ or_txt }} <a href="{% url 'pong:external_login' %}">{{ external_log_txt }} 42</a></p>
+{% endblock %}
