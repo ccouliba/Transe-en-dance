@@ -165,7 +165,28 @@ function bindKeyboardEvents(){
 	playState.isKeyboardBind = true
 }
 
-
+function updateProfileStats() {
+	fetch('/pong/api/profile', {
+		method: 'GET',
+		credentials: 'include'
+	})
+	.then(response => response.json())
+	.then(profile => {
+		// Mettre à jour profileState avec les nouvelles stats
+		profileState = {
+			...profileState,
+			...profile,
+			total_games: profile.wins + profile.losses,
+			win_rate: profile.total_games > 0 ? (profile.wins / profile.total_games) * 100 : 0
+		};
+		profileState.isLoaded = false; // Forcer le rechargement du profil
+		// Si l'utilisateur est sur la page de profil : recharger le composant
+		if (window.location.hash === '#profile') {
+			mountComponent(Profile);
+		}
+	})
+	.catch(error => console.error('Error updating profile stats:', error));
+}
 
 // fonction pour terminer le jeu
 function endGame() {
@@ -190,6 +211,7 @@ function endGame() {
 	.then(data => {
 		playState.isLoaded = false; // forcer le rechargement pour la prochaine partie
 		changePage("#play");
+		updateProfileStats();
 	})
 	.catch(error => console.error('error:', error));
 }
