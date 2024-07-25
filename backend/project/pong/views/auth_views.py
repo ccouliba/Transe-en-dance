@@ -18,7 +18,7 @@ import json
 from rest_framework.authtoken.models import Token
 from pong.decorators.Logging import loggingFunction
 # import logging
-# from logstash.middleware.LogMiddleware import LoggingFunction
+# from logstash.middleware.LogMiddleware import Logging_acces
 
 # import inspect
 
@@ -42,14 +42,14 @@ def external_login(request):
 	client_id = os.getenv('UID')
 	request.session['client_id'] = client_id 
 	# response_type = 'code'
-	# LoggingFunction(request=request, opname='External log-in')
+	# Logging_acces(request=request, opname='External log-in')
 	return redirect(f"{forty2_auth_url}?client_id={client_id}&redirect_uri={redirect_uri}&response_type=code")
 
 @loggingFunction
 def auth_callback(request):
 	api_response = auth.get_response_from_api(request)
 	if api_response is None:
-		# LoggingFunction(request=request, opname='Auth API callback')		
+		# Logging_acces(request=request, opname='Auth API callback')		
 		return redirect('/pong/#login')
 	elif api_response.status_code == 200:
 		token_data = api_response.json()
@@ -81,7 +81,7 @@ def login_view(request):
 	user = authenticate(username=username, password=password)
 	if user is not None:
 		login(request, user)
-		# LoggingFunction(request=request, opname='Log-in')
+		# Logging_acces(request=request, opname='Log-in')
 		return JsonResponse({'status': 'success'})
 	else:
 		return JsonResponse({'status': 'error', 'message': 'Invalid credentials'}, status=400)
@@ -90,7 +90,7 @@ def login_view(request):
 @login_required
 def logout_view(request):
 	logout(request)
-	# LoggingFunction(request=request, opname='Log-out')
+	# Logging_acces(request=request, opname='Log-out')
 	request.session.flush()
 	return JsonResponse({'status': 'success'})
 
@@ -102,7 +102,7 @@ def register_view(request):
 		form = RegisterForm(data)
 		if form.is_valid():
 			user = form.save()
-			# LoggingFunction(request=request, opname='Registration')
+			# Logging_acces(request=request, opname='Registration')
 			return JsonResponse({'status': 'success'})
 		else:
 			return JsonResponse({'status': 'error', 'message': form.errors}, status=400)

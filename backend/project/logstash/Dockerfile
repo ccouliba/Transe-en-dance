@@ -1,26 +1,20 @@
+# Utilisez l'image officielle de Logstash
 FROM docker.elastic.co/logstash/logstash:8.9.0
 
-# WORKDIR /usr/src/logstash
+USER $USERNAME
 
-# ENV USER root
+# Je supprime le fichier de configuration Logstash existant dans le conteneur
+# Pas necessaire car la copie qui suit ecrase mais bon ...
+RUN rm -f /usr/share/logstash/config/logstash.yml
 
-# # Supprimer les configs par defaut
-# # Sans cela logstash ne prend pas nos configs (pipelines etc ..)
-# RUN rm -rf /usr/share/logstash/pipeline/
-# RUN rm -rf /usr/share/logstash/config/
+# Je copie mon fichier de configuration Logstash dans le conteneur
+COPY ./config/logstash.yml /usr/share/logstash/config/logstash.yml
+# Je copie mon pipeline Logstash dans le conteneur
+COPY ./pipeline/logstash.conf /usr/share/logstash/pipeline/logstash.conf
 
-# # RUN mkdir pipeline
-# # RUN mkdir config/
+# Je change le propriétaire du fichier de configuration Logstash pour éviter les problèmes de permissions
+RUN chown logstash:logstash /usr/share/logstash/config/logstash.yml
+RUN chown logstash:logstash /usr/share/logstash/pipeline/logstash.conf
 
-# # RUN echo "user = "$(whoami)
-# # RUN chown $(whoami) /usr/share/logstash/config/
-
-# # RUN chmod -R 777 /usr/share/logstash/config/
-
-# # RUN chmod -R 777 ./config/logstash/config/*
-# # Copie de nos configurations
-# COPY ./pipeline .
-# COPY ./config .
-
-# # RUN chmod -R 755 /usr/share/logstash/config/logstash.yml
-# # RUN chmod -R 755 /usr/share/logstash/pipeline/pipelines.yml
+# Exposez le port que Logstash utilisera pour recevoir les logs
+EXPOSE 5959

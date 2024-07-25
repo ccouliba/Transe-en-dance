@@ -13,8 +13,8 @@ import os
 import sys
 from django.utils.translation import gettext_lazy as _
 from pathlib import Path
-# import logging
-# import logstash
+import logging
+from logstash import handler_tcp
 # from corsheaders.defaults import default_headers
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -251,9 +251,12 @@ LOGGING = {
         },
         # 'logstash': {
         #     'level': 'DEBUG',
-        #     'class': 'logstash.TCPLogstashHandler',
-        #     'host': 'localhost',  # Adresse de votre serveur Logstash
-        #     'port': 5959,  # Port utilisé par Logstash
+        #     'class': handler_tcp.TCPLogstashHandler,
+        #     'host': 'logstash',
+        #     'port': 5959,
+        #     'version': 1,
+        #     'message_type': 'django',
+        #     'tags': ['django.request'],
         # },
     },
     
@@ -290,13 +293,10 @@ LOGGING = {
 
 ELASTICSEARCH_DSL = {
     'default': {
-        'hosts': {
-            'http://elasticsearch:9200',
-            'http://elasticsearch:9300',
-        },
-        # 'http_auth': ('user', 'password'),
-        # 'use_ssl': True,
-        # 'verify_certs': True,
-        # 'connection_class': 'RequestsHttpConnection',
+        'hosts': os.getenv('ELASTICSEARCH_DSL_HOSTS', 'localhost:9200'),
+        'http_auth': ('username', 'password'),
+        'use_ssl': True,
+        'verify_certs': True,
+        'connection_class': 'RequestsHttpConnection',
     },
 }

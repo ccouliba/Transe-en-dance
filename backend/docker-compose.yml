@@ -48,14 +48,13 @@ services:
   # Elasticsearch is a search engine
   elasticsearch:
     container_name: elasticsearch
-    image: docker.elastic.co/elasticsearch/elasticsearch:8.9.0
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.14.3
     environment:
       - discovery.type=single-node #for development mode
       - xpack.security.enabled=false #for anonymous request
       # - xpack.monitoring.enabled=true
     ports: #several ports
-      - "9200:9200"
-      # - "9300:9300"
+      - 127.0.0.1:9200:9200
     volumes:
       - es-data:/usr/share/elasticsearch/data
     networks:
@@ -64,11 +63,13 @@ services:
   # Logstash is a server-side data processing pipeline
   logstash:
     container_name: logstash
-    image: docker.elastic.co/logstash/logstash:8.9.0
-    # build: ./project/logstash
-    # command: bin/logstash -f /usr/src/logstash/config/conf.yml #-f ./project/logstash/pipeline/logstash_2.conf
+    image: docker.elastic.co/logstash/logstash:8.14.3
+    build: ./project/logstash
+    # command: bin/logstash -f /usr/share/logstash/pipeline/logstash.conf --config.test_and_exit --log.level trace #-f ./project/logstash/pipeline/logstash_2.conf
     volumes:
-      - ./project/logstash/:/usr/src/logstash/
+      - ./project/logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml
+      - ./project/logstash/pipeline/logstash.conf:/usr/share/logstash/pipeline/logstash.conf
+      # - ./project/logstash/:/usr/share/logstash/
     ports:
       - "5959:5959/tcp"
       - "5959:5959/udp"
@@ -80,9 +81,14 @@ services:
   # Kibana is used for data visualization
   kibana:
     container_name: kibana
-    image: docker.elastic.co/kibana/kibana:8.9.0
+    image: docker.elastic.co/kibana/kibana:8.14.3
+    environment:
+      - XPACK_SECURITY_ENABLED=false
+    # volumes:
+    #   - kibana-data:/usr/share/kibana/data
     ports:
-      - "5601:5601"
+      - target: 5601
+        published: 5601
     depends_on:
       - elasticsearch
     networks:
