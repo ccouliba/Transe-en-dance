@@ -84,6 +84,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     # 'elasticapm.contrib.django.middleware.TracingMiddleware',
+    'pong.middleware.Logging.LoggingMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',
@@ -92,7 +93,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    # 'pong.middleware.Logging.LoggingMiddleware',
 ]
 
 ROOT_URLCONF = 'server.urls'
@@ -268,13 +268,18 @@ LOGGING = {
             'level': 'INFO',
             'propagate': True, # If logs should be propagte to parent logs
         },
+        'backend': {
+            'handlers': ['console', 'file'],
+            'level': 'INFO',
+            'propagate': True,
+        },
         'django.request': {
-            'handlers': ['console'],
+            'handlers': ['console', 'file'],
             'level': 'INFO',
             'propagate': True,
         },
         'django.db.backend': {
-            'handlers': ['console'],
+            'handlers': ['console', 'file'],
             'level': 'INFO',
             'propagate': True,
         },

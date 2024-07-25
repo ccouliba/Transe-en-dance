@@ -3,7 +3,7 @@ from django.utils.deprecation import MiddlewareMixin
 import logging
 
 class LoggingMiddleware(MiddlewareMixin):
-    ''' __init__ => initialise le middleware avec get_response '''
+    ''' __init__ => intervient avant que la vue ne soit decidee '''
     ''' __call__ => intervient avant que la vue ne soit appelée '''
     ''' Appel de la fonction logger.info() pour ecrire dans le fichier de logs '''
     
@@ -18,6 +18,7 @@ class LoggingMiddleware(MiddlewareMixin):
         status = response.status_code
         state = 'success' if status == 200 else 'error'
         logger.info(f"code: [{status}] => [{state}]")
+    
         return response
 
 

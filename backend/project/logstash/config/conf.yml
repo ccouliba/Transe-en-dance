@@ -1,3 +1,6 @@
+node.name: logstash_pong
+api.environment: dev
+
 # # Every interfaces should be listened
 http.host: "0.0.0.0"
 

@@ -23,7 +23,7 @@ CREATE_SU = docker compose exec web python manage.py createsuperuser
 all: .INIT build run
 
 build: 
-	echo "[$(_YELLOW)make$(_END)]:[$(_BLUE)build$(_END)] ---------------------> $(_GREEN)building container(s)$(_END)"
+	echo "[$(_YELLOW)make$(_END)]:[$(_BLUE)build$(_END)] ---------------------> $(_GREY)building container(s)$(_END)"
 	if $(BUILD) ; then \
 		echo "[$(_YELLOW)make$(_END)]:[$(_BLUE)build$(_END)] ---------------------> [ $(_GREEN)DONE$(_END) ]" ;\
 	else \
@@ -31,7 +31,7 @@ build:
 	fi
 
 run:
-	echo "[$(_YELLOW)make$(_END)]:[ $(_BLUE)run$(_END) ] ---------------------> $(_GREEN)running container(s)$(_END)"
+	echo "[$(_YELLOW)make$(_END)]:[ $(_BLUE)run$(_END) ] ---------------------> $(_GREY)running container(s)$(_END)"
 	if $(RUN) ; then \
 		$(MIGRATE) ; \
 	else \

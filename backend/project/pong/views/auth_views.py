@@ -35,6 +35,7 @@ def check_auth(request):
 	})
  
 # Cette vue gere l'authentification via l'API d'Intra 42 en redirigeant l'utilisateur vers l'URL d'authentification appropriee
+@loggingFunction
 def external_login(request):
 	forty2_auth_url = os.getenv('API_AUTH_URL', 'https://api.intra.42.fr/oauth/authorize')
 	redirect_uri = os.getenv('REDIRECT_URI', 'http://127.0.0.1:8000/pong/auth/callback')
@@ -71,7 +72,8 @@ def get_log(request, token):
 			token = Token.objects.create(user=user)
 			return JsonResponse({'messages':'succcess', 'token':token, 'redirect_url':'/pong/#home'})
 	return None
-	
+
+@loggingFunction
 def login_view(request):
 	data = json.loads(request.body)
 	username = data.get('username')
@@ -84,7 +86,7 @@ def login_view(request):
 	else:
 		return JsonResponse({'status': 'error', 'message': 'Invalid credentials'}, status=400)
 
-
+@loggingFunction
 @login_required
 def logout_view(request):
 	logout(request)
@@ -93,6 +95,7 @@ def logout_view(request):
 	return JsonResponse({'status': 'success'})
 
 # Cette vue gere l'inscription des nouveaux utilisateurs
+@loggingFunction
 def register_view(request):
 	try:
 		data = json.loads(request.body)
