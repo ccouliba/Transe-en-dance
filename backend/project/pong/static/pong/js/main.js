@@ -57,13 +57,13 @@ function resetLoaded() {
 	Object.keys(routes).forEach((url) => {
 		// Extrait le nom du composant de l'URL en supprimant le '#' et en prenant la partie apres
 		let stateName = url.split("#")[1];
-
+		
 		// Ajoute "State" a la fin du nom du composant pour obtenir le nom de l'objet d'etat
 		stateName += "State";
-
 		// Verifie si un objet d'etat correspondant existe dans l'objet global window
 		if (typeof window[stateName] !== "undefined") {
 			// Si l'objet d'etat existe, reinitialise sa propriete isLoaded a false
+			console.log(stateName, "fdf")
 			window[stateName].isLoaded = false;
 		}
 	});

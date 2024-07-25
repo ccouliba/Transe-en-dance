@@ -1,4 +1,4 @@
-let matchHistoryState = {
+var matchHistoryState = {
 	history: [],
 	isLoaded: false
 };
