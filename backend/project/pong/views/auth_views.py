@@ -1,6 +1,8 @@
+from django.middleware.csrf import get_token
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import AuthenticationForm
 from pong.forms import RegisterForm
 from ..models import User
 import os
@@ -8,6 +10,12 @@ from django.http import JsonResponse
 from django.views.decorators.http import require_POST
 from django.views.decorators.csrf import csrf_exempt
 import json
+from rest_framework.authtoken.models import Token
+from pong.decorators.Logging import loggingFunction
+# import logging
+# from logstash.middleware.LogMiddleware import LoggingFunction
+
+# import inspect
 
 def base_view(request):
 	return render(request, 'pong/base.html')
@@ -29,12 +37,15 @@ def check_auth(request):
 	})
  
 # Cette vue gere l'authentification via l'API d'Intra 42 en redirigeant l'utilisateur vers l'URL d'authentification appropriee
+@loggingFunction
 def external_login(request):
 	forty2_auth_url = os.getenv('API_AUTH_URL', 'https://api.intra.42.fr/oauth/authorize')
 	redirect_uri = os.getenv('REDIRECT_URI', 'http://127.0.0.1:8000/pong/auth/callback')
 	client_id = os.getenv('UID')
-	request.session['client_id'] = client_id # sauvegarder le client_id dans la session
-	response_type = 'code'
+	# print()
+	request.session['client_id'] = client_id 
+	# response_type = 'code'
+	# LoggingFunction(request=request, opname='External log-in')
 	return redirect(f"{forty2_auth_url}?client_id={client_id}&redirect_uri={redirect_uri}&response_type=code")
 
 import requests
@@ -95,6 +106,7 @@ def get_user_from_api(request, access_token):
 		return redirect('/pong/#login')
 
 # Cette vue gere le callback de l'authentification (ie la reponse recue apres que l'utilisateur ait autorise l'application via l'authentification via l'API d'Intra 42)
+@loggingFunction
 def auth_callback(request):
 	print("Received callback request:", request.GET)
 	api_response = get_response_from_api(request)
@@ -118,6 +130,19 @@ def auth_callback(request):
 @require_POST
 # @ensure_csrf_cookie
 @csrf_exempt
+## New function of back without form validation and all that stuff !!
+def get_log(request, token):
+	if request.method == 'POST':
+		username = request.data.get('username')
+		password = request.data.get('password')
+		user = authenticate(username=username, password=password)  # Compare les informations d'identification (nom d'utilisateur et mdp) avec les informations stockées dans la bdd
+		if user is not None:
+			login(request, user)
+			token = Token.objects.create(user=user)
+			return JsonResponse({'messages':'succcess', 'token':token, 'redirect_url':'/pong/#home'})
+	return None
+
+@loggingFunction
 def login_view(request):
 	data = json.loads(request.body)
 	username = data.get('username')
@@ -125,23 +150,21 @@ def login_view(request):
 	user = authenticate(username=username, password=password)
 	if user is not None:
 		login(request, user)
+		# LoggingFunction(request=request, opname='Log-in')
 		return JsonResponse({'status': 'success'})
 	else:
 		return JsonResponse({'status': 'error', 'message': 'Invalid credentials'}, status=401)
 
-
-# vue pour gerer la deconnexion de l'utilisateur
-# @login_required
-# def logout_view(request):
-# 	logout(request) #methode Django
-# 	return JsonResponse({'status': 'success'})
+@loggingFunction
 @login_required
 def logout_view(request):
 	logout(request)
+	# LoggingFunction(request=request, opname='Log-out')
 	request.session.flush()
 	return JsonResponse({'status': 'success'})
 
 # Cette vue gere l'inscription des nouveaux utilisateurs
+@loggingFunction
 def register_view(request):
 	try:
 		data = json.loads(request.body)
@@ -150,6 +173,7 @@ def register_view(request):
 		if form.is_valid():
 			# form.is_online = False
 			user = form.save()
+			# LoggingFunction(request=request, opname='Registration')
 			return JsonResponse({'status': 'success'})
 		else:
 			return JsonResponse({'status': 'error', 'message': form.errors}, status=400)
