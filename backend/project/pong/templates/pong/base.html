@@ -9,22 +9,22 @@
 	<link rel="stylesheet" href="{% static 'pong/css/frontstyle.css' %}" />
   </head>
   <body>
-    <header>
-        <h1 class="pong-title">PONG</h1>
-        <div id="menu-container"></div>
-    </header>
-	<script src="{% static 'pong/js/menu.js' %}"></script>
-	<script src="{% static 'pong/js/home.js' %}"></script>
-	<script src="{% static 'pong/js/play.js' %}"></script>
-	<script src="{% static 'pong/js/friends.js' %}"></script>
-	<script src="{% static 'pong/js/tournament.js' %}"></script>
-	<script src="{% static 'pong/js/logout.js' %}"></script>
-	<script src="{% static 'pong/js/404.js' %}"></script>
-	<script src="{% static 'pong/js/profile.js' %}"></script>
-	<script src="{% static 'pong/js/login.js' %}"></script>
-	<script src="{% static 'pong/js/main.js' %}"></script>
-	<main>
-	  <div id="app">
+	  <script src="{% static 'pong/js/menu.js' %}"></script>
+	  <script src="{% static 'pong/js/home.js' %}"></script>
+	  <script src="{% static 'pong/js/play.js' %}"></script>
+	  <script src="{% static 'pong/js/friends.js' %}"></script>
+	  <script src="{% static 'pong/js/tournament.js' %}"></script>
+	  <script src="{% static 'pong/js/logout.js' %}"></script>
+	  <script src="{% static 'pong/js/404.js' %}"></script>
+	  <script src="{% static 'pong/js/profile.js' %}"></script>
+	  <script src="{% static 'pong/js/login.js' %}"></script>
+	  <script src="{% static 'pong/js/main.js' %}"></script>
+	  <header>
+		  <!-- <h1 class="pong-title">PONG</h1> -->
+		  <div id="menu-container"></div>
+	  </header>
+	  <main>
+		  <div id="app" class="container">
 		{% block content %}
 		<script>
 		  // est ce que l'utilisateur est connecte ?
@@ -46,8 +46,8 @@
 	  </div>
 	</main>
 	{% block scripts %} {% endblock %}
-	<canvas id="background"></canvas>
-	<script src="{% static 'pong/js/background.js' %}"></script>
+	<!-- <canvas id="background"></canvas>
+	<script src="{% static 'pong/js/background.js' %}"></script> -->
 	<script src="{% static 'pong/js/bootstrap.min.js' %}"></script>
   </body>
 </html>

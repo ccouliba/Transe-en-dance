@@ -43,17 +43,56 @@ function Profile() {
 		</div>
 		<br>
 		<div class="container">
-			<h2 class="mt-4 mb-3">Modify username</h2>
-			${EditUsername()}
-			<h2 class="mt-4 mb-3">Modify email</h2>
-			${EditEmail()}
-			<h2 class="mt-4 mb-3">Modify first name</h2>
-			${EditFirstname()}
-			<h2 class="mt-4 mb-3">Modify last name</h2>
-			${EditLastname()}
-			<h2 class="mt-4 mb-3">Modify password</h2>
-			${EditPassword()}
+
 		</div>
+
+<div class="accordion" id="accordionExample">
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="headingTwo">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+        Accordion Item #2
+      </button>
+    </h2>
+    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+			<h3 class="mt-4 mb-3">Username</h2>
+			${EditUsername()}
+			<h3 class="mt-4 mb-3">Email</h2>
+			${EditEmail()}
+			<h3 class="mt-4 mb-3">First name</h2>
+			${EditFirstname()}
+			<h3 class="mt-4 mb-3">Last name</h2>
+			${EditLastname()}
+			<h3 class="mt-4 mb-3">Password</h2>
+			${EditPassword()}
+      </div>
+    </div>
+  </div>
+</div><br/><br/>
+
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+	RGPD statements 
+</button>
+
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">RGPD</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        RGPD, nous vendrons vos données pour du pognons, de la drogue ect tu connais.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Revolt</button>
+        <button type="button" class="btn btn-primary">Accept</button>
+      </div>
+    </div>
+  </div>
+</div>
 	`;
 }
 

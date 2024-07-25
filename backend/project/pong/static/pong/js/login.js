@@ -49,7 +49,7 @@ function LoginForm() {
 				<input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
 				<label for="password">Password</label>
 			</div>
-			<button type="submit" class="btn custom-btn">Login</button>
+			<button type="submit" class="btn custom-btn" style="background-color: green">Login</button>
 		</form>
 	`;
 }
