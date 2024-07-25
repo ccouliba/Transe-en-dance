@@ -1,4 +1,4 @@
-let loginState = {
+var loginState = {
 	isLoaded: false, // indique si les donnees de cette page ont ete chargees (initialement faux)
 	showRegister: false // Indique si le formulaire d'inscription est affiche
 };

@@ -16,6 +16,13 @@ def base_view(request):
 # def check_auth(request):
 # 	return JsonResponse({'is_authenticated': request.user.is_authenticated})
 def check_auth(request):
+	user = request.user
+ 
+	if not user.is_anonymous:
+		user.was_active_now()
+		user.save()
+
+	
 	return JsonResponse({
 		'is_authenticated': request.user.is_authenticated,
 		'username': request.user.username if request.user.is_authenticated else None
@@ -120,7 +127,7 @@ def login_view(request):
 		login(request, user)
 		return JsonResponse({'status': 'success'})
 	else:
-		return JsonResponse({'status': 'error', 'message': 'Invalid credentials'}, status=400)
+		return JsonResponse({'status': 'error', 'message': 'Invalid credentials'}, status=401)
 
 
 # vue pour gerer la deconnexion de l'utilisateur
@@ -138,8 +145,10 @@ def logout_view(request):
 def register_view(request):
 	try:
 		data = json.loads(request.body)
+		data["is_online"] = False
 		form = RegisterForm(data)
 		if form.is_valid():
+			# form.is_online = False
 			user = form.save()
 			return JsonResponse({'status': 'success'})
 		else:

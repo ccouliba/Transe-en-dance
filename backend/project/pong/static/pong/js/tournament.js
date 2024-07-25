@@ -1,4 +1,4 @@
-let tournamentState = {
+var tournamentState = {
 	players: [],
 	isStarted: false,
 	isLoaded: false

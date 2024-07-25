@@ -57,13 +57,13 @@ function resetLoaded() {
 	Object.keys(routes).forEach((url) => {
 		// Extrait le nom du composant de l'URL en supprimant le '#' et en prenant la partie apres
 		let stateName = url.split("#")[1];
-
+		
 		// Ajoute "State" a la fin du nom du composant pour obtenir le nom de l'objet d'etat
 		stateName += "State";
-
 		// Verifie si un objet d'etat correspondant existe dans l'objet global window
 		if (typeof window[stateName] !== "undefined") {
 			// Si l'objet d'etat existe, reinitialise sa propriete isLoaded a false
+			console.log(stateName, "fdf")
 			window[stateName].isLoaded = false;
 		}
 	});
@@ -79,28 +79,53 @@ let routes = {
 	"#logout": () => mountComponent(Logout),
 	"#login": () => mountComponent(Login),
 	"#register": () => mountComponent(Register),
+	"#match_history": () => mountComponent(MatchHistory)
 };
+
+function cleanStates(){
+	if (friendsState.friendStatusInterval){
+		clearInterval(friendsState.friendStatusInterval)
+	}
+
+	if (playState.checkInterval){
+		clearInterval(playState.checkInterval)
+	}
+
+	resetLoaded()
+}
+
+function checkAuth(){
+	return 	fetch("/pong/api/check_auth/")
+	// Transformer la reponse en JSON
+	.then((response) => response.json())
+}
 
 // Variable pour eviter plusieurs verifications d'authentification en meme temps
 let isCheckingAuth = false;
 
 // Fonction pour changer de page
 window.changePage = function (url) {
-	// Si une verification d'authentification est deja en cours => sortir de la fonction
-	if (isCheckingAuth) return;
-
-	// Indique qu'une verification d'authentification est en cours
-	isCheckingAuth = true;
+	
+	cleanStates()
+	if (url === ''){
+		changePage("#login")
+		return 
+	}
+	if (url === "#login" || url === "#register"  ){
+		url = "#login"
+		routes[url]();
+		// Mettre a jour l'historique du navigateur avec la nouvelle page
+		history.pushState({
+			page: url
+		}, "", url);
+		return
+	}
 
 	// Faire une requete pour verifier l'authentification de l'utilisateur
-	fetch("/pong/api/check_auth/")
-		// Transformer la reponse en JSON
-		.then((response) => response.json())
-		// Traiter les donnees recues
+	checkAuth()
 		.then((data) => {
 			// La verification est terminee
-			isCheckingAuth = false;
-
+		
 			// Si l'utilisateur est authentifie
 			if (data.is_authenticated) {
 				// Stocker un token et le nom d'utilisateur dans le localStorage (=> une fonctionnalité de l'API Web Storage qui permet de stocker des données de manière persistante dans le navigateur)
@@ -110,48 +135,42 @@ window.changePage = function (url) {
 				// Si l'utilisateur n'est pas authentifie, supprimer les infos du localStorage
 				localStorage.removeItem("userToken");
 				localStorage.removeItem("username");
+
+				updateMenu();
+				changePage("#login")
+				return
 			}
 
-			// Mettre a jour le menu de navigation
-			updateMenu();
-
-			// Si l'utilisateur n'est pas authentifie et qu'il essaie d'acceder a une page autre que login ou register
-			if (!data.is_authenticated && url !== "#login" && url !== "#register") {
-				// Rediriger vers la page de connexion
-				window.location.href = "/pong/";
-			} else {
-				// Si l'utilisateur accede a la page play, reinitialiser l'etat de la page play
-				if (url === "#play") {
-					playState.isLoaded = false;
-				}
+			if (url === "#play") {
+				playState.isLoaded = false;
+			}
 
 				// Si l'URL n'existe pas dans les routes definies
-				if (typeof routes[url] === "undefined") {
-					// Afficher la page 404
-					mountComponent(Page404);
-					// Mettre a jour l'historique du navigateur avec la page 404
-					history.pushState({
-						page: "#404"
-					}, "", "#404");
-					return;
-				}
+			if (typeof routes[url] === "undefined") {
+				// Afficher la page 404
+				mountComponent(Page404);
+				// Mettre a jour l'historique du navigateur avec la page 404
+				history.pushState({
+					page: "#404"
+				}, "", "#404");
+				return;
+			}
 
 				// Charger la nouvelle page selon l'URL
-				routes[url]();
-				// Mettre a jour l'historique du navigateur avec la nouvelle page
-				history.pushState({
-					page: url
-				}, "", url);
-			}
+			routes[url]();
+			// Mettre a jour l'historique du navigateur avec la nouvelle page
+			history.pushState({
+				page: url
+			}, "", url);
+			
 		})
-		// Gérer les erreurs lors de la requete
 		.catch((error) => {
 			// La verification est terminee meme en cas d'erreur
-			isCheckingAuth = false;
+		
 			// Afficher l'erreur dans la console
 			console.error("Error:", error);
-			// Rediriger vers la page de connexion en cas d'erreur
-			window.location.href = "/pong/";
+			
+			
 		});
 };
 

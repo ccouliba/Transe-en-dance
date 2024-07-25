@@ -13,7 +13,9 @@
     </header>
 	<script src="{% static 'pong/js/menu.js' %}"></script>
 	<script src="{% static 'pong/js/home.js' %}"></script>
-	<script src="{% static 'pong/js/play.js' %}"></script>
+	<script src="{% static 'pong/js/play/play.js' %}"></script>
+	<script src="{% static 'pong/js/play/pongGame.js' %}"></script>
+
 	<script src="{% static 'pong/js/friends.js' %}"></script>
 	<script src="{% static 'pong/js/tournament.js' %}"></script>
 	<script src="{% static 'pong/js/logout.js' %}"></script>
@@ -21,24 +23,17 @@
 	<script src="{% static 'pong/js/profile.js' %}"></script>
 	<script src="{% static 'pong/js/login.js' %}"></script>
 	<script src="{% static 'pong/js/main.js' %}"></script>
+	<script src="{% static 'pong/js/matchHistory.js' %}"></script>
+
 	<main>
 	  <div id="app">
 		{% block content %}
 		<script>
-		  // est ce que l'utilisateur est connecte ?
-		  fetch('/pong/api/check_auth')
-			.then(response => response.json())
-			.then(data => {
-			  if (data.is_authenticated) {
-				changePage("#home");
-			  } else {
-				changePage("#login");
-			  }
-			})
-			.catch(error => {
-			  console.error('Error:', error);
-			  changePage("#login");
-			});
+
+			let hash = window.location.hash
+			
+
+			changePage(hash);
 		</script>
 		{% endblock %}
 	  </div>
