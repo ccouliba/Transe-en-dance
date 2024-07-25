@@ -162,8 +162,14 @@ window.onload = function() {
     }
 
     function updateAI() {
+        let pos = ball.y / 5;
         if (ball.dx < 0)
-            centerAiPaddle(2);
+        {
+            if (ball.x < canvas.width / 2)
+                centerAiPaddle(pos);
+        }
+        else if (ball.x < canvas.width / 2 + (canvas.width / 10))
+            centerAiPaddle(pos);
         else {
             centerAiPaddle(predictBallY());
         }
