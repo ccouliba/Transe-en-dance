@@ -3,6 +3,7 @@ from django.http import JsonResponse, HttpResponse
 from django.template import loader
 from django.contrib.auth.decorators import login_required
 from pong.models import User
+from pong.decorators.Logging import logging_acces
 
 
 # view pour afficher la liste des utilisateurs. Test pour fetch() des donnees du backend/bdd
@@ -15,6 +16,7 @@ def user_list_json(request):
 # @login_required
 # def user_list(request):
 # 	return render(request, 'pong/user_list.html')
+@logging_acces
 def user_list(request):
 	users = User.objects.all()
 	user_data = []
@@ -28,9 +30,7 @@ def user_list(request):
 
 	return render(request, 'pong/user_list.html', {'users': user_data})
 
-
-
-
+@logging_acces
 def index(request):
 	template = loader.get_template('pong/index.html')
 	return HttpResponse(template.render())
@@ -40,6 +40,7 @@ def index(request):
 # @login_required
 # def home_view(request):
 # 	return render(request, 'pong/home.html')
+@logging_acces
 @login_required
 def home_view(request):
 	return render(request, 'pong/base.html')

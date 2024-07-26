@@ -1,0 +1,25 @@
+# Le nom du cluster Elasticsearch
+cluster.name: "Transe-en-danse"
+
+# Le nom du seul noeud qu'on a
+node.name: "transe-node"
+
+# Réglages réseau
+network.host: 0.0.0.0
+http.port: 9200
+
+# Activer le mode single-node pour le développement
+discovery.type: single-node
+
+# Désactiver la sécurité pour les requêtes anonymes
+xpack.security.enabled: false
+
+# Pour securiser la data processe par elasticsearch
+# Generer un certificat gratuit (openssl) et une cle privee
+# xpack.security.http.ssl.enabled: true
+# xpack.security.http.ssl.key: /usr/share/elasticsearch/config/certs/ssl.key
+# xpack.security.http.ssl.certificate: /usr/share/elasticsearch/config/certs/ssl.crt
+
+# Pour la connection a l'API de elastic par Logstash
+# http.auth.basic.enabled: true
+

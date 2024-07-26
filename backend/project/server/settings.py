@@ -226,6 +226,7 @@ LOGGING = {
     # Defines the dict version for logging config ; Should always be 1 ; another value seems to cause issues
     'version': 1,
     'disable_existing_loggers': False, # ?q= false -> not activated
+    
     'formatters': {
         'verbose': {
             'format': '[%(asctime)s]::[%(levelname)s]::[%(name)s]=> (%(message)s)', # [%(funcName)s]::
@@ -240,7 +241,7 @@ LOGGING = {
         'file': {
             'level': 'INFO',
             'class': 'logging.FileHandler',
-            'filename': '../project/logs/pong.logs',
+            'filename': '../project/elk/pong.logs',
             'formatter': 'verbose',
         },
         'console': {
@@ -249,15 +250,15 @@ LOGGING = {
             'stream': sys.stdout,
             'formatter': 'simple',
         },
-        # 'logstash': {
-        #     'level': 'DEBUG',
-        #     'class': handler_tcp.TCPLogstashHandler,
-        #     'host': 'logstash',
-        #     'port': 5959,
-        #     'version': 1,
-        #     'message_type': 'django',
-        #     'tags': ['django.request'],
-        # },
+        'logstash': {
+            'level': 'DEBUG',
+            'class': 'logstash.TCPLogstashHandler',
+            'host': 'logstash',
+            'port': 5959,
+            'version': 1,
+            'message_type': 'django',
+            'tags': ['django.request'],
+        },
     },
     
     'root': {
@@ -267,36 +268,35 @@ LOGGING = {
     
     'loggers': {
         'pong': {
-            'handlers': ['file'],
+            'handlers': ['file', 'logstash'],
             'level': 'INFO',
             'propagate': True, # If logs should be propagte to parent logs
         },
         'backend': {
-            'handlers': ['console', 'file'],
+            'handlers': ['file'],
             'level': 'INFO',
             'propagate': True,
         },
         'django.request': {
-            'handlers': ['console', 'file'],
+            'handlers': ['console'],
             'level': 'INFO',
             'propagate': True,
         },
         'django.db.backend': {
-            'handlers': ['console', 'file'],
+            'handlers': ['console'],
             'level': 'INFO',
             'propagate': True,
-        },
+        }, 
     },
 }
 
 ## FOR ELASTICSEARCH APP 
-
 ELASTICSEARCH_DSL = {
     'default': {
-        'hosts': os.getenv('ELASTICSEARCH_DSL_HOSTS', 'localhost:9200'),
-        'http_auth': ('username', 'password'),
-        'use_ssl': True,
-        'verify_certs': True,
-        'connection_class': 'RequestsHttpConnection',
+        'hosts': os.getenv('ELASTICSEARCH_DSL_HOSTS', 'http://localhost:9200'),
+        # 'http_auth': (os.getenv('ELASTIC_USERNAME'), os.getenv('ELASTIC_PASSWORD')),
+        # 'use_ssl': True,
+        # 'verify_certs': True,
+        # 'connection_class': 'RequestsHttpConnection',
     },
 }

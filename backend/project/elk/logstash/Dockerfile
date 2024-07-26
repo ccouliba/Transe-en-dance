@@ -1,7 +1,9 @@
-# Utilisez l'image officielle de Logstash
-FROM docker.elastic.co/logstash/logstash:8.9.0
+# Utiliser l'image officielle de Logstash
+FROM docker.elastic.co/logstash/logstash:8.14.3
 
 USER $USERNAME
+
+# RUN mkdir /usr/share/logstash/config/certs
 
 # Je supprime le fichier de configuration Logstash existant dans le conteneur
 # Pas necessaire car la copie qui suit ecrase mais bon ...

@@ -16,7 +16,7 @@ from django.views.decorators.csrf import ensure_csrf_cookie
 from django.views.decorators.csrf import csrf_exempt
 import json
 from rest_framework.authtoken.models import Token
-from pong.decorators.Logging import loggingFunction
+from pong.decorators.Logging import logging_acces
 # import logging
 # from logstash.middleware.LogMiddleware import Logging_acces
 
@@ -35,7 +35,7 @@ def check_auth(request):
 	})
  
 # Cette vue gere l'authentification via l'API d'Intra 42 en redirigeant l'utilisateur vers l'URL d'authentification appropriee
-@loggingFunction
+@logging_acces
 def external_login(request):
 	forty2_auth_url = os.getenv('API_AUTH_URL', 'https://api.intra.42.fr/oauth/authorize')
 	redirect_uri = os.getenv('REDIRECT_URI', 'http://127.0.0.1:8000/pong/auth/callback')
@@ -45,7 +45,7 @@ def external_login(request):
 	# Logging_acces(request=request, opname='External log-in')
 	return redirect(f"{forty2_auth_url}?client_id={client_id}&redirect_uri={redirect_uri}&response_type=code")
 
-@loggingFunction
+@logging_acces
 def auth_callback(request):
 	api_response = auth.get_response_from_api(request)
 	if api_response is None:
@@ -60,7 +60,7 @@ def auth_callback(request):
 # Cette vue gere la connexion des utilisateurs
 @require_POST
 # @ensure_csrf_cookie
-@csrf_exempt
+# @csrf_exempt
 ## New function of back without form validation and all that stuff !!
 def get_log(request, token):
 	if request.method == 'POST':
@@ -73,7 +73,7 @@ def get_log(request, token):
 			return JsonResponse({'messages':'succcess', 'token':token, 'redirect_url':'/pong/#home'})
 	return None
 
-@loggingFunction
+@logging_acces
 def login_view(request):
 	data = json.loads(request.body)
 	username = data.get('username')
@@ -86,7 +86,7 @@ def login_view(request):
 	else:
 		return JsonResponse({'status': 'error', 'message': 'Invalid credentials'}, status=400)
 
-@loggingFunction
+@logging_acces
 @login_required
 def logout_view(request):
 	logout(request)
@@ -95,7 +95,7 @@ def logout_view(request):
 	return JsonResponse({'status': 'success'})
 
 # Cette vue gere l'inscription des nouveaux utilisateurs
-@loggingFunction
+@logging_acces
 def register_view(request):
 	try:
 		data = json.loads(request.body)

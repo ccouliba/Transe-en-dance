@@ -5,7 +5,7 @@ from functools import wraps
 ## Another way to automatize logging is using our own decorators
 ## using @wraps
 
-def loggingFunction(func):
+def logging_acces(func):
     ''' Decorateur pour le log : Wrap la fonction d'execution '''
     ''' Pour conserver les parametres de la view appelant le decorateur '''
     @wraps(func)

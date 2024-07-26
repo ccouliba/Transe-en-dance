@@ -6,9 +6,9 @@ from ..models import User
 import requests
 # from requests.auth import HTTPBasicAuth 
 import os
-from pong.decorators.Logging import loggingFunction
+from pong.decorators.Logging import logging_acces
 
-@loggingFunction
+@logging_acces
 def get_response_from_api(request):
     # Get code parameter of the GET request (autorisation temporaire pour obtenir un jeton pour se connecter)
     url = os.getenv('TOKEN_URL')
@@ -27,7 +27,7 @@ def get_response_from_api(request):
         return None
     return response
 
-@loggingFunction
+@logging_acces
 def get_user_from_api(request, access_token):    
     user_info_url = os.getenv('USER_INFO_URL')
     user_info_response = requests.get(
@@ -38,6 +38,5 @@ def get_user_from_api(request, access_token):
         user_info = user_info_response.json()
         user, created = User.objects.get_or_create(username=user_info['login'])
         login(request, user)
-        redirect('/pong/#home')
-        # return redirect('/pong/#home')
+        return redirect('/pong/#home')
     return redirect('/pong/#login')

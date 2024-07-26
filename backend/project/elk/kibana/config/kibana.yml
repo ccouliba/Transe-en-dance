@@ -1,0 +1,12 @@
+# Kibana config
+server.host: "0.0.0.0"
+server.shutdownTimeout: "5s"
+elasticsearch.hosts: ["https://elasticsearch:9200"]
+
+elasticsearch.ssl.certificate: /usr/share/kibana/config/certs/ssl.crt
+elasticsearch.ssl.key: /usr/share/kibana/config/certs/ssl.key
+
+xpack.screenshotting.browser.chromium.disableSandbox: true
+
+# To prevent sessions from being invalidated on restart, please set
+# xpack.reporting.encryptionKey: ""
