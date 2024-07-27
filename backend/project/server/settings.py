@@ -106,30 +106,30 @@ WSGI_APPLICATION = 'server.wsgi.application'
 
 
 
-DATABASES = {
-	'default': {
-		'ENGINE': os.getenv('SQL_ENGINE', 'django.db.backends.postgresql_psycopg2'),
-		'NAME': os.getenv('SQL_DATABASE', 'db1'),
-		'USER': os.getenv('SQL_USER', 'ccouliba'),
-		'PASSWORD': os.getenv('SQL_PASSWORD'),
-		# 'HOST': os.getenv('SQL_HOST', 'db'),
-		'HOST': 'localhost', #todo : A MODIFIER (juste pour pouvoir executer django localement)
-		'PORT': os.getenv('SQL_PORT', '5432'),
-	}
-}
+# DATABASES = {
+# 	'default': {
+# 		'ENGINE': os.getenv('SQL_ENGINE', 'django.db.backends.postgresql_psycopg2'),
+# 		'NAME': os.getenv('SQL_DATABASE', 'db1'),
+# 		'USER': os.getenv('SQL_USER', 'ccouliba'),
+# 		'PASSWORD': os.getenv('SQL_PASSWORD'),
+# 		'HOST': os.getenv('SQL_HOST', 'db'),
+# 		# 'HOST': 'localhost', #todo : A MODIFIER (juste pour pouvoir executer django localement)
+# 		'PORT': os.getenv('SQL_PORT', '5432'),
+# 	}
+# }
 
 
 # on localhost
-# DATABASES = {
-# 	'default': {
-# 		'ENGINE': 'django.db.backends.postgresql_psycopg2',
-# 		'NAME': 'db1',
-# 		'USER': 'ccouliba',
-# 		'PASSWORD': 'password',
-# 		'HOST': 'localhost',
-# 		'PORT': '5432',
-# 	}
-# }
+DATABASES = {
+	'default': {
+		'ENGINE': 'django.db.backends.postgresql_psycopg2',
+		'NAME': 'db1',
+		'USER': 'ccouliba',
+		'PASSWORD': 'password',
+		'HOST': 'localhost',
+		'PORT': '5432',
+	}
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators

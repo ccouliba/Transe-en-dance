@@ -5,6 +5,7 @@
 	<title>{% block title %}PONG{% endblock %}</title>
 	{% load static %}
 	<link rel="stylesheet" href="{% static 'pong/css/style.css' %}" />
+	<link rel="icon" href="{% static 'pong/images/favicon.ico' %}" type="image/x-icon">
   </head>
   <body>
     <header>
@@ -17,7 +18,7 @@
 	<script src="{% static 'pong/js/play/pongGame.js' %}"></script>
 
 	<script src="{% static 'pong/js/friends.js' %}"></script>
-	<script src="{% static 'pong/js/tournament.js' %}"></script>
+	<script src="{% static 'pong/js/tournament/tournament.js' %}"></script>
 	<script src="{% static 'pong/js/logout.js' %}"></script>
 	<script src="{% static 'pong/js/404.js' %}"></script>
 	<script src="{% static 'pong/js/profile.js' %}"></script>

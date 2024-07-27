@@ -4,16 +4,11 @@ from .views.game_views import create_game, update_game, finish_game, match_histo
 from .views.friend_views import send_friend_request, accept_friend_request, remove_friend, friends_data, friends_online_status
 from .views.profile_views import profile_view, user_updated_profile, user_account_deleted,edit_password_view, get_user_info, profile_update_view, upload_avatar
 from .views.user_views import user_list_json, user_list, index, home_view
-# from .views.tournament_views import (
-# 	create_tournament, get_tournament_state, register_player,
-# 	start_tournament, end_tournament_match, finish_tournament, cancel_tournament
-# )
+from .views.tournament_views import create_tournament, tournament_view
+
 from django.conf import settings
 from django.conf.urls.static import static
 
-from .views.tournament_views import (
-	get_tournament_state, register_player,
-)
 app_name = 'pong'  # definir le namespace
 
 urlpatterns = [
@@ -55,12 +50,8 @@ urlpatterns = [
 	path('api/games/finish_game/<int:game_id>/', finish_game, name='finish_game'),
 	path('api/games/match_history/', match_history, name='match_history'),
  
-	# path('api/tournament/create', create_tournament, name='create_tournament'),
-	path('api/tournament/state', get_tournament_state, name='get_tournament_state'),
-	path('api/tournament/register', register_player, name='register_player'),
-	# path('api/tournament/start', start_tournament, name='start_tournament'),
-	# path('api/tournament/endmatch', end_tournament_match, name='end_tournament_match'),
-	# path('api/tournament/finish', finish_tournament, name='finish_tournament'),
-	# path('api/tournament/cancel', cancel_tournament, name='cancel_tournament'),
+	path('api/tournament/create/', create_tournament, name='create_tournament'),
+	path('api/tournament/tournaments/', tournament_view, name='create_tournament'),
+
 ]
 

@@ -4,6 +4,8 @@ from django.contrib.auth.models import AbstractUser, Group, Permission
 from django.db.models import UniqueConstraint
 from django.utils import timezone
 from django.conf import settings
+from django.core.exceptions import ValidationError
+from django.db.models import UniqueConstraint, Q
 
 # class User(AbstractUser): #https://openclassrooms.com/fr/courses/7192426-allez-plus-loin-avec-le-framework-django/7386368-personnalisez-le-modele-utilisateur
 
@@ -84,29 +86,20 @@ class Game(models.Model):
 	def __str__(self):
 		return f"Game {self.id}: {self.player1} vs {self.player2}"
 	
+
 class Tournament(models.Model):
 	name = models.CharField(max_length=100)
 	is_started = models.BooleanField(default=False)
 	start_date = models.DateTimeField(null=True, blank=True)
 	end_date = models.DateTimeField(null=True, blank=True)
-	winner = models.ForeignKey(User, related_name='won_tournaments', on_delete=models.SET_NULL, null=True, blank=True)
 
 	def __str__(self):
 		return self.name
 
-class Participate(models.Model):
-	player = models.ForeignKey(User, on_delete=models.CASCADE)
-	tournament = models.ForeignKey(Tournament, on_delete=models.CASCADE)
-	order_of_turn = models.IntegerField()
-	alias = models.CharField(max_length=50)
 
-	class Meta:
-		constraints = [
-			models.UniqueConstraint(fields=['player', 'tournament'], name='unique_player_tournament')
-		]
 
-	def __str__(self):
-		return f"{self.player} participates in {self.tournament} as {self.alias}, order of turn: {self.order_of_turn}"
+
+
 
 
 class Composed(models.Model):
