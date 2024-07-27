@@ -110,6 +110,7 @@ import pytz
 from django.utils import timezone
 
 @login_required
+@csrf_exempt
 def match_history(request):
 	user = request.user
 	games = Game.objects.filter(

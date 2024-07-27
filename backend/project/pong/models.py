@@ -92,9 +92,15 @@ class Tournament(models.Model):
 	is_started = models.BooleanField(default=False)
 	start_date = models.DateTimeField(null=True, blank=True)
 	end_date = models.DateTimeField(null=True, blank=True)
-
+	created_at = models.DateTimeField(auto_now_add=True, null=True)
+	participants = models.ManyToManyField(User, related_name='tournaments', blank=True)
+	def __init__(self, *args, **kwargs):
+		super().__init__(*args, **kwargs)
+		if not self.created_at:
+			self.created_at = timezone.now()
 	def __str__(self):
 		return self.name
+
 
 
 
