@@ -36,9 +36,9 @@ function Play() {
 
 	if (playState.gameOver) {
 		content = `
-			<div class="container mt-5">
+			<div class="container">
 				<h1>Game ended. Bye !</h1>
-				<div class="mt-4">
+				<div>
 					<h2>Final scores:</h2>
 					<p>${playState.player1Email}: ${playState.player1Score}</p>
 					<p>${playState.player2Email}: ${playState.player2Score}</p>
@@ -48,10 +48,11 @@ function Play() {
 		`;
 	} else if (!playState.gameStarted) {
 		content = `
-			<div class="container mt-5">
+			<div class="container">
 				<h1>Pong game</h1>
-				<div id="instructions" class="card p-3 mb-4">
-					<h2 class="card-title">Instructions </h2> <br/>
+				<div id="instructions" class="card">
+					<h2 class="card-title">Instructions</h2>
+					<br/>
 					<p>
 						The objective of the game is to score points by hitting the ball into the opponent's court.<br/><hr>
 						Player 1 controls their paddle using the W (up) and S (down) keys.<br/><hr>
@@ -61,11 +62,11 @@ function Play() {
 					</p>
 				</div>
 				<form id="start-game-form">
-					<div class="mb-3">
+					<div>
 						<label for="player1Email" class="form-label">First player's email</label>
 						<input type="email" class="form-control" id="player1Email" required>
 					</div>
-					<div class="mb-3">
+					<div>
 						<label for="player2Email" class="form-label">Second player's email</label>
 						<input type="email" class="form-control" id="player2Email" required>
 					</div>
@@ -75,7 +76,7 @@ function Play() {
 		`;
 	} else {
 		content = `
-	<div class="container mt-5">
+	<div class="container">
 		<h1 class="text-center">Pong Game</h1>
 
 		<canvas id="pongCanvas" width="${CANVAS_WIDTH}" height="${CANVAS_HEIGHT}"></canvas>

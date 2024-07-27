@@ -16,7 +16,7 @@ body, html {
   background: rgb(42, 0, 0);
   font-family: 'Trajan Pro', sans-serif;
   color: rgb(200, 200, 200);
-  background-image: linear-gradient(to top, rgb(42,0,0, 0.42), rgb(100,20,20, 0.42));
+  background-image: linear-gradient(to top, rgb(42,0,0), rgb(100,20,20));
 }
 
 .custom-btn {
@@ -30,8 +30,8 @@ a {
 
 #profilePage {
   color: rgb(115, 115, 115);
-  background-color: rgba(30,30,30, 0.42);
-  background-image: linear-gradient(to top, rgb(30,30,30, 0.42) 80%, rgb(42,50,80, 0.42));
+  background-color: rgba(30,30,30);
+  background-image: linear-gradient(to top, rgb(30,30,30) 80%, rgb(42,50,80));
 }
 
 #profileValue {
@@ -44,6 +44,12 @@ a {
 
 #passwordHelpBlock {
   color: rgb(145, 142, 112);
+}
+
+.accordion, #instructions, #start-game-form, #player1Email, #player2Email, #staticBackdrop {
+  color: gold;
+  background-color: rgba(30,30,30);
+  background-image: linear-gradient(to top, rgb(30,30,30) 80%, rgb(42,50,80));
 }
 
 .navbar-custom {
