@@ -257,7 +257,7 @@ LOGGING = {
             'port': 5959,
             'version': 1,
             'message_type': 'django',
-            'tags': ['django.request'],
+            'tags': ['django.request', 'backend'],
         },
     },
     
@@ -273,12 +273,12 @@ LOGGING = {
             'propagate': True, # If logs should be propagte to parent logs
         },
         'backend': {
-            'handlers': ['file'],
+            'handlers': ['file', 'logstash'],
             'level': 'INFO',
             'propagate': True,
         },
         'django.request': {
-            'handlers': ['console'],
+            'handlers': ['console', 'logstash'],
             'level': 'INFO',
             'propagate': True,
         },
@@ -293,10 +293,10 @@ LOGGING = {
 ## FOR ELASTICSEARCH APP 
 ELASTICSEARCH_DSL = {
     'default': {
-        'hosts': os.getenv('ELASTICSEARCH_DSL_HOSTS', 'http://localhost:9200'),
-        # 'http_auth': (os.getenv('ELASTIC_USERNAME'), os.getenv('ELASTIC_PASSWORD')),
+        'hosts': os.getenv('ELASTICSEARCH_DSL_HOSTS'),
+        'http_auth': (os.getenv('ELASTIC_USERNAME'), os.getenv('ELASTIC_PASSWORD')),
         # 'use_ssl': True,
-        # 'verify_certs': True,
+        # 'verify_certs': False,
         # 'connection_class': 'RequestsHttpConnection',
     },
 }

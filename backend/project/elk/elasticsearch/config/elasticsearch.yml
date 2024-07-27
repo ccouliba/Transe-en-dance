@@ -6,13 +6,14 @@ node.name: "transe-node"
 
 # Réglages réseau
 network.host: 0.0.0.0
+
 http.port: 9200
 
 # Activer le mode single-node pour le développement
 discovery.type: single-node
 
 # Désactiver la sécurité pour les requêtes anonymes
-xpack.security.enabled: false
+xpack.security.enabled: true
 
 # Pour securiser la data processe par elasticsearch
 # Generer un certificat gratuit (openssl) et une cle privee

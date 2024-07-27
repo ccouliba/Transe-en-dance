@@ -5,13 +5,12 @@ USER $USERNAME
 
 # RUN mkdir /usr/share/logstash/config/certs
 
-# Je supprime le fichier de configuration Logstash existant dans le conteneur
-# Pas necessaire car la copie qui suit ecrase mais bon ...
-RUN rm -f /usr/share/logstash/config/logstash.yml
+# # Je copie certificat et cle dans le conteneur
+# COPY ./config/certs/* /usr/share/logstash/config/certs/
+# RUN chmod 600 /usr/share/logstash/certs/*
 
-# Je copie mon fichier de configuration Logstash dans le conteneur
+# Je copie ma config et ma pipeline  dans le conteneur
 COPY ./config/logstash.yml /usr/share/logstash/config/logstash.yml
-# Je copie mon pipeline Logstash dans le conteneur
 COPY ./pipeline/logstash.conf /usr/share/logstash/pipeline/logstash.conf
 
 # Je change le propriétaire du fichier de configuration Logstash pour éviter les problèmes de permissions
