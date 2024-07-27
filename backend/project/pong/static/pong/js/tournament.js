@@ -7,9 +7,6 @@ let tournamentState = {
 function Tournament() {
 	return `
 	<div class="container">
-		<h1>
-		caca
-		</h1>
 		<table class="table table-hover table-dark">
 		  <thead class="thead-dark">
   			  <tr>

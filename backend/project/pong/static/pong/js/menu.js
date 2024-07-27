@@ -2,7 +2,7 @@ function Menu() {
 	const isLoggedIn = localStorage.getItem('userToken') === 'true';
 	return `
 		<div class="menuStructureTop">
-			<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+			<nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-custom">
 				<div class="container-fluid">
 					<a class="navbar-brand active" href="#home" onclick="changePage('#home'); return false;" id="navbarHomeLink">Home</a>
 					<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
