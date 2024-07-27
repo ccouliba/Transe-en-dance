@@ -46,17 +46,20 @@ services:
   # Elasticsearch is a search engine
   elasticsearch:
     container_name: elasticsearch
-    image: docker.elastic.co/elastic/elastic:8.14.3
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.14.3
     # build: ./project/elk/elasticsearch
     configs:
       - source: es_config
-        target: /usr/share/elasticsearch/config/elasticsearch.yml
-    env_file:
-      - ./.utils/.env
+        target: /usr/share/elasticsearch/config/elasticsearch.yml:ro
+    # env_file:
+    #   - ./.utils/.env
+    environment:
+      - xpack.security.enabled=false
     ports:
       - 9200:9200
     volumes:
       - elk-data:/usr/share/elasticsearch/data
+      # - ./project/elk/elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
       # - ./project/elk/elasticsearch/config/certs:/usr/share/elasticsearch/config/certs
     networks:
       - devops
@@ -64,19 +67,19 @@ services:
   # Logstash is a server-side data processing pipeline
   logstash:
     container_name: logstash
-    image: docker.elastic.co/logstash/logstash:8.14.3
-    # build: ./project/elk/logstash
+    # image: docker.elastic.co/logstash/logstash:8.14.3
+    build: ./project/elk/logstash
     # env_file:
     #   - ./.utils/.env
     command: bin/logstash -f /usr/share/logstash/pipeline/logstash.conf
-    configs:
-      - source: logstash_config
-        target: /usr/share/logstash/config/logstash.yml
-      - source: logstash_pipeline
-        target: /usr/share/logstash/pipeline/logstash.conf
-    # volumes:
-    #   - ./project/elk/logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml
-    #   - ./project/elk/logstash/pipeline/logstash.conf:/usr/share/logstash/pipeline/logstash.conf
+    # configs:
+    #   - source: logstash_config
+    #     target: /usr/share/logstash/config/logstash.yml:ro
+    #   - source: logstash_pipeline
+    #     target: /usr/share/logstash/pipeline/logstash.conf
+    volumes:
+      - ./project/elk/logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml
+      - ./project/elk/logstash/pipeline/logstash.conf:/usr/share/logstash/pipeline/logstash.conf
       # - ./project/elk/logstash/config/certs:/usr/share/logstash/config/certs
     ports:
       - "5959:5959/tcp"
@@ -84,7 +87,6 @@ services:
       - elasticsearch
     networks:
       - transcendance
-      - devops
 
   # Kibana is used for data visualization
   kibana:
@@ -93,13 +95,15 @@ services:
     # build: ./project/elk/kibana
     configs:
       - source: kibana_config
-        target: /usr/share/kibana/config/kibana.yml
-    env_file:
-      - ./.utils/.env
-    environment:
-      - XPACK_SECURITY_ENABLED=true
-      - ELASTICSEARCH_USERNAME=ELASTIC_USERNAME
-      - ELASTICSEARCH_PASSWORD=ELASTIC_PASSWORD
+        target: /usr/share/kibana/config/kibana.yml:ro
+    # env_file:
+    #   - ./.utils/.env
+    # environment:
+    #   - XPACK_SECURITY_ENABLED=true
+    #   - ELASTICSEARCH_USERNAME=ELASTIC_USERNAME
+    #   - ELASTICSEARCH_PASSWORD=ELASTIC_PASSWORD
+    # volumes:
+    #   - ./project/elk/kibana/config/kibana.yml:/usr/share/kibana/config/kibana.yml
     ports:
       - target: 5601
         published: 5601
@@ -112,12 +116,12 @@ services:
 configs:
   es_config:
     file: ./project/elk/elasticsearch/config/elasticsearch.yml
-  logstash_config:
-    file: ./project/elk/logstash/config/logstash.yml
-  logstash_pipeline:
-    file: ./project/elk/logstash/pipeline/logstash.conf
+  # logstash_config:
+  #   file: ./project/elk/logstash/config/logstash.yml
+  # logstash_pipeline:
+  #   file: ./project/elk/logstash/pipeline/logstash.conf
   kibana_config:
-    file: ./project/elk/kibana/config/ kibana.yml
+    file: ./project/elk/kibana/config/kibana.yml
 
 volumes:
   postgres_data:

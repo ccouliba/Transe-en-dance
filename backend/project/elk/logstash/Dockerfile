@@ -3,7 +3,7 @@ FROM docker.elastic.co/logstash/logstash:8.14.3
 
 USER $USERNAME
 
-# RUN mkdir /usr/share/logstash/config/certs
+# RUN mkdir /usr/share/logstash/config
 
 # # Je copie certificat et cle dans le conteneur
 # COPY ./config/certs/* /usr/share/logstash/config/certs/

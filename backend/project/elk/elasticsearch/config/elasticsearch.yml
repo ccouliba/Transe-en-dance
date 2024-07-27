@@ -2,7 +2,7 @@
 cluster.name: "Transe-en-danse"
 
 # Le nom du seul noeud qu'on a
-node.name: "transe-node"
+# node.name: "transe-node"
 
 # Réglages réseau
 network.host: 0.0.0.0
@@ -13,7 +13,7 @@ http.port: 9200
 discovery.type: single-node
 
 # Désactiver la sécurité pour les requêtes anonymes
-xpack.security.enabled: true
+# xpack.security.enabled: false
 
 # Pour securiser la data processe par elasticsearch
 # Generer un certificat gratuit (openssl) et une cle privee
