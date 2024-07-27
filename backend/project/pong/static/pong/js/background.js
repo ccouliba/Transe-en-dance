@@ -1,7 +1,28 @@
 const canvas = document.getElementById('background');
 const ctx = canvas.getContext('2d');
+
 canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+// canvas.height = window.innerHeight;
+canvas.height = canvas.width * 0.5;
+
+window.addEventListener("resize", handleResize);
+function handleResize() {
+    var w = window.innerWidth;
+    var h = window.innerHeight;
+    ctx.canvas.width = w;
+    ctx.canvas.height = h;
+    //
+    var ratio = 100/100; // 100 is the width and height of the circle content.
+    var windowRatio = w/h;
+    var scale = w/100;
+    if (windowRatio > ratio) {
+        scale = h/100;
+    }
+    // formule pour rescale particule j'ignore comment appeler les objets particules: Scale up to fit width or height
+    // c.scaleX= c.scaleY = scale; 
+    
+    ctx.update();
+}
 
 const particlesArray = [];
 const numberOfParticles = 50; // Reduced number of particles
@@ -148,109 +169,3 @@ window.addEventListener('resize', function() {
     fireGlowGradient.addColorStop(0.5, 'rgba(255, 140, 0, 0.1)'); // orange
     fireGlowGradient.addColorStop(1, 'rgba(255, 215, 0, 0)'); // yellow end
 });
-
-///////////////////////////////////////////////////////////////////////////////////////////
-
-
-//musique
-document.addEventListener('DOMContentLoaded', function() {
-    const playButton = document.getElementById('playButton');
-    const audio = new Audio('dotamain.mp3');
-    let isPlaying = false; // Variable pour suivre l'état de la lecture audio
-
-    playButton.addEventListener('click', function() {
-        if (!isPlaying) {
-            audio.play().then(() => {
-                console.log('La musique est en train de jouer');
-                isPlaying = true; // Met à jour l'état de lecture
-                playButton.textContent = '🔇'; // Change le texte du bouton
-            }).catch(error => {
-                console.error('Erreur de lecture audio :', error);
-            });
-        } else {
-            audio.pause(); // Met en pause la musique
-            isPlaying = false; // Met à jour l'état de lecture
-            playButton.textContent = '🔈'; // Change le texte du bouton
-        }
-    });
-});
-
-
-
-
-
-//////////////////////////////////////////////////////////////////////////////////////////
-
-// Récupération des éléments du DOM
-const classicButton = document.getElementById('classicButton');
-const boostedButton = document.getElementById('boostedButton');
-const humanVsComputerButton = document.getElementById('humanVsComputerButton');
-const humanVsHumanButton = document.getElementById('humanVsHumanButton');
-const levelSelection = document.getElementById('levelSelection');
-const easyLevelButton = document.getElementById('easyLevel');
-const mediumLevelButton = document.getElementById('mediumLevel');
-const hardLevelButton = document.getElementById('hardLevel');
-
-// Ajout des écouteurs d'événements aux boutons principaux
-classicButton.addEventListener('click', function() {
-    showSelectionOptions('Classic');
-});
-
-boostedButton.addEventListener('click', function() {
-    showSelectionOptions('Boosted');
-});
-
-// Fonction pour afficher les options de sélection
-function showSelectionOptions(gameMode) {
-    // Masquer tous les boutons principaux
-    classicButton.style.display = 'none';
-    boostedButton.style.display = 'none';
-
-    // Afficher les boutons d'options de sélection correspondants
-    if (gameMode === 'Classic') {
-        humanVsComputerButton.style.display = 'inline-block';
-        humanVsHumanButton.style.display = 'inline-block';
-    } else if (gameMode === 'Boosted') {
-        humanVsComputerButton.style.display = 'inline-block';
-        humanVsHumanButton.style.display = 'inline-block';
-    }
-}
-
-// Ajout des écouteurs d'événements aux boutons d'options de sélection
-humanVsComputerButton.addEventListener('click', function() {
-    showLevelSelection();
-});
-
-humanVsHumanButton.addEventListener('click', function() {
-    // Ici vous pouvez mettre le code pour l'action de "Human vs Human" si nécessaire
-    console.log('Human vs Human mode selected.');
-});
-
-// Fonction pour afficher la sélection de niveau
-function showLevelSelection() {
-    // Masquer les boutons d'options de sélection
-    humanVsComputerButton.style.display = 'none';
-    humanVsHumanButton.style.display = 'none';
-
-    // Afficher la sélection de niveau
-    levelSelection.style.display = 'block';
-
-    // Ajouter les écouteurs d'événements pour chaque niveau
-    easyLevelButton.addEventListener('click', function() {
-        handleLevelSelection('Easy');
-    });
-
-    mediumLevelButton.addEventListener('click', function() {
-        handleLevelSelection('Medium');
-    });
-
-    hardLevelButton.addEventListener('click', function() {
-        handleLevelSelection('Hard');
-    });
-}
-
-// Fonction pour traiter la sélection de niveau
-function handleLevelSelection(level) {
-    // Exemple : Vous pouvez ici effectuer des actions en fonction du niveau sélectionné
-    console.log(`Selected ${level} level.`);
-}

@@ -70,7 +70,7 @@ function Profile() {
   </div>
 </div><br/><br/>
 
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+<button type="button" class="btn btn-primary" id="RGPDButton" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
 	RGPD statements 
 </button>
 
