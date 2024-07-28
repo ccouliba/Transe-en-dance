@@ -153,6 +153,9 @@ def add_alias(request, tournament_id):
 		if not new_username or not new_alias:
 			return JsonResponse({'status': 'error', 'message': 'Both username and alias are required.'}, status=400)
 
+		if not tournament.participants.filter(username=new_username).exists():
+			return JsonResponse({'status': 'error', 'message': 'The user is not a participant in this tournament.'}, status=400)
+
 		new_alias_obj = {'username': new_username, 'alias': new_alias}
 		
 		if new_alias_obj not in tournament.aliases:

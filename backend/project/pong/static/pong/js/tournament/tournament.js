@@ -229,7 +229,10 @@ function addAlias(event) {
 		alert('Please enter both username and alias.');
 		return;
 	}
-
+	if (!tournamentState.tournament.participants.includes(username)) {
+		alert('The entered username is not a participant in this tournament.');
+		return;
+	}
 	fetch(`/pong/api/tournament/${tournamentState.tournament.id}/add_alias/`, {
 		method: 'POST',
 		headers: {
