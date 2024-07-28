@@ -49,14 +49,19 @@ function MatchList() {
 }
 
 function TournamentDetail() {
-
-	let winner = matchmakingState.standings[0].username
+    let winner
+    let winner_html = ''
+    if (Tournament.enddate)
+    {
+	    winner = matchmakingState.standings[0].username
+        winner_html = `<h2>Winner: ${winner}</h2>`
+    }
     return `
         <h1>Tournament matchmaking</h1>
         ${MatchList()}
 
         
-        <h2>Winner: ${winner}</h2>
+        ${winner_html}
 		
         <h2>Standings</h2>
         <ul id="standingsList">
