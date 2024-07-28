@@ -420,7 +420,7 @@ function TournamentMatchmaking() {
 			<ul id="matchesList">
 				${matches.map(match => `
 					<li>
-						${match.player1} vs ${match.player2}: 
+						${getDisplayName(match.player1)} vs ${getDisplayName(match.player2)}: 
 						${match.player1_score} - ${match.player2_score}
 						${match.status === 'pending' ? 
 							`<button onclick="startMatch(${match.id})">Start Match</button>` : 
@@ -432,11 +432,15 @@ function TournamentMatchmaking() {
 			<h2>Standings</h2>
 			<ul id="standingsList">
 				${standings.map(player => `
-					<li>${player.username}: ${player.wins} wins, Total score: ${player.total_score}</li>
+					<li>${getDisplayName(player)}: ${player.wins} wins, Total score: ${player.total_score}</li>
 				`).join('')}
 			</ul>
-			${winner ? `<h2>Winner: ${winner}</h2>` : ''}
+			${winner ? `<h2>Winner: ${getDisplayName({username: winner, alias: aliases[winner]})}</h2>` : ''}
 		`;
+	}
+	
+	function getDisplayName(player) {
+		return player.alias ? `${player.username} (${player.alias})` : player.username;
 	}
 
 	fetchMatchesAndStandings();
@@ -453,24 +457,39 @@ function TournamentMatchmaking() {
 	let matches = [];
 	let standings = [];
 	let winner = null;
+	let aliases = {};
 
 	function fetchMatchesAndStandings() {
 		fetch(`/pong/api/tournament/${tournamentState.tournament.id}/matchmaking/`)
-			.then(response => response.json())
+			.then(response => {
+				if (!response.ok) {
+					throw new Error(`HTTP error! status: ${response.status}`);
+				}
+				return response.json();
+			})
 			.then(data => {
 				if (data.status === 'success') {
 					matches = data.matches;
 					standings = data.standings;
 					winner = data.winner;
+					aliases = data.aliases || {};
 					renderTournamentMatchmaking();
 				} else {
-					alert('Error fetching tournament data: ' + data.message);
+					throw new Error('Error fetching tournament data: ' + data.message);
 				}
 			})
 			.catch(error => {
 				console.error('Error:', error);
-				alert('An error occurred while fetching tournament data.');
+				alert('An error occurred while fetching tournament data: ' + error.message);
+				document.querySelector('.container').innerHTML = `
+					<h1>Tournament Matchmaking</h1>
+					<p>Error loading tournament data: ${error.message}</p>
+				`;
 			});
+	}
+
+	function getDisplayName(username, alias) {
+		return alias ? `${username} (${alias})` : username;
 	}
 
 	function renderTournamentMatchmaking() {
@@ -481,7 +500,7 @@ function TournamentMatchmaking() {
 			<ul id="matchesList">
 				${matches.map(match => `
 					<li>
-						${match.player1} vs ${match.player2}: 
+						${getDisplayName(match.player1.username, match.player1.alias)} vs ${getDisplayName(match.player2.username, match.player2.alias)}: 
 						${match.player1_score} - ${match.player2_score}
 						${match.status === 'pending' ? 
 							`<button onclick="startMatch(${match.id})">Start Match</button>` : 
@@ -493,10 +512,10 @@ function TournamentMatchmaking() {
 			<h2>Standings</h2>
 			<ul id="standingsList">
 				${standings.map(player => `
-					<li>${player.username}: ${player.wins} wins, Total score: ${player.total_score}</li>
+					<li>${getDisplayName(player.username, player.alias)}: ${player.wins} wins, Total score: ${player.total_score}</li>
 				`).join('')}
 			</ul>
-			${winner ? `<h2>Winner: ${winner}</h2>` : ''}
+			${winner ? `<h2>Winner: ${getDisplayName(winner, aliases[winner])}</h2>` : ''}
 		`;
 	}
 
@@ -504,7 +523,7 @@ function TournamentMatchmaking() {
 
 	return `
 		<div class="container mt-5">
-			<h1>Tournament Matchmaking</h1>
+			<h1>Tournament matchmaking</h1>
 			<p>Loading tournament data...</p>
 		</div>
 	`;

@@ -212,35 +212,45 @@ from pong.models import Tournament, Game, Composed
 from itertools import combinations
 from django.db.models import Q, F
 from django.db.models import IntegerField
+
 @login_required
 def tournament_matchmaking(request, tournament_id):
 	tournament = get_object_or_404(Tournament, id=tournament_id)
-	
+   
 	if not tournament.is_started:
 		return JsonResponse({'status': 'error', 'message': 'Tournament has not started yet.'}, status=400)
-	
+   
 	participants = list(tournament.participants.all())
 	
+	# Get aliases
+	aliases = {alias['username']: alias['alias'] for alias in tournament.aliases}
+   
 	# Generate all possible matches if they don't exist
 	if Composed.objects.filter(tournament=tournament).count() == 0:
 		matches = list(combinations(participants, 2))
 		for i, (player1, player2) in enumerate(matches):
 			game = Game.objects.create(player1=player1, player2=player2, status='pending')
 			Composed.objects.create(tournament=tournament, game=game, game_number=i+1)
-	
+   
 	# Fetch all matches
 	composed_games = Composed.objects.filter(tournament=tournament).select_related('game')
 	matches = [
 		{
 			'id': cg.game.id,
-			'player1': cg.game.player1.username,
-			'player2': cg.game.player2.username,
+			'player1': {
+				'username': cg.game.player1.username,
+				'alias': aliases.get(cg.game.player1.username)
+			},
+			'player2': {
+				'username': cg.game.player2.username,
+				'alias': aliases.get(cg.game.player2.username)
+			},
 			'player1_score': cg.game.player1_score,
 			'player2_score': cg.game.player2_score,
 			'status': cg.game.status
 		} for cg in composed_games
 	]
-	
+   
 	# Calculate standings
 	standings = []
 	for player in participants:
@@ -249,7 +259,7 @@ def tournament_matchmaking(request, tournament_id):
 			Q(player2=player, player2_score__gt=F('player1_score')),
 			status='finished'
 		).count()
-		
+	   
 		total_score = Game.objects.filter(
 			Q(player1=player) | Q(player2=player),
 			status='finished'
@@ -261,24 +271,26 @@ def tournament_matchmaking(request, tournament_id):
 				output_field=IntegerField()
 			))
 		)['total'] or 0
-		
+	   
 		standings.append({
 			'username': player.username,
+			'alias': aliases.get(player.username),
 			'wins': wins,
 			'total_score': total_score
 		})
-	
+   
 	# Sort standings by wins, then by total score
 	standings.sort(key=lambda x: (-x['wins'], -x['total_score']))
-	
+   
 	# Determine winner if all games are finished
 	winner = None
 	if all(match['status'] == 'finished' for match in matches):
 		winner = standings[0]['username']
-	
+   
 	return JsonResponse({
 		'status': 'success',
 		'matches': matches,
 		'standings': standings,
-		'winner': winner
+		'winner': winner,
+		'aliases': aliases
 	})
