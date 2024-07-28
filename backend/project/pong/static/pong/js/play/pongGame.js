@@ -188,33 +188,6 @@ function updateProfileStats() {
 	.catch(error => console.error('Error updating profile stats:', error));
 }
 
-// // fonction pour terminer le jeu
-// function endGame() {
-// 	playState.gameOver = true; // indique que le jeu est termine
-// 	// determine le gagnant
-// 	const winner = playState.player1Score > playState.player2Score ? playState.player1Email : playState.player2Email;
-// 	finishGame(playState.gameId, winner); //pour les stats
-// 	// envoie une requete post a l'api pour mettre a jour la partie
-// 	fetch(`/pong/api/games/${playState.gameId}/update`, {
-// 		method: 'POST',
-// 		headers: {
-// 			'Content-Type': 'application/json',
-// 		},
-// 		body: JSON.stringify({
-// 			player1Score: playState.player1Score,
-// 			player2Score: playState.player2Score,
-// 			winner: winner
-// 		}),
-// 		credentials: 'include'
-// 	})
-// 	.then(response => response.json())
-// 	.then(data => {
-// 		playState.isLoaded = false; // forcer le rechargement pour la prochaine partie
-// 		changePage("#play");
-// 		updateProfileStats();
-// 	})
-// 	.catch(error => console.error('error:', error));
-// }
 
 
 
