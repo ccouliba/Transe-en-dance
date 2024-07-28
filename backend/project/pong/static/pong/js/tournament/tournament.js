@@ -51,9 +51,22 @@ function Tournament() {
 			${addParticipantForm()}
 			<h2 class="mt-4">Add alias</h2>
 			${addAliasForm()}
+			${startTournamentButton()}
 		</div>
 	`;
 }
+
+function startTournamentButton() {
+	if (!tournamentState.tournament || tournamentState.tournament.is_started) {
+		return '';
+	}
+	return `
+		<div class="mt-4">
+			<button id="startTournamentBtn" class="btn btn-primary">Start Tournament</button>
+		</div>
+	`;
+}
+
 function createTournamentForm() {
 	return `
 		<form id="createTournamentForm">
@@ -70,7 +83,7 @@ function loadTournamentState() {
 	bindEvent(tournamentState, "#createTournamentForm", "submit", createTournament);
 	bindEvent(tournamentState, "#addParticipantForm", "submit", addParticipant);
 	bindEvent(tournamentState, "#addAliasForm", "submit", addAlias);
-
+	bindEvent(tournamentState, "#startTournamentBtn", "click", startTournament);
 	fetch('/pong/api/tournament/latest_tournament/')
 		.then(response => response.json())
 		.then(data => {
@@ -339,3 +352,47 @@ function updateParticipantsList(newParticipant) {
 		tournamentState.tournament.participants.push(newParticipant);
 	}
 }
+
+
+function startTournament() {
+	if (!tournamentState.tournament) {
+		alert('No tournament available to start.');
+		return;
+	}
+
+	fetch(`/pong/api/tournament/${tournamentState.tournament.id}/start/`, {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		credentials: 'include'
+	})
+	.then(response => {
+		if (!response.ok) {
+	//		throw new Error(`HTTP error! status: ${response.status}`);
+		}
+		return response.json();
+	})
+	.then(data => {
+		if (data.status === 'success') {
+			alert('Tournament started successfully!');
+			changePage('#tournamentmatchmaking');
+		} else {
+			alert('Error starting tournament: ' + data.message);
+		}
+	})
+	.catch(error => {
+		console.error('Error:', error);
+		alert('An error occurred while starting the tournament: ' + error.message);
+	});
+}
+
+function TournamentMatchmaking() {
+	return `
+		<div class="container mt-5">
+			<h1>Tournament Matchmaking</h1>
+			<p>Matchmaking in progress...</p>
+		</div>
+	`;
+}
+

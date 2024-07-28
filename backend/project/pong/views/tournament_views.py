@@ -175,3 +175,32 @@ def add_alias(request, tournament_id):
 			})
 	except Exception as e:
 		return JsonResponse({'status': 'error', 'message': str(e)}, status=400)
+
+
+from django.utils import timezone
+@login_required
+@csrf_exempt
+@require_http_methods(["POST"])
+def start_tournament(request, tournament_id):
+	try:
+		tournament = get_object_or_404(Tournament, id=tournament_id)
+		
+		if tournament.is_started:
+			return JsonResponse({'status': 'error', 'message': 'Tournament has already started.'}, status=400)
+		
+		if tournament.participants.count() < 2:
+			return JsonResponse({'status': 'error', 'message': 'At least two participants are required to start the tournament.'}, status=400)
+		
+		tournament.is_started = True
+		tournament.start_date = timezone.now()
+		tournament.save()
+		
+
+		
+		return JsonResponse({
+			'status': 'success',
+			'message': 'Tournament started successfully.',
+			'tournament_id': tournament.id
+		})
+	except Exception as e:
+		return JsonResponse({'status': 'error', 'message': str(e)}, status=400)
