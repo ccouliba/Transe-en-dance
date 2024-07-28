@@ -38,6 +38,18 @@ def create_tournament(request):
 def tournament_view(request):
 	latest_tournament = Tournament.objects.filter(participants=request.user).order_by('-created_at').first()
 	if latest_tournament:
+		# Traitement des aliases pour s'assurer qu'ils sont dans le bon format
+		formatted_aliases = []
+		for alias in latest_tournament.aliases:
+			if isinstance(alias, dict) and 'username' in alias and 'alias' in alias:
+				formatted_aliases.append(alias)
+			elif isinstance(alias, str):
+				# Si c'est une ancienne entrée (juste une chaîne), on ajoute un username par défaut
+				formatted_aliases.append({'username': 'Unknown', 'alias': alias})
+			else:
+				# Si le format n'est pas reconnu, on l'ignore
+				continue
+
 		tournament_data = {
 			'id': latest_tournament.id,
 			'name': latest_tournament.name,
@@ -46,9 +58,9 @@ def tournament_view(request):
 			'end_date': latest_tournament.end_date.isoformat() if latest_tournament.end_date else None,
 			'created_at': latest_tournament.created_at.isoformat(),
 			'participants': [participant.username for participant in list(latest_tournament.participants.all())],
-			'aliases': latest_tournament.aliases,
+			'aliases': formatted_aliases,
 		}
-		
+	   
 		return JsonResponse({
 			'status': 'success',
 			'tournament': tournament_data
@@ -58,7 +70,7 @@ def tournament_view(request):
 			'status': 'success',
 			'tournament': None
 		})
- 
+
 from django.shortcuts import get_object_or_404
 @login_required
 def tournament_detail(request, tournament_id):
@@ -135,24 +147,27 @@ def add_alias(request, tournament_id):
 		tournament = get_object_or_404(Tournament, id=tournament_id)
 		
 		data = json.loads(request.body)
+		new_username = data.get('username')
 		new_alias = data.get('alias')
 		
-		if not new_alias:
-			return JsonResponse({'status': 'error', 'message': 'Alias is required.'}, status=400)
+		if not new_username or not new_alias:
+			return JsonResponse({'status': 'error', 'message': 'Both username and alias are required.'}, status=400)
 
-		if new_alias not in tournament.aliases:
-			tournament.aliases.append(new_alias)
+		new_alias_obj = {'username': new_username, 'alias': new_alias}
+		
+		if new_alias_obj not in tournament.aliases:
+			tournament.aliases.append(new_alias_obj)
 			tournament.save()
 			
 			return JsonResponse({
 				'status': 'success',
-				'message': f'Alias "{new_alias}" added successfully.',
+				'message': f'Alias "{new_alias}" added successfully for user "{new_username}".',
 				'aliases': tournament.aliases
 			})
 		else:
 			return JsonResponse({
 				'status': 'warning',
-				'message': f'Alias "{new_alias}" already exists in this tournament.',
+				'message': f'Alias "{new_alias}" for user "{new_username}" already exists in this tournament.',
 				'aliases': tournament.aliases
 			})
 	except Exception as e:

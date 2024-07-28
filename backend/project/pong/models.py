@@ -95,6 +95,7 @@ class Tournament(models.Model):
 	created_at = models.DateTimeField(auto_now_add=True, null=True)
 	participants = models.ManyToManyField(User, related_name='tournaments', blank=True)
 	aliases = models.JSONField(default=list, blank=True) 
+ 
 	def __init__(self, *args, **kwargs):
 		super().__init__(*args, **kwargs)
 		if not self.created_at:
