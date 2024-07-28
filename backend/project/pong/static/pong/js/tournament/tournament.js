@@ -44,22 +44,23 @@ function Tournament() {
 	return `
 		<div class="container mt-5">
 			<h1>Tournaments</h1>
-			${TournamentDetail()}
-			<h2 class="mt-4">Create a new tournament</h2>
-			${createTournamentForm()}
-			<h2 class="mt-4">Add participant</h2>
-			${addParticipantForm()}
-			<h2 class="mt-4">Add alias</h2>
-			${addAliasForm()}
-			${startTournamentButton()}
+
+					${TournamentDetail()}
+					<h2 class="mt-4">Create a new tournament</h2>
+					${createTournamentForm()}
+					<h2 class="mt-4">Add participant</h2>
+					${addParticipantForm()}
+					<h2 class="mt-4">Add alias</h2>
+					${addAliasForm()}
+					${startTournamentButton()}
 		</div>
 	`;
 }
 
 function startTournamentButton() {
-	if (!tournamentState.tournament || tournamentState.tournament.is_started) {
-		return '';
-	}
+	// if (!tournamentState.tournament || tournamentState.tournament.is_started) {
+	// 	return '';
+	// }
 	return `
 		<div class="mt-4">
 			<button id="startTournamentBtn" class="btn btn-primary">Start Tournament</button>
@@ -353,7 +354,6 @@ function updateParticipantsList(newParticipant) {
 	}
 }
 
-
 function startTournament() {
 	if (!tournamentState.tournament) {
 		alert('No tournament available to start.');
@@ -369,14 +369,15 @@ function startTournament() {
 	})
 	.then(response => {
 		if (!response.ok) {
-	//		throw new Error(`HTTP error! status: ${response.status}`);
+			// throw new Error(`HTTP error! status: ${response.status}`);
 		}
 		return response.json();
 	})
 	.then(data => {
 		if (data.status === 'success') {
 			alert('Tournament started successfully!');
-			changePage('#tournamentmatchmaking');
+			tournamentState.tournament.is_started = true;
+			mountComponent(TournamentMatchmaking);
 		} else {
 			alert('Error starting tournament: ' + data.message);
 		}
@@ -388,11 +389,123 @@ function startTournament() {
 }
 
 function TournamentMatchmaking() {
+	let matches = [];
+	let standings = [];
+	let winner = null;
+
+	function fetchMatchesAndStandings() {
+		fetch(`/pong/api/tournament/${tournamentState.tournament.id}/matchmaking/`)
+			.then(response => response.json())
+			.then(data => {
+				if (data.status === 'success') {
+					matches = data.matches;
+					standings = data.standings;
+					winner = data.winner;
+					renderTournamentMatchmaking();
+				} else {
+					alert('Error fetching tournament data: ' + data.message);
+				}
+			})
+			.catch(error => {
+				console.error('Error:', error);
+				alert('An error occurred while fetching tournament data.');
+			});
+	}
+
+	function renderTournamentMatchmaking() {
+		const container = document.querySelector('.container');
+		container.innerHTML = `
+			<h1>Tournament Matchmaking</h1>
+			<h2>Matches</h2>
+			<ul id="matchesList">
+				${matches.map(match => `
+					<li>
+						${match.player1} vs ${match.player2}: 
+						${match.player1_score} - ${match.player2_score}
+						${match.status === 'pending' ? 
+							`<button onclick="startMatch(${match.id})">Start Match</button>` : 
+							''
+						}
+					</li>
+				`).join('')}
+			</ul>
+			<h2>Standings</h2>
+			<ul id="standingsList">
+				${standings.map(player => `
+					<li>${player.username}: ${player.wins} wins, Total score: ${player.total_score}</li>
+				`).join('')}
+			</ul>
+			${winner ? `<h2>Winner: ${winner}</h2>` : ''}
+		`;
+	}
+
+	fetchMatchesAndStandings();
+
 	return `
 		<div class="container mt-5">
-			<h1>Tournament Matchmaking</h1>
-			<p>Matchmaking in progress...</p>
+			<h1>Tournament matchmaking</h1>
+			<p>Loading tournament data...</p>
 		</div>
 	`;
 }
 
+function TournamentMatchmaking() {
+	let matches = [];
+	let standings = [];
+	let winner = null;
+
+	function fetchMatchesAndStandings() {
+		fetch(`/pong/api/tournament/${tournamentState.tournament.id}/matchmaking/`)
+			.then(response => response.json())
+			.then(data => {
+				if (data.status === 'success') {
+					matches = data.matches;
+					standings = data.standings;
+					winner = data.winner;
+					renderTournamentMatchmaking();
+				} else {
+					alert('Error fetching tournament data: ' + data.message);
+				}
+			})
+			.catch(error => {
+				console.error('Error:', error);
+				alert('An error occurred while fetching tournament data.');
+			});
+	}
+
+	function renderTournamentMatchmaking() {
+		const container = document.querySelector('.container');
+		container.innerHTML = `
+			<h1>Tournament Matchmaking</h1>
+			<h2>Matches</h2>
+			<ul id="matchesList">
+				${matches.map(match => `
+					<li>
+						${match.player1} vs ${match.player2}: 
+						${match.player1_score} - ${match.player2_score}
+						${match.status === 'pending' ? 
+							`<button onclick="startMatch(${match.id})">Start Match</button>` : 
+							''
+						}
+					</li>
+				`).join('')}
+			</ul>
+			<h2>Standings</h2>
+			<ul id="standingsList">
+				${standings.map(player => `
+					<li>${player.username}: ${player.wins} wins, Total score: ${player.total_score}</li>
+				`).join('')}
+			</ul>
+			${winner ? `<h2>Winner: ${winner}</h2>` : ''}
+		`;
+	}
+
+	fetchMatchesAndStandings();
+
+	return `
+		<div class="container mt-5">
+			<h1>Tournament Matchmaking</h1>
+			<p>Loading tournament data...</p>
+		</div>
+	`;
+}

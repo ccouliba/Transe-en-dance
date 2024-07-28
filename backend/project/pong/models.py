@@ -78,6 +78,7 @@ class Game(models.Model):
 	winner = models.ForeignKey(User, related_name='won_games', on_delete=models.SET_NULL, null=True, blank=True)
 	created_at = models.DateTimeField(auto_now_add=True,  null=True, blank=True)
 	finished_at = models.DateTimeField(null=True, blank=True)
+	status = models.CharField(max_length=20, choices=[('pending', 'Pending'), ('started', 'Started'), ('finished', 'Finished')], default='pending')
 	def finish(self, winner):
 		self.winner = winner
 		self.status = 'finished'
