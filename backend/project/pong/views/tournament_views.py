@@ -294,3 +294,24 @@ def tournament_matchmaking(request, tournament_id):
 		'winner': winner,
 		'aliases': aliases
 	})
+ 
+ 
+@login_required
+@require_http_methods(["POST"])
+@csrf_exempt
+
+def finish_tournament(request, tournament_id):
+	try:
+		tournament = Tournament.objects.get(id=tournament_id)
+		if not tournament.is_started:
+			return JsonResponse({'status': 'error', 'message': 'Tournament is not started.'}, status=400)
+		
+		tournament.is_started = False
+		tournament.end_date = timezone.now()
+		tournament.save()
+		
+		return JsonResponse({'status': 'success', 'message': 'Tournament finished successfully.'})
+	except Tournament.DoesNotExist:
+		return JsonResponse({'status': 'error', 'message': 'Tournament not found.'}, status=404)
+	except Exception as e:
+		return JsonResponse({'status': 'error', 'message': str(e)}, status=500)
