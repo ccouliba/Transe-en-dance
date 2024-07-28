@@ -17,7 +17,7 @@ def create_tournament(request):
 		if not name:
 			return JsonResponse({'status': 'error', 'message': 'Tournament name required.'}, status=400)
 
-		tournament = Tournament.objects.create(name=name)
+		tournament = Tournament.objects.create(name=name, aliases=[]) #alias est une liste vide
   
 		tournament.participants.add(request.user)
 
@@ -26,6 +26,7 @@ def create_tournament(request):
 			'name': tournament.name,
 			'is_started': tournament.is_started,
 			'start_date': tournament.start_date.isoformat() if tournament.start_date else None,
+			'aliases': tournament.aliases,
 		}
 
 		return JsonResponse({'status': 'success', 'tournament': tournament_data})
@@ -45,6 +46,7 @@ def tournament_view(request):
 			'end_date': latest_tournament.end_date.isoformat() if latest_tournament.end_date else None,
 			'created_at': latest_tournament.created_at.isoformat(),
 			'participants': [participant.username for participant in list(latest_tournament.participants.all())],
+			'aliases': latest_tournament.aliases,
 		}
 		
 		return JsonResponse({
@@ -72,7 +74,8 @@ def tournament_detail(request, tournament_id):
 		'name': tournament.name,
 		'is_started': tournament.is_started,
 		'start_date': tournament.start_date.isoformat() if tournament.start_date else None,
-		'participants': list(participants)
+		'participants': list(participants),
+		'aliases': tournament.aliases
 	}
 
 	return JsonResponse({
@@ -121,5 +124,36 @@ def add_participants(request, tournament_id):
 				response['message'] = 'All specified users are already in the tournament.'
 		
 		return JsonResponse(response)
+	except Exception as e:
+		return JsonResponse({'status': 'error', 'message': str(e)}, status=400)
+
+@login_required
+@csrf_exempt
+@require_http_methods(["POST"])
+def add_alias(request, tournament_id):
+	try:
+		tournament = get_object_or_404(Tournament, id=tournament_id)
+		
+		data = json.loads(request.body)
+		new_alias = data.get('alias')
+		
+		if not new_alias:
+			return JsonResponse({'status': 'error', 'message': 'Alias is required.'}, status=400)
+
+		if new_alias not in tournament.aliases:
+			tournament.aliases.append(new_alias)
+			tournament.save()
+			
+			return JsonResponse({
+				'status': 'success',
+				'message': f'Alias "{new_alias}" added successfully.',
+				'aliases': tournament.aliases
+			})
+		else:
+			return JsonResponse({
+				'status': 'warning',
+				'message': f'Alias "{new_alias}" already exists in this tournament.',
+				'aliases': tournament.aliases
+			})
 	except Exception as e:
 		return JsonResponse({'status': 'error', 'message': str(e)}, status=400)

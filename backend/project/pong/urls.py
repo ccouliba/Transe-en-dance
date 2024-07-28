@@ -4,7 +4,7 @@ from .views.game_views import create_game, update_game, finish_game, match_histo
 from .views.friend_views import send_friend_request, accept_friend_request, remove_friend, friends_data, friends_online_status
 from .views.profile_views import profile_view, user_updated_profile, user_account_deleted,edit_password_view, get_user_info, profile_update_view, upload_avatar
 from .views.user_views import user_list_json, user_list, index, home_view
-from .views.tournament_views import create_tournament, tournament_view, tournament_detail, add_participants
+from .views.tournament_views import create_tournament, tournament_view, tournament_detail, add_participants, add_alias
 
 from django.conf import settings
 from django.conf.urls.static import static
@@ -54,5 +54,7 @@ urlpatterns = [
 	path('api/tournament/latest_tournament/', tournament_view, name='create_tournament'),
 	path('api/tournament/<int:tournament_id>/', tournament_detail, name='tournament_detail'),
 	path('api/tournament/<int:tournament_id>/add_participants/', add_participants, name='add_participants'),
+	path('api/tournament/<int:tournament_id>/add_alias/', add_alias, name='add_alias'),
+ 
 ]
 
