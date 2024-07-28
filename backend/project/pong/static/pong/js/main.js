@@ -80,7 +80,7 @@ let routes = {
 	"#login": () => mountComponent(Login),
 	"#register": () => mountComponent(Register),
 	"#match_history": () => mountComponent(MatchHistory),
-	'#tournamentmatchmaking': () => mountComponent(TournamentMatchmaking),
+	'#matchmaking': () => mountComponent(TournamentMatchmaking),
 
 };
 
@@ -175,6 +175,29 @@ window.changePage = function (url) {
 			
 		});
 };
+
+
+function httpGetJson(url){
+	return fetch(url, {
+		method: 'GET',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		credentials: 'include'
+	})
+}
+
+function httpPostJson(url, payload){
+	return fetch(url, {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify(payload),
+		credentials: 'include'
+	})
+}
+
 
 // Gérer l'événement `popstate`
 window.onpopstate = function (event) {

@@ -213,6 +213,64 @@ from itertools import combinations
 from django.db.models import Q, F
 from django.db.models import IntegerField
 
+
+def get_matches(aliases, composed_games):
+    
+    matches = [
+		{
+			'id': cg.game.id,
+			'player1': {
+				'username': cg.game.player1.username,
+				'alias': aliases.get(cg.game.player1.username)
+			},
+			'player2': {
+				'username': cg.game.player2.username,
+				'alias': aliases.get(cg.game.player2.username)
+			},
+			'player1_score': cg.game.player1_score,
+			'player2_score': cg.game.player2_score,
+			'status': cg.game.status
+		} for cg in composed_games
+	]
+    
+    return matches
+
+def get_standings(matches, aliases):
+    standings = {}
+    
+    for match in matches:
+        player1 = match['player1']['username']
+        player2 = match['player2']['username']
+        
+        # Initialiser les joueurs s'ils n'existent pas encore dans les standings
+        if player1 not in standings:
+            standings[player1] = {'username': player1, 'alias': aliases.get(player1), 'wins': 0, 'total_score': 0}
+        if player2 not in standings:
+            standings[player2] = {'username': player2, 'alias': aliases.get(player2), 'wins': 0, 'total_score': 0}
+        
+        # Mettre à jour les scores totaux
+        standings[player1]['total_score'] += match['player1_score']
+        standings[player2]['total_score'] += match['player2_score']
+        
+        # Mettre à jour les victoires si le match est terminé
+        if match['status'] == 'finished':
+            if match['player1_score'] > match['player2_score']:
+                standings[player1]['wins'] += 1
+            elif match['player2_score'] > match['player1_score']:
+                standings[player2]['wins'] += 1
+            # En cas d'égalité, on ne compte pas de victoire
+    
+    # Convertir le dictionnaire en liste et trier par victoires puis par score total
+    sorted_standings = sorted(
+        standings.values(),
+        key=lambda x: (x['wins'], x['total_score']),
+        reverse=True
+    )
+    
+    return sorted_standings
+
+
+
 @login_required
 def tournament_matchmaking(request, tournament_id):
 	tournament = get_object_or_404(Tournament, id=tournament_id)
@@ -234,54 +292,9 @@ def tournament_matchmaking(request, tournament_id):
    
 	# Fetch all matches
 	composed_games = Composed.objects.filter(tournament=tournament).select_related('game')
-	matches = [
-		{
-			'id': cg.game.id,
-			'player1': {
-				'username': cg.game.player1.username,
-				'alias': aliases.get(cg.game.player1.username)
-			},
-			'player2': {
-				'username': cg.game.player2.username,
-				'alias': aliases.get(cg.game.player2.username)
-			},
-			'player1_score': cg.game.player1_score,
-			'player2_score': cg.game.player2_score,
-			'status': cg.game.status
-		} for cg in composed_games
-	]
+	matches = get_matches(aliases, composed_games)
    
-	# Calculate standings
-	standings = []
-	for player in participants:
-		wins = Game.objects.filter(
-			Q(player1=player, player1_score__gt=F('player2_score')) |
-			Q(player2=player, player2_score__gt=F('player1_score')),
-			status='finished'
-		).count()
-	   
-		total_score = Game.objects.filter(
-			Q(player1=player) | Q(player2=player),
-			status='finished'
-		).aggregate(
-			total=Sum(Case(
-				When(player1=player, then='player1_score'),
-				When(player2=player, then='player2_score'),
-				default=0,
-				output_field=IntegerField()
-			))
-		)['total'] or 0
-	   
-		standings.append({
-			'username': player.username,
-			'alias': aliases.get(player.username),
-			'wins': wins,
-			'total_score': total_score
-		})
-   
-	# Sort standings by wins, then by total score
-	standings.sort(key=lambda x: (-x['wins'], -x['total_score']))
-   
+	standings = get_standings(matches, aliases)
 	# Determine winner if all games are finished
 	winner = None
 	if all(match['status'] == 'finished' for match in matches):
@@ -306,7 +319,6 @@ def finish_tournament(request, tournament_id):
 		if not tournament.is_started:
 			return JsonResponse({'status': 'error', 'message': 'Tournament is not started.'}, status=400)
 		
-		tournament.is_started = False
 		tournament.end_date = timezone.now()
 		tournament.save()
 		
