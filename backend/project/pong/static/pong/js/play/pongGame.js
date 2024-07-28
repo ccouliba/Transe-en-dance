@@ -188,33 +188,33 @@ function updateProfileStats() {
 	.catch(error => console.error('Error updating profile stats:', error));
 }
 
-// fonction pour terminer le jeu
-function endGame() {
-	playState.gameOver = true; // indique que le jeu est termine
-	// determine le gagnant
-	const winner = playState.player1Score > playState.player2Score ? playState.player1Email : playState.player2Email;
-	finishGame(playState.gameId, winner); //pour les stats
-	// envoie une requete post a l'api pour mettre a jour la partie
-	fetch(`/pong/api/games/${playState.gameId}/update`, {
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/json',
-		},
-		body: JSON.stringify({
-			player1Score: playState.player1Score,
-			player2Score: playState.player2Score,
-			winner: winner
-		}),
-		credentials: 'include'
-	})
-	.then(response => response.json())
-	.then(data => {
-		playState.isLoaded = false; // forcer le rechargement pour la prochaine partie
-		changePage("#play");
-		updateProfileStats();
-	})
-	.catch(error => console.error('error:', error));
-}
+// // fonction pour terminer le jeu
+// function endGame() {
+// 	playState.gameOver = true; // indique que le jeu est termine
+// 	// determine le gagnant
+// 	const winner = playState.player1Score > playState.player2Score ? playState.player1Email : playState.player2Email;
+// 	finishGame(playState.gameId, winner); //pour les stats
+// 	// envoie une requete post a l'api pour mettre a jour la partie
+// 	fetch(`/pong/api/games/${playState.gameId}/update`, {
+// 		method: 'POST',
+// 		headers: {
+// 			'Content-Type': 'application/json',
+// 		},
+// 		body: JSON.stringify({
+// 			player1Score: playState.player1Score,
+// 			player2Score: playState.player2Score,
+// 			winner: winner
+// 		}),
+// 		credentials: 'include'
+// 	})
+// 	.then(response => response.json())
+// 	.then(data => {
+// 		playState.isLoaded = false; // forcer le rechargement pour la prochaine partie
+// 		changePage("#play");
+// 		updateProfileStats();
+// 	})
+// 	.catch(error => console.error('error:', error));
+// }
 
 
 
@@ -275,4 +275,69 @@ function createGameInDatabase() {
 		}
 	})
 	.catch(error => console.error('error:', error));
+}
+
+
+
+function endGame() {
+    playState.gameOver = true;
+    const winner = playState.player1Score > playState.player2Score ? playState.player1Email : playState.player2Email;
+    
+    if (playState.isTournamentMatch) {
+        updateTournamentMatchScore(playState.gameId, playState.player1Score, playState.player2Score);
+    } else {
+        finishGame(playState.gameId, winner);
+    }
+
+    fetch(`/pong/api/games/${playState.gameId}/update`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            player1Score: playState.player1Score,
+            player2Score: playState.player2Score,
+            winner: winner
+        }),
+        credentials: 'include'
+    })
+    .then(response => response.json())
+    .then(data => {
+        playState.isLoaded = false;
+        changePage("#play");
+        updateProfileStats();
+    })
+    .catch(error => console.error('error:', error));
+}
+
+function backToTournament() {
+    playState.isTournamentMatch = false;
+    playState.tournamentId = null;
+    changePage("#tournamentmatchmaking");
+}
+
+function updateTournamentMatchScore(matchId, player1Score, player2Score) {
+    fetch(`/pong/api/tournament/update_match_score/`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCookie('csrftoken'),
+        },
+        body: JSON.stringify({
+            match_id: matchId,
+            player1_score: player1Score,
+            player2_score: player2Score
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === 'success') {
+            console.log('Tournament match score updated successfully');
+        } else {
+            console.error('Error updating tournament match score:', data.message);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
 }

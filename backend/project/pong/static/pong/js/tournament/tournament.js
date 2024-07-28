@@ -381,11 +381,89 @@ function startTournament() {
 	});
 }
 
+// function TournamentMatchmaking() {
+// 	let matches = [];
+// 	let standings = [];
+// 	let winner = null;
+// 	let aliases = {};
+
+//     function fetchMatchesAndStandings() {
+//         fetch(`/pong/api/tournament/${tournamentState.tournament.id}/matchmaking/`)
+//             .then(response => {
+//                 if (!response.ok) {
+//                     throw new Error(`HTTP error! status: ${response.status}`);
+//                 }
+//                 return response.json();
+//             })
+//             .then(data => {
+//                 if (data.status === 'success') {
+//                     matches = data.matches;
+//                     standings = data.standings;
+//                     winner = data.winner;
+//                     aliases = data.aliases || {};
+//                     renderTournamentMatchmaking();
+//                 } else {
+//                     throw new Error('Error fetching tournament data: ' + data.message);
+//                 }
+//             })
+//             .catch(error => {
+//                 console.error('Error:', error);
+//                 alert('An error occurred while fetching tournament data: ' + error.message);
+//                 document.querySelector('.container').innerHTML = `
+//                     <h1>Tournament matchmaking</h1>
+//                     <p>Error loading tournament data: ${error.message}</p>
+//                 `;
+//             });
+//     }
+
+//     function getDisplayName(username, alias) {
+//         return alias ? `${username} (${alias})` : username;
+//     }
+// 	function renderTournamentMatchmaking() {
+// 		const container = document.querySelector('.container');
+// 		container.innerHTML = `
+// 			<h1>Tournament matchmaking</h1>
+// 			<h2>Matches</h2>
+// 			<ul id="matchesList">
+// 				${matches.map(match => `
+// 					<li>
+// 						${getDisplayName(match.player1.username, match.player1.alias)} vs ${getDisplayName(match.player2.username, match.player2.alias)}: 
+// 						${match.player1_score} - ${match.player2_score}
+// 						${match.status === 'pending' ? 
+// 							`<button onclick="startMatch(${match.id})">Start Match</button>` : 
+// 							''
+// 						}
+// 					</li>
+// 				`).join('')}
+// 			</ul>
+// 			<h2>Standings</h2>
+// 			<ul id="standingsList">
+// 				${standings.map(player => `
+// 					<li>${getDisplayName(player.username, player.alias)}: ${player.wins} wins, Total score: ${player.total_score}</li>
+// 				`).join('')}
+// 			</ul>
+// 			${winner ? `<h2>Winner: ${getDisplayName(winner, aliases[winner])}</h2>` : ''}
+// 			<button onclick="finishTournament()" class="btn btn-danger mt-4">Finish tournament</button>
+// 		`;
+// 	}
+
+// 	fetchMatchesAndStandings();
+
+// 	return `
+// 		<div class="container mt-5">
+// 			<h1>Tournament matchmaking</h1>
+// 			<p>Loading tournament data...</p>
+// 		</div>
+// 	`;
+// }
+
+
 function TournamentMatchmaking() {
-	let matches = [];
-	let standings = [];
-	let winner = null;
-	let aliases = {};
+    let matches = [];
+    let standings = [];
+    let winner = null;
+    let aliases = {};
+    let tournamentId = null;
 
     function fetchMatchesAndStandings() {
         fetch(`/pong/api/tournament/${tournamentState.tournament.id}/matchmaking/`)
@@ -401,6 +479,7 @@ function TournamentMatchmaking() {
                     standings = data.standings;
                     winner = data.winner;
                     aliases = data.aliases || {};
+                    tournamentId = tournamentState.tournament.id;
                     renderTournamentMatchmaking();
                 } else {
                     throw new Error('Error fetching tournament data: ' + data.message);
@@ -419,42 +498,43 @@ function TournamentMatchmaking() {
     function getDisplayName(username, alias) {
         return alias ? `${username} (${alias})` : username;
     }
-	function renderTournamentMatchmaking() {
-		const container = document.querySelector('.container');
-		container.innerHTML = `
-			<h1>Tournament matchmaking</h1>
-			<h2>Matches</h2>
-			<ul id="matchesList">
-				${matches.map(match => `
-					<li>
-						${getDisplayName(match.player1.username, match.player1.alias)} vs ${getDisplayName(match.player2.username, match.player2.alias)}: 
-						${match.player1_score} - ${match.player2_score}
-						${match.status === 'pending' ? 
-							`<button onclick="startMatch(${match.id})">Start Match</button>` : 
-							''
-						}
-					</li>
-				`).join('')}
-			</ul>
-			<h2>Standings</h2>
-			<ul id="standingsList">
-				${standings.map(player => `
-					<li>${getDisplayName(player.username, player.alias)}: ${player.wins} wins, Total score: ${player.total_score}</li>
-				`).join('')}
-			</ul>
-			${winner ? `<h2>Winner: ${getDisplayName(winner, aliases[winner])}</h2>` : ''}
-			<button onclick="finishTournament()" class="btn btn-danger mt-4">Finish tournament</button>
-		`;
-	}
 
-	fetchMatchesAndStandings();
+    function renderTournamentMatchmaking() {
+        const container = document.querySelector('.container');
+        container.innerHTML = `
+            <h1>Tournament matchmaking</h1>
+            <h2>Matches</h2>
+            <ul id="matchesList">
+                ${matches.map(match => `
+                    <li>
+                        ${getDisplayName(match.player1.username, match.player1.alias)} vs ${getDisplayName(match.player2.username, match.player2.alias)}: 
+                        ${match.player1_score} - ${match.player2_score}
+                        ${match.status === 'pending' ? 
+                            `<button onclick="startMatch(${match.id}, '${match.player1.username}', '${match.player2.username}')">Start match</button>` : 
+                            ''
+                        }
+                    </li>
+                `).join('')}
+            </ul>
+            <h2>Standings</h2>
+            <ul id="standingsList">
+                ${standings.map(player => `
+                    <li>${getDisplayName(player.username, player.alias)}: ${player.wins} wins, Total score: ${player.total_score}</li>
+                `).join('')}
+            </ul>
+            ${winner ? `<h2>Winner: ${getDisplayName(winner, aliases[winner])}</h2>` : ''}
+            <button onclick="finishTournament()" class="btn btn-danger mt-4">Finish tournament</button>
+        `;
+    }
 
-	return `
-		<div class="container mt-5">
-			<h1>Tournament matchmaking</h1>
-			<p>Loading tournament data...</p>
-		</div>
-	`;
+    fetchMatchesAndStandings();
+
+    return `
+        <div class="container mt-5">
+            <h1>Tournament matchmaking</h1>
+            <p>Loading tournament data...</p>
+        </div>
+    `;
 }
 
 function finishTournament() {
@@ -490,4 +570,19 @@ function finishTournament() {
 		console.error('Error:', error);
 		alert('An error occurred while finishing the tournament: ' + error.message);
 	});
+}
+
+function startMatch(matchId, player1Username, player2Username) {
+    // Set up the play state for the tournament match
+    playState.gameStarted = true;
+    playState.player1Email = player1Username;
+    playState.player2Email = player2Username;
+    playState.player1Score = 0;
+    playState.player2Score = 0;
+    playState.gameOver = false;
+    playState.gameId = matchId;
+    playState.isTournamentMatch = true;
+
+    // Navigate to the play page
+    changePage("#play");
 }
