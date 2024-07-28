@@ -84,32 +84,49 @@ function createTournamentForm() {
 }
 
 function loadTournamentState() {
-	bindEvent(tournamentState, "#createTournamentForm", "submit", createTournament);
-	bindEvent(tournamentState, "#addParticipantForm", "submit", addParticipant);
-	bindEvent(tournamentState, "#addAliasForm", "submit", addAlias);
-	bindEvent(tournamentState, "#startTournamentBtn", "click", startTournament);
-	fetch('/pong/api/tournament/latest_tournament/')
-		.then(response => response.json())
-		.then(data => {
-			tournamentState.tournament = data.tournament;
-			if (tournamentState.tournament) {
-				tournamentState.tournament.is_started = tournamentState.tournament.is_started || false;
-				// ... (le reste du code reste inchangé)
-			}
-			tournamentState.isLoaded = true;
-			mountComponent(Tournament);
-			updateAliasesList();
-		})
-		.catch(error => {
-			console.error('Error loading tournaments:', error);
-			tournamentState.isLoaded = true;
-			mountComponent(Tournament);
-		});
+    // Lier les événements aux formulaires et boutons
+    bindEvent(tournamentState, "#createTournamentForm", "submit", createTournament);
+    bindEvent(tournamentState, "#addParticipantForm", "submit", addParticipant);
+    bindEvent(tournamentState, "#addAliasForm", "submit", addAlias);
+    bindEvent(tournamentState, "#startTournamentBtn", "click", startTournament);
+
+    // Récupérer les données du dernier tournoi
+    fetch('/pong/api/tournament/latest_tournament/')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            tournamentState.tournament = data.tournament;
+            if (tournamentState.tournament) {
+                // S'assurer que is_started est bien un booléen
+                tournamentState.tournament.is_started = Boolean(tournamentState.tournament.is_started);
+                
+                // Initialiser les listes si elles n'existent pas
+                tournamentState.tournament.participants = tournamentState.tournament.participants || [];
+                tournamentState.tournament.aliases = tournamentState.tournament.aliases || [];
+            }
+            tournamentState.isLoaded = true;
+            
+            // Monter le composant approprié en fonction de l'état du tournoi
+            if (tournamentState.tournament && tournamentState.tournament.is_started) {
+                mountComponent(TournamentMatchmaking);
+            } else {
+                mountComponent(Tournament);
+            }
+
+            // Mettre à jour la liste des alias
+            updateAliasesList();
+        })
+        .catch(error => {
+            console.error('Error loading tournaments:', error);
+            tournamentState.isLoaded = true;
+            tournamentState.error = error.message;
+            mountComponent(Tournament); // Monter le composant Tournament même en cas d'erreur
+        });
 }
-
-
-
-
 
 function addParticipantForm() {
 	if (!tournamentState.tournament) return '';
