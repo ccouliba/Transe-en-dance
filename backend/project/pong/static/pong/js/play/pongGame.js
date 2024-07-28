@@ -252,45 +252,41 @@ function createGameInDatabase() {
 
 
 
-function endGame() {
-    playState.gameOver = true;
-    const winner = playState.player1Score > playState.player2Score ? playState.player1Email : playState.player2Email;
+// function endGame() {
+//     playState.gameOver = true;
+//     const winner = playState.player1Score > playState.player2Score ? playState.player1Email : playState.player2Email;
     
-    if (playState.isTournamentMatch) {
-        updateTournamentMatchScore(playState.gameId, playState.player1Score, playState.player2Score);
-    } else {
-        finishGame(playState.gameId, winner);
-    }
+//     if (playState.isTournamentMatch) {
+//         updateTournamentMatchScore(playState.gameId, playState.player1Score, playState.player2Score);
+//     } else {
+//         finishGame(playState.gameId, winner);
+//     }
 
-    fetch(`/pong/api/games/${playState.gameId}/update`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            player1Score: playState.player1Score,
-            player2Score: playState.player2Score,
-            winner: winner
-        }),
-        credentials: 'include'
-    })
-    .then(response => response.json())
-    .then(data => {
-        playState.isLoaded = false;
-        changePage("#play");
-        updateProfileStats();
-    })
-    .catch(error => console.error('error:', error));
-}
+//     fetch(`/pong/api/games/${playState.gameId}/update`, {
+//         method: 'POST',
+//         headers: {
+//             'Content-Type': 'application/json',
+//         },
+//         body: JSON.stringify({
+//             player1Score: playState.player1Score,
+//             player2Score: playState.player2Score,
+//             winner: winner
+//         }),
+//         credentials: 'include'
+//     })
+//     .then(response => response.json())
+//     .then(data => {
+//         playState.isLoaded = false;
+//         changePage("#play");
+//         updateProfileStats();
+//     })
+//     .catch(error => console.error('error:', error));
+// }
 
-function backToTournament() {
-    playState.isTournamentMatch = false;
-    playState.tournamentId = null;
-    changePage("#tournamentmatchmaking");
-}
-
-function updateTournamentMatchScore(matchId, player1Score, player2Score) {
-    fetch(`/pong/api/tournament/update_match_score/`, {
+function updateTournamentMatchScore(matchId, player1Score, player2Score, winner) {
+    console.log('Updating tournament match score:', { matchId, player1Score, player2Score, winner });
+    
+    return fetch(`/pong/api/tournament/update_match_score/`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -299,18 +295,86 @@ function updateTournamentMatchScore(matchId, player1Score, player2Score) {
         body: JSON.stringify({
             match_id: matchId,
             player1_score: player1Score,
-            player2_score: player2Score
+            player2_score: player2Score,
+            winner: winner
         })
     })
-    .then(response => response.json())
+    .then(response => {
+        console.log('Server response status:', response.status);
+        return response.json();
+    })
     .then(data => {
+        console.log('Server response data:', data);
         if (data.status === 'success') {
             console.log('Tournament match score updated successfully');
+            return data;
         } else {
             console.error('Error updating tournament match score:', data.message);
+            throw new Error(data.message);
         }
     })
     .catch(error => {
-        console.error('Error:', error);
+        console.error('Error in updateTournamentMatchScore:', error);
+        throw error;
     });
 }
+
+function endGame() {
+    playState.gameOver = true;
+    const winner = playState.player1Score > playState.player2Score ? playState.player1Email : playState.player2Email;
+   
+    console.log('Game ended. Current playState:', JSON.stringify(playState, null, 2));
+
+    if (playState.isTournamentMatch) {
+        updateTournamentMatchScore(playState.gameId, playState.player1Score, playState.player2Score, winner)
+            .then(() => {
+                console.log('Score update completed, reloading tournament data');
+                if (typeof TournamentMatchmaking.reloadData === 'function') {
+                    return TournamentMatchmaking.reloadData();
+                }
+            })
+            .then(() => {
+                console.log('Tournament data reloaded, changing page');
+                changePage("#tournamentmatchmaking");
+            })
+            .catch(error => {
+                console.error('Error updating tournament data:', error);
+                alert('An error occurred while updating the tournament. Please refresh the page.');
+            });
+    } else {
+        finishGame(playState.gameId, winner);
+        changePage("#play");
+    }
+    updateProfileStats();
+}
+
+
+
+function reloadTournamentData() {
+    return fetch(`/pong/api/tournament/${tournamentState.tournament.id}/matchmaking/`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.status === 'success') {
+                tournamentState.matches = data.matches;
+                tournamentState.standings = data.standings;
+                tournamentState.winner = data.winner;
+                tournamentState.aliases = data.aliases || {};
+            } else {
+                throw new Error('Error fetching tournament data: ' + data.message);
+            }
+        });
+}
+
+
+
+function backToTournament() {
+    playState.isTournamentMatch = false;
+    playState.tournamentId = null;
+    changePage("#tournamentmatchmaking");
+}
+

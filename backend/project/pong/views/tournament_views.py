@@ -315,3 +315,95 @@ def finish_tournament(request, tournament_id):
 		return JsonResponse({'status': 'error', 'message': 'Tournament not found.'}, status=404)
 	except Exception as e:
 		return JsonResponse({'status': 'error', 'message': str(e)}, status=500)
+
+import logging
+
+logger = logging.getLogger(__name__)
+
+@login_required
+@csrf_exempt
+@require_http_methods(["POST"])
+def update_match_score(request):
+	try:
+		data = json.loads(request.body)
+		logger.info(f"Received data: {data}")
+
+		match_id = data.get('match_id')
+		player1_score = data.get('player1_score')
+		player2_score = data.get('player2_score')
+		winner = data.get('winner')
+
+		logger.info(f"Updating match {match_id}: {player1_score} - {player2_score}, winner: {winner}")
+
+		game = get_object_or_404(Game, id=match_id)
+		logger.info(f"Found game: {game}")
+		
+		# Update game scores
+		game.player1_score = player1_score
+		game.player2_score = player2_score
+		game.status = 'finished'
+		
+		# Determine winner
+		if game.player1.username == winner:
+			game.winner = game.player1
+		elif game.player2.username == winner:
+			game.winner = game.player2
+
+		game.save()
+		logger.info(f"Game updated: {game}")
+
+		# Update tournament standings
+		composed = get_object_or_404(Composed, game=game)
+		tournament = composed.tournament
+		logger.info(f"Updating standings for tournament: {tournament}")
+
+		# Recalculate tournament standings
+		participants = tournament.participants.all()
+		standings = []
+		for player in participants:
+			wins = Game.objects.filter(
+				(Q(player1=player, winner=player) | Q(player2=player, winner=player)),
+				composed__tournament=tournament,
+				status='finished'
+			).count()
+			
+			total_score = Game.objects.filter(
+				Q(player1=player) | Q(player2=player),
+				composed__tournament=tournament,
+				status='finished'
+			).aggregate(
+				total=Sum(Case(
+					When(player1=player, then='player1_score'),
+					When(player2=player, then='player2_score'),
+					default=0,
+					output_field=IntegerField()
+				))
+			)['total'] or 0
+
+			standings.append({
+				'username': player.username,
+				'wins': wins,
+				'total_score': total_score
+			})
+
+		# Sort standings
+		standings.sort(key=lambda x: (-x['wins'], -x['total_score']))
+
+		logger.info(f"Final standings: {standings}")
+
+		# Check if the tournament is finished
+		all_games_finished = not Game.objects.filter(
+			composed__tournament=tournament,
+			status='pending'
+		).exists()
+
+		return JsonResponse({
+			'status': 'success',
+			'message': 'Match score updated successfully.',
+			'standings': standings,
+			'tournament_finished': all_games_finished
+		})
+
+	except Exception as e:
+		logger.error(f"Error in update_match_score: {str(e)}", exc_info=True)
+		return JsonResponse({'status': 'error', 'message': str(e)}, status=400)

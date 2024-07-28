@@ -84,48 +84,48 @@ function createTournamentForm() {
 }
 
 function loadTournamentState() {
-    // Lier les événements aux formulaires et boutons
-    bindEvent(tournamentState, "#createTournamentForm", "submit", createTournament);
-    bindEvent(tournamentState, "#addParticipantForm", "submit", addParticipant);
-    bindEvent(tournamentState, "#addAliasForm", "submit", addAlias);
-    bindEvent(tournamentState, "#startTournamentBtn", "click", startTournament);
+	// Lier les événements aux formulaires et boutons
+	bindEvent(tournamentState, "#createTournamentForm", "submit", createTournament);
+	bindEvent(tournamentState, "#addParticipantForm", "submit", addParticipant);
+	bindEvent(tournamentState, "#addAliasForm", "submit", addAlias);
+	bindEvent(tournamentState, "#startTournamentBtn", "click", startTournament);
 
-    // Récupérer les données du dernier tournoi
-    fetch('/pong/api/tournament/latest_tournament/')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            return response.json();
-        })
-        .then(data => {
-            tournamentState.tournament = data.tournament;
-            if (tournamentState.tournament) {
-                // S'assurer que is_started est bien un booléen
-                tournamentState.tournament.is_started = Boolean(tournamentState.tournament.is_started);
-                
-                // Initialiser les listes si elles n'existent pas
-                tournamentState.tournament.participants = tournamentState.tournament.participants || [];
-                tournamentState.tournament.aliases = tournamentState.tournament.aliases || [];
-            }
-            tournamentState.isLoaded = true;
-            
-            // Monter le composant approprié en fonction de l'état du tournoi
-            if (tournamentState.tournament && tournamentState.tournament.is_started) {
-                mountComponent(TournamentMatchmaking);
-            } else {
-                mountComponent(Tournament);
-            }
+	// Récupérer les données du dernier tournoi
+	fetch('/pong/api/tournament/latest_tournament/')
+		.then(response => {
+			if (!response.ok) {
+				throw new Error(`HTTP error! status: ${response.status}`);
+			}
+			return response.json();
+		})
+		.then(data => {
+			tournamentState.tournament = data.tournament;
+			if (tournamentState.tournament) {
+				// S'assurer que is_started est bien un booléen
+				tournamentState.tournament.is_started = Boolean(tournamentState.tournament.is_started);
+				
+				// Initialiser les listes si elles n'existent pas
+				tournamentState.tournament.participants = tournamentState.tournament.participants || [];
+				tournamentState.tournament.aliases = tournamentState.tournament.aliases || [];
+			}
+			tournamentState.isLoaded = true;
+			
+			// Monter le composant approprié en fonction de l'état du tournoi
+			if (tournamentState.tournament && tournamentState.tournament.is_started) {
+				mountComponent(TournamentMatchmaking);
+			} else {
+				mountComponent(Tournament);
+			}
 
-            // Mettre à jour la liste des alias
-            updateAliasesList();
-        })
-        .catch(error => {
-            console.error('Error loading tournaments:', error);
-            tournamentState.isLoaded = true;
-            tournamentState.error = error.message;
-            mountComponent(Tournament); // Monter le composant Tournament même en cas d'erreur
-        });
+			// Mettre à jour la liste des alias
+			updateAliasesList();
+		})
+		.catch(error => {
+			console.error('Error loading tournaments:', error);
+			tournamentState.isLoaded = true;
+			tournamentState.error = error.message;
+			mountComponent(Tournament); // Monter le composant Tournament même en cas d'erreur
+		});
 }
 
 function addParticipantForm() {
@@ -400,84 +400,190 @@ function startTournament() {
 
 
 
+// function TournamentMatchmaking() {
+//     let matches = [];
+//     let standings = [];
+//     let winner = null;
+//     let aliases = {};
+//     let tournamentId = null;
+
+//     function fetchMatchesAndStandings() {
+//         fetch(`/pong/api/tournament/${tournamentState.tournament.id}/matchmaking/`)
+//             .then(response => {
+//                 if (!response.ok) {
+//                     throw new Error(`HTTP error! status: ${response.status}`);
+//                 }
+//                 return response.json();
+//             })
+//             .then(data => {
+//                 if (data.status === 'success') {
+//                     matches = data.matches;
+//                     standings = data.standings;
+//                     winner = data.winner;
+//                     aliases = data.aliases || {};
+//                     tournamentId = tournamentState.tournament.id;
+//                     renderTournamentMatchmaking();
+//                 } else {
+//                     throw new Error('Error fetching tournament data: ' + data.message);
+//                 }
+//             })
+//             .catch(error => {
+//                 console.error('Error:', error);
+//                 alert('An error occurred while fetching tournament data: ' + error.message);
+//                 document.querySelector('.container').innerHTML = `
+//                     <h1>Tournament matchmaking</h1>
+//                     <p>Error loading tournament data: ${error.message}</p>
+//                 `;
+//             });
+//     }
+
+//     function getDisplayName(username, alias) {
+//         return alias ? `${username} (${alias})` : username;
+//     }
+
+//     function renderTournamentMatchmaking() {
+//         const container = document.querySelector('.container');
+//         container.innerHTML = `
+//             <h1>Tournament matchmaking</h1>
+//             <h2>Matches</h2>
+//             <ul id="matchesList">
+//                 ${matches.map(match => `
+//                     <li>
+//                         ${getDisplayName(match.player1.username, match.player1.alias)} vs ${getDisplayName(match.player2.username, match.player2.alias)}: 
+//                         ${match.player1_score} - ${match.player2_score}
+//                         ${match.status === 'pending' ? 
+//                             `<button onclick="startMatch(${match.id}, '${match.player1.username}', '${match.player2.username}')">Start match</button>` : 
+//                             ''
+//                         }
+//                     </li>
+//                 `).join('')}
+//             </ul>
+//             <h2>Standings</h2>
+//             <ul id="standingsList">
+//                 ${standings.map(player => `
+//                     <li>${getDisplayName(player.username, player.alias)}: ${player.wins} wins, Total score: ${player.total_score}</li>
+//                 `).join('')}
+//             </ul>
+//             ${winner ? `<h2>Winner: ${getDisplayName(winner, aliases[winner])}</h2>` : ''}
+//             <button onclick="finishTournament()" class="btn btn-danger mt-4">Finish tournament</button>
+//         `;
+//     }
+
+//     fetchMatchesAndStandings();
+
+//     return `
+//         <div class="container mt-5">
+//             <h1>Tournament matchmaking</h1>
+//             <p>Loading tournament data...</p>
+//         </div>
+//     `;
+// }
+
 function TournamentMatchmaking() {
-    let matches = [];
-    let standings = [];
-    let winner = null;
-    let aliases = {};
-    let tournamentId = null;
+	let matches = [];
+	let standings = [];
+	let winner = null;
+	let aliases = {};
+	let tournamentId = null;
+	let tournamentFinished = false;
 
-    function fetchMatchesAndStandings() {
-        fetch(`/pong/api/tournament/${tournamentState.tournament.id}/matchmaking/`)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then(data => {
-                if (data.status === 'success') {
-                    matches = data.matches;
-                    standings = data.standings;
-                    winner = data.winner;
-                    aliases = data.aliases || {};
-                    tournamentId = tournamentState.tournament.id;
-                    renderTournamentMatchmaking();
-                } else {
-                    throw new Error('Error fetching tournament data: ' + data.message);
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('An error occurred while fetching tournament data: ' + error.message);
-                document.querySelector('.container').innerHTML = `
-                    <h1>Tournament matchmaking</h1>
-                    <p>Error loading tournament data: ${error.message}</p>
-                `;
-            });
-    }
+	function fetchMatchesAndStandings() {
+		fetch(`/pong/api/tournament/${tournamentState.tournament.id}/matchmaking/`)
+			.then(response => {
+				if (!response.ok) {
+					throw new Error(`HTTP error! status: ${response.status}`);
+				}
+				return response.json();
+			})
+			.then(data => {
+				if (data.status === 'success') {
+					matches = data.matches;
+					standings = data.standings;
+					winner = data.winner;
+					aliases = data.aliases || {};
+					tournamentId = tournamentState.tournament.id;
+					tournamentFinished = data.tournament_finished;
+					renderTournamentMatchmaking();
+				} else {
+					throw new Error('Error fetching tournament data: ' + data.message);
+				}
+			})
+			.catch(error => {
+				console.error('Error:', error);
+				alert('An error occurred while fetching tournament data: ' + error.message);
+				document.querySelector('.container').innerHTML = `
+					<h1>Tournament matchmaking</h1>
+					<p>Error loading tournament data: ${error.message}</p>
+				`;
+			});
+	}
 
-    function getDisplayName(username, alias) {
-        return alias ? `${username} (${alias})` : username;
-    }
+	function getDisplayName(username, alias) {
+		return alias ? `${username} (${alias})` : username;
+	}
 
-    function renderTournamentMatchmaking() {
-        const container = document.querySelector('.container');
-        container.innerHTML = `
-            <h1>Tournament matchmaking</h1>
-            <h2>Matches</h2>
-            <ul id="matchesList">
-                ${matches.map(match => `
-                    <li>
-                        ${getDisplayName(match.player1.username, match.player1.alias)} vs ${getDisplayName(match.player2.username, match.player2.alias)}: 
-                        ${match.player1_score} - ${match.player2_score}
-                        ${match.status === 'pending' ? 
-                            `<button onclick="startMatch(${match.id}, '${match.player1.username}', '${match.player2.username}')">Start match</button>` : 
-                            ''
-                        }
-                    </li>
-                `).join('')}
-            </ul>
-            <h2>Standings</h2>
-            <ul id="standingsList">
-                ${standings.map(player => `
-                    <li>${getDisplayName(player.username, player.alias)}: ${player.wins} wins, Total score: ${player.total_score}</li>
-                `).join('')}
-            </ul>
-            ${winner ? `<h2>Winner: ${getDisplayName(winner, aliases[winner])}</h2>` : ''}
-            <button onclick="finishTournament()" class="btn btn-danger mt-4">Finish tournament</button>
-        `;
-    }
+	function renderTournamentMatchmaking() {
+		const container = document.querySelector('.container');
+		container.innerHTML = `
+			<h1>Tournament matchmaking</h1>
+			<h2>Matches</h2>
+			<ul id="matchesList">
+				${matches.map(match => `
+					<li>
+						${getDisplayName(match.player1.username, match.player1.alias)} vs ${getDisplayName(match.player2.username, match.player2.alias)}: 
+						${match.player1_score} - ${match.player2_score}
+						${match.status === 'pending' ? 
+							`<button onclick="startMatch(${match.id}, '${match.player1.username}', '${match.player2.username}')">Start match</button>` : 
+							''
+						}
+					</li>
+				`).join('')}
+			</ul>
+			<h2>Standings</h2>
+			<ul id="standingsList">
+				${standings.map(player => `
+					<li>${getDisplayName(player.username, player.alias)}: ${player.wins} wins, Total score: ${player.total_score}</li>
+				`).join('')}
+			</ul>
+			${tournamentFinished && standings.length > 0 ? 
+				`<h2>Winner: ${getDisplayName(standings[0].username, aliases[standings[0].username])}</h2>` : 
+				''
+			}
+			${!tournamentFinished ? 
+				`<button onclick="finishTournament()" class="btn btn-danger mt-4">Finish tournament</button>` :
+				`<button onclick="startNewTournament()" class="btn btn-primary mt-4">Start New Tournament</button>`
+			}
+		`;
+	}
 
-    fetchMatchesAndStandings();
+	fetchMatchesAndStandings();
 
-    return `
-        <div class="container mt-5">
-            <h1>Tournament matchmaking</h1>
-            <p>Loading tournament data...</p>
-        </div>
-    `;
+	return `
+		<div class="container mt-5">
+			<h1>Tournament matchmaking</h1>
+			<p>Loading tournament data...</p>
+		</div>
+	`;
 }
+
+
+
+function startNewTournament() {
+	// Reset tournament state
+	tournamentState.tournament = null;
+	tournamentState.isLoaded = false;
+
+	changePage("#tournament");
+}
+
+
+
+
+
+
+
+
+
 
 function finishTournament() {
 	if (!tournamentState.tournament || !tournamentState.tournament.is_started) {
@@ -515,16 +621,16 @@ function finishTournament() {
 }
 
 function startMatch(matchId, player1Username, player2Username) {
-    // Set up the play state for the tournament match
-    playState.gameStarted = true;
-    playState.player1Email = player1Username;
-    playState.player2Email = player2Username;
-    playState.player1Score = 0;
-    playState.player2Score = 0;
-    playState.gameOver = false;
-    playState.gameId = matchId;
-    playState.isTournamentMatch = true;
+	// Set up the play state for the tournament match
+	playState.gameStarted = true;
+	playState.player1Email = player1Username;
+	playState.player2Email = player2Username;
+	playState.player1Score = 0;
+	playState.player2Score = 0;
+	playState.gameOver = false;
+	playState.gameId = matchId;
+	playState.isTournamentMatch = true;
 
-    // Navigate to the play page
-    changePage("#play");
+	// Navigate to the play page
+	changePage("#play");
 }
