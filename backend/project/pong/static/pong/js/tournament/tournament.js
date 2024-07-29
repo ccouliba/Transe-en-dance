@@ -6,16 +6,16 @@ var tournamentState = {
 
 function getTournamentStatus(tournament){
 	if (!tournament.is_started){
-		return "draft"
+		return "tournament has not started yet"
 	}
 
 
 	if (tournament.end_date){ 
 
-		return "done"
+		return "Tournament is done"
 	}
 	if (tournament.is_started){
-		return "running"
+		return "Tournamement is running"
 	}
 	return "ztf"
 }
@@ -34,7 +34,7 @@ function Tournament() {
 
 	let tournamentStatus = getTournamentStatus(tournament)
 	return `<div class="container mt-5">
-			<h1>Latest tournament: ${tournament.name} - ${tournamentStatus}</h1>
+			<h1>Latest tournament name : ${tournament.name} - status : ${tournamentStatus}</h1>
 			${Participants()}
 			<h2 class="mt-4">Create a new tournament</h2>
 			${createTournamentForm()}

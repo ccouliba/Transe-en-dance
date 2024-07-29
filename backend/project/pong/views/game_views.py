@@ -76,11 +76,18 @@ def finish_game(request, game_id):
 			
 			data = json.loads(request.body)
 			winner_email = data.get('winner')
+			player1_score = data.get('player1Score')
+			player2_score = data.get('player2Score')
+   
+   
 			winner = User.objects.get(email=winner_email)
-			
+			# print(winner, player1_score, player2_score)
 			# mise a jour du statut du jeu et le gagnant
 			game.status = 'finished'
 			game.winner = winner
+			game.player1_score  = player1_score
+			game.player2_score  = player2_score
+   
 			game.save()
 			
 			# mise a jour des stats pour les joueurs
@@ -118,7 +125,7 @@ def match_history(request):
 		status='finished'
 	).order_by('-created_at')  
 	paris_tz = pytz.timezone('Europe/Paris')
-	print(paris_tz)
+	# print(paris_tz)
 	history = []
 	for game in games:
 		game_time = game.finished_at or game.created_at
@@ -133,3 +140,4 @@ def match_history(request):
 		})
 	
 	return JsonResponse({'match_history': history})
+

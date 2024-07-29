@@ -191,10 +191,10 @@ function updateProfileStats() {
 
 
 
-function finishGame(gameId, winnerEmail) {
+function finishGame(gameId, player1Score, player2Score, winnerEmail) {
 
 	let url = `/pong/api/games/finish_game/${gameId}/` 
-	let payload = { winner: winnerEmail }
+	let payload = { winner: winnerEmail, player1Score, player2Score }
 	httpPostJson(url, payload)
 	.then(response => response.json())
 	.then(data => {
@@ -299,7 +299,7 @@ function endGame() {
 				alert('An error occurred while updating the tournament. Please refresh the page.');
 			});
 	} else {
-		finishGame(playState.gameId, winner);
+		finishGame(playState.gameId, playState.player1Score, playState.player2Score, winner);
 		changePage("#play");
 	}
 	updateProfileStats();
@@ -335,3 +335,38 @@ function backToTournament() {
 	changePage("#tournamentmatchmaking");
 }
 
+function updateScore(gameId, player1Score, player2Score, winner) {
+	// fetch('/pong/api/games/create_game/', {
+	
+	return fetch(`/pong/api/games/update_score/`, {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+			'X-CSRFToken': getCookie('csrftoken'),
+		},
+		body: JSON.stringify({
+			game_id: matchId,
+			player1_score: player1Score,
+			player2_score: player2Score,
+			winner: winner
+		})
+	})
+	.then(response => {
+		console.log('Server response status:', response.status);
+		return response.json();
+	})
+	.then(data => {
+		console.log('Server response data:', data);
+		if (data.status === 'success') {
+			console.log('Score updated successfully');
+			return data;
+		} else {
+			console.error('Error score:', data.message);
+			throw new Error(data.message);
+		}
+	})
+	.catch(error => {
+		console.error('Error in updateScore:', error);
+		throw error;
+	});
+}
