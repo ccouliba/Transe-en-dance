@@ -63,23 +63,23 @@ function moveBall() {
 }
 
 
-function updateOnlineStatus() {
-	// let url = `/pong/api/games/finish_game/${gameId}/` 
-	fetch('/pong/api/games/update_online_status/', {
-		method: 'POST',
-		credentials: 'include',
-		headers: {
-			'Content-Type': 'application/json',
-		}
-	})
-	.then(response => response.json())
-	.then(data => {
-		if (data.status !== 'success') {
-			console.error('Failed to update online status:', data.message);
-		}
-	})
-	.catch(error => console.error('Error updating online status:', error));
-}
+// function updateOnlineStatus() {
+// 	// let url = `/pong/api/games/finish_game/${gameId}/` 
+// 	fetch('/pong/api/games/update_online_status/', {
+// 		method: 'POST',
+// 		credentials: 'include',
+// 		headers: {
+// 			'Content-Type': 'application/json',
+// 		}
+// 	})
+// 	.then(response => response.json())
+// 	.then(data => {
+// 		if (data.status !== 'success') {
+// 			console.error('Failed to update online status:', data.message);
+// 		}
+// 	})
+// 	.catch(error => console.error('Error updating online status:', error));
+// }
 
 
 
@@ -134,10 +134,10 @@ function initializeGame() {
 			requestAnimationFrame(update); // methode js qui demande au navigateur d'executer une fonction specifique avant le prochain rafraichissement de l'ecran (generalement 60 fps)
 		} else {
 			changePage("#play"); // si jeu est termine => forcer le rechargement de la page
-			clearInterval(onlineStatusInterval);
+			// clearInterval(onlineStatusInterval);
 		}
 	}
-	onlineStatusInterval = setInterval(updateOnlineStatus, 5000);
+	// onlineStatusInterval = setInterval(updateOnlineStatus, 5000);
 
 		// ajoute un ecouteur d'evenement global pour empecher le defilement de la page
 	window.addEventListener('keydown', preventDefaultForScrollKeys, false);
