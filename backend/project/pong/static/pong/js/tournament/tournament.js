@@ -12,12 +12,12 @@ function getTournamentStatus(tournament){
 
 	if (tournament.end_date){ 
 
-	    return "done"
+		return "done"
 	}
 	if (tournament.is_started){
 		return "running"
 	}
-    return "ztf"
+	return "ztf"
 }
 
 function Tournament() {
@@ -326,7 +326,7 @@ function startNewTournament() {
 	// Reset tournament state
 	tournamentState.tournament = null;
 	tournamentState.isLoaded = false;
-	matchMakingState.isLoaded = false
+	matchmakingState.isLoaded = false
 	changePage("#tournament");
 }
 
@@ -354,11 +354,15 @@ function finishTournament() {
 	.then(data => {
 		if (data.status === 'success') {
 			alert('Tournament finished successfully!');
-			tournamentState.tournament.is_started = false;
-			tournamentState.tournament = null;
-			console.log("finishtournament noramelemnt")
+			// tournamentState.tournament.is_started = false;
+			// tournamentState.tournament = null;
+			// console.log("finishtournament noramelemnt")
 			matchmakingState.tournamentFinished = true;
 			// changePage("#tournament");
+			if (data.rankings) {
+				matchmakingState.rankings = data.rankings;
+			}
+			mountComponent(TournamentMatchmaking);
 		} else {
 			alert('Error finishing tournament: ' + data.message);
 		}

@@ -89,7 +89,7 @@ function TournamentDetail() {
         winnerHtml = `
             <div class="winner-announcement">
                 <h2>Tournament winner</h2>
-                <p>${getDisplayName(winner.username, matchmakingState.aliases[winner.username])}</p>
+                <p>Winner is : ${getDisplayName(winner.username, matchmakingState.aliases[winner.username])}</p>
                 <p>Wins: ${winner.wins}, Total score: ${winner.total_score}</p>
             </div>
         `;
