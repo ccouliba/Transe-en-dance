@@ -235,39 +235,39 @@ def get_matches(aliases, composed_games):
     
     return matches
 
-def get_standings(matches, aliases):
-    standings = {}
+def get_rankings(matches, aliases):
+    rankings = {}
     
     for match in matches:
         player1 = match['player1']['username']
         player2 = match['player2']['username']
         
-        # Initialiser les joueurs s'ils n'existent pas encore dans les standings
-        if player1 not in standings:
-            standings[player1] = {'username': player1, 'alias': aliases.get(player1), 'wins': 0, 'total_score': 0}
-        if player2 not in standings:
-            standings[player2] = {'username': player2, 'alias': aliases.get(player2), 'wins': 0, 'total_score': 0}
+        # Initialiser les joueurs s'ils n'existent pas encore dans les rankings
+        if player1 not in rankings:
+            rankings[player1] = {'username': player1, 'alias': aliases.get(player1), 'wins': 0, 'total_score': 0}
+        if player2 not in rankings:
+            rankings[player2] = {'username': player2, 'alias': aliases.get(player2), 'wins': 0, 'total_score': 0}
         
         # Mettre à jour les scores totaux
-        standings[player1]['total_score'] += match['player1_score']
-        standings[player2]['total_score'] += match['player2_score']
+        rankings[player1]['total_score'] += match['player1_score']
+        rankings[player2]['total_score'] += match['player2_score']
         
         # Mettre à jour les victoires si le match est terminé
         if match['status'] == 'finished':
             if match['player1_score'] > match['player2_score']:
-                standings[player1]['wins'] += 1
+                rankings[player1]['wins'] += 1
             elif match['player2_score'] > match['player1_score']:
-                standings[player2]['wins'] += 1
+                rankings[player2]['wins'] += 1
             # En cas d'égalité, on ne compte pas de victoire
     
     # Convertir le dictionnaire en liste et trier par victoires puis par score total
-    sorted_standings = sorted(
-        standings.values(),
+    sorted_rankings = sorted(
+        rankings.values(),
         key=lambda x: (x['wins'], x['total_score']),
         reverse=True
     )
     
-    return sorted_standings
+    return sorted_rankings
 
 
 
@@ -294,16 +294,16 @@ def tournament_matchmaking(request, tournament_id):
 	composed_games = Composed.objects.filter(tournament=tournament).select_related('game')
 	matches = get_matches(aliases, composed_games)
    
-	standings = get_standings(matches, aliases)
+	rankings = get_rankings(matches, aliases)
 	# Determine winner if all games are finished
 	winner = None
 	if all(match['status'] == 'finished' for match in matches):
-		winner = standings[0]['username']
+		winner = rankings[0]['username']
    
 	return JsonResponse({
 		'status': 'success',
 		'matches': matches,
-		'standings': standings,
+		'rankings': rankings,
 		'winner': winner,
 		'aliases': aliases
 	})
@@ -364,14 +364,14 @@ def update_match_score(request):
 		game.save()
 		logger.info(f"Game updated: {game}")
 
-		# Update tournament standings
+		# Update tournament rankings
 		composed = get_object_or_404(Composed, game=game)
 		tournament = composed.tournament
-		logger.info(f"Updating standings for tournament: {tournament}")
+		logger.info(f"Updating rankings for tournament: {tournament}")
 
-		# Recalculate tournament standings
+		# Recalculate tournament rankings
 		participants = tournament.participants.all()
-		standings = []
+		rankings = []
 		for player in participants:
 			wins = Game.objects.filter(
 				(Q(player1=player, winner=player) | Q(player2=player, winner=player)),
@@ -392,16 +392,16 @@ def update_match_score(request):
 				))
 			)['total'] or 0
 
-			standings.append({
+			rankings.append({
 				'username': player.username,
 				'wins': wins,
 				'total_score': total_score
 			})
 
-		# Sort standings
-		standings.sort(key=lambda x: (-x['wins'], -x['total_score']))
+		# Sort rankings
+		rankings.sort(key=lambda x: (-x['wins'], -x['total_score']))
 
-		logger.info(f"Final standings: {standings}")
+		logger.info(f"Final rankings: {rankings}")
 
 		# Check if the tournament is finished
 		all_games_finished = not Game.objects.filter(
@@ -412,7 +412,7 @@ def update_match_score(request):
 		return JsonResponse({
 			'status': 'success',
 			'message': 'Match score updated successfully.',
-			'standings': standings,
+			'rankings': rankings,
 			'tournament_finished': all_games_finished
 		})
 

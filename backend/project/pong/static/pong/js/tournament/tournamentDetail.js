@@ -50,6 +50,7 @@ function addParticipantForm() {
 	}
 	return `
 		<div class="mt-4">
+		<h2 class="mt-4">Add participant</h2>
 			<form id="addParticipantForm">
 				<div class="mb-3">
 					<label for="participant" class="form-label">Add one participant (enter your username, you must be registered to this app in order to play)</label>

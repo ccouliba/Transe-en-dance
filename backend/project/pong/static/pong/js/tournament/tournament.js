@@ -356,7 +356,9 @@ function finishTournament() {
 			alert('Tournament finished successfully!');
 			tournamentState.tournament.is_started = false;
 			tournamentState.tournament = null;
-			changePage("#tournament");
+			console.log("finishtournament noramelemnt")
+			matchmakingState.tournamentFinished = true;
+			// changePage("#tournament");
 		} else {
 			alert('Error finishing tournament: ' + data.message);
 		}

@@ -2,7 +2,7 @@
 var matchmakingState = {
 	isLoaded:false,
 	 matches: [],
-	 standings: [],
+	 rankings: [],
 	 winner : null,
 	 aliases : {},
 	 tournamentId : null,
@@ -13,7 +13,7 @@ function TournamentMatchmaking() {
 	
 	if (!matchmakingState.isLoaded){
 	
-		fetchMatchesAndStandings();
+		fetchMatchesAndRankings();
 	
 		return `
 		<div class="container mt-5">
@@ -48,39 +48,69 @@ function MatchList() {
     `;
 }
 
-function TournamentDetail() {
-    let winner
-    let winner_html = ''
-    if (Tournament.enddate)
-    {
-	    winner = matchmakingState.standings[0].username
-        winner_html = `<h2>Winner: ${winner}</h2>`
-    }
-    return `
-        <h1>Tournament matchmaking</h1>
-        ${MatchList()}
+// function TournamentDetail() {
+//     let winner
+//     let winner_html = ''
+//     if (Tournament.enddate)
+//     {
+// 	    winner = matchmakingState.rankings[0].username
+//         winner_html = `<h2>Winner: ${winner}</h2>`
+//     }
+//     return `
+//         <h1>Tournament matchmaking</h1>
+//         ${MatchList()}
 
         
-        ${winner_html}
+//         ${winner_html}
 		
-        <h2>Standings</h2>
-        <ul id="standingsList">
-            ${matchmakingState.standings.map(player => `
-                <li>${getDisplayName(player.username, player.alias)}: ${player.wins} wins, Total score: ${player.total_score}</li>
+//         <h2>Rankings</h2>
+//         <ul id="rankingsList">
+//             ${matchmakingState.rankings.map(player => `
+//                 <li>${getDisplayName(player.username, player.alias)}: ${player.wins} wins, Total score: ${player.total_score}</li>
+//             `).join('')}
+//         </ul>
+        
+// 		${matchmakingState.tournamentFinished && matchmakingState.rankings.length > 0 ?
+//             `<h2>Winner: ${getDisplayName(matchmakingState.rankings[0].username, matchmakingState.aliases[matchmakingState.rankings[0].username])}</h2>` :
+//             ''
+//         }
+//         ${!matchmakingState.tournamentFinished ?
+//             `<button onclick="finishTournament()" class="btn btn-danger mt-4">Finish tournament</button>` :
+//             `<button onclick="startNewTournament()" class="btn btn-primary mt-4">Start New Tournament</button>`
+//         }
+//     `;
+// }
+function TournamentDetail() {
+    let winnerHtml = '';
+    console.log("coucou")
+    console.log(matchmakingState.tournamentFinished, matchmakingState.rankings.length)
+    if (matchmakingState.tournamentFinished && matchmakingState.rankings.length > 0) {
+        const winner = matchmakingState.rankings[0];
+        winnerHtml = `
+            <div class="winner-announcement">
+                <h2>Tournament winner</h2>
+                <p>${getDisplayName(winner.username, matchmakingState.aliases[winner.username])}</p>
+                <p>Wins: ${winner.wins}, Total score: ${winner.total_score}</p>
+            </div>
+        `;
+    }
+
+    return `
+        <h1>Tournament Matchmaking</h1>
+        ${MatchList()}
+        ${winnerHtml}
+        <h2>Rankings</h2>
+        <ul id="rankingsList">
+            ${matchmakingState.rankings.map(player => `
+                <li>${getDisplayName(player.username, matchmakingState.aliases[player.username])}: ${player.wins} wins, Total score: ${player.total_score}</li>
             `).join('')}
         </ul>
-        
-		${matchmakingState.tournamentFinished && matchmakingState.standings.length > 0 ?
-            `<h2>Winner: ${getDisplayName(matchmakingState.standings[0].username, matchmakingState.aliases[matchmakingState.standings[0].username])}</h2>` :
-            ''
-        }
         ${!matchmakingState.tournamentFinished ?
             `<button onclick="finishTournament()" class="btn btn-danger mt-4">Finish tournament</button>` :
-            `<button onclick="startNewTournament()" class="btn btn-primary mt-4">Start New Tournament</button>`
+            `<button onclick="startNewTournament()" class="btn btn-primary mt-4">Start new tournament</button>`
         }
     `;
 }
-
 
 function getDisplayName(username, alias) {
 	return alias ? `${username} (${alias})` : username;
@@ -102,12 +132,12 @@ function getMatchMakingFromBackend(){
 }
 
 
-function fetchMatchesAndStandings() {
+function fetchMatchesAndRankings() {
     return getMatchMakingFromBackend().then(data => {
         if (data.status === 'success') {
             // Mise à jour de matchmakingState
             matchmakingState.matches = data.matches;
-            matchmakingState.standings = data.standings;
+            matchmakingState.rankings = data.rankings;
             matchmakingState.winner = data.winner;
             matchmakingState.aliases = data.aliases || {};
             matchmakingState.tournamentId = tournamentState.tournament.id;

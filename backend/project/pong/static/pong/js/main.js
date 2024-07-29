@@ -63,7 +63,7 @@ function resetLoaded() {
 		// Verifie si un objet d'etat correspondant existe dans l'objet global window
 		if (typeof window[stateName] !== "undefined") {
 			// Si l'objet d'etat existe, reinitialise sa propriete isLoaded a false
-			console.log(stateName, "fdf")
+			// console.log(stateName, "fdf")
 			window[stateName].isLoaded = false;
 		}
 	});

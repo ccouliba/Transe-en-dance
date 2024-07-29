@@ -290,7 +290,7 @@ function endGame() {
 	if (playState.isTournamentMatch) {
 		updateTournamentMatchScore(playState.gameId, playState.player1Score, playState.player2Score, winner)
 			.then((payload) => {
-				fetchMatchesAndStandings()
+				fetchMatchesAndRankings()
 				return
 				//changePage("#tournament");
 			})
@@ -318,7 +318,7 @@ function reloadTournamentData() {
 		.then(data => {
 			if (data.status === 'success') {
 				tournamentState.matches = data.matches;
-				tournamentState.standings = data.standings;
+				tournamentState.rankings = data.rankings;
 				tournamentState.winner = data.winner;
 				tournamentState.aliases = data.aliases || {};
 			} else {
