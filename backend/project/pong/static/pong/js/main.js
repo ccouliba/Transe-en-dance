@@ -73,7 +73,9 @@ let routes = {
 	"#home": () => mountComponent(Home),
 	"#play": () => mountComponent(Play),
 	"#profile": () => mountComponent(Profile),
-	"#friends": () => mountComponent(FriendsList),
+	"#friends": () => mountComponent(Friends),
+	"#friends_list": () => mountComponent(FriendsList),
+
 	"#404": () => mountComponent(Page404),
 	"#tournament": () => mountComponent(Tournament),
 	"#logout": () => mountComponent(Logout),
