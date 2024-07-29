@@ -66,7 +66,7 @@ function Play() {
 							<label for="player2Email" class="form-label">Second player's email</label>
 							<input type="email" class="form-control" id="player2Email" required>
 						</div>
-						<button type="submit" class="btn btn-primary">Start ame</button>
+						<button type="submit" class="btn btn-primary">Start game</button>
 					</form>
 					<div id="instructions" class="card p-3 mb-4">
 						<h2 class="card-title">Instructions</h2>

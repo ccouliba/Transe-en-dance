@@ -84,6 +84,7 @@ function loadFriendsData() {
 			// mountComponent(FriendsList); // mise a jour de l'interface avec la liste des amis
 			mountComponent(Friends); // mise a jour de l'interface avec la liste des amis
 			// Démarrer l'intervalle pour la mise à jour du statut des amis
+			console.log("friendsState.friendStatusInterval", friendsState.friendStatusInterval)
 			if (!friendsState.friendStatusInterval) {
 				friendsState.friendStatusInterval = setInterval(getFriendsStatus, 10 * 1000);
 			}
@@ -92,6 +93,7 @@ function loadFriendsData() {
 }
 
 function getFriendsStatus(){
+	console.log("in getfriendstatus")
 	let url = `/pong/api/friends/get-status/`;
 	return fetch(url, {
 			credentials: "include" // inclure les cookies pour l'authentification
