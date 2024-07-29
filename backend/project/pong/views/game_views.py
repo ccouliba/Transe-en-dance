@@ -141,3 +141,15 @@ def match_history(request):
 	
 	return JsonResponse({'match_history': history})
 
+
+from django.utils import timezone
+
+@login_required
+@csrf_exempt
+def update_online_status(request):
+	if request.method == 'POST':
+		user = request.user
+		user.last_activity = timezone.now()
+		user.save()
+		return JsonResponse({'status': 'success'})
+	return JsonResponse({'status': 'error', 'message': 'Invalid request method'}, status=405)
