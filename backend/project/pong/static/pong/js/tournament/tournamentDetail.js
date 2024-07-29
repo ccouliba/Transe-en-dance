@@ -44,7 +44,7 @@ function createTournamentForm() {
 
 
 function addParticipantForm() {
-	if (tournamentState.tournament.is_started){
+	if (tournamentState.tournament && tournamentState.tournament.is_started){
 
 	     return '';
 	}
@@ -65,7 +65,7 @@ function addParticipantForm() {
 
 
 function addAliasForm() {
-	if (tournamentState.tournament.is_started){
+	if (tournamentState.tournament && tournamentState.tournament.is_started){
 		return '';
 	} 
 	

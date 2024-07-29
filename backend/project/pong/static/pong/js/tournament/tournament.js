@@ -4,21 +4,21 @@ var tournamentState = {
 	showAddParticipants: false
 };
 
-function getTournamentStatus(tournament){
-	if (!tournament.is_started){
-		return "tournament has not started yet"
-	}
+// function getTournamentStatus(tournament){
+// 	if (!tournament.is_started){
+// 		return "tournament has not started yet"
+// 	}
 
 
-	if (tournament.end_date){ 
+// 	if (tournament.end_date){ 
 
-		return "Tournament is done"
-	}
-	if (tournament.is_started){
-		return "Tournamement is running"
-	}
-	return "ztf"
-}
+// 		return "Tournament is done"
+// 	}
+// 	if (tournament.is_started){
+// 		return "Tournamement is running"
+// 	}
+// 	return "ztf"
+// }
 
 function Tournament() {
 
@@ -27,14 +27,22 @@ function Tournament() {
 		loadTournamentState();
 		return `<div class="container mt-5"><p>Loading tournament data...</p></div>`;
 	}
+
+	
 	
 	if (tournament && tournament.is_started && !tournament.end_date) {
 		return TournamentMatchmaking();
 	}
 
-	let tournamentStatus = getTournamentStatus(tournament)
+	// let tournamentStatus = getTournamentStatus(tournament)
+	// <h1>Latest tournament name : ${tournament.name} - status : ${tournamentStatus}</h1>
+	let lastTournament = ""
+	if (tournament){
+		lastTournament = `<h1>Latest tournament name : ${tournament.name}</h1>`
+	}
+
 	return `<div class="container mt-5">
-			<h1>Latest tournament name : ${tournament.name} - status : ${tournamentStatus}</h1>
+			${lastTournament}	
 			${Participants()}
 			<h2 class="mt-4">Create a new tournament</h2>
 			${createTournamentForm()}
@@ -48,7 +56,7 @@ function Tournament() {
 }
 
 function startTournamentButton() {
-	 if (tournamentState.tournament.is_started) {
+	 if (tournamentState.tournament && tournamentState.tournament.is_started) {
 	 	return '';
 	 }
 	return `
