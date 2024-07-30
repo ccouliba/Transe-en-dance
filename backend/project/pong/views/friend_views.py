@@ -136,7 +136,7 @@ from datetime import timedelta
 def	are_user_online(friends:List[User]):
 	statuses = []
 	now = timezone.now()
-	threshold = timedelta(seconds=5)  #definir la periode pour considerer un user comme en ligne 
+	threshold = timedelta(seconds=10)  #definir la periode pour considerer un user comme en ligne 
 	for friend in friends:
 		if friend.last_activity is None:
 			is_online = False
@@ -147,12 +147,7 @@ def	are_user_online(friends:List[User]):
 		statuses.append(is_online) 
 	return statuses
 
-# def	are_user_online(friends:List[User]):
-# 	statuses = []
-# 	for friend in friends:
-# 		is_online = friend.last_activity
-# 		statuses.append(is_online) 
-# 	return statuses
+
 
 @login_required
 @csrf_exempt

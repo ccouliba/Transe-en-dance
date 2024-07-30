@@ -87,12 +87,11 @@ let routes = {
 };
 
 function cleanStates(){
-	if (friendsState.friendStatusInterval){
-		clearInterval(friendsState.friendStatusInterval)
-	}
+
 
 	if (playState.checkInterval){
 		clearInterval(playState.checkInterval)
+		playState.checkInterval = null
 	}
 
 	resetLoaded()

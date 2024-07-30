@@ -86,7 +86,7 @@ function loadFriendsData() {
 			// Démarrer l'intervalle pour la mise à jour du statut des amis
 			console.log("friendsState.friendStatusInterval", friendsState.friendStatusInterval)
 			if (!friendsState.friendStatusInterval) {
-				friendsState.friendStatusInterval = setInterval(getFriendsStatus, 10 * 1000);
+				friendsState.friendStatusInterval = setInterval(getFriendsStatus, 5 * 1000);
 			}
 		})
 		.catch(error => console.error('Error:', error));
