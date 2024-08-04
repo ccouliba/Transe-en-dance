@@ -137,7 +137,7 @@ function initializeGame() {
 			// clearInterval(onlineStatusInterval);
 		}
 	}
-	onlineStatusInterval = setInterval(updateOnlineStatus, 5000);
+	// onlineStatusInterval = setInterval(updateOnlineStatus, 5000);
 
 		// ajoute un ecouteur d'evenement global pour empecher le defilement de la page
 	window.addEventListener('keydown', preventDefaultForScrollKeys, false);

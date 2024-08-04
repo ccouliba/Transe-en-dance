@@ -124,7 +124,7 @@ def friends_data(request):
 	received_requests = Friendship.objects.filter(id_user_2=user).exclude(id_user_1__in=user.friends.all())
 
 	return JsonResponse({
-		'friends': [{'username': friend.username, 'email': friend.email} for friend in friends],
+		'friends': [{'username': friend.username, 'email': friend.email, "isOnline": friend.is_online} for friend in friends],
 		'sentRequests': [{'username': req.id_user_2.username, 'email': req.id_user_2.email} for req in sent_requests],
 		'receivedRequests': [{'username': req.id_user_1.username, 'email': req.id_user_1.email} for req in received_requests],
 	})
@@ -135,17 +135,21 @@ from datetime import timedelta
 
 def	are_user_online(friends:List[User]):
 	statuses = []
-	now = timezone.now()
-	threshold = timedelta(seconds=10)  #definir la periode pour considerer un user comme en ligne 
 	for friend in friends:
-		if friend.last_activity is None:
-			is_online = False
-		else:
-			time_since_last_activity = now - friend.last_activity #difference entre maintenant et derniere activite du user
-			# print(time_since_last_activity, friend.last_activity)
-			is_online = time_since_last_activity < threshold #verifier si cette différence est inferieure au seuil (threshold)
-		statuses.append(is_online) 
+		statuses.append(friend.is_online)
 	return statuses
+	# statuses = []
+	# now = timezone.now()
+	# threshold = timedelta(seconds=10)  #definir la periode pour considerer un user comme en ligne 
+	# for friend in friends:
+	# 	if friend.last_activity is None:
+	# 		is_online = False
+	# 	else:
+	# 		time_since_last_activity = now - friend.last_activity #difference entre maintenant et derniere activite du user
+	# 		# print(time_since_last_activity, friend.last_activity)
+	# 		is_online = time_since_last_activity < threshold #verifier si cette différence est inferieure au seuil (threshold)
+	# 	statuses.append(is_online) 
+	# return statuses
 
 
 

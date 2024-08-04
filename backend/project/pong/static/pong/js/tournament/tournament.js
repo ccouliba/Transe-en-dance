@@ -4,21 +4,9 @@ var tournamentState = {
 	showAddParticipants: false
 };
 
-// function getTournamentStatus(tournament){
-// 	if (!tournament.is_started){
-// 		return "tournament has not started yet"
-// 	}
-
-
-// 	if (tournament.end_date){ 
-
-// 		return "Tournament is done"
-// 	}
-// 	if (tournament.is_started){
-// 		return "Tournamement is running"
-// 	}
-// 	return "ztf"
-// }
+function isTournamentFinished(matches) {
+    return matches.every(match => match.status === "finished");
+}
 
 function Tournament() {
 
@@ -341,10 +329,19 @@ function startNewTournament() {
 
 
 function finishTournament() {
+	console.log(isTournamentFinished(matchmakingState.matches), matchmakingState.matches)
+	if (!isTournamentFinished(matchmakingState.matches))
+	{
+		alert("Can not finish tournament if there are remaining matches")
+		return
+	}
+
 	if (!tournamentState.tournament || !tournamentState.tournament.is_started) {
 		alert('No active tournament to finish.');
 		return;
 	}
+
+
 
 	fetch(`/pong/api/tournament/${tournamentState.tournament.id}/finish/`, {
 		method: 'POST',

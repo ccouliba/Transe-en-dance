@@ -95,9 +95,7 @@ function Play() {
 
 
 function loadPlayState() {
-	if (!playState.checkInterval) {
-		playState.checkInterval = setInterval(checkAuth, 5 * 1000);
-	}
+
 
 	if (!playState.isLoaded) {
 		bindEvent(playState, "#start-game-form", "submit", startGame);
