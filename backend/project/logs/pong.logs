@@ -1,3 +1,0 @@
-[2024/07/27 21:55:58]::[INFO]::[django.utils.autoreload]=> (Watching for file changes with StatReloader)
-[2024/07/27 21:56:00]::[WARNING]::[django.request]=> (Not Found: /)
-[2024/07/27 21:56:00]::[WARNING]::[django.request]=> (Not Found: /)
