@@ -3,6 +3,7 @@ include ./.utils/.ANSI_color.txt
 BUILD	= docker compose build
 
 # FLUSH	= docker-compose exec server python manage.py flush --no-input
+MIGRATE_SESSION = docker compose exec web python3 manage.py migrate sessions
 MIGRATE	= docker compose exec web python3 manage.py migrate
 
 # without the flag '-d', you should see in verbose server running
@@ -10,7 +11,7 @@ RUN		= docker compose up -d
 
 # should use this when running with the -d option
 STOP	= docker compose stop
-
+DOWN    = docker compose down -v
 # Watch Mode :
 # When modify the file system of the server, modify the same file in the container
 WATCH	= docker compose up --watch
@@ -23,6 +24,7 @@ CREATE_SU = docker compose exec web python manage.py createsuperuser
 all: .INIT build run
 
 build: 
+	$(DOWN)
 	echo "[$(_YELLOW)make$(_END)]:[$(_BLUE)build$(_END)] ---------------------> $(_GREY)building container(s)$(_END)"
 	if $(BUILD) ; then \
 		echo "[$(_YELLOW)make$(_END)]:[$(_BLUE)build$(_END)] ---------------------> [ $(_GREEN)DONE$(_END) ]" ;\
@@ -33,6 +35,7 @@ build:
 run:
 	echo "[$(_YELLOW)make$(_END)]:[ $(_BLUE)run$(_END) ] ---------------------> $(_GREY)running container(s)$(_END)"
 	if $(RUN) ; then \
+		$(MIGRATE_SESSION) ; \
 		$(MIGRATE) ; \
 	else \
 		echo "[$(_YELLOW)make$(_END)]:[ $(_BLUE)run$(_END) ] ------> running -----> [ $(_RED)FAIL$(_END) ]" ;\
