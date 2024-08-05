@@ -142,7 +142,7 @@ function handleRegister(event) {
 	.then(data => {
 		if (data.status === 'success') {
 			alert('Registration successful!'); 
-			changePage('#home'); // Rediriger vers la page d'accueil
+			changePage('#login'); 
 		} else {
 			alert('Registration failed: ' + JSON.stringify(data.message));
 		}
