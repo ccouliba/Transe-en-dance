@@ -38,6 +38,18 @@
 			
 
 			changePage(hash);
+	
+			function handleLogout() {
+				logout()
+				navigator.sendBeacon('/pong/api/logout/', '', { method: 'POST', credentials: 'include' });
+			}
+
+			window.addEventListener('beforeunload', handleLogout);
+			window.addEventListener('unload', handleLogout);
+
+			document.addEventListener('visibilitychange', function() {
+			
+		});
 		</script>
 		{% endblock %}
 	  </div>

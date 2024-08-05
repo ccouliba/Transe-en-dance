@@ -95,6 +95,7 @@ function loadFriendsData() {
 function getFriendsStatus(){
 	console.log("in getfriendstatus")
 	let url = `/pong/api/friends/get-status/`;
+	
 	return fetch(url, {
 			credentials: "include" // inclure les cookies pour l'authentification
 		})
