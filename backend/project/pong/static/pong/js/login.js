@@ -108,7 +108,8 @@ function handleLogin(event) {
 		if (data.status === 'success') {
 			localStorage.setItem('userToken', 'true'); // Stocker le token de l'utilisateur
 			alert('Login successful!'); 
-			changePage('#profile'); // Rediriger vers la page de profil
+			changePage('#home');
+			// changePage('#profile'); // Rediriger vers la page de profil
 		} else {
 			alert('Login failed: ' + data.message); 
 		}
@@ -187,7 +188,10 @@ window.addEventListener("load", function () {
 		// Verifier si la fonction changePage est definie
 		if (typeof changePage === "function") {
 			// Appeler la fonction changePage pour naviguer vers la page du profil
-			changePage("#profile");
+			// changePage("#profile");
+			// console.log("hello")
+			changePage("#home");
+
 		} else {
 			// Afficher une erreur dans la console si changePage n'est pas definie
 			console.error("changePage function is not defined");
