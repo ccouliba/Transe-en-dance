@@ -7,11 +7,42 @@ var loginState = {
 function loadLoginState() {
 	// Attacher des evenements aux formulaires et liens
 	bindEvent(loginState, "#loginForm", "submit", handleLogin); // Attacher l'evenement submit au formulaire de connexion
-	bindEvent(loginState, "#registerForm", "submit", handleRegister); // Attacher l'evenement submit au formulaire d'inscription
-	bindEvent(loginState, "#showRegister", "click", toggleRegister); // Attacher l'evenement click au lien pour afficher l'inscription
-	bindEvent(loginState, "#showLogin", "click", toggleRegister); // Attacher l'evenement click au lien pour afficher la connexion
+	
+	
+	bindEvent(loginState, "#showRegister", "click", (event)=>{
+		event.preventDefault()
+		
+		changePage("#register")
+		return
+	})
 	loginState.isLoaded = true; // indique que la page est chargee
+
 }
+
+// Fonction pour afficher le formulaire de connexion ou d'inscription 
+// Par defaut =? loginState.showRegister = false. Donc affiche formulaire de connexion (LoginForm)
+// a) Si le user clique sur le lien "Don't have an account? Register" alors loginState.showRegister = true grace a la fonction toggleRegister
+// Donc le formulaire d'inscription (RegisterForm) sera affiche
+// b) Si le user clique sur le lien "Already have an account? Login" alors loginState.showRegister = false grace a la fonction toggleRegister
+// Donc le formulaire de connexion (LoginForm) sera affiche
+function Login() {
+	if (!loginState.isLoaded) {
+		loadLoginState(); // Charger la page si non chargee
+	}
+
+	
+	return `
+		<div class="container mt-5">
+			<h1>Login</h1> 
+			 ${LoginForm()}
+			<p class="mt-3">
+				 Don't have an account? <a href="#" id="showRegister">Register</a>
+			</p>
+			${ExternalLoginButton()}
+		</div>
+	`;
+}
+
 
 // Fonction pour afficher le formulaire de connexion
 function LoginForm() {
@@ -28,51 +59,6 @@ function LoginForm() {
 	`;
 }
 
-// Fonction pour afficher le formulaire d'inscription
-function RegisterForm() {
-	return `
-		<form id="registerForm">
-			<div class="mb-3">
-				<input type="text" class="form-control" name="username" placeholder="Username" required>
-			</div>
-			<div class="mb-3">
-				<input type="email" class="form-control" name="email" placeholder="Email" required>
-			</div>
-			<div class="mb-3">
-				<input type="password" class="form-control" name="password1" placeholder="Password" required>
-			</div>
-			<div class="mb-3">
-				<input type="password" class="form-control" name="password2" placeholder="Confirm Password" required>
-			</div>
-			<button type="submit" class="btn btn-primary">Register</button>
-		</form>
-	`;
-}
-
-// Fonction pour afficher le formulaire de connexion ou d'inscription 
-// Par defaut =? loginState.showRegister = false. Donc affiche formulaire de connexion (LoginForm)
-// a) Si le user clique sur le lien "Don't have an account? Register" alors loginState.showRegister = true grace a la fonction toggleRegister
-// Donc le formulaire d'inscription (RegisterForm) sera affiche
-// b) Si le user clique sur le lien "Already have an account? Login" alors loginState.showRegister = false grace a la fonction toggleRegister
-// Donc le formulaire de connexion (LoginForm) sera affiche
-function Login() {
-	if (!loginState.isLoaded) {
-		loadLoginState(); // Charger la page si non chargee
-	}
-
-	return `
-		<div class="container mt-5">
-			<h1>${loginState.showRegister ? 'Register' : 'Login'}</h1> 
-			${loginState.showRegister ? RegisterForm() : LoginForm()}
-			<p class="mt-3">
-				${loginState.showRegister 
-					? 'Already have an account? <a href="#" id="showLogin">Login</a>' 
-					: 'Don\'t have an account? <a href="#" id="showRegister">Register</a>'}
-			</p>
-			${!loginState.showRegister ? ExternalLoginButton() : ''}
-		</div>
-	`;
-}
 
 // Fonction pour afficher le bouton de connexion externe avec api 42
 function ExternalLoginButton() {
@@ -118,46 +104,6 @@ function handleLogin(event) {
 		console.error('Error:', error); 
 		alert('An error occurred during login. Please try again.'); 
 	});
-}
-
-// Fonction pour gerer la soumission du formulaire d'inscription
-function handleRegister(event) {
-	event.preventDefault(); // Empecher le comportement par defaut du formulaire
-	const username = event.target.elements.username.value; // Obtenir le nom d'utilisateur
-	const email = event.target.elements.email.value; // Obtenir l'email
-	const password1 = event.target.elements.password1.value; // Obtenir le mot de passe
-	const password2 = event.target.elements.password2.value; // Obtenir la confirmation du mot de passe
-	let url = `/pong/api/register/`; 
-
-	fetch(url, {
-		method: 'POST', 
-		headers: {
-			'Content-Type': 'application/json', // Type de contenu JSON
-			'X-CSRFToken': getCookie('csrftoken') // Ajouter le token CSRF aux headers. todo : a garder ou pas
-		},
-		body: JSON.stringify({ username, email, password1, password2 }), // Corps de la requete avec les informations d'inscription
-		credentials: 'include' // Inclure les cookies pour l'authentification
-	})
-	.then(response => response.json()) // Convertir la reponse en JSON
-	.then(data => {
-		if (data.status === 'success') {
-			alert('Registration successful!'); 
-			changePage('#login'); 
-		} else {
-			alert('Registration failed: ' + JSON.stringify(data.message));
-		}
-	})
-	.catch(error => {
-		console.error('Error:', error);
-		alert('An error occurred during registration. Please try again.');
-	});
-}
-
-// Fonction pour basculer entre les formulaires de connexion et d'inscription
-function toggleRegister(event) {
-	event.preventDefault(); // Empecher le comportement par defaut du lien
-	loginState.showRegister = !loginState.showRegister; // Inverser l'etat d'affichage
-	mountComponent(Login); // Mettre a jour l'interface avec le formulaire approprie
 }
 
 
