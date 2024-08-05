@@ -76,21 +76,13 @@ def finish_game(request, game_id):
 			
 			data = json.loads(request.body)
 			winner_email = data.get('winner')
+			player1_score = data.get('player1Score')
+			player2_score = data.get('player2Score')
 			winner = User.objects.get(email=winner_email)
 			
 			# mise a jour du statut du jeu et le gagnant
-			game.status = 'finished'
-			game.winner = winner
+			game.was_won_by(winner, player1_score, player2_score)
 			game.save()
-			
-			# mise a jour des stats pour les joueurs
-			if game.player1 == winner:
-				game.player1.wins = F('wins') + 1
-				game.player2.losses = F('losses') + 1
-			else:
-				game.player1.losses = F('losses') + 1
-				game.player2.wins = F('wins') + 1
-			
 			game.player1.save()
 			game.player2.save()
 			
@@ -110,6 +102,7 @@ import pytz
 from django.utils import timezone
 
 @login_required
+@csrf_exempt
 def match_history(request):
 	user = request.user
 	games = Game.objects.filter(
@@ -117,7 +110,7 @@ def match_history(request):
 		status='finished'
 	).order_by('-created_at')  
 	paris_tz = pytz.timezone('Europe/Paris')
-	print(paris_tz)
+	# print(paris_tz)
 	history = []
 	for game in games:
 		game_time = game.finished_at or game.created_at
@@ -132,3 +125,16 @@ def match_history(request):
 		})
 	
 	return JsonResponse({'match_history': history})
+
+
+from django.utils import timezone
+
+@login_required
+@csrf_exempt
+def update_online_status(request):
+	if request.method == 'POST':
+		user = request.user
+		user.last_activity = timezone.now()
+		user.save()
+		return JsonResponse({'status': 'success'})
+	return JsonResponse({'status': 'error', 'message': 'Invalid request method'}, status=405)

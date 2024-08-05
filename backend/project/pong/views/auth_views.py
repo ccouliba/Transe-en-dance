@@ -148,9 +148,10 @@ def login_view(request):
 	username = data.get('username')
 	password = data.get('password')
 	user = authenticate(username=username, password=password)
+
 	if user is not None:
 		login(request, user)
-		# LoggingFunction(request=request, opname='Log-in')
+		user.login()#utilisation de la methode de la class user (pour online/offline)
 		return JsonResponse({'status': 'success'})
 	else:
 		return JsonResponse({'status': 'error', 'message': 'Invalid credentials'}, status=401)
@@ -158,9 +159,11 @@ def login_view(request):
 @loggingFunction
 @login_required
 def logout_view(request):
-	logout(request)
-	# LoggingFunction(request=request, opname='Log-out')
+	user = request.user
 	request.session.flush()
+	logout(request)
+	user.logout()#utilisation de la methode de la class user (pour online/offline)
+	
 	return JsonResponse({'status': 'success'})
 
 # Cette vue gere l'inscription des nouveaux utilisateurs

@@ -4,6 +4,11 @@ from django.contrib.auth.models import AbstractUser, Group, Permission
 from django.db.models import UniqueConstraint
 from django.utils import timezone
 from django.conf import settings
+from django.core.exceptions import ValidationError
+from django.db.models import UniqueConstraint
+
+from django.db.models import F #pour effectuer des opérations de mise à jour directement au niveau de la base de données sans d'abord récupérer les objets en mémoire
+from django.db.models import Q #pour construire des requêtes qui nécessitent des opérations logiques telles que OR et AND
 
 # class User(AbstractUser): #https://openclassrooms.com/fr/courses/7192426-allez-plus-loin-avec-le-framework-django/7386368-personnalisez-le-modele-utilisateur
 
@@ -12,7 +17,10 @@ class User(AbstractUser):
 	langue = models.CharField(max_length=10, blank=True, null=True)  # Langue de l'utilisateur
 	avatar = models.CharField(max_length=255, blank=True, null=True)  # URL ou chemin de l'avatar de l'utilisateur
 	friends = models.ManyToManyField('self', symmetrical=True, blank=True)  # Champ pour les amis
-	
+	is_online = models.BooleanField(default=False)
+
+
+  
 	avatar = models.ImageField(upload_to='avatars/', null=True, blank=True)
 
 	last_activity = models.DateTimeField(default=timezone.now)
@@ -55,6 +63,15 @@ class User(AbstractUser):
 			return (self.wins / self.total_games) * 100
 		return 0
 
+	def login(self):
+		self.is_online = True
+		self.last_activity = timezone.now()
+		self.save()
+
+	def logout(self):
+		self.is_online = False
+		self.save()
+
 #class qui permet de gerer les demandes d'amis. Si demande acceptee alors sauvegarde l'ami dans friends (cf. class user et dans bdd : `pong_user_friends``) 
 class Friendship(models.Model):
 	id_user_1 = models.ForeignKey(User, related_name='friendship_sender', on_delete=models.CASCADE, null = True, blank = True)
@@ -76,6 +93,7 @@ class Game(models.Model):
 	winner = models.ForeignKey(User, related_name='won_games', on_delete=models.SET_NULL, null=True, blank=True)
 	created_at = models.DateTimeField(auto_now_add=True,  null=True, blank=True)
 	finished_at = models.DateTimeField(null=True, blank=True)
+	status = models.CharField(max_length=20, choices=[('pending', 'Pending'), ('started', 'Started'), ('finished', 'Finished')], default='pending')
 	def finish(self, winner):
 		self.winner = winner
 		self.status = 'finished'
@@ -84,29 +102,44 @@ class Game(models.Model):
 	def __str__(self):
 		return f"Game {self.id}: {self.player1} vs {self.player2}"
 	
+	def was_won_by(self, winner, player1_score, player2_score):
+		self.status = 'finished'
+		self.winner = winner
+		self.player1_score  = player1_score
+		self.player2_score  = player2_score
+		
+		# mise a jour des stats pour les joueurs
+		if self.player1 == winner:
+			self.player1.wins = F('wins') + 1
+			self.player2.losses = F('losses') + 1
+		else:
+			self.player1.losses = F('losses') + 1
+			self.player2.wins = F('wins') + 1
+  
+  
+   
+
 class Tournament(models.Model):
 	name = models.CharField(max_length=100)
 	is_started = models.BooleanField(default=False)
 	start_date = models.DateTimeField(null=True, blank=True)
 	end_date = models.DateTimeField(null=True, blank=True)
-	winner = models.ForeignKey(User, related_name='won_tournaments', on_delete=models.SET_NULL, null=True, blank=True)
-
+	created_at = models.DateTimeField(auto_now_add=True, null=True)
+	participants = models.ManyToManyField(User, related_name='tournaments', blank=True)
+	aliases = models.JSONField(default=list, blank=True) 
+ 
+	def __init__(self, *args, **kwargs):
+		super().__init__(*args, **kwargs)
+		if not self.created_at:
+			self.created_at = timezone.now()
 	def __str__(self):
 		return self.name
 
-class Participate(models.Model):
-	player = models.ForeignKey(User, on_delete=models.CASCADE)
-	tournament = models.ForeignKey(Tournament, on_delete=models.CASCADE)
-	order_of_turn = models.IntegerField()
-	alias = models.CharField(max_length=50)
 
-	class Meta:
-		constraints = [
-			models.UniqueConstraint(fields=['player', 'tournament'], name='unique_player_tournament')
-		]
 
-	def __str__(self):
-		return f"{self.player} participates in {self.tournament} as {self.alias}, order of turn: {self.order_of_turn}"
+
+
+
 
 
 class Composed(models.Model):

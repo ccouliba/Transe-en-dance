@@ -63,7 +63,7 @@ function resetLoaded() {
 		// Verifie si un objet d'etat correspondant existe dans l'objet global window
 		if (typeof window[stateName] !== "undefined") {
 			// Si l'objet d'etat existe, reinitialise sa propriete isLoaded a false
-			console.log(stateName, "fdf")
+			// console.log(stateName, "fdf")
 			window[stateName].isLoaded = false;
 		}
 	});
@@ -73,22 +73,25 @@ let routes = {
 	"#home": () => mountComponent(Home),
 	"#play": () => mountComponent(Play),
 	"#profile": () => mountComponent(Profile),
-	"#friends": () => mountComponent(FriendsList),
+	"#friends": () => mountComponent(Friends),
+	"#friends_list": () => mountComponent(FriendsList),
+
 	"#404": () => mountComponent(Page404),
 	"#tournament": () => mountComponent(Tournament),
 	"#logout": () => mountComponent(Logout),
 	"#login": () => mountComponent(Login),
 	"#register": () => mountComponent(Register),
-	"#match_history": () => mountComponent(MatchHistory)
+	"#match_history": () => mountComponent(MatchHistory),
+	'#matchmaking': () => mountComponent(TournamentMatchmaking),
+
 };
 
 function cleanStates(){
-	if (friendsState.friendStatusInterval){
-		clearInterval(friendsState.friendStatusInterval)
-	}
+
 
 	if (playState.checkInterval){
 		clearInterval(playState.checkInterval)
+		playState.checkInterval = null
 	}
 
 	resetLoaded()
@@ -174,6 +177,29 @@ window.changePage = function (url) {
 		});
 };
 
+
+function httpGetJson(url){
+	return fetch(url, {
+		method: 'GET',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		credentials: 'include'
+	})
+}
+
+function httpPostJson(url, payload){
+	return fetch(url, {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify(payload),
+		credentials: 'include'
+	})
+}
+
+
 // Gérer l'événement `popstate`
 window.onpopstate = function (event) {
 	const page = event.state ? event.state.page : "404";
@@ -232,5 +258,4 @@ function updateMenu() {
 		menuContainer.innerHTML = Menu();
 	}
 }
-
 

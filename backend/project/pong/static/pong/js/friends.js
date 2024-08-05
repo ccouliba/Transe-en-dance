@@ -7,6 +7,68 @@ var friendsState = {
 	isLoaded: false, // indique si les donnees de cette page ont ete chargees (initialement faux)
 };
 
+function Friends() {
+	if (!friendsState.isLoaded) {
+		loadFriendsData();
+		return `<div>Loading...</div>`;
+	}
+
+	return `
+		<div class="container mt-5">
+			<div id="friends-forms">
+				${FriendsForms()}
+			</div>
+			<div id="friends-list">
+				${FriendsList()}
+			</div>
+		</div>
+	`;
+}
+
+function FriendsForms(){
+	return `
+	
+		${AddFriendForm()}
+		${AcceptFriendForm()}
+		${RemoveFriendForm()}
+
+	`
+}
+	
+function FriendsList() {
+    return `
+        <h1 class="mb-4">Friends list</h1>
+        
+        <button class="btn btn-primary mb-3" onclick="refreshFriendsList()">Refresh list</button>
+        
+        <h2>My friends</h2>
+        <ul id="friends-status-list" class="list-group mb-4">
+            ${friendsState.friends.map(friend => `
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    ${friend.username} (${friend.email}) - <span class="friend-status">${friend.isOnline ? "online" : "offline"}</span>
+                </li>
+            `).join('')}
+        </ul>
+        
+        <h2>Friend requests sent</h2>
+        <ul class="list-group mb-4">
+            ${friendsState.sentRequests.map(request => `
+                <li class="list-group-item">${request.username} (${request.email})</li>
+            `).join('')}
+        </ul>
+        
+        <h2>Friend requests received</h2>
+        <ul class="list-group mb-4">
+            ${friendsState.receivedRequests.map(request => `
+                <li class="list-group-item">
+                    ${request.username} (${request.email})
+                </li>
+            `).join('')}
+        </ul>
+    `;
+}
+
+
 // Fonction pour charger les donnees des amis du backend
 function loadFriendsData() {
 	let url = `/pong/api/friends_data/`;
@@ -19,13 +81,21 @@ function loadFriendsData() {
 			friendsState.sentRequests = data.sentRequests; // mise a jour des demandes envoyees
 			friendsState.receivedRequests = data.receivedRequests; // mise a jour des demandes recues
 			friendsState.isLoaded = true; // indiquer que les donnees sont chargees
-			mountComponent(FriendsList); // mise a jour de l'interface avec la liste des amis
+			// mountComponent(FriendsList); // mise a jour de l'interface avec la liste des amis
+			mountComponent(Friends); // mise a jour de l'interface avec la liste des amis
+			// Démarrer l'intervalle pour la mise à jour du statut des amis
+			console.log("friendsState.friendStatusInterval", friendsState.friendStatusInterval)
+			if (!friendsState.friendStatusInterval) {
+				friendsState.friendStatusInterval = setInterval(getFriendsStatus, 5 * 1000);
+			}
 		})
 		.catch(error => console.error('Error:', error));
 }
 
 function getFriendsStatus(){
+	console.log("in getfriendstatus")
 	let url = `/pong/api/friends/get-status/`;
+	
 	return fetch(url, {
 			credentials: "include" // inclure les cookies pour l'authentification
 		})
@@ -34,11 +104,21 @@ function getFriendsStatus(){
 			payload.statuses.forEach((isOnline, i) => {
 				friendsState.friends[i].isOnline = isOnline	
 			});
-
-			mountComponent(FriendsList)
+			updateFriendsStatus();
+			// mountComponent(FriendsList) 
 			
 		})
 		.catch(error => console.error('Error:', error));
+}
+
+function updateFriendsStatus() {
+    const statusList = document.getElementById('friends-status-list');
+    if (statusList) {
+        const statusSpans = statusList.querySelectorAll('.friend-status');
+        statusSpans.forEach((span, i) => {
+            span.textContent = friendsState.friends[i].isOnline ? "online" : "offline";
+        });
+    }
 }
 
 // Fonction pour rafraichir la liste des amis
@@ -187,55 +267,6 @@ function RemoveFriendForm() {
 				<button class="btn btn-danger" type="submit">Delete</button>
 			</div>
 		</form>
-	`;
-}
-
-function FriendsList() {
-	if (!friendsState.isLoaded) {
-		friendsState.friendStatusInterval = setInterval(getFriendsStatus, 10 * 1000)
-		
-		loadFriendsData();
-		return `<div>Loading...</div>`;
-	}
-
-	return `
-		
-		<div class="container mt-5">
-			${AddFriendForm()}
-			${AcceptFriendForm()}
-			${RemoveFriendForm()}
-
-			<h1 class="mb-4">Friends list</h1>
-			
-			<button class="btn btn-primary mb-3" onclick="refreshFriendsList()">Refresh list</button>
-			
-			<h2>My friends</h2>
-			<ul class="list-group mb-4">
-				${friendsState.friends.map(friend => {
-					return `
-						<li class="list-group-item d-flex justify-content-between align-items-center">
-							${friend.username} (${friend.email}) - ${friend.isOnline ? "online":"offline"}
-						</li>
-					`;
-				}).join('')}
-			</ul>
-			
-			<h2>Friend requests sent</h2>
-			<ul class="list-group mb-4">
-				${friendsState.sentRequests.map(request => `
-					<li class="list-group-item">${request.username} (${request.email})</li>
-				`).join('')}
-			</ul>
-			
-			<h2>Friend requests received</h2>
-			<ul class="list-group mb-4">
-				${friendsState.receivedRequests.map(request => `
-					<li class="list-group-item">
-						${request.username} (${request.email})
-					</li>
-				`).join('')}
-			</ul>
-		</div>
 	`;
 }
 

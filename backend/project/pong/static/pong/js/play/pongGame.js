@@ -62,8 +62,31 @@ function moveBall() {
 	}
 }
 
+
+function updateOnlineStatus() {
+	// let url = `/pong/api/games/finish_game/${gameId}/` 
+	fetch('/pong/api/games/update_online_status/', {
+		method: 'POST',
+		credentials: 'include',
+		headers: {
+			'Content-Type': 'application/json',
+		}
+	})
+	.then(response => response.json())
+	.then(data => {
+		if (data.status !== 'success') {
+			console.error('Failed to update online status:', data.message);
+		}
+	})
+	.catch(error => console.error('Error updating online status:', error));
+}
+
+
+
 // fonction pour initialiser le jeu
 function initializeGame() {
+
+	let onlineStatusInterval;
 	// selectionner le canvas et son contexte de dessin
 	const canvas = document.getElementById('pongCanvas');
 	if (canvas == null)
@@ -111,8 +134,10 @@ function initializeGame() {
 			requestAnimationFrame(update); // methode js qui demande au navigateur d'executer une fonction specifique avant le prochain rafraichissement de l'ecran (generalement 60 fps)
 		} else {
 			changePage("#play"); // si jeu est termine => forcer le rechargement de la page
+			// clearInterval(onlineStatusInterval);
 		}
 	}
+	// onlineStatusInterval = setInterval(updateOnlineStatus, 5000);
 
 		// ajoute un ecouteur d'evenement global pour empecher le defilement de la page
 	window.addEventListener('keydown', preventDefaultForScrollKeys, false);
@@ -159,6 +184,7 @@ function bindKeyboardEvents(){
 					preventDefaultForScrollKeys(event);
 					break;
 			}
+			
 		}
 	});
 
@@ -188,45 +214,14 @@ function updateProfileStats() {
 	.catch(error => console.error('Error updating profile stats:', error));
 }
 
-// fonction pour terminer le jeu
-function endGame() {
-	playState.gameOver = true; // indique que le jeu est termine
-	// determine le gagnant
-	const winner = playState.player1Score > playState.player2Score ? playState.player1Email : playState.player2Email;
-	finishGame(playState.gameId, winner); //pour les stats
-	// envoie une requete post a l'api pour mettre a jour la partie
-	fetch(`/pong/api/games/${playState.gameId}/update`, {
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/json',
-		},
-		body: JSON.stringify({
-			player1Score: playState.player1Score,
-			player2Score: playState.player2Score,
-			winner: winner
-		}),
-		credentials: 'include'
-	})
-	.then(response => response.json())
-	.then(data => {
-		playState.isLoaded = false; // forcer le rechargement pour la prochaine partie
-		changePage("#play");
-		updateProfileStats();
-	})
-	.catch(error => console.error('error:', error));
-}
 
 
 
-function finishGame(gameId, winnerEmail) {
-	fetch(`/pong/api/games/finish_game/${gameId}/`, {
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/json',
-		},
-		body: JSON.stringify({ winner: winnerEmail }),
-		credentials: 'include'
-	})
+function finishGame(gameId, player1Score, player2Score, winnerEmail) {
+
+	let url = `/pong/api/games/finish_game/${gameId}/` 
+	let payload = { winner: winnerEmail, player1Score, player2Score }
+	httpPostJson(url, payload)
 	.then(response => response.json())
 	.then(data => {
 		console.log('Game finished:', data);
@@ -275,4 +270,129 @@ function createGameInDatabase() {
 		}
 	})
 	.catch(error => console.error('error:', error));
+}
+
+
+
+function updateTournamentMatchScore(matchId, player1Score, player2Score, winner) {
+	
+	return fetch(`/pong/api/tournament/update_match_score/`, {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+			'X-CSRFToken': getCookie('csrftoken'),
+		},
+		body: JSON.stringify({
+			match_id: matchId,
+			player1_score: player1Score,
+			player2_score: player2Score,
+			winner: winner
+		})
+	})
+	.then(response => {
+		console.log('Server response status:', response.status);
+		return response.json();
+	})
+	.then(data => {
+		console.log('Server response data:', data);
+		if (data.status === 'success') {
+			console.log('Tournament match score updated successfully');
+			return data;
+		} else {
+			console.error('Error updating tournament match score:', data.message);
+			throw new Error(data.message);
+		}
+	})
+	.catch(error => {
+		console.error('Error in updateTournamentMatchScore:', error);
+		throw error;
+	});
+}
+
+function endGame() {
+	playState.gameOver = true;
+	const winner = playState.player1Score > playState.player2Score ? playState.player1Email : playState.player2Email;
+   
+	if (playState.isTournamentMatch) {
+		updateTournamentMatchScore(playState.gameId, playState.player1Score, playState.player2Score, winner)
+			.then((payload) => {
+				fetchMatchesAndRankings()
+				return
+				//changePage("#tournament");
+			})
+			.catch(error => {
+				console.error('Error updating tournament data:', error);
+				alert('An error occurred while updating the tournament. Please refresh the page.');
+			});
+	} else {
+		finishGame(playState.gameId, playState.player1Score, playState.player2Score, winner);
+		changePage("#play");
+	}
+	updateProfileStats();
+}
+
+
+
+function reloadTournamentData() {
+	return fetch(`/pong/api/tournament/${tournamentState.tournament.id}/matchmaking/`)
+		.then(response => {
+			if (!response.ok) {
+				throw new Error(`HTTP error! status: ${response.status}`);
+			}
+			return response.json();
+		})
+		.then(data => {
+			if (data.status === 'success') {
+				tournamentState.matches = data.matches;
+				tournamentState.rankings = data.rankings;
+				tournamentState.winner = data.winner;
+				tournamentState.aliases = data.aliases || {};
+			} else {
+				throw new Error('Error fetching tournament data: ' + data.message);
+			}
+		});
+}
+
+
+
+function backToTournament() {
+	playState.isTournamentMatch = false;
+	playState.tournamentId = null;
+	changePage("#tournamentmatchmaking");
+}
+
+function updateScore(gameId, player1Score, player2Score, winner) {
+	// fetch('/pong/api/games/create_game/', {
+	
+	return fetch(`/pong/api/games/update_score/`, {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+			'X-CSRFToken': getCookie('csrftoken'),
+		},
+		body: JSON.stringify({
+			game_id: matchId,
+			player1_score: player1Score,
+			player2_score: player2Score,
+			winner: winner
+		})
+	})
+	.then(response => {
+		console.log('Server response status:', response.status);
+		return response.json();
+	})
+	.then(data => {
+		console.log('Server response data:', data);
+		if (data.status === 'success') {
+			console.log('Score updated successfully');
+			return data;
+		} else {
+			console.error('Error score:', data.message);
+			throw new Error(data.message);
+		}
+	})
+	.catch(error => {
+		console.error('Error in updateScore:', error);
+		throw error;
+	});
 }

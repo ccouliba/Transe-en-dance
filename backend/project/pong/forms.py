@@ -4,6 +4,8 @@ from django.conf import settings
 from django.utils.translation import gettext_lazy as _
 from .models import User
 from django.contrib.auth.forms import UserCreationForm
+from django.core.exceptions import ValidationError
+from .models import User
 
 class RegisterForm(forms.ModelForm):
 	password = forms.CharField(widget=forms.PasswordInput)
@@ -41,3 +43,5 @@ class AvatarUploadForm(forms.ModelForm):
 	class Meta:
 		model = User
 		fields = ['avatar']
+  
+
