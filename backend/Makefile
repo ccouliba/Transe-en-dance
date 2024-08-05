@@ -6,7 +6,7 @@ BUILD	= docker compose build
 MIGRATE	= docker compose exec web python3 manage.py migrate
 
 # without the flag '-d', you should see in verbose server running
-RUN		= docker compose up
+RUN		= docker compose up -d
 
 # should use this when running with the -d option
 STOP	= docker compose stop
