@@ -12,82 +12,162 @@ var profileState = {
 	isLoaded: false // indique si les donnees du profil ont ete chargees (initialement faux)
 }
 
+loadTranslationScript(function() {
 // fonction pour afficher le profil utilisateur
 function Profile() {
 	// charge les donnees du profil depuis le backend
 	loadProfileFromBackend(); // get
 
 	// retourne une chaine de caracteres contenant le HTML du composant Profile
-	return `
-		<div class="container mt-5">
-			<h1 class="mb-4">profil</h1>
-			<div class="card">
-				<div class="card-body">
-				<h2 class="mt-4 mb-3" style="text-decoration: underline;">your information</h2>
-					<div class="row mb-3">
-						<div class="col-sm-3"><strong>username :</strong></div>
-						<div class="col-sm-9">${profileState.username}</div>
-					</div>
-					<div class="row mb-3">
-						<div class="col-sm-3"><strong>email :</strong></div>
-						<div class="col-sm-9">${profileState.email}</div>
-					</div>
-					<div class="row mb-3">
-						<div class="col-sm-3"><strong>first name :</strong></div>
-						<div class="col-sm-9">${profileState.firstname}</div>
-					</div>
-					<div class="row mb-3">
-						<div class="col-sm-3"><strong>last name :</strong></div>
-						<div class="col-sm-9">${profileState.lastname}</div>
-					</div>
-					<div class="row mb-3">
-						<div class="col-sm-3"><strong>todo : language :</strong></div>
-						<div class="col-sm-9">${profileState.langue}</div>
-					</div>
-					<div class="row mb-3">
-						<div class="col-sm-3"><strong>avatar :</strong></div>
-						<div class="col-sm-9">
-							<img src="${profileState.avatar_url}" alt="Avatar" style="width: 100px; height: 100px;">
-						</div>
-					</div>
-					<h2 class="mt-4 mb-3" style="text-decoration: underline;">your game statistics</h2>
-					<div class="row mb-3">
-						<div class="col-sm-3"><strong>wins :</strong></div>
-						<div class="col-sm-9">${profileState.wins}</div>
-					</div>
-					<div class="row mb-3">
-						<div class="col-sm-3"><strong>losses :</strong></div>
-						<div class="col-sm-9">${profileState.losses}</div>
-					</div>
-					<div class="row mb-3">
-						<div class="col-sm-3"><strong>total games played :</strong></div>
-						<div class="col-sm-9">${profileState.total_games}</div>
-					</div>
-					<div class="row mb-3">
-						<div class="col-sm-3"><strong>winning rate :</strong></div>
-						<div class="col-sm-9">${profileState.win_rate.toFixed(2)}%</div>
-					</div>
-				</div>
-			</div>
-			<h2 class="mt-4 mb-3" style="text-decoration: underline;">edit your information</h2>
-
-			<h3 class="mt-4 mb-3">modify username</h2>
-			${EditUsername()}
-			<h3 class="mt-4 mb-3">modify email</h2>
-			${EditEmail()}
-			<h3 class="mt-4 mb-3">modify first name</h2>
-			${EditFirstname()}
-			<h3 class="mt-4 mb-3">modify last name</h2>
-			${EditLastname()}
-			<h3 class="mt-4 mb-3">todo : modify langue</h2>
-			${EditLangue()}
-			<h3 class="mt-4 mb-3">modify avatar</h2>
-			${EditAvatar()}
-			<h3 class="mt-4 mb-3">modify password</h2>
-			${EditPassword()}
-		</div>
-	`;
+	return '<div class="container mt-5">'
+	+ '<h1 class="mb-4">' + gettext('profil') + '</h1>'
+	+ '<div class="card">'
+	+ '<div class="card-body">'
+	+ '<h2 class="mt-4 mb-3" style="text-decoration: underline;">' + gettext('your information') + '</h2>'
+	+ '<div class="row mb-3">'
+	+ '<div class="col-sm-3"><strong>' + gettext("username :") + '</strong></div>'
+	+ '<div class="col-sm-9">' + profileState.username + '</div>'
+	+ '</div>'
+	+ '<div class="row mb-3">'
+	+ '<div class="col-sm-3"><strong>' + gettext("email :") + '</strong></div>'
+	+ '<div class="col-sm-9">' + profileState.email + '</div>'
+	+ '</div>'
+	+ '<div class="row mb-3">'
+	+ '<div class="col-sm-3"><strong>' + gettext("first name :") + '</strong></div>'
+	+ '<div class="col-sm-9">' + profileState.firstname + '</div>'
+	+ '</div>'
+	+ '<div class="row mb-3">'
+	+ '<div class="col-sm-3"><strong>' + gettext("last name :") + '</strong></div>'
+	+ '<div class="col-sm-9">' + profileState.lastname + '</div>'
+	+ '</div>'
+	+ '<div class="row mb-3">'
+	+ '<div class="col-sm-3"><strong>todo : language :</strong></div>'
+	+ '<div class="col-sm-9">' + profileState.langue + '</div>'
+	+ '</div>'
+	+ '<div class="row mb-3">'
+	+ '<div class="col-sm-3"><strong>avatar :</strong></div>'
+	+ '<div class="col-sm-9">'
+	+ '<img src="' + profileState.avatar_url + '" alt="Avatar" style="width: 100px; height: 100px;">'
+	+ '</div>'
+	+ '</div>'
+	+ '<h2 class="mt-4 mb-3" style="text-decoration: underline;">' + gettext('your game statistics') + '</h2>'
+	+ '<div class="row mb-3">'
+	+ '<div class="col-sm-3"><strong>' + gettext('wins :') + '</strong></div>'
+	+ '<div class="col-sm-9">' + profileState.wins + '</div>'
+	+ '</div>'
+	+ '<div class="row mb-3">'
+	+ '<div class="col-sm-3"><strong>' + gettext('losses :') + '</strong></div>'
+	+ '<div class="col-sm-9">' + profileState.losses + '</div>'
+	+ '</div>'
+	+ '<div class="row mb-3">'
+	+ '<div class="col-sm-3"><strong>' + gettext('total games played :') + '</strong></div>'
+	+ '<div class="col-sm-9">' + profileState.total_games + '</div>'
+	+ '</div>'
+	+ '<div class="row mb-3">'
+	+ '<div class="col-sm-3"><strong>' + gettext("winning rate :") + '</strong></div>'
+	+ '<div class="col-sm-9">' + profileState.win_rate.toFixed(2) + '%</div>'
+	+ '</div>'
+	+ '</div>'
+	+ '</div>'
+	+ '<h2 class="mt-4 mb-3" style="text-decoration: underline;">' + gettext('edit your information') + '</h2>'
+	+ '<h3 class="mt-4 mb-3">' + gettext('modify username') + '</h3>'
+	+ EditUsername()
+	+ '<h3 class="mt-4 mb-3">' + gettext('modify email') + '</h3>'
+	+ EditEmail()
+	+ '<h3 class="mt-4 mb-3">' + gettext('modify first name') + '</h3>'
+	+ EditFirstname()
+	+ '<h3 class="mt-4 mb-3">' + gettext('modify last name') + '</h3>'
+	+ EditLastname()
+	+ '<h3 class="mt-4 mb-3">' + gettext('modify language') + '</h3>'
+	+ EditLangue()
+	+ '<h3 class="mt-4 mb-3">' + gettext('modify avatar') + '</h3>'
+	+ EditAvatar()
+	+ '<h3 class="mt-4 mb-3">' + gettext('modify password') + '</h3>'
+	+ EditPassword()
+	+ '</div>';
 }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        document.body.innerHTML = Home();
+    });
+});
+
+// // fonction pour afficher le profil utilisateur
+// function Profile() {
+// 	// charge les donnees du profil depuis le backend
+// 	loadProfileFromBackend(); // get
+
+// 	// retourne une chaine de caracteres contenant le HTML du composant Profile
+// 	return `
+// 		<div class="container mt-5">
+// 			<h1 class="mb-4">profil</h1>
+// 			<div class="card">
+// 				<div class="card-body">
+// 				<h2 class="mt-4 mb-3" style="text-decoration: underline;">your information</h2>
+// 					<div class="row mb-3">
+// 						<div class="col-sm-3"><strong>username :</strong></div>
+// 						<div class="col-sm-9">${profileState.username}</div>
+// 					</div>
+// 					<div class="row mb-3">
+// 						<div class="col-sm-3"><strong>email :</strong></div>
+// 						<div class="col-sm-9">${profileState.email}</div>
+// 					</div>
+// 					<div class="row mb-3">
+// 						<div class="col-sm-3"><strong>first name :</strong></div>
+// 						<div class="col-sm-9">${profileState.firstname}</div>
+// 					</div>
+// 					<div class="row mb-3">
+// 						<div class="col-sm-3"><strong>last name :</strong></div>
+// 						<div class="col-sm-9">${profileState.lastname}</div>
+// 					</div>
+// 					<div class="row mb-3">
+// 						<div class="col-sm-3"><strong>todo : language :</strong></div>
+// 						<div class="col-sm-9">${profileState.langue}</div>
+// 					</div>
+// 					<div class="row mb-3">
+// 						<div class="col-sm-3"><strong>avatar :</strong></div>
+// 						<div class="col-sm-9">
+// 							<img src="${profileState.avatar_url}" alt="Avatar" style="width: 100px; height: 100px;">
+// 						</div>
+// 					</div>
+// 					<h2 class="mt-4 mb-3" style="text-decoration: underline;">your game statistics</h2>
+// 					<div class="row mb-3">
+// 						<div class="col-sm-3"><strong>wins :</strong></div>
+// 						<div class="col-sm-9">${profileState.wins}</div>
+// 					</div>
+// 					<div class="row mb-3">
+// 						<div class="col-sm-3"><strong>losses :</strong></div>
+// 						<div class="col-sm-9">${profileState.losses}</div>
+// 					</div>
+// 					<div class="row mb-3">
+// 						<div class="col-sm-3"><strong>total games played :</strong></div>
+// 						<div class="col-sm-9">${profileState.total_games}</div>
+// 					</div>
+// 					<div class="row mb-3">
+// 						<div class="col-sm-3"><strong>winning rate :</strong></div>
+// 						<div class="col-sm-9">${profileState.win_rate.toFixed(2)}%</div>
+// 					</div>
+// 				</div>
+// 			</div>
+// 			<h2 class="mt-4 mb-3" style="text-decoration: underline;">edit your information</h2>
+
+// 			<h3 class="mt-4 mb-3">modify username</h2>
+// 			${EditUsername()}
+// 			<h3 class="mt-4 mb-3">modify email</h2>
+// 			${EditEmail()}
+// 			<h3 class="mt-4 mb-3">modify first name</h2>
+// 			${EditFirstname()}
+// 			<h3 class="mt-4 mb-3">modify last name</h2>
+// 			${EditLastname()}
+// 			<h3 class="mt-4 mb-3">todo : modify langue</h2>
+// 			${EditLangue()}
+// 			<h3 class="mt-4 mb-3">modify avatar</h2>
+// 			${EditAvatar()}
+// 			<h3 class="mt-4 mb-3">modify password</h2>
+// 			${EditPassword()}
+// 		</div>
+// 	`;
+// }
 
 // fonction pour charger les donnees du profil depuis le backend
 async function loadProfileFromBackend() {
@@ -258,31 +338,60 @@ function EditLastname() {
 }
 
 //todo : juste un modele a modifier
-function EditLangue() {
-	bindEvent(profileState, "#edit-langue", "submit", event => {
-		event.preventDefault();
-		const langueInput = event.target.elements.langue.value;
+// function EditLangue() {
+// 	bindEvent(profileState, "#edit-langue", "submit", event => {
+// 		event.preventDefault();
+// 		const langueInput = event.target.elements.langue.value;
 
-		profileState.langue = langueInput;
-		sendProfileToBackend({ 'langue': langueInput });
-		profileState.isLoaded = false;
-		mountComponent(Profile);
-	});
-	return `
-	<form id="edit-langue" class="mt-3">
-		<div class="input-group">
-			<input 
-				type="text" 
-				class="form-control" 
-				name="langue" 
-				value="${profileState.langue}" 
-				aria-label="New langue"
-			/>
-			<button class="btn btn-primary" type="submit">Modify</button>
-		</div>
-	</form>
-	`;
-}
+// 		profileState.langue = langueInput;
+// 		sendProfileToBackend({ 'langue': langueInput });
+// 		profileState.isLoaded = false;
+// 		mountComponent(Profile);
+// 	});
+// 	return `
+// 	<form id="edit-langue" class="mt-3">
+// 		<div class="input-group">
+// 			<input 
+// 				type="text" 
+// 				class="form-control" 
+// 				name="langue" 
+// 				value="${profileState.langue}" 
+// 				aria-label="New langue"
+// 			/>
+// 			<button class="btn btn-primary" type="submit">Modify</button>
+// 		</div>
+// 	</form>
+// 	`;
+// }
+loadTranslationScript(function() {
+    function EditLangue() {
+        bindEvent(profileState, "#edit-langue", "submit", event => {
+            event.preventDefault();
+            const langueInput = event.target.elements.langue.value;
+
+            profileState.langue = langueInput;
+            sendProfileToBackend({ 'langue': langueInput });
+            profileState.isLoaded = false;
+            mountComponent(Profile);
+        });
+
+        return '<form id="edit-langue" class="mt-3">'
+		+ '<div class="input-group">'
+		+ '<input '
+		+ 'type="text" '
+		+ 'class="form-control" '
+		+ 'name="langue" '
+		+ 'value="' + profileState.langue + '" '
+		+ 'aria-label="' + gettext('New language') + '"'
+		+ '/>'
+		+ '<button class="btn btn-primary" type="submit">' + gettext('Modify') + '</button>'
+		+ '</div>'
+		+ '</form>';
+	}
+
+    // Assuming you want to insert the EditLangue component into the body or a specific element
+    document.getElementById('edit-langue-container').innerHTML = EditLangue();
+});
 
 function EditAvatar() {
 	bindEvent(profileState, "#edit-avatar", "submit", event => {
