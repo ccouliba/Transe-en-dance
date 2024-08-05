@@ -1,5 +1,3 @@
-version: '4.3.0'
-
 services:
   web:
     container_name: backend
@@ -23,7 +21,7 @@ services:
       - db
     networks:
       - transcendance
-      - devops
+      # - devops
 
   db:
     image: postgres:15
