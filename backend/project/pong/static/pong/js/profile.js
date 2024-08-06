@@ -93,10 +93,14 @@ var profileState = {
 // });
 
 // fonction pour afficher le profil utilisateur
-function Profile() {
+function Profile(translations) {
 	// charge les donnees du profil depuis le backend
 	loadProfileFromBackend(); // get
 
+	const defaultMessage = "username :";
+   
+	// Use the fetched welcome message if available, otherwise fall back to the default message
+	const username = translations?.username || defaultMessage;
 	// retourne une chaine de caracteres contenant le HTML du composant Profile
 	return `
 		<div class="container mt-5">
@@ -105,7 +109,7 @@ function Profile() {
 				<div class="card-body">
 				<h2 class="mt-4 mb-3" style="text-decoration: underline;">your information</h2>
 					<div class="row mb-3">
-						<div class="col-sm-3"><strong>username :</strong></div>
+						<div class="col-sm-3"><strong>${username}</strong></div>
 						<div class="col-sm-9">${profileState.username}</div>
 					</div>
 					<div class="row mb-3">
@@ -541,3 +545,17 @@ function EditPassword() {
 	</form>
 	`;
 }
+// Home();
+function loadProfile(language) {
+	console.log("In loadProfile before: " + prefLang);
+	// var cookie = getCookie();
+	// console.log(navigator.language);
+	prefLang = language;
+	console.log("In loadProfile after: " + prefLang);
+    loadTranslations(prefLang).then(translations => {
+        document.getElementById('app').innerHTML = Profile(translations);
+    });
+}
+
+// Call the function to load content
+loadProfile(language);
