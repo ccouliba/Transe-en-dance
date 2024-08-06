@@ -45,6 +45,7 @@
 		return navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
 	}
 	// Gestion de la fermeture de l'onglet ou de la fenêtre
+	/*
 	window.addEventListener('beforeunload', function (e) {
 		handleLogout();
 		// Pour Firefox => retourner undefined pour éviter un message de confirmation
@@ -56,7 +57,7 @@
 	// Pour Chrome
 	if (!isFirefox()) {
 		window.addEventListener('unload', handleLogout);
-	}
+	} */
 		</script>
 		{% endblock %}
 	  </div>

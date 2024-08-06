@@ -13,7 +13,11 @@ from itertools import combinations
 from django.db.models import Q, F
 from django.db.models import IntegerField
 
-@csrf_exempt
+from django.utils import timezone
+from django.shortcuts import get_object_or_404
+
+
+
 @require_http_methods(["POST"])
 @login_required
 def create_tournament(request):
@@ -78,7 +82,6 @@ def tournament_view(request):
 			'tournament': None
 		})
 
-from django.shortcuts import get_object_or_404
 @login_required
 def tournament_detail(request, tournament_id):
 	# Récupérer le tournoi ou renvoyer une 404 si non trouvé
@@ -102,8 +105,8 @@ def tournament_detail(request, tournament_id):
 		'tournament': tournament_data
 	})
 
+
 @login_required
-@csrf_exempt
 @require_http_methods(["POST"])
 def add_participants(request, tournament_id):
 	try:
@@ -147,7 +150,6 @@ def add_participants(request, tournament_id):
 		return JsonResponse({'status': 'error', 'message': str(e)}, status=400)
 
 @login_required
-@csrf_exempt
 @require_http_methods(["POST"])
 def add_alias(request, tournament_id):
 	try:
@@ -184,9 +186,7 @@ def add_alias(request, tournament_id):
 		return JsonResponse({'status': 'error', 'message': str(e)}, status=400)
 
 
-from django.utils import timezone
 @login_required
-@csrf_exempt
 @require_http_methods(["POST"])
 def start_tournament(request, tournament_id):
 	try:
@@ -211,11 +211,6 @@ def start_tournament(request, tournament_id):
 		})
 	except Exception as e:
 		return JsonResponse({'status': 'error', 'message': str(e)}, status=400)
-
-
-
-
-
 
 
 
@@ -259,8 +254,6 @@ def tournament_matchmaking(request, tournament_id):
  
 @login_required
 @require_http_methods(["POST"])
-@csrf_exempt
-
 def finish_tournament(request, tournament_id):
 	try:
 		tournament = Tournament.objects.get(id=tournament_id)
@@ -281,7 +274,6 @@ import logging
 logger = logging.getLogger(__name__)
 
 @login_required
-@csrf_exempt
 @require_http_methods(["POST"])
 def update_match_score(request):
 	try:

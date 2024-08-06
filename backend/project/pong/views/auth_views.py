@@ -17,6 +17,10 @@ from pong.decorators.Logging import loggingFunction
 
 # import inspect
 
+from django.views.decorators.csrf import ensure_csrf_cookie
+
+
+@ensure_csrf_cookie
 def base_view(request):
 	return render(request, 'pong/base.html')
 
@@ -107,6 +111,7 @@ def get_user_from_api(request, access_token):
 
 # Cette vue gere le callback de l'authentification (ie la reponse recue apres que l'utilisateur ait autorise l'application via l'authentification via l'API d'Intra 42)
 @loggingFunction
+@csrf_exempt
 def auth_callback(request):
 	print("Received callback request:", request.GET)
 	api_response = get_response_from_api(request)
@@ -158,7 +163,6 @@ def login_view(request):
 
 @loggingFunction
 @login_required
-@csrf_exempt
 def logout_view(request):
 	user = request.user
 	request.session.flush()
@@ -169,7 +173,6 @@ def logout_view(request):
 
 # Cette vue gere l'inscription des nouveaux utilisateurs
 @loggingFunction
-@csrf_exempt
 def register_view(request):
 	try:
 		data = json.loads(request.body)
