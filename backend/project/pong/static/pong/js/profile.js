@@ -1,94 +1,97 @@
-// Declare un objet 'profileState' pour stocker les informations du profil utilisateur
+// declare un objet 'profileState' pour stocker les informations du profil utilisateur
 var profileState = {
-	username:"",
-	email:"",
-	firstname:"",
-	lastname:"",
-	id:"",
-	isLoaded:false  // indique si les donnees du profil ont ete chargees (initialement faux)
+	username: "", // nom d'utilisateur
+	email: "", // email de l'utilisateur
+	firstname: "", // prenom de l'utilisateur
+	lastname: "", // nom de famille de l'utilisateur
+	avatar: "",
+	wins: 0,
+	losses: 0,
+	total_games: 0,
+	win_rate: 0,
+	isLoaded: false // indique si les donnees du profil ont ete chargees (initialement faux)
 }
 
-function checkAuth() {
-	fetch('/pong/api/check_auth/', {
-		method: 'GET',
-		credentials: 'include',
-	})
-	.then(response => response.json())
-	.then(data => {
-		if (!data.isAuthenticated) {
-			changePage('#login');
-		}
-	});
-}
-
+// fonction pour afficher le profil utilisateur
 function Profile() {
+	// charge les donnees du profil depuis le backend
+	loadProfileFromBackend(); // get
 
-	// Charge les donnees du profil depuis le backend
-	loadProfileFromBackend() //get
-
-	// Retourne une chaine de caracteres contenant le HTML du composant Profile :
-	// - inclut le menu de navigation
-	// - affiche les informations du profil en utilisant les donnees de profileState
-	// - sections pour modifier les informations du profil
+	// retourne une chaine de caracteres contenant le HTML du composant Profile
 	return `
-		
-		<div>
-			<h1>Profile</h1>
-				<div class="container mt-5" id="profilePage">
-				<h1 id="profileUsernameHeader">Profile of ${ profileState.username }</h1>
-				<p id="profileEmailTxt">e-mail : <span id="profileValue">${ profileState.email }</span></p>
-				<p id="profileNameTxt">Name : <span id="profileValue">${ profileState.firstname } ${ profileState.lastname }</span></p>
-				<p id="profileIdTxt">ID : <span id="profileValue">${ profileState.id }</span></p>
+		<div class="container mt-5" id="profilePage">
+			<h1 class="mb-4">profil</h1>
+			<div class="card" id="profilePage">
+				<div class="card-body">
+				<h2 class="mt-4 mb-3" style="text-decoration: underline;">your information</h2>
+					<div class="row mb-3">
+						<div class="col-sm-3"><strong>username :</strong></div>
+						<div class="col-sm-9">${profileState.username}</div>
+					</div>
+					<div class="row mb-3">
+						<div class="col-sm-3"><strong>email :</strong></div>
+						<div class="col-sm-9">${profileState.email}</div>
+					</div>
+					<div class="row mb-3">
+						<div class="col-sm-3"><strong>first name :</strong></div>
+						<div class="col-sm-9">${profileState.firstname}</div>
+					</div>
+					<div class="row mb-3">
+						<div class="col-sm-3"><strong>last name :</strong></div>
+						<div class="col-sm-9">${profileState.lastname}</div>
+					</div>
+					<div class="row mb-3">
+						<div class="col-sm-3"><strong>todo : language :</strong></div>
+						<div class="col-sm-9">${profileState.langue}</div>
+					</div>
+					<div class="row mb-3">
+						<div class="col-sm-3"><strong>avatar :</strong></div>
+						<div class="col-sm-9">
+							<img src="${profileState.avatar_url}" alt="Avatar" style="width: 100px; height: 100px;">
+						</div>
+					</div>
+					<h2 class="mt-4 mb-3" style="text-decoration: underline;">your game statistics</h2>
+					<div class="row mb-3">
+						<div class="col-sm-3"><strong>wins :</strong></div>
+						<div class="col-sm-9">${profileState.wins}</div>
+					</div>
+					<div class="row mb-3">
+						<div class="col-sm-3"><strong>losses :</strong></div>
+						<div class="col-sm-9">${profileState.losses}</div>
+					</div>
+					<div class="row mb-3">
+						<div class="col-sm-3"><strong>total games played :</strong></div>
+						<div class="col-sm-9">${profileState.total_games}</div>
+					</div>
+					<div class="row mb-3">
+						<div class="col-sm-3"><strong>winning rate :</strong></div>
+						<div class="col-sm-9">${profileState.win_rate.toFixed(2)}%</div>
+					</div>
 				</div>
-		</div>
-		<br>
-		<div class="container">
-
-		</div>
-
-<div class="accordion" id="accordionExample">
+			</div>
+		<div class="accordion" id="accordionExample">
   <div class="accordion-item">
     <h2 class="accordion-header" id="headingTwo">
       <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-        Accordion Item #2
+        Edit profile
       </button>
     </h2>
     <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
       <div class="accordion-body">
-			<h3 class="mt-4 mb-3">Username</h2>
+			<h3 class="mt-4 mb-3">modify username</h2>
 			${EditUsername()}
-			<h3 class="mt-4 mb-3">Email</h2>
+			<h3 class="mt-4 mb-3">modify email</h2>
 			${EditEmail()}
-			<h3 class="mt-4 mb-3">First name</h2>
+			<h3 class="mt-4 mb-3">modify first name</h2>
 			${EditFirstname()}
-			<h3 class="mt-4 mb-3">Last name</h2>
+			<h3 class="mt-4 mb-3">modify last name</h2>
 			${EditLastname()}
-			<h3 class="mt-4 mb-3">Password</h2>
+			<h3 class="mt-4 mb-3">todo : modify langue</h2>
+			${EditLangue()}
+			<h3 class="mt-4 mb-3">modify avatar</h2>
+			${EditAvatar()}
+			<h3 class="mt-4 mb-3">modify password</h2>
 			${EditPassword()}
-      </div>
-    </div>
-  </div>
-</div><br/><br/>
-
-<button type="button" class="btn btn-primary" id="RGPDButton" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-	RGPD statements 
-</button>
-
-
-<!-- Modal -->
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="staticBackdropLabel">RGPD</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        RGPD, nous vendrons vos données pour du pognons, de la drogue ect tu connais.
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Revolt</button>
-        <button type="button" class="btn btn-primary">Accept</button>
       </div>
     </div>
   </div>
@@ -96,136 +99,130 @@ function Profile() {
 	`;
 }
 
-
-async function loadProfileFromBackend(){
-	
-	if (profileState.isLoaded == true){ //pour eviter des fetch infinis au backend
-		return 
+// fonction pour charger les donnees du profil depuis le backend
+async function loadProfileFromBackend() {
+	// verifier si les donnees du profil sont deja chargees
+	if (profileState.isLoaded) { // pour eviter des fetch infinis au backend
+		return;
 	}
 
-	let url = `/pong/api/profile` //calling my django views here thanks to urls.py
-	fetch(url, { //envoyer une requette http au backend (vue)
-		"credentials": "include" //pour envoyer les cookies au backend car fetch ne le fait pas automatiquement (ex : pour authentification si login required)
+	let url = `/pong/api/profile`; // url de l'API pour recuperer les donnees du profil
+	fetch(url, { // envoyer une requete http au backend (vue)
+		"credentials": "include" // pour envoyer les cookies au backend car fetch ne le fait pas automatiquement (ex : pour authentification si login required)
 	}).then(response => {
-		return response.json()//transformer mon json en objet js (y'a le username a l'interieur)
-	}).then(profile => { //promesse
-		profileState = {...profileState, ...profile}// utilisation d'un spread operator. Cree un nouvel objet profileState en combinant deux objets existants
-		mountComponent(Profile) //ce qui provoque la boucle infinie (cela se produirait si la fonction Profile() appelle a son tour loadProfileFromBackend())
-		profileState.isLoaded = true // hyper important car : 
-			// Lors du premier appel, isLoaded est false, donc la fonction continue.
-			// Apres avoir charge les donnees, profileState.isLoaded est mis a true.
-			// Lors des appels suivants, la condition if (profileState.isLoaded) est vraie, ce qui fait sortir immediatement de la fonction 
-	
-	})
-}
-
-// envoie des donnees de mise a jour du profil au backend
-// function sendProfileToBackend(payload) { //payload = un objet contenant les donnees a mettre a jour dans le profil
-// 	console.log("Authenticated:", !!localStorage.getItem('userToken'));
-// 	let url = `/pong/api/profile/update`;
-	
-// 	fetch(url, {
-// 		method: "POST",
-// 		credentials: "include", 
-// 		headers: { 
-// 			'Content-Type': 'application/json', 
-// 		},
-// 		body: JSON.stringify(payload) // convertit l'objet payload en chaine JSON
-// 	})
-// 	.then(response => response.json())  
-// 	.then(data => console.log('Success:', data))
-// 	.catch(error => console.error('Error:', error));
-// }
-
-function sendProfileToBackend(payload) {
-	console.log("Authenticated:", !!localStorage.getItem('userToken'));
-	let url = `/pong/api/profile/update`;
-	
-	fetch(url, {
-		method: "POST",
-		credentials: "include",// envoie les cookies avec la requete = important pour l'authentification
-		headers: { 
-			'Content-Type': 'application/json',// specifie que le contenu envoye est au format JSON
-			'Authorization': `Bearer ${localStorage.getItem('userToken')}`
-		},
-		body: JSON.stringify(payload)
-	})
-	.then(response => {
-		if (!response.ok) {
-			return response.text().then(text => {
-				throw new Error(`HTTP error! status: ${response.status}, message: ${text}`);
-			});
-		}
-		return response.json();
-	})
-	.then(data => console.log('Success:', data))
-	.catch(error => {
-		console.error('Error:', error);
-		alert('An error occurred while updating the profile. Please try again.');
+		return response.json(); // transformer la reponse en JSON
+	}).then(profile => { // promesse
+		// mise a jour de profileState avec les donnees recues
+		profileState = {
+			...profileState,
+			...profile,
+			total_games: profile.wins + profile.losses,
+			win_rate: profile.total_games > 0 ? (profile.wins / profile.total_games) * 100 : 0
+		}; // utilisation d'un spread operator
+		profileState.isLoaded = true;
+		mountComponent(Profile); // monter le composant Profile
+		// marquer les donnees du profil comme chargees
 	});
 }
 
-function EditUsername(){
+// fonction pour envoyer les donnees de mise a jour du profil au backend
+function sendProfileToBackend(payload) {
+	// console.log("authenticated:", !!localStorage.getItem('userToken'));
+	let url = `/pong/api/profile/update`; // url de l'API pour mettre a jour le profil
+
+	fetch(url, {
+			method: "POST", // methode POST pour envoyer les donnees
+			credentials: "include", // envoie les cookies avec la requete = important pour l'authentification
+			headers: {
+				'Content-Type': 'application/json', // specifie que le contenu envoye est au format JSON
+				'Authorization': `Bearer ${localStorage.getItem('userToken')}`
+			},
+			body: JSON.stringify(payload) // convertir l'objet payload en chaine JSON
+		})
+		.then(response => {
+			if (!response.ok) {
+				return response.text().then(text => {
+					throw new Error(`http error! status: ${response.status}, message: ${text}`);
+				});
+			}
+			return response.json(); // transformer la reponse en JSON
+		})
+		.then(data => console.log('success:', data))
+		.catch(error => {
+			console.error('error:', error);
+			alert('an error occurred while updating the profile. please try again.');
+		});
+}
+
+// fonction pour modifier le nom d'utilisateur
+function EditUsername() {
 	// ceci ne fonctionnerait pas :
 	// document.querySelector("#edit-username").addEventListener("submit", event => { ... })
-	
-	// on utilise bindEvent a la place :
+	// on utilise bindEvent a la place de addEventListener
 	bindEvent(profileState, "#edit-username", "submit", event => {
-		event.preventDefault() //pour ne pas que l'evenement submit soit execute par defaut
-		const usernameInput = event.target.elements.username.value
-		
-		profileState.username = usernameInput
-		sendProfileToBackend({'username': usernameInput})
-		profileState.isLoaded = false
-		mountComponent(Profile)
-	})
+		event.preventDefault(); // empecher l'execution par defaut de l'evenement submit
+		const usernameInput = event.target.elements.username.value; // recuperer la nouvelle valeur du nom d'utilisateur
+
+		profileState.username = usernameInput; // mettre a jour profileState
+		sendProfileToBackend({
+			'username': usernameInput
+		}); // envoyer les donnees au backend
+		profileState.isLoaded = false; // marquer les donnees du profil comme non chargees
+		mountComponent(Profile); // monter le composant Profile
+	});
 
 	return `
 		<form id="edit-username" class="mt-3">
 			<div class="input-group">
 				<input 
 					type="text" 
-					class="form-control" 
+					class="form-control"
+					id="username" 
 					name="username" 
 					value="${profileState.username}" 
 				/>
-				<button class="btn btn-primary" type="submit">Modify</button>
+				<button class="btn btn-primary" type="submit">modify</button>
 			</div>
 		</form>
-	`
+	`;
 }
 
-function EditEmail()
-{
+// fonction pour modifier l'email
+function EditEmail() {
 	bindEvent(profileState, "#edit-email", "submit", event => {
-		event.preventDefault()
-		const emailInput = event.target.elements.email.value
-		profileState.email = emailInput
-		sendProfileToBackend({'email': emailInput})
-		profileState.isLoaded = false
-		mountComponent(Profile)
-	})
+		event.preventDefault(); // empecher l'execution par defaut de l'evenement submit
+		const emailInput = event.target.elements.email.value; // recuperer la nouvelle valeur de l'email
+
+		profileState.email = emailInput; // mettre a jour profileState
+		sendProfileToBackend({
+			'email': emailInput
+		}); // envoyer les donnees au backend
+		profileState.isLoaded = false; // marquer les donnees du profil comme non chargees
+		mountComponent(Profile); // monter le composant Profile
+	});
 	return `
 		<form id="edit-email" class="mt-3">
 			<div class="input-group">
-				<input type="text" class="form-control" name="email" value="${profileState.email}" aria-label="New email">
-				<button class="btn btn-primary" type="submit">Modify</button>
+				<input type="text" class="form-control" id="email" name="email" value="${profileState.email}" aria-label="new email">
+				<button class="btn btn-primary" type="submit">modifier</button>
 			</div>
 		</form>
-	`	
+	`;
 }
 
-function EditFirstname()
-{
-	bindEvent(profileState, "#edit-first-name", "submit", event =>
-	{
-		event.preventDefault()
-		const firstnameInput = event.target.elements.firstname.value
-		profileState.firstname = firstnameInput
-		sendProfileToBackend({'firstname':firstnameInput})
-		profileState.isLoaded = false
-		mountComponent(Profile)
-	})
+// fonction pour modifier le prenom
+function EditFirstname() {
+	bindEvent(profileState, "#edit-first-name", "submit", event => {
+		event.preventDefault(); // empecher l'execution par defaut de l'evenement submit
+		const firstnameInput = event.target.elements.firstname.value; // recuperer la nouvelle valeur du prenom
+
+		profileState.firstname = firstnameInput; // mettre a jour profileState
+		sendProfileToBackend({
+			'firstname': firstnameInput
+		}); // envoyer les donnees au backend
+		profileState.isLoaded = false; // marquer les donnees du profil comme non chargees
+		mountComponent(Profile); // monter le composant Profile
+	});
 	return `
 	<form id="edit-first-name" class="mt-3">
 		<div class="input-group">
@@ -233,111 +230,196 @@ function EditFirstname()
 				type="text" 
 				class="form-control" 
 				name="firstname" 
+				id="firstname"
 				value="${profileState.firstname}" 
-				aria-label="New first name"
+				aria-label="new first name"
 			/>
-			<button class="btn btn-primary" type="submit">Modify</button>
+			<button class="btn btn-primary" type="submit">modifier</button>
 		</div>
 	</form>
-`	
+	`;
 }
 
-function EditLastname()
-{
-	bindEvent(profileState, "#edit-last-name", "submit", event =>
-	{
-		event.preventDefault()
-		const lastnameInput = event.target.elements.lastname.value
-		profileState.lastname = lastnameInput
-		sendProfileToBackend({'lastname': lastnameInput})
-		profileState.isLoaded = false
-		mountComponent(Profile)
-	})
+// fonction pour modifier le nom de famille
+function EditLastname() {
+	bindEvent(profileState, "#edit-last-name", "submit", event => {
+		event.preventDefault(); // empecher l'execution par defaut de l'evenement submit
+		const lastnameInput = event.target.elements.lastname.value; // recuperer la nouvelle valeur du nom de famille
+
+		profileState.lastname = lastnameInput; // mettre a jour profileState
+		sendProfileToBackend({
+			'lastname': lastnameInput
+		}); // envoyer les donnees au backend
+		profileState.isLoaded = false; // marquer les donnees du profil comme non chargees
+		mountComponent(Profile); // monter le composant Profile
+	});
 	return `
 	<form id="edit-last-name" class="mt-3">
 		<div class="input-group">
 			<input 
 				type="text" 
 				class="form-control" 
-				name="lastname" 
+				name="lastname"
+				id="lastname" 
 				value="${profileState.lastname}" 
-				aria-label="New last name"
+				aria-label="new last name"
+			/>
+			<button class="btn btn-primary" type="submit">modifier</button>
+		</div>
+	</form>
+	`;
+}
+
+//todo : juste un modele a modifier
+function EditLangue() {
+	bindEvent(profileState, "#edit-langue", "submit", event => {
+		event.preventDefault();
+		const langueInput = event.target.elements.langue.value;
+
+		profileState.langue = langueInput;
+		sendProfileToBackend({ 'langue': langueInput });
+		profileState.isLoaded = false;
+		mountComponent(Profile);
+	});
+	return `
+<label for="languageSelector" id="languageLabel">Select your language&nbsp;:</label>
+<select class="form-select" name="languageSelector" id="languageSelector">
+  <!-- <option selected>Open this select menu</option> -->
+  <option value="en" id="englishOption">English 🇺🇸</option>
+  <option value="fr" id="frenchOption">Francais 🇫🇷</option>
+  <option value="es" id="spanishOption">Espanol 🇪🇸</option>
+  <option value="it" id="italianOption">Italiano 🇮🇹</option>
+</select>
+	<form id="edit-langue" class="mt-3">
+		<div class="input-group">
+			<input 
+				type="text" 
+				class="form-control" 
+				name="langue" 
+				value="${profileState.langue}" 
+				aria-label="New langue"
 			/>
 			<button class="btn btn-primary" type="submit">Modify</button>
 		</div>
 	</form>
-`	
+	`;
 }
 
-function EditPassword() {
-	// Attache un evenement submit au formulaire avec l'id => edit-password-form
-	bindEvent(profileState, "#edit-password-form", "submit", event => {
-		// Empeche le comportement par defaut du formulaire ie soumission et rechargement de la page
+function EditAvatar() {
+	bindEvent(profileState, "#edit-avatar", "submit", event => {
 		event.preventDefault();
-		// Recupere la valeur du champ 'old_password' du formulaire
+		const avatarInput = event.target.elements.avatar;
+		
+		if (avatarInput.files && avatarInput.files[0]) {
+			const formData = new FormData();
+			formData.append('avatar', avatarInput.files[0]);
+			fetch('/pong/api/profile/upload-avatar/', {
+				method: 'POST',
+				body: formData,
+				credentials: 'include',
+			})
+			.then(response => response.json())
+			.then(data => {
+				if (data.status === 'success') {
+					profileState.avatar = data.avatar_url;
+					profileState.isLoaded = false;
+					mountComponent(Profile);
+				} else {
+					alert('Error uploading avatar: ' + JSON.stringify(data.errors));
+				}
+			})
+			.catch(error => {
+				console.error('Error:', error);
+				alert('An error occurred while uploading the avatar. Please try again.');
+			});
+		}
+	});
+
+	return `
+	<form id="edit-avatar" class="mt-3">
+		<div class="input-group">
+			<input 
+				type="file" 
+				class="form-control" 
+				name="avatar" 
+				accept="image/*"
+			/>
+			<button class="btn btn-primary" type="submit">Upload Avatar</button>
+		</div>
+	</form>
+	`;
+}
+
+// fonction pour modifier le mot de passe
+function EditPassword() {
+	// attache un evenement submit au formulaire avec l'id => edit-password-form
+	bindEvent(profileState, "#edit-password-form", "submit", event => {
+		// empeche le comportement par defaut du formulaire ie soumission et rechargement de la page
+		event.preventDefault();
+		// recupere la valeur du champ 'old_password' du formulaire
 		const oldPassword = event.target.elements.old_password.value;
-		// Recupere la valeur du champ 'new_password1' du formulaire
+		// recupere la valeur du champ 'new_password1' du formulaire
 		const newPassword1 = event.target.elements.new_password1.value;
-		// Recupere la valeur du champ 'new_password2' du formulaire
+		// recupere la valeur du champ 'new_password2' du formulaire
 		const newPassword2 = event.target.elements.new_password2.value;
 
 		let url = `/pong/api/profile/change-password`;
-						
-		// Envoie une requete POST a l'API pour changer le mot de passe
+
+		// envoie une requete POST a l'API pour changer le mot de passe
 		fetch(url, {
-			method: 'POST',
-			// Headers de la requete en incluant le type de contenu et le token CSRF
-			headers: {
-				'Content-Type': 'application/json',
-				'X-CSRFToken': getCookie('csrftoken')
-			},
-			// Corps de la requete converti en JSON
-			body: JSON.stringify({
-				old_password: oldPassword,
-				new_password1: newPassword1,
-				new_password2: newPassword2
-			}),
-			// Inclut les cookies avec la requete pour l'authentification
-			credentials: 'include'
-		})
-		// Parse la reponse en JSON
-		.then(response => response.json())
-		// Traite les donnees recues de l'API
-		.then(data => {
-			// Si le changement de mot de passe est reussi
-			if (data.status === 'success') {
-				alert('Password changed successfully');
-				// Marque les donnees de profil comme non chargees
-				profileState.isLoaded = false;
-				// Recharge le composant du profil
-				mountComponent(Profile);
-			} else {
-				// Prepare un message d'erreur en cas d'echec
-				let errorMessage = "There were errors changing your password:\n\n";
-				// Si l'ancien mot de passe est incorrect
-				if (data.errors.old_password) {
-					errorMessage += "- Your old password was entered incorrectly. Please try again.\n";
+				method: 'POST',
+				// headers de la requete en incluant le type de contenu et le token csrf
+				headers: {
+					'Content-Type': 'application/json',
+					'X-CSRFToken': getCookie('csrftoken')
+				},
+				// corps de la requete converti en JSON
+				body: JSON.stringify({
+					old_password: oldPassword,
+					new_password1: newPassword1,
+					new_password2: newPassword2
+				}),
+				// inclut les cookies avec la requete pour l'authentification
+				credentials: 'include'
+			})
+			// parse la reponse en JSON
+			.then(response => response.json())
+			// traite les donnees recues de l'API
+			.then(data => {
+				// si le changement de mot de passe est reussi
+				if (data.status === 'success') {
+					alert('password changed successfully');
+					// marque les donnees de profil comme non chargees
+					profileState.isLoaded = false;
+					// recharge le composant du profil
+					mountComponent(Profile);
+				} else {
+					// prepare un message d'erreur en cas d'echec
+					let errorMessage = "there were errors changing your password:\n\n";
+					// si l'ancien mot de passe est incorrect
+					if (data.errors.old_password) {
+						errorMessage += "- your old password was entered incorrectly. please try again.\n";
+					}
+					// si le nouveau mot de passe ne repond pas aux criteres de securite
+					if (data.errors.new_password2) {
+						errorMessage += "- please choose a more secure password.\n";
+						errorMessage += "\nfor a strong password:\n";
+						errorMessage += "- use a mix of uppercase and lowercase letters, numbers, and symbols\n";
+						errorMessage += "- avoid using personal information like birthdates or names\n";
+						errorMessage += "- make it at least 12 characters long\n";
+					}
+					// affiche le message d'erreur
+					alert(errorMessage);
 				}
-				// Si le nouveau mot de passe ne repond pas aux criteres de securite
-				if (data.errors.new_password2) {
-					errorMessage += "- Please choose a more secure password.\n";
-					errorMessage += "\nFor a strong password:\n";
-					errorMessage += "- Use a mix of uppercase and lowercase letters, numbers, and symbols\n";
-					errorMessage += "- Avoid using personal information like birthdates or names\n";
-					errorMessage += "- Make it at least 12 characters long\n";
-				}
-				// Affiche le message d'erreur
-				alert(errorMessage);
-			}
-		})
-		// Traite les erreurs de la requete
-		.catch(error => {
-			console.error('Error:', error);
-			alert('An error occurred. Please try again.');
-		});
+			})
+			// traite les erreurs de la requete
+			.catch(error => {
+				console.error('error:', error);
+				alert('an error occurred. please try again.');
+			});
 	});
 
-	// Retourne le formulaire HTML pour changer le mot de passe
+	// retourne le formulaire html pour changer le mot de passe
 	return `
 	<form id="edit-password-form" class="mt-3">
 		<div class="input-group mt-3">
@@ -345,34 +427,32 @@ function EditPassword() {
 				type="password" 
 				class="form-control" 
 				name="old_password" 
-				placeholder="Old password" 
+				id="old_password" 
+				placeholder="old password" 
 				required
 			/>
 		</div>
 		<div class="input-group mt-3">
 			<input 
 				type="password" 
-				class="form-control" 
+				class="form-control"
+				id="new_password1" 
 				name="new_password1" 
-				placeholder="New password" 
+				placeholder="new password" 
 				required
 			/>
 		</div>
 		<div class="input-group mt-3">
 			<input 
 				type="password" 
-				class="form-control" 
+				class="form-control"
+				id="new_password2"  
 				name="new_password2" 
-				placeholder="Confirm new password" 
+				placeholder="confirm new password" 
 				required
 			/>
 		</div>
-		<button class="btn btn-primary mt-3" type="submit">Change Password</button>
+		<button class="btn btn-primary mt-3" type="submit">change password</button>
 	</form>
-
 	`;
 }
-
-
-
-

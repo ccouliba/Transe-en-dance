@@ -124,48 +124,41 @@ def friends_data(request):
 	received_requests = Friendship.objects.filter(id_user_2=user).exclude(id_user_1__in=user.friends.all())
 
 	return JsonResponse({
-		'friends': [{'username': friend.username, 'email': friend.email} for friend in friends],
+		'friends': [{'username': friend.username, 'email': friend.email, "isOnline": friend.is_online} for friend in friends],
 		'sentRequests': [{'username': req.id_user_2.username, 'email': req.id_user_2.email} for req in sent_requests],
 		'receivedRequests': [{'username': req.id_user_1.username, 'email': req.id_user_1.email} for req in received_requests],
 	})
 
-# # Cette vue gere l'acceptation d'une demande d'ami en verifiant d'abord si elle est deja acceptee puis en ajoutant chaque utilisateur a la liste d'amis de l'autre et en supprimant la demande acceptee
-# @login_required
-# @require_POST
-# @csrf_exempt# TO DO : ENLEVER CELA C EST JUSTE POUR LES TESTS AVEC POSTMAN !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-# def refuse_friend_request(request):
-# 	payload = json.loads(request.body)
-# 	request_id = payload.get('request_id')
- 
-# 	friend_request = get_object_or_404(Friendship, id=request_id)
+from typing import List
+from django.utils import timezone
+from datetime import timedelta
 
-# 	# Refuser la demande d'ami en supprimant l'entree dans la base de données
-# 	friend_request.delete()
+def	are_user_online(friends:List[User]):
+	statuses = []
+	for friend in friends:
+		statuses.append(friend.is_online)
+	return statuses
+	# statuses = []
+	# now = timezone.now()
+	# threshold = timedelta(seconds=10)  #definir la periode pour considerer un user comme en ligne 
+	# for friend in friends:
+	# 	if friend.last_activity is None:
+	# 		is_online = False
+	# 	else:
+	# 		time_since_last_activity = now - friend.last_activity #difference entre maintenant et derniere activite du user
+	# 		# print(time_since_last_activity, friend.last_activity)
+	# 		is_online = time_since_last_activity < threshold #verifier si cette différence est inferieure au seuil (threshold)
+	# 	statuses.append(is_online) 
+	# return statuses
 
-# 	return JsonResponse({'status': 'friend_request_refused', 'request_id': request_id})
 
-# # Cette vue gère le retrait d'une demande d'ami envoyée
-# @login_required
-# @require_POST
-# @csrf_exempt
-# def remove_friend_request(request):
-# 	payload = json.loads(request.body)
-# 	request_id = payload.get('request_id')
-# 	friend_request = get_object_or_404(Friendship, id=request_id, id_user_1=request.user)
-# 	friend_request.delete()
-# 	return JsonResponse({'status': 'success', 'message': 'Demande d\'ami retirée avec succès.'})
 
-# # Cette vue gère la suppression d'un ami
-# @login_required
-# @require_POST
-# @csrf_exempt
-# def unfriend(request):
-# 	payload = json.loads(request.body)
-# 	friend_id = payload.get('friend_id')
-# 	friend = get_object_or_404(User, id=friend_id)
-	
-# 	# Supprimer l'ami des deux côtés
-# 	request.user.friends.remove(friend)
-# 	friend.friends.remove(request.user)
-	
-# 	return JsonResponse({'status': 'success', 'message': 'Ami supprimé avec succès.'})
+@login_required
+@csrf_exempt
+def friends_online_status(request):
+	user = request.user
+	friends = user.friends.all()
+	statuses = are_user_online(friends)
+	print("friends_online_status", user, statuses)
+	payload = {"statuses":statuses}
+	return JsonResponse(payload)

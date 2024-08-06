@@ -1,6 +1,26 @@
 function Menu() {
 	const isLoggedIn = localStorage.getItem('userToken') === 'true';
 	return `
+		<nav class="navbar">
+			${isLoggedIn ? `
+				<a href="#home" onclick="changePage('#home'); return false;">Home</a>
+				<a href="#play" onclick="changePage('#play'); return false;">Play</a>
+				<a href="#tournament" onclick="changePage('#tournament'); return false;">Tournament</a>
+				<a href="#profile" onclick="changePage('#profile'); return false;">Profil</a>
+				<a href="#friends" onclick="changePage('#friends'); return false;">Friends</a>
+				<a href="#profile" onclick="changePage('#match_history'); return false;">Match history</a>
+				<a href="#" onclick="logout(); return false;">Logout</a>
+			` : `
+				
+			`}
+		</nav>
+	`;
+}
+
+
+function Menu() {
+	const isLoggedIn = localStorage.getItem('userToken') === 'true';
+	return `
 		<div class="menuStructureTop">
 			<nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-custom">
 				<div class="container-fluid">
@@ -23,6 +43,9 @@ function Menu() {
 								<li class="nav-item flex-grow-1 text-center">
 									<a class="nav-link" aria-current="page" href="#friends" id="navbarFriendsLink" onclick="changePage('#friends'); return false;">Friends</a>
 								</li>
+								<li class="nav-item flex-grow-1 text-center">
+									<a class="nav-link" aria-current="page" href="#match_history" id="navbarHistoryLink" onclick="changePage('#match_history'); return false;">Match history</a>
+								</li>
 								</ul>
 								<ul class="navbar-nav ms-auto">
 									<li class="nav-item">
@@ -38,3 +61,4 @@ function Menu() {
 		</div>
 	`;
 }
+// a voir si jamais pas logged in, ce que l'on veut afficher

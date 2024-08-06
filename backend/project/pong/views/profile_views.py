@@ -11,21 +11,23 @@ from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
 from pong.models import User, Friendship
 from .. import forms
+from pong.forms import AvatarUploadForm
+from django.views.decorators.csrf import csrf_exempt
 
 # This view for multilang
 @login_required
 def change_language(request):
-    if request.method == 'POST':
-        form = forms.SetLanguageForm(request.POST)
-        if form.is_valid():
-            user_language = form.cleaned_data['language']
-            translation.activate(user_language)
-            response = redirect('/pong/home')
-            response.set_cookie(settings.LANGUAGE_COOKIE_NAME, user_language)
-            return response
-    else:
-        form = forms.SetLanguageForm()
-    return render(request, 'pong/change_language.html', {'form': form})
+	if request.method == 'POST':
+		form = forms.SetLanguageForm(request.POST)
+		if form.is_valid():
+			user_language = form.cleaned_data['language']
+			translation.activate(user_language)
+			response = redirect('/pong/home')
+			response.set_cookie(settings.LANGUAGE_COOKIE_NAME, user_language)
+			return response
+	else:
+		form = forms.SetLanguageForm()
+	return render(request, 'pong/change_language.html', {'form': form})
 from django.views.decorators.http import require_POST
 from django.views.decorators.csrf import csrf_exempt
 import json
@@ -54,6 +56,15 @@ def	profile_update_view(request):
 		if 'lastname' in data:
 			user.last_name = data['lastname']
 			updated.append('lastname')
+		
+		#todo : a modifier
+		if 'langue' in data:
+			user.langue = data['langue']
+			updated.append('langue')
+		
+		if 'avatar' in data:
+			user.last_name = data['avatar']
+			updated.append('avatar')
 
 		if updated:
 			user.save()
@@ -72,17 +83,26 @@ def	profile_update_view(request):
 @login_required
 def profile_view(request):
 	user = request.user
-	friends = user.friends.all()
-	sent_requests = Friendship.objects.filter(id_user_1=user)
-	received_requests = Friendship.objects.filter(id_user_2=user)
+
+	# user.was_active_now()
+	# user.save()
+	# print("user er", user.last_activity)
+
+	# friends = user.friends.all()
+	# sent_requests = Friendship.objects.filter(id_user_1=user)
+	# received_requests = Friendship.objects.filter(id_user_2=user)
  
 	return JsonResponse({
 		'username': user.username,
 		'email': user.email,
 		'firstname': user.first_name,
 		'lastname' : user.last_name,
-		'id' :user.id
-  
+		'id' :user.id,
+		'avatar_url': user.get_avatar_url(),
+		'wins': user.wins,
+		'losses': user.losses,
+		'total_games': user.total_games,
+		'win_rate': round(user.win_rate, 2)
   
 	})
  
@@ -142,6 +162,18 @@ def edit_password_view(request):
 	except Exception as e:
 		# Si une autre erreur se produit :
 		return JsonResponse({'status': 'error', 'message': str(e)}, status=500)
+
+
+
+@login_required
+@require_POST
+@csrf_exempt
+def upload_avatar(request):
+	form = AvatarUploadForm(request.POST, request.FILES, instance=request.user)
+	if form.is_valid():
+		form.save()
+		return JsonResponse({'status': 'success', 'avatar_url': request.user.get_avatar_url()})  # Utilisez la nouvelle méthode ici
+	return JsonResponse({'status': 'error', 'errors': form.errors}, status=400)
 
 # Can be changed any time ! Just a simple view linked to a template/form that works
 # Cette vue permet a l'utilisateur connecte de supprimer son compte et de rediriger vers la page d'accueil

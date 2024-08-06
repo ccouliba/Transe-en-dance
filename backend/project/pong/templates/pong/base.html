@@ -7,41 +7,69 @@
 	<link rel="stylesheet" href="{% static 'pong/css/bootstrap.min.css' %}" />
 	<link rel="stylesheet" href="{% static 'pong/css/TrajanPro.css' %}" />
 	<link rel="stylesheet" href="{% static 'pong/css/frontstyle.css' %}" />
+	<link rel="icon" href="{% static 'pong/images/favicon.ico' %}" type="image/x-icon">
   </head>
   <body>
-	  <script src="{% static 'pong/js/menu.js' %}"></script>
-	  <script src="{% static 'pong/js/home.js' %}"></script>
-	  <script src="{% static 'pong/js/play.js' %}"></script>
-	  <script src="{% static 'pong/js/friends.js' %}"></script>
-	  <script src="{% static 'pong/js/tournament.js' %}"></script>
-	  <script src="{% static 'pong/js/logout.js' %}"></script>
-	  <script src="{% static 'pong/js/404.js' %}"></script>
-	  <script src="{% static 'pong/js/profile.js' %}"></script>
-	  <script src="{% static 'pong/js/login.js' %}"></script>
-	  <script src="{% static 'pong/js/main.js' %}"></script>
-	  <header>
-		  <!-- <h1 class="pong-title">PONG</h1> -->
-		  <div id="menu-container"></div>
-	  </header>
-	  <main>
-		  <div id="app" class="container">
+	<header>
+		<h1 class="pong-title">PONG</h1>
+		<div id="menu-container"></div>
+	</header>
+	<script src="{% static 'pong/js/menu.js' %}"></script>
+	<script src="{% static 'pong/js/home.js' %}"></script>
+	<script src="{% static 'pong/js/play/play.js' %}"></script>
+	<script src="{% static 'pong/js/play/pongGame.js' %}"></script>
+
+	<script src="{% static 'pong/js/friends.js' %}"></script>
+	<script src="{% static 'pong/js/tournament/tournament.js' %}"></script>
+	
+	<script src="{% static 'pong/js/tournament/tournamentDetail.js' %}"></script>
+	<script src="{% static 'pong/js/tournament/matchmaking.js' %}"></script>
+	<script src="{% static 'pong/js/logout.js' %}"></script>
+	<script src="{% static 'pong/js/404.js' %}"></script>
+	<script src="{% static 'pong/js/profile.js' %}"></script>
+	<script src="{% static 'pong/js/login.js' %}"></script>
+	<script src="{% static 'pong/js/register.js' %}"></script>
+	<script src="{% static 'pong/js/main.js' %}"></script>
+	<script src="{% static 'pong/js/matchHistory.js' %}"></script>
+	<!-- <p><script src="{% static 'pong/js/iaAlgo.js' %}"></script></p> -->
+	<main>
+	  <div id="app">
 		{% block content %}
 		<script>
-		  // est ce que l'utilisateur est connecte ?
-		  fetch('/pong/api/check_auth')
-			.then(response => response.json())
-			.then(data => {
-			  if (data.is_authenticated) {
-				changePage("#home");
-			  } else {
-				changePage("#login");
-			  }
-			})
-			.catch(error => {
-			  console.error('Error:', error);
-			  changePage("#login");
-			});
+
+			let hash = window.location.hash
+			
+
+			changePage(hash);
+	
+	function handleLogout() {
+
+		logout();
+		navigator.sendBeacon('/pong/api/logout/', '', { method: 'POST', credentials: 'include' });
+	}
+
+	function isFirefox() {
+		return navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
+	}
+
+	// Gestion de la fermeture de l'onglet ou de la fenêtre
+	window.addEventListener('beforeunload', function (e) {
+		handleLogout();
+		// Pour Firefox => retourner undefined pour éviter un message de confirmation
+		if (isFirefox()) {
+			e.preventDefault(); // Annule l'événement
+			e.returnValue = '';
+		}
+	});
+
+	// Pour Chrome
+	if (!isFirefox()) {
+		window.addEventListener('unload', handleLogout);
+	}
+
+
 		</script>
+
 		{% endblock %}
 	  </div>
 	</main>

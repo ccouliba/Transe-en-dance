@@ -1,0 +1,86 @@
+/* static/pong/css/style.css */
+body {
+    font-family: Arial, sans-serif;
+    display: flex;  /* Ajout pour le layout flex */
+    min-height: 100vh;  /* Ajout pour s'assurer que le corps prend toute la hauteur de la vue */
+    flex-direction: column;  /* Ajout pour que les enfants soient en colonne */
+    margin: 0;  /* Ajout pour supprimer les marges par défaut */
+}
+
+main {
+    flex: 1;  /* Ajout pour que le main prenne l'espace disponible */
+}
+
+footer {
+    background: #333;  /* Ajout de couleur de fond pour le footer */
+    color: white;  /* Couleur du texte */
+    text-align: center;  /* Centrer le texte */
+    padding: 1em 0;  /* Ajout de padding */
+    position: fixed;  /* Fixer le footer en bas */
+    bottom: 0;  /* Positionner le footer en bas */
+    width: 100%;  /* Faire en sorte que le footer prenne toute la largeur */
+}
+
+.navbar {
+    overflow: hidden;
+    background-color: #333;
+}
+
+.navbar a {
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.navbar a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+.home {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.button_active {
+    margin: 5px;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.button_active:hover {
+    background-color: #45a049;
+}
+
+h1.pong-title {
+    font-family: 'Arial', sans-serif; /* Choix de la police */
+    font-size: 3em; /* Taille de la police */
+    color: #000203; /* Couleur du texte */
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Ombre du texte */
+    text-align: center; /* Centrer le texte */
+    margin-top: 20px; /* Marge en haut */
+    letter-spacing: 2px; /* Espacement des lettres */
+}
+
+
+#game-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+}
+
+#pong-canvas {
+    border: 1px solid #000;
+}
+
+#controls {
+    margin-top: 20px;
+}
+
