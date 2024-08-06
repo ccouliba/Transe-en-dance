@@ -36,7 +36,7 @@ services:
       - POSTGRES_PORT='5432'
     restart: always
     healthcheck:
-      test: ["CMD-SHELL", "sh -c 'pg_isready -U ccouliba'"]
+      test: ["CMD-SHELL", "sh -c 'pg_isready -U ccouliba -d db1'"]
       interval: 10s
       timeout: 4s
       retries: 3  

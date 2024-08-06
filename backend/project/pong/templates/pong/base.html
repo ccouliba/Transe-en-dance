@@ -26,6 +26,7 @@
 	<script src="{% static 'pong/js/404.js' %}"></script>
 	<script src="{% static 'pong/js/profile.js' %}"></script>
 	<script src="{% static 'pong/js/login.js' %}"></script>
+	<script src="{% static 'pong/js/register.js' %}"></script>
 	<script src="{% static 'pong/js/main.js' %}"></script>
 	<script src="{% static 'pong/js/matchHistory.js' %}"></script>
 	<!-- <p><script src="{% static 'pong/js/iaAlgo.js' %}"></script></p> -->
@@ -40,6 +41,7 @@
 			changePage(hash);
 	
 	function handleLogout() {
+
 		logout();
 		navigator.sendBeacon('/pong/api/logout/', '', { method: 'POST', credentials: 'include' });
 	}
