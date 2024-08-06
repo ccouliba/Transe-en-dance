@@ -158,6 +158,7 @@ def login_view(request):
 
 @loggingFunction
 @login_required
+@csrf_exempt
 def logout_view(request):
 	user = request.user
 	request.session.flush()
@@ -168,6 +169,7 @@ def logout_view(request):
 
 # Cette vue gere l'inscription des nouveaux utilisateurs
 @loggingFunction
+@csrf_exempt
 def register_view(request):
 	try:
 		data = json.loads(request.body)
