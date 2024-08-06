@@ -259,7 +259,8 @@ window.onload = function() {
         resetBall();
     }
 
-    setInterval(gameLoop, 1000 / 60);
+    if (iaMode)
+        setInterval(gameLoop, 1000 / 60);
 };
 
 function IA() {
