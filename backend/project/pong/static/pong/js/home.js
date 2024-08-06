@@ -29,17 +29,36 @@
 //         document.body.innerHTML = Home();
 //     });
 // });
-var prefLang = 'en'
-function loadTranslations(language) {
-	const langFile = language === 'fr' ? '/static/pong/js/translations/fr.json' : 
-                    language === 'es' ? '/static/pong/js/translations/es.json' :
-                    '/static/pong/js/translations/en.json'; // Default to French if neither English nor Spanish
-					return fetch(langFile)
+window.prefLang = 'en'
+window.translations = null;
+// function loadTranslations(prefLang) {
+// 	const langFile = prefLang === 'fr' ? '/static/pong/js/translations/fr.json' : 
+//                     prefLang === 'es' ? '/static/pong/js/translations/es.json' :
+//                     '/static/pong/js/translations/en.json'; // Default to French if neither English nor Spanish
+// 					return fetch(langFile)
+//         .then(response => response.json())
+//         .catch(error => console.error('Error fetching translations:', error));
+// }
+function loadTranslations(prefLang) {
+    const langFile = prefLang === 'fr' ? '/static/pong/js/translations/fr.json' : 
+                    prefLang === 'es' ? '/static/pong/js/translations/es.json' :
+                    '/static/pong/js/translations/en.json'; // Default to English if neither French nor Spanish
+
+    return fetch(langFile)
         .then(response => response.json())
-        .catch(error => console.error('Error fetching translations:', error));
+        .then(translations => {
+            window.translations = translations; // Assign translations to global variable
+            return translations; // Return translations for further processing
+        })
+        .catch(error => {
+            console.error('Error fetching translations:', error);
+            window.translations = {}; // Fallback to empty object on error
+            return {}; // Return empty object
+        });
 }
 
-function Home(translations) {
+function Home() {
+	console.log("translations in Home: " + window.translations)
     // return `
     // <div>
     //     <h1>${translations.welcome}</h1>
@@ -48,7 +67,7 @@ function Home(translations) {
 		const defaultMessage = "Welcome home";
    
 		// Use the fetched welcome message if available, otherwise fall back to the default message
-		const welcomeMessage = translations?.welcome || defaultMessage;
+		const welcomeMessage = window.translations?.welcome || defaultMessage;
 
 		return `
 		<div>
@@ -61,16 +80,23 @@ function Home(translations) {
 }
 
 // Home();
-function loadHome(language) {
+function loadHome(newLang) {
+	window.prefLang = newLang;
 	// var cookie = getCookie();
 	// console.log(navigator.languages);
 	console.log("In loadHome before: " + prefLang);
-	prefLang = language;
+	// prefLang = language;
 	console.log("In loadHome after: " + prefLang);
-    loadTranslations(prefLang).then(translations => {
+    loadTranslations(window.prefLang).then(translations => {
         document.getElementById('app').innerHTML = Home(translations);
     });
 }
 
 // Call the function to load content
-loadHome(language);
+// loadHome(window.prefLang);
+Home(window.translations);
+
+// Ensure the script runs after the DOM is fully loaded
+// document.addEventListener('DOMContentLoaded', (event) => {
+//     loadHome(window.prefLang);
+// });

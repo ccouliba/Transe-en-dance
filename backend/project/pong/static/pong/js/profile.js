@@ -94,6 +94,8 @@ var profileState = {
 
 // fonction pour afficher le profil utilisateur
 function Profile(translations) {
+	console.log("translations in Profile: " + translations)
+	console.log("In Profile: " + window.prefLang);
 	// charge les donnees du profil depuis le backend
 	loadProfileFromBackend(); // get
 
@@ -194,7 +196,7 @@ async function loadProfileFromBackend() {
 			win_rate: profile.total_games > 0 ? (profile.wins / profile.total_games) * 100 : 0
 		}; // utilisation d'un spread operator
 		profileState.isLoaded = true;
-		mountComponent(Profile); // monter le composant Profile
+		mountComponent(Profile, translations); // monter le composant Profile
 		// marquer les donnees du profil comme chargees
 	});
 }
@@ -545,17 +547,17 @@ function EditPassword() {
 	</form>
 	`;
 }
-// Home();
-function loadProfile(language) {
-	console.log("In loadProfile before: " + prefLang);
-	// var cookie = getCookie();
-	// console.log(navigator.language);
-	prefLang = language;
-	console.log("In loadProfile after: " + prefLang);
-    loadTranslations(prefLang).then(translations => {
-        document.getElementById('app').innerHTML = Profile(translations);
-    });
-}
+// // Home();
+// function loadProfile(language) {
+// 	console.log("In loadProfile before: " + prefLang);
+// 	// var cookie = getCookie();
+// 	// console.log(navigator.language);
+// 	prefLang = language;
+// 	console.log("In loadProfile after: " + prefLang);
+//     loadTranslations(prefLang).then(translations => {
+//         document.getElementById('app').innerHTML = Profile(translations);
+//     });
+// }
 
-// Call the function to load content
-loadProfile(language);
+// // Call the function to load content
+// loadProfile(language);
