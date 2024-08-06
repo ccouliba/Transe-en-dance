@@ -85,24 +85,6 @@ let routes = {
 	"#register": () => mountComponent(Register),
 };
 
-
-// Fonction pour changer de page
-// window.changePage = function (url) {
-// 	if (url === "#play") {
-// 		playState.isLoaded = false;
-// 	  }
-// 	if (typeof routes[url] === "undefined") {
-// 		mountComponent(Page404)
-// 		history.pushState({ page: "#404" }, "", "#404"); // Ajoute à l'historique
-// 		return;
-// 	}
-	
-// 	routes[url](); // Charge la page demandée
-	
-// 	history.pushState({ page: url }, "", url); // Ajoute à l'historique
-
-// }
-
 let isCheckingAuth = false;
 
 window.changePage = function (url) {
@@ -207,3 +189,9 @@ window.addEventListener('load', function() {
 		}
 	}
 });
+
+/////////////////////////////////////////////////////////
+
+//Pour IA
+
+let iaMode = 0;

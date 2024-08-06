@@ -162,17 +162,12 @@ window.onload = function() {
     }
 
     function updateAI() {
-        let pos = ball.y / 5;
-        if (ball.dx < 0)
-        {
-            if (ball.x < canvas.width / 2)
-                centerAiPaddle(pos);
-        }
-        else if (ball.x < canvas.width / 2 + (canvas.width / 10))
-            centerAiPaddle(pos);
-        else {
+        if (ball.dx < 0) 
+            centerAiPaddle(2);
+        else if (ball.x < canvas.width / 2 + ((canvas.width / 2) / 3))
+            centerAiPaddle(getBallSection(ball.y));
+        else
             centerAiPaddle(predictBallY());
-        }
     }
 
     setInterval(updateAI, 1000);
@@ -266,3 +261,12 @@ window.onload = function() {
 
     setInterval(gameLoop, 1000 / 60);
 };
+
+function IA() {
+    iaMode = 1;
+    window.onload();
+	return `
+	<div>
+		<h1>Good Luck</h1>
+	</div>`;
+}
