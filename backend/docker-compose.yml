@@ -1,0 +1,100 @@
+version: '4.3.0'
+
+services:
+  web:
+    container_name: backend
+    build: ./project
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./project/:/usr/src/project/
+    ports:
+      - 8000:8000
+    env_file:
+      - ./.utils/.env
+    depends_on:
+      - db
+    restart: unless-stopped
+    develop:
+      watch:
+        - action: sync
+          path: ./project
+          target: /usr/src/project
+    links:
+      - db
+    networks:
+      - transcendance
+      - devops
+
+  db:
+    image: postgres:15
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=ccouliba
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=db1
+      - POSTGRES_PORT='5432'
+    restart: always
+    healthcheck:
+      test: ["CMD-SHELL", "sh -c 'pg_isready -U ccouliba -d db1'"]
+      interval: 10s
+      timeout: 4s
+      retries: 3  
+    networks:
+     - transcendance
+
+  # Elasticsearch is a search engine
+  elasticsearch:
+    container_name: elasticsearch
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.9.0
+    environment:
+      - discovery.type=single-node #for development mode
+      - xpack.security.enabled=false #for anonymous request
+      - xpack.monitoring.enabled:true
+    ports: #several ports
+      - "9200:9200"
+    volumes:
+      - es-data:/usr/share/elasticsearch/data
+    networks:
+      - transcendance
+
+  # Logstash is a server-side data processing pipeline
+  logstash:
+    container_name: logstash
+    image: docker.elastic.co/logstash/logstash:8.9.0
+    # command: logstash -f /usr/share/logstash/pipeline/logstash_1.conf
+    volumes:
+      - ./project/logstash/:/usr/src/logstash/
+    ports:
+      - "5959:5959"
+    depends_on:
+      - elasticsearch
+    networks:
+      - transcendance
+
+  # Kibana is used for data visualization
+  kibana:
+    container_name: kibana
+    image: docker.elastic.co/kibana/kibana:8.9.0
+    ports:
+      - "5601:5601"
+    depends_on:
+      - elasticsearch
+    networks:
+      - transcendance
+      - devops
+
+volumes:
+  postgres_data:
+  es-data:
+
+  # Created another network for devops_front
+networks:
+  transcendance:
+    name: transcendance
+    driver: bridge
+  devops:
+    name: devops
+    driver: bridge

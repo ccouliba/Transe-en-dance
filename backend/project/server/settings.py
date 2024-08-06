@@ -10,8 +10,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 import os
+import sys
 from django.utils.translation import gettext_lazy as _
-# from django.utils.translation import gettext as _
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -58,7 +58,7 @@ ALLOWE_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-	# 'polls',
+    # 'elasticapm.contrib.django',
 	'pong',
 	'django.contrib.admin',
 	'django.contrib.auth',
@@ -66,18 +66,21 @@ INSTALLED_APPS = [
 	'django.contrib.sessions',
 	'django.contrib.messages',
 	'django.contrib.staticfiles',
-	# 'corsheaders',
+	'rest_framework',
+	'rest_framework.authtoken',
+    'django_elasticsearch_dsl',
 ]
 
 MIDDLEWARE = [
-	'django.middleware.security.SecurityMiddleware',
-	'django.contrib.sessions.middleware.SessionMiddleware',
-	'django.middleware.locale.LocaleMiddleware',
-	'django.middleware.common.CommonMiddleware',
-	'django.middleware.csrf.CsrfViewMiddleware',
-	'django.contrib.auth.middleware.AuthenticationMiddleware',
-	'django.contrib.messages.middleware.MessageMiddleware',
-	'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 'pong.middleware.Logging.LoggingMiddleware',
+    'django.middleware.security.SecurityMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
 ROOT_URLCONF = 'server.urls'
@@ -106,30 +109,33 @@ WSGI_APPLICATION = 'server.wsgi.application'
 
 
 
-# DATABASES = {
-# 	'default': {
-# 		'ENGINE': os.getenv('SQL_ENGINE', 'django.db.backends.postgresql_psycopg2'),
-# 		'NAME': os.getenv('SQL_DATABASE', 'db1'),
-# 		'USER': os.getenv('SQL_USER', 'ccouliba'),
-# 		'PASSWORD': os.getenv('SQL_PASSWORD'),
-# 		'HOST': os.getenv('SQL_HOST', 'db'),
-# 		# 'HOST': 'localhost', #todo : A MODIFIER (juste pour pouvoir executer django localement)
-# 		'PORT': os.getenv('SQL_PORT', '5432'),
-# 	}
-# }
-
-
-# on localhost
 DATABASES = {
 	'default': {
-		'ENGINE': 'django.db.backends.postgresql_psycopg2',
-		'NAME': 'db1',
-		'USER': 'ccouliba',
-		'PASSWORD': 'password',
-		'HOST': 'localhost',
-		'PORT': '5432',
+		'ENGINE': os.getenv('SQL_ENGINE', 'django.db.backends.postgresql_psycopg2'),
+		'NAME': os.getenv('SQL_DATABASE', 'db1'),
+		'USER': os.getenv('SQL_USER', 'ccouliba'),
+		'PASSWORD': os.getenv('SQL_PASSWORD'),
+		'HOST': os.getenv('SQL_HOST', 'db'),
+		# 'HOST': 'localhost', #todo : A MODIFIER (juste pour pouvoir executer django localement)
+		'PORT': os.getenv('SQL_PORT', '5432'),
 	}
 }
+
+if os.getenv("DEV_ENV", False):
+# on localhost
+    DATABASES = {
+        'default': {
+            'ENGINE': os.getenv('SQL_ENGINE', 'django.db.backends.postgresql_psycopg2'),
+            'NAME': os.getenv('SQL_DATABASE', 'db1'),
+            'USER': os.getenv('SQL_USER', 'ccouliba'),
+            'PASSWORD': os.getenv('SQL_PASSWORD', "password"),
+            'HOST': os.getenv('SQL_HOST', 'localhost'),
+            # 'HOST': 'localhost', #todo : A MODIFIER (juste pour pouvoir executer django localement)
+            'PORT': os.getenv('SQL_PORT', '5432'),
+        }
+    }
+
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -167,13 +173,14 @@ LOCALE_PATHS = [ os.path.join(BASE_DIR, 'locale'), ]
 
 LANGUAGE_CODE = 'en-us'
 
+USE_TZ = True
+
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
@@ -210,3 +217,82 @@ MEDIA_URL = '/media/'
 # Fuseau horaire
 TIME_ZONE = 'Europe/Paris'
 USE_TZ = True
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ]
+}
+
+# For logging (devops)
+LOGGING = {
+    # Defines the dict version for logging config ; Should always be 1 ; another value seems to cause issues
+    'version': 1,
+    'disable_existing_loggers': False, # ?q= false -> not activated
+    'formatters': {
+        'verbose': {
+            'format': '[%(asctime)s]::[%(levelname)s]::[%(name)s]=> (%(message)s)', # [%(funcName)s]::
+            'datefmt': '%Y/%m/%d %H:%M:%S',
+        },
+        'simple': {
+            'format': '[%(name)s]=> (%(message)s)',
+        },
+    },
+    
+    'handlers': {
+        'file': {
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': '../project/logs/pong.logs', # Chemin du fichier ou seront stockes les logs
+            'formatter': 'verbose',
+        },
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'stream': sys.stdout,
+            'formatter': 'simple',
+        },
+    },
+    
+    'root': {
+        'handlers': ['console', 'file'],
+        'level': 'WARNING',
+    },
+    
+    'loggers': {
+        'pong': {
+            'handlers': ['file'],
+            'level': 'INFO',
+            'propagate': True, # If logs should be propagte to parent logs
+        },
+        'logstash': {
+            'handlers': ['console'],
+            'level': 'INFO',
+            'propagate': True, # If logs should be propagte to parent logs
+        },
+        'backend': {
+            'handlers': ['file'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+        'django.request': {
+            'handlers': ['console', 'file'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+        'django.db.backend': {
+            'handlers': ['console', 'file'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+    },
+}
+
+## FOR ELASTICSEARCH APP 
+
+ELASTICSEARCH_DSL = {
+    'default': {
+        'hosts': { 'http://elasticsearch:9200', },
+    },
+}

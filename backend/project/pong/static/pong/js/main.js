@@ -2,7 +2,7 @@
 // Pourquoi ? car addEventListener fonctionne sur des elements deja presents dans le DOM
 // Il gere les cas ou l'element n'existe pas encore dans le DOM.
 function bindEvent(state, cssSelector, event, callback) {
-
+	console.log(state, cssSelector, event, callback)
 	// Fonction interne pour attacher l'evenement aux elements correspondant au selecteur CSS
 	function attachEvent() {
 		// utilise querySelectorAll pour obtenir tous les elements correspondant au selecteur CSS
@@ -115,7 +115,6 @@ window.changePage = function (url) {
 		return 
 	}
 	if (url === "#login" || url === "#register"  ){
-		url = "#login"
 		routes[url]();
 		// Mettre a jour l'historique du navigateur avec la nouvelle page
 		history.pushState({

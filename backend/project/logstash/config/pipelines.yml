@@ -1,0 +1,7 @@
+# Configuration basique de pipelines
+
+# - pipeline.id: logstash_1
+#   path.config: "/usr/share/logstash/pipeline/logstash_1.conf"
+
+# - pipeline.id: logstash_2
+#   path.config: "/usr/share/logstash/pipeline/logstash_2.conf"

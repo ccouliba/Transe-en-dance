@@ -59,7 +59,7 @@ def	profile_update_view(request):
 		
 		#todo : a modifier
 		if 'langue' in data:
-			user.last_name = data['langue']
+			user.langue = data['langue']
 			updated.append('langue')
 		
 		if 'avatar' in data:
