@@ -63,15 +63,9 @@ function moveBall() {
 }
 
 
-function updateOnlineStatus() {
-	// let url = `/pong/api/games/finish_game/${gameId}/` 
-	fetch('/pong/api/games/update_online_status/', {
-		method: 'POST',
-		credentials: 'include',
-		headers: {
-			'Content-Type': 'application/json',
-		}
-	})
+function updateOnlineStatus() { 
+	let url = '/pong/api/games/update_online_status/'
+	httpPostJson(url)
 	.then(response => response.json())
 	.then(data => {
 		if (data.status !== 'success') {
@@ -192,10 +186,7 @@ function bindKeyboardEvents(){
 }
 
 function updateProfileStats() {
-	fetch('/pong/api/profile', {
-		method: 'GET',
-		credentials: 'include'
-	})
+	httpGetJson('/pong/api/profile')
 	.then(response => response.json())
 	.then(profile => {
 		// Mettre à jour profileState avec les nouvelles stats
@@ -235,18 +226,9 @@ function finishGame(gameId, player1Score, player2Score, winnerEmail) {
 // fonction pour creer une nouvelle partie dans la base de donnees
 function createGameInDatabase() {
 	// envoie une requete post a l'api pour creer une nouvelle partie
-	fetch('/pong/api/games/create_game/', {
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/json', // indique que le corps de la requete est en json
-		},
-		// convertit les donnees en json et les ajoute au corps de la requete
-		body: JSON.stringify({
-			player1Email: playState.player1Email,
-			player2Email: playState.player2Email
-		}),
-		// inclut les cookies dans la requete pour l'authentification
-		credentials: 'include'
+	httpPostJson('/pong/api/games/create_game/', {
+		player1Email: playState.player1Email,
+		player2Email: playState.player2Email
 	})
 	.then(response => {
 		return response.json().then(data => {
@@ -276,18 +258,12 @@ function createGameInDatabase() {
 
 function updateTournamentMatchScore(matchId, player1Score, player2Score, winner) {
 	
-	return fetch(`/pong/api/tournament/update_match_score/`, {
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/json',
-			'X-CSRFToken': getCookie('csrftoken'),
-		},
-		body: JSON.stringify({
-			match_id: matchId,
-			player1_score: player1Score,
-			player2_score: player2Score,
-			winner: winner
-		})
+	let url = `/pong/api/tournament/update_match_score/`
+	return httpPostJson(url, {
+		match_id: matchId,
+		player1_score: player1Score,
+		player2_score: player2Score,
+		winner: winner
 	})
 	.then(response => {
 		console.log('Server response status:', response.status);
@@ -334,7 +310,9 @@ function endGame() {
 
 
 function reloadTournamentData() {
-	return fetch(`/pong/api/tournament/${tournamentState.tournament.id}/matchmaking/`)
+
+	let url = `/pong/api/tournament/${tournamentState.tournament.id}/matchmaking/`
+	return httpGetJson(url)
 		.then(response => {
 			if (!response.ok) {
 				throw new Error(`HTTP error! status: ${response.status}`);
@@ -353,8 +331,6 @@ function reloadTournamentData() {
 		});
 }
 
-
-
 function backToTournament() {
 	playState.isTournamentMatch = false;
 	playState.tournamentId = null;
@@ -364,18 +340,11 @@ function backToTournament() {
 function updateScore(gameId, player1Score, player2Score, winner) {
 	// fetch('/pong/api/games/create_game/', {
 	
-	return fetch(`/pong/api/games/update_score/`, {
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/json',
-			'X-CSRFToken': getCookie('csrftoken'),
-		},
-		body: JSON.stringify({
-			game_id: matchId,
-			player1_score: player1Score,
-			player2_score: player2Score,
-			winner: winner
-		})
+	return httpPostJson(`/pong/api/games/update_score/`, {
+		game_id: matchId,
+		player1_score: player1Score,
+		player2_score: player2Score,
+		winner: winner
 	})
 	.then(response => {
 		console.log('Server response status:', response.status);

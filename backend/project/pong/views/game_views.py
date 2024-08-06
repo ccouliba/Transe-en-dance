@@ -6,7 +6,6 @@ from django.views.decorators.csrf import csrf_exempt
 from django.db.models import F #pour effectuer des opérations de mise à jour directement au niveau de la base de données sans d'abord récupérer les objets en mémoire
 from django.db.models import Q #pour construire des requêtes qui nécessitent des opérations logiques telles que OR et AND
 
-@csrf_exempt
 @login_required
 def create_game(request):
 	if request.method == 'POST':
@@ -35,7 +34,6 @@ def create_game(request):
 	else:
 		return JsonResponse({'error': 'Invalid request method'}, status=405)
 
-@csrf_exempt
 @login_required
 def update_game(request, game_id):
 	if request.method == 'POST':
@@ -64,7 +62,6 @@ def update_game(request, game_id):
 		return JsonResponse({'error': 'Invalid request method'}, status=405)
 
 
-@csrf_exempt
 @login_required
 def finish_game(request, game_id):
 	if request.method == 'POST':
@@ -102,7 +99,6 @@ import pytz
 from django.utils import timezone
 
 @login_required
-@csrf_exempt
 def match_history(request):
 	user = request.user
 	games = Game.objects.filter(
@@ -130,7 +126,6 @@ def match_history(request):
 from django.utils import timezone
 
 @login_required
-@csrf_exempt
 def update_online_status(request):
 	if request.method == 'POST':
 		user = request.user

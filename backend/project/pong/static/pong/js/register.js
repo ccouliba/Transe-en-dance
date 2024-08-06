@@ -50,15 +50,7 @@ function handleRegister(event) {
 	const password2 = event.target.elements.password2.value; // Obtenir la confirmation du mot de passe
 	let url = `/pong/api/register/`; 
 
-	fetch(url, {
-		method: 'POST', 
-		headers: {
-			'Content-Type': 'application/json', // Type de contenu JSON
-			'X-CSRFToken': getCookie('csrftoken') // Ajouter le token CSRF aux headers. todo : a garder ou pas
-		},
-		body: JSON.stringify({ username, email, password1, password2 }), // Corps de la requete avec les informations d'inscription
-		credentials: 'include' // Inclure les cookies pour l'authentification
-	})
+	httpPostJson(url, { username, email, password1, password2 })
 	.then(response => response.json()) // Convertir la reponse en JSON
 	.then(data => {
 		if (data.status === 'success') {
