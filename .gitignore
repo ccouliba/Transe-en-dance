@@ -6,3 +6,5 @@ __pycache__/
 
 # Ignorer le fichier de configuration de prettier
 .prettierrc
+
+backend/project/logs/
