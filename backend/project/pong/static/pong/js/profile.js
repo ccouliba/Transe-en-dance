@@ -93,16 +93,16 @@ var profileState = {
 // });
 
 // fonction pour afficher le profil utilisateur
-function Profile(translations) {
-	console.log("translations in Profile: " + translations)
-	console.log("In Profile: " + window.prefLang);
+function Profile() {
+	// console.log("translations in Profile: " + translations)
+	// console.log("In Profile: " + window.prefLang);
 	// charge les donnees du profil depuis le backend
 	loadProfileFromBackend(); // get
 
 	const defaultMessage = "username :";
    
 	// Use the fetched welcome message if available, otherwise fall back to the default message
-	const username = translations?.username || defaultMessage;
+	const username = window.trans?.username || defaultMessage;
 	// retourne une chaine de caracteres contenant le HTML du composant Profile
 	return `
 		<div class="container mt-5">
@@ -196,7 +196,7 @@ async function loadProfileFromBackend() {
 			win_rate: profile.total_games > 0 ? (profile.wins / profile.total_games) * 100 : 0
 		}; // utilisation d'un spread operator
 		profileState.isLoaded = true;
-		mountComponent(Profile, translations); // monter le composant Profile
+		mountComponent(Profile); // monter le composant Profile
 		// marquer les donnees du profil comme chargees
 	});
 }

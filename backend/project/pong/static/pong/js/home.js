@@ -30,7 +30,7 @@
 //     });
 // });
 window.prefLang = 'en'
-window.translations = null;
+window.trans = null;
 // function loadTranslations(prefLang) {
 // 	const langFile = prefLang === 'fr' ? '/static/pong/js/translations/fr.json' : 
 //                     prefLang === 'es' ? '/static/pong/js/translations/es.json' :
@@ -43,22 +43,23 @@ function loadTranslations(prefLang) {
     const langFile = prefLang === 'fr' ? '/static/pong/js/translations/fr.json' : 
                     prefLang === 'es' ? '/static/pong/js/translations/es.json' :
                     '/static/pong/js/translations/en.json'; // Default to English if neither French nor Spanish
-
+    console.log("langFile : " + langFile);
+    console.log("Local trans: " + trans);
     return fetch(langFile)
         .then(response => response.json())
-        .then(translations => {
-            window.translations = translations; // Assign translations to global variable
-            return translations; // Return translations for further processing
+        .then(trans => {
+            window.trans = trans; // Assign translations to global variable
+            // return trans; // Return translations for further processing
         })
         .catch(error => {
             console.error('Error fetching translations:', error);
-            window.translations = {}; // Fallback to empty object on error
-            return {}; // Return empty object
+            // window.trans = {}; // Fallback to empty object on error
+            // return {}; // Return empty object
         });
 }
 
 function Home() {
-	console.log("translations in Home: " + window.translations)
+	// console.log("translations in Home: " + window.trans)
     // return `
     // <div>
     //     <h1>${translations.welcome}</h1>
@@ -67,7 +68,7 @@ function Home() {
 		const defaultMessage = "Welcome home";
    
 		// Use the fetched welcome message if available, otherwise fall back to the default message
-		const welcomeMessage = window.translations?.welcome || defaultMessage;
+		const welcomeMessage = window.trans?.welcome || defaultMessage;
 
 		return `
 		<div>
@@ -84,17 +85,17 @@ function loadHome(newLang) {
 	window.prefLang = newLang;
 	// var cookie = getCookie();
 	// console.log(navigator.languages);
-	console.log("In loadHome before: " + prefLang);
+	// console.log("In loadHome before: " + prefLang);
 	// prefLang = language;
-	console.log("In loadHome after: " + prefLang);
-    loadTranslations(window.prefLang).then(translations => {
-        document.getElementById('app').innerHTML = Home(translations);
+	// console.log("In loadHome after: " + prefLang);
+    loadTranslations(window.prefLang).then(trans => {
+        document.getElementById('app').innerHTML = Home(trans);
     });
 }
 
 // Call the function to load content
 // loadHome(window.prefLang);
-Home(window.translations);
+Home(window.trans);
 
 // Ensure the script runs after the DOM is fully loaded
 // document.addEventListener('DOMContentLoaded', (event) => {
