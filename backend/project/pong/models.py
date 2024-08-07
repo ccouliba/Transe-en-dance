@@ -10,6 +10,7 @@ from django.db.models import UniqueConstraint
 from django.db.models import F #pour effectuer des opérations de mise à jour directement au niveau de la base de données sans d'abord récupérer les objets en mémoire
 from django.db.models import Q #pour construire des requêtes qui nécessitent des opérations logiques telles que OR et AND
 
+from django.utils.translation import gettext_lazy as _
 # class User(AbstractUser): #https://openclassrooms.com/fr/courses/7192426-allez-plus-loin-avec-le-framework-django/7386368-personnalisez-le-modele-utilisateur
 
 class User(AbstractUser):
@@ -19,7 +20,8 @@ class User(AbstractUser):
 	friends = models.ManyToManyField('self', symmetrical=True, blank=True)  # Champ pour les amis
 	is_online = models.BooleanField(default=False)
 
-
+	email = models.EmailField(_("email address"), unique=True, blank=True)
+    
   
 	avatar = models.ImageField(upload_to='avatars/', null=True, blank=True)
 
