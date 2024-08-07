@@ -178,10 +178,12 @@ window.changePage = function (url) {
 
 
 function httpGetJson(url){
+
 	return fetch(url, {
 		method: 'GET',
 		headers: {
 			'Content-Type': 'application/json',
+			'X-CSRFToken': getCSRFToken()
 		},
 		credentials: 'include'
 	})
@@ -192,6 +194,7 @@ function httpPostJson(url, payload){
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
+			'X-CSRFToken': getCSRFToken()
 		},
 		body: JSON.stringify(payload),
 		credentials: 'include'
@@ -214,6 +217,22 @@ function mountComponent(componentFunction, data) {
 	const appContainer = document.getElementById("app");
 	appContainer.innerHTML = componentFunction(data);
 	updateMenu(); //pour ne pas avoir le menu en double
+}
+
+
+function getCSRFToken() {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, 10) === 'csrftoken=') {
+                cookieValue = decodeURIComponent(cookie.substring(10));
+                break;
+            }
+        }
+    }
+    return cookieValue;
 }
 
 // Fonction pour obtenir la valeur d'un cookie par son nom

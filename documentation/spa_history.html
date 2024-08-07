@@ -69,8 +69,6 @@
 	  let customHistory = [];
 	  // fonction pour changer la page actuelle
 	  function changePage(pageName) {
-		console.log("HELLO")
-		console.log("Changement de page vers", pageName);
 		if (typeof pages[pageName] === "undefined") {
 		  // Si la page demandée n'existe pas
 		  mountComponent(Page404);
@@ -88,8 +86,6 @@
     
 	  //onpopstate est déclenché chaque fois que l'utilisateur clique sur les boutons Précédent ou Suivant du navigateur.
 	  window.onpopstate = function(event) {
-		console.log(event.state)
-		console.log(event.state.page)
 
 		if (event.state && event.state.page) {
 			if (typeof pages[event.state.page] === "function") {

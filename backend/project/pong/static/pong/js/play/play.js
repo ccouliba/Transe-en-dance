@@ -55,7 +55,7 @@ function Play() {
 				</div>
 			`
 			: `
-				<div class="container mt-5" id="profilePage">
+				<div class="container mt-5">
 					<h1>Pong Game</h1>
 					<form id="start-game-form">
 						<div class="mb-3">

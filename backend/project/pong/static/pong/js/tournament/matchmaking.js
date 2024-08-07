@@ -122,7 +122,7 @@ function getDisplayName(username, alias) {
 function getMatchMakingFromBackend(){
 	let url = `/pong/api/tournament/${tournamentState.tournament.id}/matchmaking/` 
 
-	return fetch(url)
+	return httpGetJson(url)
 		.then(response => {
 			if (!response.ok) {
 				throw new Error(`HTTP error! status: ${response.status}`);

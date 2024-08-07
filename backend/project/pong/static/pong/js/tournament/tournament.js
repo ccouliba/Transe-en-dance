@@ -62,7 +62,7 @@ function loadTournamentState() {
 	bindEvent(tournamentState, "#startTournamentBtn", "click", startTournament);
 
 	// Récupérer les données du dernier tournoi
-	fetch('/pong/api/tournament/latest_tournament/')
+	httpGetJson('/pong/api/tournament/latest_tournament/')
 		.then(response => {
 			if (!response.ok) {
 				throw new Error(`HTTP error! status: ${response.status}`);
@@ -99,15 +99,8 @@ function createTournament(event) {
 		alert('The tournament name is required.');
 		return;
 	}
-
-	fetch('/pong/api/tournament/create/', {
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/json',
-		},
-		body: JSON.stringify({ name }),
-		credentials: 'include'
-	})
+	let url = '/pong/api/tournament/create/'
+	httpPostJson(url, {name})
 	.then(response => response.json())
 	.then(data => {
 		if (data.status === 'success') {
@@ -287,13 +280,8 @@ function startTournament() {
 		return;
 	}
 
-	fetch(`/pong/api/tournament/${tournamentState.tournament.id}/start/`, {
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/json',
-		},
-		credentials: 'include'
-	})
+	let url = `/pong/api/tournament/${tournamentState.tournament.id}/start/` 
+	httpPostJson(url, {})
 	.then(response => {
 		if (!response.ok) {
 			throw new Error(`HTTP error! status: ${response.status}`);
@@ -342,14 +330,8 @@ function finishTournament() {
 	}
 
 
-
-	fetch(`/pong/api/tournament/${tournamentState.tournament.id}/finish/`, {
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/json',
-		},
-		credentials: 'include'
-	})
+	let url = `/pong/api/tournament/${tournamentState.tournament.id}/finish/` 
+	httpPostJson(url, {})
 	.then(response => {
 		if (!response.ok) {
 			throw new Error(`HTTP error! status: ${response.status}`);

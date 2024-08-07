@@ -10,3 +10,8 @@ __pycache__/
 ./backend/project/.venv/
 
 *.logs
+
+# Ignorer le fichier de configuration de prettier
+.prettierrc
+
+backend/project/logs/

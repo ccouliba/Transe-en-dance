@@ -366,23 +366,11 @@ function EditPassword() {
 		let url = `/pong/api/profile/change-password`;
 
 		// envoie une requete POST a l'API pour changer le mot de passe
-		fetch(url, {
-				method: 'POST',
-				// headers de la requete en incluant le type de contenu et le token csrf
-				headers: {
-					'Content-Type': 'application/json',
-					'X-CSRFToken': getCookie('csrftoken')
-				},
-				// corps de la requete converti en JSON
-				body: JSON.stringify({
-					old_password: oldPassword,
-					new_password1: newPassword1,
-					new_password2: newPassword2
-				}),
-				// inclut les cookies avec la requete pour l'authentification
-				credentials: 'include'
-			})
-			// parse la reponse en JSON
+		httpPostJson(url, {
+			old_password: oldPassword,
+			new_password1: newPassword1,
+			new_password2: newPassword2
+		})
 			.then(response => response.json())
 			// traite les donnees recues de l'API
 			.then(data => {

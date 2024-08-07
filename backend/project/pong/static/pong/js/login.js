@@ -76,18 +76,9 @@ function handleLogin(event) {
 	event.preventDefault(); // empecher le comportement par defaut du formulaire
 	const username = event.target.elements.username.value; // obtenir le nom d'utilisateur
 	const password = event.target.elements.password.value; // obtenir le mot de passe
-	const csrfToken = getCookie('csrftoken'); // obtenir le token CSRF. todo : a garder ou pas
-
+	
 	let url = `/pong/api/login/`;
-	fetch(url, {
-		method: 'POST', 
-		headers: {
-			'Content-Type': 'application/json', 
-			'X-CSRFToken': csrfToken // Ajouter le token CSRF aux headers. todo : a garder ou pas
-		},
-		body: JSON.stringify({ username, password }), // Corps de la requete avec les identifiants
-		credentials: 'include' // Inclure les cookies pour l'authentification
-	})
+	httpPostJson(url, { username, password })
 	.then(response => {
 		if (!response.ok) throw new Error('Network response was not ok'); // Verifier si la reponse est OK
 		return response.json(); // Convertir la reponse en JSON

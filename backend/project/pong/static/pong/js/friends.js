@@ -72,9 +72,7 @@ function FriendsList() {
 // Fonction pour charger les donnees des amis du backend
 function loadFriendsData() {
 	let url = `/pong/api/friends_data/`;
-	fetch(url, {
-			credentials: "include" // inclure les cookies pour l'authentification
-		})
+	httpGetJson(url)
 		.then(response => response.json()) // Convertir la reponse en JSON
 		.then(data => {
 			friendsState.friends = data.friends; // mise a jour de la liste des amis
@@ -96,9 +94,7 @@ function getFriendsStatus(){
 	console.log("in getfriendstatus")
 	let url = `/pong/api/friends/get-status/`;
 	
-	return fetch(url, {
-			credentials: "include" // inclure les cookies pour l'authentification
-		})
+	return httpGetJson(url)
 		.then(response => response.json()) // Convertir la reponse en JSON
 		.then(payload=>{
 			payload.statuses.forEach((isOnline, i) => {
@@ -130,16 +126,7 @@ function refreshFriendsList() {
 // Fonction pour envoyer une demande d'ami
 function sendFriendRequest(email) {
 	let url = `/pong/api/profile/send_friend_request/`;
-	fetch(url, {
-			method: "POST",
-			credentials: "include", // Inclure les cookies pour l'authentification
-			headers: {
-				'Content-Type': 'application/json', // Type de contenu JSON
-			},
-			body: JSON.stringify({
-				email: email
-			}) // Corps de la requete avec l'email de l'ami
-		})
+	httpPostJson(url, { email })
 		.then(response => response.json()) // Convertir la reponse en JSON
 		.then(data => {
 			if (data.status === 'success') {
@@ -178,16 +165,7 @@ function AddFriendForm() {
 // Fonction pour accepter une demande d'ami
 function AcceptFriendRequest(email) {
 	let url = `/pong/api/profile/accept_friend_request/`;
-	fetch(url, {
-			method: "POST",
-			credentials: "include", // Inclure les cookies pour l'authentification
-			headers: {
-				'Content-Type': 'application/json', // Type de contenu JSON
-			},
-			body: JSON.stringify({
-				email: email
-			}) // Corps de la requete avec l'email de l'ami
-		})
+	httpPostJson(url, { email }) 
 		.then(response => response.json()) // Convertir la reponse en JSON
 		.then(data => {
 			if (data.status === 'success') {
@@ -226,16 +204,7 @@ function AcceptFriendForm(email) {
 // Fonction pour supprimer un ami
 function removeFriend(email) {
 	let url = `/pong/api/profile/remove_friend/`;
-	fetch(url, {
-			method: "POST",
-			credentials: "include",
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify({
-				email: email
-			})
-		})
+	httpPostJson(url, { email})
 		.then(response => response.json())
 		.then(data => {
 			if (data.status === 'success') {

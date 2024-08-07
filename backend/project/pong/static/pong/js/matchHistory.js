@@ -29,7 +29,7 @@ function renderMatchHistory() {
 	}
 
 	return `
-		<table class="table table-hover table-dark">
+		<table class="table table-striped">
 			<thead>
 				<tr>
 					<th>Date</th>
