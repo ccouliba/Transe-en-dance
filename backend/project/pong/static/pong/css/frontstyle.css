@@ -99,3 +99,251 @@ background-color: rgb(42, 42, 50);
   color: darkred;
   background: silver;
 }
+
+
+
+/* friends.js */
+
+#friends-forms {
+
+}
+
+#friends-list {
+
+}
+
+#friends-status-list {
+
+}
+
+.friend-status {
+
+}
+
+#add-friend-form {
+
+}
+
+#friendEmail {
+
+}
+
+#accept-friend-form {
+
+}
+
+#remove-friend-form {
+
+}
+
+
+
+/* home.js */
+
+#homeWelcomeTxt {
+
+}
+
+
+
+/* login.js */
+
+#showRegister {
+
+}
+
+#loginForm {
+
+}
+
+#username {
+
+}
+
+#password {
+
+}
+
+
+
+/* matchHistory.js */
+
+#match-history-content {
+
+}
+
+
+/* menu.js */
+
+.menuStructureTop {
+
+}
+
+.navbar-custom {
+
+}
+
+#navbarHomeLink {
+
+}
+
+#navbar {
+
+}
+
+#navbarPlayLink {
+
+}
+
+#navbarTournamentLink {
+
+}
+
+#navbarProfileLink {
+
+}
+
+#navbarFriendsLink {
+
+}
+
+#navbarHistoryLink {
+
+}
+
+#navbarLogoutLink {
+
+}
+
+
+
+/* profile.js */
+
+#profilePage {
+
+}
+
+#accordionExample {
+
+}
+
+#headingTwo {
+
+}
+
+#collapseTwo {
+
+}
+
+#edit-username {
+
+}
+
+#username {
+
+}
+
+#edit-email {
+
+}
+
+#email {
+
+}
+
+#edit-first-name {
+
+}
+
+#firstname {
+
+}
+
+#edit-last-name {
+
+}
+
+#lastname {
+
+}
+
+#languageLabel {
+
+}
+
+#languageSelector {
+
+}
+
+#englishOption {
+
+}
+
+#frenchOption {
+
+}
+
+#spanishOption {
+
+}
+
+#italianOption {
+
+}
+
+#edit-langue {
+
+}
+
+#edit-avatar {
+
+}
+
+#edit-password-form {
+
+}
+
+#old_password {
+
+}
+
+#new_password1 {
+
+}
+
+#new_password2 {
+
+}
+
+
+
+
+/* register.js */
+
+#registerForm {
+
+}
+
+#username {
+
+}
+
+#email {
+
+}
+
+#passwordHelpBlock {
+
+}
+
+#password1 {
+
+}
+
+#password2 {
+
+}
+
+#showLogin {
+
+}
