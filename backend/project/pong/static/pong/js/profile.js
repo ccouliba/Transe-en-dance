@@ -99,7 +99,7 @@ function Profile() {
 	// charge les donnees du profil depuis le backend
 	loadProfileFromBackend(); // get
 
-	const defaultMessage = "username :";
+	const defaultMessage = "plop :";
    
 	// Use the fetched welcome message if available, otherwise fall back to the default message
 	const username = window.trans?.username || defaultMessage;

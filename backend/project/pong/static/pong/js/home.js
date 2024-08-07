@@ -1,8 +1,14 @@
-// window.prefLang = 'en'
 window.trans = '/static/pong/js/translations/en.json';
+tmp_trans = null;
 
-function loadTranslations() {
-	return fetch(window.trans)
+function loadTranslations(newLang) {
+	const langFile = newLang === 'fr' ? '/static/pong/js/translations/fr.json' : 
+	newLang === 'es' ? '/static/pong/js/translations/es.json' :
+	'/static/pong/js/translations/en.json'; // Default to English if neither French nor Spanish
+	console.log(langFile);
+	tmp_trans = langFile;
+	console.log("tmp_trans: " + tmp_trans);
+	return fetch(langFile)
 	.then(response => response.json())
 	.then(trans => {
 		window.trans = trans;
@@ -13,6 +19,8 @@ function loadTranslations() {
 }
 
 function Home() {
+	if (tmp_trans == null)
+		loadTranslations(tmp_trans);
     console.log("Translations:", window.trans);
 		const defaultMessage = "Welcome Home";
    
@@ -30,14 +38,14 @@ function Home() {
 }
 
 function loadHome(newLang) {
-	const langFile = newLang === 'fr' ? '/static/pong/js/translations/fr.json' : 
-	newLang === 'es' ? '/static/pong/js/translations/es.json' :
-	'/static/pong/js/translations/en.json'; // Default to English if neither French nor Spanish
-	console.log("prefLang: " + newLang);
-	console.log("langFile: " + langFile);
-	window.trans = langFile;
-	console.log("window.trans: " + window.trans);
-	loadTranslations().then(() => {
+	// const langFile = newLang === 'fr' ? '/static/pong/js/translations/fr.json' : 
+	// newLang === 'es' ? '/static/pong/js/translations/es.json' :
+	// '/static/pong/js/translations/en.json'; // Default to English if neither French nor Spanish
+	// console.log("prefLang: " + newLang);
+	// console.log("langFile: " + langFile);
+	// window.trans = langFile;
+	// console.log("window.trans: " + window.trans);
+	loadTranslations(newLang).then(() => {
 		document.getElementById('app').innerHTML = Home();
 	});
 }
