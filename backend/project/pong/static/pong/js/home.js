@@ -59,6 +59,7 @@ function loadTranslations(prefLang) {
 }
 
 function Home() {
+    console.log("Translations:", window.trans);
 	// console.log("translations in Home: " + window.trans)
     // return `
     // <div>
