@@ -2,6 +2,6 @@
 function Home() {
 	return `
 	<div>
-		<h1>Welcome home</h1>
+		<h1>${gettext('home.welcome.title')}</h1>
 	</div>`;
 }

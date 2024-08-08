@@ -8,3 +8,7 @@ __pycache__/
 .prettierrc
 
 backend/project/logs/
+
+backend/project/.venv/
+
+*.mo

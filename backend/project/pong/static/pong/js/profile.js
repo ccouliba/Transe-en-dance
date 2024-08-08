@@ -79,8 +79,8 @@ function Profile() {
 			${EditFirstname()}
 			<h3 class="mt-4 mb-3">modify last name</h2>
 			${EditLastname()}
-			<h3 class="mt-4 mb-3">todo : modify langue</h2>
-			${EditLangue()}
+			<h3 class="mt-4 mb-3">modify langue</h2>
+			${ChooseLanguage()}
 			<h3 class="mt-4 mb-3">modify avatar</h2>
 			${EditAvatar()}
 			<h3 class="mt-4 mb-3">modify password</h2>
