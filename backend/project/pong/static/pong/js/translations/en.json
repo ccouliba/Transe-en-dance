@@ -1,7 +1,15 @@
 {
-	"welcome": "Welcome Home",
-
+	"home": "Home",
+	"play": "Play",
+	"tournament": "Tournament",
 	"profile": "Profile",
+	"friends": "Friends",
+	"matchHistory": "Match history",
+	"logOut": "Log out",
+	
+	"welcome": "Welcome",
+
+	"infos": "Your information",
 	"username": "Username",
 	"email": "Email",
 	"firstName": "First Name",

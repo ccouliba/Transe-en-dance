@@ -1,7 +1,15 @@
 {
+	"home": "Inicio",
+	"play": "Jugar",
+	"tournament": "Torneo",
+	"profile": "Perfil",
+	"friends": "Amigos",
+	"matchHistory": "Historial de partidos",
+	"logOut": "Desconexión",
+	
 	"welcome": "Bienvenido",
 
-	"profile": "Perfil",
+	"infos": "Tus informaciones",
 	"username": "Nombre de usario",
 	"email": "Correo electrónico",
 	"firstName": "Nombre",
