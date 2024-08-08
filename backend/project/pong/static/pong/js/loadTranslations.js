@@ -1,20 +1,26 @@
-// function loadTranslationScript(callback) {
-//     var script = document.createElement("script");
-//     script.type = "text/javascript";
+window.trans = '/static/pong/js/translations/en.json';
+window.tmp_trans = null;
 
-//     if (script.readyState) {  // For old versions of IE
-//         script.onreadystatechange = function () {
-//             if (script.readyState == "loaded" || script.readyState == "complete") {
-//                 script.onreadystatechange = null;
-//                 callback();
-//             }
-//         };
-//     } else {  // For modern browsers
-//         script.onload = function () {
-//             callback();
-//         };
-//     }
+function loadTranslations(newLang) {
+	var langFile = '/static/pong/js/translations/en.json';
+	if (newLang === 'fr')
+		langFile = '/static/pong/js/translations/fr.json';
+	else if (newLang === 'es')
+		langFile = '/static/pong/js/translations/es.json';
+	// Necessary to make sure loadTranslations is only called the first time the Home function is called
+	window.tmp_trans = langFile;
+	return fetch(langFile)
+	.then(response => response.json())
+	.then(trans => {
+		window.trans = trans;
+	})
+	.catch(error => {
+		console.error('Error fetching translations:', error);
+	})
+}
 
-//     script.src = '/jsi18n/';
-//     document.getElementsByTagName("head")[0].appendChild(script);
-// }
+function changeLanguage(newLang) {
+	loadTranslations(newLang).then(() => {
+		document.getElementById('app').innerHTML = Home();
+	});
+}
