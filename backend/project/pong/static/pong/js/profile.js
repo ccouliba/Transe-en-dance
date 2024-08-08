@@ -14,7 +14,7 @@ var profileState = {
 
 // fonction pour afficher le profil utilisateur
 function Profile() {
-	// console.log(window.trans);
+	console.log(window.trans);
 	// charge les donnees du profil depuis le backend
 	loadProfileFromBackend(); // get
 
@@ -24,7 +24,7 @@ function Profile() {
 			<h1 class="mb-4">${window.trans.profile}</h1>
 			<div class="card">
 				<div class="card-body">
-				<h2 class="mt-4 mb-3" style="text-decoration: underline;">your information</h2>
+				<h2 class="mt-4 mb-3" style="text-decoration: underline;">${window.trans.infos}</h2>
 					<div class="row mb-3">
 						<div class="col-sm-3"><strong>${window.trans.username} :</strong></div>
 						<div class="col-sm-9">${profileState.username}</div>
