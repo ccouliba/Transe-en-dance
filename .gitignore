@@ -3,3 +3,7 @@
 
 # Ignorer les dossiers __pycache__
 __pycache__/
+
+
+elk_data/*
+!elk_data/.gitkeep
