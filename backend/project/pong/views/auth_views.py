@@ -133,7 +133,6 @@ def auth_callback(request):
 
 # Cette vue gere la connexion des utilisateurs
 @require_POST
-# @ensure_csrf_cookie
 @csrf_exempt
 ## New function of back without form validation and all that stuff !!
 def get_log(request, token):

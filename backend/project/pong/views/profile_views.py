@@ -9,7 +9,7 @@ from django.utils import translation
 from django.utils.translation import gettext as _
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
-from pong.models import User, Friendship
+from pong.models import User, Friendship, Game
 from .. import forms
 from pong.forms import AvatarUploadForm
 from django.views.decorators.csrf import csrf_exempt
@@ -78,40 +78,61 @@ def	profile_update_view(request):
 	# 	request.user.save()
 	# 	return JsonResponse({'status': 'success'})
 	
-
+from django.db.models import Q, Count, Sum, Case, When, IntegerField
 #Cette vue affiche le profil de l'utilisateur connecte en rendant la page HTML appropriee
 @login_required
 def profile_view(request):
 	user = request.user
+	
+	# Calculer les statistiques pour tous les jeux (1v1 et tournoi)
+	game_stats = Game.objects.filter(Q(player1=user) | Q(player2=user)).aggregate(
+		total_games=Count('id'),
+		wins=Count(Case(When(winner=user, then=1))),
+		total_score=Sum(Case(
+			When(player1=user, then='player1_score'),
+			When(player2=user, then='player2_score'),
+			default=0,
+			output_field=IntegerField()
+		))
+	)
 
-	# user.was_active_now()
-	# user.save()
-	# print("user er", user.last_activity)
+	wins = game_stats['wins']
+	total_games = game_stats['total_games']
+	losses = total_games - wins
+	win_rate = (wins / total_games * 100) if total_games > 0 else 0
 
-	# friends = user.friends.all()
-	# sent_requests = Friendship.objects.filter(id_user_1=user)
-	# received_requests = Friendship.objects.filter(id_user_2=user)
- 
-	return JsonResponse({
+	profile_data = {
 		'username': user.username,
 		'email': user.email,
 		'firstname': user.first_name,
-		'lastname' : user.last_name,
-		'id' :user.id,
+		'lastname': user.last_name,
 		'avatar_url': user.get_avatar_url(),
-		'wins': user.wins,
-		'losses': user.losses,
-		'total_games': user.total_games,
-		'win_rate': round(user.win_rate, 2)
-  
-	})
+		'wins': wins,
+		'losses': losses,
+		'total_games': total_games,
+		'win_rate': win_rate,
+		'total_score': game_stats['total_score']
+	}
+
+	return JsonResponse(profile_data)
+# def profile_view(request):
+# 	user = request.user
+
  
-	# return render(request, 'pong/profile.html', {
-	# 	'user': user,
-	# 	'friends': friends,
-	# 	'sent_requests': sent_requests,
-	# 	'received_requests': received_requests
-	# })
+# 	return JsonResponse({
+# 		'username': user.username,
+# 		'email': user.email,
+# 		'firstname': user.first_name,
+# 		'lastname' : user.last_name,
+# 		'id' :user.id,
+# 		'avatar_url': user.get_avatar_url(),
+# 		'wins': user.wins,
+# 		'losses': user.losses,
+# 		'total_games': user.total_games,
+# 		'win_rate': round(user.win_rate, 2)
+  
+# 	})
+ 
 
 # @login_required
 # def profile_view(request):
@@ -132,7 +153,6 @@ def user_updated_profile(request):
 
 # Cette vue permet a l'utilisateur connecte de changer son mot de passe en utilisant un formulaire fourni par Django
 @login_required
-# @csrf_exempt  #todo
 @require_POST
 def edit_password_view(request):
 	print(f"User authenticated: {request.user.is_authenticated}")

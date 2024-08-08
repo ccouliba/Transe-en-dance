@@ -65,7 +65,7 @@ function Profile() {
 					</div>
 					<div class="row mb-3">
 						<div class="col-sm-3"><strong>winning rate :</strong></div>
-						<div class="col-sm-9">${profileState.win_rate.toFixed(2)}%</div>
+						<div class="col-sm-9">${profileState.win_rate}%</div>
 					</div>
 				</div>
 			</div>
@@ -106,8 +106,9 @@ async function loadProfileFromBackend() {
 		profileState = {
 			...profileState,
 			...profile,
-			total_games: profile.wins + profile.losses,
-			win_rate: profile.total_games > 0 ? (profile.wins / profile.total_games) * 100 : 0
+			win_rate: profile.win_rate.toFixed(2)
+			// total_games: profile.wins + profile.losses,
+			// win_rate: profile.total_games > 0 ? (profile.wins / profile.total_games) * 100 : 0
 		}; // utilisation d'un spread operator
 		profileState.isLoaded = true;
 		mountComponent(Profile); // monter le composant Profile

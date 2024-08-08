@@ -106,7 +106,6 @@ def match_history(request):
 		status='finished'
 	).order_by('-created_at')  
 	paris_tz = pytz.timezone('Europe/Paris')
-	# print(paris_tz)
 	history = []
 	for game in games:
 		game_time = game.finished_at or game.created_at
@@ -117,7 +116,9 @@ def match_history(request):
 			'user_score': game.player1_score if game.player1 == user else game.player2_score,
 			'opponent_score': game.player2_score if game.player1 == user else game.player1_score,
 			'result': 'Win' if game.winner == user else 'Loss',
-			'date': game_time_paris.strftime("%Y-%m-%d %H:%M:%S")
+			'date': game_time_paris.strftime("%Y-%m-%d %H:%M:%S"),
+			'is_tournament': game.is_tournament_game,
+			'tournament_name': game.tournament.name if game.tournament else None
 		})
 	
 	return JsonResponse({'match_history': history})
