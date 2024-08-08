@@ -9,6 +9,18 @@
 	
 	"welcome": "Welcome",
 
+	"pongGame": "Pong Game",
+	"firstPlayerEmail": "First player's email",
+	"secondPlayerEmail": "Second player's email",
+	"btnStartGame": "Start game",
+	"instructions": "Instructions",
+	"rule1": "The objective of the game is to score points by hitting the ball into the opponent's court.",
+	"rule2": "Player 1 controls their paddle using the W (up) and S (down) keys.",
+	"rule3": "Player 2 controls their paddle using the Up (↑) and Down (↓) arrow keys.",
+	"rule4": "The first player to reach a set number of points wins the game.",
+	"rule5": "A player cannot play against themselves.",
+	"goodLuck": "Good luck and have fun!",
+
 	"infos": "Your information",
 	"username": "Username",
 	"email": "Email",

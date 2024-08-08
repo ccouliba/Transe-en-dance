@@ -13,10 +13,6 @@ var playState = {
 	tournamentId: null,
 };
 
-
-
-
-
 function Play() {
 	if (playState.gameOver || !playState.isLoaded) {
 		playState.isLoaded = false;
@@ -56,27 +52,28 @@ function Play() {
 			`
 			: `
 				<div class="container mt-5">
-					<h1>Pong Game</h1>
+					<h1>${window.trans.pongGame}
+					</h1>
 					<form id="start-game-form">
 						<div class="mb-3">
-							<label for="player1Email" class="form-label">First player's email</label>
+							<label for="player1Email" class="form-label">${window.trans.firstPlayerEmail}</label>
 							<input type="email" class="form-control" id="player1Email" required>
 						</div>
 						<div class="mb-3">
-							<label for="player2Email" class="form-label">Second player's email</label>
+							<label for="player2Email" class="form-label">${window.trans.secondPlayerEmail}</label>
 							<input type="email" class="form-control" id="player2Email" required>
 						</div>
-						<button type="submit" class="btn btn-primary">Start game</button>
+						<button type="submit" class="btn btn-primary">${window.trans.btnStartGame}</button>
 					</form>
 					<div id="instructions" class="card p-3 mb-4">
-						<h2 class="card-title">Instructions</h2>
+						<h2 class="card-title">${window.trans.instructions}</h2>
 						<ul class="list-group list-group-flush">
-							<li class="list-group-item">The objective of the game is to score points by hitting the ball into the opponent's court.</li>
-							<li class="list-group-item">Player 1 controls their paddle using the W (up) and S (down) keys.</li>
-							<li class="list-group-item">Player 2 controls their paddle using the Up (↑) and Down (↓) arrow keys.</li>
-							<li class="list-group-item">The first player to reach a set number of points wins the game.</li>
-							<li class="list-group-item">A player cannot play against themselves.</li>
-							<li class="list-group-item">Good luck and have fun!</li>
+							<li class="list-group-item">${window.trans.rule1}</li>
+							<li class="list-group-item">${window.trans.rule2}</li>
+							<li class="list-group-item">${window.trans.rule3}</li>
+							<li class="list-group-item">${window.trans.rule4}</li>
+							<li class="list-group-item">${window.trans.rule5}</li>
+							<li class="list-group-item">${window.trans.goodLuck}</li>
 						</ul>
 					</div>
 				</div>

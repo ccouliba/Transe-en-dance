@@ -9,6 +9,18 @@
 	
 	"welcome": "Bienvenido",
 
+	"pongGame": "Juego de Pong",
+	"firstPlayerEmail": "Correo electrónico del primer jugador",
+	"secondPlayerEmail": "Correo electrónico del segundo jugador",
+	"btnStartGame": "Iniciar el juego",
+	"instructions": "Instrucciones",
+	"rule1": "El objetivo del juego es conseguir puntos golpeando la pelota en el campo del adversario.",
+	"rule2": "El jugador 1 controla su paleta con las teclas W (arriba) y S (abajo).",
+	"rule3": "El jugador 2 controla su paleta con las teclas de flecha Arriba (↑) y Abajo (↓).",
+	"rule4": "El primer jugador que alcance un número determinado de puntos gana la partida.",
+	"rule5": "Un jugador no puede jugar contra sí mismo.",
+	"goodLuck": "¡Buena suerte y diviértete!",
+
 	"infos": "Tus informaciones",
 	"username": "Nombre de usario",
 	"email": "Correo electrónico",
