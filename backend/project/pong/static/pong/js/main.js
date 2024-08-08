@@ -177,6 +177,29 @@ window.changePage = function (url) {
 };
 
 
+function getCurrentLanguage() {
+	return django.catalog.lang;
+}
+
+function changeLanguage(langCode) {
+	fetch('/i18n/setlang/', {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded', // Type de contenu envoye dans la requete
+			'X-CSRFToken': getCSRFToken(), 
+		},
+		body: `language=${langCode}`,// Corps de la requete avec le code de la langue
+		credentials: 'include'
+	})
+	.then(response => {
+		if (response.ok) {
+			window.location.reload();// Recharge la page si la langue a ete changee avec succes
+		}
+	})
+	.catch(error => console.error('Erreur lors du changement de langue:', error));
+}
+
+
 function httpGetJson(url){
 
 	return fetch(url, {
@@ -221,18 +244,18 @@ function mountComponent(componentFunction, data) {
 
 
 function getCSRFToken() {
-    let cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-        const cookies = document.cookie.split(';');
-        for (let i = 0; i < cookies.length; i++) {
-            const cookie = cookies[i].trim();
-            if (cookie.substring(0, 10) === 'csrftoken=') {
-                cookieValue = decodeURIComponent(cookie.substring(10));
-                break;
-            }
-        }
-    }
-    return cookieValue;
+	let cookieValue = null;
+	if (document.cookie && document.cookie !== '') {
+		const cookies = document.cookie.split(';');
+		for (let i = 0; i < cookies.length; i++) {
+			const cookie = cookies[i].trim();
+			if (cookie.substring(0, 10) === 'csrftoken=') {
+				cookieValue = decodeURIComponent(cookie.substring(10));
+				break;
+			}
+		}
+	}
+	return cookieValue;
 }
 
 // Fonction pour obtenir la valeur d'un cookie par son nom

@@ -1,0 +1,8 @@
+
+
+msgid "lang"
+msgstr "en"
+
+# Welcome
+msgid "home.welcome.title"
+msgstr "welcome"
