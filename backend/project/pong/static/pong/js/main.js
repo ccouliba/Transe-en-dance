@@ -75,8 +75,7 @@ let routes = {
 	"#play": () => mountComponent(Play),
 	"#profile": () => mountComponent(Profile),
 	"#friends": () => mountComponent(FriendsList),
-	"#ia":() => mountComponent(IA),
-
+	"#ia":() => mountComponent(IA), 
 	// login: () => mountComponent(Login),
 	"#404": () => mountComponent(Page404),
 	"#tournament": () => mountComponent(Tournament),
@@ -195,3 +194,4 @@ window.addEventListener('load', function() {
 //Pour IA
 
 let iaMode = 0;
+

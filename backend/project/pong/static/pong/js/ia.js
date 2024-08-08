@@ -1,4 +1,5 @@
-window.onload = function() {
+// Fonction pour configurer et dessiner sur le canvas pour le jeu
+function initializeGame() {
     // Création du canvas
     var canvas = document.createElement("canvas");
     canvas.id = "myCanvas";
@@ -259,15 +260,33 @@ window.onload = function() {
         resetBall();
     }
 
-    if (iaMode)
-        setInterval(gameLoop, 1000 / 60);
-};
+    setInterval(gameLoop, 1000 / 60);
+}
+
+// Fonction pour afficher ou masquer le canvas en fonction de son état actuel
+function toggleCanvas() {
+    var canvas = document.getElementById('myCanvas');
+    if (canvas) {
+        // Si le canvas existe déjà, le retirer
+        document.body.removeChild(canvas);
+    } else {
+        // Sinon, initialiser le jeu et ajouter le canvas
+        initializeGame();
+    }
+}
+
+// Fonction pour masquer le canvas
+function hideCanvas() {
+    var canvas = document.getElementById('myCanvas');
+    if (canvas) {
+        document.body.removeChild(canvas);
+    }
+}
+
 
 function IA() {
-    iaMode = 1;
-    window.onload();
 	return `
 	<div>
-		<h1>Good Luck</h1>
+		<h1>Good Luck !</h1>
 	</div>`;
 }
