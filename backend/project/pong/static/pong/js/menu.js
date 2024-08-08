@@ -3,13 +3,13 @@ function Menu() {
 	return `
 		<nav class="navbar">
 			${isLoggedIn ? `
-				<a href="#home" onclick="changePage('#home'); return false;">Home</a>
-				<a href="#play" onclick="changePage('#play'); return false;">Play</a>
-				<a href="#tournament" onclick="changePage('#tournament'); return false;">Tournament</a>
-				<a href="#profile" onclick="changePage('#profile'); return false;">Profil</a>
-				<a href="#friends" onclick="changePage('#friends'); return false;">Friends</a>
-				<a href="#profile" onclick="changePage('#match_history'); return false;">Match history</a>
-				<a href="#" onclick="logout(); return false;">Logout</a>
+				<a href="#home" onclick="changePage('#home'); return false;">${window.trans.home}</a>
+				<a href="#play" onclick="changePage('#play'); return false;">${window.trans.play}</a>
+				<a href="#tournament" onclick="changePage('#tournament'); return false;">${window.trans.tournament}</a>
+				<a href="#profile" onclick="changePage('#profile'); return false;">${window.trans.profile}</a>
+				<a href="#friends" onclick="changePage('#friends'); return false;">${window.trans.friends}</a>
+				<a href="#profile" onclick="changePage('#match_history'); return false;">${window.trans.matchHistory}</a>
+				<a href="#" onclick="logout(); return false;">${window.trans.logOut}</a>
 			` : `
 				
 			`}
