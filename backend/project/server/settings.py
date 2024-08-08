@@ -206,6 +206,10 @@ STATICFILES_DIRS = [
 	os.path.join(BASE_DIR, 'pong/static'),
 ]
 
+FRONTFILES_DIR = [
+    os.path.join(BASE_DIR, 'frontend/'),
+]
+
 # Chemin pour les fichiers statiques collectés (utilisé avec collectstatic)
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 

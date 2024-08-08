@@ -48,14 +48,16 @@ function Login() {
 function LoginForm() {
 	return `
 		<form id="loginForm">
-			<div class="mb-3">
-				<input type="text" class="form-control" name="username" placeholder="Username" required>
+			<div class="form-floating">
+				<input type="text" class="form-control" name="username" id="username" placeholder="Username" required>
+				<label for="username">Username</label>
 			</div>
-			<div class="mb-3">
-				<input type="password" class="form-control" name="password" placeholder="Password" required>
+			<div class="form-floating">
+				<input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
+				<label for="password">Password</label>
 			</div>
-			<button type="submit" class="btn btn-primary">Login</button>
 		</form>
+		<button type="submit" class="btn btn-secondary">Login</button>
 	`;
 }
 

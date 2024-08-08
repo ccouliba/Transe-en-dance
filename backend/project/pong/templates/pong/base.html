@@ -4,7 +4,9 @@
 	<meta charset="UTF-8" />
 	<title>{% block title %}PONG{% endblock %}</title>
 	{% load static %}
-	<link rel="stylesheet" href="{% static 'pong/css/style.css' %}" />
+	<link href="/frontend/css/bootstrap.min.css"/>
+	<link href="/frontend/css/TrajanPro.css"/>
+	<link href="/frontend/css/frontstyle.css"/>
 	<link rel="icon" href="{% static 'pong/images/favicon.ico' %}" type="image/x-icon">
   </head>
   <body>
@@ -16,9 +18,10 @@
 	<script src="{% static 'pong/js/home.js' %}"></script>
 	<script src="{% static 'pong/js/play/play.js' %}"></script>
 	<script src="{% static 'pong/js/play/pongGame.js' %}"></script>
+
 	<script src="{% static 'pong/js/friends.js' %}"></script>
 	<script src="{% static 'pong/js/tournament/tournament.js' %}"></script>
-   
+	
 	<script src="{% static 'pong/js/tournament/tournamentDetail.js' %}"></script>
 	<script src="{% static 'pong/js/tournament/matchmaking.js' %}"></script>
 	<script src="{% static 'pong/js/logout.js' %}"></script>
@@ -63,5 +66,8 @@
 	  </div>
 	</main>
 	{% block scripts %} {% endblock %}
+	<canvas id="background"></canvas>
+	<script src="{% static 'pong/js/background.js' %}"></script>
+	<script src="{% static 'pong/js/bootstrap.min.js' %}"></script>
   </body>
 </html>

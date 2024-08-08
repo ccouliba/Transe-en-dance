@@ -19,18 +19,24 @@ function Register() {
 
 	return `
 		<form id="registerForm">
-			<h1>Register</h1> 
-			<div class="mb-3">
-				<input type="text" class="form-control" name="username" placeholder="Username" required>
+			<div class="form-floating">
+				<input type="text" class="form-control" name="username" id="username" placeholder="Username" required>
+				<label for="username">Username</label>
 			</div>
-			<div class="mb-3">
-				<input type="email" class="form-control" name="email" placeholder="Email" required>
+			<div class="form-floating">
+				<input type="email" class="form-control" name="email" id="email" placeholder="Email" required>
+				<label for="email">Email</label>
 			</div>
-			<div class="mb-3">
-				<input type="password" class="form-control" name="password1" placeholder="Password" required>
+			<div id="passwordHelpBlock" class="form-text">
+				Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.
 			</div>
-			<div class="mb-3">
-				<input type="password" class="form-control" name="password2" placeholder="Confirm Password" required>
+			<div class="form-floating">
+				<input type="password" class="form-control" name="password1" id="password1" placeholder="Password" required>
+				<label for="password1">Password</label>
+			</div>
+			<div class="form-floating">
+				<input type="password" class="form-control" name="password2" id="password2" placeholder="Confirm Password" required>
+				<label for="password2">Confirm password</label>
 			</div>
 			<button type="submit" class="btn btn-primary">Register</button>
 		</form>

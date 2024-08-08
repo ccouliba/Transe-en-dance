@@ -155,7 +155,7 @@ function AddFriendForm() {
 		<h2 class="mt-4 mb-3">Add a friend</h2>
 		<form id="add-friend-form" class="mt-3">
 			<div class="input-group">
-				<input type="text" class="form-control" name="friendEmail" placeholder="Friend's email" />
+				<input type="text" class="form-control" name="friendEmail" id="friendEmail" placeholder="Friend's email" />
 				<button class="btn btn-primary" type="submit">Add</button>
 			</div>
 		</form>
@@ -194,7 +194,7 @@ function AcceptFriendForm(email) {
 		<h2 class="mt-4 mb-3">Accept a friend</h2>
 		<form id="accept-friend-form" class="mt-3">
 			<div class="input-group">
-				<input type="text" class="form-control" name="friendEmail" placeholder="Friend's email" />
+				<input type="text" class="form-control" id="friendEmail" name="friendEmail" placeholder="Friend's email" />
 				<button class="btn btn-primary" type="submit">Accept</button>
 			</div>
 		</form>
@@ -232,7 +232,7 @@ function RemoveFriendForm() {
 		<h2 class="mt-4 mb-3">Delete a friend</h2>
 		<form id="remove-friend-form" class="mt-3">
 			<div class="input-group">
-				<input type="text" class="form-control" name="friendEmail" placeholder="Friend's email to delete" />
+				<input type="text" class="form-control" name="friendEmail" id="friendEmail" placeholder="Friend's email to delete" />
 				<button class="btn btn-danger" type="submit">Delete</button>
 			</div>
 		</form>

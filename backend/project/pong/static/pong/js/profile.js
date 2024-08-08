@@ -19,9 +19,9 @@ function Profile() {
 
 	// retourne une chaine de caracteres contenant le HTML du composant Profile
 	return `
-		<div class="container mt-5">
+		<div class="container mt-5" id="profilePage">
 			<h1 class="mb-4">profil</h1>
-			<div class="card">
+			<div class="card" id="profilePage">
 				<div class="card-body">
 				<h2 class="mt-4 mb-3" style="text-decoration: underline;">your information</h2>
 					<div class="row mb-3">
@@ -69,8 +69,15 @@ function Profile() {
 					</div>
 				</div>
 			</div>
-			<h2 class="mt-4 mb-3" style="text-decoration: underline;">edit your information</h2>
-
+		<div class="accordion" id="accordionExample">
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="headingTwo">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+        Edit profile
+      </button>
+    </h2>
+    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
 			<h3 class="mt-4 mb-3">modify username</h2>
 			${EditUsername()}
 			<h3 class="mt-4 mb-3">modify email</h2>
@@ -85,7 +92,10 @@ function Profile() {
 			${EditAvatar()}
 			<h3 class="mt-4 mb-3">modify password</h2>
 			${EditPassword()}
-		</div>
+      </div>
+    </div>
+  </div>
+</div>
 	`;
 }
 
@@ -166,7 +176,8 @@ function EditUsername() {
 			<div class="input-group">
 				<input 
 					type="text" 
-					class="form-control" 
+					class="form-control"
+					id="username" 
 					name="username" 
 					value="${profileState.username}" 
 				/>
@@ -192,7 +203,7 @@ function EditEmail() {
 	return `
 		<form id="edit-email" class="mt-3">
 			<div class="input-group">
-				<input type="text" class="form-control" name="email" value="${profileState.email}" aria-label="new email">
+				<input type="text" class="form-control" id="email" name="email" value="${profileState.email}" aria-label="new email">
 				<button class="btn btn-primary" type="submit">modifier</button>
 			</div>
 		</form>
@@ -219,6 +230,7 @@ function EditFirstname() {
 				type="text" 
 				class="form-control" 
 				name="firstname" 
+				id="firstname"
 				value="${profileState.firstname}" 
 				aria-label="new first name"
 			/>
@@ -247,7 +259,8 @@ function EditLastname() {
 			<input 
 				type="text" 
 				class="form-control" 
-				name="lastname" 
+				name="lastname"
+				id="lastname" 
 				value="${profileState.lastname}" 
 				aria-label="new last name"
 			/>
@@ -269,6 +282,14 @@ function EditLangue() {
 		mountComponent(Profile);
 	});
 	return `
+<label for="languageSelector" id="languageLabel">Select your language&nbsp;:</label>
+<select class="form-select" name="languageSelector" id="languageSelector">
+  <!-- <option selected>Open this select menu</option> -->
+  <option value="en" id="englishOption">English 🇺🇸</option>
+  <option value="fr" id="frenchOption">Francais 🇫🇷</option>
+  <option value="es" id="spanishOption">Espanol 🇪🇸</option>
+  <option value="it" id="italianOption">Italiano 🇮🇹</option>
+</select>
 	<form id="edit-langue" class="mt-3">
 		<div class="input-group">
 			<input 
@@ -394,6 +415,7 @@ function EditPassword() {
 				type="password" 
 				class="form-control" 
 				name="old_password" 
+				id="old_password" 
 				placeholder="old password" 
 				required
 			/>
@@ -401,7 +423,8 @@ function EditPassword() {
 		<div class="input-group mt-3">
 			<input 
 				type="password" 
-				class="form-control" 
+				class="form-control"
+				id="new_password1" 
 				name="new_password1" 
 				placeholder="new password" 
 				required
@@ -410,7 +433,8 @@ function EditPassword() {
 		<div class="input-group mt-3">
 			<input 
 				type="password" 
-				class="form-control" 
+				class="form-control"
+				id="new_password2"  
 				name="new_password2" 
 				placeholder="confirm new password" 
 				required
