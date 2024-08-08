@@ -1,6 +1,7 @@
 {
 	"welcome": "Welcome Home",
 
+	"profile": "Profile",
 	"username": "Username",
 	"email": "Email",
 	"firstName": "First Name",
@@ -12,8 +13,10 @@
 	"losses": "Losses",
 	"totalGamesPlayed": "Total Games Played",
 	"winRate": "Win Rate",
-	"editInfos:": "Edit your information",
+	"editInfos": "Edit your profile",
 	"modify": "Modify",
+	"upload": "Upload",
+	"change": "Change",
 	"_username": "Username",
 	"_email": "Email",
 	"_firstName": "First Name",

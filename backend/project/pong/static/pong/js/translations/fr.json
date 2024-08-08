@@ -1,4 +1,27 @@
 {
 	"welcome": "Bienvenue",
-	"username": "Nom d'utilisateur :"
+
+	"profile": "Profil",
+	"username": "Nom d'utilisateur",
+	"email": "Adresse mail",
+	"firstName": "Prénom",
+	"lastName": "Nom",
+	"language": "Langue",
+	"avatar": "Avatar",
+	"gameStats": "Statistiques de jeu",
+	"wins": "Victores",
+	"losses": "Défaites",
+	"totalGamesPlayed": "Total de parties jouées",
+	"winRate": "Taux de victoires",
+	"editInfos": "Modifies ton profil",
+	"modify": "Modifier",
+	"upload": "Télécharger",
+	"change": "Changer",
+	"_username": "le nom d'utilisateur",
+	"_email": "l'adresse mail",
+	"_firstName": "le prénom",
+	"_lastName": "le nom",
+	"_language": "la langue",
+	"_avatar": "l'avatar",
+	"_password": "le mot de passe"
 }
