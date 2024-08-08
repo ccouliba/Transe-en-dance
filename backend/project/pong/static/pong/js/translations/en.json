@@ -1,4 +1,24 @@
 {
 	"welcome": "Welcome Home",
-	"username": "username :"
+
+	"username": "Username",
+	"email": "Email",
+	"firstName": "First Name",
+	"lastName": "Last Name",
+	"language": "Language",
+	"avatar": "Avatar",
+	"gameStats": "Game Statistics",
+	"wins": "Wins",
+	"losses": "Losses",
+	"totalGamesPlayed": "Total Games Played",
+	"winRate": "Win Rate",
+	"editInfos:": "Edit your information",
+	"modify": "Modify",
+	"_username": "Username",
+	"_email": "Email",
+	"_firstName": "First Name",
+	"_lastName": "Last Name",
+	"_language": "Language",
+	"_avatar": "avatar",
+	"_password": "password"
 }
