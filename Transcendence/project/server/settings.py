@@ -59,7 +59,7 @@ ALLOWE_HOSTS = []
 
 INSTALLED_APPS = [
     # 'elasticapm.contrib.django',
-	'pong',
+	'back',
 	'django.contrib.admin',
 	'django.contrib.auth',
 	'django.contrib.contenttypes',
@@ -88,7 +88,7 @@ ROOT_URLCONF = 'server.urls'
 TEMPLATES = [
 	{
 		'BACKEND': 'django.template.backends.django.DjangoTemplates',
-		'DIRS': [os.path.join(BASE_DIR, 'pong', 'templates')],
+		'DIRS': [os.path.join(BASE_DIR, 'back', 'templates')],
 		'APP_DIRS': True,
 		'OPTIONS': {
 			'context_processors': [
@@ -96,7 +96,7 @@ TEMPLATES = [
 				'django.template.context_processors.request',
 				'django.contrib.auth.context_processors.auth',
 				'django.contrib.messages.context_processors.messages',
-				'pong.context_variables_processors.texts_to_translate',
+				'back.context_variables_processors.texts_to_translate',
 			],
 		},
 	},
@@ -192,7 +192,7 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTH_USER_MODEL = 'pong.User'
+AUTH_USER_MODEL = 'back.User'
 
 LOGIN_REDIRECT_URL = '/pong/home'
 LOGOUT_REDIRECT_URL = '/pong/login'
@@ -203,7 +203,8 @@ LOGOUT_REDIRECT_URL = '/pong/login'
 # STATIC_URL = "static/"
 
 STATICFILES_DIRS = [
-	os.path.join(BASE_DIR, 'pong/static'),
+	os.path.join(BASE_DIR, 'back/static'),
+	os.path.join(BASE_DIR, 'front')
 ]
 
 # Chemin pour les fichiers statiques collectés (utilisé avec collectstatic)
@@ -244,7 +245,7 @@ LOGGING = {
         'file': {
             'level': 'INFO',
             'class': 'logging.FileHandler',
-            'filename': '../project/logs/pong.logs', # Chemin du fichier ou seront stockes les logs
+            'filename': '../project/logs/back.logs', # Chemin du fichier ou seront stockes les logs
             'formatter': 'verbose',
         },
         'console': {
@@ -261,7 +262,7 @@ LOGGING = {
     },
     
     'loggers': {
-        'pong': {
+        'back': {
             'handlers': ['file'],
             'level': 'INFO',
             'propagate': True, # If logs should be propagte to parent logs
