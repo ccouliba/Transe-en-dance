@@ -20,7 +20,7 @@ function Register() {
 	return `
 		<form id="registerForm">
 			<div class="form-floating">
-				<input type="text" class="form-control" name="username" id="username" placeholder="Username" required>
+				<input type="text" class="form-control" name="username" id="username" autocomplete="username" placeholder="Username" required>
 				<label for="username">Username</label>
 			</div>
 			<div class="form-floating">
@@ -31,11 +31,11 @@ function Register() {
 				Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.
 			</div>
 			<div class="form-floating">
-				<input type="password" class="form-control" name="password1" id="password1" placeholder="Password" required>
+				<input type="password" class="form-control" name="password1" id="password1" autocomplete="current-password" placeholder="Password" required>
 				<label for="password1">Password</label>
 			</div>
 			<div class="form-floating">
-				<input type="password" class="form-control" name="password2" id="password2" placeholder="Confirm Password" required>
+				<input type="password" class="form-control" name="password2" id="password2" autocomplete="current-password" placeholder="Confirm Password" required>
 				<label for="password2">Confirm password</label>
 			</div>
 			<button type="submit" class="btn btn-primary">Register</button>

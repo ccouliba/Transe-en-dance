@@ -245,7 +245,7 @@ LOGGING = {
         'file': {
             'level': 'INFO',
             'class': 'logging.FileHandler',
-            'filename': '../project/logs/back.logs', # Chemin du fichier ou seront stockes les logs
+            'filename': '../project/back/logs/back.logs', # Chemin du fichier ou seront stockes les logs
             'formatter': 'verbose',
         },
         'console': {

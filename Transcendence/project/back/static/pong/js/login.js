@@ -49,15 +49,15 @@ function LoginForm() {
 	return `
 		<form id="loginForm">
 			<div class="form-floating">
-				<input type="text" class="form-control" name="username" id="username" placeholder="Username" required>
+				<input type="text" class="form-control" name="username" id="username" autocomplete="username" placeholder="Username" required>
 				<label for="username">Username</label>
 			</div>
 			<div class="form-floating">
-				<input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
+				<input type="password" class="form-control" name="password" id="password" autocomplete="current-password" placeholder="Password" required>
 				<label for="password">Password</label>
 			</div>
+			<button type="submit" class="btn btn-primary">Login</button>
 		</form>
-		<button type="submit" class="btn btn-secondary">Login</button>
 	`;
 }
 
