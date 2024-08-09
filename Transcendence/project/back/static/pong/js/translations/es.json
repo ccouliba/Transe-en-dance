@@ -7,7 +7,7 @@
 	"matchHistory": "Historial de partidos",
 	"logOut": "Desconexión",
 	
-	"welcome": "Bienvenido",
+	"welcome": "Bienvenido al Pong",
 
 	"pongGame": "Juego de Pong",
 	"firstPlayerEmail": "Correo electrónico del primer jugador",
@@ -47,6 +47,7 @@
 	"alias": "Alias",
 	"_alias": "alias",
 	"add": "Añadir",
+	"accept": "Acceptar",
 	"_participants": "participantes",
 	"_participant": "participante",
 	"matches": "Partidos",

@@ -49,7 +49,7 @@ function startTournamentButton() {
 	 }
 	return `
 		<div class="mt-4">
-			<button id="startTournamentBtn" class="btn btn-primary">Start tournament</button>
+			<button id="startTournamentBtn" class="btn btn-primary">${window.trans._btnStartTournament}</button>
 		</div>
 	`;
 }

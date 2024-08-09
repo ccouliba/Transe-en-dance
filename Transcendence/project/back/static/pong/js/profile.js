@@ -275,7 +275,7 @@ function EditLastname() {
 function EditLangue() {
 	bindEvent(profileState, "#edit-langue", "submit", event => {
 		event.preventDefault();
-		const langueInput = event.target.elements.langue.value;
+		const langueInput = event.target.elements.languageSelector.value;
 
 		profileState.langue = langueInput;
 		sendProfileToBackend({ 'langue': langueInput });

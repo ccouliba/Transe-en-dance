@@ -28,6 +28,6 @@ function loadTranslations(newLang) {
 function changeLanguage(newLang) {
 	loadTranslations(newLang).then(() => {
 		updateMenu();
-		document.getElementById('app').innerHTML = Home();
+		document.getElementById('app').innerHTML = Profile();
 	});
 }
