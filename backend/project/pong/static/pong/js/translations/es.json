@@ -74,5 +74,20 @@
 	"_lastName": "el apellido",
 	"_language": "el idioma",
 	"_avatar": "el avatar",
-	"_password": "la contraseña"
+	"_password": "la contraseña",
+
+	"loading": "Cargando",
+	"friendsList": "Lista de amigos",
+	"refreshList": "Actualizar lista",
+	"myFriends": "Mis amigos",
+	"online": "Conectado",
+	"offline": "Desconectado",
+	"friendRequestsSent": "Solicitudes de amistad enviadas",
+	"friendRequestsReceived": "solicitudes de amistad recibidas",
+	"friendEmail": "Correo electrónico del amigo",
+	"friendEmailToDelete": "Correo electrónico del amigo para eliminar",
+	"addFriend": "Agregar un amigo",
+	"acceptFriend": "Acceptar un amigo",
+	"deleteFriend": "Eliminar a friend",
+	"delete": "Eliminar"
 }

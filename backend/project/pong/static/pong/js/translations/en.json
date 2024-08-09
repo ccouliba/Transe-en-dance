@@ -75,5 +75,20 @@
 	"_lastName": "Last Name",
 	"_language": "Language",
 	"_avatar": "avatar",
-	"_password": "password"
+	"_password": "password",
+
+	"loading": "Loading",
+	"friendsList": "Friends list",
+	"refreshList": "Refresh list",
+	"myFriends": "My friends",
+	"online": "online",
+	"offline": "offline",
+	"friendRequestsSent": "Friend requests sent",
+	"friendRequestsReceived": "Friend requests received",
+	"friendEmail": "Friend's email",
+	"friendEmailToDelete": "Friend's email to delete",
+	"addFriend": "Add a friend",
+	"acceptFriend": "Accept a friend",
+	"deleteFriend": "Delete a friend",
+	"delete": "Delete"
 }

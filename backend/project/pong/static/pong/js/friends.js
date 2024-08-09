@@ -10,7 +10,7 @@ var friendsState = {
 function Friends() {
 	if (!friendsState.isLoaded) {
 		loadFriendsData();
-		return `<div>Loading...</div>`;
+		return `<div>${window.trans.loading}...</div>`;
 	}
 
 	return `
@@ -37,27 +37,27 @@ function FriendsForms(){
 	
 function FriendsList() {
     return `
-        <h1 class="mb-4">Friends list</h1>
+        <h1 class="mb-4">${window.trans.friendsList}</h1>
         
-        <button class="btn btn-primary mb-3" onclick="refreshFriendsList()">Refresh list</button>
+        <button class="btn btn-primary mb-3" onclick="refreshFriendsList()">${window.trans.refreshList}</button>
         
-        <h2>My friends</h2>
+        <h2>${window.trans.myFriends}</h2>
         <ul id="friends-status-list" class="list-group mb-4">
             ${friendsState.friends.map(friend => `
                 <li class="list-group-item d-flex justify-content-between align-items-center">
-                    ${friend.username} (${friend.email}) - <span class="friend-status">${friend.isOnline ? "online" : "offline"}</span>
+                    ${friend.username} (${friend.email}) - <span class="friend-status">${friend.isOnline ? "(${window.trans.online})" : "${window.trans.offline}"}</span>
                 </li>
             `).join('')}
         </ul>
         
-        <h2>Friend requests sent</h2>
+        <h2>${window.trans.friendRequestsSent}</h2>
         <ul class="list-group mb-4">
             ${friendsState.sentRequests.map(request => `
                 <li class="list-group-item">${request.username} (${request.email})</li>
             `).join('')}
         </ul>
         
-        <h2>Friend requests received</h2>
+        <h2>${window.trans.friendRequestsReceived}</h2>
         <ul class="list-group mb-4">
             ${friendsState.receivedRequests.map(request => `
                 <li class="list-group-item">
@@ -112,7 +112,7 @@ function updateFriendsStatus() {
     if (statusList) {
         const statusSpans = statusList.querySelectorAll('.friend-status');
         statusSpans.forEach((span, i) => {
-            span.textContent = friendsState.friends[i].isOnline ? "online" : "offline";
+            span.textContent = friendsState.friends[i].isOnline ? "${window.trans.online}" : "${window.trans.offline}";
         });
     }
 }
@@ -152,11 +152,11 @@ function AddFriendForm() {
 
 	// Retourner le HTML du formulaire d'ajout d'ami
 	return `
-		<h2 class="mt-4 mb-3">Add a friend</h2>
+		<h2 class="mt-4 mb-3">${window.trans.addFriend}</h2>
 		<form id="add-friend-form" class="mt-3">
 			<div class="input-group">
-				<input type="text" class="form-control" name="friendEmail" placeholder="Friend's email" />
-				<button class="btn btn-primary" type="submit">Add</button>
+				<input type="text" class="form-control" name="friendEmail" placeholder=${window.trans.friendEmail}/>
+				<button class="btn btn-primary" type="submit">${window.trans.add}</button>
 			</div>
 		</form>
 	`;
@@ -191,11 +191,11 @@ function AcceptFriendForm(email) {
 
 	// Retourner le HTML du formulaire d'acceptation d'ami
 	return `
-		<h2 class="mt-4 mb-3">Accept a friend</h2>
+		<h2 class="mt-4 mb-3">${window.trans.acceptFriend}</h2>
 		<form id="accept-friend-form" class="mt-3">
 			<div class="input-group">
-				<input type="text" class="form-control" name="friendEmail" placeholder="Friend's email" />
-				<button class="btn btn-primary" type="submit">Accept</button>
+				<input type="text" class="form-control" name="friendEmail" placeholder=${window.trans.friendEmail} />
+				<button class="btn btn-primary" type="submit">${window.trans.add}</button>
 			</div>
 		</form>
 	`;
@@ -229,11 +229,11 @@ function RemoveFriendForm() {
 
 	// Retourner le HTML du formulaire de suppression d'ami
 	return `
-		<h2 class="mt-4 mb-3">Delete a friend</h2>
+		<h2 class="mt-4 mb-3">${window.trans.deleteFriend}</h2>
 		<form id="remove-friend-form" class="mt-3">
 			<div class="input-group">
-				<input type="text" class="form-control" name="friendEmail" placeholder="Friend's email to delete" />
-				<button class="btn btn-danger" type="submit">Delete</button>
+				<input type="text" class="form-control" name="friendEmail" placeholder=${window.trans.friendEmailToDelete} />
+				<button class="btn btn-danger" type="submit">${window.trans.delete}</button>
 			</div>
 		</form>
 	`;

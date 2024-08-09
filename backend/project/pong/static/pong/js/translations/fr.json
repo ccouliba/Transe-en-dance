@@ -74,5 +74,20 @@
 	"_lastName": "le nom",
 	"_language": "la langue",
 	"_avatar": "l'avatar",
-	"_password": "le mot de passe"
+	"_password": "le mot de passe",
+
+	"loading": "Chargement",
+	"friendsList": "Liste d'amis",
+	"refreshList": "Rafraîchir la liste",
+	"myFriends": "Mes amis",
+	"online": "connecté",
+	"offline": "deconnecté",
+	"friendRequestsSent": "Demandes d'amis envoyées",
+	"friendRequestsReceived": "Demandes d'amis reçues",
+	"friendEmail": "Mail de l'ami",
+	"friendEmailToDelete": "Mail de l'ami à supprimer",
+	"addFriend": "Ajouter un ami",
+	"acceptFriend": "Accepter un ami",
+	"deleteFriend": "Supprimer un ami",
+	"delete": "Supprimer"
 }
