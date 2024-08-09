@@ -21,11 +21,13 @@ function MatchHistory() {
 
 function renderMatchHistory() {
 	if (!matchHistoryState.isLoaded) {
-		return '<p>${window.trans.loading} ${window.trans._matchHistory}...</p>';
+		// Removing <p></p> for text to display properky
+		return `${window.trans.loading} ${window.trans._matchHistory}...`;
 	}
 
 	if (matchHistoryState.history.length === 0) {
-		return `<p>${window.trans.noMatchesFound}.</p>`;
+		// Removing <p></p> for text to display properky
+		return `${window.trans.noMatchesFound}.`;
 	}
 
 	return `
