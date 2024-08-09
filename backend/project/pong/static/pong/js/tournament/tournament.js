@@ -13,7 +13,7 @@ function Tournament() {
 	let tournament = tournamentState.tournament
 	if (!tournamentState.isLoaded) {
 		loadTournamentState();
-		return `<div class="container mt-5"><p>Loading tournament data...</p></div>`;
+		return `<div class="container mt-5"><p>${window.trans.loadTournamentData}...</p></div>`;
 	}
 
 	
@@ -26,13 +26,13 @@ function Tournament() {
 	// <h1>Latest tournament name : ${tournament.name} - status : ${tournamentStatus}</h1>
 	let lastTournament = ""
 	if (tournament){
-		lastTournament = `<h1>Latest tournament name : ${tournament.name}</h1>`
+		lastTournament = `<h1>${window.trans.lastestTournament} : ${tournament.name}</h1>`
 	}
 
 	return `<div class="container mt-5">
 			${lastTournament}	
 			${Participants()}
-			<h2 class="mt-4">Create a new tournament</h2>
+			<h2 class="mt-4">${window.trans.createTournament}</h2>
 			${createTournamentForm()}
 			
 			${addParticipantForm()}

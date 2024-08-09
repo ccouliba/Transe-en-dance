@@ -16,11 +16,11 @@ function Participants() {
 
 	return `
 	<div class="tournament-details">
-		<h3>Participants:</h3>
+		<h3>${window.trans.participants}:</h3>
 		<ul id="participantsList">
 			${participantsList}
 		</ul>
-		<h3>Aliases:</h3>
+		<h3>${window.trans.aliases}:</h3>
 		<ul id="aliasesList">
 			${aliasesList}
 		</ul>
@@ -34,10 +34,10 @@ function createTournamentForm() {
 	return `
 		<form id="createTournamentForm">
 			<div class="mb-3">
-				<label for="tournamentName" class="form-label">Tournament name</label>
+				<label for="tournamentName" class="form-label">${window.trans.tournamentName} :</label>
 				<input type="text" class="form-control" id="tournamentName" required>
 			</div>
-			<button type="submit" class="btn btn-primary">Create tournament</button>
+			<button type="submit" class="btn btn-primary">${window.trans.createTournament}</button>
 		</form>
 	`;
 }
@@ -50,13 +50,13 @@ function addParticipantForm() {
 	}
 	return `
 		<div class="mt-4">
-		<h2 class="mt-4">Add participant</h2>
+		<h2 class="mt-4">${window.trans.add} ${window.trans._participants}</h2>
 			<form id="addParticipantForm">
 				<div class="mb-3">
-					<label for="participant" class="form-label">Add one participant (enter your username, you must be registered to this app in order to play)</label>
+					<label for="participant" class="form-label">${window.trans.add} ${window.trans._participant} :</label>
 					<input type="text" class="form-control" id="participant" required>
 				</div>
-				<button type="submit" class="btn btn-primary">Add participant</button>
+				<button type="submit" class="btn btn-primary">${window.trans.add}</button>
 			</form>
 		</div>
 	`;
@@ -71,17 +71,17 @@ function addAliasForm() {
 	
 	return `
 		<div class="mt-4">
-		<h2 class="mt-4">Add alias</h2>
+		<h2 class="mt-4">${window.trans.add} ${window.trans._aliases}</h2>
 			<form id="addAliasForm">
 				<div class="mb-3">
-					<label for="username" class="form-label">Your username</label>
+					<label for="username" class="form-label">${window.trans.username} :</label>
 					<input type="text" class="form-control" id="username" required>
 				</div>
 				<div class="mb-3">
-					<label for="alias" class="form-label">Add your alias</label>
+					<label for="alias" class="form-label">${window.trans.alias} :</label>
 					<input type="text" class="form-control" id="alias" required>
 				</div>
-				<button type="submit" class="btn btn-primary">Add alias</button>
+				<button type="submit" class="btn btn-primary">${window.trans.add}</button>
 			</form>
 		</div>
 	`;

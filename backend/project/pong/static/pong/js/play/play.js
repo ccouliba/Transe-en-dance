@@ -28,15 +28,15 @@ function Play() {
 		clearInterval(playState.checkInterval);
 		content = `
 			<div class="container mt-5">
-				<h1>Game ended!</h1>
+				<h1>${window.trans.gameEnded}!</h1>
 				<div class="mt-4">
-					<h2>Final scores:</h2>
+					<h2>${window.trans.finalScores}:</h2>
 					<p>${playState.player1Email}: ${playState.player1Score}</p>
 					<p>${playState.player2Email}: ${playState.player2Score}</p>
 				</div>
 				${playState.isTournamentMatch 
-					? `<button id="backToTournamentBtn" class="btn btn-primary mt-3">Back to Tournament</button>`
-					: `<button id="restartGameBtn" class="btn btn-primary mt-3">Play another game</button>`
+					? `<button id="backToTournamentBtn" class="btn btn-primary mt-3">${window.trans.backToTournament}</button>`
+					: `<button id="restartGameBtn" class="btn btn-primary mt-3">${window.trans.playAnotherGame}</button>`
 				}
 			</div>
 		`;
@@ -44,10 +44,10 @@ function Play() {
 		content = playState.isTournamentMatch
 			? `
 				<div class="container mt-5">
-					<h1>Tournament Match</h1>
+					<h1>${window.trans.tournamentMatch}</h1>
 					<p>Waiting for game to start...</p>
 					<p>${playState.player1Email} vs ${playState.player2Email}</p>
-					<button id="startTournamentMatchBtn" class="btn btn-primary mt-3">Start Match</button>
+					<button id="startTournamentMatchBtn" class="btn btn-primary mt-3">${window.trans.startMatch}</button>
 				</div>
 			`
 			: `
@@ -81,7 +81,7 @@ function Play() {
 	} else {
 		content = `
 		<div class="container mt-5">
-			<h1 class="text-center">Pong Game</h1>
+			<h1 class="text-center">${window.trans.pongGame}</h1>
 			<canvas id="pongCanvas" width="${CANVAS_WIDTH}" height="${CANVAS_HEIGHT}"></canvas>
 		</div>
 		`;

@@ -1,5 +1,7 @@
 function Menu() {
-	const isLoggedIn = localStorage.getItem('userToken') === 'true';
+	// const isLoggedIn = localStorage.getItem('userToken') === 'true';
+	// Temporary fix cause navbar sometimes displaying when lauching page
+	var isLoggedIn = localStorage.getItem('userToken') === 'true';
 	return `
 		<nav class="navbar">
 			${isLoggedIn ? `
@@ -11,7 +13,7 @@ function Menu() {
 				<a href="#profile" onclick="changePage('#match_history'); return false;">${window.trans.matchHistory}</a>
 				<a href="#" onclick="logout(); return false;">${window.trans.logOut}</a>
 			` : `
-				
+
 			`}
 		</nav>
 	`;
