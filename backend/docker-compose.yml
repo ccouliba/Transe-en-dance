@@ -1,5 +1,3 @@
-version: '3.8' #maj de la version
-
 services:
   web:
     container_name: backend
@@ -21,7 +19,7 @@ services:
           target: /usr/src/project
     networks:
       - transcendance
-      - devops
+      # - devops
 
   db:
     image: postgres:15
@@ -71,10 +69,10 @@ services:
       - bootstrap.memory_lock=true
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
       - xpack.security.enabled=false
-    ulimits:
-      memlock:
-        soft: -1
-        hard: -1
+    # ulimits:
+    #   memlock:
+    #     soft: -1
+    #     hard: -1
     volumes:
       - elk_data:/usr/share/elasticsearch/data
     ports:
@@ -137,15 +135,14 @@ networks:
   transcendance:
     name: transcendance
     driver: bridge
-  devops:
-    name: devops
-    driver: bridge
+  # devops:
+  #   name: devops
+  #   driver: bridge
   elk:
     driver: bridge
 
 
 
-# version: '1.29.2'
 
 # services:
 #   web:
