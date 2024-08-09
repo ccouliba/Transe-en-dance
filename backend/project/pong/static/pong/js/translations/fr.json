@@ -61,6 +61,7 @@
 	"avatar": "Avatar",
 	"gameStats": "Statistiques de jeu",
 	"wins": "Victores",
+	"_wins": "victoires",
 	"losses": "Défaites",
 	"totalGamesPlayed": "Total de parties jouées",
 	"winRate": "Taux de victoires",
@@ -89,5 +90,12 @@
 	"addFriend": "Ajouter un ami",
 	"acceptFriend": "Accepter un ami",
 	"deleteFriend": "Supprimer un ami",
-	"delete": "Supprimer"
+	"delete": "Supprimer",
+
+	"_matchHistory": "historique des parties",
+	"noMatchesFound": "Aucun match trouvé",
+	"date": "Date",
+	"opponent": "Adversaire",
+	"score": "Score",
+	"result": "Résultat"
 }

@@ -9,7 +9,7 @@ function MatchHistory() {
 
 	let content = `
 		<div class="container mt-5">
-			<h2>Match history</h2>
+			<h2>${window.trans.matchHistory}</h2>
 			<div id="match-history-content">
 				${renderMatchHistory()}
 			</div>
@@ -21,21 +21,21 @@ function MatchHistory() {
 
 function renderMatchHistory() {
 	if (!matchHistoryState.isLoaded) {
-		return '<p>Loading match history...</p>';
+		return '<p>${window.trans.loading} ${window.trans._matchHistory}...</p>';
 	}
 
 	if (matchHistoryState.history.length === 0) {
-		return '<p>No matches found.</p>';
+		return `<p>${window.trans.noMatchesFound}.</p>`;
 	}
 
 	return `
 		<table class="table table-striped">
 			<thead>
 				<tr>
-					<th>Date</th>
-					<th>Opponent</th>
-					<th>Score</th>
-					<th>Result</th>
+					<th>${window.trans.date}</th>
+					<th>${window.trans.opponent}</th>
+					<th>${window.trans.score}</th>
+					<th>${window.trans.result}</th>
 				</tr>
 			</thead>
 			<tbody>

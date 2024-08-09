@@ -90,5 +90,12 @@
 	"addFriend": "Add a friend",
 	"acceptFriend": "Accept a friend",
 	"deleteFriend": "Delete a friend",
-	"delete": "Delete"
+	"delete": "Delete",
+
+	"_matchHistory": "match history",
+	"noMatchesFound": "No matches found",
+	"date": "Date",
+	"opponent": "Opponent",
+	"score": "Score",
+	"result": "Result"
 }
