@@ -265,7 +265,7 @@ function EditLastname() {
 				value="${profileState.lastname}" 
 				aria-label="new last name"
 			/>
-			<button class="btn btn-primary" type="submit">${window.trans.modify}</button>
+			<button class="btn btn-primary">${window.trans.modify}</button>
 		</div>
 	</form>
 	`;
@@ -289,22 +289,12 @@ function EditLangue() {
   <option value="en" id="englishOption">English 🇺🇸</option>
   <option value="fr" id="frenchOption">Francais 🇫🇷</option>
   <option value="es" id="spanishOption">Espanol 🇪🇸</option>
-  <option value="it" id="italianOption">Italiano 🇮🇹</option>
-</select>
-	<form id="edit-langue" class="mt-3">
-		<div class="input-group">
-			<input 
-				type="text" 
-				class="form-control" 
-				name="langue" 
-				value="${profileState.langue}" 
-				aria-label="New langue"
-			/>
-			<button class="btn btn-primary" type="submit">${window.trans.modify}</button>
-		</div>
-	</form>
-	`;
-}
+  </select>
+  <button class="btn btn-primary" onclick="changeLanguage(document.getElementById('languageSelector').value)">${window.trans.modify}</button>
+  `;
+  }
+
+//   <option value="it" id="italianOption">Italiano 🇮🇹</option>
 
 function EditAvatar() {
 	bindEvent(profileState, "#edit-avatar", "submit", event => {
