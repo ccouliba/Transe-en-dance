@@ -1,6 +1,8 @@
 var playState = {
-	player1Email: "", // email du joueur 1
-	player2Email: "", // email du joueur 2
+	// player1Email: "", // email du joueur 1
+	// player2Email: "", // email du joueur 2
+	player1Username: "", // username du joueur 1
+	player2Username: "", // username du joueur 2
 	player1Score: 0, // score du joueur 1
 	player2Score: 0, // score du joueur 2
 	gameStarted: false, // indique si le jeu a commence
@@ -35,8 +37,8 @@ function Play() {
 				<h1>Game ended!</h1>
 				<div class="mt-4">
 					<h2>Final scores:</h2>
-					<p>${playState.player1Email}: ${playState.player1Score}</p>
-					<p>${playState.player2Email}: ${playState.player2Score}</p>
+					<p>${playState.player1Username}: ${playState.player1Score}</p>
+					<p>${playState.player2Username}: ${playState.player2Score}</p>
 				</div>
 				${playState.isTournamentMatch 
 					? `<button id="backToTournamentBtn" class="btn btn-primary mt-3">Back to Tournament</button>`
@@ -50,7 +52,7 @@ function Play() {
 				<div class="container mt-5">
 					<h1>Tournament Match</h1>
 					<p>Waiting for game to start...</p>
-					<p>${playState.player1Email} vs ${playState.player2Email}</p>
+					<p>${playState.player1Username} vs ${playState.player2Username}</p>
 					<button id="startTournamentMatchBtn" class="btn btn-primary mt-3">Start Match</button>
 				</div>
 			`
@@ -59,12 +61,12 @@ function Play() {
 					<h1>Pong Game</h1>
 					<form id="start-game-form">
 						<div class="mb-3">
-							<label for="player1Email" class="form-label">First player's email</label>
-							<input type="email" class="form-control" id="player1Email" required>
+							<label for="player1Username" class="form-label">First player's username</label>
+							<input type="text" class="form-control" id="player1Username" required>
 						</div>
 						<div class="mb-3">
-							<label for="player2Email" class="form-label">Second player's email</label>
-							<input type="email" class="form-control" id="player2Email" required>
+							<label for="player2Username" class="form-label">Second player's username</label>
+							<input type="text" class="form-control" id="player2Username" required>
 						</div>
 						<button type="submit" class="btn btn-primary">Start game</button>
 					</form>
@@ -121,11 +123,11 @@ function startGame(event) {
 	if (event) event.preventDefault();
 
 	if (!playState.isTournamentMatch) {
-		playState.player1Email = document.getElementById("player1Email").value;
-		playState.player2Email = document.getElementById("player2Email").value;
+		playState.player1Username = document.getElementById("player1Username").value;
+		playState.player2Username = document.getElementById("player2Username").value;
 
-		if (playState.player1Email === playState.player2Email) {
-			alert("A player cannot play against themselves. Please enter different emails.");
+		if (playState.player1Username === playState.player2Username) {
+			alert("A player cannot play against themselves. Please enter different usernames.");
 			return;
 		}
 	}

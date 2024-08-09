@@ -363,8 +363,9 @@ function finishTournament() {
 function startMatch(matchId, player1Username, player2Username) {
 	// Set up the play state for the tournament match
 	playState.gameStarted = true;
-	playState.player1Email = player1Username;
-	playState.player2Email = player2Username;
+
+	playState.player1Username = player1Username;
+	playState.player2Username = player2Username;
 	playState.player1Score = 0;
 	playState.player2Score = 0;
 	playState.gameOver = false;

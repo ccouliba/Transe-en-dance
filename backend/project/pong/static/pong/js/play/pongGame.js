@@ -227,8 +227,8 @@ function finishGame(gameId, player1Score, player2Score, winnerEmail) {
 function createGameInDatabase() {
 	// envoie une requete post a l'api pour creer une nouvelle partie
 	httpPostJson('/pong/api/games/create_game/', {
-		player1Email: playState.player1Email,
-		player2Email: playState.player2Email
+		player1Username: playState.player1Username,
+		player2Username: playState.player2Username
 	})
 	.then(response => {
 		return response.json().then(data => {
@@ -287,7 +287,7 @@ function updateTournamentMatchScore(matchId, player1Score, player2Score, winner)
 
 function endGame() {
 	playState.gameOver = true;
-	const winner = playState.player1Score > playState.player2Score ? playState.player1Email : playState.player2Email;
+	const winner = playState.player1Score > playState.player2Score ? playState.player1Username : playState.player2Username;
    
 	if (playState.isTournamentMatch) {
 		updateTournamentMatchScore(playState.gameId, playState.player1Score, playState.player2Score, winner)
