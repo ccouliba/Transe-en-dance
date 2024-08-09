@@ -14,9 +14,7 @@ __pycache__/
 # Ignorer le fichier de configuration de prettier
 .prettierrc
 
-./backend/project/logs/*
+./back/project/logs/*
 
-./backend/project/logs/pong.logs
-
-#guegue hoarding syndrome						 
-old/			
+./back/project/logs/back.logs
+		
