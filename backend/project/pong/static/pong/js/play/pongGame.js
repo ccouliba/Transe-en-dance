@@ -211,7 +211,7 @@ function updateProfileStats() {
 function finishGame(gameId, player1Score, player2Score, winnerEmail) {
 
 	let url = `/pong/api/games/finish_game/${gameId}/` 
-	let payload = { winner: winnerEmail, player1Score, player2Score }
+	let payload = { winner: winnerUsername, player1Score, player2Score }
 	httpPostJson(url, payload)
 	.then(response => response.json())
 	.then(data => {

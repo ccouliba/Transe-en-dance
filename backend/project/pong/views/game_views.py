@@ -71,11 +71,11 @@ def finish_game(request, game_id):
 				return JsonResponse({'error': 'Game already finished'}, status=400)
 			
 			data = json.loads(request.body)
-			winner_email = data.get('winner')
-			print(winner_email)
+			winner_username  = data.get('winner')
+			print(winner_username)
 			player1_score = data.get('player1Score')
 			player2_score = data.get('player2Score')
-			winner = User.objects.get(email=winner_email)
+			winner = User.objects.get(username=winner_username)
 			
 			print(winner)
 			# mise a jour du statut du jeu et le gagnant
