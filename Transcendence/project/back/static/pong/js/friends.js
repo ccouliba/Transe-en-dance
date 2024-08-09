@@ -45,7 +45,7 @@ function FriendsList() {
         <ul id="friends-status-list" class="list-group mb-4">
             ${friendsState.friends.map(friend => `
                 <li class="list-group-item d-flex justify-content-between align-items-center">
-                    ${friend.username} (${friend.email}) - <span class="friend-status">${friend.isOnline ? "${window.trans.online}" : "${window.trans.offline}"}</span>
+                    ${friend.username} (${friend.email}) - <span class="friend-status">${friend.isOnline ? "online" : "offline"}</span>
                 </li>
             `).join('')}
         </ul>
@@ -155,7 +155,7 @@ function AddFriendForm() {
 		<h2 class="mt-4 mb-3">${window.trans.addFriend}</h2>
 		<form id="add-friend-form" class="mt-3">
 			<div class="input-group">
-				<input type="text" class="form-control" name="friendEmail" placeholder=${window.trans.friendEmail} />
+				<input type="text" class="form-control" name="friendEmail" placeholder=${window.trans.friendEmail}/>
 				<button class="btn btn-primary" type="submit">${window.trans.add}</button>
 			</div>
 		</form>
@@ -194,7 +194,7 @@ function AcceptFriendForm(email) {
 		<h2 class="mt-4 mb-3">${window.trans.acceptFriend}</h2>
 		<form id="accept-friend-form" class="mt-3">
 			<div class="input-group">
-				<input type="text" class="form-control" name="friendEmail" placeholder=${window.trans.friendEmail} />
+				<input type="text" class="form-control" name="friendEmail" placeholder=${window.trans.friendEmail}/>
 				<button class="btn btn-primary" type="submit">${window.trans.accept}</button>
 			</div>
 		</form>
@@ -232,7 +232,7 @@ function RemoveFriendForm() {
 		<h2 class="mt-4 mb-3">${window.trans.deleteFriend}</h2>
 		<form id="remove-friend-form" class="mt-3">
 			<div class="input-group">
-				<input type="text" class="form-control" name="friendEmail" placeholder=${window.trans.friendEmailToDelete} />
+				<input type="text" class="form-control" name="friendEmail" placeholder=${window.trans.friendEmailToDelete}/>
 				<button class="btn btn-danger" type="submit">${window.trans.delete}</button>
 			</div>
 		</form>
