@@ -38,37 +38,122 @@
 	  <div id="app">
 		{% block content %}
 		<script>
-			let hash = window.location.hash
+			/*let hash = window.location.hash
 		   
-			changePage(hash);
+			changePage(hash);*/
+			{% if user.is_authenticated %}
+				if (window.location.hash === '' || window.location.hash === '#') {
+					changePage('#home');
+				} else {
+					changePage(window.location.hash);
+				}
+			{% else %}
+				if (window.location.hash === '#register') {
+					changePage('#register');
+				} else {
+					changePage('#login');
+				}
+			{% endif %}
    
-	function handleLogout() {
-		logout();
-		navigator.sendBeacon('/pong/api/logout/', '', { method: 'POST', credentials: 'include' });
-	}
-	function isFirefox() {
-		return navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
-	}
+
 	loadTranslations();
-	// Gestion de la fermeture de l'onglet ou de la fenêtre
-	/*
-	window.addEventListener('beforeunload', function (e) {
-		handleLogout();
-		// Pour Firefox => retourner undefined pour éviter un message de confirmation
-		if (isFirefox()) {
-			e.preventDefault(); // Annule l'événement
-			e.returnValue = '';
-		}
-	});
-	// Pour Chrome
-	if (!isFirefox()) {
-		window.addEventListener('unload', handleLogout);
-	} */
+
 		</script>
 		{% endblock %}
 	  </div>
 	</main>
 	{% block scripts %} {% endblock %}
+
+
+
+
+
+
+
+
+<script>
+
+	// Script JS pour avoir une modale lorsque l'utilisateur est en mode navigation privee
+
+
+	// VerifiFonction pour verifier si l'utilisateur est en mode navigation privee
+	async function isIncognito() {
+		if (navigator.storage && navigator.storage.estimate) {
+			const { quota } = await navigator.storage.estimate();
+			if (quota) {
+				return quota < performance.memory.jsHeapSizeLimit;
+			}
+		}
+		return false;
+	}
+
+	// Fonction pour afficher la modale
+	function showModal() {
+		// Verifier si l'utilisateur a deja accepte les conditions
+		if (localStorage.getItem('incognitoAccepted') === 'true') return;
+
+		const modal = document.createElement('div');
+		modal.style.cssText = `
+			position: fixed;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			background-color: white;
+			padding: 20px;
+			border-radius: 5px;
+			box-shadow: 0 0 10px rgba(0,0,0,0.3);
+			z-index: 1000;
+			max-width: 80%;
+			max-height: 80%;
+			overflow-y: auto;
+		`;
+		modal.innerHTML = `
+			   <h2>Warning</h2>
+				<p>You are currently using private browsing mode. Please be aware of the following:</p>
+				<ul>
+					<li>If you close your window or your tab, you will be logged out, but you may still appear active to your friends.</li>
+					<li>To appear offline to your friends, you must manually log out before closing the window.</li>
+				</ul>
+
+			<button id="acceptIncognito" style="
+				background-color: #4CAF50;
+				border: none;
+				color: white;
+				padding: 15px 32px;
+				text-align: center;
+				text-decoration: none;
+				display: inline-block;
+				font-size: 16px;
+				margin: 4px 2px;
+				cursor: pointer;
+			">I understand and accept the consequences</button>
+		`;
+		document.body.appendChild(modal);
+
+		// Ajouter un event au bouton
+		document.getElementById('acceptIncognito').addEventListener('click', function() {
+			localStorage.setItem('incognitoAccepted', 'true');
+			modal.remove();
+		});
+	}
+
+	// Verifier si l'utilisateur est en mode de navigation privee et afficher la modale 
+	isIncognito().then(incognito => {
+		if (incognito) {
+			showModal();
+		}
+	});
+
+		</script>
+
+
+
+
+
+
+
+
+
 	<canvas id="background"></canvas>
 	<script src="{% static 'pong/js/background.js' %}"></script>
 	<script src="{% static 'pong/js/bootstrap.min.js' %}"></script>

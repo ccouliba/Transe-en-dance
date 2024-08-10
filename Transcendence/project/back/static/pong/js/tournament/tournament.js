@@ -5,7 +5,7 @@ var tournamentState = {
 };
 
 function isTournamentFinished(matches) {
-    return matches.every(match => match.status === "finished");
+	return matches.every(match => match.status === "finished");
 }
 
 function Tournament() {
@@ -119,6 +119,10 @@ function createTournament(event) {
 
 function addParticipant(event) {
 	event.preventDefault();
+	if (!tournamentState.tournament || !tournamentState.tournament.id) {
+		alert("You must create a tournament first");
+		return;
+	}
 	const participant = document.getElementById('participant').value.trim();
 
 	if (!participant) {
@@ -161,6 +165,10 @@ function addParticipant(event) {
 
 function addAlias(event) {
 	event.preventDefault();
+	if (!tournamentState.tournament || !tournamentState.tournament.id) {
+		alert("You must create a tournament first");
+		return;
+	}
 	const username = document.getElementById('username').value.trim();
 	const alias = document.getElementById('alias').value.trim();
 
@@ -363,8 +371,9 @@ function finishTournament() {
 function startMatch(matchId, player1Username, player2Username) {
 	// Set up the play state for the tournament match
 	playState.gameStarted = true;
-	playState.player1Email = player1Username;
-	playState.player2Email = player2Username;
+
+	playState.player1Username = player1Username;
+	playState.player2Username = player2Username;
 	playState.player1Score = 0;
 	playState.player2Score = 0;
 	playState.gameOver = false;

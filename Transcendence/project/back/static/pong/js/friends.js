@@ -99,6 +99,8 @@ function getFriendsStatus(){
 		.then(payload=>{
 			payload.statuses.forEach((isOnline, i) => {
 				friendsState.friends[i].isOnline = isOnline	
+				console.log(friendsState.friends[i].isOnline )
+
 			});
 			updateFriendsStatus();
 			// mountComponent(FriendsList) 

@@ -100,6 +100,11 @@ def get_user_from_api(request, access_token):
 		
 		user_info = user_info_response.json()
 		user, created = User.objects.get_or_create(username=user_info['login'])
+  
+		user.email = user_info.get('email', '')
+		user.avatar = user_info.get('image_url', '') 
+		user.save()
+		
 		login(request, user)
 		return redirect('/pong/#home')
 	except requests.exceptions.RequestException as e:
@@ -133,7 +138,6 @@ def auth_callback(request):
 
 # Cette vue gere la connexion des utilisateurs
 @require_POST
-# @ensure_csrf_cookie
 @csrf_exempt
 ## New function of back without form validation and all that stuff !!
 def get_log(request, token):
