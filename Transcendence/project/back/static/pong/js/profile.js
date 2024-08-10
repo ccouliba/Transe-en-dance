@@ -21,9 +21,9 @@ function Profile() {
 	let winRate = profileState.win_rate ? parseFloat(profileState.win_rate).toFixed(2) : 0
 	// retourne une chaine de caracteres contenant le HTML du composant Profile
 	return `
-		<div class="container mt-5">
+		<div class="container mt-5" id="profilePage">
 			<h1 class="mb-4">${window.trans.profile}</h1>
-			<div class="card">
+			<div class="card" id="profilePage">
 				<div class="card-body">
 				<h2 class="mt-4 mb-3" style="text-decoration: underline;">${window.trans.infos}</h2>
 					<div class="row mb-3">

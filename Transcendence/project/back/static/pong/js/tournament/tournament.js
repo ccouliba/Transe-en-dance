@@ -26,7 +26,7 @@ function Tournament() {
 	// <h1>Latest tournament name : ${tournament.name} - status : ${tournamentStatus}</h1>
 	let lastTournament = ""
 	if (tournament){
-		lastTournament = `<h1>${window.trans.lastestTournament} : ${tournament.name}</h1>`
+		lastTournament = `<h1>${window.trans.latestTournament} : ${tournament.name}</h1>`
 	}
 
 	return `<div class="container mt-5">

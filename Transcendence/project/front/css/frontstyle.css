@@ -50,7 +50,7 @@ a {
   color: rgb(145, 142, 112);
 }
 
-#profilePage, #instructions, #loginForm, .accordion-button, .accordion-body, #instructions, #start-game-form, #player1Email, #player2Email, .modal-content, .form-control, #username, #password, #email, #password1, #password2, #firstname, #lastname, #old_password, #new_password1, #new_password2, #participant, #alias, #tournamentName, #friendEmail {
+#profilePage, #instructions, .accordion-button, .accordion-body, #instructions, #start-game-form, #player1Email, #player2Email, .modal-content, .form-control, #username, #password, #email, #password1, #password2, #firstname, #lastname, #old_password, #new_password1, #new_password2, #participant, #alias, #tournamentName, #friendEmail, #friends-forms, #friends-list, #add-friend-form, #accept-friend-form {
   color: gold;
   background-color: rgba(30,30,30);
   background-image: linear-gradient(to top, rgb(30,30,30) 80%, rgb(42,50,80));
