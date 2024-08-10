@@ -65,13 +65,8 @@ function Profile() {
 						<div class="col-sm-9">${profileState.total_games}</div>
 					</div>
 					<div class="row mb-3">
-<<<<<<< HEAD:Transcendence/project/back/static/pong/js/profile.js
 						<div class="col-sm-3"><strong>${window.trans.winRate} :</strong></div>
 						<div class="col-sm-9">${profileState.win_rate.toFixed(2)}%</div>
-=======
-						<div class="col-sm-3"><strong>winning rate :</strong></div>
-						<div class="col-sm-9">${profileState.win_rate}%</div>
->>>>>>> spa:backend/project/pong/static/pong/js/profile.js
 					</div>
 				</div>
 			</div>
