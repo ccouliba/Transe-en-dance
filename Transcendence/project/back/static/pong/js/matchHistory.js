@@ -32,18 +32,10 @@ function renderMatchHistory() {
 		<table class="table table-striped">
 			<thead>
 				<tr>
-<<<<<<< HEAD:Transcendence/project/back/static/pong/js/matchHistory.js
 					<th>${window.trans.date}</th>
 					<th>${window.trans.opponent}</th>
 					<th>${window.trans.score}</th>
 					<th>${window.trans.result}</th>
-=======
-					<th>Date</th>
-					<th>Opponent</th>
-					<th>Score</th>
-					<th>Result</th>
-					<th>Type</th>
->>>>>>> spa:backend/project/pong/static/pong/js/matchHistory.js
 				</tr>
 			</thead>
 			<tbody>

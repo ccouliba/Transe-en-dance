@@ -17,7 +17,8 @@ function Profile() {
 	console.log(window.trans);
 	// charge les donnees du profil depuis le backend
 	loadProfileFromBackend(); // get
-
+	
+	let winRate = profileState.win_rate ? parseFloat(profileState.win_rate).toFixed(2) : 0
 	// retourne une chaine de caracteres contenant le HTML du composant Profile
 	return `
 		<div class="container mt-5">
@@ -65,13 +66,8 @@ function Profile() {
 						<div class="col-sm-9">${profileState.total_games}</div>
 					</div>
 					<div class="row mb-3">
-<<<<<<< HEAD:Transcendence/project/back/static/pong/js/profile.js
 						<div class="col-sm-3"><strong>${window.trans.winRate} :</strong></div>
-						<div class="col-sm-9">${profileState.win_rate.toFixed(2)}%</div>
-=======
-						<div class="col-sm-3"><strong>winning rate :</strong></div>
-						<div class="col-sm-9">${profileState.win_rate}%</div>
->>>>>>> spa:backend/project/pong/static/pong/js/profile.js
+						<div class="col-sm-9">${winRate}%</div>
 					</div>
 				</div>
 			</div>
