@@ -34,7 +34,7 @@ class Migration(migrations.Migration):
                 ('creation_date', models.DateTimeField(default=django.utils.timezone.now)),
                 ('langue', models.CharField(blank=True, max_length=10, null=True)),
                 ('is_online', models.BooleanField(default=False)),
-                ('avatar', models.ImageField(blank=True, default="English", null=True, upload_to='avatars/')),
+                ('avatar', models.ImageField(blank=True, null=True, upload_to='avatars/')),
                 ('last_activity', models.DateTimeField(default=django.utils.timezone.now)),
                 ('wins', models.IntegerField(default=0)),
                 ('losses', models.IntegerField(default=0)),
