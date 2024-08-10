@@ -215,7 +215,7 @@ function finishGame(gameId, player1Score, player2Score, winnerUsername) {
 // fonction pour creer une nouvelle partie dans la base de donnees
 function createGameInDatabase() {
 	// envoie une requete post a l'api pour creer une nouvelle partie
-	httpPostJson('/pong/api/games/create_game/', {
+	return httpPostJson('/pong/api/games/create_game/', {
 		// player1Username: playState.player1Username,
 		player2Username: playState.player2Username
 	})
@@ -228,20 +228,7 @@ function createGameInDatabase() {
 	// 	// stocke l'id de la partie retourne par le serveur
 	// 	playState.gameId = data.gameId;
 	// })
-	.then(({ status, body }) => {
-		if (status === 201) {
-			playState.gameId = body.gameId;
-			playState.player1Username = body.player1Username;
-			playState.player2Username = body.player2Username;
-		} else if (status === 404 && body.error === 'One or both players not found') {
-			// affiche une alerte si un ou les deux joueurs ne sont pas trouvés
-			alert('One or both players not found');
-			playState.gameStarted = false; 
-		} else {
-			// gere les autres erreurs
-			console.error('Error:', body.error);
-		}
-	})
+	
 	.catch(error => console.error('error:', error));
 }
 

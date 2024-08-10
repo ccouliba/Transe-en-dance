@@ -380,6 +380,5 @@ function startMatch(matchId, player1Username, player2Username) {
 	playState.gameId = matchId;
 	playState.isTournamentMatch = true;
 
-	// Navigate to the play page
-	changePage("#play");
+	mountComponent(Play);
 }

@@ -34,15 +34,9 @@ function Play() {
 			<div class="container mt-5">
 				<h1>${window.trans.gameEnded}!</h1>
 				<div class="mt-4">
-<<<<<<< HEAD:Transcendence/project/back/static/pong/js/play/play.js
-					<h2>${window.trans.finalScores}:</h2>
-					<p>${playState.player1Email}: ${playState.player1Score}</p>
-					<p>${playState.player2Email}: ${playState.player2Score}</p>
-=======
 					<h2>Final scores:</h2>
 					<p>${playState.player1Username}: ${playState.player1Score}</p>
 					<p>${playState.player2Username}: ${playState.player2Score}</p>
->>>>>>> spa:backend/project/pong/static/pong/js/play/play.js
 				</div>
 				${playState.isTournamentMatch 
 					? `<button id="backToTournamentBtn" class="btn btn-primary mt-3">${window.trans.backToTournament}</button>`
@@ -56,29 +50,12 @@ function Play() {
 				<div class="container mt-5">
 					<h1>${window.trans.tournamentMatch}</h1>
 					<p>Waiting for game to start...</p>
-<<<<<<< HEAD:Transcendence/project/back/static/pong/js/play/play.js
-					<p>${playState.player1Email} vs ${playState.player2Email}</p>
-					<button id="startTournamentMatchBtn" class="btn btn-primary mt-3">${window.trans.startMatch}</button>
-=======
 					<p>${playState.player1Username} vs ${playState.player2Username}</p>
 					<button id="startTournamentMatchBtn" class="btn btn-primary mt-3">Start Match</button>
->>>>>>> spa:backend/project/pong/static/pong/js/play/play.js
 				</div>
 			`
 			: `
 				<div class="container mt-5">
-<<<<<<< HEAD:Transcendence/project/back/static/pong/js/play/play.js
-					<h1>${window.trans.pongGame}
-					</h1>
-					<form id="start-game-form">
-						<div class="mb-3">
-							<label for="player1Email" class="form-label">${window.trans.firstPlayerEmail}</label>
-							<input type="email" class="form-control" id="player1Email" required>
-						</div>
-						<div class="mb-3">
-							<label for="player2Email" class="form-label">${window.trans.secondPlayerEmail}</label>
-							<input type="email" class="form-control" id="player2Email" required>
-=======
 					<h1>Pong game</h1>
 					<form id="start-game-form">
 						<div class="mb-3">
@@ -88,7 +65,6 @@ function Play() {
 						<div class="mb-3">
 							<label for="player2Username" class="form-label">Second player's username</label>
 							<input type="text" class="form-control" id="player2Username" required>
->>>>>>> spa:backend/project/pong/static/pong/js/play/play.js
 						</div>
 						<button type="submit" class="btn btn-primary">${window.trans.btnStartGame}</button>
 					</form>
@@ -108,11 +84,7 @@ function Play() {
 	} else {
 		content = `
 		<div class="container mt-5">
-<<<<<<< HEAD:Transcendence/project/back/static/pong/js/play/play.js
 			<h1 class="text-center">${window.trans.pongGame}</h1>
-=======
-			<h1 class="text-center">Pong game</h1>
->>>>>>> spa:backend/project/pong/static/pong/js/play/play.js
 			<canvas id="pongCanvas" width="${CANVAS_WIDTH}" height="${CANVAS_HEIGHT}"></canvas>
 		</div>
 		`;
@@ -140,7 +112,11 @@ function loadPlayState() {
 		setTimeout(initializeGame, 0);
 	}
 
+	if (playState.isTournamentMatch){
+		return
+	}
 	
+	//pas en mode tournoi
 	getCurrentUser().then(user => {
 		playState.player1Username = user.username;	
 		mountComponent(Play)
@@ -167,14 +143,33 @@ function startGame(event) {
 	playState.player2Score = 0;
 	playState.gameOver = false;
 
-	if (!playState.isTournamentMatch) {
-		createGameInDatabase();
+		console.log(playState.isTournamentMatch, "is")
+	 if (!playState.isTournamentMatch) {
+		createGameInDatabase()
+		.then(({ status, body }) => {
+			if (status === 201) {
+				playState.gameId = body.gameId;
+				playState.player1Username = body.player1Username;
+				playState.player2Username = body.player2Username;
+				mountComponent(Play);
+				initializeGame();
+			} else if (status === 404 && body.error === 'One or both players not found') {
+				// affiche une alerte si un ou les deux joueurs ne sont pas trouvés
+				alert('One or both players not found');
+				playState.gameStarted = false; 
+			} else {
+				// gere les autres erreurs
+				console.error('Error:', body.error);
+			}
+		})
+	}
+	else{
+		//mountComponent(Play);
+		initializeGame();
 	}
 
-	mountComponent(Play);
-	initializeGame();
 }
-
+	
 function startTournamentMatch() {
 	startGame();
 }

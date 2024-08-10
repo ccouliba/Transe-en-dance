@@ -9,11 +9,7 @@ from django.utils import translation
 from django.utils.translation import gettext as _
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
-<<<<<<< HEAD:Transcendence/project/back/views/profile_views.py
-from back.models import User, Friendship
-=======
-from pong.models import User, Friendship, Game
->>>>>>> spa:backend/project/pong/views/profile_views.py
+from back.models import User, Friendship, Game
 from .. import forms
 from back.forms import AvatarUploadForm
 from django.views.decorators.csrf import csrf_exempt
