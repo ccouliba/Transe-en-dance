@@ -17,8 +17,7 @@ function Profile() {
 	console.log(window.trans);
 	// charge les donnees du profil depuis le backend
 	loadProfileFromBackend(); // get
-	
-	let winRate = profileState.win_rate ? parseFloat(profileState.win_rate).toFixed(2) : 0
+	let winRate = profileState.win_rate.toFixed(2)
 	// retourne une chaine de caracteres contenant le HTML du composant Profile
 	return `
 		<div class="container mt-5" id="profilePage">
@@ -118,7 +117,7 @@ async function loadProfileFromBackend() {
 		profileState = {
 			...profileState,
 			...profile,
-			win_rate: profile.win_rate.toFixed(2)
+			win_rate: profile.win_rate
 			// total_games: profile.wins + profile.losses,
 			// win_rate: profile.total_games > 0 ? (profile.wins / profile.total_games) * 100 : 0
 		}; // utilisation d'un spread operator
