@@ -20,14 +20,16 @@ var playState = {
 
 
 function Play() {
-	if (playState.gameOver || !playState.isLoaded) {
-		playState.isLoaded = false;
-	}
-
 	if (!playState.isLoaded) {
 		loadPlayState();
 	}
 	
+	// if (playState.gameOver || !playState.isLoaded) {
+	// 	playState.isLoaded = false;
+	// }
+
+
+
 	let content = '';
 
 	if (playState.gameOver) {
@@ -58,11 +60,11 @@ function Play() {
 			`
 			: `
 				<div class="container mt-5">
-					<h1>Pong Game</h1>
+					<h1>Pong game</h1>
 					<form id="start-game-form">
 						<div class="mb-3">
 							<label for="player1Username" class="form-label">First player's username</label>
-							<input type="text" class="form-control" id="player1Username" required>
+							<p id="player1UsernameDisplay">${playState.player1Username || 'Loading...'}</p>
 						</div>
 						<div class="mb-3">
 							<label for="player2Username" class="form-label">Second player's username</label>
@@ -86,7 +88,7 @@ function Play() {
 	} else {
 		content = `
 		<div class="container mt-5">
-			<h1 class="text-center">Pong Game</h1>
+			<h1 class="text-center">Pong game</h1>
 			<canvas id="pongCanvas" width="${CANVAS_WIDTH}" height="${CANVAS_HEIGHT}"></canvas>
 		</div>
 		`;
@@ -98,14 +100,14 @@ function Play() {
 
 function loadPlayState() {
 
-
-	if (!playState.isLoaded) {
-		bindEvent(playState, "#start-game-form", "submit", startGame);
-		bindEvent(playState, "#restartGameBtn", "click", restartGame);
-		bindEvent(playState, "#backToTournamentBtn", "click", backToTournament);
-		bindEvent(playState, "#startTournamentMatchBtn", "click", startTournamentMatch);
-	}
-
+		
+	playState.isLoaded = true
+	bindEvent(playState, "#start-game-form", "submit", startGame);
+	bindEvent(playState, "#restartGameBtn", "click", restartGame);
+	bindEvent(playState, "#backToTournamentBtn", "click", backToTournament);
+	bindEvent(playState, "#startTournamentMatchBtn", "click", startTournamentMatch);
+	
+	
 	if (!playState.isKeyboardBind) {
 		bindKeyboardEvents();
 	}
@@ -114,7 +116,11 @@ function loadPlayState() {
 		setTimeout(initializeGame, 0);
 	}
 
-	playState.isLoaded = true;
+	
+	getCurrentUser().then(user => {
+		playState.player1Username = user.username;	
+		mountComponent(Play)
+	});	
 }
 
 
@@ -123,7 +129,7 @@ function startGame(event) {
 	if (event) event.preventDefault();
 
 	if (!playState.isTournamentMatch) {
-		playState.player1Username = document.getElementById("player1Username").value;
+		// playState.player1Username = document.getElementById("player1Username").value;
 		playState.player2Username = document.getElementById("player2Username").value;
 
 		if (playState.player1Username === playState.player2Username) {
@@ -141,7 +147,7 @@ function startGame(event) {
 		createGameInDatabase();
 	}
 
-	changePage("#play");
+	mountComponent(Play);
 	initializeGame();
 }
 
@@ -165,4 +171,13 @@ function restartGame() {
 	
 	// utiliser changePage pour revenir a l'ecran de demarrage du jeu
 	changePage("#play");
+}
+
+function getCurrentUser() {
+	return httpGetJson('/pong/api/games/get_current_user/')
+	.then(response => response.json())
+	.catch(error => {
+		console.error('Error:', error);
+		return null;
+	});
 }

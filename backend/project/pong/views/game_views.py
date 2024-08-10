@@ -10,24 +10,33 @@ from django.db.models import Q #pour construire des requêtes qui nécessitent d
 def create_game(request):
 	if request.method == 'POST':
 		data = json.loads(request.body)
-		player1_username = data.get('player1Username')
+  
+  
+		# player1_username = data.get('player1Username')
 		player2_username = data.get('player2Username')
   
-		if not User.objects.filter(username=player1_username).exists() or not User.objects.filter(username=player2_username).exists():
+		if  not User.objects.filter(username=player2_username).exists():
 			return JsonResponse({'error': 'One or both players not found'}, status=404)
 
 		try:
-			player1 = User.objects.get(username=player1_username)
+			
+			# player1 = User.objects.get(username=player1_username)
 			player2 = User.objects.get(username=player2_username)
 
 			game = Game.objects.create(
-				player1=player1,
+				player1=request.user,
 				player2=player2,
 				status='started'
 			)
 
+			# game.player1.add(request.user)
 
-			return JsonResponse({'gameId': game.id}, status=201)
+
+			return JsonResponse({
+				'gameId': game.id,
+				'player1Username': request.user.username,
+				'player2Username': player2.username
+			}, status=201)
 		except User.DoesNotExist:
 			return JsonResponse({'error': 'One or both players not found'}, status=404)
 	else:
@@ -130,11 +139,21 @@ def match_history(request):
 
 from django.utils import timezone
 
+# @login_required
+# def update_online_status(request):
+# 	if request.method == 'POST':
+# 		user = request.user
+# 		user.last_activity = timezone.now()
+# 		user.save()
+# 		return JsonResponse({'status': 'success'})
+# 	return JsonResponse({'status': 'error', 'message': 'Invalid request method'}, status=405)
+
+
 @login_required
-def update_online_status(request):
-	if request.method == 'POST':
-		user = request.user
-		user.last_activity = timezone.now()
-		user.save()
-		return JsonResponse({'status': 'success'})
-	return JsonResponse({'status': 'error', 'message': 'Invalid request method'}, status=405)
+def get_current_user(request):
+	if request.method == 'GET':
+		return JsonResponse({
+			'username': request.user.username,
+			'email': request.user.email
+		})
+	return JsonResponse({'error': 'Invalid request method'}, status=405)

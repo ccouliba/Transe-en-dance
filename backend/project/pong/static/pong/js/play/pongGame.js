@@ -63,17 +63,17 @@ function moveBall() {
 }
 
 
-function updateOnlineStatus() { 
-	let url = '/pong/api/games/update_online_status/'
-	httpPostJson(url)
-	.then(response => response.json())
-	.then(data => {
-		if (data.status !== 'success') {
-			console.error('Failed to update online status:', data.message);
-		}
-	})
-	.catch(error => console.error('Error updating online status:', error));
-}
+// function updateOnlineStatus() { 
+// 	let url = '/pong/api/games/update_online_status/'
+// 	httpPostJson(url)
+// 	.then(response => response.json())
+// 	.then(data => {
+// 		if (data.status !== 'success') {
+// 			console.error('Failed to update online status:', data.message);
+// 		}
+// 	})
+// 	.catch(error => console.error('Error updating online status:', error));
+// }
 
 
 
@@ -208,7 +208,7 @@ function updateProfileStats() {
 
 
 
-function finishGame(gameId, player1Score, player2Score, winnerEmail) {
+function finishGame(gameId, player1Score, player2Score, winnerUsername) {
 
 	let url = `/pong/api/games/finish_game/${gameId}/` 
 	let payload = { winner: winnerUsername, player1Score, player2Score }
@@ -227,7 +227,7 @@ function finishGame(gameId, player1Score, player2Score, winnerEmail) {
 function createGameInDatabase() {
 	// envoie une requete post a l'api pour creer une nouvelle partie
 	httpPostJson('/pong/api/games/create_game/', {
-		player1Username: playState.player1Username,
+		// player1Username: playState.player1Username,
 		player2Username: playState.player2Username
 	})
 	.then(response => {
@@ -242,6 +242,8 @@ function createGameInDatabase() {
 	.then(({ status, body }) => {
 		if (status === 201) {
 			playState.gameId = body.gameId;
+			playState.player1Username = body.player1Username;
+			playState.player2Username = body.player2Username;
 		} else if (status === 404 && body.error === 'One or both players not found') {
 			// affiche une alerte si un ou les deux joueurs ne sont pas trouvés
 			alert('One or both players not found');
@@ -287,10 +289,10 @@ function updateTournamentMatchScore(matchId, player1Score, player2Score, winner)
 
 function endGame() {
 	playState.gameOver = true;
-	const winner = playState.player1Score > playState.player2Score ? playState.player1Username : playState.player2Username;
+	const winnerUsername  = playState.player1Score > playState.player2Score ? playState.player1Username : playState.player2Username;
    
 	if (playState.isTournamentMatch) {
-		updateTournamentMatchScore(playState.gameId, playState.player1Score, playState.player2Score, winner)
+		updateTournamentMatchScore(playState.gameId, playState.player1Score, playState.player2Score, winnerUsername)
 			.then((payload) => {
 				fetchMatchesAndRankings()
 				return
@@ -301,7 +303,7 @@ function endGame() {
 				alert('An error occurred while updating the tournament. Please refresh the page.');
 			});
 	} else {
-		finishGame(playState.gameId, playState.player1Score, playState.player2Score, winner);
+		finishGame(playState.gameId, playState.player1Score, playState.player2Score, winnerUsername);
 		changePage("#play");
 	}
 	updateProfileStats();
