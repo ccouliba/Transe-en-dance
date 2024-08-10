@@ -226,69 +226,69 @@ REST_FRAMEWORK = {
     ]
 }
 
-# For logging (devops)
-LOGGING = {
-    # Defines the dict version for logging config ; Should always be 1 ; another value seems to cause issues
-    'version': 1,
-    'disable_existing_loggers': False, # ?q= false -> not activated
-    'formatters': {
-        'verbose': {
-            'format': '[%(asctime)s]::[%(levelname)s]::[%(name)s]=> (%(message)s)', # [%(funcName)s]::
-            'datefmt': '%Y/%m/%d %H:%M:%S',
-        },
-        'simple': {
-            'format': '[%(name)s]=> (%(message)s)',
-        },
-    },
+# # For logging (devops)
+# LOGGING = {
+#     # Defines the dict version for logging config ; Should always be 1 ; another value seems to cause issues
+#     'version': 1,
+#     'disable_existing_loggers': False, # ?q= false -> not activated
+#     'formatters': {
+#         'verbose': {
+#             'format': '[%(asctime)s]::[%(levelname)s]::[%(name)s]=> (%(message)s)', # [%(funcName)s]::
+#             'datefmt': '%Y/%m/%d %H:%M:%S',
+#         },
+#         'simple': {
+#             'format': '[%(name)s]=> (%(message)s)',
+#         },
+#     },
     
-    'handlers': {
-        'file': {
-            'level': 'INFO',
-            'class': 'logging.FileHandler',
-            'filename': '../project/logs/back.logs', # Chemin du fichier ou seront stockes les logs
-            'formatter': 'verbose',
-        },
-        'console': {
-            'level': 'DEBUG',
-            'class': 'logging.StreamHandler',
-            'stream': sys.stdout,
-            'formatter': 'simple',
-        },
-    },
+#     'handlers': {
+#         'file': {
+#             'level': 'INFO',
+#             'class': 'logging.FileHandler',
+#             'filename': '../project/logs/back.logs', # Chemin du fichier ou seront stockes les logs
+#             'formatter': 'verbose',
+#         },
+#         'console': {
+#             'level': 'DEBUG',
+#             'class': 'logging.StreamHandler',
+#             'stream': sys.stdout,
+#             'formatter': 'simple',
+#         },
+#     },
     
-    'root': {
-        'handlers': ['console', 'file'],
-        'level': 'WARNING',
-    },
+#     'root': {
+#         'handlers': ['console', 'file'],
+#         'level': 'WARNING',
+#     },
     
-    'loggers': {
-        'back': {
-            'handlers': ['file'],
-            'level': 'INFO',
-            'propagate': True, # If logs should be propagte to parent logs
-        },
-        'logstash': {
-            'handlers': ['console'],
-            'level': 'INFO',
-            'propagate': True, # If logs should be propagte to parent logs
-        },
-        'backend': {
-            'handlers': ['file'],
-            'level': 'INFO',
-            'propagate': True,
-        },
-        'django.request': {
-            'handlers': ['console', 'file'],
-            'level': 'INFO',
-            'propagate': True,
-        },
-        'django.db.backend': {
-            'handlers': ['console', 'file'],
-            'level': 'INFO',
-            'propagate': True,
-        },
-    },
-}
+#     'loggers': {
+#         'back': {
+#             'handlers': ['file'],
+#             'level': 'INFO',
+#             'propagate': True, # If logs should be propagte to parent logs
+#         },
+#         'logstash': {
+#             'handlers': ['console'],
+#             'level': 'INFO',
+#             'propagate': True, # If logs should be propagte to parent logs
+#         },
+#         'backend': {
+#             'handlers': ['file'],
+#             'level': 'INFO',
+#             'propagate': True,
+#         },
+#         'django.request': {
+#             'handlers': ['console', 'file'],
+#             'level': 'INFO',
+#             'propagate': True,
+#         },
+#         'django.db.backend': {
+#             'handlers': ['console', 'file'],
+#             'level': 'INFO',
+#             'propagate': True,
+#         },
+#     },
+# }
 
 ## FOR ELASTICSEARCH APP 
 
