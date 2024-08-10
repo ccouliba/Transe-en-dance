@@ -4,6 +4,7 @@ var profileState = {
 	email: "", // email de l'utilisateur
 	firstname: "", // prenom de l'utilisateur
 	lastname: "", // nom de famille de l'utilisateur
+	langue: "English",
 	avatar: "",
 	wins: 0,
 	losses: 0,
@@ -288,7 +289,7 @@ function EditLangue() {
   <!-- <option selected>Open this select menu</option> -->
   <option value="en" id="englishOption">English 🇺🇸</option>
   <option value="fr" id="frenchOption">Francais 🇫🇷</option>
-  <option value="es" id="spanishOption">Espanol 🇪🇸</option>
+  <option value="es" id="spanishOption">Español 🇪🇸</option>
   </select>
   <button class="btn btn-primary" onclick="changeLanguage(document.getElementById('languageSelector').value)">${window.trans.modify}</button>
   `;
