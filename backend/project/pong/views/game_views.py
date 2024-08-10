@@ -139,15 +139,6 @@ def match_history(request):
 
 from django.utils import timezone
 
-# @login_required
-# def update_online_status(request):
-# 	if request.method == 'POST':
-# 		user = request.user
-# 		user.last_activity = timezone.now()
-# 		user.save()
-# 		return JsonResponse({'status': 'success'})
-# 	return JsonResponse({'status': 'error', 'message': 'Invalid request method'}, status=405)
-
 
 @login_required
 def get_current_user(request):

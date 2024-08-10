@@ -49,7 +49,6 @@ urlpatterns = [
 	path('api/games/<int:game_id>/update', update_game, name='update_game'),
 	path('api/games/finish_game/<int:game_id>/', finish_game, name='finish_game'),
 	path('api/games/match_history/', match_history, name='match_history'),
-	# path('api/games/update_online_status/', update_online_status, name='update_online_status'),
 	path('api/games/get_current_user/', get_current_user, name='get_current_user'),
  
 	path('api/tournament/create/', create_tournament, name='create_tournament'),

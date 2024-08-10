@@ -63,17 +63,6 @@ function moveBall() {
 }
 
 
-// function updateOnlineStatus() { 
-// 	let url = '/pong/api/games/update_online_status/'
-// 	httpPostJson(url)
-// 	.then(response => response.json())
-// 	.then(data => {
-// 		if (data.status !== 'success') {
-// 			console.error('Failed to update online status:', data.message);
-// 		}
-// 	})
-// 	.catch(error => console.error('Error updating online status:', error));
-// }
 
 
 
