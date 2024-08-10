@@ -12,6 +12,8 @@ from django.views.decorators.csrf import csrf_exempt
 import json
 from rest_framework.authtoken.models import Token
 from back.decorators.Logging import loggingFunction
+from django.utils import timezone
+from django.db import transaction
 # import logging
 # from logstash.middleware.LogMiddleware import LoggingFunction
 
@@ -193,3 +195,34 @@ def register_view(request):
 		return JsonResponse({'status': 'error', 'message': 'Invalid JSON'}, status=400)
 	except Exception as e:
 		return JsonResponse({'status': 'error', 'message': str(e)}, status=500)
+
+
+
+
+
+@login_required
+@transaction.atomic
+def soft_delete_user(request):
+	if request.method == 'POST':
+		user = request.user
+		
+		# Anonymize user data (like in discord)
+		user.username = f"deleted_user_{user.id}"
+		user.email = f"deleted_{user.id}@example.com"
+		user.first_name = "Deleted"
+		user.last_name = "User"
+		
+		user.is_deleted = True
+		user.deleted_at = timezone.now()
+		
+		user.is_active = False
+		
+		user.avatar = None  
+		
+		user.save()
+		
+		logout(request)
+		
+		return JsonResponse({'status': 'success', 'message': 'Your account has been successfully deleted.'})
+	
+	return JsonResponse({'status': 'error', 'message': 'Invalid request method.'}, status=405)

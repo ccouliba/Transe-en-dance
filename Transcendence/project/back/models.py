@@ -28,7 +28,10 @@ class User(AbstractUser):
  
 	wins = models.IntegerField(default=0)
 	losses = models.IntegerField(default=0)
-
+ 
+	is_deleted = models.BooleanField(default=False)
+	deleted_at = models.DateTimeField(null=True, blank=True)
+ 
 	# Ajout d'un champ many-to-many pour les groupes auxquels cet utilisateur appartient
 	groups = models.ManyToManyField(
 		Group,  # Le modele de groupe du framework d'authentification de Django

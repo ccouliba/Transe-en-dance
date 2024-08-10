@@ -18,6 +18,8 @@ function Profile() {
 	// charge les donnees du profil depuis le backend
 	loadProfileFromBackend(); // get
 	let winRate = profileState.win_rate.toFixed(2)
+	bindEvent(profileState, "#deleteAccountBtn", "click", handleDeleteAccount);
+	
 	// retourne une chaine de caracteres contenant le HTML du composant Profile
 	return `
 		<div class="container mt-5" id="profilePage">
@@ -72,13 +74,13 @@ function Profile() {
 			</div>
 		<div class="accordion" id="accordionExample">
   <div class="accordion-item">
-    <h2 class="accordion-header" id="headingTwo">
-      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-        ${window.trans.editInfos}
-      </button>
-    </h2>
-    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-      <div class="accordion-body">
+	<h2 class="accordion-header" id="headingTwo">
+	  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+		${window.trans.editInfos}
+	  </button>
+	</h2>
+	<div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+	  <div class="accordion-body">
 			<h3 class="mt-4 mb-3">${window.trans.modify} ${window.trans._username}</h2>
 			${EditUsername()}
 			<h3 class="mt-4 mb-3">${window.trans.modify} ${window.trans._email}</h2>
@@ -93,8 +95,11 @@ function Profile() {
 			${EditAvatar()}
 			<h3 class="mt-4 mb-3">${window.trans.modify} ${window.trans._password}</h2>
 			${EditPassword()}
-      </div>
-    </div>
+			<div class="mt-4">
+				<button id="deleteAccountBtn" class="btn btn-danger">Delete account</button>
+			</div>
+	  </div>
+	</div>
   </div>
 </div>
 	`;
@@ -102,6 +107,7 @@ function Profile() {
 
 // fonction pour charger les donnees du profil depuis le backend
 async function loadProfileFromBackend() {
+
 	// verifier si les donnees du profil sont deja chargees
 	if (profileState.isLoaded) { // pour eviter des fetch infinis au backend
 		return;
@@ -435,4 +441,31 @@ function EditPassword() {
 		<button class="btn btn-primary mt-3" type="submit">${window.trans.change} ${window.trans._password}</button>
 	</form>
 	`;
+}
+
+
+function handleDeleteAccount() {
+	if (confirm("Are you sure you want to delete your account? This action cannot be undone.")) {
+		fetch('/pong/api/profile/soft_delete_user/', {
+			method: 'POST',
+			credentials: 'include',
+			headers: {
+				'Content-Type': 'application/json',
+				'X-CSRFToken': getCookie('csrftoken') 
+			},
+		})
+		.then(response => response.json())
+		.then(data => {
+			if (data.status === 'success') {
+				alert("Your account has been successfully deleted.");
+				changePage(Login);
+			} else {
+				alert("An error occurred while deleting your account. Please try again.");
+			}
+		})
+		.catch(error => {
+			console.error('Error:', error);
+			alert("An error occurred while deleting your account. Please try again.");
+		});
+	}
 }
