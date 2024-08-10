@@ -26,6 +26,9 @@ function Menu() {
 								<li class="nav-item flex-grow-1 text-center">
 									<a class="nav-link" aria-current="page" href="#match_history" id="navbarHistoryLink" onclick="changePage('#match_history'); return false;">Match history</a>
 								</li>
+								<li class="nav-item flex-grow-1 text-center">
+								<a class="nav-link" aria-current="page" href="#privacy-policy" onclick="changePage('#privacy-policy'); return false;" id="navbarPrivacyLink">Privacy Policy</a>
+								</li>
 								</ul>
 								<ul class="navbar-nav ms-auto">
 									<li class="nav-item">
