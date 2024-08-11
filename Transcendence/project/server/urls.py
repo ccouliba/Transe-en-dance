@@ -22,6 +22,6 @@ router = DefaultRouter()
 # router.register(r'/home', )
 
 urlpatterns = [
-    path("pong/", include("pong.urls")),
+    path("pong/", include("back.urls")),
     path("admin/", admin.site.urls),
 ]

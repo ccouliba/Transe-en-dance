@@ -9,7 +9,7 @@ import django.utils.timezone
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('pong', '0007_auto_20240615_1404'),
+        ('back', '0007_auto_20240615_1404'),
     ]
 
     operations = [

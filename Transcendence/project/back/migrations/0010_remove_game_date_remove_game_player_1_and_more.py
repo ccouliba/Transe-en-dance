@@ -8,7 +8,7 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('pong', '0009_delete_login'),
+        ('back', '0009_delete_login'),
     ]
 
     operations = [

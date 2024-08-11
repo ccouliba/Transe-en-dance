@@ -11,7 +11,7 @@ from .views.user_views import user_list_json, user_list, index, home_view
 from .views.tournament_views import (
 	get_tournament_state, register_player,
 )
-app_name = 'pong'  # definir le namespace
+app_name = 'back'  # definir le namespace
 
 urlpatterns = [
 

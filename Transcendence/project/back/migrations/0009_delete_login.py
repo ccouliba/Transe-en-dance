@@ -6,7 +6,7 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('pong', '0008_remove_play_game_remove_play_player_and_more'),
+        ('back', '0008_remove_play_game_remove_play_player_and_more'),
     ]
 
     operations = [

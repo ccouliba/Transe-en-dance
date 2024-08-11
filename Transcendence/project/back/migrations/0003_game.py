@@ -7,7 +7,7 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('pong', '0002_friendship_friendship_unique_friendship'),
+        ('back', '0002_friendship_friendship_unique_friendship'),
     ]
 
     operations = [

@@ -6,7 +6,7 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('pong', '0012_friendship_created_at'),
+        ('back', '0012_friendship_created_at'),
     ]
 
     operations = [

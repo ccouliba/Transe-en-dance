@@ -7,7 +7,7 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('pong', '0004_play_play_unique_player_game'),
+        ('back', '0004_play_play_unique_player_game'),
     ]
 
     operations = [

@@ -23,7 +23,7 @@ class LoggingMiddleware(MiddlewareMixin):
 
 
 # def Logging_acces(request, opname):
-#     logger = logging.getLogger('pong')
+#     logger = logging.getLogger('back')
 #     if request.user.is_authenticated:
 #         logger.info(f"operation::[{opname}]::[{request.user.username}] => [success]")
 #     else:

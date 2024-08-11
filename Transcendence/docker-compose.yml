@@ -40,7 +40,7 @@ services:
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
       - xpack.security.enabled=false
     volumes:
-      - ./project/elk_data:/usr/share/elasticsearch/data
+      - elk_data:/usr/share/elasticsearch/data
     ports:
       - 9200:9200
     networks:
@@ -51,8 +51,8 @@ services:
     image: docker.elastic.co/logstash/logstash:8.14.3
     user: root # should not be really ??
     volumes:
-      - ./project/elk_data/logstash/pipeline/logstash.conf/:/usr/share/logstash/pipeline/logstash.conf:ro
-      - ./project/elk_data/logstash/pipeline/logstash2.conf/:/usr/share/logstash/pipeline/logstash2.conf:ro
+      - ./elk_data/logstash/pipeline/logstash.conf/:/usr/share/logstash/pipeline/logstash.conf:ro
+      - ./elk_data/logstash/pipeline/logstash2.conf/:/usr/share/logstash/pipeline/logstash2.conf:ro
       - ./project/logs:/logs
     ports:
       - 5959:5959
@@ -96,3 +96,4 @@ networks:
   elk:
     name: elk
     driver: bridge
+    

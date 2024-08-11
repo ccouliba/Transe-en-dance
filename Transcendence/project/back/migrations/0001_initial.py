@@ -31,8 +31,8 @@ class Migration(migrations.Migration):
                 ('is_staff', models.BooleanField(default=False, help_text='Designates whether the user can log into this admin site.', verbose_name='staff status')),
                 ('is_active', models.BooleanField(default=True, help_text='Designates whether this user should be treated as active. Unselect this instead of deleting accounts.', verbose_name='active')),
                 ('date_joined', models.DateTimeField(default=django.utils.timezone.now, verbose_name='date joined')),
-                ('groups', models.ManyToManyField(blank=True, help_text='The groups this user belongs to.', related_name='pong_user_set', related_query_name='pong_user', to='auth.group')),
-                ('user_permissions', models.ManyToManyField(blank=True, help_text='Specific permissions for this user.', related_name='pong_user_permissions_set', related_query_name='pong_user_permissions', to='auth.permission')),
+                ('groups', models.ManyToManyField(blank=True, help_text='The groups this user belongs to.', related_name='back_user_set', related_query_name='back_user', to='auth.group')),
+                ('user_permissions', models.ManyToManyField(blank=True, help_text='Specific permissions for this user.', related_name='back_user_permissions_set', related_query_name='back_user_permissions', to='auth.permission')),
             ],
             options={
                 'verbose_name': 'user',

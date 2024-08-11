@@ -7,7 +7,7 @@ import django.utils.timezone
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('pong', '0011_user_friends'),
+        ('back', '0011_user_friends'),
     ]
 
     operations = [

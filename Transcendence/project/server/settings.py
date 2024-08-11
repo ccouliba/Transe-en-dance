@@ -90,7 +90,7 @@ ROOT_URLCONF = 'server.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'pong', 'templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'back', 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -186,7 +186,7 @@ LOGOUT_REDIRECT_URL = '/pong/login'
 # STATIC_URL = "static/"
 
 STATICFILES_DIRS = [
-	os.path.join(BASE_DIR, 'pong/static'),
+	os.path.join(BASE_DIR, 'back/static'),
 ]
 
 # Chemin pour les fichiers statiques collectés (utilisé avec collectstatic)
@@ -219,7 +219,7 @@ LOGGING = {
         'file': {
             'level': 'INFO',
             'class': 'logging.FileHandler',
-            'filename': '../logs/pong.logs',
+            'filename': '../project/logs/back.logs',
             'formatter': 'verbose',
         },
         'console': {
@@ -245,16 +245,16 @@ LOGGING = {
     },
     
     'loggers': {
-        'pong': {
+        'back': {
             'handlers': ['file'],
             'level': 'INFO',
             'propagate': True, # If logs should be propagte to parent logs
         },
-        # 'backend': {
-        #     'handlers': ['file', 'logstash'],
-        #     'level': 'INFO',
-        #     'propagate': True,
-        # },
+        'backend': {
+            'handlers': ['console', 'logstash'],
+            'level': 'INFO',
+            'propagate': True,
+        },
         'django.request': {
             'handlers': ['logstash'],
             'level': 'INFO',

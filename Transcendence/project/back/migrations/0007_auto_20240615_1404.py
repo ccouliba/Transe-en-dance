@@ -10,8 +10,8 @@ from django.contrib.auth import get_user_model
 from django.utils import timezone
 
 def create_initial_user_and_player(apps, schema_editor):
-    User = apps.get_model('pong', 'User')
-    Player = apps.get_model('pong', 'Player')
+    User = apps.get_model('back', 'User')
+    Player = apps.get_model('back', 'Player')
     
     # Creer un utilisateur
     user = User.objects.create_user(
@@ -26,7 +26,7 @@ def create_initial_user_and_player(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('pong', '0006_participate_composed_and_more'),  # Assurez-vous que cette dépendance pointe vers la migration initiale correcte
+        ('back', '0006_participate_composed_and_more'),  # Assurez-vous que cette dépendance pointe vers la migration initiale correcte
     ]
 
     operations = [
