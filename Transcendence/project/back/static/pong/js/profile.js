@@ -4,7 +4,8 @@ var profileState = {
 	email: "", // email de l'utilisateur
 	firstname: "", // prenom de l'utilisateur
 	lastname: "", // nom de famille de l'utilisateur
-	langue: "",
+	// langue: "",
+	langue: localStorage.getItem('selectedLanguage') || 'English',
 	avatar: "",
 	wins: 0,
 	losses: 0,
@@ -121,8 +122,8 @@ async function loadProfileFromBackend() {
 			total_games: profile.wins + profile.losses,
 			win_rate: profile.total_games > 0 ? (profile.wins / profile.total_games) * 100 : 0
 		}; // utilisation d'un spread operator
-		profileState.isLoaded = true;
 		mountComponent(Profile); // monter le composant Profile
+		profileState.isLoaded = true;
 		// marquer les donnees du profil comme chargees
 	});
 }
@@ -169,8 +170,8 @@ function EditUsername() {
 		sendProfileToBackend({
 			'username': usernameInput
 		}); // envoyer les donnees au backend
-		profileState.isLoaded = false; // marquer les donnees du profil comme non chargees
 		mountComponent(Profile); // monter le composant Profile
+		profileState.isLoaded = false; // marquer les donnees du profil comme non chargees
 	});
 
 	return `
@@ -181,11 +182,12 @@ function EditUsername() {
 					class="form-control"
 					id="username" 
 					name="username" 
-					value="${profileState.username}" 
+					value="${profileState.username}"
+					aria-label="new username"
 				/>
 				<button class="btn btn-primary" type="submit">${window.trans.modify}</button>
 			</div>
-		</form>
+		</form> 	
 	`;
 }
 
@@ -199,13 +201,13 @@ function EditEmail() {
 		sendProfileToBackend({
 			'email': emailInput
 		}); // envoyer les donnees au backend
-		profileState.isLoaded = false; // marquer les donnees du profil comme non chargees
 		mountComponent(Profile); // monter le composant Profile
+		profileState.isLoaded = false; // marquer les donnees du profil comme non chargees
 	});
 	return `
 		<form id="edit-email" class="mt-3">
 			<div class="input-group">
-				<input type="text" class="form-control" id="email" name="email" value="${profileState.email}" aria-label="new email">
+				<input type="text" class="form-control" id="email" name="email" value="${profileState.email}" aria-label="new email"/>
 				<button class="btn btn-primary" type="submit">${window.trans.modify}</button>
 			</div>
 		</form>
@@ -222,8 +224,8 @@ function EditFirstname() {
 		sendProfileToBackend({
 			'firstname': firstnameInput
 		}); // envoyer les donnees au backend
-		profileState.isLoaded = false; // marquer les donnees du profil comme non chargees
 		mountComponent(Profile); // monter le composant Profile
+		profileState.isLoaded = false; // marquer les donnees du profil comme non chargees
 	});
 	return `
 	<form id="edit-first-name" class="mt-3">
@@ -252,8 +254,8 @@ function EditLastname() {
 		sendProfileToBackend({
 			'lastname': lastnameInput
 		}); // envoyer les donnees au backend
-		profileState.isLoaded = false; // marquer les donnees du profil comme non chargees
 		mountComponent(Profile); // monter le composant Profile
+		profileState.isLoaded = false; // marquer les donnees du profil comme non chargees
 	});
 	return `
 	<form id="edit-last-name" class="mt-3">
@@ -266,7 +268,7 @@ function EditLastname() {
 				value="${profileState.lastname}" 
 				aria-label="new last name"
 			/>
-			<button class="btn btn-primary">${window.trans.modify}</button>
+			<button class="btn btn-primary" type="submit">${window.trans.modify}</button>
 		</div>
 	</form>
 	`;
@@ -279,21 +281,23 @@ function EditLangue() {
 		const langueInput = event.target.elements.languageSelector.value;
 
 		profileState.langue = langueInput;
+		localStorage.setItem('selectedLanguage', langueInput);
 		sendProfileToBackend({ 'langue': langueInput });
-		profileState.isLoaded = false;
 		mountComponent(Profile);
+		profileState.isLoaded = false;
+		changeLanguage();
 	});
 	return `
-<label for="languageSelector" id="languageLabel">Select your language&nbsp;:</label>
-<select class="form-select" name="languageSelector" id="languageSelector">
-  <!-- <option selected>Open this select menu</option> -->
-  <option value="en" id="englishOption">English 🇺🇸</option>
-  <option value="fr" id="frenchOption">Francais 🇫🇷</option>
-  <option value="es" id="spanishOption">Español 🇪🇸</option>
-  </select>
-  <button class="btn btn-primary" onclick="changeLanguage(document.getElementById('languageSelector').value)">${window.trans.modify}</button>
-  `;
-  }
+	<form id="edit-langue">
+	<select class="form-select" name="languageSelector" id="languageSelector" aria-label="Select your language">
+		<option value="English" id="langue" name="langue">English 🇺🇸</option>
+		<option value="Français" id="langue" name="langue">Français 🇫🇷</option>
+		<option value="Español" id="langue" name="langue">Español 🇪🇸</option>
+	</select>
+	<button class="btn btn-primary" type="submit" onclick='document.getElementById('app').innerHTML = Profile()'>${window.trans.modify}</button>
+	</form>
+	`;
+}
 
 //   <option value="it" id="italianOption">Italiano 🇮🇹</option>
 
@@ -335,6 +339,7 @@ function EditAvatar() {
 				class="form-control" 
 				name="avatar" 
 				accept="image/*"
+				aria-label="new avatar"
 			/>
 			<button class="btn btn-primary" type="submit">${window.trans.upload} ${window.trans._avatar}</button>
 		</div>
@@ -370,9 +375,9 @@ function EditPassword() {
 				if (data.status === 'success') {
 					alert('password changed successfully');
 					// marque les donnees de profil comme non chargees
-					profileState.isLoaded = false;
 					// recharge le composant du profil
 					mountComponent(Profile);
+					profileState.isLoaded = false;
 				} else {
 					// prepare un message d'erreur en cas d'echec
 					let errorMessage = "there were errors changing your password:\n\n";
