@@ -250,11 +250,11 @@ LOGGING = {
             'level': 'INFO',
             'propagate': True, # If logs should be propagte to parent logs
         },
-        'backend': {
-            'handlers': ['console', 'logstash'],
-            'level': 'INFO',
-            'propagate': True,
-        },
+        # 'backend': {
+        #     'handlers': ['file', 'logstash'],
+        #     'level': 'INFO',
+        #     'propagate': True,
+        # },
         'django.request': {
             'handlers': ['logstash'],
             'level': 'INFO',

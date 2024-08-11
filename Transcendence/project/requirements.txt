@@ -13,3 +13,5 @@ elasticsearch-dsl==8.12.0
 django-elasticsearch-dsl==8.0
 django-elasticsearch-dsl-drf
 
+# elastic-apm
+
