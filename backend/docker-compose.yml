@@ -11,12 +11,12 @@ services:
       - ./.utils/.env
     depends_on:
       - db
-    restart: unless-stopped
-    develop:
-      watch:
-        - action: sync
-          path: ./project
-          target: /usr/src/project
+    # restart: unless-stopped
+    # develop:
+    #   watch:
+    #     - action: sync
+    #       path: ./project
+    #       target: /usr/src/project
     networks:
       - transcendance
       # - devops
@@ -101,14 +101,19 @@ services:
   logstash:
     container_name: logstash
     image: docker.elastic.co/logstash/logstash:8.14.3
+    # build: ./elk_data/logstash
+    user: root
     volumes:
-      - ./elk_data/logstash/pipeline:/usr/share/logstash/pipeline:ro
+      - ./elk_data/logstash/pipeline/logstash.conf/:/usr/share/logstash/pipeline/logstash.conf:ro
       - ./project/logs:/logs
     command: logstash -f /usr/share/logstash/pipeline/logstash.conf
+    ports:
+      - 5959:5959/tcp
     environment:
       LS_JAVA_OPTS: "-Xmx256m -Xms256m"
     networks:
       - elk
+      - transcendance
     depends_on:
       - elasticsearch
 

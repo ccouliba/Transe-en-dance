@@ -257,33 +257,33 @@ LOGGING = {
             'port': 5959,
             'version': 1,
             'message_type': 'django',
-            'tags': ['django.request', 'backend'],
+            'tags': ['pong', 'django.db'],
         },
     },
     
     'root': {
-        'handlers': ['console', 'file'],
+        'handlers': ['file', 'console', 'logstash'],
         'level': 'WARNING',
     },
     
     'loggers': {
         'pong': {
-            'handlers': ['file', 'logstash'],
+            'handlers': ['file', 'console', 'logstash'],
             'level': 'INFO',
             'propagate': True, # If logs should be propagte to parent logs
         },
         'backend': {
-            'handlers': ['file', 'logstash'],
+            'handlers': ['console'],
             'level': 'INFO',
             'propagate': True,
         },
         'django.request': {
-            'handlers': ['console', 'logstash'],
+            'handlers': ['logstash'],
             'level': 'INFO',
             'propagate': True,
         },
         'django.db.backend': {
-            'handlers': ['console'],
+            'handlers': ['file'],
             'level': 'INFO',
             'propagate': True,
         }, 
