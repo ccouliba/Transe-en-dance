@@ -53,9 +53,17 @@ class User(AbstractUser):
 		return self.username 
 	def was_active_now(self):
 		self.last_activity = timezone.now()
+	# def get_avatar_url(self):
+	# 	if self.avatar and hasattr(self.avatar, 'url'):
+	# 		return self.avatar.url
+	# 	else:
+	# 		return f"{settings.STATIC_URL}pong/images/default_avatar.png"
 	def get_avatar_url(self):
 		if self.avatar and hasattr(self.avatar, 'url'):
-			return self.avatar.url
+			if self.avatar.name.startswith('http'):
+				return self.avatar.name
+			else:
+				return self.avatar.url
 		else:
 			return f"{settings.STATIC_URL}pong/images/default_avatar.png"
 	@property #https://docs.python.org/3/library/functions.html#property

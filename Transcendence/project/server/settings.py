@@ -123,7 +123,6 @@ DATABASES = {
 		'PORT': os.getenv('SQL_PORT', '5432'),
 	}
 }
-print(os.getenv('SQL_USER'))
 
 if os.getenv("DEV_ENV", False):
 # on localhost
