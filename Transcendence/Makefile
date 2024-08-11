@@ -4,7 +4,7 @@ BUILD	= docker compose build
 
 # FLUSH	= docker-compose exec server python manage.py flush --no-input
 MIGRATE_SESSION = docker compose exec web python3 manage.py migrate sessions
-MIGRATE	= docker compose exec web python3 manage.py migrate
+MIGRATE	= docker compose exec web python3 manage.py makemigrations && docker compose exec web python3 manage.py migrate
 
 # without the flag '-d', you should see in verbose server running
 RUN		= docker compose up -d
