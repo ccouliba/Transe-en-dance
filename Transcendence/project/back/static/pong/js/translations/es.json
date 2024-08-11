@@ -88,7 +88,8 @@
 	"offline": "Desconectado",
 	"friendRequestsSent": "Solicitudes de amistad enviadas",
 	"friendRequestsReceived": "solicitudes de amistad recibidas",
-	"friendEmail": "Correo electrónico del amigo",
+	"friendEmailToAdd": "Correo electrónico del amigo para añadir",
+	"friendEmailToAccept": "Correo electrónico del amigo para acceptar",
 	"friendEmailToDelete": "Correo electrónico del amigo para eliminar",
 	"addFriend": "Agregar un amigo",
 	"acceptFriend": "Acceptar un amigo",
@@ -96,7 +97,7 @@
 	"delete": "Eliminar",
 
 	"_matchHistory": "historial de partidos",
-	"noMatchesFound": "No se eontraron partidos",
+	"noMatchesFound": "No se encontraron partidos",
 	"date": "Fecha",
 	"opponent": "Adversario",
 	"score": "Puntaje",
