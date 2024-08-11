@@ -19,6 +19,7 @@ from pathlib import Path
 # BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
@@ -56,6 +57,8 @@ ALLOWE_HOSTS = []
 # SESSION_COOKIE_SAMESITE = 'Lax'  # ou 'None' si nécessaire, mais cela nécessite HTTPS
 
 # Application definition
+
+
 
 INSTALLED_APPS = [
     # 'elasticapm.contrib.django',
@@ -120,6 +123,7 @@ DATABASES = {
 		'PORT': os.getenv('SQL_PORT', '5432'),
 	}
 }
+print(os.getenv('SQL_USER'))
 
 if os.getenv("DEV_ENV", False):
 # on localhost
@@ -134,7 +138,6 @@ if os.getenv("DEV_ENV", False):
             'PORT': os.getenv('SQL_PORT', '5432'),
         }
     }
-
 
 
 # Password validation

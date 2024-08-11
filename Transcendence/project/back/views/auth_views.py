@@ -20,6 +20,13 @@ from django.db import transaction
 # import inspect
 
 from django.views.decorators.csrf import ensure_csrf_cookie
+  
+from back.utils import load_env
+
+
+current_dir = os.path.dirname(os.path.abspath(__file__))
+env_path = os.path.join(current_dir, "../../../.utils/.env")
+load_env(env_path)
 
 
 @ensure_csrf_cookie
@@ -36,23 +43,25 @@ def check_auth(request):
 		user.was_active_now()
 		user.save()
 
-	
 	return JsonResponse({
 		'is_authenticated': request.user.is_authenticated,
 		'username': request.user.username if request.user.is_authenticated else None
 	})
- 
+
+
+# todo : ENLEVER VALEUR EN DUR DE UID
 # Cette vue gere l'authentification via l'API d'Intra 42 en redirigeant l'utilisateur vers l'URL d'authentification appropriee
 @loggingFunction
 def external_login(request):
-	forty2_auth_url = os.getenv('API_AUTH_URL', 'https://api.intra.42.fr/oauth/authorize')
-	redirect_uri = os.getenv('REDIRECT_URI', 'http://127.0.0.1:8000/pong/auth/callback')
+	
+	forty2_auth_url = os.getenv('API_AUTH_URL')
+	redirect_uri = os.getenv('REDIRECT_URI')
 	client_id = os.getenv('UID')
-	# print()
 	request.session['client_id'] = client_id 
-	# response_type = 'code'
-	# LoggingFunction(request=request, opname='External log-in')
-	return redirect(f"{forty2_auth_url}?client_id={client_id}&redirect_uri={redirect_uri}&response_type=code")
+	
+	url = f"{forty2_auth_url}?client_id={client_id}&redirect_uri={redirect_uri}&response_type=code"
+	
+	return redirect(url)
 
 import requests
 
@@ -64,20 +73,25 @@ def get_response_from_api(request):
 		print("No authorization code received from 42 API")
 		return None
 
+	redirect_uri = os.getenv('REDIRECT_URI')
+	
 	data = {
 		'code': code,
-		'redirect_uri': os.getenv('REDIRECT_URI'),
+		'redirect_uri': redirect_uri,
 		'grant_type': 'authorization_code',
 	}
 
 	client_id = os.getenv('UID')
 	client_secret = os.getenv('SECRET')
-
+	
 	try:
 		response = requests.post(
-			url, 
-			data=data, 
-			auth=(client_id, client_secret)
+			url,
+			data=data,
+			auth=(client_id, client_secret),
+			headers={
+				"Authorization": f"Bearer {code}"
+			}
 		)
 		print(f"Token API response status: {response.status_code}")
 		print(f"Token API response content: {response.text}")
@@ -226,3 +240,65 @@ def soft_delete_user(request):
 		return JsonResponse({'status': 'success', 'message': 'Your account has been successfully deleted.'})
 	
 	return JsonResponse({'status': 'error', 'message': 'Invalid request method.'}, status=405)
+
+
+import os
+from django.http import JsonResponse
+from django.conf import settings
+from django.views.decorators.http import require_GET
+from django.views.decorators.csrf import csrf_exempt
+
+@csrf_exempt
+@require_GET
+def debug_oauth_config(request):
+	config = {
+		'API_AUTH_URL': os.getenv('API_AUTH_URL'),
+		'REDIRECT_URI': os.getenv('REDIRECT_URI'),
+		'UID': os.getenv('UID'),
+		'SECRET': 'HIDDEN',  # Ne jamais exposer le secret
+		'TOKEN_URL': os.getenv('TOKEN_URL'),
+		'USER_INFO_URL': os.getenv('USER_INFO_URL'),
+	}
+	
+	missing_vars = [key for key, value in config.items() if value is None]
+	
+	if missing_vars:
+		return JsonResponse({
+			'status': 'error',
+			'message': f"Missing environment variables: {', '.join(missing_vars)}",
+			'debug_mode': settings.DEBUG
+		})
+	else:
+		return JsonResponse({
+			'status': 'success',
+			'message': 'All required environment variables are set',
+			'config': config if settings.DEBUG else 'Hidden in production'
+		})
+
+
+import os
+from django.http import JsonResponse
+from django.views.decorators.http import require_GET
+from django.views.decorators.csrf import csrf_exempt
+
+@csrf_exempt
+@require_GET
+def check_env_loading(request):
+	env_vars = [
+		'API_AUTH_URL', 'REDIRECT_URI', 'UID', 'SECRET', 'TOKEN_URL', 'USER_INFO_URL',
+		'DEBUG', 'SECRET_KEY', 'DJANGO_ALLOWED_HOSTS',
+		'SQL_ENGINE', 'SQL_DATABASE', 'SQL_USER', 'SQL_PASSWORD', 'SQL_HOST', 'SQL_PORT',
+		'USER', 'EMAIL', 'PASSWORD',
+		'MY_SERVICE_NAME', 'SECRET_TOKEN', 'SERVER_URL', 'ENVIRONMENT'
+	]
+	
+	loaded_vars = {}
+	for var in env_vars:
+		loaded_vars[var] = os.getenv(var, 'Not set')
+	
+	return JsonResponse({
+		'status': 'info',
+		'message': 'Environment variables loading status',
+		'loaded_vars': loaded_vars
+	})
+
