@@ -72,15 +72,7 @@ INSTALLED_APPS = [
 	'rest_framework',
 	'rest_framework.authtoken',
     'django_elasticsearch_dsl',
-    # 'django_elasticsearch_dsl_drf',
 ]
-
-# ELASTIC_APM = {
-#   'SERVICE_NAME': 'my-service-name',
-#   'SECRET_TOKEN': 'DJMayVBz6V3GiHWAfC',
-#   'SERVER_URL': 'https://9f09a6004982450f8d7de133ffe845f3.apm.us-central1.gcp.cloud.es.io:443',
-#   'ENVIRONMENT': 'my-environment',
-# }
 
 MIDDLEWARE = [
     # 'elasticapm.contrib.django.middleware.TracingMiddleware',
@@ -129,18 +121,6 @@ DATABASES = {
         'PORT': os.getenv('SQL_PORT', '5432'),
     }
 }
-
-# on localhost
-# DATABASES = {
-# 	'default': {
-# 		'ENGINE': 'django.db.backends.postgresql_psycopg2',
-# 		'NAME': 'db1',
-# 		'USER': 'ccouliba',
-# 		'PASSWORD': 'password',
-# 		'HOST': 'localhost',
-# 		'PORT': '5432',
-# 	}
-# }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -257,7 +237,7 @@ LOGGING = {
             'port': 5959,
             'version': 1,
             'message_type': 'django',
-            'tags': ['pong', 'django.request'],
+            'tags': ['django.request', 'backend'],
         },
     },
     
@@ -273,7 +253,7 @@ LOGGING = {
             'propagate': True, # If logs should be propagte to parent logs
         },
         'backend': {
-            'handlers': ['file'],
+            'handlers': ['console', 'logstash'],
             'level': 'INFO',
             'propagate': True,
         },
@@ -282,11 +262,11 @@ LOGGING = {
             'level': 'INFO',
             'propagate': True,
         },
-        'django.db.backend': {
-            'handlers': ['console'],
-            'level': 'INFO',
-            'propagate': True,
-        }, 
+        # 'django.db.backend': {
+        #     'handlers': ['Logstash'],
+        #     'level': 'INFO',
+        #     'propagate': True,
+        # }, 
     },
 }
 
