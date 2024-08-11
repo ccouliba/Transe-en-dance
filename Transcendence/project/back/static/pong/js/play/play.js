@@ -59,11 +59,11 @@ function Play() {
 					<h1>Pong game</h1>
 					<form id="start-game-form">
 						<div class="mb-3">
-							<label for="player1Username" class="form-label">First player's username</label>
+							<label for="player1Username" class="form-label">${window.trans.firstPlayerUsername}</label>
 							<p id="player1UsernameDisplay">${playState.player1Username || 'Loading...'}</p>
 						</div>
 						<div class="mb-3">
-							<label for="player2Username" class="form-label">Second player's username</label>
+							<label for="player2Username" class="form-label">${window.trans.secondPlayerUsername}</label>
 							<input type="text" class="form-control" id="player2Username" required>
 						</div>
 						<button type="submit" class="btn btn-primary">${window.trans.btnStartGame}</button>

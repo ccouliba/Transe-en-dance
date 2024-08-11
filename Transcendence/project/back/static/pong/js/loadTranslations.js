@@ -1,20 +1,12 @@
-window.trans = '/static/pong/js/translations/en.json';
-
-// function setLanguageCookie(language) {
-//     var d = new Date();
-//     d.setTime(d.getTime() + (365 * 24 * 60 * 60 * 1000)); // Cookie valid for 1 year
-//     var expires = "expires=" + d.toUTCString();
-//     document.cookie = "language=" + language + ";" + expires + ";path=/";
-// }
+window.trans = null;
 
 function loadTranslations(newLang) {
+	newLang = localStorage.getItem('selectedLanguage');
 	let langFile = '/static/pong/js/translations/en.json';
-	if (newLang === 'fr')
+	if (newLang === 'Français')
 		langFile = '/static/pong/js/translations/fr.json';
-	else if (newLang === 'es')
+	else if (newLang === 'Español')
 		langFile = '/static/pong/js/translations/es.json';
-	
-	// setLanguageCookie(newLang);
 	return fetch(langFile)
 	.then(response => response.json())
 	.then(trans => {

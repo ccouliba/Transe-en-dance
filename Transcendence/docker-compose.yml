@@ -12,11 +12,11 @@ services:
     depends_on:
       - db
     restart: unless-stopped
-    develop:
-      watch:
-        - action: sync
-          path: ./project
-          target: /usr/src/project
+    # develop:
+    #   watch:
+    #     - action: sync
+    #       path: ./project
+    #       target: /usr/src/project
     links:
       - db
     networks:
@@ -35,11 +35,11 @@ services:
       - POSTGRES_DB=db1
       - POSTGRES_PORT='5432'
     restart: always
-    healthcheck:
-      test: ["CMD-SHELL", "sh -c 'pg_isready -U ccouliba -d db1'"]
-      interval: 10s
-      timeout: 4s
-      retries: 3  
+    # healthcheck:
+    #   test: ["CMD-SHELL", "sh -c 'pg_isready -U ccouliba -d db1'"]
+    #   interval: 10s
+    #   timeout: 4s
+    #   retries: 3  
     networks:
      - transcendance
 

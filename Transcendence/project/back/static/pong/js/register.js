@@ -28,7 +28,7 @@ function Register() {
 				<label for="email">Email</label>
 			</div>
 			<div id="passwordHelpBlock" class="form-text">
-				Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.
+				Your password must be at least 8 characters long, can contain letters and numbers, and must not contain spaces, special characters, or emoji.
 			</div>
 			<div class="form-floating">
 				<input type="password" class="form-control" name="password1" id="password1" autocomplete="current-password" placeholder="Password" required>
