@@ -115,21 +115,14 @@ def get_user_from_api(request, access_token):
 		user_info_response.raise_for_status()
 		
 		user_info = user_info_response.json()
-		print("Full user info:", json.dumps(user_info, indent=2))
+		# print("Full user info:", json.dumps(user_info, indent=2))
 		user, created = User.objects.get_or_create(username=user_info['login'])
 
 		user.email = user_info.get('email', '')
 		user.first_name = user_info.get('first_name', '')
 		user.last_name = user_info.get('last_name', '')
-		avatar_url = user_info.get('image', {}).get('link')
+		user.avatar = user_info.get('image', {}).get('link')
 
-		if avatar_url:
-			if avatar_url.startswith('http'):
-				user.avatar = avatar_url  
-			else:
-				user.avatar = os.path.join(settings.MEDIA_URL, avatar_url) 
-		
-		print("User avatar URL:", user.avatar)
 
 		login(request, user)
 		return redirect('/pong/#home')
