@@ -21,8 +21,7 @@ class User(AbstractUser):
 	is_online = models.BooleanField(default=False)
 
 	email = models.EmailField(_("email address"), unique=True, blank=True)
-    
-  
+	
 	avatar = models.ImageField(upload_to='avatars/', null=True, blank=True)
 
 	last_activity = models.DateTimeField(default=timezone.now)
@@ -86,6 +85,28 @@ class Friendship(models.Model):
 	def __str__(self):
 		return f"{self.id_user_1} is friend with {self.id_user_2}"
 
+
+class Tournament(models.Model):
+	name = models.CharField(max_length=100)
+	is_started = models.BooleanField(default=False)
+	start_date = models.DateTimeField(null=True, blank=True)
+	end_date = models.DateTimeField(null=True, blank=True)
+	created_at = models.DateTimeField(auto_now_add=True, null=True)
+	participants = models.ManyToManyField(User, related_name='tournaments', blank=True)
+	aliases = models.JSONField(default=list, blank=True) 
+ 
+	def __init__(self, *args, **kwargs):
+		super().__init__(*args, **kwargs)
+		if not self.created_at:
+			self.created_at = timezone.now()
+	def __str__(self):
+		return self.name
+
+
+
+
+
+
 class Game(models.Model):
 	player1 = models.ForeignKey(User, related_name='player1_games', on_delete=models.CASCADE,  null=True, blank=True)
 	player2 = models.ForeignKey(User, related_name='player2_games', on_delete=models.CASCADE,  null=True, blank=True)
@@ -96,6 +117,8 @@ class Game(models.Model):
 	created_at = models.DateTimeField(auto_now_add=True,  null=True, blank=True)
 	finished_at = models.DateTimeField(null=True, blank=True)
 	status = models.CharField(max_length=20, choices=[('pending', 'Pending'), ('started', 'Started'), ('finished', 'Finished')], default='pending')
+	is_tournament_game = models.BooleanField(default=False)
+	tournament = models.ForeignKey(Tournament, on_delete=models.SET_NULL, null=True, blank=True, related_name='games')
 	def finish(self, winner):
 		self.winner = winner
 		self.status = 'finished'
@@ -120,23 +143,6 @@ class Game(models.Model):
   
   
    
-
-class Tournament(models.Model):
-	name = models.CharField(max_length=100)
-	is_started = models.BooleanField(default=False)
-	start_date = models.DateTimeField(null=True, blank=True)
-	end_date = models.DateTimeField(null=True, blank=True)
-	created_at = models.DateTimeField(auto_now_add=True, null=True)
-	participants = models.ManyToManyField(User, related_name='tournaments', blank=True)
-	aliases = models.JSONField(default=list, blank=True) 
- 
-	def __init__(self, *args, **kwargs):
-		super().__init__(*args, **kwargs)
-		if not self.created_at:
-			self.created_at = timezone.now()
-	def __str__(self):
-		return self.name
-
 
 
 

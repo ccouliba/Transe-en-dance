@@ -99,6 +99,8 @@ function getFriendsStatus(){
 		.then(payload=>{
 			payload.statuses.forEach((isOnline, i) => {
 				friendsState.friends[i].isOnline = isOnline	
+				console.log(friendsState.friends[i].isOnline )
+
 			});
 			updateFriendsStatus();
 			// mountComponent(FriendsList) 
@@ -155,7 +157,7 @@ function AddFriendForm() {
 		<h2 class="mt-4 mb-3">${window.trans.addFriend}</h2>
 		<form id="add-friend-form" class="mt-3">
 			<div class="input-group">
-				<input type="text" class="form-control" name="friendEmail" placeholder=${window.trans.friendEmail}/>
+				<input type="text" class="form-control" id="friendEmail" name="friendEmail" placeholder=${window.trans.friendEmail}/>
 				<button class="btn btn-primary" type="submit">${window.trans.add}</button>
 			</div>
 		</form>
@@ -194,7 +196,7 @@ function AcceptFriendForm(email) {
 		<h2 class="mt-4 mb-3">${window.trans.acceptFriend}</h2>
 		<form id="accept-friend-form" class="mt-3">
 			<div class="input-group">
-				<input type="text" class="form-control" name="friendEmail" placeholder=${window.trans.friendEmail}/>
+				<input type="text" class="form-control" id="friendEmail" name="friendEmail" placeholder=${window.trans.friendEmail}/>
 				<button class="btn btn-primary" type="submit">${window.trans.accept}</button>
 			</div>
 		</form>
@@ -232,7 +234,7 @@ function RemoveFriendForm() {
 		<h2 class="mt-4 mb-3">${window.trans.deleteFriend}</h2>
 		<form id="remove-friend-form" class="mt-3">
 			<div class="input-group">
-				<input type="text" class="form-control" name="friendEmail" placeholder=${window.trans.friendEmailToDelete}/>
+				<input type="text" class="form-control" id="friendEmail" name="friendEmail" placeholder=${window.trans.friendEmailToDelete}/>
 				<button class="btn btn-danger" type="submit">${window.trans.delete}</button>
 			</div>
 		</form>

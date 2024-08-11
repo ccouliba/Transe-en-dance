@@ -19,12 +19,12 @@ function Profile() {
 	console.log(window.trans);
 	// charge les donnees du profil depuis le backend
 	loadProfileFromBackend(); // get
-
+	let winRate = profileState.win_rate.toFixed(2)
 	// retourne une chaine de caracteres contenant le HTML du composant Profile
 	return `
-		<div class="container mt-5">
+		<div class="container mt-5" id="profilePage">
 			<h1 class="mb-4">${window.trans.profile}</h1>
-			<div class="card">
+			<div class="card" id="profilePage">
 				<div class="card-body">
 				<h2 class="mt-4 mb-3" style="text-decoration: underline;">${window.trans.infos}</h2>
 					<div class="row mb-3">
@@ -68,7 +68,7 @@ function Profile() {
 					</div>
 					<div class="row mb-3">
 						<div class="col-sm-3"><strong>${window.trans.winRate} :</strong></div>
-						<div class="col-sm-9">${profileState.win_rate.toFixed(2)}%</div>
+						<div class="col-sm-9">${winRate}%</div>
 					</div>
 				</div>
 			</div>
@@ -119,8 +119,9 @@ async function loadProfileFromBackend() {
 		profileState = {
 			...profileState,
 			...profile,
-			total_games: profile.wins + profile.losses,
-			win_rate: profile.total_games > 0 ? (profile.wins / profile.total_games) * 100 : 0
+			win_rate: profile.win_rate
+			// total_games: profile.wins + profile.losses,
+			// win_rate: profile.total_games > 0 ? (profile.wins / profile.total_games) * 100 : 0
 		}; // utilisation d'un spread operator
 		mountComponent(Profile); // monter le composant Profile
 		profileState.isLoaded = true;

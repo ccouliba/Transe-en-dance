@@ -230,7 +230,7 @@ def tournament_matchmaking(request, tournament_id):
 	if Composed.objects.filter(tournament=tournament).count() == 0:
 		matches = list(combinations(participants, 2))
 		for i, (player1, player2) in enumerate(matches):
-			game = Game.objects.create(player1=player1, player2=player2, status='pending')
+			game = Game.objects.create(player1=player1, player2=player2, status='pending', is_tournament_game=True )
 			Composed.objects.create(tournament=tournament, game=game, game_number=i+1)
    
 	# Fetch all matches

@@ -23,8 +23,14 @@ body, html {
   height : 100%;
   background: rgb(42, 0, 0);
   font-family: 'Trajan Pro', sans-serif;
-  color: rgb(200, 200, 200);
+  color: silver;
   background-image: linear-gradient(to top, rgb(42,0,0), rgb(100,20,20));
+}
+
+#profilePage, #instructions, .accordion-button, .accordion-body, #instructions, #start-game-form, #player1Email, #player2Email, #player2Username, .modal-content, .form-control, #username, #password, #email, #password1, #password2, #firstname, #lastname, #old_password, #new_password1, #new_password2, #participant, #alias, #tournamentName, #friendEmail, #friends-forms, #friends-list, #add-friend-form, #accept-friend-form {
+  color: gold;
+  /* background-color: lightgrey; */
+  background-image: linear-gradient(to top, rgb(30,30,30) 80%, rgb(42,50,80));
 }
 
 .custom-btn, .btn  {
@@ -50,14 +56,10 @@ a {
   color: rgb(145, 142, 112);
 }
 
-#profilePage, #instructions, #loginForm, .accordion-button, .accordion-body, #instructions, #start-game-form, #player1Email, #player2Email, .modal-content, .form-control, #username, #password, #email, #password1, #password2, #firstname, #lastname, #old_password, #new_password1, #new_password2, #participant, #alias, #tournamentName, #friendEmail {
-  color: gold;
-  background-color: rgba(30,30,30);
-  background-image: linear-gradient(to top, rgb(30,30,30) 80%, rgb(42,50,80));
-}
+
 
 .navbar-custom {
-  background-color: slategray;
+  /* background-color: slategray; */
   background-image: linear-gradient(to left, rgb(30,30,30) 80%, rgb(70, 70, 85));
    /* Pour plus tard couleur du hover d'un bouton  */
    /* background-image: radial-gradient(closest-side at 10%,rgb(252,205,98), rgb(196,73,46));  */
@@ -96,11 +98,24 @@ background-color: rgb(42, 42, 50);
 }
 
 ::selection {
-  color: darkred;
-  background: silver;
+  color: darkgoldenrod;
+  background: lightgoldenrodyellow;
 }
 
+.form-control::placeholder {
+  color : silver;
+}
 
+input, input[password] {
+  color : silver;
+  background-image: linear-gradient(to top, rgb(90, 90, 90) 80%, rgb(100, 100, 150));
+}
+
+#edit-username, #edit-usename > #username::placeholder, #edit-mail, #edit-mail > #email::placeholder, #edit-first-name, #edit-first-name > #firstname::placeholder, #edit-last-name, #edit-last-name > #lastname::placeholder, #edit-password-form, #edit-password-form > #old_password, #edit-password-form > #new_password1::placeholder, #edit-password-form > #new_password2::placeholder {
+  color : silver;
+  /* background-image: linear-gradient(to top, rgb(90, 90, 90) 80%, rgb(100, 100, 150)); */
+
+}
 
 /* friends.js */
 

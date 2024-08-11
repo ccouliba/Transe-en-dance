@@ -154,6 +154,6 @@ def friends_online_status(request):
 	user = request.user
 	friends = user.friends.all()
 	statuses = are_user_online(friends)
-	print("friends_online_status", user, statuses)
+	# print("friends_online_status", user, statuses)
 	payload = {"statuses":statuses}
 	return JsonResponse(payload)

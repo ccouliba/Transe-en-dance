@@ -10,25 +10,33 @@ from django.db.models import Q #pour construire des requêtes qui nécessitent d
 def create_game(request):
 	if request.method == 'POST':
 		data = json.loads(request.body)
-		player1_email = data.get('player1Email')
-		player2_email = data.get('player2Email')
   
-		if not User.objects.filter(email=player1_email).exists() or not User.objects.filter(email=player2_email).exists():
+  
+		# player1_username = data.get('player1Username')
+		player2_username = data.get('player2Username')
+  
+		if  not User.objects.filter(username=player2_username).exists():
 			return JsonResponse({'error': 'One or both players not found'}, status=404)
 
-		print(User.objects.filter(email=player1_email).exists())
-  
 		try:
-			player1 = User.objects.get(email=player1_email)
-			player2 = User.objects.get(email=player2_email)
+			
+			# player1 = User.objects.get(username=player1_username)
+			player2 = User.objects.get(username=player2_username)
 
 			game = Game.objects.create(
-				player1=player1,
+				player1=request.user,
 				player2=player2,
 				status='started'
 			)
 
-			return JsonResponse({'gameId': game.id}, status=201)
+			# game.player1.add(request.user)
+
+
+			return JsonResponse({
+				'gameId': game.id,
+				'player1Username': request.user.username,
+				'player2Username': player2.username
+			}, status=201)
 		except User.DoesNotExist:
 			return JsonResponse({'error': 'One or both players not found'}, status=404)
 	else:
@@ -72,11 +80,13 @@ def finish_game(request, game_id):
 				return JsonResponse({'error': 'Game already finished'}, status=400)
 			
 			data = json.loads(request.body)
-			winner_email = data.get('winner')
+			winner_username  = data.get('winner')
+			print(winner_username)
 			player1_score = data.get('player1Score')
 			player2_score = data.get('player2Score')
-			winner = User.objects.get(email=winner_email)
+			winner = User.objects.get(username=winner_username)
 			
+			print(winner)
 			# mise a jour du statut du jeu et le gagnant
 			game.was_won_by(winner, player1_score, player2_score)
 			game.save()
@@ -101,35 +111,40 @@ from django.utils import timezone
 @login_required
 def match_history(request):
 	user = request.user
+	print(f"Fetching match history for user: {user.username}") 
 	games = Game.objects.filter(
 		Q(player1=user) | Q(player2=user),
 		status='finished'
-	).order_by('-created_at')  
+	).order_by('-created_at')
+
+	print(f"Number of games found: {games.count()}")
 	paris_tz = pytz.timezone('Europe/Paris')
-	# print(paris_tz)
 	history = []
 	for game in games:
 		game_time = game.finished_at or game.created_at
 		game_time_paris = game_time.astimezone(paris_tz)
 		history.append({
 			'id': game.id,
-			'opponent': game.player2.email if game.player1 == user else game.player1.email,
+			'opponent': game.player2.username if game.player1 == user else game.player1.username,
 			'user_score': game.player1_score if game.player1 == user else game.player2_score,
 			'opponent_score': game.player2_score if game.player1 == user else game.player1_score,
 			'result': 'Win' if game.winner == user else 'Loss',
-			'date': game_time_paris.strftime("%Y-%m-%d %H:%M:%S")
+			'date': game_time_paris.strftime("%Y-%m-%d %H:%M:%S"),
+			'is_tournament': game.is_tournament_game,
+			'tournament_name': game.tournament.name if game.tournament else None
 		})
-	
+	print(f"Number of games in history: {len(history)}") 
 	return JsonResponse({'match_history': history})
 
 
 from django.utils import timezone
 
+
 @login_required
-def update_online_status(request):
-	if request.method == 'POST':
-		user = request.user
-		user.last_activity = timezone.now()
-		user.save()
-		return JsonResponse({'status': 'success'})
-	return JsonResponse({'status': 'error', 'message': 'Invalid request method'}, status=405)
+def get_current_user(request):
+	if request.method == 'GET':
+		return JsonResponse({
+			'username': request.user.username,
+			'email': request.user.email
+		})
+	return JsonResponse({'error': 'Invalid request method'}, status=405)
