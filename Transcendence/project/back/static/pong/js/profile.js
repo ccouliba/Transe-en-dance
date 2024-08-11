@@ -295,7 +295,7 @@ function EditLangue() {
 		<option value="Français" id="langue" name="langue">Français 🇫🇷</option>
 		<option value="Español" id="langue" name="langue">Español 🇪🇸</option>
 	</select>
-	<button class="btn btn-primary" type="submit" onclick='document.getElementById('app').innerHTML = Profile()'>${window.trans.modify}</button>
+	<button class="btn btn-primary" type="submit">${window.trans.modify}</button>
 	</form>
 	`;
 }
