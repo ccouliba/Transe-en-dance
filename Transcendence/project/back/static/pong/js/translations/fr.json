@@ -105,6 +105,7 @@
 	"acceptFriend": "Accepter un ami",
 	"deleteFriend": "Supprimer un ami",
 	"delete": "Supprimer",
+	"_account": "le compte",
 
 	"_matchHistory": "historique des parties",
 	"noMatchesFound": "Aucun match trouvé",
