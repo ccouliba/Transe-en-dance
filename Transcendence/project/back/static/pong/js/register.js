@@ -60,7 +60,7 @@ function handleRegister(event) {
 	.then(response => response.json()) // Convertir la reponse en JSON
 	.then(data => {
 		if (data.status === 'success') {
-			alert('Registration successful!'); 
+			alert(`${window.trans.registerSuccess}`); 
 			changePage('#login');
 		} else {
 			alert('Registration failed: ' + JSON.stringify(data.message));
