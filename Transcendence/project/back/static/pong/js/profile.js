@@ -159,7 +159,7 @@ function sendProfileToBackend(payload) {
 		.then(data => console.log('success:', data))
 		.catch(error => {
 			console.error('error:', error);
-			alert('an error occurred while updating the profile. please try again.');
+			alert('Please ensure that the information you provide is accurate and correct.');
 		});
 }
 

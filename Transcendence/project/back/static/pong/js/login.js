@@ -95,7 +95,7 @@ function handleLogin(event) {
 	})
 	.catch(error => {
 		console.error('Error:', error); 
-		alert('An error occurred during login. Please try again.'); 
+		alert('An error occurred during login. Please ensure that the information you provide is accurate and correct.'); 
 	});
 }
 
