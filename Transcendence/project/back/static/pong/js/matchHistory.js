@@ -29,7 +29,7 @@ function renderMatchHistory() {
 		return `${window.trans.noMatchesFound}.`;
 	}
 	return `
-		<table class="table table-striped">
+		<table class="table table-dark table-striped table-hover">
 			<thead>
 				<tr>
 					<th>${window.trans.date}</th>
