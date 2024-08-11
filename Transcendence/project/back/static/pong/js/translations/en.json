@@ -12,6 +12,8 @@
 	"pongGame": "Pong Game",
 	"firstPlayerEmail": "First player's email",
 	"secondPlayerEmail": "Second player's email",
+	"firstPlayerUsername": "First player's username",
+	"secondPlayerUsername": "Second player's username",
 	"btnStartGame": "Start game",
 	"instructions": "Instructions",
 	"rule1": "The objective of the game is to score points by hitting the ball into the opponent's court.",

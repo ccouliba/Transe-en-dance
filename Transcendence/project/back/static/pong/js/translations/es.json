@@ -12,6 +12,8 @@
 	"pongGame": "Juego de Pong",
 	"firstPlayerEmail": "Correo electrónico del primer jugador",
 	"secondPlayerEmail": "Correo electrónico del segundo jugador",
+	"firstPlayerUsername": "Nombre de usario del primer jugador",
+	"secondPlayerUsername": "Nombre de usario del segundo jugador",
 	"btnStartGame": "Iniciar el juego",
 	"instructions": "Instrucciones",
 	"rule1": "El objetivo del juego es conseguir puntos golpeando la pelota en el campo del adversario.",
