@@ -105,9 +105,11 @@ services:
     user: root
     volumes:
       - ./elk_data/logstash/pipeline/logstash.conf/:/usr/share/logstash/pipeline/logstash.conf:ro
+      - ./elk_data/logstash/pipeline/logstash2.conf/:/usr/share/logstash/pipeline/logstash2.conf:ro
       - ./project/logs:/logs
-    command: logstash -f /usr/share/logstash/pipeline/logstash.conf
+    # command: logstash -f /usr/share/logstash/pipeline/logstash.conf
     ports:
+      - 5959:5959
       - 5959:5959/tcp
     environment:
       LS_JAVA_OPTS: "-Xmx256m -Xms256m"
@@ -116,6 +118,12 @@ services:
       - transcendance
     depends_on:
       - elasticsearch
+    healthcheck:
+      test: curl http://localhost:5959
+      interval: 10s
+      timeout: 1s
+      retries: 20
+      start_period: 5s
 
 
   kibana:

@@ -241,7 +241,7 @@ LOGGING = {
         'file': {
             'level': 'INFO',
             'class': 'logging.FileHandler',
-            'filename': '../project/elk/pong.logs',
+            'filename': '../project/logs/pong.logs',
             'formatter': 'verbose',
         },
         'console': {
@@ -257,23 +257,23 @@ LOGGING = {
             'port': 5959,
             'version': 1,
             'message_type': 'django',
-            'tags': ['pong', 'django.db'],
+            'tags': ['pong', 'django.request'],
         },
     },
     
     'root': {
-        'handlers': ['file', 'console', 'logstash'],
+        'handlers': ['file', 'console'],
         'level': 'WARNING',
     },
     
     'loggers': {
         'pong': {
-            'handlers': ['file', 'console', 'logstash'],
+            'handlers': ['file'],
             'level': 'INFO',
             'propagate': True, # If logs should be propagte to parent logs
         },
         'backend': {
-            'handlers': ['console'],
+            'handlers': ['file'],
             'level': 'INFO',
             'propagate': True,
         },
@@ -283,7 +283,7 @@ LOGGING = {
             'propagate': True,
         },
         'django.db.backend': {
-            'handlers': ['file'],
+            'handlers': ['console'],
             'level': 'INFO',
             'propagate': True,
         }, 

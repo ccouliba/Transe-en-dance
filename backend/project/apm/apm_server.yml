@@ -1,7 +1,0 @@
-# [pong]
-# token: {{ APM_TOKEN }}
-
-# apm-server:
-#   host: "https://localhost:8200"
-#   auth:
-#     secret_token: 'token'
