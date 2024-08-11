@@ -111,10 +111,11 @@ function getFriendsStatus(){
 
 function updateFriendsStatus() {
     const statusList = document.getElementById('friends-status-list');
+	console.log('window.trans:', window.trans);
     if (statusList) {
         const statusSpans = statusList.querySelectorAll('.friend-status');
         statusSpans.forEach((span, i) => {
-            span.textContent = friendsState.friends[i].isOnline ? "${window.trans.online}" : "${window.trans.offline}";
+            span.textContent = friendsState.friends[i].isOnline ? `${window.trans.online}` : `${window.trans.offline}`;
         });
     }
 }
