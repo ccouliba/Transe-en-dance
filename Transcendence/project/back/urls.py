@@ -1,5 +1,5 @@
 from django.urls import path
-from .views.auth_views import base_view,check_auth, register_view, login_view, logout_view, auth_callback, external_login
+from .views.auth_views import base_view,check_auth, register_view, login_view, logout_view, auth_callback, external_login, soft_delete_user
 from .views.game_views import create_game, update_game, finish_game, match_history,  get_current_user
 from .views.friend_views import send_friend_request, accept_friend_request, remove_friend, friends_data, friends_online_status
 from .views.profile_views import profile_view, user_updated_profile, user_account_deleted,edit_password_view, get_user_info, profile_update_view, upload_avatar
@@ -37,6 +37,8 @@ urlpatterns = [
 	path('api/profile/update', profile_update_view, name='profile_update'),
 	path('api/profile/change-password', edit_password_view, name='change_password'),
  	path('api/profile/upload-avatar/', upload_avatar, name='upload_avatar'),
+ 	path('api/profile/soft_delete_user/', soft_delete_user, name='upload_avatar'),
+  
  
 	path('api/profile/send_friend_request/', send_friend_request, name='send_friend_request'),
 	path('api/profile/accept_friend_request/', accept_friend_request, name='accept_friend_request'),
