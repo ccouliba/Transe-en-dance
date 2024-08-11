@@ -1,0 +1,98 @@
+services:
+  web:
+    container_name: backend
+    build: ./project
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./project/:/usr/src/project/
+    ports:
+      - 8000:8000
+    env_file:
+      - ./.utils/.env
+    depends_on:
+      - db
+    networks:
+      - transcendance
+
+  db:
+    image: postgres:15
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=ccouliba
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=db1
+      - POSTGRES_PORT='5432'
+    restart: always
+    networks:
+     - transcendance
+
+  elasticsearch:
+    container_name: elasticsearch
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.14.3
+    environment:
+      - node.name=elasticsearch
+      - cluster.name=es-docker-cluster
+      - discovery.type=single-node
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - xpack.security.enabled=false
+    volumes:
+      - ./project/elk_data:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+    networks:
+      - elk
+
+  logstash:
+    container_name: logstash
+    image: docker.elastic.co/logstash/logstash:8.14.3
+    user: root # should not be really ??
+    volumes:
+      - ./project/elk_data/logstash/pipeline/logstash.conf/:/usr/share/logstash/pipeline/logstash.conf:ro
+      - ./project/elk_data/logstash/pipeline/logstash2.conf/:/usr/share/logstash/pipeline/logstash2.conf:ro
+      - ./project/logs:/logs
+    ports:
+      - 5959:5959
+      - 5959:5959/tcp
+    environment:
+      LS_JAVA_OPTS: "-Xmx256m -Xms256m"
+    networks:
+      - elk
+      - transcendance
+    depends_on:
+      - elasticsearch
+    healthcheck:
+      test: curl http://localhost:5959
+      interval: 10s
+      timeout: 1s
+      retries: 3
+      start_period: 5s
+
+  kibana:
+    container_name: kibana
+    image: docker.elastic.co/kibana/kibana:8.14.3
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+    ports:
+      - 5601:5601
+    networks:
+      - elk
+    depends_on:
+      - elasticsearch
+
+volumes:
+  postgres_data:
+  # definition explicite du volume elk_data
+  elk_data:
+    driver: local
+
+networks:
+  transcendance:
+    name: transcendance
+    driver: bridge
+  elk:
+    name: elk
+    driver: bridge
