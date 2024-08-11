@@ -33,10 +33,10 @@ function Login() {
 	
 	return `
 		<div class="container mt-5">
-			<h1>Login</h1> 
+			<h1>${window.trans.btnLogin}</h1> 
 			 ${LoginForm()}
 			<p class="mt-3">
-				 Don't have an account? <a href="#" id="showRegister">Register</a>
+				${window.trans.noAccount} <a href="#" id="showRegister">${window.trans.register}</a>
 			</p>
 			${ExternalLoginButton()}
 		</div>
@@ -50,13 +50,13 @@ function LoginForm() {
 		<form id="loginForm">
 			<div class="form-floating" id="profilePage">
 				<input type="text" class="form-control" name="username" id="username" autocomplete="username" placeholder="Username" required>
-				<label for="username">Username</label>
+				<label for="username">${window.trans.username}</label>
 			</div>
 			<div class="form-floating" id="profilePage">
 				<input type="password" class="form-control" name="password" id="password" autocomplete="current-password" placeholder="Password" required>
-				<label for="password">Password</label>
+				<label for="password">${window.trans.password}</label>
 			</div>
-			<button type="submit" class="btn btn-primary">Login</button>
+			<button type="submit" class="btn btn-primary">${window.trans.btnLogin}</button>
 		</form>
 	`;
 }
@@ -66,7 +66,7 @@ function LoginForm() {
 function ExternalLoginButton() {
 	return `
 		<div class="mt-3">
-			<a href="/pong/external_login/" class="btn btn-secondary">Login with 42</a>
+			<a href="/pong/external_login/" class="btn btn-secondary">${window.trans.login42}</a>
 		</div>
 	`;
 }

@@ -36,8 +36,9 @@
 	<!-- <p><script src="{% static 'pong/js/iaAlgo.js' %}"></script></p> -->
 	<main>
 	  <div id="app">
-		{% block content %}
-		<script>
+		  {% block content %}
+		  <script>
+			loadTranslations();
 			/*let hash = window.location.hash
 		   
 			changePage(hash);*/
@@ -47,17 +48,13 @@
 				} else {
 					changePage(window.location.hash);
 				}
-			{% else %}
+				{% else %}
 				if (window.location.hash === '#register') {
 					changePage('#register');
 				} else {
 					changePage('#login');
 				}
 			{% endif %}
-   
-
-	loadTranslations();
-
 		</script>
 		{% endblock %}
 	  </div>
