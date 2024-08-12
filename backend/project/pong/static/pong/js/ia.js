@@ -263,17 +263,17 @@ function initializeGame() {
     setInterval(gameLoop, 1000 / 60);
 }
 
-// Fonction pour afficher ou masquer le canvas en fonction de son état actuel
 function toggleCanvas() {
     var canvas = document.getElementById('myCanvas');
     if (canvas) {
-        // Si le canvas existe déjà, le retirer
-        document.body.removeChild(canvas);
+        // Si le canvas existe déjà, réinitialiser le jeu
+        resetGame();
     } else {
         // Sinon, initialiser le jeu et ajouter le canvas
         initializeGame();
     }
 }
+
 
 // Fonction pour masquer le canvas
 function hideCanvas() {
