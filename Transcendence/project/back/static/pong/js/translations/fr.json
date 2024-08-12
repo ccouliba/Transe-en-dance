@@ -1,5 +1,6 @@
 {
 	"registerSuccess": "Inscription réussie!",
+	"createAccount": "Créer un compte",
 
 	"home": "Accueil",
 	"play": "Jouer",
@@ -42,7 +43,7 @@
 	"winnerIs": "The winner is",
 	"totalScore": "Score total",
 	"_totalScore": "score total",
-	"finishTournament": "Terminer le tournoi", 
+	"fishTournament": "Terminer le tournoi", 
 	"startNewTournament": "Commencer un nouveau tournoi",
 	"participants": "Participants",
 	"noParticipants": "Aucun participant pour l'instant",
