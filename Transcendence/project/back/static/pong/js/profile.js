@@ -81,7 +81,7 @@ function Profile() {
 						${window.trans.editInfos}
 					</button>
 				</h2>
-			<div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+			<div id="collapseTwo" class="" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
 				<div class="accordion-body">
 					<h3 class="mt-4 mb-3">${window.trans.modify} ${window.trans._username}</h2>
 					${EditUsername()}
@@ -177,7 +177,7 @@ function EditUsername() {
 		sendProfileToBackend({
 			'username': usernameInput
 		}); // envoyer les donnees au backend
-	//	mountComponent(Profile); // monter le composant Profile
+		mountComponent(Profile); // monter le composant Profile
 		profileState.isLoaded = false; // marquer les donnees du profil comme non chargees
 	});
 
@@ -208,7 +208,7 @@ function EditEmail() {
 		sendProfileToBackend({
 			'email': emailInput
 		}); // envoyer les donnees au backend
-		//mountComponent(Profile); // monter le composant Profile
+		mountComponent(Profile); // monter le composant Profile
 		profileState.isLoaded = false; // marquer les donnees du profil comme non chargees
 	});
 	return `
@@ -231,7 +231,7 @@ function EditFirstname() {
 		sendProfileToBackend({
 			'firstname': firstnameInput
 		}); // envoyer les donnees au backend
-	//	mountComponent(Profile); // monter le composant Profile
+		mountComponent(Profile); // monter le composant Profile
 		profileState.isLoaded = false; // marquer les donnees du profil comme non chargees
 	});
 	return `
@@ -261,7 +261,7 @@ function EditLastname() {
 		sendProfileToBackend({
 			'lastname': lastnameInput
 		}); // envoyer les donnees au backend
-	//	mountComponent(Profile); // monter le composant Profile
+		mountComponent(Profile); // monter le composant Profile
 		profileState.isLoaded = false; // marquer les donnees du profil comme non chargees
 	});
 	return `
