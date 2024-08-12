@@ -116,5 +116,21 @@
 	"date": "Date",
 	"opponent": "Opponent",
 	"score": "Score",
-	"result": "Result"
+	"result": "Result",
+
+	"privacyPolicy": "Privacy policy for Pong Application",
+	"introduction": "Introduction",
+	"welcomePP": "Welcome to the Pong Application. We are committed to protecting your personal information and your right to privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our application",
+	"informationCollect": "Information we collect",
+	"weCollect": "We collect the following types of information",
+	"personalInfos": "Personal information (such as name, email address, and profile picture) when you create an account",
+	"gameRelatedData": "Game-related data (such as scores, wins, losses, and gameplay statistics)",
+	"howWeUseInfos": "How we use your information",
+	"weUseInfos": "We use the collected information for various purposes, including",
+	"improving": "Improving and personalizing user experience",
+	"managing": "Managing user accounts and authenticating users",
+	"yourRights": "Your rights",
+	"youHaveTheRight": "You have the right to access, correct, or delete your personal information. You can exercise these rights by contacting us or using the features provided in the application",
+	"contactUs": "Contact Us",
+	"haveQuestions": "If you have any questions about this Privacy Policy, please contact us at ccouliba@student.42.fr"
 }
