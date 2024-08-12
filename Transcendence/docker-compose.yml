@@ -42,7 +42,7 @@ services:
   # Elasticsearch is a search engine
   elasticsearch:
     container_name: elasticsearch
-    image: docker.elastic.co/elasticsearch/elasticsearch:8.15.0
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.14.3
     environment:
       - node.name=elasticsearch
       - cluster.name=es-docker-cluster
@@ -64,7 +64,7 @@ services:
   # Logstash is a server-side data processing pipeline
   logstash:
     container_name: logstash
-    image: docker.elastic.co/logstash/logstash:8.15.0
+    image: docker.elastic.co/logstash/logstash:8.14.3
     user: root
     volumes:
       - ./elk_data/logstash/pipeline/logstash.conf/:/usr/share/logstash/pipeline/logstash.conf:ro
@@ -90,7 +90,7 @@ services:
   # # Kibana is used for data visualization
   kibana:
     container_name: kibana
-    image: docker.elastic.co/kibana/kibana:8.15.0
+    image: docker.elastic.co/kibana/kibana:8.14.3
     environment:
       - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
     ports:

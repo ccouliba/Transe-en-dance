@@ -48,11 +48,11 @@ function Login() {
 function LoginForm() {
 	return `
 		<form id="loginForm">
-			<div class="form-floating" id="profilePage">
+			<div class="form-floating w-50" id="profilePage">
 				<input type="text" class="form-control" name="username" id="username" autocomplete="username" placeholder="Username" required>
 				<label for="username">${window.trans.username}</label>
 			</div>
-			<div class="form-floating" id="profilePage">
+			<div class="form-floating w-50" id="profilePage">
 				<input type="password" class="form-control" name="password" id="password" autocomplete="current-password" placeholder="Password" required>
 				<label for="password">${window.trans.password}</label>
 			</div>

@@ -6,23 +6,6 @@ canvas.width = window.innerWidth;
 canvas.height = canvas.width * 0.5;
 
 window.addEventListener("resize", handleResize);
-function handleResize() {
-    var w = window.innerWidth;
-    var h = window.innerHeight;
-    ctx.canvas.width = w;
-    ctx.canvas.height = h;
-    //
-    var ratio = 100/100; // 100 is the width and height of the circle content.
-    var windowRatio = w/h;
-    var scale = w/100;
-    if (windowRatio > ratio) {
-        scale = h/100;
-    }
-    // formule pour rescale particule j'ignore comment appeler les objets particules: Scale up to fit width or height
-    // c.scaleX= c.scaleY = scale; 
-    
-    ctx.update();
-}
 
 const particlesArray = [];
 const numberOfParticles = 50; // Reduced number of particles
@@ -169,3 +152,21 @@ window.addEventListener('resize', function() {
     fireGlowGradient.addColorStop(0.5, 'rgba(255, 140, 0, 0.1)'); // orange
     fireGlowGradient.addColorStop(1, 'rgba(255, 215, 0, 0)'); // yellow end
 });
+
+function handleResize() {
+    var w = window.innerWidth;
+    var h = window.innerHeight;
+    ctx.canvas.width = w;
+    ctx.canvas.height = h;
+
+    var ratio = 100/100; // 100 is the width and height of the circle content.
+    var windowRatio = w/h;
+    var scale = w/100;
+    if (windowRatio > ratio) {
+        scale = h/100;
+    }
+    // formule pour rescale particule j'ignore comment appeler les objets particules: Scale up to fit width or height
+    // c.scaleX= c.scaleY = scale; 
+    
+    // ctx.update();
+}
