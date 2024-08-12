@@ -98,7 +98,8 @@ function cleanStates(){
 }
 
 function checkAuth(){
-	return 	fetch("/pong/api/check_auth/")
+	let url = `/pong/api/check_auth/`
+	return 	httpGetJson(url)
 	// Transformer la reponse en JSON
 	.then((response) => response.json())
 }

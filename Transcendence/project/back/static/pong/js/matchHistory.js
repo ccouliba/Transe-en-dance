@@ -53,9 +53,8 @@ function renderMatchHistory() {
 	`;
 }
 function loadMatchHistory() {
-	fetch('/pong/api/games/match_history/', {
-		credentials: 'include'
-	})
+	let url = `/pong/api/games/match_history/`
+	httpGetJson(url)
 	.then(response => {
 		if (!response.ok) {
 			throw new Error(`HTTP error! status: ${response.status}`);

@@ -316,9 +316,8 @@ function backToTournament() {
 }
 
 function updateScore(gameId, player1Score, player2Score, winner) {
-	// fetch('/pong/api/games/create_game/', {
-	
-	return httpPostJson(`/pong/api/games/update_score/`, {
+	let url = `/pong/api/games/update_score/`
+	return httpPostJson(url, {
 		game_id: matchId,
 		player1_score: player1Score,
 		player2_score: player2Score,
