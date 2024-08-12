@@ -135,7 +135,7 @@ def get_user_from_api(request, access_token):
 
 # Cette vue gere le callback de l'authentification (ie la reponse recue apres que l'utilisateur ait autorise l'application via l'authentification via l'API d'Intra 42)
 @loggingFunction
-@csrf_exempt
+# @csrf_exempt #maybe have to use it since api42 do not send back csrf token perhaps
 def auth_callback(request):
 	print("Received callback request:", request.GET)
 	api_response = get_response_from_api(request)
@@ -157,7 +157,6 @@ def auth_callback(request):
 
 # Cette vue gere la connexion des utilisateurs
 @require_POST
-# @csrf_exempt
 ## New function of back without form validation and all that stuff !!
 def get_log(request, token):
 	if request.method == 'POST':

@@ -34,7 +34,6 @@ import json
 
 # path('pong/api/profile/update', profile_update_view, name='profile_update'),
 @login_required
-# @csrf_exempt
 @require_POST
 def	profile_update_view(request):
 		data = json.loads(request.body)
@@ -186,7 +185,6 @@ def edit_password_view(request):
 
 @login_required
 @require_POST
-# @csrf_exempt
 def upload_avatar(request):
 	form = AvatarUploadForm(request.POST, request.FILES, instance=request.user)
 	if form.is_valid():
