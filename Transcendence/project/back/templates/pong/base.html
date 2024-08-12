@@ -40,7 +40,7 @@
 	  <div id="app">
 		  {% block content %}
 		  <script>
-			loadTranslations();
+
 			/*let hash = window.location.hash
 		   
 			changePage(hash);*/
@@ -52,9 +52,13 @@
 				}
 				{% else %}
 				if (window.location.hash === '#register') {
-					changePage('#register');
+					loadTranslations().then(() => {
+						changePage('#register');
+					});
 				} else {
-					changePage('#login');
+					loadTranslations().then(() => {
+						changePage('#login');
+					});
 				}
 			{% endif %}
 		</script>
