@@ -13,6 +13,7 @@ import os
 import sys
 from django.utils.translation import gettext_lazy as _
 from pathlib import Path
+import logging
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 # BASE_DIR = Path(__file__).resolve().parent.parent
@@ -72,7 +73,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    # 'pong.middleware.Logging.LoggingMiddleware',
+    'back.middleware.Logging.LoggingMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',
@@ -121,19 +122,19 @@ DATABASES = {
 	}
 }
 
-if os.getenv("DEV_ENV", False):
-# on localhost
-    DATABASES = {
-        'default': {
-            'ENGINE': os.getenv('SQL_ENGINE', 'django.db.backends.postgresql_psycopg2'),
-            'NAME': os.getenv('SQL_DATABASE', 'db1'),
-            'USER': os.getenv('SQL_USER', 'ccouliba'),
-            'PASSWORD': os.getenv('SQL_PASSWORD', "password"),
-            'HOST': os.getenv('SQL_HOST', 'localhost'),
-            # 'HOST': 'localhost', #todo : A MODIFIER (juste pour pouvoir executer django localement)
-            'PORT': os.getenv('SQL_PORT', '5432'),
-        }
-    }
+# if os.getenv("DEV_ENV", False):
+# # on localhost
+#     DATABASES = {
+#         'default': {
+#             'ENGINE': os.getenv('SQL_ENGINE', 'django.db.backends.postgresql_psycopg2'),
+#             'NAME': os.getenv('SQL_DATABASE', 'db1'),
+#             'USER': os.getenv('SQL_USER', 'ccouliba'),
+#             'PASSWORD': os.getenv('SQL_PASSWORD', "password"),
+#             'HOST': os.getenv('SQL_HOST', 'localhost'),
+#             # 'HOST': 'localhost', #todo : A MODIFIER (juste pour pouvoir executer django localement)
+#             'PORT': os.getenv('SQL_PORT', '5432'),
+#         }
+#     }
 
 
 
@@ -225,73 +226,81 @@ REST_FRAMEWORK = {
 }
 
 # # For logging (devops)
-# LOGGING = {
-#     # Defines the dict version for logging config ; Should always be 1 ; another value seems to cause issues
-#     'version': 1,
-#     'disable_existing_loggers': False, # ?q= false -> not activated
-#     'formatters': {
-#         'verbose': {
-#             'format': '[%(asctime)s]::[%(levelname)s]::[%(name)s]=> (%(message)s)', # [%(funcName)s]::
-#             'datefmt': '%Y/%m/%d %H:%M:%S',
-#         },
-#         'simple': {
-#             'format': '[%(name)s]=> (%(message)s)',
-#         },
-#     },
+LOGGING = {
+    # Defines the dict version for logging config ; Should always be 1 ; another value seems to cause issues
+    'version': 1,
+    'disable_existing_loggers': False, # ?q= false -> not activated
     
-#     'handlers': {
-#         'file': {
-#             'level': 'INFO',
-#             'class': 'logging.FileHandler',
-#             'filename': '../project/logs/back.logs', # Chemin du fichier ou seront stockes les logs
-#             'formatter': 'verbose',
-#         },
-#         'console': {
-#             'level': 'DEBUG',
-#             'class': 'logging.StreamHandler',
-#             'stream': sys.stdout,
-#             'formatter': 'simple',
-#         },
-#     },
+    'formatters': {
+        'verbose': {
+            'format': '[%(asctime)s]::[%(levelname)s]::[%(name)s]=> (%(message)s)', # [%(funcName)s]::
+            'datefmt': '%Y/%m/%d %H:%M:%S',
+        },
+        'simple': {
+            'format': '[%(funcname)s]::[%(name)s]=> (%(message)s)',
+        },
+    },
     
-#     'root': {
-#         'handlers': ['console', 'file'],
-#         'level': 'WARNING',
-#     },
+    'handlers': {
+        'file': {
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': '../project/logs/back.logs',
+            'formatter': 'verbose',
+        },
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'stream': sys.stdout,
+            'formatter': 'simple',
+        },
+        # 'logstash': {
+        #     'level': 'DEBUG',
+        #     'class': 'logstash.handlers.TCPLogstashHandler',
+        #     'host': 'logstash',
+        #     'port': 5959,
+        #     'version': 1,
+        #     'message_type': 'django',
+        #     'tags': ['django.request', 'backend'],
+        # },
+    },
     
-#     'loggers': {
-#         'back': {
-#             'handlers': ['file'],
-#             'level': 'INFO',
-#             'propagate': True, # If logs should be propagte to parent logs
-#         },
-#         'logstash': {
-#             'handlers': ['console'],
-#             'level': 'INFO',
-#             'propagate': True, # If logs should be propagte to parent logs
-#         },
-#         'backend': {
-#             'handlers': ['file'],
-#             'level': 'INFO',
-#             'propagate': True,
-#         },
-#         'django.request': {
-#             'handlers': ['console', 'file'],
-#             'level': 'INFO',
-#             'propagate': True,
-#         },
-#         'django.db.backend': {
-#             'handlers': ['console', 'file'],
-#             'level': 'INFO',
-#             'propagate': True,
-#         },
-#     },
-# }
+    'root': {
+        'handlers': ['file', 'console'],
+        'level': 'WARNING',
+    },
+    
+    'loggers': {
+        'back': {
+            'handlers': ['file'],
+            'level': 'INFO',
+            'propagate': True, # If logs should be propagate to parent logs
+        },
+        'backend': {
+            'handlers': ['file'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+        'django.request': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+        'django.db.backend': {
+            'handlers': ['console'],
+            'level': 'INFO',
+            'propagate': True,
+        }, 
+    },
+}
 
-## FOR ELASTICSEARCH APP 
-
+# FOR ELASTICSEARCH APP 
 ELASTICSEARCH_DSL = {
     'default': {
-        'hosts': { 'http://elasticsearch:9200', },
+        'hosts': os.getenv('ELASTICSEARCH_DSL_HOSTS'),
+        'http_auth': (os.getenv('ELASTIC_USERNAME'), os.getenv('ELASTIC_PASSWORD')),
+        # 'use_ssl': True,
+        # 'verify_certs': False,
+        # 'connection_class': 'RequestsHttpConnection',
     },
 }

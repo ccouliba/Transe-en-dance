@@ -7,7 +7,7 @@ MIGRATE_SESSION = docker compose exec web python3 manage.py migrate sessions
 MIGRATE	= docker compose exec web python3 manage.py makemigrations && docker compose exec web python3 manage.py migrate
 
 # without the flag '-d', you should see in verbose server running
-RUN		= docker compose up -d
+RUN		= docker compose up
 
 # should use this when running with the -d option
 STOP	= docker compose stop
