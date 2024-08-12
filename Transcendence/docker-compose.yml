@@ -86,7 +86,7 @@ services:
 
 volumes:
   postgres_data:
-  es-data:
+  # es-data:
 
   # Created another network for devops_front
 networks:
