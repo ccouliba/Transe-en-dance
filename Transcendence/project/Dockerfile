@@ -16,7 +16,7 @@ COPY ./requirements.txt .
 RUN pip install -r requirements.txt &&\
 	pip install reportlab &&\
 	pip install pytz &&\
-	python -m pip install Pillow\
+	python -m pip install Pillow
 	
 # copy project
 COPY . .

@@ -239,7 +239,7 @@ LOGGING = {
             'datefmt': '%Y/%m/%d %H:%M:%S',
         },
         'simple': {
-            'format': '[%(funcname)s]::[%(name)s]=> (%(message)s)',
+            'format': '[%(name)s]=> (%(message)s)',
         },
     },
     
@@ -256,15 +256,6 @@ LOGGING = {
             'stream': sys.stdout,
             'formatter': 'simple',
         },
-        # 'logstash': {
-        #     'level': 'DEBUG',
-        #     'class': 'logstash.handlers.TCPLogstashHandler',
-        #     'host': 'logstash',
-        #     'port': 5959,
-        #     'version': 1,
-        #     'message_type': 'django',
-        #     'tags': ['django.request', 'backend'],
-        # },
     },
     
     'root': {
@@ -301,8 +292,5 @@ ELASTICSEARCH_DSL = {
     'default': {
         'hosts': os.getenv('ELASTICSEARCH_DSL_HOSTS'),
         'http_auth': (os.getenv('ELASTIC_USERNAME'), os.getenv('ELASTIC_PASSWORD')),
-        # 'use_ssl': True,
-        # 'verify_certs': False,
-        # 'connection_class': 'RequestsHttpConnection',
     },
 }
