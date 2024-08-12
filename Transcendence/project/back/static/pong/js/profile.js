@@ -52,7 +52,7 @@ function Profile() {
 				<div class="row mb-3">
 					<div class="col-sm-3"><strong>${window.trans.avatar} :</strong></div>
 						<div class="col-sm-9">
-							<img src="${profileState.avatar_url.startsWith('http') ? profileState.avatar_url : profileState.avatar_url}" alt="Avatar" style="width: 100px; height: 100px;">
+							<img src="${profileState.avatar_url && profileState.avatar_url.startsWith('http') ? profileState.avatar_url : ''}" alt="Avatar" style="width: 100px; height: 100px;">
 						</div>
 				</div>
 				<h2 class="mt-4 mb-3" style="text-decoration: underline;">${window.trans.gameStats}</h2>
