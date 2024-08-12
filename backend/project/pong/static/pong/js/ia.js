@@ -1,3 +1,5 @@
+let inGame = false;
+
 function initializeGame() {
     // Création du canvas
     var canvas = document.createElement("canvas");
@@ -173,7 +175,8 @@ function initializeGame() {
                     }
                 }
     
-                requestAnimationFrame(animateStep);
+                if (inGame)
+                    requestAnimationFrame(animateStep);
             }
     
             animateStep();
@@ -293,6 +296,9 @@ function initializeGame() {
 }
 
 function toggleCanvas() {
+    inGame = true;
+    console.log("in game");
+    console.log(inGame);
     var canvas = document.getElementById('myCanvas');
     if (canvas) {
         resetGame();
@@ -302,18 +308,13 @@ function toggleCanvas() {
 }
 
 function hideCanvas() {
+    inGame = false;
+    console.log("out game");
+    console.log(inGame);
     var canvas = document.getElementById('myCanvas');
     if (canvas) {
         document.body.removeChild(canvas);
     }
-}
-
-function stopGame() {
-    if (gameLoopInterval) clearInterval(gameLoopInterval);
-    if (aiUpdateInterval) clearInterval(aiUpdateInterval);
-    
-    document.removeEventListener('keydown', handleKeyDown);
-    document.removeEventListener('keyup', handleKeyUp);
 }
 
 function handleKeyDown(e) {
