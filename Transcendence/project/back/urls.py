@@ -1,5 +1,5 @@
 from django.urls import path
-from .views.auth_views import base_view,check_auth, register_view, login_view, logout_view, auth_callback, external_login, soft_delete_user, debug_oauth_config, check_env_loading
+from .views.auth_views import base_view,check_auth, register_view, login_view, logout_view, auth_callback, external_login, soft_delete_user
 from .views.game_views import create_game, update_game, finish_game, match_history,  get_current_user
 from .views.friend_views import send_friend_request, accept_friend_request, remove_friend, friends_data, friends_online_status
 from .views.profile_views import profile_view, user_updated_profile, user_account_deleted,edit_password_view, get_user_info, profile_update_view, upload_avatar
@@ -33,9 +33,6 @@ urlpatterns = [
 	path('home/', home_view, name='home'),
 	path('home/', home_view, name='home'),
 
-	path('debug_oauth_config/', debug_oauth_config, name='debug_oauth_config'),
-	path('check_env_loading/', check_env_loading, name='check_env_loading'),
- 
  
 	path('api/check_auth/', check_auth, name='check_auth'),
 	path('api/profile/', profile_view, name='profile'),
