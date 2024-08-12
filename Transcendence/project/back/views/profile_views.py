@@ -57,7 +57,6 @@ def	profile_update_view(request):
 			user.last_name = data['lastname']
 			updated.append('lastname')
 		
-		#todo : a modifier
 		if 'langue' in data:
 			user.langue = data['langue']
 			updated.append('langue')

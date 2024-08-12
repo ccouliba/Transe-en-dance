@@ -16,7 +16,7 @@ function logout() {
 		credentials: "include", 
 		headers: {
 			'Content-Type': 'application/json', 
-			'X-CSRFToken': getCookie('csrftoken') // ajouter le token csrf aux headers. todo : a garder ou pas
+			'X-CSRFToken': getCookie('csrftoken') 
 		},
 	})
 	.then(response => {

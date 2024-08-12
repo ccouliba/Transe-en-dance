@@ -281,7 +281,6 @@ function EditLastname() {
 	`;
 }
 
-//todo : juste un modele a modifier
 function EditLangue() {
 	bindEvent(profileState, "#edit-langue", "submit", event => {
 		event.preventDefault();

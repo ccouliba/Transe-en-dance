@@ -49,7 +49,6 @@ def check_auth(request):
 	})
 
 
-# todo : ENLEVER VALEUR EN DUR DE UID
 # Cette vue gere l'authentification via l'API d'Intra 42 en redirigeant l'utilisateur vers l'URL d'authentification appropriee
 @loggingFunction
 def external_login(request):
