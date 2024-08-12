@@ -7,7 +7,6 @@ function loadTranslations(newLang) {
 		langFile = '/static/pong/js/translations/fr.json';
 	else if (newLang === 'Español')
 		langFile = '/static/pong/js/translations/es.json';
-	console.log("langFile: " + langFile);
 	return fetch(langFile)
 	.then(response => response.json())
 	.then(trans => {
