@@ -23,7 +23,7 @@ from django.views.decorators.csrf import ensure_csrf_cookie
   
 from back.utils import load_env
 
-
+#loading env variables for external login with api42
 current_dir = os.path.dirname(os.path.abspath(__file__))
 env_path = os.path.join(current_dir, "../../../.utils/.env")
 load_env(env_path)
@@ -49,7 +49,6 @@ def check_auth(request):
 	})
 
 
-# todo : ENLEVER VALEUR EN DUR DE UID
 # Cette vue gere l'authentification via l'API d'Intra 42 en redirigeant l'utilisateur vers l'URL d'authentification appropriee
 @loggingFunction
 def external_login(request):
@@ -115,15 +114,16 @@ def get_user_from_api(request, access_token):
 		user_info_response.raise_for_status()
 		
 		user_info = user_info_response.json()
-		# print("Full user info:", json.dumps(user_info, indent=2))
 		user, created = User.objects.get_or_create(username=user_info['login'])
-
-		user.email = user_info.get('email', '')
-		user.first_name = user_info.get('first_name', '')
-		user.last_name = user_info.get('last_name', '')
-		user.avatar = user_info.get('image', {}).get('link')
-
-
+		if created:
+			email = user_info.get('email', '')
+			avatar = user_info.get('image', {}).get('link')
+			first_name = user_info.get('first_name', '')
+			last_name = user_info.get('last_name', '')
+			
+			user.register_from_42_login(email, avatar, first_name, last_name)
+			user.save()
+		
 		login(request, user)
 		return redirect('/pong/#home')
 	except requests.exceptions.RequestException as e:
@@ -135,7 +135,7 @@ def get_user_from_api(request, access_token):
 
 # Cette vue gere le callback de l'authentification (ie la reponse recue apres que l'utilisateur ait autorise l'application via l'authentification via l'API d'Intra 42)
 @loggingFunction
-@csrf_exempt
+# @csrf_exempt #maybe have to use it since api42 do not send back csrf token perhaps
 def auth_callback(request):
 	print("Received callback request:", request.GET)
 	api_response = get_response_from_api(request)
@@ -157,7 +157,6 @@ def auth_callback(request):
 
 # Cette vue gere la connexion des utilisateurs
 @require_POST
-@csrf_exempt
 ## New function of back without form validation and all that stuff !!
 def get_log(request, token):
 	if request.method == 'POST':
@@ -250,58 +249,3 @@ from django.http import JsonResponse
 from django.conf import settings
 from django.views.decorators.http import require_GET
 from django.views.decorators.csrf import csrf_exempt
-
-@csrf_exempt
-@require_GET
-def debug_oauth_config(request):
-	config = {
-		'API_AUTH_URL': os.getenv('API_AUTH_URL'),
-		'REDIRECT_URI': os.getenv('REDIRECT_URI'),
-		'UID': os.getenv('UID'),
-		'SECRET': 'HIDDEN',  # Ne jamais exposer le secret
-		'TOKEN_URL': os.getenv('TOKEN_URL'),
-		'USER_INFO_URL': os.getenv('USER_INFO_URL'),
-	}
-	
-	missing_vars = [key for key, value in config.items() if value is None]
-	
-	if missing_vars:
-		return JsonResponse({
-			'status': 'error',
-			'message': f"Missing environment variables: {', '.join(missing_vars)}",
-			'debug_mode': settings.DEBUG
-		})
-	else:
-		return JsonResponse({
-			'status': 'success',
-			'message': 'All required environment variables are set',
-			'config': config if settings.DEBUG else 'Hidden in production'
-		})
-
-
-import os
-from django.http import JsonResponse
-from django.views.decorators.http import require_GET
-from django.views.decorators.csrf import csrf_exempt
-
-@csrf_exempt
-@require_GET
-def check_env_loading(request):
-	env_vars = [
-		'API_AUTH_URL', 'REDIRECT_URI', 'UID', 'SECRET', 'TOKEN_URL', 'USER_INFO_URL',
-		'DEBUG', 'SECRET_KEY', 'DJANGO_ALLOWED_HOSTS',
-		'SQL_ENGINE', 'SQL_DATABASE', 'SQL_USER', 'SQL_PASSWORD', 'SQL_HOST', 'SQL_PORT',
-		'USER', 'EMAIL', 'PASSWORD',
-		'MY_SERVICE_NAME', 'SECRET_TOKEN', 'SERVER_URL', 'ENVIRONMENT'
-	]
-	
-	loaded_vars = {}
-	for var in env_vars:
-		loaded_vars[var] = os.getenv(var, 'Not set')
-	
-	return JsonResponse({
-		'status': 'info',
-		'message': 'Environment variables loading status',
-		'loaded_vars': loaded_vars
-	})
-

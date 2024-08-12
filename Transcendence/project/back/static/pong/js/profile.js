@@ -116,23 +116,22 @@ async function loadProfileFromBackend() {
 	}
 
 	let url = `/pong/api/profile`; // url de l'API pour recuperer les donnees du profil
-	fetch(url, { // envoyer une requete http au backend (vue)
-		"credentials": "include" // pour envoyer les cookies au backend car fetch ne le fait pas automatiquement (ex : pour authentification si login required)
-	}).then(response => {
-		return response.json(); // transformer la reponse en JSON
-	}).then(profile => { // promesse
-		// mise a jour de profileState avec les donnees recues
-		profileState = {
-			...profileState,
-			...profile,
-			win_rate: profile.win_rate
-			// total_games: profile.wins + profile.losses,
-			// win_rate: profile.total_games > 0 ? (profile.wins / profile.total_games) * 100 : 0
-		}; // utilisation d'un spread operator
-		mountComponent(Profile); // monter le composant Profile
-		profileState.isLoaded = true;
-		// marquer les donnees du profil comme chargees
-	});
+	httpGetJson(url)// envoyer une requete http au backend (vue)
+		.then(response => {
+			return response.json();
+		}) // transformer la reponse en JSON
+		.then(profile => { // promesse
+			// mise a jour de profileState avec les donnees recues
+			profileState = {
+				...profileState,
+				...profile,
+				win_rate: profile.win_rate
+				// total_games: profile.wins + profile.losses,
+				// win_rate: profile.total_games > 0 ? (profile.wins / profile.total_games) * 100 : 0
+			}; // utilisation d'un spread operator
+			mountComponent(Profile); // monter le composant Profile
+			profileState.isLoaded = true;// marquer les donnees du profil comme chargees
+		});
 }
 
 // fonction pour envoyer les donnees de mise a jour du profil au backend
@@ -140,15 +139,16 @@ function sendProfileToBackend(payload) {
 	// console.log("authenticated:", !!localStorage.getItem('userToken'));
 	let url = `/pong/api/profile/update`; // url de l'API pour mettre a jour le profil
 
-	fetch(url, {
-			method: "POST", // methode POST pour envoyer les donnees
-			credentials: "include", // envoie les cookies avec la requete = important pour l'authentification
-			headers: {
-				'Content-Type': 'application/json', // specifie que le contenu envoye est au format JSON
-				'Authorization': `Bearer ${localStorage.getItem('userToken')}`
-			},
-			body: JSON.stringify(payload) // convertir l'objet payload en chaine JSON
-		})
+	// fetch(url, {
+	// 		method: "POST", // methode POST pour envoyer les donnees
+	// 		credentials: "include", // envoie les cookies avec la requete = important pour l'authentification
+	// 		headers: {
+	// 			'Content-Type': 'application/json', // specifie que le contenu envoye est au format JSON
+	// 			'Authorization': `Bearer ${localStorage.getItem('userToken')}`
+	// 		},
+	// 		body: JSON.stringify(payload) // convertir l'objet payload en chaine JSON
+	// 	})
+		httpPostJson(url, payload)
 		.then(response => {
 			if (!response.ok) {
 				return response.text().then(text => {
@@ -177,7 +177,7 @@ function EditUsername() {
 		sendProfileToBackend({
 			'username': usernameInput
 		}); // envoyer les donnees au backend
-		mountComponent(Profile); // monter le composant Profile
+	//	mountComponent(Profile); // monter le composant Profile
 		profileState.isLoaded = false; // marquer les donnees du profil comme non chargees
 	});
 
@@ -208,7 +208,7 @@ function EditEmail() {
 		sendProfileToBackend({
 			'email': emailInput
 		}); // envoyer les donnees au backend
-		mountComponent(Profile); // monter le composant Profile
+		//mountComponent(Profile); // monter le composant Profile
 		profileState.isLoaded = false; // marquer les donnees du profil comme non chargees
 	});
 	return `
@@ -231,7 +231,7 @@ function EditFirstname() {
 		sendProfileToBackend({
 			'firstname': firstnameInput
 		}); // envoyer les donnees au backend
-		mountComponent(Profile); // monter le composant Profile
+	//	mountComponent(Profile); // monter le composant Profile
 		profileState.isLoaded = false; // marquer les donnees du profil comme non chargees
 	});
 	return `
@@ -261,7 +261,7 @@ function EditLastname() {
 		sendProfileToBackend({
 			'lastname': lastnameInput
 		}); // envoyer les donnees au backend
-		mountComponent(Profile); // monter le composant Profile
+	//	mountComponent(Profile); // monter le composant Profile
 		profileState.isLoaded = false; // marquer les donnees du profil comme non chargees
 	});
 	return `
@@ -281,7 +281,6 @@ function EditLastname() {
 	`;
 }
 
-//todo : juste un modele a modifier
 function EditLangue() {
 	bindEvent(profileState, "#edit-langue", "submit", event => {
 		event.preventDefault();
@@ -316,8 +315,8 @@ function EditAvatar() {
 		if (avatarInput.files && avatarInput.files[0]) {
 			const formData = new FormData();
 			formData.append('avatar', avatarInput.files[0]);
-			fetch('/pong/api/profile/upload-avatar/', {
-				method: 'POST',
+			fetch('/pong/api/profile/upload-avatar/', { //not using httpPostJson because using formdata here
+				method: 'POST', 
 				body: formData,
 				credentials: 'include',
 			})
@@ -452,14 +451,16 @@ function EditPassword() {
 
 function handleDeleteAccount() {
 	if (confirm("Are you sure you want to delete your account? This action cannot be undone.")) {
-		fetch('/pong/api/profile/soft_delete_user/', {
-			method: 'POST',
-			credentials: 'include',
-			headers: {
-				'Content-Type': 'application/json',
-				'X-CSRFToken': getCookie('csrftoken') 
-			},
-		})
+		// fetch('/pong/api/profile/soft_delete_user/', {
+		// 	method: 'POST',
+		// 	credentials: 'include',
+		// 	headers: {
+		// 		'Content-Type': 'application/json',
+		// 		'X-CSRFToken': getCookie('csrftoken') 
+		// 	},
+		// })
+		let url = `/pong/api/profile/soft_delete_user/`
+		httpPostJson(url, {})
 		.then(response => response.json())
 		.then(data => {
 			if (data.status === 'success') {

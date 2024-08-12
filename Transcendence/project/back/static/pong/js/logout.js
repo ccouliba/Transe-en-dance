@@ -11,14 +11,15 @@ function logout() {
 		return; // sortir de la fonction si deja deconnecte
 	}
 	let url = `/pong/api/logout/`; 
-	fetch(url, {
-		method: "POST", 
-		credentials: "include", 
-		headers: {
-			'Content-Type': 'application/json', 
-			'X-CSRFToken': getCookie('csrftoken') // ajouter le token csrf aux headers. todo : a garder ou pas
-		},
-	})
+	// fetch(url, {
+	// 	method: "POST", 
+	// 	credentials: "include", 
+	// 	headers: {
+	// 		'Content-Type': 'application/json', 
+	// 		'X-CSRFToken': getCookie('csrftoken') 
+	// 	},
+	// })
+	httpPostJson(url, {})
 	.then(response => {
 		if (!response.ok) {
 			throw new Error(`http error! status: ${response.status}`); // verifier si la reponse est ok
