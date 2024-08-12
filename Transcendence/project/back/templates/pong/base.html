@@ -46,13 +46,17 @@
 			changePage(hash);*/
 			{% if user.is_authenticated %}
 				if (window.location.hash === '' || window.location.hash === '#') {
-					changePage('#home');
+					loadTranslations().then(() => {
+						changePage('#home');
+					});
 				} else {
-					changePage(window.location.hash);
+					loadTranslations().then(() => {
+						changePage(window.location.hash);
+					});
 				}
 				{% else %}
 				if (window.location.hash === '#register') {
-					loadTranslations().then(() => {
+					loadTranslations().then(() => { 
 						changePage('#register');
 					});
 				} else {
@@ -61,6 +65,7 @@
 					});
 				}
 			{% endif %}
+		loadTranslations();
 		</script>
 		{% endblock %}
 	  </div>
