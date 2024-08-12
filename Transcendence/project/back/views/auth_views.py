@@ -23,7 +23,7 @@ from django.views.decorators.csrf import ensure_csrf_cookie
   
 from back.utils import load_env
 
-
+#loading env variables for external login with api42
 current_dir = os.path.dirname(os.path.abspath(__file__))
 env_path = os.path.join(current_dir, "../../../.utils/.env")
 load_env(env_path)
