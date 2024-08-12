@@ -1,10 +1,11 @@
-// Fonction pour configurer et dessiner sur le canvas pour le jeu
 function initializeGame() {
     // Création du canvas
     var canvas = document.createElement("canvas");
+    console.log("Canvas créé:", canvas);
     canvas.id = "myCanvas";
-    canvas.width = 600; // Largeur du canvas
-    canvas.height = 300; // Hauteur du canvas
+    canvas.width = 600;
+    canvas.height = 300;
+    console.log("Dimensions du canvas:", canvas.width, canvas.height);
 
     // Style pour centrer le canvas
     canvas.style.display = "block";
@@ -12,40 +13,49 @@ function initializeGame() {
     canvas.style.position = "relative";
     canvas.style.top = "50%";
     canvas.style.transform = "translateY(-50%)";
+    console.log("Style du canvas défini:", canvas.style);
 
     // Ajout du canvas au DOM
     document.body.appendChild(canvas);
 
     const ctx = canvas.getContext('2d');
+    console.log("Contexte 2D obtenu:", ctx);
 
     // Définition des dimensions des paddles et initialisation des positions
     const paddleWidth = 10;
     const paddleHeight = canvas.height / 5;
+    console.log("Dimensions des paddles:", paddleWidth, paddleHeight);
+
     const player = { x: 10, y: canvas.height / 2 - paddleHeight / 2, dy: 0 };
     const ai = { x: canvas.width - 20, y: canvas.height / 2 - paddleHeight / 2, dy: 0 };
     const ball = { x: canvas.width / 2, y: canvas.height / 2, dx: 2, dy: 2, radius: 7, speed: 2 };
+    console.log("Positions initiales:", "Player:", player, "AI:", ai, "Ball:", ball);
 
     // Couleurs
-    const playerColor = '#00f'; // Bleu pour le joueur
-    const aiColor = '#f00'; // Rouge pour l'IA
-    const ballColor = '#0f0'; // Vert pour la balle
-    const backgroundColor = '#000'; // Noir pour le fond du canvas
+    const playerColor = '#00f';
+    const aiColor = '#f00';
+    const ballColor = '#0f0';
+    const backgroundColor = '#000';
+    console.log("Couleurs définies:", "Player:", playerColor, "AI:", aiColor, "Ball:", ballColor, "Background:", backgroundColor);
 
     // Variables de score
     let playerScore = 0;
     let aiScore = 0;
     const maxScore = 5;
+    console.log("Scores initiaux:", "Player:", playerScore, "AI:", aiScore);
 
     // Gestion des événements de pression de touche
     document.addEventListener('keydown', function(e) {
+        console.log("Touche pressée:", e.key);
         if (e.key === 'ArrowUp') player.dy = -8;
         if (e.key === 'ArrowDown') player.dy = 8;
         if (e.key === '+') ai.dy = -8;
         if (e.key === '-') ai.dy = 8;
-        if (e.key === 'Enter' && gameOver) resetGame(); // Redémarrer le jeu
+        if (e.key === 'Enter' && gameOver) resetGame();
     });
 
     document.addEventListener('keyup', function(e) {
+        console.log("Touche relâchée:", e.key);
         if (e.key === 'ArrowUp' || e.key === 'ArrowDown') player.dy = 0;
         if (e.key === '+' || e.key === '-') ai.dy = 0;
     });
@@ -53,11 +63,14 @@ function initializeGame() {
     function simulateKey(key, isKeyDown = true) {
         const eventType = isKeyDown ? 'keydown' : 'keyup';
         const event = new KeyboardEvent(eventType, { key });
+        console.log("Simulation de touche:", eventType, key);
         document.dispatchEvent(event);
     }
 
     function update() {
-        if (gameOver) return; // Ne pas mettre à jour si le jeu est terminé
+        if (gameOver) return;
+
+        console.log("Mise à jour des positions:", "Player Y:", player.y, "AI Y:", ai.y, "Ball:", ball);
 
         player.y += player.dy;
         if (player.y < 0) player.y = 0;
@@ -79,6 +92,7 @@ function initializeGame() {
         }
 
         if (checkCollision(ball, player)) {
+            console.log("Collision avec le joueur");
             ball.x = player.x + paddleWidth + ball.radius;
             ball.dx *= -1;
             ball.dy = (ball.y - (player.y + paddleHeight / 2)) * 0.2;
@@ -86,6 +100,7 @@ function initializeGame() {
         }
 
         if (checkCollision(ball, ai)) {
+            console.log("Collision avec l'IA");
             ball.x = ai.x - ball.radius;
             ball.dx *= -1;
             ball.dy = (ball.y - (ai.y + paddleHeight / 2)) * 0.2;
@@ -94,17 +109,21 @@ function initializeGame() {
 
         if (ball.x + ball.radius > canvas.width) {
             playerScore++;
+            console.log("But! Score du joueur:", playerScore);
             if (playerScore >= maxScore) {
                 gameOver = true;
                 winner = 'Player';
+                console.log("Le joueur gagne!");
             } else {
                 resetBall();
             }
         } else if (ball.x - ball.radius < 0) {
             aiScore++;
+            console.log("But! Score de l'IA:", aiScore);
             if (aiScore >= maxScore) {
                 gameOver = true;
                 winner = 'AI';
+                console.log("L'IA gagne!");
             } else {
                 resetBall();
             }
@@ -118,6 +137,7 @@ function initializeGame() {
     function animateCenteringAiPaddle(pos) {
         if (!animatingAiPaddle) {
             animatingAiPaddle = true;
+            console.log("Centrage du paddle de l'IA vers la position:", pos);
 
             let targetY;
             if (pos === 0)
@@ -130,14 +150,17 @@ function initializeGame() {
                 targetY = canvas.height / 2 - paddleHeight / 2 + paddleHeight;
             else
                 targetY = canvas.height / 2 - paddleHeight / 2 + (paddleHeight * 2);
-            
+
             let startY = ai.y;
+            console.log("Début de l'animation du paddle IA de", startY, "vers", targetY);
+
             function animateStep() {
                 if (startY <= targetY) {
-                    simulateKey('-'); // Monte le paddle
+                    simulateKey('-');
                     if (ai.y >= targetY) {
                         simulateKey('-', false);
                         animatingAiPaddle = false;
+                        console.log("Fin de l'animation du paddle IA.");
                         return;
                     }
                 } else {
@@ -145,6 +168,7 @@ function initializeGame() {
                     if (ai.y <= targetY) {
                         simulateKey('+', false);
                         animatingAiPaddle = false;
+                        console.log("Fin de l'animation du paddle IA.");
                         return;
                     }
                 }
@@ -157,12 +181,13 @@ function initializeGame() {
     }
 
     function centerAiPaddle(pos) {
-        simulateKey('+', false); // Relâche la touche
-        simulateKey('-', false); // Relâche la touche
+        simulateKey('+', false);
+        simulateKey('-', false);
         animateCenteringAiPaddle(pos);
     }
 
     function updateAI() {
+        console.log("Mise à jour de l'IA");
         if (ball.dx < 0) 
             centerAiPaddle(2);
         else if (ball.x < canvas.width / 2 + ((canvas.width / 2) / 3))
@@ -186,6 +211,7 @@ function initializeGame() {
         ball.dx = 2 * (Math.random() > 0.5 ? 1 : -1);
         ball.dy = 2 * (Math.random() > 0.5 ? 1 : -1);
         ball.speed = 2;
+        console.log("Balle réinitialisée:", ball);
     }
 
     function draw() {
@@ -233,6 +259,7 @@ function initializeGame() {
     
     function getBallSection(ballY) {
         const sectionHeight = canvas.height / 5;
+        console.log("Section de la balle:", ballY, "Section:", Math.floor(ballY / sectionHeight));
         if (ballY < sectionHeight) return 0;
         if (ballY < sectionHeight * 2) return 1;
         if (ballY < sectionHeight * 3) return 2;
@@ -249,6 +276,7 @@ function initializeGame() {
                 tempBall.dy *= -1;
             }
         }
+        console.log("Prédiction de la position Y de la balle:", tempBall.y);
         return getBallSection(tempBall.y);
     }
 
@@ -258,6 +286,7 @@ function initializeGame() {
         gameOver = false;
         winner = '';
         resetBall();
+        console.log("Jeu réinitialisé.");
     }
 
     setInterval(gameLoop, 1000 / 60);
@@ -266,16 +295,12 @@ function initializeGame() {
 function toggleCanvas() {
     var canvas = document.getElementById('myCanvas');
     if (canvas) {
-        // Si le canvas existe déjà, réinitialiser le jeu
         resetGame();
     } else {
-        // Sinon, initialiser le jeu et ajouter le canvas
         initializeGame();
     }
 }
 
-
-// Fonction pour masquer le canvas
 function hideCanvas() {
     var canvas = document.getElementById('myCanvas');
     if (canvas) {
@@ -283,6 +308,26 @@ function hideCanvas() {
     }
 }
 
+function stopGame() {
+    if (gameLoopInterval) clearInterval(gameLoopInterval);
+    if (aiUpdateInterval) clearInterval(aiUpdateInterval);
+    
+    document.removeEventListener('keydown', handleKeyDown);
+    document.removeEventListener('keyup', handleKeyUp);
+}
+
+function handleKeyDown(e) {
+    if (e.key === 'ArrowUp') player.dy = -8;
+    if (e.key === 'ArrowDown') player.dy = 8;
+    if (e.key === '+') ai.dy = -8;
+    if (e.key === '-') ai.dy = 8;
+    if (e.key === 'Enter' && gameOver) resetGame();
+}
+
+function handleKeyUp(e) {
+    if (e.key === 'ArrowUp' || e.key === 'ArrowDown') player.dy = 0;
+    if (e.key === '+' || e.key === '-') ai.dy = 0;
+}
 
 function IA() {
 	return `
