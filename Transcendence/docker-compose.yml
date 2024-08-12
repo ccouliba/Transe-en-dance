@@ -4,21 +4,20 @@ services:
     build: ./project
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
-      - ./project/:/usr/src/project/
+      - ./project/:/usr/src/back/
     ports:
       - 8000:8000
     env_file:
       - ./.utils/.env
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     restart: unless-stopped
     # develop:
     #   watch:
     #     - action: sync
     #       path: ./project
     #       target: /usr/src/project
-    links:
-      - db
     networks:
       - transcendance
       # - devops
@@ -35,11 +34,11 @@ services:
       - POSTGRES_DB=db1
       - POSTGRES_PORT='5432'
     restart: always
-    # healthcheck:
-    #   test: ["CMD-SHELL", "sh -c 'pg_isready -U ccouliba -d db1'"]
-    #   interval: 10s
-    #   timeout: 4s
-    #   retries: 3  
+    healthcheck:
+      test: ["CMD-SHELL", "sh -c 'pg_isready -U ccouliba -d db1'"]
+      interval: 10s
+      timeout: 4s
+      retries: 3  
     networks:
      - transcendance
 
@@ -86,7 +85,7 @@ services:
 
 volumes:
   postgres_data:
-  es-data:
+  # es-data:
 
   # Created another network for devops_front
 networks:

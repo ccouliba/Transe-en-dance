@@ -115,7 +115,7 @@ DATABASES = {
 		'NAME': os.getenv('SQL_DATABASE', 'db1'),
 		'USER': os.getenv('SQL_USER', 'ccouliba'),
 		'PASSWORD': os.getenv('SQL_PASSWORD'),
-		'HOST': os.getenv('SQL_HOST', 'db'),
+		'HOST': os.getenv('SQL_HOST', 'localhost'),
 		# 'HOST': 'localhost', #todo : A MODIFIER (juste pour pouvoir executer django localement)
 		'PORT': os.getenv('SQL_PORT', '5432'),
 	}
@@ -161,9 +161,7 @@ AUTH_PASSWORD_VALIDATORS = [
 LANGUAGES = [
 	('en', _('English')),
 	('fr', _('French')),
-	('it', _('Italian')),
 	('es', _('Spanish')),
-	('de', _('Deutsch')),
 	]
 
 LANGUAGE_COOKIE_NAME = 'language'
