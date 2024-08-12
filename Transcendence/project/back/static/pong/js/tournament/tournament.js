@@ -306,8 +306,7 @@ function startTournament() {
 		}
 	})
 	.catch(error => {
-		console.error('Error:', error);
-		alert('An error occurred while starting the tournament: ' + error.message);
+		alert('An error occurred while starting the tournament. Please enter correct and accurate informations');
 	});
 }
 

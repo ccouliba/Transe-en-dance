@@ -27,10 +27,12 @@ urlpatterns = [
 	path('user_list_json/', user_list_json, name='user_list_json'),
 	path('user_list/', user_list, name='user_list'),
 	path('index/', index, name='index'),
+	path('external_login/', external_login, name='external_login'),
+ 
  
 	path('home/', home_view, name='home'),
+	path('home/', home_view, name='home'),
 
-	path('external_login/', external_login, name='external_login'),
  
 	path('api/check_auth/', check_auth, name='check_auth'),
 	path('api/profile/', profile_view, name='profile'),

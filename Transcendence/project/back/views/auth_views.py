@@ -20,6 +20,13 @@ from django.db import transaction
 # import inspect
 
 from django.views.decorators.csrf import ensure_csrf_cookie
+  
+from back.utils import load_env
+
+#loading env variables for external login with api42
+current_dir = os.path.dirname(os.path.abspath(__file__))
+env_path = os.path.join(current_dir, "../../../.utils/.env")
+load_env(env_path)
 
 
 @ensure_csrf_cookie
@@ -36,23 +43,24 @@ def check_auth(request):
 		user.was_active_now()
 		user.save()
 
-	
 	return JsonResponse({
 		'is_authenticated': request.user.is_authenticated,
 		'username': request.user.username if request.user.is_authenticated else None
 	})
- 
+
+
 # Cette vue gere l'authentification via l'API d'Intra 42 en redirigeant l'utilisateur vers l'URL d'authentification appropriee
 @loggingFunction
 def external_login(request):
-	forty2_auth_url = os.getenv('API_AUTH_URL', 'https://api.intra.42.fr/oauth/authorize')
-	redirect_uri = os.getenv('REDIRECT_URI', 'http://127.0.0.1:8000/pong/auth/callback')
+	
+	forty2_auth_url = os.getenv('API_AUTH_URL')
+	redirect_uri = os.getenv('REDIRECT_URI')
 	client_id = os.getenv('UID')
-	# print()
 	request.session['client_id'] = client_id 
-	# response_type = 'code'
-	# LoggingFunction(request=request, opname='External log-in')
-	return redirect(f"{forty2_auth_url}?client_id={client_id}&redirect_uri={redirect_uri}&response_type=code")
+	
+	url = f"{forty2_auth_url}?client_id={client_id}&redirect_uri={redirect_uri}&response_type=code"
+	
+	return redirect(url)
 
 import requests
 
@@ -64,20 +72,25 @@ def get_response_from_api(request):
 		print("No authorization code received from 42 API")
 		return None
 
+	redirect_uri = os.getenv('REDIRECT_URI')
+	
 	data = {
 		'code': code,
-		'redirect_uri': os.getenv('REDIRECT_URI'),
+		'redirect_uri': redirect_uri,
 		'grant_type': 'authorization_code',
 	}
 
 	client_id = os.getenv('UID')
 	client_secret = os.getenv('SECRET')
-
+	
 	try:
 		response = requests.post(
-			url, 
-			data=data, 
-			auth=(client_id, client_secret)
+			url,
+			data=data,
+			auth=(client_id, client_secret),
+			headers={
+				"Authorization": f"Bearer {code}"
+			}
 		)
 		print(f"Token API response status: {response.status_code}")
 		print(f"Token API response content: {response.text}")
@@ -102,10 +115,14 @@ def get_user_from_api(request, access_token):
 		
 		user_info = user_info_response.json()
 		user, created = User.objects.get_or_create(username=user_info['login'])
-  
-		user.email = user_info.get('email', '')
-		user.avatar = user_info.get('image_url', '') 
-		user.save()
+		if created:
+			email = user_info.get('email', '')
+			avatar = user_info.get('image', {}).get('link')
+			first_name = user_info.get('first_name', '')
+			last_name = user_info.get('last_name', '')
+			
+			user.register_from_42_login(email, avatar, first_name, last_name)
+			user.save()
 		
 		login(request, user)
 		return redirect('/pong/#home')
@@ -118,7 +135,7 @@ def get_user_from_api(request, access_token):
 
 # Cette vue gere le callback de l'authentification (ie la reponse recue apres que l'utilisateur ait autorise l'application via l'authentification via l'API d'Intra 42)
 @loggingFunction
-@csrf_exempt
+# @csrf_exempt #maybe have to use it since api42 do not send back csrf token perhaps
 def auth_callback(request):
 	print("Received callback request:", request.GET)
 	api_response = get_response_from_api(request)
@@ -140,7 +157,6 @@ def auth_callback(request):
 
 # Cette vue gere la connexion des utilisateurs
 @require_POST
-@csrf_exempt
 ## New function of back without form validation and all that stuff !!
 def get_log(request, token):
 	if request.method == 'POST':
@@ -226,3 +242,10 @@ def soft_delete_user(request):
 		return JsonResponse({'status': 'success', 'message': 'Your account has been successfully deleted.'})
 	
 	return JsonResponse({'status': 'error', 'message': 'Invalid request method.'}, status=405)
+
+
+import os
+from django.http import JsonResponse
+from django.conf import settings
+from django.views.decorators.http import require_GET
+from django.views.decorators.csrf import csrf_exempt

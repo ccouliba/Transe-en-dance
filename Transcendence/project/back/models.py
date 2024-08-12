@@ -53,9 +53,17 @@ class User(AbstractUser):
 		return self.username 
 	def was_active_now(self):
 		self.last_activity = timezone.now()
+	# def get_avatar_url(self):
+	# 	if self.avatar and hasattr(self.avatar, 'url'):
+	# 		return self.avatar.url
+	# 	else:
+	# 		return f"{settings.STATIC_URL}pong/images/default_avatar.png"
 	def get_avatar_url(self):
 		if self.avatar and hasattr(self.avatar, 'url'):
-			return self.avatar.url
+			if self.avatar.name.startswith('http'):
+				return self.avatar.name
+			else:
+				return self.avatar.url
 		else:
 			return f"{settings.STATIC_URL}pong/images/default_avatar.png"
 	@property #https://docs.python.org/3/library/functions.html#property
@@ -66,6 +74,20 @@ class User(AbstractUser):
 		if self.total_games > 0:
 			return (self.wins / self.total_games) * 100
 		return 0
+
+
+	def register_from_42_login(self, email, avatar_url:str, firstname:str, lastname:str):
+		self.email = email
+		self.set_avatar(avatar_url)
+		self.first_name = firstname
+		self.last_name = lastname
+
+
+	def set_avatar(self, avatar_url: str):
+		if avatar_url.startswith('http'):
+			self.avatar = avatar_url
+		else:
+			self.avatar = os.path.join(settings.MEDIA_URL, avatar_url)
 
 	def login(self):
 		self.is_online = True
