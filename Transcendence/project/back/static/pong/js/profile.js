@@ -419,7 +419,7 @@ function EditPassword() {
 				class="form-control" 
 				name="old_password" 
 				id="old_password" 
-				placeholder="old password" 
+				placeholder="${window.trans.oldPassword}" 
 				required
 			/>
 		</div>
@@ -429,7 +429,7 @@ function EditPassword() {
 				class="form-control"
 				id="new_password1" 
 				name="new_password1" 
-				placeholder="new password" 
+				placeholder="${window.trans.newPassword}"
 				required
 			/>
 		</div>
@@ -439,7 +439,7 @@ function EditPassword() {
 				class="form-control"
 				id="new_password2"  
 				name="new_password2" 
-				placeholder="confirm new password" 
+				placeholder="${window.trans.confirmNewPassword}" 
 				required
 			/>
 		</div>
