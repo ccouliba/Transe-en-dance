@@ -1,4 +1,7 @@
 {
+	"registerSuccess": "¡Registro completado con éxito!",
+	"createAccount": "Crear una cuenta",
+
 	"home": "Inicio",
 	"play": "Jugar",
 	"tournament": "Torneo",
@@ -78,7 +81,18 @@
 	"_lastName": "el apellido",
 	"_language": "el idioma",
 	"_avatar": "el avatar",
+	"password": "Contraseña",
 	"_password": "la contraseña",
+	"oldPassword": "Contraseña antigua",
+	"newPassword": "Nueva contraseña",
+	"confirmNewPassword": "Confrima la nueva contraseña",
+	"confirmPassword": "Confirma la contraseña",
+	"register": "Regístrese",
+	"backToLogin": "Volver al login",
+	"passwordSecurity": "Tu contraseña debe tener al menos 8 caracteres, puede contener letras y números, y no debe contener espacios, caracteres especiales ni emoji.",
+	"btnLogin": "Inicio de sesión",
+	"noAccount": "¿No tienes una cuenta?",
+	"login42": "Conexión con 42",
 
 	"loading": "Cargando",
 	"friendsList": "Lista de amigos",
@@ -95,6 +109,7 @@
 	"acceptFriend": "Acceptar un amigo",
 	"deleteFriend": "Eliminar a friend",
 	"delete": "Eliminar",
+	"_account": "la cuenta",
 
 	"_matchHistory": "historial de partidos",
 	"noMatchesFound": "No se encontraron partidos",

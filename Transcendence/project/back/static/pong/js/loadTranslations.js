@@ -1,7 +1,7 @@
-window.trans = null;
+window.trans = '';
 
 function loadTranslations(newLang) {
-	newLang = localStorage.getItem('selectedLanguage');
+	newLang = localStorage.getItem('selectedLanguage') || "English";
 	let langFile = '/static/pong/js/translations/en.json';
 	if (newLang === 'Français')
 		langFile = '/static/pong/js/translations/fr.json';
@@ -23,3 +23,10 @@ function changeLanguage(newLang) {
 		document.getElementById('app').innerHTML = Profile();
 	});
 }
+
+// function displayRegister(newLang)
+// {
+// 	loadTranslations(newLang).then(() => {
+// 		document.getElementById('app').innerHTML = Register();
+// 	});
+// }

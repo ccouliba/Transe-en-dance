@@ -29,7 +29,7 @@ function renderMatchHistory() {
 		return `${window.trans.noMatchesFound}.`;
 	}
 	return `
-		<table class="table table-striped">
+		<table class="table table-dark table-striped table-hover">
 			<thead>
 				<tr>
 					<th>${window.trans.date}</th>
@@ -45,7 +45,7 @@ function renderMatchHistory() {
 						<td>${game.opponent}</td>
 						<td>${game.user_score} - ${game.opponent_score}</td>
 						<td>${game.result}</td>
-						<td>${game.is_tournament ? `Tournament` : '1v1'}</td>
+						<td>${game.is_tournament ? `${window.trans.tournament}` : '1v1'}</td>
 					</tr>
 				`).join('')}
 			</tbody>

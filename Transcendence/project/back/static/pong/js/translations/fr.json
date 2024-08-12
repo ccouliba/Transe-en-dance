@@ -1,4 +1,7 @@
 {
+	"registerSuccess": "Inscription réussie!",
+	"createAccount": "Créer un compte",
+
 	"home": "Accueil",
 	"play": "Jouer",
 	"tournament": "Tournoi",
@@ -40,7 +43,7 @@
 	"winnerIs": "The winner is",
 	"totalScore": "Score total",
 	"_totalScore": "score total",
-	"finishTournament": "Terminer le tournoi", 
+	"fishTournament": "Terminer le tournoi", 
 	"startNewTournament": "Commencer un nouveau tournoi",
 	"participants": "Participants",
 	"noParticipants": "Aucun participant pour l'instant",
@@ -78,7 +81,18 @@
 	"_lastName": "le nom",
 	"_language": "la langue",
 	"_avatar": "l'avatar",
+	"password": "Mot de passe",
 	"_password": "le mot de passe",
+	"oldPassword": "Ancien mot de passe",
+	"newPassword": "Nouveau mot de passe",
+	"confirmNewPassword": "Confirmer le nouveau mot de passe",
+	"confirmPassword": "Confirmez le mot de passe",
+	"register": "S'inscrire",
+	"backToLogin": "Retourner au login",
+	"passwordSecurity": "Votre mot de passe doit comporter au moins 8 caractères, peut contenir des lettres et des chiffres, et ne doit pas contenir d'espaces, ni de caractères spéciaux ou d'emoji.",
+	"btnLogin": "Connexion",
+	"noAccount": "Tu n'as pas de compte ?",
+	"login42": "Connexion avec 42",
 
 	"loading": "Chargement",
 	"friendsList": "Liste d'amis",
@@ -95,6 +109,7 @@
 	"acceptFriend": "Accepter un ami",
 	"deleteFriend": "Supprimer un ami",
 	"delete": "Supprimer",
+	"_account": "le compte",
 
 	"_matchHistory": "historique des parties",
 	"noMatchesFound": "Aucun match trouvé",

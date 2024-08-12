@@ -38,28 +38,34 @@
 	<!-- <p><script src="{% static 'pong/js/iaAlgo.js' %}"></script></p> -->
 	<main>
 	  <div id="app">
-		{% block content %}
-		<script>
+		  {% block content %}
+		  <script>
+
 			/*let hash = window.location.hash
 		   
 			changePage(hash);*/
 			{% if user.is_authenticated %}
 				if (window.location.hash === '' || window.location.hash === '#') {
-					changePage('#home');
+					loadTranslations().then(() => {
+						changePage('#home');
+					});
 				} else {
-					changePage(window.location.hash);
+					loadTranslations().then(() => {
+						changePage(window.location.hash);
+					});
 				}
-			{% else %}
+				{% else %}
 				if (window.location.hash === '#register') {
-					changePage('#register');
+					loadTranslations().then(() => { 
+						changePage('#register');
+					});
 				} else {
-					changePage('#login');
+					loadTranslations().then(() => {
+						changePage('#login');
+					});
 				}
 			{% endif %}
-   
-
-	loadTranslations();
-
+		loadTranslations();
 		</script>
 		{% endblock %}
 	  </div>

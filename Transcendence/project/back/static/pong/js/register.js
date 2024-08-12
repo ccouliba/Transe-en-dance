@@ -18,12 +18,11 @@ function Register() {
 		handleGDPRConsent();
 		registerState.isLoaded = true
 	}
-
 	return `
 		<div class="container mt-5">
-			<h1>Register</h1>
+			<h1>${window.trans.register}</h1>
 			${registerState.showForm ? RegisterForm() : showRegisterButton()}
-			<button class="btn btn-link" id="showLogin">Go back to login</button>
+			<button class="btn btn-link" id="showLogin">${window.trans.backToLogin}</button>
 		</div>
 		${GDPRModal()}
 	`;
@@ -51,7 +50,7 @@ function handleRegister(event) {
 	.then(response => response.json()) // Convertir la reponse en JSON
 	.then(data => {
 		if (data.status === 'success') {
-			alert('Registration successful!'); 
+			alert(`${window.trans.registerSuccess}`); 
 			changePage('#login');
 		} else {
 			alert('Registration failed: ' + JSON.stringify(data.message));
@@ -75,24 +74,24 @@ function RegisterForm() {
 		<form id="registerForm">
 			<div class="form-floating">
 				<input type="text" class="form-control" name="username" id="username" autocomplete="username" placeholder="Username" required>
-				<label for="username">Username</label>
+				<label for="username">${window.trans.username}</label>
 			</div>
 			<div class="form-floating">
 				<input type="email" class="form-control" name="email" id="email" placeholder="Email" required>
-				<label for="email">Email</label>
+				<label for="email">${window.trans.email}</label>
 			</div>
 			<div id="passwordHelpBlock" class="form-text">
-				Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.
+				${window.trans.passwordSecurity}
 			</div>
 			<div class="form-floating">
-				<input type="password" class="form-control" name="password1" id="password1" autocomplete="new-password" placeholder="Password" required>
-				<label for="password1">Password</label>
+				<input type="password" class="form-control" name="password1" id="password1" autocomplete="current-password" placeholder="Password" required>
+				<label for="password1">${window.trans.password}</label>
 			</div>
 			<div class="form-floating">
-				<input type="password" class="form-control" name="password2" id="password2" autocomplete="new-password" placeholder="Confirm Password" required>
-				<label for="password2">Confirm password</label>
+				<input type="password" class="form-control" name="password2" id="password2" autocomplete="current-password" placeholder="Confirm Password" required>
+				<label for="password2">${window.trans.confirmPassword}</label>
 			</div>
-			<button type="submit" class="btn btn-primary">Register</button>
+			<button type="submit" class="btn btn-primary">${window.trans.register}</button>
 		</form>
 	`;
 }

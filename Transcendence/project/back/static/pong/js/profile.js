@@ -29,81 +29,81 @@ function Profile() {
 			<div class="card" id="profilePage">
 				<div class="card-body">
 				<h2 class="mt-4 mb-3" style="text-decoration: underline;">${window.trans.infos}</h2>
-					<div class="row mb-3">
+				<div class="row mb-3">
 						<div class="col-sm-3"><strong>${window.trans.username} :</strong></div>
 						<div class="col-sm-9">${profileState.username}</div>
-					</div>
-					<div class="row mb-3">
-						<div class="col-sm-3"><strong>${window.trans.email} :</strong></div>
-						<div class="col-sm-9">${profileState.email}</div>
-					</div>
-					<div class="row mb-3">
-						<div class="col-sm-3"><strong>${window.trans.firstName} :</strong></div>
-						<div class="col-sm-9">${profileState.firstname}</div>
-					</div>
-					<div class="row mb-3">
-						<div class="col-sm-3"><strong>${window.trans.lastName} :</strong></div>
-						<div class="col-sm-9">${profileState.lastname}</div>
-					</div>
-					<div class="row mb-3">
-						<div class="col-sm-3"><strong>${window.trans.language} :</strong></div>
-						<div class="col-sm-9">${profileState.langue}</div>
-					</div>
-					<div class="row mb-3">
-						<div class="col-sm-3"><strong>${window.trans.avatar} :</strong></div>
+				</div>
+				<div class="row mb-3">
+					<div class="col-sm-3"><strong>${window.trans.email} :</strong></div>
+					<div class="col-sm-9">${profileState.email}</div>
+				</div>
+				<div class="row mb-3">
+					<div class="col-sm-3"><strong>${window.trans.firstName} :</strong></div>
+					<div class="col-sm-9">${profileState.firstname}</div>
+				</div>
+				<div class="row mb-3">
+					<div class="col-sm-3"><strong>${window.trans.lastName} :</strong></div>
+					<div class="col-sm-9">${profileState.lastname}</div>
+				</div>
+				<div class="row mb-3">
+					<div class="col-sm-3"><strong>${window.trans.language} :</strong></div>
+					<div class="col-sm-9">${profileState.langue}</div>
+				</div>
+				<div class="row mb-3">
+					<div class="col-sm-3"><strong>${window.trans.avatar} :</strong></div>
 						<div class="col-sm-9">
 							<img src="${profileState.avatar_url.startsWith('http') ? profileState.avatar_url : profileState.avatar_url}" alt="Avatar" style="width: 100px; height: 100px;">
 						</div>
-					</div>
-					<h2 class="mt-4 mb-3" style="text-decoration: underline;">${window.trans.gameStats}</h2>
-					<div class="row mb-3">
-						<div class="col-sm-3"><strong>${window.trans.wins} :</strong></div>
-						<div class="col-sm-9">${profileState.wins}</div>
-					</div>
-					<div class="row mb-3">
-						<div class="col-sm-3"><strong>${window.trans.losses} :</strong></div>
-						<div class="col-sm-9">${profileState.losses}</div>
-					</div>
-					<div class="row mb-3">
-						<div class="col-sm-3"><strong>${window.trans.totalGamesPlayed} :</strong></div>
-						<div class="col-sm-9">${profileState.total_games}</div>
-					</div>
-					<div class="row mb-3">
-						<div class="col-sm-3"><strong>${window.trans.winRate} :</strong></div>
-						<div class="col-sm-9">${winRate}%</div>
+				</div>
+				<h2 class="mt-4 mb-3" style="text-decoration: underline;">${window.trans.gameStats}</h2>
+				<div class="row mb-3">
+					<div class="col-sm-3"><strong>${window.trans.wins} :</strong></div>
+					<div class="col-sm-9">${profileState.wins}</div>
+				</div>
+				<div class="row mb-3">
+					<div class="col-sm-3"><strong>${window.trans.losses} :</strong></div>
+					<div class="col-sm-9">${profileState.losses}</div>
+				</div>
+				<div class="row mb-3">
+					<div class="col-sm-3"><strong>${window.trans.totalGamesPlayed} :</strong></div>
+					<div class="col-sm-9">${profileState.total_games}</div>
+				</div>
+				<div class="row mb-3">
+					<div class="col-sm-3"><strong>${window.trans.winRate} :</strong></div>
+					<div class="col-sm-9">${winRate}%</div>
+				</div>
+			</div>
+		</div>
+		<div class="accordion" id="accordionExample">
+			<div class="accordion-item">
+				<h2 class="accordion-header" id="headingTwo">
+					<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+						${window.trans.editInfos}
+					</button>
+				</h2>
+			<div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+				<div class="accordion-body">
+					<h3 class="mt-4 mb-3">${window.trans.modify} ${window.trans._username}</h2>
+					${EditUsername()}
+					<h3 class="mt-4 mb-3">${window.trans.modify} ${window.trans._email}</h2>
+					${EditEmail()}
+					<h3 class="mt-4 mb-3">${window.trans.modify} ${window.trans._firstName}</h2>
+					${EditFirstname()}
+					<h3 class="mt-4 mb-3">${window.trans.modify} ${window.trans._lastName}</h2>
+					${EditLastname()}
+					<h3 class="mt-4 mb-3">${window.trans.modify} ${window.trans._language}</h2>
+					${EditLangue()}
+					<h3 class="mt-4 mb-3">${window.trans.modify} ${window.trans._avatar}</h2>
+					${EditAvatar()}
+					<h3 class="mt-4 mb-3">${window.trans.modify} ${window.trans._password}</h2>
+					${EditPassword()}
+					<div class="mt-4">
+						<button id="deleteAccountBtn" class="btn btn-danger">${window.trans.delete} ${window.trans._account}</button>
 					</div>
 				</div>
 			</div>
-		<div class="accordion" id="accordionExample">
-  <div class="accordion-item">
-	<h2 class="accordion-header" id="headingTwo">
-	  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-		${window.trans.editInfos}
-	  </button>
-	</h2>
-	<div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-	  <div class="accordion-body">
-			<h3 class="mt-4 mb-3">${window.trans.modify} ${window.trans._username}</h2>
-			${EditUsername()}
-			<h3 class="mt-4 mb-3">${window.trans.modify} ${window.trans._email}</h2>
-			${EditEmail()}
-			<h3 class="mt-4 mb-3">${window.trans.modify} ${window.trans._firstName}</h2>
-			${EditFirstname()}
-			<h3 class="mt-4 mb-3">${window.trans.modify} ${window.trans._lastName}</h2>
-			${EditLastname()}
-			<h3 class="mt-4 mb-3">${window.trans.modify} ${window.trans._language}</h2>
-			${EditLangue()}
-			<h3 class="mt-4 mb-3">${window.trans.modify} ${window.trans._avatar}</h2>
-			${EditAvatar()}
-			<h3 class="mt-4 mb-3">${window.trans.modify} ${window.trans._password}</h2>
-			${EditPassword()}
-			<div class="mt-4">
-				<button id="deleteAccountBtn" class="btn btn-danger">Delete account</button>
-			</div>
-	  </div>
+		</div>
 	</div>
-  </div>
-</div>
 	`;
 }
 
@@ -420,7 +420,7 @@ function EditPassword() {
 				class="form-control" 
 				name="old_password" 
 				id="old_password" 
-				placeholder="old password" 
+				placeholder="${window.trans.oldPassword}" 
 				required
 			/>
 		</div>
@@ -430,7 +430,7 @@ function EditPassword() {
 				class="form-control"
 				id="new_password1" 
 				name="new_password1" 
-				placeholder="new password" 
+				placeholder="${window.trans.newPassword}"
 				required
 			/>
 		</div>
@@ -440,7 +440,7 @@ function EditPassword() {
 				class="form-control"
 				id="new_password2"  
 				name="new_password2" 
-				placeholder="confirm new password" 
+				placeholder="${window.trans.confirmNewPassword}" 
 				required
 			/>
 		</div>

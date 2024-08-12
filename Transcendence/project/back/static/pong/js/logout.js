@@ -53,6 +53,7 @@ function resetAllStates() {
 		email: "", // reinitialiser l'email
 		firstname: "", // reinitialiser le prenom
 		lastname: "", // reinitialiser le nom de famille
+		langue: "",
 		id: "", // reinitialiser l'id
 		friends: [], // reinitialiser la liste d'amis
 		isLoaded: false // indiquer que les donnees ne sont pas chargees
