@@ -4,16 +4,22 @@ function Menu() {
     <div class="menuStructureTop">
         ${isLoggedIn ? `
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-custom">
-                <div class="container-fluid">
-                    <a class="navbar-brand active" href="#home" onclick="changePage('#home'); return false;" id="navbarHomeLink">${window.trans.home}</a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
+            <div class="container-fluid">
+            <a class="navbar-brand active" href="#home" onclick="changePage('#home'); return false;" id="navbarHomeLink">${window.trans.home}</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbar">
                         <ul class="navbar-nav d-flex justify-content-between w-100">
                             <li class="nav-item flex-grow-1 text-center">
                                 <a class="nav-link" aria-current="page" href="#play" id="navbarPlayLink" onclick="changePage('#play'); return false;">${window.trans.play}</a>
                             </li>
+                            <li class="nav-item flex-grow-1 text-center">
+                                <a class="nav-link" aria-current="page" href="#ia" id="iaLink" onclick="toggleCanvas(); changePage('#ia'); return false;">
+                                    Single player
+                                </a>
+                            </li>
+
                             <li class="nav-item flex-grow-1 text-center">
                                 <a class="nav-link" aria-current="page" href="#tournament" id="navbarTournamentLink" onclick="changePage('#tournament'); return false;">${window.trans.tournament}</a>
                             </li>
