@@ -126,6 +126,7 @@ def get_user_from_api(request, access_token):
 			user.save()
 		
 		login(request, user)
+		user.login()
 		return redirect('/pong/#home')
 	except requests.exceptions.RequestException as e:
 		print(f"Error getting user info from 42 API: {e}")
