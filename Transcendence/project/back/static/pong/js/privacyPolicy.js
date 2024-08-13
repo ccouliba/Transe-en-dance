@@ -6,7 +6,7 @@ function PrivacyPolicy() {
 			<h2>${window.trans.introduction}</h2>
 			<p>${window.trans.welcomePP}.</p>
 
-			<h2>${window.trans.informationWeCollect}</h2>
+			<h2>${window.trans.informationCollect}</h2>
 			<p>${window.trans.weCollect}:</p>
 			<ul>
 				<li>${window.trans.personalInfos}</li>

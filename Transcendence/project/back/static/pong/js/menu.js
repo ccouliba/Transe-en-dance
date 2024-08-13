@@ -33,7 +33,7 @@ function Menu() {
                                 <a class="nav-link" aria-current="page" href="#match_history" id="navbarHistoryLink" onclick="changePage('#match_history'); hideCanvas(); return false;">${window.trans.matchHistory}</a>
                             </li>
                             <li class="nav-item flex-grow-1 text-center">
-                                <a class="nav-link" aria-current="page" href="#privacy_policy" id="navbarHistoryLink" onclick="changePage('#privacy_policy'); hideCanvas(); return false;">${window.trans.privacyPolicy}</a>
+                                <a class="nav-link" aria-current="page" href="#privacy_policy" id="navbarPrivacyPolicy" onclick="changePage('#privacy_policy'); hideCanvas(); return false;">${window.trans.privacyPolicy}</a>
                             </li>
                         </ul>
                         <ul class="navbar-nav ms-auto">

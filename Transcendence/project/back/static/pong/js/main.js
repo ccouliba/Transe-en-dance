@@ -83,7 +83,7 @@ let routes = {
 	"#register": () => mountComponent(Register),
 	"#match_history": () => mountComponent(MatchHistory),
 	'#matchmaking': () => mountComponent(TournamentMatchmaking),
-	"#privacy_policy": () => mountComponent(PrivacyPolicy), 
+	"#privacy_policy": () => mountComponent(PrivacyPolicy)
 };
 
 function cleanStates(){
