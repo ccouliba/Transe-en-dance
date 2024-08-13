@@ -103,11 +103,11 @@
 			overflow-y: auto;
 		`;
 		modal.innerHTML = `
-			   <h2>Warning</h2>
-				<p>You are currently using private browsing mode. Please be aware of the following:</p>
+			   <h2>${window.trans.warning}</h2>
+				<p>${window.trans.usePrivateBrowsing}:</p>
 				<ul>
-					<li>If you close your window or your tab, you will be logged out, but you may still appear active to your friends.</li>
-					<li>To appear offline to your friends, you must manually log out before closing the window.</li>
+					<li>${window.trans.closeWinOrTab}.</li>
+					<li>${window.trans.toAppearOffline}.</li>
 				</ul>
 
 			<button id="acceptIncognito" style="
@@ -121,7 +121,7 @@
 				font-size: 16px;
 				margin: 4px 2px;
 				cursor: pointer;
-			">I understand and accept the consequences</button>
+			">${window.trans.iUnderstandAndAccept}</button>
 		`;
 		document.body.appendChild(modal);
 

@@ -25,84 +25,84 @@ function Home() {
 	function TutorialMenu() {
 		return `
 		<div>
-			<button onclick="window.homeTutorial.changePage('home')">Accueil</button>
-			<button onclick="window.homeTutorial.changePage('concept')">Concept SPA</button>
-			<button onclick="window.homeTutorial.changePage('navigation')">Navigation</button>
-			<button onclick="window.homeTutorial.changePage('history')">Historique</button>
-			<button onclick="window.homeTutorial.changePage('structure')">Structure</button>
-			<button onclick="window.homeTutorial.changePage('conclusion')">Conclusion</button>
+			<button onclick="window.homeTutorial.changePage('home')">${window.trans.home}</button>
+			<button onclick="window.homeTutorial.changePage('concept')">${window.trans.SPAConcept}</button>
+			<button onclick="window.homeTutorial.changePage('navigation')">${window.trans.nav}</button>
+			<button onclick="window.homeTutorial.changePage('history')">${window.trans.history}</button>
+			<button onclick="window.homeTutorial.changePage('structure')">${window.trans.structure}</button>
+			<button onclick="window.homeTutorial.changePage('conclusion')">${window.trans.conclusion}</button>
 		</div>
 		`;
 	}
 
 	function generateContent(pageName) {
 		let content = '<div class="container">';
-		content += '<h1>Tutoriel SPA</h1>';
+		content += `<h1>${window.trans.SPATutorial}</h1>`;
 		content += TutorialMenu();
 
 		switch(pageName) {
 			case 'home':
 				content += `
-					<h2>Bienvenue dans notre tutoriel SPA</h2>
-					<p>Ce tutoriel vous guidera à travers la compréhension et le test de la nature Single-Page Application (SPA) de notre projet.</p>
-					<p>Utilisez le menu ci-dessus pour naviguer entre les différentes parties du tutoriel.</p>
+					<h2>${window.trans.welcomeSPATutorial}</h2>
+					<p>${window.trans.thisTutorial}</p>
+					<p>${window.trans.useManu}</p>
 				`;
 				break;
 			case 'concept':
 				content += `
-					<h2>Qu'est-ce qu'une Single-Page Application ?</h2>
-					<p>Une Single-Page Application (SPA) est une application web qui charge une seule page HTML et met à jour dynamiquement cette page lorsque l'utilisateur interagit avec l'application. Dans une SPA :</p>
+					<h2>${window.trans.whatIsSPA}</h2>
+					<p>${window.trans.SPAIs}</p>
 					<ul>
-						<li>Les rechargements de page ne sont pas nécessaires lors de la navigation</li>
-						<li>Le contenu est récupéré et affiché dynamiquement</li>
-						<li>L'URL change pour refléter la "page" actuelle, mais sans rechargement complet</li>
+						<li>${window.trans.pageRefreshNotNecessary}</li>
+						<li>${window.trans.contentIsCollected}</li>
+						<li>${window.trans.URLChange}</li>
 					</ul>
 				`;
 				break;
 			case 'navigation':
 				content += `
-					<h2>Navigation dans une SPA</h2>
-					<p>Observez comment le contenu change lorsque vous cliquez sur les boutons du menu sans que la page ne se recharge complètement.</p>
-					<p>Dans une SPA, la navigation est gérée par JavaScript, qui met à jour le contenu de la page et l'URL.</p>
+					<h2>${window.trans.SPANav}</h2>
+					<p>${window.trans.observeContent}</p>
+					<p>${window.trans.inSPA}</p>
 				`;
 				break;
 			case 'history':
 				content += `
-					<h2>Gestion de l'historique</h2>
-					<p>Une SPA doit également gérer l'historique du navigateur pour permettre l'utilisation des boutons Précédent et Suivant.</p>
-					<p>Essayez d'utiliser les boutons de navigation de votre navigateur après avoir parcouru le tutoriel.</p>
+					<h2>${window.trans.historyHandle}</h2>
+					<p>${window.trans.historyHandling}</p>
+					<p>${window.trans.tryUsing}</p>
 				`;
 				break;
 			case 'structure':
 				content += `
-					<h2>Structure du code SPA</h2>
-					<p>Notre SPA est structurée de la manière suivante :</p>
+					<h2>${window.trans.SPAStructure}</h2>
+					<p>${window.trans.ourSPA}</p>
 					<ul>
-						<li>Un seul fichier HTML (base.html) sert de template pour toute l'application</li>
-						<li>Tout le contenu HTML est généré dynamiquement par des fonctions JavaScript</li>
-						<li>Chaque "page" est en réalité une fonction JavaScript dans un fichier .js séparé</li>
-						<li>Le backend utilise des vues Django pour servir l'API et le template de base</li>
-						<li>Une mini-librairie SPA personnalisée gère la navigation et le rendu des pages</li>
+						<li>${window.trans.oneHTML}</li>
+						<li>${window.trans.allHTML}</li>
+						<li>${window.trans.eachPage}</li>
+						<li>${window.trans.backendUses}</li>
+						<li>${window.trans.miniLibSPA}</li>
 					</ul>
-					<h3>Fonctions clés dans main.js :</h3>
+					<h3>${window.trans.keyFunctions}</h3>
 					<ul>
-						<li><code>changePage(url)</code> : Gère la navigation entre les "pages"</li>
-						<li><code>mountComponent(componentFunction, data)</code> : Rend une nouvelle "page"</li>
-						<li><code>bindEvent(state, cssSelector, event, callback)</code> : Attache des événements de manière asynchrone</li>
-						<li><code>httpGetJson(url)</code> et <code>httpPostJson(url, payload)</code> : Gèrent les requêtes AJAX</li>
+						<li><code>changePage(url)</code> : ${window.trans.changePage}</li>
+						<li><code>mountComponent(componentFunction, data)</code> : ${window.trans.mountComponent}</li>
+						<li><code>bindEvent(state, cssSelector, event, callback)</code> : ${window.trans.bindEvent}</li>
+						<li><code>httpGetJson(url)</code> ${window.trans.and} <code>httpPostJson(url, payload)</code> : ${window.trans.httpFunctions}</li>
 					</ul>
 				`;
 				break;
 			case 'conclusion':
 				content += `
-					<h2>Conclusion</h2>
-					<p>Vous avez parcouru les principes de base d'une Single-Page Application :</p>
+					<h2>${window.trans.conclusion}</h2>
+					<p>${window.trans.youBrowsed}</p>
 					<ul>
-						<li>Chargement dynamique du contenu</li>
-						<li>Navigation sans rechargement de page</li>
-						<li>Gestion de l'historique du navigateur</li>
+						<li>${window.trans.dynamicLoad}</li>
+						<li>${window.trans.navigationWithoutReload}</li>
+						<li>${window.trans.navHistory}</li>
 					</ul>
-					<p>Continuez à explorer l'application pour voir ces principes en action !</p>
+					<p>${window.trans.keepOnExploring}</p>
 				`;
 				break;
 		}
