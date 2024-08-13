@@ -1,6 +1,32 @@
 {
+	"friReqSentSuccess": "¡Solicitud de amistad enviada con éxito!",
+	"friReqAccSuccess": "¡Solicitud de amistad acceptada con éxito!",
+	"friDelSuccess": "¡Amigo eliminado con éxito!",
+	"error": "Error",
+	"err404": "¡Ups! Tienes un 404",
 	"registerSuccess": "¡Registro completado con éxito!",
 	"createAccount": "Crear una cuenta",
+	"musicPlaying": "La música està sonando",
+	"errorMusic": "Error de reproducción de audio",
+	"httpError": "¡Error HTTP!",
+	"logoutError": "Error al desconectar",
+	"logoutFail": "Fallo al desconectar",
+	"logoutErrorRetry": "Se ha producido un error al desconectar. Por favor, inténtelo de nuevo",
+	"youreLoggedOut": "Eres desconectado",
+	"click": "Haga clic",
+	"here": "aquí",
+	"toReconnect": "para volver a conectarse",
+	"successLogin": "¡Inicio de sesión exitoso!",
+	"failLogin": "Error de inicio de sesión",
+	"netAnsNotOK": "La respuesta de nework no fue correcta",
+	"loginErrorRetry": "Se ha producido un error al iniciar sesión. Por favor, asegúrese de que la información que proporciona es exacta y correcta",
+	"undefinedChangePage": "La función changePage no está definida",
+	"errorParsingServerResp":"Error al analizar la respuesta del servidor",
+	"errorFetchingMatchHist":"Error al recuperar el historial de partidos",
+	"errorRegistration": "Registro fallido",
+	"errorRegistrationRetry": "Se ha producido un error durante el registro. Por favor, inténtelo de nuevo",
+	"mustAcceptPP": "Debe aceptar la política de privacidad para registrarse",
+
 
 	"home": "Inicio",
 	"play": "Jugar",
@@ -132,5 +158,17 @@
 	"yourRights": "Tus derechos",
 	"youHaveTheRight": "Tiene derecho a acceder a su información personal, corregirla o eliminarla. Puede ejercer estos derechos poniéndose en contacto con nosotros o utilizando las funciones que ofrece la aplicación",
 	"contactUs": "Contáctenos",
-	"haveQuestions": "Si tiene alguna pregunta sobre esta política de privacidad, contáctenos en ccouliba@student.42.fr"
+	"haveQuestions": "Si tiene alguna pregunta sobre esta política de privacidad, contáctenos en ccouliba@student.42.fr",
+
+	"ppAndConsent": "Política de privacidad y consentimiento",
+	"dearUser": "Estimado usuario",
+	"informYou": "Queremos informarle sobre el uso de sus datos personales",
+	"yourData": "Sus datos se utilizarán exclusivamente para el funcionamiento de la aplicación",
+	"noProcess": "No se llevará a cabo ningún tratamiento de sus datos para fines específicos como el marketing directo",
+	"rightToObject": "Tiene derecho a oponerse al tratamiento de sus datos y solicitar su supresión",
+	"exerciseRight": "Para ejercer sus derechos o para cualquier pregunta, póngase en contacto con nosotros a través del formulario específico",
+	"decline": "Rechazo",
+	"iAccept": "Acepto",
+
+	"weCantProceed": "No podemos proceder a su registro sin su consentimiento"
 }

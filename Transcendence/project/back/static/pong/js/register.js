@@ -35,7 +35,7 @@ function handleRegister(event) {
 	event.preventDefault(); // Empecher le comportement par defaut du formulaire
 
 	if (localStorage.getItem('gdprConsent') !== 'true') {
-		alert("You must accept the privacy policy to register.");
+		alert(`${window.trans.mustAcceptPP}.`);
 		showGDPRModal();
 		return;
 	}
@@ -53,18 +53,18 @@ function handleRegister(event) {
 			alert(`${window.trans.registerSuccess}`); 
 			changePage('#login');
 		} else {
-			alert('Registration failed: ' + JSON.stringify(data.message));
+			alert(`${window.trans.errorRegistration}: ` + JSON.stringify(data.message));
 		}
 	})
 	.catch(error => {
-		console.error('Error:', error);
-		alert('An error occurred during registration. Please try again.');
+		console.error(`${window.trans.error}`, error);
+		alert(`${window.trans.errorRegistrationRetry}.`);
 	});
 }
 
 function showRegisterButton() {
 	return `
-		<button class="btn btn-primary" id="showRegisterForm">Create an account</button>
+		<button class="btn btn-primary" id="showRegisterForm">${window.trans.createAccount}</button>
 	`;
 }
 
@@ -73,22 +73,22 @@ function RegisterForm() {
 	return `
 		<form id="registerForm">
 			<div class="form-floating">
-				<input type="text" class="form-control" name="username" id="username" autocomplete="username" placeholder="Username" required>
+				<input type="text" class="form-control" name="username" id="username" autocomplete="username" placeholder="${window.trans.username}" required>
 				<label for="username">${window.trans.username}</label>
 			</div>
 			<div class="form-floating">
-				<input type="email" class="form-control" name="email" id="email" placeholder="Email" required>
+				<input type="email" class="form-control" name="email" id="email" placeholder="${window.trans.email}" required>
 				<label for="email">${window.trans.email}</label>
 			</div>
 			<div id="passwordHelpBlock" class="form-text">
 				${window.trans.passwordSecurity}
 			</div>
 			<div class="form-floating">
-				<input type="password" class="form-control" name="password1" id="password1" autocomplete="current-password" placeholder="Password" required>
+				<input type="password" class="form-control" name="password1" id="password1" autocomplete="current-password" placeholder="${window.trans.password}" required>
 				<label for="password1">${window.trans.password}</label>
 			</div>
 			<div class="form-floating">
-				<input type="password" class="form-control" name="password2" id="password2" autocomplete="current-password" placeholder="Confirm Password" required>
+				<input type="password" class="form-control" name="password2" id="password2" autocomplete="current-password" placeholder="${window.trans.confirmPassword}" required>
 				<label for="password2">${window.trans.confirmPassword}</label>
 			</div>
 			<button type="submit" class="btn btn-primary">${window.trans.register}</button>
@@ -104,22 +104,22 @@ function GDPRModal() {
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title" id="gdprModalLabel">Privacy Policy and Consent</h5>
+						<h5 class="modal-title" id="gdprModalLabel">${window.trans.ppAndConsent}</h5>
 						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 					</div>
 					<div class="modal-body">
-						<p>Dear user,</p>
-						<p>We want to inform you about the use of your personal data:</p>
+						<p>${window.trans.dearUser},</p>
+						<p>${window.trans.informYou}:</p>
 						<ul>
-							<li>Your data will be used solely for the operation of the application.</li>
-							<li>No processing of your data will be carried out for specific purposes such as direct marketing.</li>
-							<li>You have the right to object to the processing of your data and request its deletion.</li>
+							<li>${window.trans.yourData}.</li>
+							<li>${window.trans.noProcess}.</li>
+							<li>${window.trans.rightToObject}.</li>
 						</ul>
-						<p>To exercise your rights or for any questions, please contact us via the dedicated form.</p>
+						<p>${window.trans.exerciseRight}.</p>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="gdprDecline">I decline</button>
-						<button type="button" class="btn btn-primary" id="gdprAccept">I accept</button>
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="gdprDecline">${window.trans.decline}</button>
+						<button type="button" class="btn btn-primary" id="gdprAccept">${window.trans.iAccept}</button>
 					</div>
 				</div>
 			</div>
@@ -142,7 +142,7 @@ function handleGDPRConsent() {
 	});
 
 	bindEvent(registerState, "#gdprDecline", "click", () => {
-		alert("We cannot proceed with your registration without your consent.");
+		alert(`${window.trans.weCantProceed}.`);
 		bootstrap.Modal.getInstance(document.getElementById('gdprModal')).hide();
 	});
 }

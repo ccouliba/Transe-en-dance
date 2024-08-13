@@ -4,7 +4,7 @@ var profileState = {
 	email: "", // email de l'utilisateur
 	firstname: "", // prenom de l'utilisateur
 	lastname: "", // nom de famille de l'utilisateur
-	langue: localStorage.getItem('selectedLanguage') || 'English',
+	langue: localStorage.getItem('selectedLanguage') || 'Français',
 	avatar: "",
 	wins: 0,
 	losses: 0,

@@ -148,7 +148,7 @@ function addParticipant(event) {
 			} else if (data.already_in_tournament.length > 0) {
 				alert(`${participant} is already in the tournament.`);
 			} else if (data.not_found_participants.length > 0) {
-				alert(`User ${participant} not found. Please make sure the user is registered.`);
+				alert(`${window.trans.user} ${participant} ${window.trans.notFound}. ${window.trans.checkRegister}.`);
 			}
 		} else {
 			alert('Error adding participant: ' + data.message);

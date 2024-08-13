@@ -87,7 +87,7 @@ function loadFriendsData() {
 				friendsState.friendStatusInterval = setInterval(getFriendsStatus, 5 * 1000);
 			}
 		})
-		.catch(error => console.error('Error:', error));
+		.catch(error => console.error(`${window.trans.error}:`, error));
 }
 
 function getFriendsStatus(){
@@ -106,7 +106,7 @@ function getFriendsStatus(){
 			// mountComponent(FriendsList) 
 			
 		})
-		.catch(error => console.error('Error:', error));
+		.catch(error => console.error(`${window.trans.error}:`, error));
 }
 
 function updateFriendsStatus() {
@@ -133,13 +133,13 @@ function sendFriendRequest(email) {
 		.then(response => response.json()) // Convertir la reponse en JSON
 		.then(data => {
 			if (data.status === 'success') {
-				alert("Demande d'ami envoyee avec succes!"); // modale pour alerter l'utilisateur du succes
+				alert(`${window.trans.friReqSentSuccess}`); // modale pour alerter l'utilisateur du succes
 				refreshFriendsList(); // rafraichir la liste des amis !!! pas besoin de websockets ou autres
 			} else {
 				alert(data.message); // modale pour alerter l'utilisateur de l'echec
 			}
 		})
-		.catch(error => console.error('Error:', error));
+		.catch(error => console.error(`${window.trans.error}:`, error));
 }
 
 // Fonction pour afficher le formulaire d'ajout d'ami
@@ -172,13 +172,13 @@ function AcceptFriendRequest(email) {
 		.then(response => response.json()) // Convertir la reponse en JSON
 		.then(data => {
 			if (data.status === 'success') {
-				alert("Demande d'ami acceptee avec succes!"); //modale pour alerter l'utilisateur du succes
+				alert(`${window.trans.friReqAccSuccess}`); //modale pour alerter l'utilisateur du succes
 				refreshFriendsList(); // Rafraichir la liste des amis !
 			} else {
 				alert(data.message); // modale pour alerter l'utilisateur de l'echec
 			}
 		})
-		.catch(error => console.error('Error:', error));
+		.catch(error => console.error(`${window.trans.error}:`, error));
 }
 
 // Fonction pour afficher le formulaire d'acceptation d'ami
@@ -211,7 +211,7 @@ function removeFriend(email) {
 		.then(response => response.json())
 		.then(data => {
 			if (data.status === 'success') {
-				alert("Ami supprime avec succes!"); // modale pour alerter l'utilisateur du succes
+				alert(`${window.trans.friDelSuccess}`); // modale pour alerter l'utilisateur du succes
 				refreshFriendsList(); // Rafraichir la liste des amis
 			} else {
 				alert(data.message); // modale pour alerter l'utilisateur de l'echec

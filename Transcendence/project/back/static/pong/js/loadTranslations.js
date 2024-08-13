@@ -1,7 +1,7 @@
 window.trans = '';
 
 function loadTranslations(newLang) {
-	newLang = localStorage.getItem('selectedLanguage') || "English";
+	newLang = localStorage.getItem('selectedLanguage') || "Français";
 	let langFile = '/static/pong/js/translations/en.json';
 	if (newLang === 'Français')
 		langFile = '/static/pong/js/translations/fr.json';

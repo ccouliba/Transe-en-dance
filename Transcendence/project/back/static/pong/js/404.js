@@ -2,6 +2,6 @@
 function Page404() {
 	return `
 	<div>
-		<h1>Oops! You got 404'd</h1>
+		<h1>${window.trans.err404}</h1>
 	</div>`;
 }

@@ -161,11 +161,11 @@ document.addEventListener('DOMContentLoaded', function() {
     playButton.addEventListener('click', function() {
         if (!isPlaying) {
             audio.play().then(() => {
-                console.log('La musique est en train de jouer');
+                console.log(`${window.trans.musicPlaying}`);
                 isPlaying = true; // Met à jour l'état de lecture
                 playButton.textContent = '🔇'; // Change le texte du bouton
             }).catch(error => {
-                console.error('Erreur de lecture audio :', error);
+                console.error(`${window.trans.errorMusic} :`, error);
             });
         } else {
             audio.pause(); // Met en pause la musique
