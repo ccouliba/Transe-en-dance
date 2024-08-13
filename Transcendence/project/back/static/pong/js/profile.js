@@ -5,7 +5,7 @@ var profileState = {
 	firstname: "", // prenom de l'utilisateur
 	lastname: "", // nom de famille de l'utilisateur
 	langue: localStorage.getItem('selectedLanguage') || 'English',
-	avatar: "",
+	avatar_url: "",
 	wins: 0,
 	losses: 0,
 	total_games: 0,
@@ -15,13 +15,14 @@ var profileState = {
 
 // fonction pour afficher le profil utilisateur
 function Profile() {
-	console.log("Avatar URL:", profileState.avatar_url);
-	console.log(window.trans);
+	 	
 	// charge les donnees du profil depuis le backend
 	loadProfileFromBackend(); // get
 	let winRate = profileState.win_rate.toFixed(2)
 	bindEvent(profileState, "#deleteAccountBtn", "click", handleDeleteAccount);
 	
+	let avatarUrl = profileState.avatar_url 
+
 	// retourne une chaine de caracteres contenant le HTML du composant Profile
 	return `
 		<div class="container mt-5" id="profilePage">
@@ -52,7 +53,7 @@ function Profile() {
 				<div class="row mb-3">
 					<div class="col-sm-3"><strong>${window.trans.avatar} :</strong></div>
 						<div class="col-sm-9">
-							<img src="${profileState.avatar_url && profileState.avatar_url.startsWith('http') ? profileState.avatar_url : ''}" alt="Avatar" style="width: 100px; height: 100px;">
+							<img src="${avatarUrl}" alt="Avatar" style="width: 100px; height: 100px;">
 						</div>
 				</div>
 				<h2 class="mt-4 mb-3" style="text-decoration: underline;">${window.trans.gameStats}</h2>
@@ -129,8 +130,10 @@ async function loadProfileFromBackend() {
 				// total_games: profile.wins + profile.losses,
 				// win_rate: profile.total_games > 0 ? (profile.wins / profile.total_games) * 100 : 0
 			}; // utilisation d'un spread operator
+			console.log(profile)
+			profileState.isLoaded = true;
 			mountComponent(Profile); // monter le composant Profile
-			profileState.isLoaded = true;// marquer les donnees du profil comme chargees
+			// marquer les donnees du profil comme chargees
 		});
 }
 
@@ -315,7 +318,7 @@ function EditAvatar() {
 		if (avatarInput.files && avatarInput.files[0]) {
 			const formData = new FormData();
 			formData.append('avatar', avatarInput.files[0]);
-			fetch('/pong/api/profile/upload-avatar/', { //not using httpPostJson because using formdata here
+			fetch('/pong/api/profile/upload-avatar/', { 
 				method: 'POST', 
 				body: formData,
 				credentials: 'include',

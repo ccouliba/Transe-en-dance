@@ -201,10 +201,13 @@ function finishGame(gameId, player1Score, player2Score, winnerUsername) {
 
 	let url = `/pong/api/games/finish_game/${gameId}/` 
 	let payload = { winner: winnerUsername, player1Score, player2Score }
-	httpPostJson(url, payload)
+	return httpPostJson(url, payload)
 	.then(response => response.json())
 	.then(data => {
 		console.log('Game finished:', data);
+		playState.gameOver = false
+		playState.gameStarted = false
+		
 	})
 	.catch(error => console.error('Error finishing game:', error));
 }
@@ -270,7 +273,13 @@ function endGame() {
 	if (playState.isTournamentMatch) {
 		updateTournamentMatchScore(playState.gameId, playState.player1Score, playState.player2Score, winnerUsername)
 			.then((payload) => {
+				
+				playState.gameOver = false
+				playState.gameStarted = false
+				playState.isLoaded = false
+				
 				fetchMatchesAndRankings()
+
 				return
 				//changePage("#tournament");
 			})

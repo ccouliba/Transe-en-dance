@@ -88,7 +88,7 @@
 	async function isIncognito() {
 		if (navigator.storage && navigator.storage.estimate) {
 			const { quota } = await navigator.storage.estimate();
-			if (quota) {
+			if (quota && typeof performance.memory !== "undefined") {
 				return quota < performance.memory.jsHeapSizeLimit;
 			}
 		}

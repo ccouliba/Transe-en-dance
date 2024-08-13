@@ -10,11 +10,10 @@ from django.db.models import Q #pour construire des requêtes qui nécessitent d
 def create_game(request):
 	if request.method == 'POST':
 		data = json.loads(request.body)
-  
-  
+
 		# player1_username = data.get('player1Username')
 		player2_username = data.get('player2Username')
-  
+
 		if  not User.objects.filter(username=player2_username).exists():
 			return JsonResponse({'error': 'One or both players not found'}, status=404)
 

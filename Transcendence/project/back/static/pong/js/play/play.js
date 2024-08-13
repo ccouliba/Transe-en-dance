@@ -126,7 +126,9 @@ function loadPlayState() {
 
 
 function startGame(event) {
-	if (event) event.preventDefault();
+	console.log("startGame", event)
+	if (event) 
+		event.preventDefault();
 
 	if (!playState.isTournamentMatch) {
 		// playState.player1Username = document.getElementById("player1Username").value;
@@ -143,7 +145,7 @@ function startGame(event) {
 	playState.player2Score = 0;
 	playState.gameOver = false;
 
-		console.log(playState.isTournamentMatch, "is")
+	console.log(playState.isTournamentMatch, "is")
 	 if (!playState.isTournamentMatch) {
 		createGameInDatabase()
 		.then(({ status, body }) => {
@@ -171,6 +173,7 @@ function startGame(event) {
 }
 	
 function startTournamentMatch() {
+	console.log("startTournamentMatch")
 	startGame();
 }
 

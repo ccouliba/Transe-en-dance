@@ -185,6 +185,7 @@ def edit_password_view(request):
 
 @login_required
 @require_POST
+@csrf_exempt
 def upload_avatar(request):
 	form = AvatarUploadForm(request.POST, request.FILES, instance=request.user)
 	if form.is_valid():
