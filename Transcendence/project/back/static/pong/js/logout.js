@@ -22,7 +22,7 @@ function logout() {
 	httpPostJson(url, {})
 	.then(response => {
 		if (!response.ok) {
-			throw new Error(`http error! status: ${response.status}`); // verifier si la reponse est ok
+			throw new Error(`${window.trans.httpError} status: ${response.status}`); // verifier si la reponse est ok
 		}
 		return response.json(); // convertir la reponse en json
 	})
@@ -36,13 +36,13 @@ function logout() {
 			updateMenu(); // mettre a jour le menu
 			changePage('#home'); // rediriger vers la page d'accueil
 		} else {
-			console.error('echec de la deconnexion:', data.message); // afficher un message d'erreur
-			alert('echec de la deconnexion: ' + data.message); 
+			console.error(`${window.trans.logoutFail}`, data.message); // afficher un message d'erreur
+			alert(`${window.trans.logoutFail}: ` + data.message); 
 		}
 	})
 	.catch(error => {
-		console.error('erreur lors de la deconnexion:', error); // afficher une erreur en cas d'echec
-		alert('une erreur est survenue lors de la deconnexion. veuillez reessayer.'); // alerter l'utilisateur de l'erreur
+		console.error(`${window.trans.logoutError}:`, error); // afficher une erreur en cas d'echec
+		alert(`${window.trans.logoutErrorRetry}.`); // alerter l'utilisateur de l'erreur
 	});
 }
 
@@ -67,8 +67,8 @@ function Logout() {
 	logout(); // appeler la fonction de deconnexion
 	return `
 		<div>
-			<h2>vous etes deconnecte</h2>
-			<p>cliquez <a href="#login" onclick="changePage('#login')">ici</a> pour vous reconnecter.</p>
+			<h2>${window.trans.youreLoggedOut}</h2>
+			<p>${window.trans.click} <a href="#login" onclick="changePage('#login')">${window.trans.here}</a> ${window.trans.toReconnect}.</p>
 		</div>
 	`;
 }

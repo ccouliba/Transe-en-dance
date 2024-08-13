@@ -4,7 +4,7 @@ var profileState = {
 	email: "", // email de l'utilisateur
 	firstname: "", // prenom de l'utilisateur
 	lastname: "", // nom de famille de l'utilisateur
-	langue: localStorage.getItem('selectedLanguage') || 'English',
+	langue: localStorage.getItem('selectedLanguage') || 'Français',
 	avatar: "",
 	wins: 0,
 	losses: 0,
@@ -460,29 +460,27 @@ function EditPassword() {
 
 
 function handleDeleteAccount() {
-	if (confirm("Are you sure you want to delete your account? This action cannot be undone.")) {
-		// fetch('/pong/api/profile/soft_delete_user/', {
-		// 	method: 'POST',
-		// 	credentials: 'include',
-		// 	headers: {
-		// 		'Content-Type': 'application/json',
-		// 		'X-CSRFToken': getCookie('csrftoken') 
-		// 	},
-		// })
-		let url = `/pong/api/profile/soft_delete_user/`
-		httpPostJson(url, {})
+	if (confirm(`${window.trans.confirmDelAcc}`)) {
+		fetch('/pong/api/profile/soft_delete_user/', {
+			method: 'POST',
+			credentials: 'include',
+			headers: {
+				'Content-Type': 'application/json',
+				'X-CSRFToken': getCookie('csrftoken') 
+			},
+		})
 		.then(response => response.json())
 		.then(data => {
 			if (data.status === 'success') {
-				alert("Your account has been successfully deleted.");
+				alert(`${window.trans.accDeleted}.`);
 				changePage(Login);
 			} else {
-				alert("An error occurred while deleting your account. Please try again.");
+				alert(`${window.trans.errDeletingAccRetry}`);
 			}
 		})
 		.catch(error => {
-			console.error('Error:', error);
-			alert("An error occurred while deleting your account. Please try again.");
+			console.error(`${window.trans.error}`, error);
+			alert(`${window.trans.errDeletingAccRetry}`);
 		});
 	}
 }
