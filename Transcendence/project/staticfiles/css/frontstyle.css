@@ -1,0 +1,375 @@
+/*  DOTA 2 MENU COLORS
+    background rgb(42, 0, 6)
+    menu structure rgb(42, 43, 48)
+    top menu bar rgb(11,12,16)
+    menu button hover light red regb(151, 70, 69)
+    top menu font dark greyish gold rgb(94, 92, 73)
+    general font light grey rgb(172, 171, 176)
+    some header font rgb(170, 197, 158)
+    value's name color light grey rgb(114, 116, 115)
+    value color light green rgb(219, 247, 144) 
+*/
+
+#background {
+  width: 100%;
+  height: 100%;
+  max-width: max-content;
+  max-height: max-content;
+
+}
+
+body, html {
+  /* width : 100%;
+  height : 100%; */
+  font-family: 'Trajan Pro', sans-serif;
+  color: silver;
+  background-image: linear-gradient(to top, rgb(42,0,0), rgb(100,20,20));
+}
+
+#profilePage, #instructions, .accordion-button, .accordion-body, #instructions, #start-game-form, #player1Email, #player2Email, #player2Username, .modal-content, .form-control, #username, #password, #email, #password1, #password2, #firstname, #lastname, #old_password, #new_password1, #new_password2, #participant, #alias, #tournamentName, #friendEmail, #friends-forms, #friends-list, #add-friend-form, #accept-friend-form {
+  color: gold;
+  /* background-color: lightgrey; */
+  background-image: linear-gradient(to top, rgb(30,30,30) 80%, rgb(42,50,80));
+}
+
+/* .form-floating > input:not(:focus):placeholder-shown + label {
+  background: darkblue !important;
+} */
+
+.form-floating > input + label::after {
+  background: darkblue !important;
+}
+
+.form-floating > label::after {
+  background: darkblue !important;
+}
+
+.custom-btn, .btn  {
+  border: 2px solid #ff4500;
+  transition: all 0.3s ease;
+  color: white;
+  background-color: rgb(42, 42, 50);
+}
+
+a {
+  color: red;
+}
+
+#profileValue {
+  color: rgb(220, 250, 145);
+}
+
+#profileUsernameHeader {
+  color: rgb(100,140,180);
+}
+
+#passwordHelpBlock {
+  color: rgb(145, 142, 112);
+}
+
+
+
+.navbar-custom {
+  /* background-color: slategray; */
+  background-image: linear-gradient(to left, rgb(30,30,30) 80%, rgb(70, 70, 85));
+   /* Pour plus tard couleur du hover d'un bouton  */
+   /* background-image: radial-gradient(closest-side at 10%,rgb(252,205,98), rgb(196,73,46));  */
+}
+
+.navbar-custom .navbar-brand {
+  color: rgb(160, 150, 140)
+}
+
+.navbar-custom .navbar-text {
+  color: rgb(100, 90, 70);
+}
+
+#languageSelector {
+  background-color: rgb(42, 42, 50);
+  color: white;
+}
+
+.nav-link {
+  color: grey;
+}
+
+.navbar-custom .navbar-text .nav-link .active {
+  color: gold;
+}
+
+.menuStructureTop {
+background-color: rgb(42, 42, 50);
+}
+
+#RGPDButton {
+  border: 2px solid #ff4500;
+  transition: all 0.3s ease;
+  color: white;
+  background-color: rgb(42, 42, 50);
+}
+
+::selection {
+  color: darkgoldenrod;
+  background: lightgoldenrodyellow;
+}
+
+.form-control::placeholder {
+  color : silver;
+}
+
+input, input[password] {
+  color : silver;
+  background-image: linear-gradient(to top, rgb(90, 90, 90) 80%, rgb(100, 100, 150));
+}
+
+#edit-username, #edit-usename > #username::placeholder, #edit-mail, #edit-mail > #email::placeholder, #edit-first-name, #edit-first-name > #firstname::placeholder, #edit-last-name, #edit-last-name > #lastname::placeholder, #edit-password-form, #edit-password-form > #old_password, #edit-password-form > #new_password1::placeholder, #edit-password-form > #new_password2::placeholder {
+  color : silver;
+  /* background-image: linear-gradient(to top, rgb(90, 90, 90) 80%, rgb(100, 100, 150)); */
+
+}
+
+/* friends.js */
+
+#friends-forms {
+
+}
+
+#friends-list {
+
+}
+
+#friends-status-list {
+
+}
+
+.friend-status {
+
+}
+
+#add-friend-form {
+
+}
+
+#friendEmail {
+
+}
+
+#accept-friend-form {
+
+}
+
+#remove-friend-form {
+
+}
+
+
+
+/* home.js */
+
+#homeWelcomeTxt {
+
+}
+
+
+
+/* login.js */
+
+#showRegister {
+
+}
+
+#loginForm {
+
+}
+
+#username {
+
+}
+
+#password {
+
+}
+
+
+
+/* matchHistory.js */
+
+#match-history-content {
+
+}
+
+
+/* menu.js */
+
+.menuStructureTop {
+
+}
+
+.navbar-custom {
+
+}
+
+#navbarHomeLink {
+
+}
+
+#navbar {
+
+}
+
+#navbarPlayLink {
+
+}
+
+#navbarTournamentLink {
+
+}
+
+#navbarProfileLink {
+
+}
+
+#navbarFriendsLink {
+
+}
+
+#navbarHistoryLink {
+
+}
+
+#navbarLogoutLink {
+
+}
+
+
+
+/* profile.js */
+
+#profilePage {
+
+}
+
+#accordionExample {
+
+}
+
+#headingTwo {
+
+}
+
+#collapseTwo {
+
+}
+
+#edit-username {
+
+}
+
+#username {
+
+}
+
+#edit-email {
+
+}
+
+#email {
+
+}
+
+#edit-first-name {
+
+}
+
+#firstname {
+
+}
+
+#edit-last-name {
+
+}
+
+#lastname {
+
+}
+
+#languageLabel {
+
+}
+
+#languageSelector {
+
+}
+
+#englishOption {
+
+}
+
+#frenchOption {
+
+}
+
+#spanishOption {
+
+}
+
+#italianOption {
+
+}
+
+#edit-langue {
+
+}
+
+#edit-avatar {
+
+}
+
+#edit-password-form {
+
+}
+
+#old_password {
+
+}
+
+#new_password1 {
+
+}
+
+#new_password2 {
+
+}
+
+
+
+
+/* register.js */
+
+#registerForm {
+
+}
+
+#username {
+
+}
+
+#email {
+
+}
+
+#passwordHelpBlock {
+
+}
+
+#password1 {
+
+}
+
+#password2 {
+
+}
+
+#showLogin {
+
+}

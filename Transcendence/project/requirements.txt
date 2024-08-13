@@ -13,3 +13,5 @@ elasticsearch==8.0.0
 elasticsearch-dsl==8.12.0
 django-elasticsearch-dsl==8.0
 django-elasticsearch-dsl-drf
+#Added to make it work 
+gunicorn==23.0.0
