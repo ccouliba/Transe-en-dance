@@ -6,10 +6,15 @@ const CANVAS_HEIGHT = 400;
 const CANVAS_WIDTH = 600;
 const WINNING_SCORE = 5; // a changer ou pas
 
+function initializePaddle(){
+	paddle1Y = (CANVAS_HEIGHT - PADDLE_HEIGHT) / 2;
+	paddle2Y = (CANVAS_HEIGHT - PADDLE_HEIGHT) / 2;
+}
+let paddle1Y
+let paddle2Y
 
 // positions initiales des raquettes et de la balle
-let paddle1Y = (CANVAS_HEIGHT - PADDLE_HEIGHT) / 2;
-let paddle2Y = (CANVAS_HEIGHT - PADDLE_HEIGHT) / 2;
+
 let ballX = CANVAS_WIDTH / 2;
 let ballY = CANVAS_HEIGHT / 2;
 let ballSpeedX = 5;
@@ -69,6 +74,7 @@ function moveBall() {
 // fonction pour initialiser le jeu
 function initializeGame() {
 
+	initializePaddle()
 	let onlineStatusInterval;
 	// selectionner le canvas et son contexte de dessin
 	const canvas = document.getElementById('pongCanvas');
