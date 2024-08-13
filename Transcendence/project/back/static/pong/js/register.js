@@ -19,10 +19,14 @@ function Register() {
 		registerState.isLoaded = true
 	}
 	return `
-		<div class="container mt-5">
+		<div class="container text-center mt-5">
 			<h1>${window.trans.register}</h1>
-			${registerState.showForm ? RegisterForm() : showRegisterButton()}
-			<button class="btn btn-link" id="showLogin">${window.trans.backToLogin}</button>
+			<div class="row justify-content-center">
+				${registerState.showForm ? RegisterForm() : showRegisterButton()}
+				<div class="col-md">
+					<button class="btn btn-link" id="showLogin">${window.trans.backToLogin}</button>
+				</div>
+			</div>
 		</div>
 		${GDPRModal()}
 	`;
@@ -64,7 +68,9 @@ function handleRegister(event) {
 
 function showRegisterButton() {
 	return `
-		<button class="btn btn-primary" id="showRegisterForm">Create an account</button>
+		<div class="col-md mt-1">
+			<button class="btn btn-primary" id="showRegisterForm">Create an account</button>
+		</div>
 	`;
 }
 

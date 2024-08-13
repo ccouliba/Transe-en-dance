@@ -20,10 +20,8 @@
 	<script src="{% static 'pong/js/home.js' %}"></script>
 	<script src="{% static 'pong/js/play/play.js' %}"></script>
 	<script src="{% static 'pong/js/play/pongGame.js' %}"></script>
-
 	<script src="{% static 'pong/js/friends.js' %}"></script>
 	<script src="{% static 'pong/js/tournament/tournament.js' %}"></script>
-	
 	<script src="{% static 'pong/js/tournament/tournamentDetail.js' %}"></script>
 	<script src="{% static 'pong/js/tournament/matchmaking.js' %}"></script>
 	<script src="{% static 'pong/js/logout.js' %}"></script>
@@ -34,15 +32,12 @@
 	<script src="{% static 'pong/js/main.js' %}"></script>
 	<script src="{% static 'pong/js/matchHistory.js' %}"></script>
 	<script src="{% static 'pong/js/privacyPolicy.js' %}"></script>
-
 	<!-- <p><script src="{% static 'pong/js/iaAlgo.js' %}"></script></p> -->
-	<main>
-	  <div class="container" id="app">
+	<main class="w-100 m-auto">
+	  <div id="app">
 		  {% block content %}
 		  <script>
-
 			/*let hash = window.location.hash
-		   
 			changePage(hash);*/
 			{% if user.is_authenticated %}
 				if (window.location.hash === '' || window.location.hash === '#') {
@@ -71,14 +66,6 @@
 	  </div>
 	</main>
 	{% block scripts %} {% endblock %}
-
-
-
-
-
-
-
-
 <script>
 
 	// Script JS pour avoir une modale lorsque l'utilisateur est en mode navigation privee
@@ -152,16 +139,7 @@
 		}
 	});
 
-		</script>
-
-
-
-
-
-
-
-
-
+	</script>
 	<canvas id="background"></canvas>
 	<script src="{% static 'pong/js/background.js' %}"></script>
 	<script src="{% static 'pong/js/bootstrap.min.js' %}"></script>

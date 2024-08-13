@@ -32,7 +32,7 @@ function Login() {
 
 	
 	return `
-		<div class="container mt-5">
+		<div class="container text-center mt-5">
 			<h1>${window.trans.btnLogin}</h1> 
 			 ${LoginForm()}
 			<p class="mt-3">
@@ -48,15 +48,15 @@ function Login() {
 function LoginForm() {
 	return `
 		<form id="loginForm">
-			<div class="form-floating w-50" id="profilePage">
+			<div class="form-floating" id="profilePage">
 				<input type="text" class="form-control" name="username" id="username" autocomplete="username" placeholder="Username" required>
-				<label for="username">${window.trans.username}</label>
+				<label for="username">Username</label>
 			</div>
-			<div class="form-floating w-50" id="profilePage">
+			<div class="form-floating" id="profilePage">
 				<input type="password" class="form-control" name="password" id="password" autocomplete="current-password" placeholder="Password" required>
-				<label for="password">${window.trans.password}</label>
+				<label for="password">Password</label>
 			</div>
-			<button type="submit" class="btn btn-primary">${window.trans.btnLogin}</button>
+			<button type="submit" class="btn btn-primary">Login</button>
 		</form>
 	`;
 }
