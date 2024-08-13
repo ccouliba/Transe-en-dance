@@ -75,7 +75,7 @@ let routes = {
 	"#profile": () => mountComponent(Profile),
 	"#friends": () => mountComponent(Friends),
 	"#friends_list": () => mountComponent(FriendsList),
-
+	"#ia":() => mountComponent(IA), 
 	"#404": () => mountComponent(Page404),
 	"#tournament": () => mountComponent(Tournament),
 	"#logout": () => mountComponent(Logout),
