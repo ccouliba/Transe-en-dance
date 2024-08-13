@@ -450,7 +450,7 @@ function EditPassword() {
 
 
 function handleDeleteAccount() {
-	if (confirm("Are you sure you want to delete your account? This action cannot be undone.")) {
+	if (confirm(`${window.trans.confirmDelAcc}`)) {
 		fetch('/pong/api/profile/soft_delete_user/', {
 			method: 'POST',
 			credentials: 'include',
@@ -462,15 +462,15 @@ function handleDeleteAccount() {
 		.then(response => response.json())
 		.then(data => {
 			if (data.status === 'success') {
-				alert("Your account has been successfully deleted.");
+				alert(`${window.trans.accDeleted}.`);
 				changePage(Login);
 			} else {
-				alert("An error occurred while deleting your account. Please try again.");
+				alert(`${window.trans.errDeletingAccRetry}`);
 			}
 		})
 		.catch(error => {
-			console.error('Error:', error);
-			alert("An error occurred while deleting your account. Please try again.");
+			console.error(`${window.trans.error}`, error);
+			alert(`${window.trans.errDeletingAccRetry}`);
 		});
 	}
 }
