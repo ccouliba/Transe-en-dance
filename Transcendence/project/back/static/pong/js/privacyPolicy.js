@@ -1,12 +1,12 @@
 function PrivacyPolicy() {
 	return `
-		<div class="container mt-5">
+		<div class="container mt-5" id="profilePage">
 			<h1>${window.trans.privacyPolicy}</h1>
 
 			<h2>${window.trans.introduction}</h2>
 			<p>${window.trans.welcomePP}.</p>
 
-			<h2>${window.trans.informationWeCollect}</h2>
+			<h2>${window.trans.informationCollect}</h2>
 			<p>${window.trans.weCollect}:</p>
 			<ul>
 				<li>${window.trans.personalInfos}</li>

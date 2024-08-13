@@ -219,8 +219,16 @@ function EditEmail() {
 	return `
 		<form id="edit-email" class="mt-3">
 			<div class="form-floating w-50">
-				<input type="text" class="form-control" id="email" name="email" placeholder="${window.trans.modify} ${window.trans._email}" value="${profileState.email}" aria-label="new email"/>
-				<label for="email>"${window.trans.modify} ${window.trans._email}</label>
+				<input
+					type="text"
+					class="form-control"
+					id="email"
+					name="email"
+					placeholder="${window.trans.modify} ${window.trans._email}"
+					value="${profileState.email}"
+					aria-label="new email"
+				/>
+				<label for="email">${window.trans.modify} ${window.trans._email}</label>
 				<button class="btn btn-primary" type="submit">${window.trans.modify}</button>
 			</div>
 		</form>

@@ -38,10 +38,12 @@ body, html {
 
 .form-floating > input + label::after {
   background: darkblue !important;
+  color:aqua;
 }
 
 .form-floating > label::after {
   background: darkblue !important;
+  color:aqua;
 }
 
 .custom-btn, .btn  {
