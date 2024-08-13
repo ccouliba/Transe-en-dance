@@ -57,7 +57,7 @@ function loadMatchHistory() {
 	httpGetJson(url)
 	.then(response => {
 		if (!response.ok) {
-			throw new Error(`HTTP error! status: ${response.status}`);
+			throw new Error(`${window.trans.httpError} status: ${response.status}`);
 		}
 		return response.text(); // Get the raw text instead of parsing JSON immediately
 	})
@@ -70,14 +70,14 @@ function loadMatchHistory() {
 		} catch (e) {
 			console.error('JSON parsing error:', e);
 			matchHistoryState.isLoaded = true;
-			matchHistoryState.error = 'Error parsing server response';
+			matchHistoryState.error = `${window.trans.errorParsingServerResp}`;
 		}
 		updateMatchHistoryContent();
 	})
 	.catch(error => {
 		console.error('Fetch error:', error);
 		matchHistoryState.isLoaded = true;
-		matchHistoryState.error = 'Error fetching match history';
+		matchHistoryState.error = `${window.trans.errorFetchingMatchHist}`;
 		updateMatchHistoryContent();
 	});
 }

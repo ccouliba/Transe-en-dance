@@ -1,10 +1,11 @@
+
 services:
   web:
     container_name: backend
     build: ./project
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
-      - ./project/:/usr/src/back/
+      - ./project/:/usr/src/project/
     ports:
       - 8000:8000
     env_file:
@@ -13,14 +14,10 @@ services:
       db:
         condition: service_healthy
     restart: unless-stopped
-    # develop:
-    #   watch:
-    #     - action: sync
-    #       path: ./project
-    #       target: /usr/src/project
+    links:
+      - db
     networks:
       - transcendance
-      # - devops
 
   db:
     image: postgres:15
@@ -43,55 +40,75 @@ services:
      - transcendance
 
   # Elasticsearch is a search engine
-  # elasticsearch:
-  #   container_name: elasticsearch
-  #   image: docker.elastic.co/elasticsearch/elasticsearch:8.9.0
-  #   environment:
-  #     - discovery.type=single-node #for development mode
-  #     - xpack.security.enabled=false #for anonymous request
-  #     - xpack.monitoring.enabled:true
-  #   ports: #several ports
-  #     - "9200:9200"
-  #   volumes:
-  #     - es-data:/usr/share/elasticsearch/data
-  #   networks:
-  #     - transcendance
+  elasticsearch:
+    container_name: elasticsearch
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.14.3
+    environment:
+      - node.name=elasticsearch
+      - cluster.name=es-docker-cluster
+      - discovery.type=single-node
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - xpack.security.enabled=false
+    # ulimits:
+    #   memlock:
+    #     soft: -1
+    #     hard: -1
+    volumes:
+      - elk_data:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+    networks:
+      - elk
 
-  # # Logstash is a server-side data processing pipeline
-  # logstash:
-  #   container_name: logstash
-  #   image: docker.elastic.co/logstash/logstash:8.9.0
-  #   # command: logstash -f /usr/share/logstash/pipeline/logstash_1.conf
-  #   volumes:
-  #     - ./project/logstash/:/usr/src/logstash/
-  #   ports:
-  #     - "5959:5959"
-  #   depends_on:
-  #     - elasticsearch
-  #   networks:
-  #     - transcendance
+  # Logstash is a server-side data processing pipeline
+  logstash:
+    container_name: logstash
+    image: docker.elastic.co/logstash/logstash:8.14.3
+    user: root
+    volumes:
+      - ./elk_data/logstash/pipeline/logstash.conf/:/usr/share/logstash/pipeline/logstash.conf:ro
+      - ./elk_data/logstash/pipeline/logstash2.conf/:/usr/share/logstash/pipeline/logstash2.conf:ro
+      - ./project/logs:/logs
+    ports:
+      - 5959:5959
+      - 5959:5959/tcp
+    environment:
+      LS_JAVA_OPTS: "-Xmx256m -Xms256m"
+    networks:
+      - elk
+      - transcendance
+    depends_on:
+      - elasticsearch
+    healthcheck:
+      test: curl http://localhost:5959
+      interval: 10s
+      timeout: 1s
+      retries: 2
+      start_period: 5s
 
   # # Kibana is used for data visualization
-  # kibana:
-  #   container_name: kibana
-  #   image: docker.elastic.co/kibana/kibana:8.9.0
-  #   ports:
-  #     - "5601:5601"
-  #   depends_on:
-  #     - elasticsearch
-  #   networks:
-  #     - transcendance
-  #     - devops
+  kibana:
+    container_name: kibana
+    image: docker.elastic.co/kibana/kibana:8.14.3
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+    ports:
+      - 5601:5601
+    networks:
+      - elk
+    depends_on:
+      - elasticsearch
 
 volumes:
   postgres_data:
-  # es-data:
+  elk_data:
+    driver: local
 
-  # Created another network for devops_front
 networks:
   transcendance:
     name: transcendance
     driver: bridge
-  # devops:
-  #   name: devops
-  #   driver: bridge
+  elk:
+    name: elk
+    driver: bridge

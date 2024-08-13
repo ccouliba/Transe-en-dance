@@ -32,7 +32,7 @@ function Login() {
 
 	
 	return `
-		<div class="container mt-5">
+		<div class="container text-center mt-5">
 			<h1>${window.trans.btnLogin}</h1> 
 			 ${LoginForm()}
 			<p class="mt-3">
@@ -49,14 +49,14 @@ function LoginForm() {
 	return `
 		<form id="loginForm">
 			<div class="form-floating" id="profilePage">
-				<input type="text" class="form-control" name="username" id="username" autocomplete="username" placeholder="Username" required>
+				<input type="text" class="form-control" name="username" id="username" autocomplete="username" placeholder="${window.trans.username}" required>
 				<label for="username">${window.trans.username}</label>
 			</div>
 			<div class="form-floating" id="profilePage">
-				<input type="password" class="form-control" name="password" id="password" autocomplete="current-password" placeholder="Password" required>
+				<input type="password" class="form-control" name="password" id="password" autocomplete="current-password" placeholder="${window.trans.password}" required>
 				<label for="password">${window.trans.password}</label>
 			</div>
-			<button type="submit" class="btn btn-primary">${window.trans.btnLogin}</button>
+			<button type="submit" class="btn btn-primary">Login</button>
 		</form>
 	`;
 }
@@ -80,22 +80,22 @@ function handleLogin(event) {
 	let url = `/pong/api/login/`;
 	httpPostJson(url, { username, password })
 	.then(response => {
-		if (!response.ok) throw new Error('Network response was not ok'); // Verifier si la reponse est OK
+		if (!response.ok) throw new Error(`${window.trans.netAnsNotOK}`); // Verifier si la reponse est OK
 		return response.json(); // Convertir la reponse en JSON
 	})
 	.then(data => {
 		if (data.status === 'success') {
 			localStorage.setItem('userToken', 'true'); // Stocker le token de l'utilisateur
-			alert('Login successful!'); 
+			alert(`${window.trans.successLogin}`); 
 			changePage('#home');
 			// changePage('#profile'); // Rediriger vers la page de profil
 		} else {
-			alert('Login failed: ' + data.message); 
+			alert(`${window.trans.failLogin}: ` + data.message); 
 		}
 	})
 	.catch(error => {
-		console.error('Error:', error); 
-		alert('An error occurred during login. Please ensure that the information you provide is accurate and correct.'); 
+		console.error(`${window.trans.error}:`, error); 
+		alert(`${window.trans.loginErrorRetry}.`); 
 	});
 }
 
@@ -122,7 +122,7 @@ window.addEventListener("load", function () {
 		localStorage.setItem("userToken", "true");
 
 		// Afficher une alerte pour informer l'utilisateur du succes de la connexion
-		alert("Login successful!");
+		alert(`${window.trans.successLogin}`);
 
 		// Verifier si la fonction changePage est definie
 		if (typeof changePage === "function") {
@@ -133,7 +133,7 @@ window.addEventListener("load", function () {
 
 		} else {
 			// Afficher une erreur dans la console si changePage n'est pas definie
-			console.error("changePage function is not defined");
+			console.error(`${window.trans.undefinedChangePage}`);
 
 			// Fallback : Changer directement le hash de l'URL pour naviguer vers la page du profil
 			window.location.hash = "#profile";

@@ -7,6 +7,7 @@ requests==2.25.1 # for api connection
 python-gettext==5.0
 
 # Fo devops
+python-dotenv>=1.0.0
 python-logstash>=0.4.8
 elasticsearch==8.0.0
 elasticsearch-dsl==8.12.0

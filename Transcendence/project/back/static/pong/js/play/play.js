@@ -34,7 +34,7 @@ function Play() {
 			<div class="container mt-5">
 				<h1>${window.trans.gameEnded}!</h1>
 				<div class="mt-4">
-					<h2>Final scores:</h2>
+					<h2>${window.trans.finalScores}:</h2>
 					<p>${playState.player1Username}: ${playState.player1Score}</p>
 					<p>${playState.player2Username}: ${playState.player2Score}</p>
 				</div>
@@ -49,18 +49,18 @@ function Play() {
 			? `
 				<div class="container mt-5">
 					<h1>${window.trans.tournamentMatch}</h1>
-					<p>Waiting for game to start...</p>
+					<p>${window.trans.waitingForGame}...</p>
 					<p>${playState.player1Username} vs ${playState.player2Username}</p>
-					<button id="startTournamentMatchBtn" class="btn btn-primary mt-3">Start Match</button>
+					<button id="startTournamentMatchBtn" class="btn btn-primary mt-3">${window.trans.match}</button>
 				</div>
 			`
 			: `
 				<div class="container mt-5">
-					<h1>Pong game</h1>
+					<h1>${window.trans.pongGame}</h1>
 					<form id="start-game-form">
 						<div class="mb-3">
 							<label for="player1Username" class="form-label">${window.trans.firstPlayerUsername}</label>
-							<p id="player1UsernameDisplay">${playState.player1Username || 'Loading...'}</p>
+							<p id="player1UsernameDisplay">${playState.player1Username || `${window.trans.loading}...`}</p>
 						</div>
 						<div class="mb-3">
 							<label for="player2Username" class="form-label">${window.trans.secondPlayerUsername}</label>
@@ -135,7 +135,7 @@ function startGame(event) {
 		playState.player2Username = document.getElementById("player2Username").value;
 
 		if (playState.player1Username === playState.player2Username) {
-			alert("A player cannot play against themselves. Please enter different usernames.");
+			alert(`${window.trans.cantPlayAgainstYourself}.`);
 			return;
 		}
 	}
@@ -155,13 +155,13 @@ function startGame(event) {
 				playState.player2Username = body.player2Username;
 				mountComponent(Play);
 				initializeGame();
-			} else if (status === 404 && body.error === 'One or both players not found') {
+			} else if (status === 404 && body.error === "One or both players not found") {
 				// affiche une alerte si un ou les deux joueurs ne sont pas trouvés
-				alert('One or both players not found');
+				alert(`${window.trans.oneOrTwoPlayersNotFound}`);
 				playState.gameStarted = false; 
 			} else {
 				// gere les autres erreurs
-				console.error('Error:', body.error);
+				console.error(`${window.trans.error}:`, body.error);
 			}
 		})
 	}
@@ -199,7 +199,7 @@ function getCurrentUser() {
 	return httpGetJson('/pong/api/games/get_current_user/')
 	.then(response => response.json())
 	.catch(error => {
-		console.error('Error:', error);
+		console.error(`${window.trans.error}:`, error);
 		return null;
 	});
 }

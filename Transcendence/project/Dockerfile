@@ -2,7 +2,7 @@
 FROM python:3.11.4-slim-buster
 
 # set work directory
-WORKDIR /usr/src/back
+WORKDIR /usr/src/backend
 
 # set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
@@ -16,7 +16,7 @@ COPY ./requirements.txt .
 RUN pip install -r requirements.txt &&\
 	pip install reportlab &&\
 	pip install pytz &&\
-	python -m pip install Pillow\
+	python -m pip install Pillow
 	
 # copy project
 COPY . .

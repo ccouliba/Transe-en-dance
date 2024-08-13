@@ -14,6 +14,7 @@ from rest_framework.authtoken.models import Token
 from back.decorators.Logging import loggingFunction
 from django.utils import timezone
 from django.db import transaction
+from dotenv import load_dotenv
 # import logging
 # from logstash.middleware.LogMiddleware import LoggingFunction
 
@@ -26,7 +27,7 @@ from back.utils import load_env
 #loading env variables for external login with api42
 current_dir = os.path.dirname(os.path.abspath(__file__))
 env_path = os.path.join(current_dir, "../../../.utils/.env")
-load_env(env_path)
+load_dotenv(env_path)
 
 
 @ensure_csrf_cookie

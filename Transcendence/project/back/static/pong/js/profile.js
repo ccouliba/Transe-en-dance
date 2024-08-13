@@ -4,8 +4,8 @@ var profileState = {
 	email: "", // email de l'utilisateur
 	firstname: "", // prenom de l'utilisateur
 	lastname: "", // nom de famille de l'utilisateur
-	langue: localStorage.getItem('selectedLanguage') || 'English',
-	avatar_url: "",
+	langue: localStorage.getItem('selectedLanguage') || 'Français',
+	avatar: "",
 	wins: 0,
 	losses: 0,
 	total_games: 0,
@@ -186,15 +186,17 @@ function EditUsername() {
 
 	return `
 		<form id="edit-username" class="mt-3">
-			<div class="input-group">
+			<div class="form-floating w-50">
 				<input 
 					type="text" 
 					class="form-control"
 					id="username" 
-					name="username" 
+					name="username"
+					placeholder="${window.trans.modify} ${window.trans._username}" 
 					value="${profileState.username}"
 					aria-label="new username"
 				/>
+				<label for="username">${window.trans.modify} ${window.trans._username}</label>
 				<button class="btn btn-primary" type="submit">${window.trans.modify}</button>
 			</div>
 		</form> 	
@@ -216,8 +218,9 @@ function EditEmail() {
 	});
 	return `
 		<form id="edit-email" class="mt-3">
-			<div class="input-group">
-				<input type="text" class="form-control" id="email" name="email" value="${profileState.email}" aria-label="new email"/>
+			<div class="form-floating w-50">
+				<input type="text" class="form-control" id="email" name="email" placeholder="${window.trans.modify} ${window.trans._email}" value="${profileState.email}" aria-label="new email"/>
+				<label for="email>"${window.trans.modify} ${window.trans._email}</label>
 				<button class="btn btn-primary" type="submit">${window.trans.modify}</button>
 			</div>
 		</form>
@@ -239,15 +242,17 @@ function EditFirstname() {
 	});
 	return `
 	<form id="edit-first-name" class="mt-3">
-		<div class="input-group">
+		<div class="form-floating w-50">
 			<input 
 				type="text" 
 				class="form-control" 
 				name="firstname" 
 				id="firstname"
+				placeholder="${window.trans.modify} ${window.trans._firstName}"
 				value="${profileState.firstname}" 
 				aria-label="new first name"
 			/>
+			<label for="firstname">${window.trans.modify} ${window.trans._firstName}</label>
 			<button class="btn btn-primary" type="submit">${window.trans.modify}</button>
 		</div>
 	</form>
@@ -269,15 +274,17 @@ function EditLastname() {
 	});
 	return `
 	<form id="edit-last-name" class="mt-3">
-		<div class="input-group">
+		<div class="form-floating">
 			<input 
 				type="text" 
 				class="form-control" 
 				name="lastname"
-				id="lastname" 
+				id="lastname"
+				placeholder="${window.trans.modify} ${window.trans._lastName}"
 				value="${profileState.lastname}" 
 				aria-label="new last name"
 			/>
+			<label for="lastname">${window.trans.modify} ${window.trans._lastName}</label>
 			<button class="btn btn-primary" type="submit">${window.trans.modify}</button>
 		</div>
 	</form>
@@ -416,7 +423,7 @@ function EditPassword() {
 	// retourne le formulaire html pour changer le mot de passe
 	return `
 	<form id="edit-password-form" class="mt-3">
-		<div class="input-group mt-3">
+		<div class="form-floating mt-3 w-50">
 			<input 
 				type="password" 
 				class="form-control" 
@@ -425,8 +432,9 @@ function EditPassword() {
 				placeholder="${window.trans.oldPassword}" 
 				required
 			/>
+			<label for="old_password">${window.trans.oldPassword}</label>
 		</div>
-		<div class="input-group mt-3">
+		<div class="form-floating mt-3 w-50">
 			<input 
 				type="password" 
 				class="form-control"
@@ -435,8 +443,9 @@ function EditPassword() {
 				placeholder="${window.trans.newPassword}"
 				required
 			/>
+			<label for="new_password1">${window.trans.newPassword}</label>
 		</div>
-		<div class="input-group mt-3">
+		<div class="form-floating mt-3 w-50">
 			<input 
 				type="password" 
 				class="form-control"
@@ -445,6 +454,7 @@ function EditPassword() {
 				placeholder="${window.trans.confirmNewPassword}" 
 				required
 			/>
+			<label for="new_password2">${window.trans.confirmNewPassword}</label>
 		</div>
 		<button class="btn btn-primary mt-3" type="submit">${window.trans.change} ${window.trans._password}</button>
 	</form>
@@ -453,29 +463,27 @@ function EditPassword() {
 
 
 function handleDeleteAccount() {
-	if (confirm("Are you sure you want to delete your account? This action cannot be undone.")) {
-		// fetch('/pong/api/profile/soft_delete_user/', {
-		// 	method: 'POST',
-		// 	credentials: 'include',
-		// 	headers: {
-		// 		'Content-Type': 'application/json',
-		// 		'X-CSRFToken': getCookie('csrftoken') 
-		// 	},
-		// })
-		let url = `/pong/api/profile/soft_delete_user/`
-		httpPostJson(url, {})
+	if (confirm(`${window.trans.confirmDelAcc}`)) {
+		fetch('/pong/api/profile/soft_delete_user/', {
+			method: 'POST',
+			credentials: 'include',
+			headers: {
+				'Content-Type': 'application/json',
+				'X-CSRFToken': getCookie('csrftoken') 
+			},
+		})
 		.then(response => response.json())
 		.then(data => {
 			if (data.status === 'success') {
-				alert("Your account has been successfully deleted.");
+				alert(`${window.trans.accDeleted}.`);
 				changePage(Login);
 			} else {
-				alert("An error occurred while deleting your account. Please try again.");
+				alert(`${window.trans.errDeletingAccRetry}`);
 			}
 		})
 		.catch(error => {
-			console.error('Error:', error);
-			alert("An error occurred while deleting your account. Please try again.");
+			console.error(`${window.trans.error}`, error);
+			alert(`${window.trans.errDeletingAccRetry}`);
 		});
 	}
 }

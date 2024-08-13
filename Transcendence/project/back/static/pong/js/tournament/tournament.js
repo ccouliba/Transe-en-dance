@@ -65,7 +65,7 @@ function loadTournamentState() {
 	httpGetJson('/pong/api/tournament/latest_tournament/')
 		.then(response => {
 			if (!response.ok) {
-				throw new Error(`HTTP error! status: ${response.status}`);
+				throw new Error(`${window.trans.httpError} status: ${response.status}`);
 			}
 			return response.json();
 		})
@@ -96,7 +96,7 @@ function createTournament(event) {
 	const name = document.getElementById('tournamentName').value;
 
 	if (!name) {
-		alert('The tournament name is required.');
+		alert(`${window.trans.tournamentNameReq}.`);
 		return;
 	}
 	let url = '/pong/api/tournament/create/'
@@ -104,29 +104,29 @@ function createTournament(event) {
 	.then(response => response.json())
 	.then(data => {
 		if (data.status === 'success') {
-			alert('Tournament created successfully!');
+			alert(`${window.trans.successCreateTournament}`);
 			tournamentState.tournament = data.tournament
 			changePage("#tournament")
 		} else {
-			alert('Error creating tournament: ' + data.message);
+			alert(`${window.trans.errCreateTournament}: ` + data.message);
 		}
 	})
 	.catch(error => {
-		console.error('Error:', error);
-		alert('An error occurred while creating the tournament.');
+		console.error(`${window.trans.error}:`, error);
+		alert(`${window.trans.errCreatingTournament}.`);
 	});
 }
 
 function addParticipant(event) {
 	event.preventDefault();
 	if (!tournamentState.tournament || !tournamentState.tournament.id) {
-		alert("You must create a tournament first");
+		alert(`${window.trans.mustCreateTournament}`);
 		return;
 	}
 	const participant = document.getElementById('participant').value.trim();
 
 	if (!participant) {
-		alert('Please enter a username.');
+		alert(`${window.trans.enterUsername}.`);
 		return;
 	}
 	let url = `/pong/api/tournament/${tournamentState.tournament.id}/add_participants/` 
@@ -135,28 +135,28 @@ function addParticipant(event) {
 	httpPostJson(url, payload)
 	.then(response => {
 		if (!response.ok) {
-			throw new Error(`HTTP error! status: ${response.status}`);
+			throw new Error(`${window.trans.httpError} status: ${response.status}`);
 		}
 		return response.json();
 	})
 	.then(data => {
 		if (data.status === 'success' || data.status === 'warning') {
 			if (data.added_participants.length > 0) {
-				alert(`Participant ${participant} added successfully!`);
+				alert(`${window.trans.participant} ${participant} ${window.trans.addedSuccessfully}!`);
 				document.getElementById('participant').value = '';  // Clear the input field
 				updateParticipantsList(data.added_participants[0]);
 			} else if (data.already_in_tournament.length > 0) {
-				alert(`${participant} is already in the tournament.`);
+				alert(`${participant} ${window.trans.alreadyInTournament}.`);
 			} else if (data.not_found_participants.length > 0) {
-				alert(`User ${participant} not found. Please make sure the user is registered.`);
+				alert(`${window.trans.user} ${participant} ${window.trans.notFound}. ${window.trans.checkRegister}.`);
 			}
 		} else {
-			alert('Error adding participant: ' + data.message);
+			alert(`${window.trans.errAddPart}: ` + data.message);
 		}
 	})
 	.catch(error => {
-		console.error('Error:', error);
-		alert('An error occurred while adding the participant. Please try refreshing the page.');
+		console.error(`${window.trans.error}:`, error);
+		alert(`${window.trans.errorAddingParticipant}.`);
 	});
 }
 
@@ -166,18 +166,18 @@ function addParticipant(event) {
 function addAlias(event) {
 	event.preventDefault();
 	if (!tournamentState.tournament || !tournamentState.tournament.id) {
-		alert("You must create a tournament first");
+		alert(`${window.trans.mustCreateTournament}`);
 		return;
 	}
 	const username = document.getElementById('username').value.trim();
 	const alias = document.getElementById('alias').value.trim();
 
 	if (!username || !alias) {
-		alert('Please enter both username and alias.');
+		alert(`${window.trans.bothUsernameAndAlias}`);
 		return;
 	}
 	if (!tournamentState.tournament.participants.includes(username)) {
-		alert('The entered username is not a participant in this tournament.');
+		alert(`${window.trans.notAParticipant}.`);
 		return;
 	}
 	
@@ -185,13 +185,13 @@ function addAlias(event) {
 	httpPostJson(url, { username: username, alias: alias })
 	.then(response => {
 		if (!response.ok) {
-			throw new Error(`HTTP error! status: ${response.status}`);
+			throw new Error(`${window.trans.httpError} status: ${response.status}`);
 		}
 		return response.json();
 	})
 	.then(data => {
 		if (data.status === 'success') {
-			alert(`Alias "${alias}" added successfully for user "${username}"!`);
+			alert(`${window.trans.alias} "${alias}" ${window.trans.addSuccessFor} "${username}"!`);
 			document.getElementById('username').value = '';  // Clear the username input
 			document.getElementById('alias').value = '';     // Clear the alias input
 			
@@ -204,12 +204,12 @@ function addAlias(event) {
 			// Update the UI
 			updateAliasesList();
 		} else {
-			alert('Error adding alias: ' + data.message);
+			alert(`${window.trans.errAddAlias}: ` + data.message);
 		}
 	})
 	.catch(error => {
-		console.error('Error:', error);
-		alert('An error occurred while adding alias: ' + error.message);
+		console.error(`${window.trans.error}:`, error);
+		alert(`${window.trans.errAddingAlias}:` + error.message);
 	});
 }
 
@@ -273,7 +273,7 @@ function updateParticipantsList(newParticipant) {
 			participantsList.appendChild(newItem);
 		}
 	} else {
-		console.error('Participants list element not found');
+		console.error(`${window.trans.participantsListElemNotFound}`);
 	}
 
 	// Update the tournamentState
@@ -284,7 +284,7 @@ function updateParticipantsList(newParticipant) {
 
 function startTournament() {
 	if (!tournamentState.tournament) {
-		alert('No tournament available to start.');
+		alert(`${window.trans.noTournamentAvail}.`);
 		return;
 	}
 
@@ -292,21 +292,22 @@ function startTournament() {
 	httpPostJson(url, {})
 	.then(response => {
 		if (!response.ok) {
-			throw new Error(`HTTP error! status: ${response.status}`);
+			throw new Error(`${window.trans.httpError} status: ${response.status}`);
 		}
 		return response.json();
 	})
 	.then(data => {
 		if (data.status === 'success') {
-			alert('Tournament started successfully!');
+			alert(`${window.trans.startTournamentSuccess}`);
 			tournamentState.tournament.is_started = true;
 			mountComponent(TournamentMatchmaking);
 		} else {
-			alert('Error starting tournament: ' + data.message);
+			alert(`${window.trans.errStartTournament}` + data.message);
 		}
 	})
 	.catch(error => {
-		alert('An error occurred while starting the tournament. Please enter correct and accurate informations');
+		console.error(`${window.trans.error}`, error);
+		alert(`${window.trans.errStartingTournament}: ` + error.message);
 	});
 }
 
@@ -327,12 +328,12 @@ function finishTournament() {
 	console.log(isTournamentFinished(matchmakingState.matches), matchmakingState.matches)
 	if (!isTournamentFinished(matchmakingState.matches))
 	{
-		alert("Can not finish tournament if there are remaining matches")
+		alert(`${window.trans.cantFinishTournament}`)
 		return
 	}
 
 	if (!tournamentState.tournament || !tournamentState.tournament.is_started) {
-		alert('No active tournament to finish.');
+		alert(`${window.trans.noActiveTournament}.`);
 		return;
 	}
 
@@ -341,13 +342,13 @@ function finishTournament() {
 	httpPostJson(url, {})
 	.then(response => {
 		if (!response.ok) {
-			throw new Error(`HTTP error! status: ${response.status}`);
+			throw new Error(`${window.trans.httpError} status: ${response.status}`);
 		}
 		return response.json();
 	})
 	.then(data => {
 		if (data.status === 'success') {
-			alert('Tournament finished successfully!');
+			alert(`${window.trans.successFinishTournament}`);
 			// tournamentState.tournament.is_started = false;
 			// tournamentState.tournament = null;
 			// console.log("finishtournament noramelemnt")
@@ -358,12 +359,12 @@ function finishTournament() {
 			}
 			mountComponent(TournamentMatchmaking);
 		} else {
-			alert('Error finishing tournament: ' + data.message);
+			alert(`${window.trans.errFinishTournament}: ` + data.message);
 		}
 	})
 	.catch(error => {
-		console.error('Error:', error);
-		alert('An error occurred while finishing the tournament: ' + error.message);
+		console.error(`${window.trans.error}:`, error);
+		alert(`${window.trans.errFinishingTournament}: ` + error.message);
 	});
 }
 

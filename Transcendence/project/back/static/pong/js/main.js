@@ -75,7 +75,7 @@ let routes = {
 	"#profile": () => mountComponent(Profile),
 	"#friends": () => mountComponent(Friends),
 	"#friends_list": () => mountComponent(FriendsList),
-
+	"#ia":() => mountComponent(IA), 
 	"#404": () => mountComponent(Page404),
 	"#tournament": () => mountComponent(Tournament),
 	"#logout": () => mountComponent(Logout),
@@ -171,7 +171,7 @@ window.changePage = function (url) {
 			// La verification est terminee meme en cas d'erreur
 		
 			// Afficher l'erreur dans la console
-			console.error("Error:", error);
+			console.error(`${window.trans.error}:`, error);
 			
 			
 		});
