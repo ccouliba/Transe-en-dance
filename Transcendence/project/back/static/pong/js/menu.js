@@ -26,9 +26,8 @@ function Menu() {
                             <li class="nav-item flex-grow-1 text-center">
                                 <a class="nav-link" aria-current="page" href="#match_history" id="navbarHistoryLink" onclick="changePage('#match_history'); return false;">${window.trans.matchHistory}</a>
                             </li>
-                            <!-- Lien pour Single Player -->
                             <li class="nav-item flex-grow-1 text-center">
-                                <a class="nav-link" aria-current="page" href="#ia" id="navbarIaLink" onclick="toggleCanvas(); changePage('#ia'); return false;">${window.trans.singlePlayer}</a>
+                                <a class="nav-link" aria-current="page" href="#privacy_policy" id="navbarHistoryLink" onclick="changePage('#privacy_policy'); return false;">${window.trans.privacyPolicy}</a>
                             </li>
                         </ul>
                         <ul class="navbar-nav ms-auto">

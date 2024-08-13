@@ -12,7 +12,6 @@ function Home() {
 	let pageHistory = ['home'];
 	let currentIndex = 0;
 
-	// Définition interne des "pages" du tutoriel
 	const pages = {
 		home: () => generateContent('home'),
 		concept: () => generateContent('concept'),
