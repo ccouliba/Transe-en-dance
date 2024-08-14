@@ -45,7 +45,7 @@ function FriendsList() {
         <ul id="friends-status-list" class="list-group mb-4">
             ${friendsState.friends.map(friend => `
                 <li class="list-group-item d-flex justify-content-between align-items-center">
-                    ${friend.username} (${friend.email}) - <span class="friend-status">${friend.isOnline ? "online" : "offline"}</span>
+                    ${friend.username} (${friend.email}) - <span class="friend-status">${friend.isOnline ?  window.trans.online : window.trans.offline}</span>
                 </li>
             `).join('')}
         </ul>

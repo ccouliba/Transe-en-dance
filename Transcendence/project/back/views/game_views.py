@@ -127,7 +127,8 @@ def match_history(request):
 			'opponent': game.player2.username if game.player1 == user else game.player1.username,
 			'user_score': game.player1_score if game.player1 == user else game.player2_score,
 			'opponent_score': game.player2_score if game.player1 == user else game.player1_score,
-			'result': 'Win' if game.winner == user else 'Loss',
+			# 'result': 'Win' if game.winner == user else 'Loss',
+			'is_winner': game.winner == user, 
 			'date': game_time_paris.strftime("%Y-%m-%d %H:%M:%S"),
 			'is_tournament': game.is_tournament_game,
 			'tournament_name': game.tournament.name if game.tournament else None
