@@ -2,7 +2,19 @@ let inGame = false;
 let intergame;
 let interia;
 
-function initializeGame() {
+
+function IA() {
+
+    setTimeout(toggleCanvas, 1000)
+	return `
+	<div>
+		<h1>Good Luck !</h1>
+
+        
+	</div>`;
+}
+
+function initializeGameIA() {
     // Création du canvas
     var canvas = document.createElement("canvas");
     //console.log("Canvas créé:", canvas);
@@ -14,11 +26,9 @@ function initializeGame() {
     // Style pour centrer le canvas
     canvas.style.display = "block";
     canvas.style.margin = "auto";
-    canvas.style.position = "relative";
-    canvas.style.top = "50%";
-    canvas.style.transform = "translateY(-50%)";
-    //console.log("Style du canvas défini:", canvas.style);
-
+    canvas.style.position = "fixed";
+    canvas.style.top = "30vh"
+    canvas.style.left = "33vh"
     // Ajout du canvas au DOM
     document.body.appendChild(canvas);
 
@@ -52,7 +62,10 @@ function initializeGame() {
     document.addEventListener('keydown', function(e) {
         //console.log("Touche pressée:", e.key);
         if (e.key === 'ArrowUp') player.dy = -8;
-        if (e.key === 'ArrowDown') player.dy = 8;
+        if (e.key === 'ArrowDown') {
+            player.dy = 8;
+            e.preventDefault()
+        }
         if (e.key === '+') ai.dy = -8;
         if (e.key === '-') ai.dy = 8;
         if (e.key === 'Enter' && gameOver) resetGame();
@@ -309,7 +322,7 @@ function toggleCanvas() {
     if (canvas) {
         resetGame();
     } else {
-        initializeGame();
+        initializeGameIA();
     }
 }
 
@@ -325,11 +338,4 @@ function hideCanvas() {
     if (canvas) {
         document.body.removeChild(canvas);
     }
-}
-
-function IA() {
-	return `
-	<div>
-		<h1>Good Luck !</h1>
-	</div>`;
 }
