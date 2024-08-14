@@ -39,6 +39,9 @@
 	"enterUsername": "Please enter a username",
 	"_addedSuccessfully" : "added successfully",
 	"participant": "Participant",
+	"user": "User",
+	"notFound": "not found",
+	"checkRegister": "Please make sure the user is registered",
 	"alreadyInTournament": "is already in the tournament",
 	"errAddPart": "Error adding participant",
 	"errorAddingParticipant": "An error occurred while adding the participant. Please try refreshing the page",
@@ -108,6 +111,7 @@
 
 	"home": "Home",
 	"play": "Play",
+	"singlePlayer": "Single Player",
 	"tournament": "Tournament",
 	"profile": "Profile",
 	"friends": "Friends",

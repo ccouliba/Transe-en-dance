@@ -40,6 +40,9 @@
 	"enterUsername": "Introduzca un nombre de usuario",
 	"_addedSuccessfully" : "añadido con éxito",
 	"participant": "Participante",
+	"user": "El usuario",
+	"notFound": "no se ha encontrado",
+	"checkRegister": "Por favor, compruebe que está registrado",
 	"alreadyInTournament": "ya está en el torneo",
 	"errAddPart": "Error al añadir un participante",
 	"errorAddingParticipant": "Se ha producido un error al añadir el participante. Intente actualizar la página",
@@ -109,6 +112,7 @@
 
 	"home": "Inicio",
 	"play": "Jugar",
+	"singlePlayer": "Jugar solo",
 	"tournament": "Torneo",
 	"profile": "Perfil",
 	"friends": "Amigos",
