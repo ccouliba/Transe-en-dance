@@ -38,7 +38,7 @@ function Menu() {
                         </ul>
                         <ul class="navbar-nav ms-auto">
                             <li class="nav-item">
-                                <a class="nav-link" aria-current="page" href="#" onclick="logout(); rhideCanvas(); eturn false;" id="navbarLogoutLink">${window.trans.logOut}</a>
+                                <a class="nav-link" aria-current="page" href="#logout" id="navbarLogoutLink" onclick="changePage('#logout'); hideCanvas(); return false;">${window.trans.logOut}</a>
                             </li>
                         </ul>
                     </div>

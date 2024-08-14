@@ -4,7 +4,7 @@ var logoutState = {
 };
 
 // fonction pour gerer la deconnexion
-function logout() {
+function executeLogout() {
 	// verifier si l'utilisateur est deja deconnecte ou pas
 	if (logoutState.isLoggedOut) {
 		console.log("deja deconnecte");
@@ -64,7 +64,7 @@ function resetAllStates() {
 
 // fonction pour afficher le message de deconnexion
 function Logout() {
-	logout(); // appeler la fonction de deconnexion
+	executeLogout(); // appeler la fonction de deconnexion
 	return `
 		<div>
 			<h2>${window.trans.youreLoggedOut}</h2>
