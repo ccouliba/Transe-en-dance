@@ -8,6 +8,166 @@
 // 	</div>`;
 // }
 
+
+function Home() {
+	function TutorialMenu() {
+		return `
+		<div>
+			<button onclick="changePage('home')">${window.trans.home}</button>
+			<button onclick="changePage('concept')">${window.trans.SPAConcept}</button>
+			<button onclick="changePage('navigation')">${window.trans.nav}</button>
+			<button onclick="changePage('history')">${window.trans.history}</button>
+			<button onclick="changePage('structure')">${window.trans.structure}</button>
+			<button onclick="changePage('conclusion')">${window.trans.conclusion}</button>
+		</div>
+		`;
+	}
+
+	function HomeComponent() {
+		return `
+			<h2>${window.trans.welcomeSPATutorial}</h2>
+			<p>${window.trans.thisTutorial}</p>
+			<p>${window.trans.useManu}</p>
+		`;
+	}
+
+	function ConceptComponent() {
+		return `
+			<h2>${window.trans.whatIsSPA}</h2>
+			<p>${window.trans.SPAIs}</p>
+			<ul>
+				<li>${window.trans.pageRefreshNotNecessary}</li>
+				<li>${window.trans.contentIsCollected}</li>
+				<li>${window.trans.URLChange}</li>
+			</ul>
+		`;
+	}
+
+	function NavigationComponent(){
+		return `
+			<h2>${window.trans.SPANav}</h2>
+			<p>${window.trans.observeContent}</p>
+			<p>${window.trans.inSPA}</p>
+		`;
+	}
+
+	function HistoryComponent(){
+		return `
+			<h2>${window.trans.historyHandle}</h2>
+			<p>${window.trans.historyHandling}</p>
+			<p>${window.trans.tryUsing}</p>
+		`;
+
+	}
+
+	function StructureComponent(){
+		return `
+			<h2>${window.trans.SPAStructure}</h2>
+			<p>${window.trans.ourSPA}</p>
+			<ul>
+				<li>${window.trans.oneHTML}</li>
+				<li>${window.trans.allHTML}</li>
+				<li>${window.trans.eachPage}</li>
+				<li>${window.trans.backendUses}</li>
+				<li>${window.trans.miniLibSPA}</li>
+			</ul>
+			<h3>${window.trans.keyFunctions}</h3>
+			<ul>
+				<li><code>changePage(url)</code> : ${window.trans.changePage}</li>
+				<li><code>mountComponent(componentFunction, data)</code> : ${window.trans.mountComponent}</li>
+				<li><code>bindEvent(state, cssSelector, event, callback)</code> : ${window.trans.bindEvent}</li>
+				<li><code>httpGetJson(url)</code> ${window.trans.and} <code>httpPostJson(url, payload)</code> : ${window.trans.httpFunctions}</li>
+			</ul>
+		`;
+	}
+
+	function ConclusionComponent() {
+		return `
+			<h2>${window.trans.conclusion}</h2>
+			<p>${window.trans.youBrowsed}</p>
+			<ul>
+				<li>${window.trans.dynamicLoad}</li>
+				<li>${window.trans.navigationWithoutReload}</li>
+				<li>${window.trans.navHistory}</li>
+			</ul>
+			<p>${window.trans.keepOnExploring}</p>
+		`;
+	}
+
+	function Page404Component() {
+		return `
+			${TutorialMenu()}
+			<div>404 - Page non trouvée</div>    
+		`;
+	}
+
+	let pages = {
+		home: () => mountComponent(HomeComponent),
+		concept: () => mountComponent(ConceptComponent),
+		navigation: () => mountComponent(NavigationComponent),
+		history: () => mountComponent(HistoryComponent),
+		structure: () => mountComponent(StructureComponent),
+		page404: () => mountComponent(Page404Component),
+		conclusion: () => mountComponent(ConclusionComponent)
+	};
+
+	function changePage(pageName) {
+		if (typeof pages[pageName] === "undefined") {
+			mountComponent(Page404);
+			history.pushState({ page: "page404" }, "", "page404");
+			return;
+		}
+		pages[pageName]();
+		history.pushState({ page: pageName }, '', pageName);
+	}
+
+	function mountComponent(componentFunction) {
+		document.getElementById("app").innerHTML = TutorialMenu() + componentFunction();
+	}
+
+	window.onpopstate = function(event) {
+		if (event.state && event.state.page) {
+			if (typeof pages[event.state.page] === "function") {
+				pages[event.state.page]();
+			} else {
+				mountComponent(Page404);
+			}
+		} else {
+			mountComponent(HomeContent);
+		}
+	};
+
+	document.addEventListener('click', function(event) {
+		if (event.target.tagName === 'BUTTON' && event.target.onclick) {
+			event.preventDefault();
+			const pageNameMatch = event.target.getAttribute('onclick').match(/changePage\('(\w+)'\)/);
+			if (pageNameMatch) {
+				changePage(pageNameMatch[1]);
+			}
+		}
+	});
+
+	mountComponent(HomeContent);
+
+	return TutorialMenu() + HomeContent();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 function Home() {
 	let pageHistory = ['home'];
 	let currentIndex = 0;
@@ -144,7 +304,6 @@ function Home() {
 		}
 	};
 
-	// Rendre les fonctions nécessaires accessibles globalement
 	window.homeTutorial = {
 		changePage: changePage
 	};
@@ -153,5 +312,4 @@ function Home() {
 	return generateContent('home');
 }
 
-// Assurez-vous que la fonction Home est accessible globalement
 window.Home = Home;
