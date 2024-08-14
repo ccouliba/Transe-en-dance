@@ -15,7 +15,7 @@ function Menu() {
                                 <a class="nav-link" aria-current="page" href="#play" id="navbarPlayLink" onclick="changePage('#play'); hideCanvas(); return false;">${window.trans.play}</a>
                             </li>
                             <li class="nav-item flex-grow-1 text-center">
-                                <a class="nav-link" aria-current="page" href="#ia" id="iaLink" onclick="toggleCanvas(); changePage('#ia'); return false;">
+                                <a class="nav-link" aria-current="page" href="#ia" id="iaLink" onclick="changePage('#ia'); return false;">
                                     Single player
                                 </a>
                             </li>
