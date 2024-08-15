@@ -40,6 +40,9 @@
 	"enterUsername": "Veuillez entrer un nom d'utilisateur",
 	"_addedSuccessfully" : "ajouté avec succès",
 	"participant": "Participant",
+	"user": "L'utilisateur",
+	"notFound": "n'a pas été trouvé",
+	"checkRegister": "Veuillez vérifier qu'il est inscrit",
 	"alreadyInTournament": "est déjà dans le tournoi",
 	"errAddPart": "Erreur lors de l'ajout du participant",
 	"errorAddingParticipant": "Une erreur s'est produite lors de l'ajout du participant. Veuillez essayer d'actualiser la page",
@@ -110,6 +113,7 @@
 
 	"home": "Accueil",
 	"play": "Jouer",
+	"singlePlayer": "Jouer seul",
 	"tournament": "Tournoi",
 	"profile": "Profil",
 	"friends": "Amis",
@@ -117,7 +121,10 @@
 	"logOut": "Déconnexion",
 	
 	"welcome": "Bienvenue au Pong",
-
+	
+	"player": "Le joueur",
+	"_won": "a gagné",
+	"pressEnter": "Appuie sur Entrer pour rejouer",
 	"pongGame": "Jeu du Pong",
 	"firstPlayerEmail": "Mail du premier joueur",
 	"secondPlayerEmail": "Mail du deuxième joueur",
@@ -174,7 +181,9 @@
 	"gameStats": "Statistiques de jeu",
 	"wins": "Victores",
 	"_wins": "victoires",
+	"win": "Victoire",
 	"losses": "Défaites",
+	"loss": "Défaite",
 	"totalGamesPlayed": "Total de parties jouées",
 	"winRate": "Taux de victoires",
 	"editInfos": "Modifies ton profil",

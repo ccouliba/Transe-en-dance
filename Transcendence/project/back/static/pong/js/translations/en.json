@@ -39,6 +39,9 @@
 	"enterUsername": "Please enter a username",
 	"_addedSuccessfully" : "added successfully",
 	"participant": "Participant",
+	"user": "User",
+	"notFound": "not found",
+	"checkRegister": "Please make sure the user is registered",
 	"alreadyInTournament": "is already in the tournament",
 	"errAddPart": "Error adding participant",
 	"errorAddingParticipant": "An error occurred while adding the participant. Please try refreshing the page",
@@ -105,9 +108,10 @@
 	"navigationWithoutReload": "Navigation without page reload",
 	"navHistory": "Browser history management",
 	"keepOnExploring": "Keep exploring the application to see these principles in action!",
-
+	
 	"home": "Home",
 	"play": "Play",
+	"singlePlayer": "Single Player",
 	"tournament": "Tournament",
 	"profile": "Profile",
 	"friends": "Friends",
@@ -115,7 +119,9 @@
 	"logOut": "Log out",
 	
 	"welcome": "Welcome to The Pong",
-
+	
+	"player": "The player",
+	"_won": "won",
 	"pongGame": "Pong Game",
 	"firstPlayerEmail": "First player's email",
 	"secondPlayerEmail": "Second player's email",
@@ -172,7 +178,9 @@
 	"gameStats": "Game Statistics",
 	"wins": "Wins",
 	"_wins": "wins",
+	"win": "Win",
 	"losses": "Losses",
+	"loss": "Loss",
 	"totalGamesPlayed": "Total Games Played",
 	"winRate": "Win Rate",
 	"editInfos": "Edit your profile",

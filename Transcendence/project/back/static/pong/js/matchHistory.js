@@ -68,7 +68,7 @@ function loadMatchHistory() {
 			// matchHistoryState.history = data.match_history;
 			matchHistoryState.history = data.match_history.map(game => ({
 				...game,
-				result: game.is_winner ? window.trans.wins : window.trans.losses 
+				result: game.is_winner ? window.trans.win : window.trans.loss 
 			}));
 			matchHistoryState.isLoaded = true;
 		} catch (e) {

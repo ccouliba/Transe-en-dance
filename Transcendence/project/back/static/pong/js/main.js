@@ -82,8 +82,8 @@ let routes = {
 	"#login": () => mountComponent(Login),
 	"#register": () => mountComponent(Register),
 	"#match_history": () => mountComponent(MatchHistory),
-	'#matchmaking': () => mountComponent(TournamentMatchmaking),
-	"#privacy_policy": () => mountComponent(PrivacyPolicy)
+	"#matchmaking": () => mountComponent(TournamentMatchmaking),
+	"#privacy_policy": () => mountComponent(PrivacyPolicy),
 };
 
 function cleanStates(){

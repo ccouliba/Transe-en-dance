@@ -205,7 +205,7 @@ function Home() {
 				content += `
 					<h2>${window.trans.welcomeSPATutorial}</h2>
 					<p>${window.trans.thisTutorial}</p>
-					<p>${window.trans.useManu}</p>
+					<p>${window.trans.useMenu}</p>
 				`;
 				break;
 			case 'concept':
