@@ -38,7 +38,7 @@
 	"errCreatingTournament": "Ha ocurrido un error al crear el torneo",
 	"mustCreateTournament": "Primero hay que crear un torneo",
 	"enterUsername": "Introduzca un nombre de usuario",
-	"_addedSuccessfully" : "añadido con éxito",
+	"addedSuccessfully" : "añadido con éxito",
 	"participant": "Participante",
 	"user": "El usuario",
 	"notFound": "no se ha encontrado",

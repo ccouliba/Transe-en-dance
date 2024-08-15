@@ -37,7 +37,7 @@
 	"errCreatingTournament": "An error occurred while creating the tournament",
 	"mustCreateTournament": "You must create a tournament first",
 	"enterUsername": "Please enter a username",
-	"_addedSuccessfully" : "added successfully",
+	"addedSuccessfully" : "added successfully",
 	"participant": "Participant",
 	"user": "User",
 	"notFound": "not found",
