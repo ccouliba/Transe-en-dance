@@ -159,6 +159,7 @@ function startGame(event) {
 				// affiche une alerte si un ou les deux joueurs ne sont pas trouvés
 				alert(`${window.trans.oneOrTwoPlayersNotFound}`);
 				playState.gameStarted = false; 
+				
 			} else {
 				// gere les autres erreurs
 				console.error(`${window.trans.error}:`, body.error);

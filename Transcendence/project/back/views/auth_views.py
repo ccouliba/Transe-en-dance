@@ -15,6 +15,7 @@ from back.decorators.Logging import loggingFunction
 from django.utils import timezone
 from django.db import transaction
 from dotenv import load_dotenv
+from django.db.models import Q
 # import logging
 # from logstash.middleware.LogMiddleware import LoggingFunction
 
@@ -113,11 +114,26 @@ def get_user_from_api(request, access_token):
 		# print(f"User info API response status: {user_info_response.status_code}")
 		# print(f"User info API response content: {user_info_response.text}")
 		user_info_response.raise_for_status()
-		
 		user_info = user_info_response.json()
-		user, created = User.objects.get_or_create(username=user_info['login'])
-		if created:
-			email = user_info.get('email', '')
+  
+		username = user_info['login']
+		email = user_info.get('email', '')
+  
+		# if a user with this username or email already exists
+		existing_user = User.objects.filter(Q(username=username) | Q(email=email)).first()
+		if existing_user:
+			# If a user already exists just log them in
+			user = existing_user
+			if user.email != email:
+				user.email = email
+				user.save()
+		else:
+			# If no user exists with this username or email, create a new one
+			user = User.objects.create(username=username, email=email)
+		
+		# user, created = User.objects.get_or_create(username=user_info['login'])
+		# if created:
+		# 	email = user_info.get('email', '')
 			avatar = user_info.get('image', {}).get('link')
 			first_name = user_info.get('first_name', '')
 			last_name = user_info.get('last_name', '')
