@@ -146,16 +146,7 @@ function sendProfileToBackend(payload) {
 	// console.log("authenticated:", !!localStorage.getItem('userToken'));
 	let url = `/pong/api/profile/update`; // url de l'API pour mettre a jour le profil
 
-	// fetch(url, {
-	// 		method: "POST", // methode POST pour envoyer les donnees
-	// 		credentials: "include", // envoie les cookies avec la requete = important pour l'authentification
-	// 		headers: {
-	// 			'Content-Type': 'application/json', // specifie que le contenu envoye est au format JSON
-	// 			'Authorization': `Bearer ${localStorage.getItem('userToken')}`
-	// 		},
-	// 		body: JSON.stringify(payload) // convertir l'objet payload en chaine JSON
-	// 	})
-		httpPostJson(url, payload)
+	return httpPostJson(url, payload)
 		.then(response => {
 			if (!response.ok) {
 				return response.text().then(text => {
@@ -183,9 +174,12 @@ function EditUsername() {
 		profileState.username = usernameInput; // mettre a jour profileState
 		sendProfileToBackend({
 			'username': usernameInput
-		}); // envoyer les donnees au backend
-		mountComponent(Profile); // monter le composant Profile
-		profileState.isLoaded = false; // marquer les donnees du profil comme non chargees
+		}).then(() => {
+			profileState.isLoaded = false
+			mountComponent(Profile);
+		})
+		 // monter le composant Profile
+		 // marquer les donnees du profil comme non chargees
 	});
 
 	return `
@@ -217,8 +211,9 @@ function EditEmail() {
 		sendProfileToBackend({
 			'email': emailInput
 		}); // envoyer les donnees au backend
+		profileState.isLoaded = false;
 		mountComponent(Profile); // monter le composant Profile
-		profileState.isLoaded = false; // marquer les donnees du profil comme non chargees
+		 // marquer les donnees du profil comme non chargees
 	});
 	return `
 		<form id="edit-email" class="mt-3">
@@ -249,8 +244,9 @@ function EditFirstname() {
 		sendProfileToBackend({
 			'firstname': firstnameInput
 		}); // envoyer les donnees au backend
+		profileState.isLoaded = false;
 		mountComponent(Profile); // monter le composant Profile
-		profileState.isLoaded = false; // marquer les donnees du profil comme non chargees
+		 // marquer les donnees du profil comme non chargees
 	});
 	return `
 	<form id="edit-first-name" class="mt-3">
@@ -281,8 +277,9 @@ function EditLastname() {
 		sendProfileToBackend({
 			'lastname': lastnameInput
 		}); // envoyer les donnees au backend
+		profileState.isLoaded = false;
 		mountComponent(Profile); // monter le composant Profile
-		profileState.isLoaded = false; // marquer les donnees du profil comme non chargees
+		 // marquer les donnees du profil comme non chargees
 	});
 	return `
 	<form id="edit-last-name" class="mt-3">

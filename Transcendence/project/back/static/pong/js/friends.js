@@ -86,7 +86,7 @@ function loadFriendsData() {
 				friendsState.friendStatusInterval = setInterval(getFriendsStatus, 5 * 1000);
 			}
 		})
-		.catch(error => console.error(`${window.trans.error}:`, error));
+		// .catch(error => console.error(`${window.trans.error}:`, error));
 }
 
 // function getFriendsStatus(){
