@@ -125,9 +125,6 @@ async function loadProfileFromBackend() {
 
 	let url = `/pong/api/profile`; // url de l'API pour recuperer les donnees du profil
 	httpGetJson(url)// envoyer une requete http au backend (vue)
-		.then(response => {
-			return response.json();
-		}) // transformer la reponse en JSON
 		.then(profile => { // promesse
 			// mise a jour de profileState avec les donnees recues
 			profileState = {

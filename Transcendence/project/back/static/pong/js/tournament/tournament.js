@@ -8,7 +8,7 @@ var tournamentState = {
 function Tournament() {
 
 	let tournament = tournamentState.tournament
-	
+
 	if (!tournamentState.isLoaded) {
 		loadTournamentState();
 		return `<div class="container mt-5"><p>${window.trans.loadTournamentData}...</p></div>`;
@@ -64,12 +64,7 @@ function loadTournamentState() {
 
 	// Récupérer les données du dernier tournoi
 	httpGetJson('/pong/api/tournament/latest_tournament/')
-		.then(response => {
-			if (!response.ok) {
-				throw new Error(`${window.trans.httpError} status: ${response.status}`);
-			}
-			return response.json();
-		})
+		
 		.then(data => {
 			tournamentState.tournament = data.tournament;
 			if (tournamentState.tournament) {
@@ -95,7 +90,7 @@ function loadTournamentState() {
 function createTournament(event) {
 	event.preventDefault();
 	const name = document.getElementById('tournamentName').value;
-
+	console.log(name)
 	if (!name) {
 		alert(`${window.trans.tournamentNameReq}.`);
 		return;
@@ -284,15 +279,16 @@ function updateParticipantsList(newParticipant) {
 }
 
 function startTournament() {
+
 	if (!tournamentState.tournament) {
 		alert(`${window.trans.noTournamentAvail}.`);
 		return;
 	}
 
-	// if (!tournamentState.tournament.participants || tournamentState.tournament.participants.length < 2) {
-	// 	alert(`${window.trans.needAtLeastTwoParticipants}.`);
-	// 	return;
-	// }
+	if (!tournamentState.tournament.participants || tournamentState.tournament.participants.length < 2) {
+		alert(`${window.trans.needAtLeastTwoParticipants}.`);
+		return;
+	}
 
 	let url = `/pong/api/tournament/${tournamentState.tournament.id}/start/` 
 	httpPostJson(url, {})
@@ -356,7 +352,6 @@ function finishTournament() {
 		if (data.status === 'success') {
 			alert(`${window.trans.successFinishTournament}`);
 			// tournamentState.tournament.is_started = false;
-			// tournamentState.tournament = null;
 			// console.log("finishtournament noramelemnt")
 			matchmakingState.tournamentFinished = true;
 			// changePage("#tournament");

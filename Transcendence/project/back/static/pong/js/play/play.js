@@ -197,7 +197,6 @@ function restartGame() {
 
 function getCurrentUser() {
 	return httpGetJson('/pong/api/games/get_current_user/')
-	.then(response => response.json())
 	.catch(error => {
 		console.error(`${window.trans.error}:`, error);
 		return null;

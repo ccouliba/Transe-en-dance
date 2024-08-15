@@ -100,8 +100,6 @@ function cleanStates(){
 function checkAuth(){
 	let url = `/pong/api/check_auth/`
 	return 	httpGetJson(url)
-	// Transformer la reponse en JSON
-	.then((response) => response.json())
 }
 
 // Variable pour eviter plusieurs verifications d'authentification en meme temps
@@ -177,9 +175,26 @@ window.changePage = function (url) {
 		});
 };
 
+// fonction pour reinitialiser tous les etats
+function handleUnauthenticated() {
+	tournamentState = { isLoaded: false, tournament: null, showAddParticipants: false };
+	friendsState = { friends: [], pendingRequests: [] };
+	// reinitialiser l'etat du profil utilisateur
+	profileState = {
+		username: "", // reinitialiser le nom d'utilisateur
+		email: "", // reinitialiser l'email
+		firstname: "", // reinitialiser le prenom
+		lastname: "", // reinitialiser le nom de famille
+		langue: "",
+		id: "", // reinitialiser l'id
+		friends: [], // reinitialiser la liste d'amis
+		isLoaded: false // indiquer que les donnees ne sont pas chargees
+	};
+	logoutState.isLoggedOut = false; // reinitialiser l'etat de deconnexion
+}
 
-function httpGetJson(url){
 
+function httpGetJson(url) {
 	return fetch(url, {
 		method: 'GET',
 		headers: {
@@ -188,7 +203,19 @@ function httpGetJson(url){
 		},
 		credentials: 'include'
 	})
+	.then(response => {
+		if (!response.ok) {
+			if (response.status === 401 || response.status === 403) {
+				handleUnauthenticated();
+				throw new Error('Unauthenticated');
+			}
+			throw new Error('Network response was not ok');
+		}
+		return response.json();
+	});
 }
+
+
 
 function httpPostJson(url, payload){
 	return fetch(url, {
@@ -222,18 +249,18 @@ function mountComponent(componentFunction, data) {
 
 
 function getCSRFToken() {
-    let cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-        const cookies = document.cookie.split(';');
-        for (let i = 0; i < cookies.length; i++) {
-            const cookie = cookies[i].trim();
-            if (cookie.substring(0, 10) === 'csrftoken=') {
-                cookieValue = decodeURIComponent(cookie.substring(10));
-                break;
-            }
-        }
-    }
-    return cookieValue;
+	let cookieValue = null;
+	if (document.cookie && document.cookie !== '') {
+		const cookies = document.cookie.split(';');
+		for (let i = 0; i < cookies.length; i++) {
+			const cookie = cookies[i].trim();
+			if (cookie.substring(0, 10) === 'csrftoken=') {
+				cookieValue = decodeURIComponent(cookie.substring(10));
+				break;
+			}
+		}
+	}
+	return cookieValue;
 }
 
 // Fonction pour obtenir la valeur d'un cookie par son nom

@@ -123,12 +123,6 @@ function getMatchMakingFromBackend(){
 	let url = `/pong/api/tournament/${tournamentState.tournament.id}/matchmaking/` 
 
 	return httpGetJson(url)
-		.then(response => {
-			if (!response.ok) {
-				throw new Error(`${window.trans.httpError} status: ${response.status}`);
-			}
-			return response.json();
-		})
 }
 
 

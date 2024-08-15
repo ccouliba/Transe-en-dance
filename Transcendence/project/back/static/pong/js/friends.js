@@ -73,7 +73,6 @@ function FriendsList() {
 function loadFriendsData() {
 	let url = `/pong/api/friends_data/`;
 	httpGetJson(url)
-		.then(response => response.json()) // Convertir la reponse en JSON
 		.then(data => {
 			friendsState.friends = data.friends; // mise a jour de la liste des amis
 			friendsState.sentRequests = data.sentRequests; // mise a jour des demandes envoyees
@@ -113,12 +112,7 @@ function getFriendsStatus(){
 	let url = `/pong/api/friends/get-status/`;
 	
 	return httpGetJson(url)
-		.then(response => {
-			if (!response.ok) {
-				throw new Error('Network response was not ok');
-			}
-			return response.json();
-		})
+		
 		.then(payload => {
 			if (payload.error) {
 				console.error('Server error:', payload.error);

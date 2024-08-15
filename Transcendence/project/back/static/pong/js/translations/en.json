@@ -256,5 +256,7 @@
 	"decline": "I decline",
 	"iAccept": "I accept",
 
-	"weCantProceed": "We cannot proceed with your registration without your consent"
+	"weCantProceed": "We cannot proceed with your registration without your consent", 
+
+	"needAtLeastTwoParticipants": "A minimum of 2 participants is required to start a tournament."
 }
