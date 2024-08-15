@@ -121,7 +121,10 @@
 	"logOut": "Déconnexion",
 	
 	"welcome": "Bienvenue au Pong",
-
+	
+	"player": "Le joueur",
+	"_won": "a gagné",
+	"pressEnter": "Appuie sur Entrer pour rejouer",
 	"pongGame": "Jeu du Pong",
 	"firstPlayerEmail": "Mail du premier joueur",
 	"secondPlayerEmail": "Mail du deuxième joueur",

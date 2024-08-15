@@ -108,7 +108,7 @@
 	"navigationWithoutReload": "Navigation without page reload",
 	"navHistory": "Browser history management",
 	"keepOnExploring": "Keep exploring the application to see these principles in action!",
-
+	
 	"home": "Home",
 	"play": "Play",
 	"singlePlayer": "Single Player",
@@ -119,7 +119,9 @@
 	"logOut": "Log out",
 	
 	"welcome": "Welcome to The Pong",
-
+	
+	"player": "The player",
+	"_won": "won",
 	"pongGame": "Pong Game",
 	"firstPlayerEmail": "First player's email",
 	"secondPlayerEmail": "Second player's email",

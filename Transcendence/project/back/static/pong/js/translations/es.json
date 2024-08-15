@@ -120,7 +120,9 @@
 	"logOut": "Desconexión",
 	
 	"welcome": "Bienvenido al Pong",
-
+	
+	"player": "El jugador",
+	"_won": "ha ganado",
 	"pongGame": "Juego de Pong",
 	"firstPlayerEmail": "Correo electrónico del primer jugador",
 	"secondPlayerEmail": "Correo electrónico del segundo jugador",

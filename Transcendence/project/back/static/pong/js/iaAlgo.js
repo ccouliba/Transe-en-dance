@@ -8,9 +8,7 @@ function IA() {
     setTimeout(toggleCanvas, 1000)
 	return `
 	<div>
-		<h1>Good Luck !</h1>
-
-        
+		<h1>${window.trans.goodLuck}</h1>
 	</div>`;
 }
 
@@ -129,7 +127,7 @@ function initializeGameIA() {
             //console.log("But! Score du joueur:", playerScore);
             if (playerScore >= maxScore) {
                 gameOver = true;
-                winner = 'Player';
+                winner = `${window.trans.player}`;
                 //console.log("Le joueur gagne!");
             } else {
                 resetBall();
@@ -259,15 +257,15 @@ function initializeGameIA() {
         ctx.fillStyle = '#fff';
         ctx.font = '24px Arial';
         ctx.textAlign = 'center';
-        ctx.fillText(`Player: ${playerScore} - AI: ${aiScore}`, canvas.width / 2, 30);
+        ctx.fillText(`${window.trans.player}: ${playerScore} - AI: ${aiScore}`, canvas.width / 2, 30);
 
         // Afficher message de fin de jeu
         if (gameOver) {
             ctx.font = '48px Arial';
             ctx.textAlign = 'center';
-            ctx.fillText(winner + " Wins!", canvas.width / 2, canvas.height / 2);
+            ctx.fillText(winner + ` ${window.trans._won}!`, canvas.width / 2, canvas.height / 2);
             ctx.font = '24px Arial';
-            ctx.fillText("Press Enter to Restart", canvas.width / 2, canvas.height / 2 + 40);
+            ctx.fillText(`${window.trans.pressEnter}`, canvas.width / 2, canvas.height / 2 + 40);
         }
     }
 
