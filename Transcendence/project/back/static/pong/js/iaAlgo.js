@@ -12,6 +12,14 @@ function IA() {
 	</div>`;
 }
 
+function clearIAGame(){
+    let canvas = document.getElementById("myCanvas")
+    if (!canvas){
+        return
+    }
+    canvas.remove()
+}
+
 function initializeGameIA() {
     // Création du canvas
     var canvas = document.createElement("canvas");
@@ -312,10 +320,7 @@ function initializeGameIA() {
 function toggleCanvas() {
     
     clearInterval(intergame);
-    //console.log(intergame);
     inGame = true;
-    //console.log("in game");
-    //console.log(inGame);
     var canvas = document.getElementById('myCanvas');
     if (canvas) {
         resetGame();

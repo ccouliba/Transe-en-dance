@@ -95,6 +95,8 @@ function cleanStates(){
 	}
 
 	resetLoaded()
+
+	clearIAGame()
 }
 
 function checkAuth(){
