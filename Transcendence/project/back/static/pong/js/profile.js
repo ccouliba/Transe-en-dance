@@ -15,10 +15,17 @@ var profileState = {
 
 // fonction pour afficher le profil utilisateur
 function Profile() {
+	if (!profileState.isLoaded) {
+		loadProfileFromBackend();
+		return '<div>Loading profile...</div>';
+	}
+	
 	 	
-	// charge les donnees du profil depuis le backend
-	loadProfileFromBackend(); // get
-	let winRate = profileState.win_rate.toFixed(2)
+	// // charge les donnees du profil depuis le backend
+	// loadProfileFromBackend(); // get
+	
+	let winRate = 0.00
+	winRate = profileState.win_rate.toFixed(2)
 	bindEvent(profileState, "#deleteAccountBtn", "click", handleDeleteAccount);
 	
 	let avatarUrl = profileState.avatar_url 
@@ -130,7 +137,7 @@ async function loadProfileFromBackend() {
 				// total_games: profile.wins + profile.losses,
 				// win_rate: profile.total_games > 0 ? (profile.wins / profile.total_games) * 100 : 0
 			}; // utilisation d'un spread operator
-			console.log(profile)
+			// console.log(profile)
 			profileState.isLoaded = true;
 			mountComponent(Profile); // monter le composant Profile
 			// marquer les donnees du profil comme chargees
@@ -484,7 +491,8 @@ function handleDeleteAccount() {
 		.then(data => {
 			if (data.status === 'success') {
 				alert(`${window.trans.accDeleted}.`);
-				changePage(Login);
+				// changePage(Login);
+				changePage("#login");
 			} else {
 				alert(`${window.trans.errDeletingAccRetry}`);
 			}

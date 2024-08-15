@@ -110,8 +110,8 @@ def get_user_from_api(request, access_token):
 			headers={'Authorization': f"Bearer {access_token}"},
 			cookies=None
 		)
-		print(f"User info API response status: {user_info_response.status_code}")
-		print(f"User info API response content: {user_info_response.text}")
+		# print(f"User info API response status: {user_info_response.status_code}")
+		# print(f"User info API response content: {user_info_response.text}")
 		user_info_response.raise_for_status()
 		
 		user_info = user_info_response.json()

@@ -150,12 +150,12 @@ window.changePage = function (url) {
 
 				// Si l'URL n'existe pas dans les routes definies
 			if (typeof routes[url] === "undefined") {
-				// Afficher la page 404
-				mountComponent(Page404);
-				// Mettre a jour l'historique du navigateur avec la page 404
-				history.pushState({
-					page: "#404"
-				}, "", "#404");
+				// // Afficher la page 404
+				// mountComponent(Page404);
+				// // Mettre a jour l'historique du navigateur avec la page 404
+				// history.pushState({
+				// 	page: "#404"
+				// }, "", "#404");
 				return;
 			}
 

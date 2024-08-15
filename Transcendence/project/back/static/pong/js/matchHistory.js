@@ -62,7 +62,7 @@ function loadMatchHistory() {
 		return response.text(); // Get the raw text instead of parsing JSON immediately
 	})
 	.then(text => {
-		console.log('Raw response:', text); // Log the raw response
+		// console.log('Raw response:', text); // Log the raw response
 		try {
 			const data = JSON.parse(text); // Try to parse the JSON
 			// matchHistoryState.history = data.match_history;
