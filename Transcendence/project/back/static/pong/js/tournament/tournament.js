@@ -4,19 +4,15 @@ var tournamentState = {
 	showAddParticipants: false
 };
 
-function isTournamentFinished(matches) {
-	return matches.every(match => match.status === "finished");
-}
 
 function Tournament() {
 
 	let tournament = tournamentState.tournament
+	
 	if (!tournamentState.isLoaded) {
 		loadTournamentState();
 		return `<div class="container mt-5"><p>${window.trans.loadTournamentData}...</p></div>`;
 	}
-
-	
 	
 	if (tournament && tournament.is_started && !tournament.end_date) {
 		return TournamentMatchmaking();
@@ -41,6 +37,11 @@ function Tournament() {
 			${startTournamentButton()}
 		</div>
 	`;
+}
+
+
+function isTournamentFinished(matches) {
+	return matches.every(match => match.status === "finished");
 }
 
 function startTournamentButton() {
@@ -287,6 +288,11 @@ function startTournament() {
 		alert(`${window.trans.noTournamentAvail}.`);
 		return;
 	}
+
+	// if (!tournamentState.tournament.participants || tournamentState.tournament.participants.length < 2) {
+	// 	alert(`${window.trans.needAtLeastTwoParticipants}.`);
+	// 	return;
+	// }
 
 	let url = `/pong/api/tournament/${tournamentState.tournament.id}/start/` 
 	httpPostJson(url, {})

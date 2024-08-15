@@ -145,7 +145,7 @@ function startGame(event) {
 	playState.player2Score = 0;
 	playState.gameOver = false;
 
-	console.log(playState.isTournamentMatch, "is")
+	// console.log(playState.isTournamentMatch, "is")
 	 if (!playState.isTournamentMatch) {
 		createGameInDatabase()
 		.then(({ status, body }) => {

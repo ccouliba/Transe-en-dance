@@ -83,7 +83,7 @@ function MatchList() {
 function TournamentDetail() {
 	let winnerHtml = '';
 	// console.log("coucou")
-	console.log(matchmakingState.tournamentFinished, matchmakingState.rankings.length)
+	// console.log(matchmakingState.tournamentFinished, matchmakingState.rankings.length)
 	if (matchmakingState.tournamentFinished && matchmakingState.rankings.length > 0) {
 		const winner = matchmakingState.rankings[0];
 		winnerHtml = `
