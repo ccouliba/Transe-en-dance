@@ -65,7 +65,11 @@ function loadMatchHistory() {
 		console.log('Raw response:', text); // Log the raw response
 		try {
 			const data = JSON.parse(text); // Try to parse the JSON
-			matchHistoryState.history = data.match_history;
+			// matchHistoryState.history = data.match_history;
+			matchHistoryState.history = data.match_history.map(game => ({
+				...game,
+				result: game.is_winner ? window.trans.wins : window.trans.losses 
+			}));
 			matchHistoryState.isLoaded = true;
 		} catch (e) {
 			console.error('JSON parsing error:', e);

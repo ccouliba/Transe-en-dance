@@ -125,8 +125,8 @@ DATABASES = {
 	}
 }
 
-if os.getenv("DEV_ENV", False):
 # on localhost
+if os.getenv("DEV_ENV", False):
     DATABASES = {
         'default': {
             'ENGINE': os.getenv('SQL_ENGINE', 'django.db.backends.postgresql_psycopg2'),
