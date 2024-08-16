@@ -50,7 +50,7 @@ function startTournamentButton() {
 	 }
 	return `
 		<div class="mt-4">
-			<button id="startTournamentBtn" class="btn btn-primary">${window.trans._btnStartTournament}</button>
+			<button id="startTournamentBtn" class="btn btn-secondary">${window.trans._btnStartTournament}</button>
 		</div>
 	`;
 }

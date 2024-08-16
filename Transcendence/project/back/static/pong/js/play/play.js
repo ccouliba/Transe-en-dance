@@ -39,8 +39,8 @@ function Play() {
 					<p>${playState.player2Username}: ${playState.player2Score}</p>
 				</div>
 				${playState.isTournamentMatch 
-					? `<button id="backToTournamentBtn" class="btn btn-primary mt-3">${window.trans.backToTournament}</button>`
-					: `<button id="restartGameBtn" class="btn btn-primary mt-3">${window.trans.playAnotherGame}</button>`
+					? `<button id="backToTournamentBtn" class="btn btn-secondary mt-3">${window.trans.backToTournament}</button>`
+					: `<button id="restartGameBtn" class="btn btn-secondary mt-3">${window.trans.playAnotherGame}</button>`
 				}
 			</div>
 		`;
@@ -51,7 +51,7 @@ function Play() {
 					<h1>${window.trans.tournamentMatch}</h1>
 					<p>${window.trans.waitingForGame}...</p>
 					<p>${playState.player1Username} vs ${playState.player2Username}</p>
-					<button id="startTournamentMatchBtn" class="btn btn-primary mt-3">${window.trans.match}</button>
+					<button id="startTournamentMatchBtn" class="btn btn-secondary mt-3">${window.trans.match}</button>
 				</div>
 			`
 			: `
@@ -66,7 +66,7 @@ function Play() {
 							<label for="player2Username" class="form-label">${window.trans.secondPlayerUsername}</label>
 							<input type="text" class="form-control" id="player2Username" required>
 						</div>
-						<button type="submit" class="btn btn-primary">${window.trans.btnStartGame}</button>
+						<button type="submit" class="btn btn-secondary">${window.trans.btnStartGame}</button>
 					</form>
 					<div id="instructions" class="card p-3 mb-4">
 						<h2 class="card-title">${window.trans.instructions}</h2>

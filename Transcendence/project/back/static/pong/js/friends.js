@@ -39,7 +39,7 @@ function FriendsList() {
 	return `
 		<h1 class="mb-4">${window.trans.friendsList}</h1>
 		
-		<button class="btn btn-primary mb-3" onclick="refreshFriendsList()">${window.trans.refreshList}</button>
+		<button class="btn btn-secondary mb-3" onclick="refreshFriendsList()">${window.trans.refreshList}</button>
 		
 		<h2>${window.trans.myFriends}</h2>
 		<ul id="friends-status-list" class="list-group mb-4">
@@ -198,7 +198,7 @@ function AddFriendForm() {
 		<form id="add-friend-form" class="mt-3">
 			<div class="input-group">
 				<input type="text" class="form-control" id="friendEmail" name="friendEmail" placeholder="${window.trans.friendEmailToAdd}"/>
-				<button class="btn btn-primary" type="submit">${window.trans.add}</button>
+				<button class="btn btn-secondary" type="submit">${window.trans.add}</button>
 			</div>
 		</form>
 	`;
@@ -237,7 +237,7 @@ function AcceptFriendForm(email) {
 		<form id="accept-friend-form" class="mt-3">
 			<div class="input-group">
 				<input type="text" class="form-control" id="friendEmail" name="friendEmail" placeholder="${window.trans.friendEmailToAccept}"/>
-				<button class="btn btn-primary" type="submit">${window.trans.accept}</button>
+				<button class="btn btn-secondary" type="submit">${window.trans.accept}</button>
 			</div>
 		</form>
 	`;

@@ -37,7 +37,7 @@ function createTournamentForm() {
 				<label for="tournamentName" class="form-label">${window.trans.tournamentName} :</label>
 				<input type="text" class="form-control" id="tournamentName" required>
 			</div>
-			<button type="submit" class="btn btn-primary">${window.trans.createTournament}</button>
+			<button type="submit" class="btn btn-secondary">${window.trans.createTournament}</button>
 		</form>
 	`;
 }
@@ -56,7 +56,7 @@ function addParticipantForm() {
 					<label for="participant" class="form-label">${window.trans.add} ${window.trans._participant} :</label>
 					<input type="text" class="form-control" id="participant" required>
 				</div>
-				<button type="submit" class="btn btn-primary">${window.trans.add}</button>
+				<button type="submit" class="btn btn-secondary">${window.trans.add}</button>
 			</form>
 		</div>
 	`;
@@ -81,7 +81,7 @@ function addAliasForm() {
 					<label for="alias" class="form-label">${window.trans.alias} :</label>
 					<input type="text" class="form-control" id="alias" required>
 				</div>
-				<button type="submit" class="btn btn-primary">${window.trans.add}</button>
+				<button type="submit" class="btn btn-secondary">${window.trans.add}</button>
 			</form>
 		</div>
 	`;

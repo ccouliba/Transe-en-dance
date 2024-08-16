@@ -76,7 +76,7 @@ function MatchList() {
 //         }
 //         ${!matchmakingState.tournamentFinished ?
 //             `<button onclick="finishTournament()" class="btn btn-danger mt-4">Finish tournament</button>` :
-//             `<button onclick="startNewTournament()" class="btn btn-primary mt-4">Start New Tournament</button>`
+//             `<button onclick="startNewTournament()" class="btn btn-secondary mt-4">Start New Tournament</button>`
 //         }
 //     `;
 // }
@@ -107,7 +107,7 @@ function TournamentDetail() {
 		</ul>
 		${!matchmakingState.tournamentFinished ?
 			`<button onclick="finishTournament()" class="btn btn-danger mt-4">${window.trans.finishTournament}</button>` :
-			`<button onclick="startNewTournament()" class="btn btn-primary mt-4">${window.trans.startNewTournament}</button>`
+			`<button onclick="startNewTournament()" class="btn btn-secondary mt-4">${window.trans.startNewTournament}</button>`
 		}
 	`;
 }

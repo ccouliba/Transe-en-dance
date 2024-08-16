@@ -194,8 +194,8 @@ function EditUsername() {
 					value="${profileState.username}"
 					aria-label="new username"
 				/>
-				<label for="username">${window.trans.modify} ${window.trans._username}</label>
-				<button class="btn btn-primary" type="submit">${window.trans.modify}</button>
+				<label for="username" class="form-label">${window.trans.modify} ${window.trans._username}</label>
+				<button class="btn btn-secondary" type="submit">${window.trans.modify}</button>
 			</div>
 		</form> 	
 	`;
@@ -227,8 +227,8 @@ function EditEmail() {
 					value="${profileState.email}"
 					aria-label="new email"
 				/>
-				<label for="email">${window.trans.modify} ${window.trans._email}</label>
-				<button class="btn btn-primary" type="submit">${window.trans.modify}</button>
+				<label for="email" class="form-label">${window.trans.modify} ${window.trans._email}</label>
+				<button class="btn btn-secondary" type="submit">${window.trans.modify}</button>
 			</div>
 		</form>
 	`;
@@ -260,8 +260,8 @@ function EditFirstname() {
 				value="${profileState.firstname}" 
 				aria-label="new first name"
 			/>
-			<label for="firstname">${window.trans.modify} ${window.trans._firstName}</label>
-			<button class="btn btn-primary" type="submit">${window.trans.modify}</button>
+			<label for="firstname" class="form-label">${window.trans.modify} ${window.trans._firstName}</label>
+			<button class="btn btn-secondary" type="submit">${window.trans.modify}</button>
 		</div>
 	</form>
 	`;
@@ -293,8 +293,8 @@ function EditLastname() {
 				value="${profileState.lastname}" 
 				aria-label="new last name"
 			/>
-			<label for="lastname">${window.trans.modify} ${window.trans._lastName}</label>
-			<button class="btn btn-primary" type="submit">${window.trans.modify}</button>
+			<label for="lastname" class="form-label">${window.trans.modify} ${window.trans._lastName}</label>
+			<button class="btn btn-secondary" type="submit">${window.trans.modify}</button>
 		</div>
 	</form>
 	`;
@@ -319,7 +319,7 @@ function EditLangue() {
 		<option value="Français" id="langue" name="langue">Français 🇫🇷</option>
 		<option value="Español" id="langue" name="langue">Español 🇪🇸</option>
 	</select>
-	<button class="btn btn-primary" type="submit">${window.trans.modify}</button>
+	<button class="btn btn-secondary" type="submit">${window.trans.modify}</button>
 	</form>
 	`;
 }
@@ -366,7 +366,7 @@ function EditAvatar() {
 				accept="image/*"
 				aria-label="new avatar"
 			/>
-			<button class="btn btn-primary" type="submit">${window.trans.upload} ${window.trans._avatar}</button>
+			<button class="btn btn-secondary" type="submit">${window.trans.upload} ${window.trans._avatar}</button>
 		</div>
 	</form>
 	`;
@@ -441,7 +441,7 @@ function EditPassword() {
 				placeholder="${window.trans.oldPassword}" 
 				required
 			/>
-			<label for="old_password">${window.trans.oldPassword}</label>
+			<label for="old_password" class="form-label">${window.trans.oldPassword}</label>
 		</div>
 		<div class="form-floating mt-3 w-50">
 			<input 
@@ -452,7 +452,7 @@ function EditPassword() {
 				placeholder="${window.trans.newPassword}"
 				required
 			/>
-			<label for="new_password1">${window.trans.newPassword}</label>
+			<label for="new_password1" class="form-label">${window.trans.newPassword}</label>
 		</div>
 		<div class="form-floating mt-3 w-50">
 			<input 
@@ -463,9 +463,9 @@ function EditPassword() {
 				placeholder="${window.trans.confirmNewPassword}" 
 				required
 			/>
-			<label for="new_password2">${window.trans.confirmNewPassword}</label>
+			<label for="new_password2" class="form-label">${window.trans.confirmNewPassword}</label>
 		</div>
-		<button class="btn btn-primary mt-3" type="submit">${window.trans.change} ${window.trans._password}</button>
+		<button class="btn btn-secondary mt-3" type="submit">${window.trans.change} ${window.trans._password}</button>
 	</form>
 	`;
 }
