@@ -37,7 +37,7 @@
 	"errCreatingTournament": "An error occurred while creating the tournament",
 	"mustCreateTournament": "You must create a tournament first",
 	"enterUsername": "Please enter a username",
-	"_addedSuccessfully" : "added successfully",
+	"addedSuccessfully" : "added successfully",
 	"participant": "Participant",
 	"user": "User",
 	"notFound": "not found",
@@ -256,5 +256,7 @@
 	"decline": "I decline",
 	"iAccept": "I accept",
 
-	"weCantProceed": "We cannot proceed with your registration without your consent"
+	"weCantProceed": "We cannot proceed with your registration without your consent", 
+
+	"needAtLeastTwoParticipants": "A minimum of 2 participants is required to start a tournament."
 }

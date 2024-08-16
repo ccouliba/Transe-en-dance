@@ -153,7 +153,13 @@ def	are_user_online(friends:List[User]):
 def friends_online_status(request):
 	user = request.user
 	friends = user.friends.all()
-	statuses = are_user_online(friends)
-	# print("friends_online_status", user, statuses)
-	payload = {"statuses":statuses}
-	return JsonResponse(payload)
+	try:
+		statuses = are_user_online(friends)
+		payload = {"statuses": statuses}
+		return JsonResponse(payload)
+	except Exception as e:
+		return JsonResponse({"error": str(e)}, status=500)
+	# statuses = are_user_online(friends)
+	# # print("friends_online_status", user, statuses)
+	# payload = {"statuses":statuses}
+	# return JsonResponse(payload)

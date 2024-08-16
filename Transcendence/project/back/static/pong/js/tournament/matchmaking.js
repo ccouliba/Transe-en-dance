@@ -83,7 +83,7 @@ function MatchList() {
 function TournamentDetail() {
 	let winnerHtml = '';
 	// console.log("coucou")
-	console.log(matchmakingState.tournamentFinished, matchmakingState.rankings.length)
+	// console.log(matchmakingState.tournamentFinished, matchmakingState.rankings.length)
 	if (matchmakingState.tournamentFinished && matchmakingState.rankings.length > 0) {
 		const winner = matchmakingState.rankings[0];
 		winnerHtml = `
@@ -123,12 +123,6 @@ function getMatchMakingFromBackend(){
 	let url = `/pong/api/tournament/${tournamentState.tournament.id}/matchmaking/` 
 
 	return httpGetJson(url)
-		.then(response => {
-			if (!response.ok) {
-				throw new Error(`${window.trans.httpError} status: ${response.status}`);
-			}
-			return response.json();
-		})
 }
 
 

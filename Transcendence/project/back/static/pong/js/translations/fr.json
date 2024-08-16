@@ -38,7 +38,7 @@
 	"errCreatingTournament": "Une erreur s'est produite lors de la création du tournoi",
 	"mustCreateTournament": "Vous devez d'abord créer un tournoi",
 	"enterUsername": "Veuillez entrer un nom d'utilisateur",
-	"_addedSuccessfully" : "ajouté avec succès",
+	"addedSuccessfully" : "ajouté avec succès",
 	"participant": "Participant",
 	"user": "L'utilisateur",
 	"notFound": "n'a pas été trouvé",
@@ -259,5 +259,8 @@
 	"decline": "Je refuse",
 	"iAccept": "J'accepte",
 
-	"weCantProceed": "Nous ne pouvons pas procéder à l'inscription sans votre consentement"
+	"weCantProceed": "Nous ne pouvons pas procéder à l'inscription sans votre consentement",
+	"needAtLeastTwoParticipants": "Il faut 2 participants minimum pour commencer un tournoi."
+
+
 }

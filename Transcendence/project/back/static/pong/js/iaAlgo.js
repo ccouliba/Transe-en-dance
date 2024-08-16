@@ -5,11 +5,19 @@ let interia;
 
 function IA() {
 
-    setTimeout(toggleCanvas, 1000)
+    setTimeout(toggleCanvas, 200)
 	return `
-	<div>
+	<div id="ia-page">
 		<h1>${window.trans.goodLuck}</h1>
 	</div>`;
+}
+
+function clearIAGame(){
+    let canvas = document.getElementById("myCanvas")
+    if (!canvas){
+        return
+    }
+    canvas.remove()
 }
 
 function initializeGameIA() {
@@ -24,12 +32,16 @@ function initializeGameIA() {
     // Style pour centrer le canvas
     canvas.style.display = "block";
     canvas.style.margin = "auto";
-    canvas.style.position = "fixed";
-    canvas.style.top = "30vh"
-    canvas.style.left = "33vh"
+    //canvas.style.position = "relative";
+   // canvas.style.top = "100px"
+    // canvas.style.left = "33vh"
     // Ajout du canvas au DOM
-    document.body.appendChild(canvas);
-
+    let holder = document.getElementById("ia-page") 
+    if (!holder){
+        return
+    }
+    holder.appendChild(canvas);
+    
     const ctx = canvas.getContext('2d');
     //console.log("Contexte 2D obtenu:", ctx);
 
@@ -312,10 +324,7 @@ function initializeGameIA() {
 function toggleCanvas() {
     
     clearInterval(intergame);
-    //console.log(intergame);
     inGame = true;
-    //console.log("in game");
-    //console.log(inGame);
     var canvas = document.getElementById('myCanvas');
     if (canvas) {
         resetGame();

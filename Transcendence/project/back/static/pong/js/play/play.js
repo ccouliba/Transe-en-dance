@@ -145,7 +145,7 @@ function startGame(event) {
 	playState.player2Score = 0;
 	playState.gameOver = false;
 
-	console.log(playState.isTournamentMatch, "is")
+	// console.log(playState.isTournamentMatch, "is")
 	 if (!playState.isTournamentMatch) {
 		createGameInDatabase()
 		.then(({ status, body }) => {
@@ -159,6 +159,7 @@ function startGame(event) {
 				// affiche une alerte si un ou les deux joueurs ne sont pas trouvés
 				alert(`${window.trans.oneOrTwoPlayersNotFound}`);
 				playState.gameStarted = false; 
+				
 			} else {
 				// gere les autres erreurs
 				console.error(`${window.trans.error}:`, body.error);
@@ -197,7 +198,6 @@ function restartGame() {
 
 function getCurrentUser() {
 	return httpGetJson('/pong/api/games/get_current_user/')
-	.then(response => response.json())
 	.catch(error => {
 		console.error(`${window.trans.error}:`, error);
 		return null;

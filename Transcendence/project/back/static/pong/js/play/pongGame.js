@@ -182,7 +182,6 @@ function bindKeyboardEvents(){
 
 function updateProfileStats() {
 	httpGetJson('/pong/api/profile')
-	.then(response => response.json())
 	.then(profile => {
 		// Mettre à jour profileState avec les nouvelles stats
 		profileState = {
@@ -210,7 +209,7 @@ function finishGame(gameId, player1Score, player2Score, winnerUsername) {
 	return httpPostJson(url, payload)
 	.then(response => response.json())
 	.then(data => {
-		console.log('Game finished:', data);
+		// console.log('Game finished:', data);
 		playState.gameOver = false
 		playState.gameStarted = false
 		
@@ -253,11 +252,11 @@ function updateTournamentMatchScore(matchId, player1Score, player2Score, winner)
 		winner: winner
 	})
 	.then(response => {
-		console.log('Server response status:', response.status);
+		// console.log('Server response status:', response.status);
 		return response.json();
 	})
 	.then(data => {
-		console.log('Server response data:', data);
+		// console.log('Server response data:', data);
 		if (data.status === 'success') {
 			console.log('Tournament match score updated successfully');
 			return data;
@@ -306,12 +305,6 @@ function reloadTournamentData() {
 
 	let url = `/pong/api/tournament/${tournamentState.tournament.id}/matchmaking/`
 	return httpGetJson(url)
-		.then(response => {
-			if (!response.ok) {
-				throw new Error(`HTTP error! status: ${response.status}`);
-			}
-			return response.json();
-		})
 		.then(data => {
 			if (data.status === 'success') {
 				tournamentState.matches = data.matches;

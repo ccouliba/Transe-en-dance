@@ -55,27 +55,13 @@ function renderMatchHistory() {
 function loadMatchHistory() {
 	let url = `/pong/api/games/match_history/`
 	httpGetJson(url)
-	.then(response => {
-		if (!response.ok) {
-			throw new Error(`${window.trans.httpError} status: ${response.status}`);
-		}
-		return response.text(); // Get the raw text instead of parsing JSON immediately
-	})
-	.then(text => {
-		console.log('Raw response:', text); // Log the raw response
-		try {
-			const data = JSON.parse(text); // Try to parse the JSON
-			// matchHistoryState.history = data.match_history;
-			matchHistoryState.history = data.match_history.map(game => ({
-				...game,
-				result: game.is_winner ? window.trans.win : window.trans.loss 
-			}));
-			matchHistoryState.isLoaded = true;
-		} catch (e) {
-			console.error('JSON parsing error:', e);
-			matchHistoryState.isLoaded = true;
-			matchHistoryState.error = `${window.trans.errorParsingServerResp}`;
-		}
+	.then(data => {
+		matchHistoryState.history = data.match_history.map(game => ({
+			...game,
+			result: game.is_winner ? window.trans.win : window.trans.loss 
+		}));
+		matchHistoryState.isLoaded = true;
+		
 		updateMatchHistoryContent();
 	})
 	.catch(error => {
