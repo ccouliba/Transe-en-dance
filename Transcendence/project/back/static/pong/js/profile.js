@@ -5,7 +5,7 @@ var profileState = {
 	firstname: "", // prenom de l'utilisateur
 	lastname: "", // nom de famille de l'utilisateur
 	langue: localStorage.getItem('selectedLanguage') || 'Français',
-	avatar: "",
+	avatar_url: "",
 	wins: 0,
 	losses: 0,
 	total_games: 0,
@@ -21,7 +21,7 @@ function Profile() {
 	let winRate = profileState.win_rate.toFixed(2)
 	bindEvent(profileState, "#deleteAccountBtn", "click", handleDeleteAccount);
 	
-	let avatarUrl = profileState.avatar_url 
+	let avatarUrl = profileState.avatar_url; 
 
 	// retourne une chaine de caracteres contenant le HTML du composant Profile
 	return `
