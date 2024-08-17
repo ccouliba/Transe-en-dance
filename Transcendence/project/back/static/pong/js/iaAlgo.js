@@ -193,7 +193,6 @@ function initializeGameIA() {
 				} else {
 					simulateKey('+');
 					if (ai.y <= targetY) {
-						setInterval(updateAI, 1000);
 						simulateKey('+', false);
 						animatingAiPaddle = false;
 						//console.log("Fin de l'animation du paddle IA.");
@@ -336,9 +335,10 @@ function toggleCanvas() {
 	clearInterval(intergame);
 	inGame = true;
 	var canvas = document.getElementById('myCanvas');
-	if (canvas) {
-		resetGame();
-	} else {
+	//if (canvas) {
+		//resetGame();
+	//} 
+	if (!canvas) {
 		initializeGameIA();
 	}
 }
