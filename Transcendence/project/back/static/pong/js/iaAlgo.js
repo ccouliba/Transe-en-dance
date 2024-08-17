@@ -193,7 +193,6 @@ function initializeGameIA() {
 				} else {
 					simulateKey('+');
 					if (ai.y <= targetY) {
-						setInterval(updateAI, 1000);
 						simulateKey('+', false);
 						animatingAiPaddle = false;
 						//console.log("Fin de l'animation du paddle IA.");
