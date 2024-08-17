@@ -270,8 +270,8 @@ function initializeGameIA() {
 		ctx.font = '24px Arial';
 		ctx.textAlign = 'center';
 
-		const textPlayer = `${window.trans.player}: ${playerScore}`;
-		const textAI = `AI: ${aiScore}`;
+		const textPlayer = `${playerScore}`;
+		const textAI = `${aiScore}`;
 
 		// Calculer la largeur du texte
 		const playerTextWidth = ctx.measureText(textPlayer).width;
