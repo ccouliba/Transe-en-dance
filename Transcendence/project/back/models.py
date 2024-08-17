@@ -1,4 +1,4 @@
-from django.db import models
+from django.db import models # un model => une table dans la bdd et un attribut => une colonne 
 from django.utils import timezone
 from django.contrib.auth.models import AbstractUser, Group, Permission
 from django.db.models import UniqueConstraint
@@ -6,82 +6,75 @@ from django.utils import timezone
 from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.db.models import UniqueConstraint
-
-from django.db.models import F #pour effectuer des opérations de mise à jour directement au niveau de la base de données sans d'abord récupérer les objets en mémoire
-from django.db.models import Q #pour construire des requêtes qui nécessitent des opérations logiques telles que OR et AND
-
 from django.utils.translation import gettext_lazy as _
-# class User(AbstractUser): #https://openclassrooms.com/fr/courses/7192426-allez-plus-loin-avec-le-framework-django/7386368-personnalisez-le-modele-utilisateur
+from django.db.models import F #query expressions F() : mettre à jour ou manipuler les champs de la bdd dynamiquement
+from django.db.models import Q #pour executer des requetes dans la bdd avec des operations comme OR ou AND
 
+# explication AbstractUser : #https://openclassrooms.com/fr/courses/7192426-allez-plus-loin-avec-le-framework-django/7386368-personnalisez-le-modele-utilisateur
 class User(AbstractUser):
-	creation_date = models.DateTimeField(default=timezone.now)  # Date de creation de l'utilisateur
-	langue = models.CharField(max_length=10, blank=True, null=True)  # Langue de l'utilisateur
-	avatar = models.CharField(max_length=255, blank=True, null=True)  # URL ou chemin de l'avatar de l'utilisateur
-	friends = models.ManyToManyField('self', symmetrical=True, blank=True)  # Champ pour les amis
+	creation_date = models.DateTimeField(default=timezone.now) 
+	langue = models.CharField(max_length=10, blank=True, null=True)  
+	avatar = models.CharField(max_length=255, blank=True, null=True)  # avatar de l'utilisateur est stocke sous forme de chemin ou URL
+	friends = models.ManyToManyField('self', symmetrical=True, blank=True)  # manytomany => un ami peut avoir plusieurs amis et chaque ami peut etre lie à plusieurs amis. Et symmetrical => si  A est ami  B alors B sera automatiquement ami  A 
 	is_online = models.BooleanField(default=False)
-
 	email = models.EmailField(_("email address"), unique=True, blank=True)
-	
 	avatar = models.ImageField(upload_to='avatars/', null=True, blank=True)
-
 	last_activity = models.DateTimeField(default=timezone.now)
- 
 	wins = models.IntegerField(default=0)
 	losses = models.IntegerField(default=0)
- 
 	is_deleted = models.BooleanField(default=False)
 	deleted_at = models.DateTimeField(null=True, blank=True)
  
-	# Ajout d'un champ many-to-many pour les groupes auxquels cet utilisateur appartient
+	# les groupes auxquels cet utilisateur appartient
 	groups = models.ManyToManyField(
 		Group,  # Le modele de groupe du framework d'authentification de Django
 		related_name='pong_user_set',  # Nom unique pour eviter les conflits avec l'application d'authentification par defaut de Django
-		blank=True,  # Champ optionnel, permet de laisser ce champ vide
+		blank=True,  
 		help_text='The groups this user belongs to.',  # Texte d'aide affiche dans l'interface d'administration
 		related_query_name='pong_user',  # Nom utilise pour les requetes inverses
 	)
-	# Ajout d'un champ many-to-many pour les permissions specifiques de cet utilisateur
+ 
+	# les permissions specifiques de cet utilisateur
 	user_permissions = models.ManyToManyField(
 		Permission,  # Le modele de permission du framework d'authentification de Django
 		related_name='pong_user_permissions_set',  # Nom unique pour eviter les conflits avec l'application d'authentification par defaut de Django
-		blank=True,  # Champ optionnel, permet de laisser ce champ vide
+		blank=True, 
 		help_text='Specific permissions for this user.',  # Texte d'aide affiche dans l'interface d'administration
 		related_query_name='pong_user_permissions',  # Nom utilise pour les requetes inverses
 	)
+ 
 	# Methode __str__ : retourner une representation en chaine de caracteres de l'utilisateur
 	def __str__(self):
 		return self.username 
+
 	def was_active_now(self):
 		self.last_activity = timezone.now()
-	# def get_avatar_url(self):
-	# 	if self.avatar and hasattr(self.avatar, 'url'):
-	# 		return self.avatar.url
-	# 	else:
-	# 		return f"{settings.STATIC_URL}pong/images/default_avatar.png"
+
 	def get_avatar_url(self):
-		if self.avatar and hasattr(self.avatar, 'url'):
+		if self.avatar and hasattr(self.avatar, 'url'): #The hasattr() method returns true if an object has the given named attribute and false if it does not.
 			if self.avatar.name.startswith('http'):
 				return self.avatar.name
 			else:
 				return self.avatar.url
 		else:
-			return f"{settings.STATIC_URL}pong/images/default_avatar.png"
+			return f"{settings.STATIC_URL}pong/images/default_avatar.png" #f-strings => inserer variables ou expressions 
+
 	@property #https://docs.python.org/3/library/functions.html#property
+	#permet d'appeler la methode comme un attribut => player.total_games au lieu de player.total_games()
 	def total_games(self):
 		return self.wins + self.losses
+
 	@property
 	def win_rate(self):
 		if self.total_games > 0:
 			return (self.wins / self.total_games) * 100
 		return 0
 
-
 	def register_from_42_login(self, email, avatar_url:str, firstname:str, lastname:str):
 		self.email = email
 		self.set_avatar(avatar_url)
 		self.first_name = firstname
 		self.last_name = lastname
-
 
 	def set_avatar(self, avatar_url: str):
 		if avatar_url.startswith('http'):
@@ -98,7 +91,7 @@ class User(AbstractUser):
 		self.is_online = False
 		self.save()
 
-#class qui permet de gerer les demandes d'amis. Si demande acceptee alors sauvegarde l'ami dans friends (cf. class user et dans bdd : `pong_user_friends``) 
+#class qui permet de gerer les demandes d'amis. Si demande acceptee alors sauvegarde l'ami dans friends (cf. class user est dans bdd : `back_user_friends``) 
 class Friendship(models.Model):
 	id_user_1 = models.ForeignKey(User, related_name='friendship_sender', on_delete=models.CASCADE, null = True, blank = True)
 	id_user_2 = models.ForeignKey(User, related_name='friendship_receiver', on_delete=models.CASCADE, null = True, blank = True)
@@ -126,11 +119,6 @@ class Tournament(models.Model):
 			self.created_at = timezone.now()
 	def __str__(self):
 		return self.name
-
-
-
-
-
 
 class Game(models.Model):
 	player1 = models.ForeignKey(User, related_name='player1_games', on_delete=models.CASCADE,  null=True, blank=True)
@@ -165,15 +153,6 @@ class Game(models.Model):
 		else:
 			self.player1.losses = F('losses') + 1
 			self.player2.wins = F('wins') + 1
-  
-  
-   
-
-
-
-
-
-
 
 class Composed(models.Model):
 	tournament = models.ForeignKey(Tournament, on_delete=models.CASCADE)
