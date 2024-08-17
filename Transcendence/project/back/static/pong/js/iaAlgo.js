@@ -336,9 +336,10 @@ function toggleCanvas() {
 	clearInterval(intergame);
 	inGame = true;
 	var canvas = document.getElementById('myCanvas');
-	if (canvas) {
-		resetGame();
-	} else {
+	//if (canvas) {
+		//resetGame();
+	//} 
+	if (!canvas) {
 		initializeGameIA();
 	}
 }
