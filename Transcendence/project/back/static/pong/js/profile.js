@@ -10,6 +10,7 @@ var profileState = {
 	losses: 0,
 	total_games: 0,
 	win_rate: 0,
+	has_password: "",
 	isLoaded: false // indique si les donnees du profil ont ete chargees (initialement faux)
 }
 
@@ -378,8 +379,13 @@ function EditPassword() {
 	bindEvent(profileState, "#edit-password-form", "submit", event => {
 		// empeche le comportement par defaut du formulaire ie soumission et rechargement de la page
 		event.preventDefault();
-		// recupere la valeur du champ 'old_password' du formulaire
-		const oldPassword = event.target.elements.old_password.value;
+
+		let  oldPassword = ""
+		
+		if (profileState.has_password){
+			oldPassword = event.target.elements.old_password.value;
+		}
+		
 		// recupere la valeur du champ 'new_password1' du formulaire
 		const newPassword1 = event.target.elements.new_password1.value;
 		// recupere la valeur du champ 'new_password2' du formulaire
@@ -432,6 +438,7 @@ function EditPassword() {
 	// retourne le formulaire html pour changer le mot de passe
 	return `
 	<form id="edit-password-form" class="mt-3">
+	${profileState.has_password ? `
 		<div class="form-floating mt-3 w-50">
 			<input 
 				type="password" 
@@ -443,6 +450,7 @@ function EditPassword() {
 			/>
 			<label for="old_password" class="form-label">${window.trans.oldPassword}</label>
 		</div>
+		` : ''}
 		<div class="form-floating mt-3 w-50">
 			<input 
 				type="password" 

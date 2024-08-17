@@ -109,7 +109,8 @@ def profile_view(request):
 		'losses': losses,
 		'total_games': total_games,
 		'win_rate': win_rate,
-		'total_score': game_stats['total_score']
+		'total_score': game_stats['total_score'],
+		'has_password': bool(user.password) 
 	}
 
 	return JsonResponse(profile_data)
@@ -150,36 +151,40 @@ def user_updated_profile(request):
 	return render(request, 'pong/update.html', {'form': form})
 
 # Cette vue permet a l'utilisateur connecte de changer son mot de passe en utilisant un formulaire fourni par Django
+
 @login_required
 @require_POST
 def edit_password_view(request):
 	print(f"User authenticated: {request.user.is_authenticated}")
 	print(f"Username: {request.user.username}")
-	try:
 		# tente de charger les donnees JSON du corps de la requete
-		data = json.loads(request.body)
-		# creer un formulaire de changement de mot de passe avec les donnees de l'utilisateur
-		form = PasswordChangeForm(user=request.user, data={
-			'old_password': data.get('old_password'),
-			'new_password1': data.get('new_password1'),
-			'new_password2': data.get('new_password2')
-		})
-		# verifie si le formulaire est valide
-		if form.is_valid():
-			# Si le formulaire est valide => enregistre le nouveau mot de passe
-			form.save()
-			# Mise a jour de la session d'authentification de l'utilisateur pour eviter la deconnexion
-			update_session_auth_hash(request, form.user) #methode Django
-			return JsonResponse({'status': 'success'})
-		else:
-			# Si le formulaire n'est pas valide :
-			return JsonResponse({'status': 'error', 'errors': form.errors}, status=400)
-	except json.JSONDecodeError:
-		# Si une erreur de decodage JSON se produit :
-		return JsonResponse({'status': 'error', 'message': 'Invalid JSON'}, status=400)
-	except Exception as e:
-		# Si une autre erreur se produit :
-		return JsonResponse({'status': 'error', 'message': str(e)}, status=500)
+	data = json.loads(request.body)
+	user = request.user
+	if not user.password: #pour api42 utilise set_password
+		if data.get('new_password1') != data.get('new_password2'):
+				return JsonResponse(
+				{'status': 'error', 'errors': {'new_password2': ['The two password fields didn\'t match.']}},
+				status=400
+			)
+		user.set_password(data.get('new_password1'))
+		user.save()
+		update_session_auth_hash(request, user)
+		return JsonResponse({'status': 'success'})
+
+	form = PasswordChangeForm(user=user, data={
+		'old_password': data.get('old_password'),
+		'new_password1': data.get('new_password1'),
+		'new_password2': data.get('new_password2')
+	})
+
+	if form.is_valid():
+		# Si le formulaire est valide => enregistre le nouveau mot de passe
+		form.save()
+		# Mise a jour de la session d'authentification de l'utilisateur pour eviter la deconnexion
+		update_session_auth_hash(request, form.user) #methode Django
+		return JsonResponse({'status': 'success'})
+
+	return JsonResponse({'status': 'error', 'errors': form.errors}, status=400)
 
 
 
