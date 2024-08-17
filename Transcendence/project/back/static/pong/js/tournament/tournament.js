@@ -80,7 +80,7 @@ function loadTournamentState() {
 			mountComponent(Tournament);			
 		})
 		.catch(error => {
-			console.error('Error loading tournaments:', error);
+			console.error(`${window.trans.errorLoadiTournament}: `, error);
 			tournamentState.isLoaded = true;
 			tournamentState.error = error.message;
 			mountComponent(Tournament); // Monter le composant Tournament même en cas d'erreur

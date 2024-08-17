@@ -398,25 +398,25 @@ function EditPassword() {
 			.then(data => {
 				// si le changement de mot de passe est reussi
 				if (data.status === 'success') {
-					alert('password changed successfully');
+					alert(`${window.trans.successPasswordChange}`);
 					// marque les donnees de profil comme non chargees
 					// recharge le composant du profil
 					mountComponent(Profile);
 					profileState.isLoaded = false;
 				} else {
 					// prepare un message d'erreur en cas d'echec
-					let errorMessage = "there were errors changing your password:\n\n";
+					let errorMessage = `${window.trans.errPasswordChange}:\n\n`;
 					// si l'ancien mot de passe est incorrect
 					if (data.errors.old_password) {
-						errorMessage += "- your old password was entered incorrectly. please try again.\n";
+						errorMessage += `${window.trans.errOldPasswordRetry}\n`;
 					}
 					// si le nouveau mot de passe ne repond pas aux criteres de securite
 					if (data.errors.new_password2) {
-						errorMessage += "- please choose a more secure password.\n";
-						errorMessage += "\nfor a strong password:\n";
-						errorMessage += "- use a mix of uppercase and lowercase letters, numbers, and symbols\n";
-						errorMessage += "- avoid using personal information like birthdates or names\n";
-						errorMessage += "- make it at least 12 characters long\n";
+						errorMessage += `${window.trans.chooseMoreSecurePassword}\n`;
+						errorMessage += `\n${window.trans.forStrongPassword}\n`;
+						errorMessage += `- ${window.trans.useMixOfSymbols}\n`;
+						errorMessage += `- ${window.trans.avoidPersonalInfo}\n`;
+						errorMessage += `- ${window.trans.minimumLengthPassword}\n`;
 					}
 					// affiche le message d'erreur
 					alert(errorMessage);
@@ -424,8 +424,8 @@ function EditPassword() {
 			})
 			// traite les erreurs de la requete
 			.catch(error => {
-				console.error('error:', error);
-				alert('an error occurred. please try again.');
+				console.error(`${window.trans.error}:`, error);
+				alert(`${window.trans.errorRetry}`);
 			});
 	});
 

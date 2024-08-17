@@ -28,7 +28,7 @@ function executeLogout() {
 	})
 	.then(data => {
 		if (data.status === 'success') {
-			console.log('deconnexion reussie');
+			console.log(`${window.trans.successLogOut}`);
 			logoutState.isLoggedOut = true; // mettre a jour le boolean de logoutstate
 			localStorage.clear(); // effacer le localstorage
 			sessionStorage.clear(); // effacer le sessionstorage

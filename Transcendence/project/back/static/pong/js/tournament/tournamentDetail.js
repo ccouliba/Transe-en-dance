@@ -8,11 +8,11 @@ function Participants() {
 		
 	const participantsList = tournament.participants && tournament.participants.length > 0
 		? tournament.participants.map(p => `<li>${p}</li>`).join('')
-		: '<li>No participants yet</li>';
+		: `<li>${window.trans.noParticipants}</li>`;
 
 	const aliasesList = tournament.aliases && tournament.aliases.length > 0
 		? tournament.aliases.map(a => `<li>${a.username}: ${a.alias}</li>`).join('')
-		: '<li>No aliases yet</li>';
+		: `<li>${window.trans.noAliases}</li>`;
 
 	return `
 	<div class="tournament-details">

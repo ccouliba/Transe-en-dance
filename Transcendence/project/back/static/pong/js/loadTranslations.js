@@ -13,7 +13,7 @@ function loadTranslations(newLang) {
 		window.trans = trans;
 	})
 	.catch(error => {
-		console.error('Error fetching translations:', error);
+		console.error(`${window.trans.errFetchingTranslations}: `, error);
 	})
 }
 
