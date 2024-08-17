@@ -112,7 +112,7 @@
 	"URLChange": "The URL changes to reflect the current \"page\", but without a complete reload",
 	"SPANav": "Navigation in a SPA",
 	"observeContent": "Observe how the content changes when you click on the menu buttons without the page reloading completely.",
-	"inSPA": "Dans une SPA, la navigation est gérée par JavaScript, qui met à jour le contenu de la page et l'URL.",
+	"inSPA": "In a SPA, navigation is managed by JavaScript, which updates the page content and URL.",
 	"historyHandle": "History management",
 	"historyHandling": "A SPA must also manage the browser history to enable the use of the Previous and Next buttons.",
 	"tryUsing": "Try using your browser's navigation buttons after reading the tutorial.",
