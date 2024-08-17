@@ -287,7 +287,9 @@
 	"iAccept": "J'accepte",
 
 	"weCantProceed": "Nous ne pouvons pas procéder à l'inscription sans votre consentement",
-	"needAtLeastTwoParticipants": "Il faut 2 participants minimum pour commencer un tournoi."
+	"needAtLeastTwoParticipants": "Il faut 2 participants minimum pour commencer un tournoi.",
+	"downloadUserInfo" : "Télécharger mes données"
+
 
 
 }

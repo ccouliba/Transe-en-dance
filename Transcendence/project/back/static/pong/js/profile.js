@@ -83,6 +83,7 @@ function Profile() {
 				</div>
 			</div>
 		</div>
+
 		<div class="accordion" id="accordionExample">
 			<div class="accordion-item">
 				<h2 class="accordion-header" id="headingTwo">
@@ -106,6 +107,7 @@ function Profile() {
 					${EditAvatar()}
 					<h3 class="mt-4 mb-3">${window.trans.modify} ${window.trans._password}</h2>
 					${EditPassword()}
+					${DownloadUserInfo()}
 					<div class="mt-4">
 						<button id="deleteAccountBtn" class="btn btn-danger">${window.trans.delete} ${window.trans._account}</button>
 					</div>
@@ -504,4 +506,41 @@ function handleDeleteAccount() {
 			alert(`${window.trans.errDeletingAccRetry}`);
 		});
 	}
+}
+
+function DownloadUserInfo() {
+	bindEvent(profileState, "#download-user-info", "click", event => {
+		event.preventDefault();
+		const url = 'get_user_info?format=pdf';
+		
+		fetch(url, {
+			method: 'GET',
+			credentials: 'include',
+		})
+		.then(response => {
+			if (!response.ok) {
+				throw new Error('Network response was not ok');
+			}
+			return response.blob();
+		})
+		.then(blob => {
+			const url = window.URL.createObjectURL(blob);
+			const a = document.createElement('a');
+			a.style.display = 'none';
+			a.href = url;
+			a.download = 'user_info.pdf';
+			document.body.appendChild(a);
+			a.click();
+			window.URL.revokeObjectURL(url);
+		})
+		.catch(error => {
+			console.error('Error:', error);
+		});
+	});
+
+	return `
+	<div class="mt-3">
+		<button id="download-user-info" class="btn btn-primary">${window.trans.downloadUserInfo}</button>
+	</div>
+	`;
 }
