@@ -24,6 +24,9 @@ from back.models import User, Friendship, Game
 from back.forms import AvatarUploadForm
 from django.core.exceptions import ValidationError
 
+from django.utils.html import escape
+
+
 from .. import forms
 
 # This view for multilang
@@ -52,11 +55,11 @@ def	profile_update_view(request):
 		updated = []
 
 		if 'username' in data:
-			user.username = data['username']
+			user.username = escape(data['username'])
 			updated.append('username')
 
 		if 'email' in data:
-			email = data['email']
+			email = escape(data['email'])
 			try:
 				validate_email(email)
 			except ValidationError:
@@ -64,19 +67,19 @@ def	profile_update_view(request):
 			updated.append('email')
 
 		if 'firstname' in data:
-			user.first_name = data['firstname']
+			user.first_name = escape(data['firstname'])
 			updated.append('firstname')
 
 		if 'lastname' in data:
-			user.last_name = data['lastname']
+			user.last_name = escape(data['lastname'])
 			updated.append('lastname')
 		
 		if 'langue' in data:
-			user.langue = data['langue']
+			user.langue = escape(data['langue'])
 			updated.append('langue')
 		
 		if 'avatar' in data:
-			user.last_name = data['avatar']
+			user.last_name = escape(data['avatar'])
 			updated.append('avatar')
 
 		if updated:

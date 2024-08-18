@@ -16,6 +16,7 @@ from django.db.models import IntegerField
 from django.utils import timezone
 from django.shortcuts import get_object_or_404
 
+from django.utils.html import escape
 
 
 @require_http_methods(["POST"])
@@ -23,7 +24,7 @@ from django.shortcuts import get_object_or_404
 def create_tournament(request):
 	try:
 		data = json.loads(request.body)
-		name = data.get('name')
+		name = escape(data.get('name'))
 
 		if not name:
 			return JsonResponse({'status': 'error', 'message': 'Tournament name required.'}, status=400)
@@ -157,7 +158,7 @@ def add_alias(request, tournament_id):
 		
 		data = json.loads(request.body)
 		new_username = data.get('username')
-		new_alias = data.get('alias')
+		new_alias = escape(data.get('alias'))
 		
 		if not new_username or not new_alias:
 			return JsonResponse({'status': 'error', 'message': 'Both username and alias are required.'}, status=400)

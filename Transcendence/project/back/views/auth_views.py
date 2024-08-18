@@ -22,8 +22,10 @@ from django.db.models import Q
 # import inspect
 
 from django.views.decorators.csrf import ensure_csrf_cookie
-  
 from back.utils import load_env
+
+from django.utils.html import escape
+
 
 #loading env variables for external login with api42
 current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -217,6 +219,8 @@ def register_view(request):
 	try:
 		data = json.loads(request.body)
 		data["is_online"] = False
+		data["username"] = escape(data["username"])
+		data["email"] = escape(data["email"])
 		form = RegisterForm(data)
 		if form.is_valid():
 			# form.is_online = False

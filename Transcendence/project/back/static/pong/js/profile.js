@@ -40,19 +40,19 @@ function Profile() {
 				<h2 class="mt-4 mb-3" style="text-decoration: underline;">${window.trans.infos}</h2>
 				<div class="row mb-3">
 						<div class="col-sm-3"><strong>${window.trans.username} :</strong></div>
-						<div class="col-sm-9">${profileState.username}</div>
+						<div class="col-sm-9">${(profileState.username)}</div>
 				</div>
 				<div class="row mb-3">
 					<div class="col-sm-3"><strong>${window.trans.email} :</strong></div>
-					<div class="col-sm-9">${profileState.email}</div>
+					<div class="col-sm-9">${(profileState.email)}</div>
 				</div>
 				<div class="row mb-3">
 					<div class="col-sm-3"><strong>${window.trans.firstName} :</strong></div>
-					<div class="col-sm-9">${profileState.firstname}</div>
+					<div class="col-sm-9">${(profileState.firstname)}</div>
 				</div>
 				<div class="row mb-3">
 					<div class="col-sm-3"><strong>${window.trans.lastName} :</strong></div>
-					<div class="col-sm-9">${profileState.lastname}</div>
+					<div class="col-sm-9">${(profileState.lastname)}</div>
 				</div>
 				<div class="row mb-3">
 					<div class="col-sm-3"><strong>${window.trans.language} :</strong></div>
@@ -231,7 +231,7 @@ function EditEmail() {
 					id="email"
 					name="email"
 					placeholder="${window.trans.modify} ${window.trans._email}"
-					value="${profileState.email}"
+					value="${(profileState.email)}"
 					aria-label="new email"
 				/>
 				<button class="btn btn-secondary" type="submit">${window.trans.modify}</button>
@@ -266,7 +266,7 @@ function EditFirstname() {
 				name="firstname" 
 				id="firstname"
 				placeholder="${window.trans.modify} ${window.trans._firstName}"
-				value="${profileState.firstname}" 
+				value="${(profileState.firstname)}" 
 				aria-label="new first name"
 			/>
 			<button class="btn btn-secondary" type="submit">${window.trans.modify}</button>
@@ -301,7 +301,7 @@ function EditLastname() {
 				name="lastname"
 				id="lastname"
 				placeholder="${window.trans.modify} ${window.trans._lastName}"
-				value="${profileState.lastname}" 
+				value="${(profileState.lastname)}" 
 				aria-label="new last name"
 			/>
 			<button class="btn btn-secondary" type="submit">${window.trans.modify}</button>
@@ -460,7 +460,7 @@ function EditPassword() {
 				class="form-control" 
 				name="old_password" 
 				id="old_password" 
-				placeholder="${window.trans.oldPassword}" 
+				placeholder="${(window.trans.oldPassword)}" 
 				required
 			/>
 		</div>
@@ -471,7 +471,7 @@ function EditPassword() {
 				class="form-control"
 				id="new_password1" 
 				name="new_password1" 
-				placeholder="${window.trans.newPassword}"
+				placeholder="${(window.trans.newPassword)}"
 				required
 			/>
 		</div>
@@ -481,7 +481,7 @@ function EditPassword() {
 				class="form-control"
 				id="new_password2"  
 				name="new_password2" 
-				placeholder="${window.trans.confirmNewPassword}" 
+				placeholder="${(window.trans.confirmNewPassword)}" 
 				required
 			/>
 			<button class="btn btn-secondary" type="submit">${window.trans.change} ${window.trans._password}</button>
@@ -554,3 +554,5 @@ function DownloadUserInfo() {
 	</div>
 	`;
 }
+
+
