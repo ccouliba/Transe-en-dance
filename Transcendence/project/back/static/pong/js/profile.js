@@ -4,12 +4,13 @@ var profileState = {
 	email: "", // email de l'utilisateur
 	firstname: "", // prenom de l'utilisateur
 	lastname: "", // nom de famille de l'utilisateur
-	langue: localStorage.getItem('selectedLanguage') || 'Français',
+	langue: localStorage.getItem('selectedLanguage') || 'English',
 	avatar_url: "",
 	wins: 0,
 	losses: 0,
 	total_games: 0,
 	win_rate: 0,
+	has_password: "",
 	isLoaded: false // indique si les donnees du profil ont ete chargees (initialement faux)
 }
 
@@ -82,6 +83,7 @@ function Profile() {
 				</div>
 			</div>
 		</div>
+
 		<div class="accordion" id="accordionExample">
 			<div class="accordion-item">
 				<h2 class="accordion-header" id="headingTwo">
@@ -105,6 +107,7 @@ function Profile() {
 					${EditAvatar()}
 					<h3 class="mt-4 mb-3">${window.trans.modify} ${window.trans._password}</h2>
 					${EditPassword()}
+					${DownloadUserInfo()}
 					<div class="mt-4">
 						<button id="deleteAccountBtn" class="btn btn-danger">${window.trans.delete} ${window.trans._account}</button>
 					</div>
@@ -213,6 +216,7 @@ function EditEmail() {
 		}); // envoyer les donnees au backend
 		profileState.isLoaded = false;
 		mountComponent(Profile); // monter le composant Profile
+		changeLanguage();
 		 // marquer les donnees du profil comme non chargees
 	});
 	return `
@@ -246,6 +250,7 @@ function EditFirstname() {
 		}); // envoyer les donnees au backend
 		profileState.isLoaded = false;
 		mountComponent(Profile); // monter le composant Profile
+		changeLanguage();
 		 // marquer les donnees du profil comme non chargees
 	});
 	return `
@@ -279,6 +284,7 @@ function EditLastname() {
 		}); // envoyer les donnees au backend
 		profileState.isLoaded = false;
 		mountComponent(Profile); // monter le composant Profile
+		changeLanguage();
 		 // marquer les donnees du profil comme non chargees
 	});
 	return `
@@ -308,8 +314,8 @@ function EditLangue() {
 		profileState.langue = langueInput;
 		localStorage.setItem('selectedLanguage', langueInput);
 		sendProfileToBackend({ 'langue': langueInput });
-		mountComponent(Profile);
 		profileState.isLoaded = false;
+		mountComponent(Profile);
 		changeLanguage();
 	});
 	
@@ -327,9 +333,6 @@ function EditLangue() {
 	</form>
 	`;
 }
-
-
-//   <option value="it" id="italianOption">Italiano 🇮🇹</option>
 
 function EditAvatar() {
 	bindEvent(profileState, "#edit-avatar", "submit", event => {
@@ -350,6 +353,7 @@ function EditAvatar() {
 					profileState.avatar = data.avatar_url;
 					profileState.isLoaded = false;
 					mountComponent(Profile);
+					changeLanguage();
 				} else {
 					alert('Error uploading avatar: ' + JSON.stringify(data.errors));
 				}
@@ -383,8 +387,13 @@ function EditPassword() {
 	bindEvent(profileState, "#edit-password-form", "submit", event => {
 		// empeche le comportement par defaut du formulaire ie soumission et rechargement de la page
 		event.preventDefault();
-		// recupere la valeur du champ 'old_password' du formulaire
-		const oldPassword = event.target.elements.old_password.value;
+
+		let  oldPassword = ""
+		
+		if (profileState.has_password){
+			oldPassword = event.target.elements.old_password.value;
+		}
+		
 		// recupere la valeur du champ 'new_password1' du formulaire
 		const newPassword1 = event.target.elements.new_password1.value;
 		// recupere la valeur du champ 'new_password2' du formulaire
@@ -403,25 +412,26 @@ function EditPassword() {
 			.then(data => {
 				// si le changement de mot de passe est reussi
 				if (data.status === 'success') {
-					alert('password changed successfully');
+					alert(`${window.trans.successPasswordChange}`);
 					// marque les donnees de profil comme non chargees
 					// recharge le composant du profil
-					mountComponent(Profile);
 					profileState.isLoaded = false;
+					mountComponent(Profile);
+					changeLanguage();
 				} else {
 					// prepare un message d'erreur en cas d'echec
-					let errorMessage = "there were errors changing your password:\n\n";
+					let errorMessage = `${window.trans.errPasswordChange}:\n\n`;
 					// si l'ancien mot de passe est incorrect
 					if (data.errors.old_password) {
-						errorMessage += "- your old password was entered incorrectly. please try again.\n";
+						errorMessage += `${window.trans.errOldPasswordRetry}\n`;
 					}
 					// si le nouveau mot de passe ne repond pas aux criteres de securite
 					if (data.errors.new_password2) {
-						errorMessage += "- please choose a more secure password.\n";
-						errorMessage += "\nfor a strong password:\n";
-						errorMessage += "- use a mix of uppercase and lowercase letters, numbers, and symbols\n";
-						errorMessage += "- avoid using personal information like birthdates or names\n";
-						errorMessage += "- make it at least 12 characters long\n";
+						errorMessage += `${window.trans.chooseMoreSecurePassword}\n`;
+						errorMessage += `\n${window.trans.forStrongPassword}\n`;
+						errorMessage += `- ${window.trans.useMixOfSymbols}\n`;
+						errorMessage += `- ${window.trans.avoidPersonalInfo}\n`;
+						errorMessage += `- ${window.trans.minimumLengthPassword}\n`;
 					}
 					// affiche le message d'erreur
 					alert(errorMessage);
@@ -429,14 +439,15 @@ function EditPassword() {
 			})
 			// traite les erreurs de la requete
 			.catch(error => {
-				console.error('error:', error);
-				alert('an error occurred. please try again.');
+				console.error(`${window.trans.error}:`, error);
+				alert(`${window.trans.errorRetry}`);
 			});
 	});
 
 	// retourne le formulaire html pour changer le mot de passe
 	return `
 	<form id="edit-password-form" class="mt-3">
+	${profileState.has_password ? `
 		<div class="form-floating mt-3 w-50">
 			<input 
 				type="password" 
@@ -448,6 +459,7 @@ function EditPassword() {
 			/>
 			<label for="old_password" class="form-label">${window.trans.oldPassword}</label>
 		</div>
+		` : ''}
 		<div class="form-floating mt-3 w-50">
 			<input 
 				type="password" 
@@ -501,4 +513,41 @@ function handleDeleteAccount() {
 			alert(`${window.trans.errDeletingAccRetry}`);
 		});
 	}
+}
+
+function DownloadUserInfo() {
+	bindEvent(profileState, "#download-user-info", "click", event => {
+		event.preventDefault();
+		const url = 'get_user_info?format=pdf';
+		
+		fetch(url, {
+			method: 'GET',
+			credentials: 'include',
+		})
+		.then(response => {
+			if (!response.ok) {
+				throw new Error('Network response was not ok');
+			}
+			return response.blob();
+		})
+		.then(blob => {
+			const url = window.URL.createObjectURL(blob);
+			const a = document.createElement('a');
+			a.style.display = 'none';
+			a.href = url;
+			a.download = 'user_info.pdf';
+			document.body.appendChild(a);
+			a.click();
+			window.URL.revokeObjectURL(url);
+		})
+		.catch(error => {
+			console.error('Error:', error);
+		});
+	});
+
+	return `
+	<div class="mt-3">
+		<button id="download-user-info" class="btn btn-primary">${window.trans.downloadUserInfo}</button>
+	</div>
+	`;
 }

@@ -1,4 +1,31 @@
 {
+	"errUpdateProfileStats": "Error updating profile stats",
+	"errFinishingGame" : "Error finishing game",
+	"successUpdateTournamentMatchScore": "Tournament match score updated successfully",
+	"errUpdateTournamentMatchScore": "Error updating tournament match score",
+	"errInUpdateTournamentMatchScore": "Error in updateTournamentMatchScore",
+	"errUpdateTournamentData": "Error updating tournament data",
+	"errUpdateTournamentRetry": "An error occured while updating the tournament. Please refresh the page.",
+	"errFetchingTournamentData": "Error fetching tournament data",
+	"serverResponseStatus": "Server response status",
+	"serverResponseData": "Server response data",
+	"successUpdateScore": "Score updated successfully",
+	"errScore": "Error score",
+	"errInUpdateScore": "Error in updateScore",
+	"errLoadingTournamentData": "Error loading tournament data",
+	"noAliases": "No aliases yet",
+	"errFetchingTranslations": "Error fetching translations",
+	"successLogOut": "Logged out successfully",
+	"successPasswordChange": "Password changed successfully",
+	"errPasswordChange": "There were errors changing your password",
+	"errOldPasswordRetry": "Your old password was entered incorrectly. Please try again.",
+	"chooseMoreSecurePassword": "Please choose a more secure password.",
+	"forStrongPassword": "For a strong password:",
+	"useMixOfSymbols": "Use a mix of uppercase and lowercase letters, numbers, and symbols",
+	"avoidPersonalInfo": "Avoid using personal information like birthdates or names",
+	"minimumLengthPassword": "Make it at least 8 characters long",
+	"errorRetry": "An error occurred. please try again.",
+
 	"friReqSentSuccess": "Friend request sent successfully!",
 	"friReqAccSuccess": "Friend request accepted successfully!",
 	"friDelSuccess": "Friend deleted successfully!",
@@ -85,7 +112,7 @@
 	"URLChange": "The URL changes to reflect the current \"page\", but without a complete reload",
 	"SPANav": "Navigation in a SPA",
 	"observeContent": "Observe how the content changes when you click on the menu buttons without the page reloading completely.",
-	"inSPA": "Dans une SPA, la navigation est gérée par JavaScript, qui met à jour le contenu de la page et l'URL.",
+	"inSPA": "In a SPA, navigation is managed by JavaScript, which updates the page content and URL.",
 	"historyHandle": "History management",
 	"historyHandling": "A SPA must also manage the browser history to enable the use of the Previous and Next buttons.",
 	"tryUsing": "Try using your browser's navigation buttons after reading the tutorial.",
@@ -258,5 +285,6 @@
 
 	"weCantProceed": "We cannot proceed with your registration without your consent", 
 
-	"needAtLeastTwoParticipants": "A minimum of 2 participants is required to start a tournament."
+	"needAtLeastTwoParticipants": "A minimum of 2 participants is required to start a tournament.",
+	"downloadUserInfo" : "Download my data"
 }

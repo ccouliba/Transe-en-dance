@@ -31,7 +31,7 @@ class User(AbstractUser):
 		related_name='pong_user_set',  # Nom unique pour eviter les conflits avec l'application d'authentification par defaut de Django
 		blank=True,  
 		help_text='The groups this user belongs to.',  # Texte d'aide affiche dans l'interface d'administration
-		related_query_name='pong_user',  # Nom utilise pour les requetes inverses
+		related_query_name='pong_user',  
 	)
  
 	# les permissions specifiques de cet utilisateur
@@ -40,7 +40,7 @@ class User(AbstractUser):
 		related_name='pong_user_permissions_set',  # Nom unique pour eviter les conflits avec l'application d'authentification par defaut de Django
 		blank=True, 
 		help_text='Specific permissions for this user.',  # Texte d'aide affiche dans l'interface d'administration
-		related_query_name='pong_user_permissions',  # Nom utilise pour les requetes inverses
+		related_query_name='pong_user_permissions', 
 	)
  
 	# Methode __str__ : retourner une representation en chaine de caracteres de l'utilisateur
@@ -91,12 +91,12 @@ class User(AbstractUser):
 		self.is_online = False
 		self.save()
 
-#class qui permet de gerer les demandes d'amis. Si demande acceptee alors sauvegarde l'ami dans friends (cf. class user est dans bdd : `back_user_friends``) 
+#class qui permet de gerer les demandes d'amis. Si demande acceptee alors sauvegarde l'ami dans la table friends 
 class Friendship(models.Model):
 	id_user_1 = models.ForeignKey(User, related_name='friendship_sender', on_delete=models.CASCADE, null = True, blank = True)
 	id_user_2 = models.ForeignKey(User, related_name='friendship_receiver', on_delete=models.CASCADE, null = True, blank = True)
 
-	class Meta: #Model Meta is basically the inner class of your model class https://www.geeksforgeeks.org/meta-class-in-models-django/
+	class Meta: #Model Meta is basically the inner class of your model class https://www.geeksforgeeks.org/meta-class-in-models-django/. Permet de definir des options plus specifiques
 		constraints = [
 			UniqueConstraint(fields=['id_user_1', 'id_user_2'], name='unique_friendship')#https://docs.djangoproject.com/en/5.0/ref/models/constraints/#fields
 		]
@@ -113,8 +113,8 @@ class Tournament(models.Model):
 	participants = models.ManyToManyField(User, related_name='tournaments', blank=True)
 	aliases = models.JSONField(default=list, blank=True) 
  
-	def __init__(self, *args, **kwargs):
-		super().__init__(*args, **kwargs)
+	def __init__(self, *args, **kwargs): # permet d'initialiser l'objet avec des valeurs par defaut ou personnalisees
+		super().__init__(*args, **kwargs) # pour appeler la method __init__ de la classe parente i.e. models.Model
 		if not self.created_at:
 			self.created_at = timezone.now()
 	def __str__(self):

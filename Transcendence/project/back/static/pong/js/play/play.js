@@ -162,7 +162,7 @@ function startGame(event) {
 				
 			} else {
 				// gere les autres erreurs
-				console.error(`${window.trans.error}:`, body.error);
+				console.error(`${window.trans.error}: `, body.error);
 			}
 		})
 	}
@@ -199,7 +199,7 @@ function restartGame() {
 function getCurrentUser() {
 	return httpGetJson('/pong/api/games/get_current_user/')
 	.catch(error => {
-		console.error(`${window.trans.error}:`, error);
+		console.error(`${window.trans.error}: `, error);
 		return null;
 	});
 }

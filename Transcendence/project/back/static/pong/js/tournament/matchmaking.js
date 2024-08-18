@@ -140,15 +140,15 @@ function fetchMatchesAndRankings() {
 
 			mountComponent(TournamentMatchmaking);
 		} else {
-			throw new Error('Error fetching tournament data: ' + data.message);
+			throw new Error(`${window.trans.errFetchingTournamentData}: ` + data.message);
 		}
 	})
 	.catch(error => {
-		console.error('Error:', error);
-		alert('An error occurred while fetching tournament data: ' + error.message);
+		console.error(`${window.trans.error}: `, error);
+		alert(`${window.trans.errFetchingTournamentData}: ` + error.message);
 		document.querySelector('.container').innerHTML = `
 			<h1>${window.trans.tournamentMatchmaking}</h1>
-			<p>Error loading tournament data: ${error.message}</p>
+			<p>${window.trans.errLoadingTournamentData}: ${error.message}</p>
 		`;
 	});
 }

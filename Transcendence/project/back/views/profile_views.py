@@ -109,7 +109,8 @@ def profile_view(request):
 		'losses': losses,
 		'total_games': total_games,
 		'win_rate': win_rate,
-		'total_score': game_stats['total_score']
+		'total_score': game_stats['total_score'],
+		'has_password': bool(user.password) 
 	}
 
 	return JsonResponse(profile_data)
@@ -150,36 +151,40 @@ def user_updated_profile(request):
 	return render(request, 'pong/update.html', {'form': form})
 
 # Cette vue permet a l'utilisateur connecte de changer son mot de passe en utilisant un formulaire fourni par Django
+
 @login_required
 @require_POST
 def edit_password_view(request):
 	print(f"User authenticated: {request.user.is_authenticated}")
 	print(f"Username: {request.user.username}")
-	try:
 		# tente de charger les donnees JSON du corps de la requete
-		data = json.loads(request.body)
-		# creer un formulaire de changement de mot de passe avec les donnees de l'utilisateur
-		form = PasswordChangeForm(user=request.user, data={
-			'old_password': data.get('old_password'),
-			'new_password1': data.get('new_password1'),
-			'new_password2': data.get('new_password2')
-		})
-		# verifie si le formulaire est valide
-		if form.is_valid():
-			# Si le formulaire est valide => enregistre le nouveau mot de passe
-			form.save()
-			# Mise a jour de la session d'authentification de l'utilisateur pour eviter la deconnexion
-			update_session_auth_hash(request, form.user) #methode Django
-			return JsonResponse({'status': 'success'})
-		else:
-			# Si le formulaire n'est pas valide :
-			return JsonResponse({'status': 'error', 'errors': form.errors}, status=400)
-	except json.JSONDecodeError:
-		# Si une erreur de decodage JSON se produit :
-		return JsonResponse({'status': 'error', 'message': 'Invalid JSON'}, status=400)
-	except Exception as e:
-		# Si une autre erreur se produit :
-		return JsonResponse({'status': 'error', 'message': str(e)}, status=500)
+	data = json.loads(request.body)
+	user = request.user
+	if not user.password: #pour api42 utilise set_password
+		if data.get('new_password1') != data.get('new_password2'):
+				return JsonResponse(
+				{'status': 'error', 'errors': {'new_password2': ['The two password fields didn\'t match.']}},
+				status=400
+			)
+		user.set_password(data.get('new_password1'))
+		user.save()
+		update_session_auth_hash(request, user)
+		return JsonResponse({'status': 'success'})
+
+	form = PasswordChangeForm(user=user, data={
+		'old_password': data.get('old_password'),
+		'new_password1': data.get('new_password1'),
+		'new_password2': data.get('new_password2')
+	})
+
+	if form.is_valid():
+		# Si le formulaire est valide => enregistre le nouveau mot de passe
+		form.save()
+		# Mise a jour de la session d'authentification de l'utilisateur pour eviter la deconnexion
+		update_session_auth_hash(request, form.user) #methode Django
+		return JsonResponse({'status': 'success'})
+
+	return JsonResponse({'status': 'error', 'errors': form.errors}, status=400)
 
 
 
@@ -209,17 +214,12 @@ def user_account_deleted(request):
 def get_user_info(request):
 	user = request.user
 	user_info = {
-		'id': user.id,
 		'username': user.username,
 		'email': user.email,
 		'first_name': user.first_name,
 		'last_name': user.last_name,
 		'creation_date': user.creation_date,
-		'langue': user.langue,
-		'avatar': user.avatar,
 		'friends': list(user.friends.values('id', 'username', 'email')),
-		'groups': list(user.groups.values('id', 'name')),
-		'user_permissions': list(user.user_permissions.values('id', 'name', 'codename')),
 	}
 
 	# Si le paramètre `format` est 'pdf', générer et retourner un PDF
@@ -233,29 +233,16 @@ def get_user_info(request):
 		line_height = 15
 
 		# Ajouter les informations utilisateur au PDF
-		p.drawString(100, start_y, f"ID: {user_info['id']}")
 		p.drawString(100, start_y - line_height, f"Username: {user_info['username']}")
 		p.drawString(100, start_y - 2 * line_height, f"Email: {user_info['email']}")
 		p.drawString(100, start_y - 3 * line_height, f"First Name: {user_info['first_name']}")
 		p.drawString(100, start_y - 4 * line_height, f"Last Name: {user_info['last_name']}")
 		p.drawString(100, start_y - 5 * line_height, f"Creation Date: {user_info['creation_date']}")
-		p.drawString(100, start_y - 6 * line_height, f"Langue: {user_info['langue']}")
-		p.drawString(100, start_y - 7 * line_height, f"Avatar: {user_info['avatar']}")
 
 		# Ajouter les amis
 		p.drawString(100, start_y - 9 * line_height, "Friends:")
 		for i, friend in enumerate(user_info['friends']):
 			p.drawString(120, start_y - (10 + i) * line_height, f"{friend['username']} ({friend['email']})")
-
-		# Ajouter les groupes
-		p.drawString(100, start_y - (11 + len(user_info['friends'])) * line_height, "Groups:")
-		for i, group in enumerate(user_info['groups']):
-			p.drawString(120, start_y - (12 + len(user_info['friends']) + i) * line_height, f"{group['name']}")
-
-		# Ajouter les permissions
-		p.drawString(100, start_y - (13 + len(user_info['friends']) + len(user_info['groups'])) * line_height, "Permissions:")
-		for i, permission in enumerate(user_info['user_permissions']):
-			p.drawString(120, start_y - (14 + len(user_info['friends']) + len(user_info['groups']) + i) * line_height, f"{permission['name']}")
 
 		# Finaliser le PDF
 		p.showPage()

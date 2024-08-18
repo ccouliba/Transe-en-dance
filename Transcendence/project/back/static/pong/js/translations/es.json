@@ -1,4 +1,31 @@
 {
+	"errUpdateProfileStats": "Error al actualizar las estadísticas del perfil",
+	"errFinishingGame" : "Error al terminar el juego",
+	"successUpdateTournamentMatchScore": "Resultados de los partidos del torneo actualizados correctamente",
+	"errUpdateTournamentMatchScore": "Error al actualizar el resultado del partido del torneo",
+	"errInUpdateTournamentMatchScore": "Error en updateTournamentMatchScore",
+	"errUpdateTournamentData": "Error al actualizar los datos del torneo",
+	"errUpdateTournamentRetry": "Se ha producido un error al actualizar el torneo. Por favor, actualice la página.",
+	"errFetchingTournamentData": "Error al recuperar los datos del torneo",
+	"serverResponseStatus": "Respuesta del servidor",
+	"serverResponseData": "Datos de respuesta del servidor",
+	"successUpdateScore": "Resultado actualizado correctamente",
+	"errScore": "Error de resultado",
+	"errInUpdateScore": "Error en updateScore",
+	"errLoadingTournamentData": "Error al cargar los datos del torneo",
+	"noAliases": "Aún no hay alias",
+	"errFetchingTranslations": "Error en la búsqueda de traducciones",
+	"successLogOut": "Se ha desconectado correctamente",
+	"successPasswordChange": "Contraseña cambiada correctamente",
+	"errPasswordChange": "Hubo errores al cambiar tu contraseña",
+	"errOldPasswordRetry": "Su antigua contraseña se ha introducido incorrectamente. Por favor, inténtelo de nuevo.",
+	"chooseMoreSecurePassword": "Elija una contraseña más segura.",
+	"forStrongPassword": "Para una contraseña segura:",
+	"useMixOfSymbols": "Utiliza una combinación de letras mayúsculas y minúsculas, números y símbolos.",
+	"avoidPersonalInfo": "Evite utilizar información personal como fechas de nacimiento o nombres",
+	"minimumLengthPassword": "Que tenga al menos 8 caracteres",
+	"errorRetry": "Se ha producido un error. Por favor, inténtelo de nuevo.",
+
 	"friReqSentSuccess": "¡Solicitud de amistad enviada con éxito!",
 	"friReqAccSuccess": "¡Solicitud de amistad acceptada con éxito!",
 	"friDelSuccess": "¡Amigo eliminado con éxito!",
@@ -259,6 +286,7 @@
 
 	"weCantProceed": "No podemos proceder a su registro sin su consentimiento", 
 
-	"needAtLeastTwoParticipants": "Se necesitan al menos 2 participantes para comenzar un torneo."
+	"needAtLeastTwoParticipants": "Se necesitan al menos 2 participantes para comenzar un torneo.",
+	"downloadUserInfo" : "Descargar mis datos"
 
 }

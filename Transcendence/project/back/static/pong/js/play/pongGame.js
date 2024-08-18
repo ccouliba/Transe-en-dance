@@ -196,7 +196,7 @@ function updateProfileStats() {
 			mountComponent(Profile);
 		}
 	})
-	.catch(error => console.error('Error updating profile stats:', error));
+	.catch(error => console.error(`${window.trans.errUpdateProfileStats}: `, error));
 }
 
 
@@ -214,7 +214,7 @@ function finishGame(gameId, player1Score, player2Score, winnerUsername) {
 		playState.gameStarted = false
 		
 	})
-	.catch(error => console.error('Error finishing game:', error));
+	.catch(error => console.error(`${window.trans.errFinishingGame}: `, error));
 }
 
 
@@ -237,7 +237,7 @@ function createGameInDatabase() {
 	// 	playState.gameId = data.gameId;
 	// })
 	
-	.catch(error => console.error('error:', error));
+	.catch(error => console.error(`${window.trans.error}: `, error));
 }
 
 
@@ -258,15 +258,15 @@ function updateTournamentMatchScore(matchId, player1Score, player2Score, winner)
 	.then(data => {
 		// console.log('Server response data:', data);
 		if (data.status === 'success') {
-			console.log('Tournament match score updated successfully');
+			console.log(`${window.trans.successUpdateTournamentMatchScore}`);
 			return data;
 		} else {
-			console.error('Error updating tournament match score:', data.message);
+			console.error(`${window.trans.errUpdateTournamentMatchScore}: `, data.message);
 			throw new Error(data.message);
 		}
 	})
 	.catch(error => {
-		console.error('Error in updateTournamentMatchScore:', error);
+		console.error(`${window.trans.errInUpdateTournamentMatchScore}: `, error);
 		throw error;
 	});
 }
@@ -289,8 +289,8 @@ function endGame() {
 				//changePage("#tournament");
 			})
 			.catch(error => {
-				console.error('Error updating tournament data:', error);
-				alert('An error occurred while updating the tournament. Please refresh the page.');
+				console.error(`${window.trans.errUpdateTournamentData}: `, error);
+				alert(`${window.trans.errUpdateTournamentRetry}`);
 			});
 	} else {
 		finishGame(playState.gameId, playState.player1Score, playState.player2Score, winnerUsername);
@@ -312,7 +312,7 @@ function reloadTournamentData() {
 				tournamentState.winner = data.winner;
 				tournamentState.aliases = data.aliases || {};
 			} else {
-				throw new Error('Error fetching tournament data: ' + data.message);
+				throw new Error(`${window.trans.errFetchingTournamentData}: ` + data.message);
 			}
 		});
 }
@@ -332,21 +332,21 @@ function updateScore(gameId, player1Score, player2Score, winner) {
 		winner: winner
 	})
 	.then(response => {
-		console.log('Server response status:', response.status);
+		console.log(`${window.trans.serverResponseStatus}: `, response.status);
 		return response.json();
 	})
 	.then(data => {
-		console.log('Server response data:', data);
+		console.log(`${window.trans.serverResponseData}: `, data);
 		if (data.status === 'success') {
-			console.log('Score updated successfully');
+			console.log(`${window.trans.successUpdateScore}`);
 			return data;
 		} else {
-			console.error('Error score:', data.message);
+			console.error(`${window.trans.errScore}: `, data.message);
 			throw new Error(data.message);
 		}
 	})
 	.catch(error => {
-		console.error('Error in updateScore:', error);
+		console.error(`${window.trans.errInUpdateScore}: `, error);
 		throw error;
 	});
 }
