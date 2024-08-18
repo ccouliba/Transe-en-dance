@@ -1,33 +1,25 @@
 from io import BytesIO
 import json
-
-
 from django.shortcuts import render, redirect
 from django.conf import settings
 from django.http import JsonResponse, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
-
 from django.core.validators import validate_email
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import UserChangeForm, PasswordChangeForm
 from django.contrib.auth.decorators import login_required
-
 from django.utils import translation
 from django.utils.translation import gettext as _
-
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
 from back.models import User, Friendship, Game
-
 from back.forms import AvatarUploadForm
 from django.core.exceptions import ValidationError
-
 from django.utils.html import escape
-
-
 from .. import forms
+from django.db.models import Q, Count, Sum, Case, When, IntegerField
 
 # This view for multilang
 @login_required
@@ -44,9 +36,6 @@ def change_language(request):
 		form = forms.SetLanguageForm()
 	return render(request, 'pong/change_language.html', {'form': form})
 
-
-
-# path('pong/api/profile/update', profile_update_view, name='profile_update'),
 @login_required
 @require_POST
 def	profile_update_view(request):
@@ -88,13 +77,6 @@ def	profile_update_view(request):
 		else:
 			return JsonResponse({'status': 'error', 'message': 'No valid fields to update'}, status=400)
 
-	# new_username = json.loads(request.body).get('username')
-	# if new_username is not None:
-	# 	request.user.username = new_username
-	# 	request.user.save()
-	# 	return JsonResponse({'status': 'success'})
-	
-from django.db.models import Q, Count, Sum, Case, When, IntegerField
 #Cette vue affiche le profil de l'utilisateur connecte en rendant la page HTML appropriee
 @login_required
 def profile_view(request):
@@ -132,28 +114,7 @@ def profile_view(request):
 	}
 
 	return JsonResponse(profile_data)
-# def profile_view(request):
-# 	user = request.user
 
- 
-# 	return JsonResponse({
-# 		'username': user.username,
-# 		'email': user.email,
-# 		'firstname': user.first_name,
-# 		'lastname' : user.last_name,
-# 		'id' :user.id,
-# 		'avatar_url': user.get_avatar_url(),
-# 		'wins': user.wins,
-# 		'losses': user.losses,
-# 		'total_games': user.total_games,
-# 		'win_rate': round(user.win_rate, 2)
-  
-# 	})
- 
-
-# @login_required
-# def profile_view(request):
-# 	return render(request, 'pong/profile.html')
 
 #Cette vue permet a l'utilisateur connecte de mettre a jour son profil en utilisant un formulaire fourni par Django
 @login_required
@@ -215,14 +176,6 @@ def upload_avatar(request):
 		form.save()
 		return JsonResponse({'status': 'success', 'avatar_url': request.user.get_avatar_url()})  # Utilisez la nouvelle méthode ici
 	return JsonResponse({'status': 'error', 'errors': form.errors}, status=400)
-
-# Can be changed any time ! Just a simple view linked to a template/form that works
-# Cette vue permet a l'utilisateur connecte de supprimer son compte et de rediriger vers la page d'accueil
-@login_required
-def user_account_deleted(request):
-	user = request.user
-	user.delete()
-	return redirect('pong/home.html')  
 
 
 # RGPD stuff 

@@ -2,9 +2,9 @@ from django.shortcuts import get_object_or_404
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
-from django.views.decorators.csrf import csrf_exempt
 from back.models import User, Friendship
 import json
+from typing import List
 
 # Cette vue gere l'envoi d'une demande d'ami entre deux utilisateurs en verifiant d'abord si une demande existe deja puis en creant une nouvelle demande si necessaire
 @login_required
@@ -125,28 +125,13 @@ def friends_data(request):
 		'receivedRequests': [{'username': req.id_user_1.username, 'email': req.id_user_1.email} for req in received_requests],
 	})
 
-from typing import List
-from django.utils import timezone
-from datetime import timedelta
+
 
 def	are_user_online(friends:List[User]):
 	statuses = []
 	for friend in friends:
 		statuses.append(friend.is_online)
 	return statuses
-	# statuses = []
-	# now = timezone.now()
-	# threshold = timedelta(seconds=10)  #definir la periode pour considerer un user comme en ligne 
-	# for friend in friends:
-	# 	if friend.last_activity is None:
-	# 		is_online = False
-	# 	else:
-	# 		time_since_last_activity = now - friend.last_activity #difference entre maintenant et derniere activite du user
-	# 		# print(time_since_last_activity, friend.last_activity)
-	# 		is_online = time_since_last_activity < threshold #verifier si cette différence est inferieure au seuil (threshold)
-	# 	statuses.append(is_online) 
-	# return statuses
-
 
 
 @login_required
@@ -159,7 +144,3 @@ def friends_online_status(request):
 		return JsonResponse(payload)
 	except Exception as e:
 		return JsonResponse({"error": str(e)}, status=500)
-	# statuses = are_user_online(friends)
-	# # print("friends_online_status", user, statuses)
-	# payload = {"statuses":statuses}
-	# return JsonResponse(payload)

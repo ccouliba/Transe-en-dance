@@ -2,13 +2,11 @@ from django.middleware.csrf import get_token
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import AuthenticationForm
 from back.forms import RegisterForm
 from ..models import User
 import os
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
-from django.views.decorators.csrf import csrf_exempt
 import json
 from rest_framework.authtoken.models import Token
 from back.decorators.Logging import loggingFunction
@@ -16,16 +14,12 @@ from django.utils import timezone
 from django.db import transaction
 from dotenv import load_dotenv
 from django.db.models import Q
-# import logging
-# from logstash.middleware.LogMiddleware import LoggingFunction
-
-# import inspect
-
 from django.views.decorators.csrf import ensure_csrf_cookie
 from back.utils import load_env
-
 from django.utils.html import escape
-
+import requests
+from django.conf import settings
+from django.views.decorators.http import require_GET
 
 #loading env variables for external login with api42
 current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -37,9 +31,83 @@ load_dotenv(env_path)
 def base_view(request):
 	return render(request, 'pong/base.html')
 
+
+
+@loggingFunction
+def login_view(request):
+	data = json.loads(request.body)
+	username = data.get('username')
+	password = data.get('password')
+	user = authenticate(username=username, password=password)
+
+	if user is not None:
+		login(request, user)
+		user.login()#utilisation de la methode de la class user (pour online/offline)
+		return JsonResponse({'status': 'success'})
+	else:
+		return JsonResponse({'status': 'error', 'message': 'Invalid credentials'}, status=401)
+
+@loggingFunction
+@login_required
+def logout_view(request):
+	user = request.user
+	request.session.flush()
+	logout(request)
+	user.logout()#utilisation de la methode de la class user (pour online/offline)
+	
+	return JsonResponse({'status': 'success'})
+
+# Cette vue gere l'inscription des nouveaux utilisateurs
+@loggingFunction
+def register_view(request):
+	try:
+		data = json.loads(request.body)
+		data["is_online"] = False
+		data["username"] = escape(data["username"])
+		data["email"] = escape(data["email"])
+		form = RegisterForm(data)
+		if form.is_valid():
+			user = form.save()
+			return JsonResponse({'status': 'success'})
+		else:
+			return JsonResponse({'status': 'error', 'message': form.errors}, status=400)
+	except json.JSONDecodeError:
+		return JsonResponse({'status': 'error', 'message': 'Invalid JSON'}, status=400)
+	except Exception as e:
+		return JsonResponse({'status': 'error', 'message': str(e)}, status=500)
+
+
+@login_required
+@transaction.atomic
+def soft_delete_user(request):
+	if request.method == 'POST':
+		user = request.user
+		
+		# Anonymize user data (like in discord)
+		user.username = f"deleted_user_{user.id}"
+		user.email = f"deleted_{user.id}@example.com"
+		user.first_name = "Deleted"
+		user.last_name = "User"
+		
+		user.is_deleted = True
+		user.deleted_at = timezone.now()
+		
+		user.is_active = False
+		
+		user.avatar = None  
+		
+		user.save()
+		
+		logout(request)
+		
+		return JsonResponse({'status': 'success', 'message': 'Your account has been successfully deleted.'})
+	
+	return JsonResponse({'status': 'error', 'message': 'Invalid request method.'}, status=405)
+
+
+
+
 # Cette vue verifie si un utilisateur est authentifie ou pas. Elle est utilise dans base.html
-# def check_auth(request):
-# 	return JsonResponse({'is_authenticated': request.user.is_authenticated})
 def check_auth(request):
 	user = request.user
  
@@ -66,7 +134,6 @@ def external_login(request):
 	
 	return redirect(url)
 
-import requests
 
 def get_response_from_api(request):
 	url = os.getenv('TOKEN_URL')
@@ -155,7 +222,6 @@ def get_user_from_api(request, access_token):
 
 # Cette vue gere le callback de l'authentification (ie la reponse recue apres que l'utilisateur ait autorise l'application via l'authentification via l'API d'Intra 42)
 @loggingFunction
-# @csrf_exempt #maybe have to use it since api42 do not send back csrf token perhaps
 def auth_callback(request):
 	print("Received callback request:", request.GET)
 	api_response = get_response_from_api(request)
@@ -188,86 +254,3 @@ def get_log(request, token):
 			token = Token.objects.create(user=user)
 			return JsonResponse({'messages':'succcess', 'token':token, 'redirect_url':'/pong/#home'})
 	return None
-
-@loggingFunction
-def login_view(request):
-	data = json.loads(request.body)
-	username = data.get('username')
-	password = data.get('password')
-	user = authenticate(username=username, password=password)
-
-	if user is not None:
-		login(request, user)
-		user.login()#utilisation de la methode de la class user (pour online/offline)
-		return JsonResponse({'status': 'success'})
-	else:
-		return JsonResponse({'status': 'error', 'message': 'Invalid credentials'}, status=401)
-
-@loggingFunction
-@login_required
-def logout_view(request):
-	user = request.user
-	request.session.flush()
-	logout(request)
-	user.logout()#utilisation de la methode de la class user (pour online/offline)
-	
-	return JsonResponse({'status': 'success'})
-
-# Cette vue gere l'inscription des nouveaux utilisateurs
-@loggingFunction
-def register_view(request):
-	try:
-		data = json.loads(request.body)
-		data["is_online"] = False
-		data["username"] = escape(data["username"])
-		data["email"] = escape(data["email"])
-		form = RegisterForm(data)
-		if form.is_valid():
-			# form.is_online = False
-			user = form.save()
-			# LoggingFunction(request=request, opname='Registration')
-			return JsonResponse({'status': 'success'})
-		else:
-			return JsonResponse({'status': 'error', 'message': form.errors}, status=400)
-	except json.JSONDecodeError:
-		return JsonResponse({'status': 'error', 'message': 'Invalid JSON'}, status=400)
-	except Exception as e:
-		return JsonResponse({'status': 'error', 'message': str(e)}, status=500)
-
-
-
-
-
-@login_required
-@transaction.atomic
-def soft_delete_user(request):
-	if request.method == 'POST':
-		user = request.user
-		
-		# Anonymize user data (like in discord)
-		user.username = f"deleted_user_{user.id}"
-		user.email = f"deleted_{user.id}@example.com"
-		user.first_name = "Deleted"
-		user.last_name = "User"
-		
-		user.is_deleted = True
-		user.deleted_at = timezone.now()
-		
-		user.is_active = False
-		
-		user.avatar = None  
-		
-		user.save()
-		
-		logout(request)
-		
-		return JsonResponse({'status': 'success', 'message': 'Your account has been successfully deleted.'})
-	
-	return JsonResponse({'status': 'error', 'message': 'Invalid request method.'}, status=405)
-
-
-import os
-from django.http import JsonResponse
-from django.conf import settings
-from django.views.decorators.http import require_GET
-from django.views.decorators.csrf import csrf_exempt

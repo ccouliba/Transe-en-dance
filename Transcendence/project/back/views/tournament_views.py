@@ -1,21 +1,16 @@
 from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
-from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
-from django.db import transaction
 from back.models import Tournament, User
 import json
 from .tournament_presenter import *
-
 from django.db.models import Sum, Case, When
 from back.models import Tournament, Game, Composed
 from itertools import combinations
 from django.db.models import Q, F
 from django.db.models import IntegerField
-
 from django.utils import timezone
 from django.shortcuts import get_object_or_404
-
 from django.utils.html import escape
 
 

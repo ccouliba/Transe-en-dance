@@ -1,4 +1,3 @@
-#convertir tes entites metiers en donnees consommables par la vue
 #presenter => presente tes entites metiers 
 #entite metier = entite contient la logique metier (ex tournament est une entite metier)
 

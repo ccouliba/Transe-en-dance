@@ -2,8 +2,8 @@ from django.urls import path
 from .views.auth_views import base_view,check_auth, register_view, login_view, logout_view, auth_callback, external_login, soft_delete_user
 from .views.game_views import create_game, update_game, finish_game, match_history,  get_current_user
 from .views.friend_views import send_friend_request, accept_friend_request, remove_friend, friends_data, friends_online_status
-from .views.profile_views import profile_view, user_updated_profile, user_account_deleted,edit_password_view, get_user_info, profile_update_view, upload_avatar
-from .views.user_views import user_list_json, user_list, index, home_view
+from .views.profile_views import profile_view, user_updated_profile, edit_password_view, get_user_info, profile_update_view, upload_avatar
+from .views.user_views import index, home_view
 from .views.tournament_views import create_tournament, tournament_view, tournament_detail, add_participants, add_alias, start_tournament, tournament_matchmaking, finish_tournament, update_match_score
 
 from django.conf import settings
@@ -21,11 +21,8 @@ urlpatterns = [
 	path('api/register/', register_view, name='api_register'),
  
 	path('update_profile/', user_updated_profile, name='update_profile'),
-	path('delete_account/', user_account_deleted, name='delete_account'),
 	path('get_user_info/', get_user_info, name='get_user_info'),
 	path('auth/callback/', auth_callback, name='auth_callback'),
-	path('user_list_json/', user_list_json, name='user_list_json'),
-	path('user_list/', user_list, name='user_list'),
 	path('index/', index, name='index'),
 	path('external_login/', external_login, name='external_login'),
  
