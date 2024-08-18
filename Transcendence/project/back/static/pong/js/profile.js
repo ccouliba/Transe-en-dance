@@ -312,17 +312,22 @@ function EditLangue() {
 		profileState.isLoaded = false;
 		changeLanguage();
 	});
+	
+	// Get the current selected language from profileState
+	const selectedLanguage = profileState.langue;
+
 	return `
 	<form id="edit-langue">
 	<select class="form-select" name="languageSelector" id="languageSelector" aria-label="Select your language">
-		<option value="English" id="langue" name="langue">English 🇺🇸</option>
-		<option value="Français" id="langue" name="langue">Français 🇫🇷</option>
-		<option value="Español" id="langue" name="langue">Español 🇪🇸</option>
+		<option value="English" ${selectedLanguage === "English" ? "selected" : ""}>English 🇺🇸</option>
+		<option value="Français" ${selectedLanguage === "Français" ? "selected" : ""}>Français 🇫🇷</option>
+		<option value="Español" ${selectedLanguage === "Español" ? "selected" : ""}>Español 🇪🇸</option>
 	</select>
 	<button class="btn btn-secondary" type="submit">${window.trans.modify}</button>
 	</form>
 	`;
 }
+
 
 //   <option value="it" id="italianOption">Italiano 🇮🇹</option>
 

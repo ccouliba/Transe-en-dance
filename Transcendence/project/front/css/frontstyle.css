@@ -51,23 +51,6 @@ a, .btn-link, .btn-check:checked+.btn, .btn.active, .btn.show, .btn:first-child:
   box-shadow: 0 0 0 .25rem rgba(250, 90, 0, 0.25);
 }
 
-.form-floating > .form-select {
-  color:greenyellow;
-}
-.form-floating > .form-control-plaintext {
-  color: turquoise;
-}
-.form-floating > .form-select ~ label {
-  color: violet;
-
-}
-
-
-/* .form-control:focus  {
-  color: gold;
-  background-color:transparent;
-} */
-
 .nav-link:focus, .nav-link:hover {
   color:goldenrod;
 }
@@ -139,5 +122,4 @@ input, input[password] {
 
 #edit-username, #edit-usename > #username::placeholder, #edit-mail, #edit-mail > #email::placeholder, #edit-first-name, #edit-first-name > #firstname::placeholder, #edit-last-name, #edit-last-name > #lastname::placeholder, #edit-password-form, #edit-password-form > #old_password, #edit-password-form > #new_password1::placeholder, #edit-password-form > #new_password2::placeholder {
   color : silver;
-  /* background-image: linear-gradient(to top, rgb(90, 90, 90) 80%, rgb(100, 100, 150)); */
 }
