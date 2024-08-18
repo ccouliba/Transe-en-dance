@@ -137,7 +137,6 @@
 	"navHistory": "Gestion de l'historique du navigateur",
 	"keepOnExploring": "Continuez à explorer l'application pour voir ces principes en action !",
 
-
 	"home": "Accueil",
 	"play": "Jouer",
 	"singlePlayer": "Jouer seul",
@@ -289,7 +288,4 @@
 	"weCantProceed": "Nous ne pouvons pas procéder à l'inscription sans votre consentement",
 	"needAtLeastTwoParticipants": "Il faut 2 participants minimum pour commencer un tournoi.",
 	"downloadUserInfo" : "Télécharger mes données"
-
-
-
 }
