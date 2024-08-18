@@ -186,20 +186,21 @@ function EditUsername() {
 		 // marquer les donnees du profil comme non chargees
 	});
 
+	// <label for="username" class="form-label">${window.trans.modify} ${window.trans._username}</label>
+	//! Removing form-floating because that's ugly
 	return `
 		<form id="edit-username" class="mt-3">
-			<div class="form-floating w-50">
-				<input 
-					type="text" 
-					class="form-control"
-					id="username" 
-					name="username"
-					placeholder="${window.trans.modify} ${window.trans._username}" 
-					value="${profileState.username}"
-					aria-label="new username"
-				/>
-				<label for="username" class="form-label">${window.trans.modify} ${window.trans._username}</label>
-				<button class="btn btn-secondary" type="submit">${window.trans.modify}</button>
+			<div class="input-group">
+			<input 
+				type="text" 
+				class="form-control" 
+				id="username" 
+				name="username"
+				placeholder="${window.trans.modify} ${window.trans._username}" 
+				value="${profileState.username}"
+				aria-label="new username"
+			/>
+			<button class="btn btn-secondary" type="submit">${window.trans.modify}</button>
 			</div>
 		</form> 	
 	`;
@@ -220,9 +221,11 @@ function EditEmail() {
 		changeLanguage();
 		 // marquer les donnees du profil comme non chargees
 	});
+	//! Removing form-floating because that's ugly
+	// <label for="email" class="form-label">${window.trans.modify} ${window.trans._email}</label>
 	return `
 		<form id="edit-email" class="mt-3">
-			<div class="form-floating w-50">
+			<div class="input-group">
 				<input
 					type="text"
 					class="form-control"
@@ -232,7 +235,6 @@ function EditEmail() {
 					value="${profileState.email}"
 					aria-label="new email"
 				/>
-				<label for="email" class="form-label">${window.trans.modify} ${window.trans._email}</label>
 				<button class="btn btn-secondary" type="submit">${window.trans.modify}</button>
 			</div>
 		</form>
@@ -254,9 +256,11 @@ function EditFirstname() {
 		changeLanguage();
 		 // marquer les donnees du profil comme non chargees
 	});
+	//! Removing form-floating because that's ugly
+	// <label for="firstname" class="form-label">${window.trans.modify} ${window.trans._firstName}</label>
 	return `
 	<form id="edit-first-name" class="mt-3">
-		<div class="form-floating w-50">
+		<div class="input-group">
 			<input 
 				type="text" 
 				class="form-control" 
@@ -266,7 +270,6 @@ function EditFirstname() {
 				value="${profileState.firstname}" 
 				aria-label="new first name"
 			/>
-			<label for="firstname" class="form-label">${window.trans.modify} ${window.trans._firstName}</label>
 			<button class="btn btn-secondary" type="submit">${window.trans.modify}</button>
 		</div>
 	</form>
@@ -288,9 +291,11 @@ function EditLastname() {
 		changeLanguage();
 		 // marquer les donnees du profil comme non chargees
 	});
+	//! Removing form-floating because that's ugly
+	// <label for="lastname" class="form-label">${window.trans.modify} ${window.trans._lastName}</label>
 	return `
 	<form id="edit-last-name" class="mt-3">
-		<div class="form-floating">
+		<div class="input-group">
 			<input 
 				type="text" 
 				class="form-control" 
@@ -300,7 +305,6 @@ function EditLastname() {
 				value="${profileState.lastname}" 
 				aria-label="new last name"
 			/>
-			<label for="lastname" class="form-label">${window.trans.modify} ${window.trans._lastName}</label>
 			<button class="btn btn-secondary" type="submit">${window.trans.modify}</button>
 		</div>
 	</form>
@@ -320,13 +324,15 @@ function EditLangue() {
 		changeLanguage();
 	});
 	return `
-	<form id="edit-langue">
-	<select class="form-select" name="languageSelector" id="languageSelector" aria-label="Select your language">
-		<option value="English" id="langue" name="langue">English 🇺🇸</option>
-		<option value="Français" id="langue" name="langue">Français 🇫🇷</option>
-		<option value="Español" id="langue" name="langue">Español 🇪🇸</option>
-	</select>
-	<button class="btn btn-secondary" type="submit">${window.trans.modify}</button>
+	<form id="edit-langue" class="mt-3">
+		<div class="input-group">
+			<select class="form-select" name="languageSelector" id="languageSelector" aria-label="Select your language">
+				<option value="English" id="langue" name="langue">English 🇺🇸</option>
+				<option value="Français" id="langue" name="langue">Français 🇫🇷</option>
+				<option value="Español" id="langue" name="langue">Español 🇪🇸</option>
+			</select>
+			<button class="btn btn-secondary" type="submit">${window.trans.modify}</button>
+		</div>
 	</form>
 	`;
 }
@@ -442,10 +448,14 @@ function EditPassword() {
 	});
 
 	// retourne le formulaire html pour changer le mot de passe
+	//! Removing form-floating because that's ugly
+	// <label for="old_password" class="form-label">${window.trans.oldPassword}</label>
+	// <label for="new_password1" class="form-label">${window.trans.newPassword}</label>
+	// <label for="new_password2" class="form-label">${window.trans.confirmNewPassword}</label>
 	return `
 	<form id="edit-password-form" class="mt-3">
 	${profileState.has_password ? `
-		<div class="form-floating mt-3 w-50">
+		<div class="mt-3 input-group">
 			<input 
 				type="password" 
 				class="form-control" 
@@ -454,10 +464,9 @@ function EditPassword() {
 				placeholder="${window.trans.oldPassword}" 
 				required
 			/>
-			<label for="old_password" class="form-label">${window.trans.oldPassword}</label>
 		</div>
 		` : ''}
-		<div class="form-floating mt-3 w-50">
+		<div class="mt-3 input-group">
 			<input 
 				type="password" 
 				class="form-control"
@@ -466,9 +475,8 @@ function EditPassword() {
 				placeholder="${window.trans.newPassword}"
 				required
 			/>
-			<label for="new_password1" class="form-label">${window.trans.newPassword}</label>
 		</div>
-		<div class="form-floating mt-3 w-50">
+		<div class="mt-3 input-group">
 			<input 
 				type="password" 
 				class="form-control"
@@ -477,9 +485,8 @@ function EditPassword() {
 				placeholder="${window.trans.confirmNewPassword}" 
 				required
 			/>
-			<label for="new_password2" class="form-label">${window.trans.confirmNewPassword}</label>
+			<button class="btn btn-secondary" type="submit">${window.trans.change} ${window.trans._password}</button>
 		</div>
-		<button class="btn btn-secondary mt-3" type="submit">${window.trans.change} ${window.trans._password}</button>
 	</form>
 	`;
 }
