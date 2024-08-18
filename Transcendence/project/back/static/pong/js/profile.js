@@ -18,7 +18,7 @@ var profileState = {
 function Profile() {
 	if (!profileState.isLoaded) {
 		loadProfileFromBackend();
-		return '<div>Loading profile...</div>';
+		return `<div>${window.trans.loading} ${window.trans.profile}...</div>`;
 	}
 	
 	 	
@@ -83,6 +83,7 @@ function Profile() {
 				</div>
 			</div>
 		</div>
+
 		<div class="accordion" id="accordionExample">
 			<div class="accordion-item">
 				<h2 class="accordion-header" id="headingTwo">
@@ -106,6 +107,7 @@ function Profile() {
 					${EditAvatar()}
 					<h3 class="mt-4 mb-3">${window.trans.modify} ${window.trans._password}</h2>
 					${EditPassword()}
+					${DownloadUserInfo()}
 					<div class="mt-4">
 						<button id="deleteAccountBtn" class="btn btn-danger">${window.trans.delete} ${window.trans._account}</button>
 					</div>
@@ -178,6 +180,7 @@ function EditUsername() {
 		}).then(() => {
 			profileState.isLoaded = false
 			mountComponent(Profile);
+			changeLanguage();
 		})
 		 // monter le composant Profile
 		 // marquer les donnees du profil comme non chargees
@@ -214,6 +217,7 @@ function EditEmail() {
 		}); // envoyer les donnees au backend
 		profileState.isLoaded = false;
 		mountComponent(Profile); // monter le composant Profile
+		changeLanguage();
 		 // marquer les donnees du profil comme non chargees
 	});
 	return `
@@ -247,6 +251,7 @@ function EditFirstname() {
 		}); // envoyer les donnees au backend
 		profileState.isLoaded = false;
 		mountComponent(Profile); // monter le composant Profile
+		changeLanguage();
 		 // marquer les donnees du profil comme non chargees
 	});
 	return `
@@ -280,6 +285,7 @@ function EditLastname() {
 		}); // envoyer les donnees au backend
 		profileState.isLoaded = false;
 		mountComponent(Profile); // monter le composant Profile
+		changeLanguage();
 		 // marquer les donnees du profil comme non chargees
 	});
 	return `
@@ -309,8 +315,8 @@ function EditLangue() {
 		profileState.langue = langueInput;
 		localStorage.setItem('selectedLanguage', langueInput);
 		sendProfileToBackend({ 'langue': langueInput });
-		mountComponent(Profile);
 		profileState.isLoaded = false;
+		mountComponent(Profile);
 		changeLanguage();
 	});
 	return `
@@ -324,8 +330,6 @@ function EditLangue() {
 	</form>
 	`;
 }
-
-//   <option value="it" id="italianOption">Italiano 🇮🇹</option>
 
 function EditAvatar() {
 	bindEvent(profileState, "#edit-avatar", "submit", event => {
@@ -346,6 +350,7 @@ function EditAvatar() {
 					profileState.avatar = data.avatar_url;
 					profileState.isLoaded = false;
 					mountComponent(Profile);
+					changeLanguage();
 				} else {
 					alert('Error uploading avatar: ' + JSON.stringify(data.errors));
 				}
@@ -407,8 +412,9 @@ function EditPassword() {
 					alert(`${window.trans.successPasswordChange}`);
 					// marque les donnees de profil comme non chargees
 					// recharge le composant du profil
-					mountComponent(Profile);
 					profileState.isLoaded = false;
+					mountComponent(Profile);
+					changeLanguage();
 				} else {
 					// prepare un message d'erreur en cas d'echec
 					let errorMessage = `${window.trans.errPasswordChange}:\n\n`;
@@ -504,4 +510,41 @@ function handleDeleteAccount() {
 			alert(`${window.trans.errDeletingAccRetry}`);
 		});
 	}
+}
+
+function DownloadUserInfo() {
+	bindEvent(profileState, "#download-user-info", "click", event => {
+		event.preventDefault();
+		const url = 'get_user_info?format=pdf';
+		
+		fetch(url, {
+			method: 'GET',
+			credentials: 'include',
+		})
+		.then(response => {
+			if (!response.ok) {
+				throw new Error('Network response was not ok');
+			}
+			return response.blob();
+		})
+		.then(blob => {
+			const url = window.URL.createObjectURL(blob);
+			const a = document.createElement('a');
+			a.style.display = 'none';
+			a.href = url;
+			a.download = 'user_info.pdf';
+			document.body.appendChild(a);
+			a.click();
+			window.URL.revokeObjectURL(url);
+		})
+		.catch(error => {
+			console.error('Error:', error);
+		});
+	});
+
+	return `
+	<div class="mt-3">
+		<button id="download-user-info" class="btn btn-primary">${window.trans.downloadUserInfo}</button>
+	</div>
+	`;
 }

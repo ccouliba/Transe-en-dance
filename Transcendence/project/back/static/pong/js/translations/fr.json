@@ -137,12 +137,12 @@
 	"navHistory": "Gestion de l'historique du navigateur",
 	"keepOnExploring": "Continuez à explorer l'application pour voir ces principes en action !",
 
-
 	"home": "Accueil",
 	"play": "Jouer",
 	"singlePlayer": "Jouer seul",
 	"tournament": "Tournoi",
 	"profile": "Profil",
+	"_profile": "du profil",
 	"friends": "Amis",
 	"matchHistory": "Historique des parties",
 	"logOut": "Déconnexion",
@@ -287,7 +287,6 @@
 	"iAccept": "J'accepte",
 
 	"weCantProceed": "Nous ne pouvons pas procéder à l'inscription sans votre consentement",
-	"needAtLeastTwoParticipants": "Il faut 2 participants minimum pour commencer un tournoi."
-
-
+	"needAtLeastTwoParticipants": "Il faut 2 participants minimum pour commencer un tournoi.",
+	"downloadUserInfo" : "Télécharger mes données"
 }

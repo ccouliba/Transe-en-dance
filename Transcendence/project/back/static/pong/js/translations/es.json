@@ -142,6 +142,7 @@
 	"singlePlayer": "Jugar solo",
 	"tournament": "Torneo",
 	"profile": "Perfil",
+	"_profile": "del perfil",
 	"friends": "Amigos",
 	"matchHistory": "Historial de partidos",
 	"logOut": "Desconexión",
@@ -286,6 +287,6 @@
 
 	"weCantProceed": "No podemos proceder a su registro sin su consentimiento", 
 
-	"needAtLeastTwoParticipants": "Se necesitan al menos 2 participantes para comenzar un torneo."
-
+	"needAtLeastTwoParticipants": "Se necesitan al menos 2 participantes para comenzar un torneo.",
+	"downloadUserInfo" : "Descargar mis datos"
 }
