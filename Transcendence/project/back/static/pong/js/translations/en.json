@@ -141,6 +141,7 @@
 	"singlePlayer": "Single Player",
 	"tournament": "Tournament",
 	"profile": "Profile",
+	"_profile": "profile",
 	"friends": "Friends",
 	"matchHistory": "Match history",
 	"logOut": "Log out",

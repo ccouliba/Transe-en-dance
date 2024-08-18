@@ -18,7 +18,7 @@ var profileState = {
 function Profile() {
 	if (!profileState.isLoaded) {
 		loadProfileFromBackend();
-		return '<div>Loading profile...</div>';
+		return `<div>${window.trans.loading} ${window.trans.profile}...</div>`;
 	}
 	
 	 	
@@ -319,16 +319,12 @@ function EditLangue() {
 		mountComponent(Profile);
 		changeLanguage();
 	});
-	
-	// Get the current selected language from profileState
-	const selectedLanguage = profileState.langue;
-
 	return `
 	<form id="edit-langue">
 	<select class="form-select" name="languageSelector" id="languageSelector" aria-label="Select your language">
-		<option value="English" ${selectedLanguage === "English" ? "selected" : ""}>English 🇺🇸</option>
-		<option value="Français" ${selectedLanguage === "Français" ? "selected" : ""}>Français 🇫🇷</option>
-		<option value="Español" ${selectedLanguage === "Español" ? "selected" : ""}>Español 🇪🇸</option>
+		<option value="English" id="langue" name="langue">English 🇺🇸</option>
+		<option value="Français" id="langue" name="langue">Français 🇫🇷</option>
+		<option value="Español" id="langue" name="langue">Español 🇪🇸</option>
 	</select>
 	<button class="btn btn-secondary" type="submit">${window.trans.modify}</button>
 	</form>
