@@ -229,6 +229,9 @@ REST_FRAMEWORK = {
 }
 
 # # For logging (devops)
+
+BACK_LOG_FILE = os.path.join(BASE_DIR, 'logs/back.log')
+
 LOGGING = {
     # Defines the dict version for logging config ; Should always be 1 ; another value seems to cause issues
     'version': 1,
@@ -260,31 +263,36 @@ LOGGING = {
     },
     
     'root': {
-        'handlers': ['file', 'console'],
+        'handlers': ['file'],
         'level': 'WARNING',
     },
     
     'loggers': {
+        'django.request': {
+            'handlers': ['file', 'console'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+        'django.db.backend': {
+            'handlers': ['file'],
+            'level': 'INFO',
+            'propagate': True,
+        },
         'back': {
             'handlers': ['file'],
             'level': 'INFO',
-            'propagate': True, # If logs should be propagate to parent logs
+            'propagate': True,  # If logs should be propagate to parent logs
         },
         'backend': {
             'handlers': ['file'],
             'level': 'INFO',
             'propagate': True,
         },
-        'django.request': {
-            'handlers': ['console'],
-            'level': 'DEBUG',
-            'propagate': True,
-        },
-        'django.db.backend': {
-            'handlers': ['console'],
+        'database': {
+            'handlers': ['file'],
             'level': 'INFO',
             'propagate': True,
-        }, 
+        },
     },
 }
 

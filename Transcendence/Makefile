@@ -7,11 +7,13 @@ MIGRATE_SESSION = docker compose exec web python3 manage.py migrate sessions
 MIGRATE	= docker compose exec web python3 manage.py makemigrations && docker compose exec web python3 manage.py migrate
 
 # without the flag '-d', you should see in verbose server running
-RUN		= docker compose up -d
+RUN		= docker compose up 
+# -d --build
 
 # should use this when running with the -d option
 STOP	= docker compose stop
 DOWN    = docker compose down -v
+
 # Watch Mode :
 # When modify the file system of the server, modify the same file in the container
 WATCH	= docker compose up --watch
@@ -34,6 +36,7 @@ build:
 
 run:
 	echo "[$(_YELLOW)make$(_END)]:[ $(_BLUE)run$(_END) ] ---------------------> $(_GREY)running container(s)$(_END)"
+	$(RUN)
 	if $(RUN) ; then \
 		$(MIGRATE_SESSION) ; \
 		$(MIGRATE) ; \

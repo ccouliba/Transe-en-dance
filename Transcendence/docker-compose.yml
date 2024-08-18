@@ -3,7 +3,6 @@ services:
   web:
     container_name: backend
     build: ./project
-    command: python manage.py runserver 0.0.0.0:8000
     volumes:
       - ./project/:/usr/src/project/
     ports:
@@ -21,6 +20,7 @@ services:
 
   db:
     image: postgres:15
+    container_name: database
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     ports:
@@ -39,7 +39,7 @@ services:
     networks:
      - transcendance
 
-  # Elasticsearch is a search engine
+  # # Elasticsearch is a search engine
   elasticsearch:
     container_name: elasticsearch
     image: docker.elastic.co/elasticsearch/elasticsearch:8.14.3
@@ -58,10 +58,15 @@ services:
       - elk_data:/usr/share/elasticsearch/data
     ports:
       - 9200:9200
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:9200/_cluster/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 2
     networks:
       - elk
 
-  # Logstash is a server-side data processing pipeline
+  # # Logstash is a server-side data processing pipeline
   logstash:
     container_name: logstash
     image: docker.elastic.co/logstash/logstash:8.14.3
@@ -75,17 +80,17 @@ services:
       - 5959:5959/tcp
     environment:
       LS_JAVA_OPTS: "-Xmx256m -Xms256m"
+    depends_on:
+      elasticsearch:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:5959"]
+      interval: 20s
+      timeout: 5s
+      retries: 3
     networks:
       - elk
       - transcendance
-    depends_on:
-      - elasticsearch
-    healthcheck:
-      test: curl http://localhost:5959
-      interval: 10s
-      timeout: 1s
-      retries: 2
-      start_period: 5s
 
   # # Kibana is used for data visualization
   kibana:
@@ -95,10 +100,11 @@ services:
       - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
     ports:
       - 5601:5601
+    depends_on:
+      elasticsearch:
+        condition: service_healthy
     networks:
       - elk
-    depends_on:
-      - elasticsearch
 
 volumes:
   postgres_data:

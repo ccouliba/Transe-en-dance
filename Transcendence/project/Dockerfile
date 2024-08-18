@@ -20,3 +20,6 @@ RUN pip install -r requirements.txt &&\
 	
 # copy project
 COPY . .
+
+ENTRYPOINT [ "sh", "runserver.sh" ]
+# CMD [ "sh", "./scripts/start.sh", ]
