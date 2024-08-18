@@ -216,6 +216,7 @@ function EditEmail() {
 		}); // envoyer les donnees au backend
 		profileState.isLoaded = false;
 		mountComponent(Profile); // monter le composant Profile
+		changeLanguage();
 		 // marquer les donnees du profil comme non chargees
 	});
 	return `
@@ -249,6 +250,7 @@ function EditFirstname() {
 		}); // envoyer les donnees au backend
 		profileState.isLoaded = false;
 		mountComponent(Profile); // monter le composant Profile
+		changeLanguage();
 		 // marquer les donnees du profil comme non chargees
 	});
 	return `
@@ -282,6 +284,7 @@ function EditLastname() {
 		}); // envoyer les donnees au backend
 		profileState.isLoaded = false;
 		mountComponent(Profile); // monter le composant Profile
+		changeLanguage();
 		 // marquer les donnees du profil comme non chargees
 	});
 	return `
@@ -311,8 +314,8 @@ function EditLangue() {
 		profileState.langue = langueInput;
 		localStorage.setItem('selectedLanguage', langueInput);
 		sendProfileToBackend({ 'langue': langueInput });
-		mountComponent(Profile);
 		profileState.isLoaded = false;
+		mountComponent(Profile);
 		changeLanguage();
 	});
 	return `
@@ -326,8 +329,6 @@ function EditLangue() {
 	</form>
 	`;
 }
-
-//   <option value="it" id="italianOption">Italiano 🇮🇹</option>
 
 function EditAvatar() {
 	bindEvent(profileState, "#edit-avatar", "submit", event => {
@@ -348,6 +349,7 @@ function EditAvatar() {
 					profileState.avatar = data.avatar_url;
 					profileState.isLoaded = false;
 					mountComponent(Profile);
+					changeLanguage();
 				} else {
 					alert('Error uploading avatar: ' + JSON.stringify(data.errors));
 				}
@@ -409,8 +411,9 @@ function EditPassword() {
 					alert(`${window.trans.successPasswordChange}`);
 					// marque les donnees de profil comme non chargees
 					// recharge le composant du profil
-					mountComponent(Profile);
 					profileState.isLoaded = false;
+					mountComponent(Profile);
+					changeLanguage();
 				} else {
 					// prepare un message d'erreur en cas d'echec
 					let errorMessage = `${window.trans.errPasswordChange}:\n\n`;
