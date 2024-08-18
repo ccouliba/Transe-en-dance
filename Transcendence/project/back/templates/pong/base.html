@@ -37,8 +37,7 @@
 	  <div id="app">
 		  {% block content %}
 		  <script>
-			/*let hash = window.location.hash
-			changePage(hash);*/
+
 			{% if user.is_authenticated %}
 				if (window.location.hash === '' || window.location.hash === '#') {
 					loadTranslations().then(() => {
@@ -144,9 +143,9 @@
 	});
 
 	</script>
-	    {% endif %}
+	{% endif %}
 	<canvas id="background"></canvas>
 	<script src="{% static 'pong/js/background.js' %}"></script>
 	<script src="{% static 'pong/js/bootstrap.min.js' %}"></script>
-  </body>
+	</body>
 </html>
