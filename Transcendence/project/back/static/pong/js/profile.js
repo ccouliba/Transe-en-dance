@@ -158,7 +158,6 @@ function sendProfileToBackend(payload) {
 			}
 			return response.json(); // transformer la reponse en JSON
 		})
-		.then(data => console.log('success:', data))
 		.catch(error => {
 			console.error('error:', error);
 			alert('Please ensure that the information you provide is accurate and correct.');
@@ -227,7 +226,7 @@ function EditEmail() {
 		<form id="edit-email" class="mt-3">
 			<div class="input-group">
 				<input
-					type="text"
+					type="email"
 					class="form-control"
 					id="email"
 					name="email"

@@ -1,18 +1,30 @@
+from io import BytesIO
+import json
+
+
 from django.shortcuts import render, redirect
 from django.conf import settings
-from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse, HttpResponse
-from django.contrib.auth.forms import UserChangeForm, PasswordChangeForm
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_POST
+
+from django.core.validators import validate_email
 from django.contrib.auth import update_session_auth_hash
-from io import BytesIO
+from django.contrib.auth.forms import UserChangeForm, PasswordChangeForm
+from django.contrib.auth.decorators import login_required
+
 from django.utils import translation
 from django.utils.translation import gettext as _
+
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
 from back.models import User, Friendship, Game
-from .. import forms
+
 from back.forms import AvatarUploadForm
-from django.views.decorators.csrf import csrf_exempt
+from django.core.exceptions import ValidationError
+
+from .. import forms
 
 # This view for multilang
 @login_required
@@ -28,9 +40,8 @@ def change_language(request):
 	else:
 		form = forms.SetLanguageForm()
 	return render(request, 'pong/change_language.html', {'form': form})
-from django.views.decorators.http import require_POST
-from django.views.decorators.csrf import csrf_exempt
-import json
+
+
 
 # path('pong/api/profile/update', profile_update_view, name='profile_update'),
 @login_required
@@ -45,7 +56,11 @@ def	profile_update_view(request):
 			updated.append('username')
 
 		if 'email' in data:
-			user.email = data['email']
+			email = data['email']
+			try:
+				validate_email(email)
+			except ValidationError:
+				return JsonResponse({'status': 'failed', 'message': "email format invalid"}, status=400)
 			updated.append('email')
 
 		if 'firstname' in data:
