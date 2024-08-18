@@ -180,6 +180,7 @@ function EditUsername() {
 		}).then(() => {
 			profileState.isLoaded = false
 			mountComponent(Profile);
+			changeLanguage();
 		})
 		 // monter le composant Profile
 		 // marquer les donnees du profil comme non chargees
