@@ -94,10 +94,10 @@ services:
       elasticsearch:
         condition: service_healthy
     healthcheck:
-      test: ["CMD-SHELL", "curl -f http://localhost:5959"]
+      test: ["CMD", "curl", "-f", "http://localhost:9600/_node/stats"]
       interval: 20s
       timeout: 5s
-      retries: 3
+      retries: 4
     networks:
       - elk
       - transcendance
