@@ -294,5 +294,8 @@
 	"CANNOT_SEND_REQUEST_TO_SELF": "Vous ne pouvez pas vous envoyer une demande d'amitié à vous-même.",
 	"FRIEND_REQUEST_ALREADY_SENT": "La demande d'amitié a déjà été envoyée.",
 	"ALREADY_FRIENDS": "Vous êtes déjà ami avec cet utilisateur.",
-	"FRIEND_REQUEST_SENT": "Demande d'amitié envoyée avec succès."
+	"FRIEND_REQUEST_SENT": "Demande d'amitié envoyée avec succès.",
+	"NO_PENDING_FRIEND_REQUESTS": "Aucune demande d'ami en attente de cet utilisateur.",
+	"FRIEND_REQUEST_ACCEPTED": "Demande d'ami acceptée avec succès.",
+	"USER_NOT_IN_FRIEND_LIST": "Cet utilisateur n'est pas dans votre liste d'amis."
 }

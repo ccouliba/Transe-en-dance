@@ -294,6 +294,8 @@
 	"CANNOT_SEND_REQUEST_TO_SELF": "No puedes enviarte una solicitud de amistad a ti mismo.",
 	"FRIEND_REQUEST_ALREADY_SENT": "La solicitud de amistad ya ha sido enviada.",
 	"ALREADY_FRIENDS": "Ya eres amigo de este usuario.",
-	"FRIEND_REQUEST_SENT": "Solicitud de amistad enviada con éxito."
-	
+	"FRIEND_REQUEST_SENT": "Solicitud de amistad enviada con éxito.",
+	"NO_PENDING_FRIEND_REQUESTS": "No hay solicitudes de amistad pendientes de este usuario.",
+	"FRIEND_REQUEST_ACCEPTED": "Solicitud de amistad aceptada con éxito.",
+	"USER_NOT_IN_FRIEND_LIST": "Este usuario no está en tu lista de amigos."
 }

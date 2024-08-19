@@ -53,12 +53,16 @@ def accept_friend_request(request):
 		payload = json.loads(request.body)
 		from_email = payload.get('email')
 		
-		from_user = get_object_or_404(User, email=from_email)
-		
+		# from_user = get_object_or_404(User, email=from_email)
+		try:
+			from_user = User.objects.get(email=from_email)
+		except User.DoesNotExist:
+			return JsonResponse({'status': 'error', 'message': 'USER_NOT_FOUND'}, status=404)
+	
 		# Vérifier si une demande existe
 		friend_request = Friendship.objects.filter(id_user_1=from_user, id_user_2=request.user).first()
 		if not friend_request:
-			return JsonResponse({'status': 'error', 'message': 'Aucune demande d\'ami en attente de cet utilisateur.'}, status=400)
+			return JsonResponse({'status': 'error', 'message': 'NO_PENDING_FRIEND_REQUESTS'}, status=400)
 		
 		# Accepter la demande d'ami
 		request.user.friends.add(from_user)
@@ -69,7 +73,7 @@ def accept_friend_request(request):
 		
 		return JsonResponse({
 			'status': 'success',
-			'message': 'Demande d\'ami acceptée avec succès.',
+			'message': 'FRIEND_REQUEST_ACCEPTED',
 			'new_friend': {
 				'id': from_user.id,
 				'username': from_user.username,
@@ -77,7 +81,7 @@ def accept_friend_request(request):
 			}
 		})
 	except User.DoesNotExist:
-		return JsonResponse({'status': 'error', 'message': 'Utilisateur non trouvé'}, status=404)
+		return JsonResponse({'status': 'error', 'message': 'USER_NOT_FOUND'}, status=404)
 	except Exception as e:
 		return JsonResponse({'status': 'error', 'message': str(e)}, status=500)
 
@@ -92,7 +96,7 @@ def remove_friend(request):
 		friend = User.objects.get(email=friend_email)
 		
 		if friend not in request.user.friends.all():
-			return JsonResponse({'status': 'error', 'message': 'Cet utilisateur n\'est pas dans votre liste d\'amis.'}, status=400)
+			return JsonResponse({'status': 'error', 'message': 'USER_NOT_IN_FRIEND_LIST'}, status=400)
 		
 		request.user.friends.remove(friend)
 		friend.friends.remove(request.user)
@@ -102,7 +106,7 @@ def remove_friend(request):
 			'message': 'Ami supprimé avec succès.',
 		})
 	except User.DoesNotExist:
-		return JsonResponse({'status': 'error', 'message': 'Utilisateur non trouvé'}, status=404)
+		return JsonResponse({'status': 'error', 'message': 'USER_NOT_FOUND'}, status=404)
 	except Exception as e:
 		return JsonResponse({'status': 'error', 'message': str(e)}, status=500)
 

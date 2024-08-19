@@ -147,7 +147,7 @@ function sendFriendRequest(email) {
 				alert(`${window.trans.friReqSentSuccess}`); // modale pour alerter l'utilisateur du succes
 				refreshFriendsList(); // rafraichir la liste des amis !!! pas besoin de websockets ou autres
 			} else {
-				alert(window.trans[data.message]); // modale pour alerter l'utilisateur de l'echec
+				alert(window.trans[data.message] || data.message); // modale pour alerter l'utilisateur de l'echec
 			}
 		})
 		.catch(error => console.error(`${window.trans.error}:`, error));
@@ -183,10 +183,12 @@ function AcceptFriendRequest(email) {
 		.then(response => response.json()) // Convertir la reponse en JSON
 		.then(data => {
 			if (data.status === 'success') {
+				console.log("window.trans:", window.trans);
 				alert(`${window.trans.friReqAccSuccess}`); //modale pour alerter l'utilisateur du succes
 				refreshFriendsList(); // Rafraichir la liste des amis !
 			} else {
-				alert(data.message); // modale pour alerter l'utilisateur de l'echec
+				console.log("window.trans:", window.trans);
+				alert(window.trans[data.message] || data.message); // modale pour alerter l'utilisateur de l'echec
 			}
 		})
 		.catch(error => console.error(`${window.trans.error}:`, error));
@@ -225,7 +227,7 @@ function removeFriend(email) {
 				alert(`${window.trans.friDelSuccess}`); // modale pour alerter l'utilisateur du succes
 				refreshFriendsList(); // Rafraichir la liste des amis
 			} else {
-				alert(data.message); // modale pour alerter l'utilisateur de l'echec
+				alert(window.trans[data.message] || data.message);// modale pour alerter l'utilisateur de l'echec
 			}
 		})
 		.catch(error => console.error('Error:', error));
