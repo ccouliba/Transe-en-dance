@@ -5,32 +5,22 @@ import json
 from django.views.decorators.csrf import csrf_exempt
 from django.db.models import F #pour effectuer des opérations de mise à jour directement au niveau de la base de données sans d'abord récupérer les objets en mémoire
 from django.db.models import Q #pour construire des requêtes qui nécessitent des opérations logiques telles que OR et AND
+import pytz
 
 @login_required
 def create_game(request):
 	if request.method == 'POST':
 		data = json.loads(request.body)
-
-		# player1_username = data.get('player1Username')
 		player2_username = data.get('player2Username')
-
 		if  not User.objects.filter(username=player2_username).exists():
 			return JsonResponse({'error': 'One or both players not found'}, status=404)
-
 		try:
-			
-			# player1 = User.objects.get(username=player1_username)
 			player2 = User.objects.get(username=player2_username)
-
 			game = Game.objects.create(
 				player1=request.user,
 				player2=player2,
 				status='started'
 			)
-
-			# game.player1.add(request.user)
-
-
 			return JsonResponse({
 				'gameId': game.id,
 				'player1Username': request.user.username,
@@ -104,8 +94,6 @@ def finish_game(request, game_id):
 	else:
 		return JsonResponse({'error': 'Invalid request method'}, status=405)
 
-import pytz
-from django.utils import timezone
 
 @login_required
 def match_history(request):
@@ -127,7 +115,6 @@ def match_history(request):
 			'opponent': game.player2.username if game.player1 == user else game.player1.username,
 			'user_score': game.player1_score if game.player1 == user else game.player2_score,
 			'opponent_score': game.player2_score if game.player1 == user else game.player1_score,
-			# 'result': 'Win' if game.winner == user else 'Loss',
 			'is_winner': game.winner == user, 
 			'date': game_time_paris.strftime("%Y-%m-%d %H:%M:%S"),
 			'is_tournament': game.is_tournament_game,
@@ -135,10 +122,6 @@ def match_history(request):
 		})
 	print(f"Number of games in history: {len(history)}") 
 	return JsonResponse({'match_history': history})
-
-
-from django.utils import timezone
-
 
 @login_required
 def get_current_user(request):

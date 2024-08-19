@@ -1,21 +1,17 @@
 from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
-from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
-from django.db import transaction
 from back.models import Tournament, User
 import json
 from .tournament_presenter import *
-
 from django.db.models import Sum, Case, When
 from back.models import Tournament, Game, Composed
 from itertools import combinations
 from django.db.models import Q, F
 from django.db.models import IntegerField
-
 from django.utils import timezone
 from django.shortcuts import get_object_or_404
-
+from django.utils.html import escape
 
 
 @require_http_methods(["POST"])
@@ -23,7 +19,7 @@ from django.shortcuts import get_object_or_404
 def create_tournament(request):
 	try:
 		data = json.loads(request.body)
-		name = data.get('name')
+		name = escape(data.get('name'))
 
 		if not name:
 			return JsonResponse({'status': 'error', 'message': 'Tournament name required.'}, status=400)
@@ -157,7 +153,7 @@ def add_alias(request, tournament_id):
 		
 		data = json.loads(request.body)
 		new_username = data.get('username')
-		new_alias = data.get('alias')
+		new_alias = escape(data.get('alias'))
 		
 		if not new_username or not new_alias:
 			return JsonResponse({'status': 'error', 'message': 'Both username and alias are required.'}, status=400)
