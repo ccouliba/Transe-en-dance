@@ -75,6 +75,7 @@ class User(AbstractUser):
 		self.set_avatar(avatar_url)
 		self.first_name = firstname
 		self.last_name = lastname
+		self.langue = "en"
 
 	def set_avatar(self, avatar_url: str):
 		if avatar_url.startswith('http'):

@@ -37,29 +37,30 @@
 	  <div id="app">
 		  {% block content %}
 		  <script>
-
+			var lang = "{{ user.langue }}"
+			
 			{% if user.is_authenticated %}
 				if (window.location.hash === '' || window.location.hash === '#') {
-					loadTranslations().then(() => {
+					loadTranslationFile(lang).then(() => {
 						changePage('#home');
 					});
 				} else {
-					loadTranslations().then(() => {
+					loadTranslationFile(lang).then(() => {
 						changePage(window.location.hash);
 					});
 				}
 				{% else %}
 				if (window.location.hash === '#register') {
-					loadTranslations().then(() => { 
+					loadTranslationFile(lang).then(() => { 
 						changePage('#register');
 					});
 				} else {
-					loadTranslations().then(() => {
+					loadTranslationFile(lang).then(() => {
 						changePage('#login');
 					});
 				}
 			{% endif %}
-		loadTranslations();
+		
 		</script>
 		{% endblock %}
 	  </div>
@@ -71,7 +72,7 @@
 
 	// Script JS pour avoir une modale lorsque l'utilisateur est en mode navigation privee
 
-
+	loadTranslationFile("en")
 	// VerifiFonction pour verifier si l'utilisateur est en mode navigation privee
 	async function isIncognito() {
 		if (navigator.storage && navigator.storage.estimate) {
@@ -136,7 +137,7 @@
 	// Verifier si l'utilisateur est en mode de navigation privee et afficher la modale 
 	isIncognito().then(incognito => {
 		if (incognito) {
-			loadTranslations().then(() => {
+			loadTranslations("en").then(() => {
 				showModal();
 			});
 		}

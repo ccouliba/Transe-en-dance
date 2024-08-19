@@ -4,7 +4,6 @@ var profileState = {
 	email: "", // email de l'utilisateur
 	firstname: "", // prenom de l'utilisateur
 	lastname: "", // nom de famille de l'utilisateur
-	langue: localStorage.getItem('selectedLanguage') || 'English',
 	avatar_url: "",
 	wins: 0,
 	losses: 0,
@@ -179,7 +178,7 @@ function EditUsername() {
 		}).then(() => {
 			profileState.isLoaded = false
 			mountComponent(Profile);
-			changeLanguage();
+			
 		})
 		 // monter le composant Profile
 		 // marquer les donnees du profil comme non chargees
@@ -217,8 +216,7 @@ function EditEmail() {
 		}); // envoyer les donnees au backend
 		profileState.isLoaded = false;
 		mountComponent(Profile); // monter le composant Profile
-		changeLanguage();
-		 // marquer les donnees du profil comme non chargees
+			 // marquer les donnees du profil comme non chargees
 	});
 	//! Removing form-floating because that's ugly
 	// <label for="email" class="form-label">${window.trans.modify} ${window.trans._email}</label>
@@ -252,7 +250,7 @@ function EditFirstname() {
 		}); // envoyer les donnees au backend
 		profileState.isLoaded = false;
 		mountComponent(Profile); // monter le composant Profile
-		changeLanguage();
+		
 		 // marquer les donnees du profil comme non chargees
 	});
 	//! Removing form-floating because that's ugly
@@ -287,7 +285,7 @@ function EditLastname() {
 		}); // envoyer les donnees au backend
 		profileState.isLoaded = false;
 		mountComponent(Profile); // monter le composant Profile
-		changeLanguage();
+
 		 // marquer les donnees du profil comme non chargees
 	});
 	//! Removing form-floating because that's ugly
@@ -315,12 +313,13 @@ function EditLangue() {
 		event.preventDefault();
 		const langueInput = event.target.elements.languageSelector.value;
 
-		profileState.langue = langueInput;
-		localStorage.setItem('selectedLanguage', langueInput);
-		sendProfileToBackend({ 'langue': langueInput });
-		profileState.isLoaded = false;
-		mountComponent(Profile);
-		changeLanguage();
+		sendProfileToBackend({ 'langue': langueInput }).then(() => {
+			changeLanguage(langueInput);
+			profileState.isLoaded = false;
+			mountComponent(Profile);
+		
+		});
+		
 	});
 
 	// Get the current selected language from profileState
@@ -330,9 +329,9 @@ function EditLangue() {
 	<form id="edit-langue" class="mt-3">
 		<div class="input-group">
 			<select class="form-select" name="languageSelector" id="languageSelector" aria-label="Select your language">
-				<option value="English" ${selectedLanguage === "English" ? "selected" : ""}>English 🇺🇸</option>
-				<option value="Français" ${selectedLanguage === "Français" ? "selected" : ""}>Français 🇫🇷</option>
-				<option value="Español" ${selectedLanguage === "Español" ? "selected" : ""}>Español 🇪🇸</option>
+				<option value="en" ${selectedLanguage === "en" ? "selected" : ""}>English 🇺🇸</option>
+				<option value="fr" ${selectedLanguage === "fr" ? "selected" : ""}>Français 🇫🇷</option>
+				<option value="es" ${selectedLanguage === "es" ? "selected" : ""}>Español 🇪🇸</option>
 			</select>
 			<button class="btn btn-secondary" type="submit">${window.trans.modify}</button>
 		</div>
@@ -359,7 +358,7 @@ function EditAvatar() {
 					profileState.avatar = data.avatar_url;
 					profileState.isLoaded = false;
 					mountComponent(Profile);
-					changeLanguage();
+					
 				} else {
 					alert('Error uploading avatar: ' + JSON.stringify(data.errors));
 				}
@@ -423,7 +422,7 @@ function EditPassword() {
 					// recharge le composant du profil
 					profileState.isLoaded = false;
 					mountComponent(Profile);
-					changeLanguage();
+					
 				} else {
 					// prepare un message d'erreur en cas d'echec
 					let errorMessage = `${window.trans.errPasswordChange}:\n\n`;

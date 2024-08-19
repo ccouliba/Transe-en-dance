@@ -1,39 +1,49 @@
 window.trans = '';
 
-// Loads the translations based on the langage given
-function loadTranslations(newLang)
-{
-	// Get the selectedLanguage or the default language
-	newLang = localStorage.getItem('selectedLanguage') || "English";
-	// By default the English translations are given
-	let langFile = '/static/pong/js/translations/en.json';
-	// French translations are given
-	if (newLang === 'Français')
-		langFile = '/static/pong/js/translations/fr.json';
-	// Spanish translations are given
-	else if (newLang === 'Español')
-		langFile = '/static/pong/js/translations/es.json';
-	// Fetch the translation file
-	return fetch(langFile)
-	// Parse the content of the translation file
-	.then(response => response.json())
-	// Store the contents in a global object
+function getUserLangFromBackend(){
+	console.log("pb")
+	url = `/pong/api/get-user-locale`
+	return httpGetJson(url)	
+}
+
+function changeBackendLanguage(locale){
+	let url = `/change-locale`
+	httpPostJson(url, {locale}).then(translations =>{
+		window.trans = translations;
+		document.getElementById('app').innerHTML = Profile();
+	})
+}
+
+function askTranslationToBackend(langFile){
+
+	return httpGetJson(langFile)
 	.then(trans => {
 		window.trans = trans;
+		updateMenu();
 	})
-	// Write an error in the console if the fetching fails
 	.catch(error => {
 		console.error(`${window.trans.errFetchingTranslations}: `, error);
 	})
 }
+// Loads the translations based on the langage given
+function loadTranslationFile(lang)
+{
+	// Get the selectedLanguage or the default language
+	if (lang == ""){
+		lang = "en"
+	}
+	let tradFiles = {
+		"fr": "/static/pong/js/translations/fr.json",
+		"en": "/static/pong/js/translations/en.json",
+		"es": "/static/pong/js/translations/es.json"	
+	}
+	let langFile = tradFiles[lang]	
+	
+	return askTranslationToBackend(langFile)
+	
+}
 
-// Applies the translations and loads necessary pages
 function changeLanguage(newLang) {
-	// Loads the translations
-	loadTranslations(newLang).then(() => {
-		// Updates the navbar
-		updateMenu();
-		// Loads the profile with the new translations
-		document.getElementById('app').innerHTML = Profile();
-	});
+
+	loadTranslationFile(newLang)
 }

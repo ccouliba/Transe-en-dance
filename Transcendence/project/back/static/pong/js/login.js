@@ -87,8 +87,17 @@ function handleLogin(event) {
 		if (data.status === 'success') {
 			localStorage.setItem('userToken', 'true'); // Stocker le token de l'utilisateur
 			alert(`${window.trans.successLogin}`); 
-			changePage('#home');
-			// changePage('#profile'); // Rediriger vers la page de profil
+			if (!getCSRFToken()){
+				return
+			}
+			console.log("es tu lance deux fois fdp")
+			getUserLangFromBackend().then(locale => {
+
+				return changeLanguage(locale.lang)
+			}).then(() => {
+				changePage('#home');
+			})
+
 		} else {
 			alert(`${window.trans.failLogin}: ` + data.message); 
 		}

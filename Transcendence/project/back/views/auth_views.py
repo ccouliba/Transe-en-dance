@@ -198,11 +198,7 @@ def get_user_from_api(request, access_token):
 				user.save()
 		else:
 			# If no user exists with this username or email, create a new one
-			user = User.objects.create(username=username, email=email)
-		
-		# user, created = User.objects.get_or_create(username=user_info['login'])
-		# if created:
-		# 	email = user_info.get('email', '')
+			user = User.objects.create(username=username, email=email)	
 			avatar = user_info.get('image', {}).get('link')
 			first_name = user_info.get('first_name', '')
 			last_name = user_info.get('last_name', '')

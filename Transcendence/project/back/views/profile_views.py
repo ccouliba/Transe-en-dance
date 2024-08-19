@@ -21,13 +21,28 @@ from django.utils.html import escape
 from .. import forms
 from django.db.models import Q, Count, Sum, Case, When, IntegerField
 
+
+@login_required
+def get_user_locale(request):
+    
+    
+    lang = request.user.langue
+    
+    return JsonResponse({"lang": lang})
+
 # This view for multilang
 @login_required
 def change_language(request):
+
+	#user = request.user
+
 	if request.method == 'POST':
 		form = forms.SetLanguageForm(request.POST)
 		if form.is_valid():
+			
 			user_language = form.cleaned_data['language']
+			#user.lang  = user_language
+			#user.save()
 			translation.activate(user_language)
 			response = redirect('/pong/home')
 			response.set_cookie(settings.LANGUAGE_COOKIE_NAME, user_language)
@@ -108,6 +123,7 @@ def profile_view(request):
 		'wins': wins,
 		'losses': losses,
 		'total_games': total_games,
+		'langue': user.langue,
 		'win_rate': win_rate,
 		'total_score': game_stats['total_score'],
 		'has_password': bool(user.password) 
@@ -130,6 +146,10 @@ def user_updated_profile(request):
 	return render(request, 'pong/update.html', {'form': form})
 
 # Cette vue permet a l'utilisateur connecte de changer son mot de passe en utilisant un formulaire fourni par Django
+
+
+
+
 
 @login_required
 @require_POST
