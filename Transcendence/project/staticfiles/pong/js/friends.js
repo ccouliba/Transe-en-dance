@@ -36,36 +36,36 @@ function FriendsForms(){
 }
 	
 function FriendsList() {
-    return `
-        <h1 class="mb-4">${window.trans.friendsList}</h1>
-        
-        <button class="btn btn-primary mb-3" onclick="refreshFriendsList()">${window.trans.refreshList}</button>
-        
-        <h2>${window.trans.myFriends}</h2>
-        <ul id="friends-status-list" class="list-group mb-4">
-            ${friendsState.friends.map(friend => `
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    ${friend.username} (${friend.email}) - <span class="friend-status">${friend.isOnline ? "online" : "offline"}</span>
-                </li>
-            `).join('')}
-        </ul>
-        
-        <h2>${window.trans.friendRequestsSent}</h2>
-        <ul class="list-group mb-4">
-            ${friendsState.sentRequests.map(request => `
-                <li class="list-group-item">${request.username} (${request.email})</li>
-            `).join('')}
-        </ul>
-        
-        <h2>${window.trans.friendRequestsReceived}</h2>
-        <ul class="list-group mb-4">
-            ${friendsState.receivedRequests.map(request => `
-                <li class="list-group-item">
-                    ${request.username} (${request.email})
-                </li>
-            `).join('')}
-        </ul>
-    `;
+	return `
+		<h1 class="mb-4">${window.trans.friendsList}</h1>
+		
+		<button class="btn btn-secondary mb-3" onclick="refreshFriendsList()">${window.trans.refreshList}</button>
+		
+		<h2>${window.trans.myFriends}</h2>
+		<ul id="friends-status-list" class="list-group mb-4">
+			${friendsState.friends.map(friend => `
+				<li class="list-group-item d-flex justify-content-between align-items-center">
+					${friend.username} (${friend.email}) - <span class="friend-status">${friend.isOnline ?  window.trans.online : window.trans.offline}</span>
+				</li>
+			`).join('')}
+		</ul>
+		
+		<h2>${window.trans.friendRequestsSent}</h2>
+		<ul class="list-group mb-4">
+			${friendsState.sentRequests.map(request => `
+				<li class="list-group-item">${request.username} (${request.email})</li>
+			`).join('')}
+		</ul>
+		
+		<h2>${window.trans.friendRequestsReceived}</h2>
+		<ul class="list-group mb-4">
+			${friendsState.receivedRequests.map(request => `
+				<li class="list-group-item">
+					${request.username} (${request.email})
+				</li>
+			`).join('')}
+		</ul>
+	`;
 }
 
 
@@ -73,7 +73,6 @@ function FriendsList() {
 function loadFriendsData() {
 	let url = `/pong/api/friends_data/`;
 	httpGetJson(url)
-		.then(response => response.json()) // Convertir la reponse en JSON
 		.then(data => {
 			friendsState.friends = data.friends; // mise a jour de la liste des amis
 			friendsState.sentRequests = data.sentRequests; // mise a jour des demandes envoyees
@@ -82,42 +81,54 @@ function loadFriendsData() {
 			// mountComponent(FriendsList); // mise a jour de l'interface avec la liste des amis
 			mountComponent(Friends); // mise a jour de l'interface avec la liste des amis
 			// Démarrer l'intervalle pour la mise à jour du statut des amis
-			console.log("friendsState.friendStatusInterval", friendsState.friendStatusInterval)
+			// console.log("friendsState.friendStatusInterval", friendsState.friendStatusInterval)
 			if (!friendsState.friendStatusInterval) {
 				friendsState.friendStatusInterval = setInterval(getFriendsStatus, 5 * 1000);
 			}
 		})
-		.catch(error => console.error(`${window.trans.error}:`, error));
+		// .catch(error => console.error(`${window.trans.error}:`, error));
 }
 
+
 function getFriendsStatus(){
-	console.log("in getfriendstatus")
 	let url = `/pong/api/friends/get-status/`;
 	
 	return httpGetJson(url)
-		.then(response => response.json()) // Convertir la reponse en JSON
-		.then(payload=>{
+		
+		.then(payload => {
+			if (payload.error) {
+				console.error('Server error:', payload.error);
+				return;
+			}
 			payload.statuses.forEach((isOnline, i) => {
-				friendsState.friends[i].isOnline = isOnline	
-				console.log(friendsState.friends[i].isOnline )
-
+				if (i < friendsState.friends.length) {
+					friendsState.friends[i].isOnline = isOnline;
+				}
 			});
 			updateFriendsStatus();
-			// mountComponent(FriendsList) 
-			
 		})
-		.catch(error => console.error(`${window.trans.error}:`, error));
+		.catch(error => {
+			console.error('Error fetching friends status:', error);
+			// set all friends to offline when error
+			friendsState.friends.forEach(friend => friend.isOnline = false);
+			updateFriendsStatus();
+		});
 }
 
+
+
 function updateFriendsStatus() {
-    const statusList = document.getElementById('friends-status-list');
-	console.log('window.trans:', window.trans);
-    if (statusList) {
-        const statusSpans = statusList.querySelectorAll('.friend-status');
-        statusSpans.forEach((span, i) => {
-            span.textContent = friendsState.friends[i].isOnline ? `${window.trans.online}` : `${window.trans.offline}`;
-        });
-    }
+	const statusList = document.getElementById('friends-status-list');
+	if (statusList) {
+		const statusSpans = statusList.querySelectorAll('.friend-status');
+		statusSpans.forEach((span, i) => {
+			if (i < friendsState.friends.length) {
+				span.textContent = friendsState.friends[i].isOnline ? `${window.trans.online}` : `${window.trans.offline}`;
+			} else {
+				span.textContent = `${window.trans.offline}`;
+			}
+		});
+	}
 }
 
 // Fonction pour rafraichir la liste des amis
@@ -136,7 +147,7 @@ function sendFriendRequest(email) {
 				alert(`${window.trans.friReqSentSuccess}`); // modale pour alerter l'utilisateur du succes
 				refreshFriendsList(); // rafraichir la liste des amis !!! pas besoin de websockets ou autres
 			} else {
-				alert(data.message); // modale pour alerter l'utilisateur de l'echec
+				alert(window.trans[data.message] || data.message); // modale pour alerter l'utilisateur de l'echec
 			}
 		})
 		.catch(error => console.error(`${window.trans.error}:`, error));
@@ -159,7 +170,7 @@ function AddFriendForm() {
 		<form id="add-friend-form" class="mt-3">
 			<div class="input-group">
 				<input type="text" class="form-control" id="friendEmail" name="friendEmail" placeholder="${window.trans.friendEmailToAdd}"/>
-				<button class="btn btn-primary" type="submit">${window.trans.add}</button>
+				<button class="btn btn-secondary" type="submit">${window.trans.add}</button>
 			</div>
 		</form>
 	`;
@@ -172,10 +183,12 @@ function AcceptFriendRequest(email) {
 		.then(response => response.json()) // Convertir la reponse en JSON
 		.then(data => {
 			if (data.status === 'success') {
+				console.log("window.trans:", window.trans);
 				alert(`${window.trans.friReqAccSuccess}`); //modale pour alerter l'utilisateur du succes
 				refreshFriendsList(); // Rafraichir la liste des amis !
 			} else {
-				alert(data.message); // modale pour alerter l'utilisateur de l'echec
+				console.log("window.trans:", window.trans);
+				alert(window.trans[data.message] || data.message); // modale pour alerter l'utilisateur de l'echec
 			}
 		})
 		.catch(error => console.error(`${window.trans.error}:`, error));
@@ -198,7 +211,7 @@ function AcceptFriendForm(email) {
 		<form id="accept-friend-form" class="mt-3">
 			<div class="input-group">
 				<input type="text" class="form-control" id="friendEmail" name="friendEmail" placeholder="${window.trans.friendEmailToAccept}"/>
-				<button class="btn btn-primary" type="submit">${window.trans.accept}</button>
+				<button class="btn btn-secondary" type="submit">${window.trans.accept}</button>
 			</div>
 		</form>
 	`;
@@ -214,7 +227,7 @@ function removeFriend(email) {
 				alert(`${window.trans.friDelSuccess}`); // modale pour alerter l'utilisateur du succes
 				refreshFriendsList(); // Rafraichir la liste des amis
 			} else {
-				alert(data.message); // modale pour alerter l'utilisateur de l'echec
+				alert(window.trans[data.message] || data.message);// modale pour alerter l'utilisateur de l'echec
 			}
 		})
 		.catch(error => console.error('Error:', error));

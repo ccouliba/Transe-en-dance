@@ -6,10 +6,15 @@ const CANVAS_HEIGHT = 400;
 const CANVAS_WIDTH = 600;
 const WINNING_SCORE = 5; // a changer ou pas
 
+function initializePaddle(){
+	paddle1Y = (CANVAS_HEIGHT - PADDLE_HEIGHT) / 2;
+	paddle2Y = (CANVAS_HEIGHT - PADDLE_HEIGHT) / 2;
+}
+let paddle1Y
+let paddle2Y
 
 // positions initiales des raquettes et de la balle
-let paddle1Y = (CANVAS_HEIGHT - PADDLE_HEIGHT) / 2;
-let paddle2Y = (CANVAS_HEIGHT - PADDLE_HEIGHT) / 2;
+
 let ballX = CANVAS_WIDTH / 2;
 let ballY = CANVAS_HEIGHT / 2;
 let ballSpeedX = 5;
@@ -69,6 +74,7 @@ function moveBall() {
 // fonction pour initialiser le jeu
 function initializeGame() {
 
+	initializePaddle()
 	let onlineStatusInterval;
 	// selectionner le canvas et son contexte de dessin
 	const canvas = document.getElementById('pongCanvas');
@@ -176,7 +182,6 @@ function bindKeyboardEvents(){
 
 function updateProfileStats() {
 	httpGetJson('/pong/api/profile')
-	.then(response => response.json())
 	.then(profile => {
 		// Mettre à jour profileState avec les nouvelles stats
 		profileState = {
@@ -191,7 +196,7 @@ function updateProfileStats() {
 			mountComponent(Profile);
 		}
 	})
-	.catch(error => console.error('Error updating profile stats:', error));
+	.catch(error => console.error(`${window.trans.errUpdateProfileStats}: `, error));
 }
 
 
@@ -201,12 +206,15 @@ function finishGame(gameId, player1Score, player2Score, winnerUsername) {
 
 	let url = `/pong/api/games/finish_game/${gameId}/` 
 	let payload = { winner: winnerUsername, player1Score, player2Score }
-	httpPostJson(url, payload)
+	return httpPostJson(url, payload)
 	.then(response => response.json())
 	.then(data => {
-		console.log('Game finished:', data);
+		// console.log('Game finished:', data);
+		playState.gameOver = false
+		playState.gameStarted = false
+		
 	})
-	.catch(error => console.error('Error finishing game:', error));
+	.catch(error => console.error(`${window.trans.errFinishingGame}: `, error));
 }
 
 
@@ -229,7 +237,7 @@ function createGameInDatabase() {
 	// 	playState.gameId = data.gameId;
 	// })
 	
-	.catch(error => console.error('error:', error));
+	.catch(error => console.error(`${window.trans.error}: `, error));
 }
 
 
@@ -244,21 +252,21 @@ function updateTournamentMatchScore(matchId, player1Score, player2Score, winner)
 		winner: winner
 	})
 	.then(response => {
-		console.log('Server response status:', response.status);
+		// console.log('Server response status:', response.status);
 		return response.json();
 	})
 	.then(data => {
-		console.log('Server response data:', data);
+		// console.log('Server response data:', data);
 		if (data.status === 'success') {
-			console.log('Tournament match score updated successfully');
+			console.log(`${window.trans.successUpdateTournamentMatchScore}`);
 			return data;
 		} else {
-			console.error('Error updating tournament match score:', data.message);
+			console.error(`${window.trans.errUpdateTournamentMatchScore}: `, data.message);
 			throw new Error(data.message);
 		}
 	})
 	.catch(error => {
-		console.error('Error in updateTournamentMatchScore:', error);
+		console.error(`${window.trans.errInUpdateTournamentMatchScore}: `, error);
 		throw error;
 	});
 }
@@ -270,13 +278,19 @@ function endGame() {
 	if (playState.isTournamentMatch) {
 		updateTournamentMatchScore(playState.gameId, playState.player1Score, playState.player2Score, winnerUsername)
 			.then((payload) => {
+				
+				playState.gameOver = false
+				playState.gameStarted = false
+				playState.isLoaded = false
+				
 				fetchMatchesAndRankings()
+
 				return
 				//changePage("#tournament");
 			})
 			.catch(error => {
-				console.error('Error updating tournament data:', error);
-				alert('An error occurred while updating the tournament. Please refresh the page.');
+				console.error(`${window.trans.errUpdateTournamentData}: `, error);
+				alert(`${window.trans.errUpdateTournamentRetry}`);
 			});
 	} else {
 		finishGame(playState.gameId, playState.player1Score, playState.player2Score, winnerUsername);
@@ -291,12 +305,6 @@ function reloadTournamentData() {
 
 	let url = `/pong/api/tournament/${tournamentState.tournament.id}/matchmaking/`
 	return httpGetJson(url)
-		.then(response => {
-			if (!response.ok) {
-				throw new Error(`HTTP error! status: ${response.status}`);
-			}
-			return response.json();
-		})
 		.then(data => {
 			if (data.status === 'success') {
 				tournamentState.matches = data.matches;
@@ -304,7 +312,7 @@ function reloadTournamentData() {
 				tournamentState.winner = data.winner;
 				tournamentState.aliases = data.aliases || {};
 			} else {
-				throw new Error('Error fetching tournament data: ' + data.message);
+				throw new Error(`${window.trans.errFetchingTournamentData}: ` + data.message);
 			}
 		});
 }
@@ -324,21 +332,21 @@ function updateScore(gameId, player1Score, player2Score, winner) {
 		winner: winner
 	})
 	.then(response => {
-		console.log('Server response status:', response.status);
+		console.log(`${window.trans.serverResponseStatus}: `, response.status);
 		return response.json();
 	})
 	.then(data => {
-		console.log('Server response data:', data);
+		console.log(`${window.trans.serverResponseData}: `, data);
 		if (data.status === 'success') {
-			console.log('Score updated successfully');
+			console.log(`${window.trans.successUpdateScore}`);
 			return data;
 		} else {
-			console.error('Error score:', data.message);
+			console.error(`${window.trans.errScore}: `, data.message);
 			throw new Error(data.message);
 		}
 	})
 	.catch(error => {
-		console.error('Error in updateScore:', error);
+		console.error(`${window.trans.errInUpdateScore}: `, error);
 		throw error;
 	});
 }

@@ -8,11 +8,11 @@ function Participants() {
 		
 	const participantsList = tournament.participants && tournament.participants.length > 0
 		? tournament.participants.map(p => `<li>${p}</li>`).join('')
-		: '<li>No participants yet</li>';
+		: `<li>${window.trans.noParticipants}</li>`;
 
 	const aliasesList = tournament.aliases && tournament.aliases.length > 0
 		? tournament.aliases.map(a => `<li>${a.username}: ${a.alias}</li>`).join('')
-		: '<li>No aliases yet</li>';
+		: `<li>${window.trans.noAliases}</li>`;
 
 	return `
 	<div class="tournament-details">
@@ -31,13 +31,13 @@ function Participants() {
 
 function createTournamentForm() {
 
+	// <label for="tournamentName" class="form-label">${window.trans.tournamentName} :</label>
 	return `
 		<form id="createTournamentForm">
-			<div class="mb-3">
-				<label for="tournamentName" class="form-label">${window.trans.tournamentName} :</label>
-				<input type="text" class="form-control" id="tournamentName" required>
+			<div class="mb-3 input-group">
+				<input type="text" class="form-control" id="tournamentName" placeholder="${window.trans.tournament}" required>
+				<button type="submit" class="btn btn-secondary">${window.trans.createTournament}</button>
 			</div>
-			<button type="submit" class="btn btn-primary">${window.trans.createTournament}</button>
 		</form>
 	`;
 }
@@ -48,15 +48,15 @@ function addParticipantForm() {
 
 	     return '';
 	}
+	// <label for="participant" class="form-label">${window.trans.add} ${window.trans._participant} :</label>
 	return `
 		<div class="mt-4">
 		<h2 class="mt-4">${window.trans.add} ${window.trans._participants}</h2>
 			<form id="addParticipantForm">
-				<div class="mb-3">
-					<label for="participant" class="form-label">${window.trans.add} ${window.trans._participant} :</label>
-					<input type="text" class="form-control" id="participant" required>
+				<div class="mb-3 input-group">
+					<input type="text" class="form-control" id="participant" placeholder="${window.trans.participant}" required>
+					<button type="submit" class="btn btn-secondary">${window.trans.add}</button>
 				</div>
-				<button type="submit" class="btn btn-primary">${window.trans.add}</button>
 			</form>
 		</div>
 	`;
@@ -69,19 +69,19 @@ function addAliasForm() {
 		return '';
 	} 
 	
+	// <label for="alias" class="form-label">${window.trans.alias} :</label>
+	// <label for="username" class="form-label">${window.trans.username} :</label>
 	return `
 		<div class="mt-4">
 		<h2 class="mt-4">${window.trans.add} ${window.trans._aliases}</h2>
 			<form id="addAliasForm">
 				<div class="mb-3">
-					<label for="username" class="form-label">${window.trans.username} :</label>
-					<input type="text" class="form-control" id="username" required>
+					<input type="text" class="form-control" id="username" placeholder="${window.trans.username}" required>
 				</div>
-				<div class="mb-3">
-					<label for="alias" class="form-label">${window.trans.alias} :</label>
-					<input type="text" class="form-control" id="alias" required>
+				<div class="mb-3 input-group">
+					<input type="text" class="form-control" id="alias" placeholder="${window.trans.alias}" required>
+					<button type="submit" class="btn btn-secondary">${window.trans.add}</button>
 				</div>
-				<button type="submit" class="btn btn-primary">${window.trans.add}</button>
 			</form>
 		</div>
 	`;

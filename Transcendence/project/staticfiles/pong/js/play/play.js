@@ -1,14 +1,12 @@
 var playState = {
-	// player1Email: "", // email du joueur 1
-	// player2Email: "", // email du joueur 2
-	player1Username: "", // username du joueur 1
-	player2Username: "", // username du joueur 2
-	player1Score: 0, // score du joueur 1
-	player2Score: 0, // score du joueur 2
-	gameStarted: false, // indique si le jeu a commence
-	gameId: null, // identifiant de la partie
-	isLoaded: false, // indique si la page est chargee
-	gameOver: false, // indique si le jeu est termine,
+	player1Username: "", 
+	player2Username: "", 
+	player1Score: 0, 
+	player2Score: 0, 
+	gameStarted: false,
+	gameId: null, 
+	isLoaded: false, 
+	gameOver: false, 
 	checkInterval: null,
 	isKeyboardBind:false,
 	isTournamentMatch: false,
@@ -19,12 +17,6 @@ function Play() {
 	if (!playState.isLoaded) {
 		loadPlayState();
 	}
-	
-	// if (playState.gameOver || !playState.isLoaded) {
-	// 	playState.isLoaded = false;
-	// }
-
-
 
 	let content = '';
 
@@ -39,8 +31,8 @@ function Play() {
 					<p>${playState.player2Username}: ${playState.player2Score}</p>
 				</div>
 				${playState.isTournamentMatch 
-					? `<button id="backToTournamentBtn" class="btn btn-primary mt-3">${window.trans.backToTournament}</button>`
-					: `<button id="restartGameBtn" class="btn btn-primary mt-3">${window.trans.playAnotherGame}</button>`
+					? `<button id="backToTournamentBtn" class="btn btn-secondary mt-3">${window.trans.backToTournament}</button>`
+					: `<button id="restartGameBtn" class="btn btn-secondary mt-3">${window.trans.playAnotherGame}</button>`
 				}
 			</div>
 		`;
@@ -51,7 +43,7 @@ function Play() {
 					<h1>${window.trans.tournamentMatch}</h1>
 					<p>${window.trans.waitingForGame}...</p>
 					<p>${playState.player1Username} vs ${playState.player2Username}</p>
-					<button id="startTournamentMatchBtn" class="btn btn-primary mt-3">${window.trans.match}</button>
+					<button id="startTournamentMatchBtn" class="btn btn-secondary mt-3">${window.trans.match}</button>
 				</div>
 			`
 			: `
@@ -66,7 +58,7 @@ function Play() {
 							<label for="player2Username" class="form-label">${window.trans.secondPlayerUsername}</label>
 							<input type="text" class="form-control" id="player2Username" required>
 						</div>
-						<button type="submit" class="btn btn-primary">${window.trans.btnStartGame}</button>
+						<button type="submit" class="btn btn-secondary">${window.trans.btnStartGame}</button>
 					</form>
 					<div id="instructions" class="card p-3 mb-4">
 						<h2 class="card-title">${window.trans.instructions}</h2>
@@ -95,14 +87,12 @@ function Play() {
 
 
 function loadPlayState() {
-
 		
 	playState.isLoaded = true
 	bindEvent(playState, "#start-game-form", "submit", startGame);
 	bindEvent(playState, "#restartGameBtn", "click", restartGame);
 	bindEvent(playState, "#backToTournamentBtn", "click", backToTournament);
 	bindEvent(playState, "#startTournamentMatchBtn", "click", startTournamentMatch);
-	
 	
 	if (!playState.isKeyboardBind) {
 		bindKeyboardEvents();
@@ -126,10 +116,11 @@ function loadPlayState() {
 
 
 function startGame(event) {
-	if (event) event.preventDefault();
+	console.log("startGame", event)
+	if (event) 
+		event.preventDefault();
 
 	if (!playState.isTournamentMatch) {
-		// playState.player1Username = document.getElementById("player1Username").value;
 		playState.player2Username = document.getElementById("player2Username").value;
 
 		if (playState.player1Username === playState.player2Username) {
@@ -143,7 +134,6 @@ function startGame(event) {
 	playState.player2Score = 0;
 	playState.gameOver = false;
 
-		console.log(playState.isTournamentMatch, "is")
 	 if (!playState.isTournamentMatch) {
 		createGameInDatabase()
 		.then(({ status, body }) => {
@@ -154,23 +144,22 @@ function startGame(event) {
 				mountComponent(Play);
 				initializeGame();
 			} else if (status === 404 && body.error === "One or both players not found") {
-				// affiche une alerte si un ou les deux joueurs ne sont pas trouvés
 				alert(`${window.trans.oneOrTwoPlayersNotFound}`);
 				playState.gameStarted = false; 
+				
 			} else {
-				// gere les autres erreurs
-				console.error(`${window.trans.error}:`, body.error);
+				console.error(`${window.trans.error}: `, body.error);
 			}
 		})
 	}
 	else{
-		//mountComponent(Play);
 		initializeGame();
 	}
 
 }
 	
 function startTournamentMatch() {
+	console.log("startTournamentMatch")
 	startGame();
 }
 
@@ -194,9 +183,8 @@ function restartGame() {
 
 function getCurrentUser() {
 	return httpGetJson('/pong/api/games/get_current_user/')
-	.then(response => response.json())
 	.catch(error => {
-		console.error(`${window.trans.error}:`, error);
+		console.error(`${window.trans.error}: `, error);
 		return null;
 	});
 }

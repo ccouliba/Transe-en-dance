@@ -76,14 +76,14 @@ function MatchList() {
 //         }
 //         ${!matchmakingState.tournamentFinished ?
 //             `<button onclick="finishTournament()" class="btn btn-danger mt-4">Finish tournament</button>` :
-//             `<button onclick="startNewTournament()" class="btn btn-primary mt-4">Start New Tournament</button>`
+//             `<button onclick="startNewTournament()" class="btn btn-secondary mt-4">Start New Tournament</button>`
 //         }
 //     `;
 // }
 function TournamentDetail() {
 	let winnerHtml = '';
 	// console.log("coucou")
-	console.log(matchmakingState.tournamentFinished, matchmakingState.rankings.length)
+	// console.log(matchmakingState.tournamentFinished, matchmakingState.rankings.length)
 	if (matchmakingState.tournamentFinished && matchmakingState.rankings.length > 0) {
 		const winner = matchmakingState.rankings[0];
 		winnerHtml = `
@@ -107,7 +107,7 @@ function TournamentDetail() {
 		</ul>
 		${!matchmakingState.tournamentFinished ?
 			`<button onclick="finishTournament()" class="btn btn-danger mt-4">${window.trans.finishTournament}</button>` :
-			`<button onclick="startNewTournament()" class="btn btn-primary mt-4">${window.trans.startNewTournament}</button>`
+			`<button onclick="startNewTournament()" class="btn btn-secondary mt-4">${window.trans.startNewTournament}</button>`
 		}
 	`;
 }
@@ -123,12 +123,6 @@ function getMatchMakingFromBackend(){
 	let url = `/pong/api/tournament/${tournamentState.tournament.id}/matchmaking/` 
 
 	return httpGetJson(url)
-		.then(response => {
-			if (!response.ok) {
-				throw new Error(`${window.trans.httpError} status: ${response.status}`);
-			}
-			return response.json();
-		})
 }
 
 
@@ -146,15 +140,15 @@ function fetchMatchesAndRankings() {
 
 			mountComponent(TournamentMatchmaking);
 		} else {
-			throw new Error('Error fetching tournament data: ' + data.message);
+			throw new Error(`${window.trans.errFetchingTournamentData}: ` + data.message);
 		}
 	})
 	.catch(error => {
-		console.error('Error:', error);
-		alert('An error occurred while fetching tournament data: ' + error.message);
+		console.error(`${window.trans.error}: `, error);
+		alert(`${window.trans.errFetchingTournamentData}: ` + error.message);
 		document.querySelector('.container').innerHTML = `
 			<h1>${window.trans.tournamentMatchmaking}</h1>
-			<p>Error loading tournament data: ${error.message}</p>
+			<p>${window.trans.errLoadingTournamentData}: ${error.message}</p>
 		`;
 	});
 }

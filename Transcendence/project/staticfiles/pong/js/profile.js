@@ -4,24 +4,33 @@ var profileState = {
 	email: "", // email de l'utilisateur
 	firstname: "", // prenom de l'utilisateur
 	lastname: "", // nom de famille de l'utilisateur
-	langue: localStorage.getItem('selectedLanguage') || 'Français',
-	avatar: "",
+	langue: localStorage.getItem('selectedLanguage') || 'English',
+	avatar_url: "",
 	wins: 0,
 	losses: 0,
 	total_games: 0,
 	win_rate: 0,
+	has_password: "",
 	isLoaded: false // indique si les donnees du profil ont ete chargees (initialement faux)
 }
 
 // fonction pour afficher le profil utilisateur
 function Profile() {
-	console.log("Avatar URL:", profileState.avatar_url);
-	console.log(window.trans);
-	// charge les donnees du profil depuis le backend
-	loadProfileFromBackend(); // get
-	let winRate = profileState.win_rate.toFixed(2)
+	if (!profileState.isLoaded) {
+		loadProfileFromBackend();
+		return `<div>${window.trans.loading} ${window.trans.profile}...</div>`;
+	}
+	
+	 	
+	// // charge les donnees du profil depuis le backend
+	// loadProfileFromBackend(); // get
+	
+	let winRate = 0.00
+	winRate = profileState.win_rate.toFixed(2)
 	bindEvent(profileState, "#deleteAccountBtn", "click", handleDeleteAccount);
 	
+	let avatarUrl = profileState.avatar_url; 
+
 	// retourne une chaine de caracteres contenant le HTML du composant Profile
 	return `
 		<div class="container mt-5" id="profilePage">
@@ -31,19 +40,19 @@ function Profile() {
 				<h2 class="mt-4 mb-3" style="text-decoration: underline;">${window.trans.infos}</h2>
 				<div class="row mb-3">
 						<div class="col-sm-3"><strong>${window.trans.username} :</strong></div>
-						<div class="col-sm-9">${profileState.username}</div>
+						<div class="col-sm-9">${(profileState.username)}</div>
 				</div>
 				<div class="row mb-3">
 					<div class="col-sm-3"><strong>${window.trans.email} :</strong></div>
-					<div class="col-sm-9">${profileState.email}</div>
+					<div class="col-sm-9">${(profileState.email)}</div>
 				</div>
 				<div class="row mb-3">
 					<div class="col-sm-3"><strong>${window.trans.firstName} :</strong></div>
-					<div class="col-sm-9">${profileState.firstname}</div>
+					<div class="col-sm-9">${(profileState.firstname)}</div>
 				</div>
 				<div class="row mb-3">
 					<div class="col-sm-3"><strong>${window.trans.lastName} :</strong></div>
-					<div class="col-sm-9">${profileState.lastname}</div>
+					<div class="col-sm-9">${(profileState.lastname)}</div>
 				</div>
 				<div class="row mb-3">
 					<div class="col-sm-3"><strong>${window.trans.language} :</strong></div>
@@ -52,7 +61,7 @@ function Profile() {
 				<div class="row mb-3">
 					<div class="col-sm-3"><strong>${window.trans.avatar} :</strong></div>
 						<div class="col-sm-9">
-							<img src="${profileState.avatar_url && profileState.avatar_url.startsWith('http') ? profileState.avatar_url : ''}" alt="Avatar" style="width: 100px; height: 100px;">
+							<img src="${avatarUrl}" alt="Avatar" style="width: 100px; height: 100px;">
 						</div>
 				</div>
 				<h2 class="mt-4 mb-3" style="text-decoration: underline;">${window.trans.gameStats}</h2>
@@ -74,6 +83,7 @@ function Profile() {
 				</div>
 			</div>
 		</div>
+
 		<div class="accordion" id="accordionExample">
 			<div class="accordion-item">
 				<h2 class="accordion-header" id="headingTwo">
@@ -97,6 +107,7 @@ function Profile() {
 					${EditAvatar()}
 					<h3 class="mt-4 mb-3">${window.trans.modify} ${window.trans._password}</h2>
 					${EditPassword()}
+					${DownloadUserInfo()}
 					<div class="mt-4">
 						<button id="deleteAccountBtn" class="btn btn-danger">${window.trans.delete} ${window.trans._account}</button>
 					</div>
@@ -117,9 +128,6 @@ async function loadProfileFromBackend() {
 
 	let url = `/pong/api/profile`; // url de l'API pour recuperer les donnees du profil
 	httpGetJson(url)// envoyer une requete http au backend (vue)
-		.then(response => {
-			return response.json();
-		}) // transformer la reponse en JSON
 		.then(profile => { // promesse
 			// mise a jour de profileState avec les donnees recues
 			profileState = {
@@ -129,8 +137,10 @@ async function loadProfileFromBackend() {
 				// total_games: profile.wins + profile.losses,
 				// win_rate: profile.total_games > 0 ? (profile.wins / profile.total_games) * 100 : 0
 			}; // utilisation d'un spread operator
+			// console.log(profile)
+			profileState.isLoaded = true;
 			mountComponent(Profile); // monter le composant Profile
-			profileState.isLoaded = true;// marquer les donnees du profil comme chargees
+			// marquer les donnees du profil comme chargees
 		});
 }
 
@@ -139,16 +149,7 @@ function sendProfileToBackend(payload) {
 	// console.log("authenticated:", !!localStorage.getItem('userToken'));
 	let url = `/pong/api/profile/update`; // url de l'API pour mettre a jour le profil
 
-	// fetch(url, {
-	// 		method: "POST", // methode POST pour envoyer les donnees
-	// 		credentials: "include", // envoie les cookies avec la requete = important pour l'authentification
-	// 		headers: {
-	// 			'Content-Type': 'application/json', // specifie que le contenu envoye est au format JSON
-	// 			'Authorization': `Bearer ${localStorage.getItem('userToken')}`
-	// 		},
-	// 		body: JSON.stringify(payload) // convertir l'objet payload en chaine JSON
-	// 	})
-		httpPostJson(url, payload)
+	return httpPostJson(url, payload)
 		.then(response => {
 			if (!response.ok) {
 				return response.text().then(text => {
@@ -157,7 +158,6 @@ function sendProfileToBackend(payload) {
 			}
 			return response.json(); // transformer la reponse en JSON
 		})
-		.then(data => console.log('success:', data))
 		.catch(error => {
 			console.error('error:', error);
 			alert('Please ensure that the information you provide is accurate and correct.');
@@ -176,25 +176,30 @@ function EditUsername() {
 		profileState.username = usernameInput; // mettre a jour profileState
 		sendProfileToBackend({
 			'username': usernameInput
-		}); // envoyer les donnees au backend
-		mountComponent(Profile); // monter le composant Profile
-		profileState.isLoaded = false; // marquer les donnees du profil comme non chargees
+		}).then(() => {
+			profileState.isLoaded = false
+			mountComponent(Profile);
+			changeLanguage();
+		})
+		 // monter le composant Profile
+		 // marquer les donnees du profil comme non chargees
 	});
 
+	// <label for="username" class="form-label">${window.trans.modify} ${window.trans._username}</label>
+	//! Removing form-floating because that's ugly
 	return `
 		<form id="edit-username" class="mt-3">
-			<div class="form-floating w-50">
-				<input 
-					type="text" 
-					class="form-control"
-					id="username" 
-					name="username"
-					placeholder="${window.trans.modify} ${window.trans._username}" 
-					value="${profileState.username}"
-					aria-label="new username"
-				/>
-				<label for="username">${window.trans.modify} ${window.trans._username}</label>
-				<button class="btn btn-primary" type="submit">${window.trans.modify}</button>
+			<div class="input-group">
+			<input 
+				type="text" 
+				class="form-control" 
+				id="username" 
+				name="username"
+				placeholder="${window.trans.modify} ${window.trans._username}" 
+				value="${profileState.username}"
+				aria-label="new username"
+			/>
+			<button class="btn btn-secondary" type="submit">${window.trans.modify}</button>
 			</div>
 		</form> 	
 	`;
@@ -210,15 +215,26 @@ function EditEmail() {
 		sendProfileToBackend({
 			'email': emailInput
 		}); // envoyer les donnees au backend
+		profileState.isLoaded = false;
 		mountComponent(Profile); // monter le composant Profile
-		profileState.isLoaded = false; // marquer les donnees du profil comme non chargees
+		changeLanguage();
+		 // marquer les donnees du profil comme non chargees
 	});
+	//! Removing form-floating because that's ugly
+	// <label for="email" class="form-label">${window.trans.modify} ${window.trans._email}</label>
 	return `
 		<form id="edit-email" class="mt-3">
-			<div class="form-floating w-50">
-				<input type="text" class="form-control" id="email" name="email" placeholder="${window.trans.modify} ${window.trans._email}" value="${profileState.email}" aria-label="new email"/>
-				<label for="email>"${window.trans.modify} ${window.trans._email}</label>
-				<button class="btn btn-primary" type="submit">${window.trans.modify}</button>
+			<div class="input-group">
+				<input
+					type="email"
+					class="form-control"
+					id="email"
+					name="email"
+					placeholder="${window.trans.modify} ${window.trans._email}"
+					value="${(profileState.email)}"
+					aria-label="new email"
+				/>
+				<button class="btn btn-secondary" type="submit">${window.trans.modify}</button>
 			</div>
 		</form>
 	`;
@@ -234,23 +250,26 @@ function EditFirstname() {
 		sendProfileToBackend({
 			'firstname': firstnameInput
 		}); // envoyer les donnees au backend
+		profileState.isLoaded = false;
 		mountComponent(Profile); // monter le composant Profile
-		profileState.isLoaded = false; // marquer les donnees du profil comme non chargees
+		changeLanguage();
+		 // marquer les donnees du profil comme non chargees
 	});
+	//! Removing form-floating because that's ugly
+	// <label for="firstname" class="form-label">${window.trans.modify} ${window.trans._firstName}</label>
 	return `
 	<form id="edit-first-name" class="mt-3">
-		<div class="form-floating w-50">
+		<div class="input-group">
 			<input 
 				type="text" 
 				class="form-control" 
 				name="firstname" 
 				id="firstname"
 				placeholder="${window.trans.modify} ${window.trans._firstName}"
-				value="${profileState.firstname}" 
+				value="${(profileState.firstname)}" 
 				aria-label="new first name"
 			/>
-			<label for="firstname">${window.trans.modify} ${window.trans._firstName}</label>
-			<button class="btn btn-primary" type="submit">${window.trans.modify}</button>
+			<button class="btn btn-secondary" type="submit">${window.trans.modify}</button>
 		</div>
 	</form>
 	`;
@@ -266,23 +285,26 @@ function EditLastname() {
 		sendProfileToBackend({
 			'lastname': lastnameInput
 		}); // envoyer les donnees au backend
+		profileState.isLoaded = false;
 		mountComponent(Profile); // monter le composant Profile
-		profileState.isLoaded = false; // marquer les donnees du profil comme non chargees
+		changeLanguage();
+		 // marquer les donnees du profil comme non chargees
 	});
+	//! Removing form-floating because that's ugly
+	// <label for="lastname" class="form-label">${window.trans.modify} ${window.trans._lastName}</label>
 	return `
 	<form id="edit-last-name" class="mt-3">
-		<div class="form-floating">
+		<div class="input-group">
 			<input 
 				type="text" 
 				class="form-control" 
 				name="lastname"
 				id="lastname"
 				placeholder="${window.trans.modify} ${window.trans._lastName}"
-				value="${profileState.lastname}" 
+				value="${(profileState.lastname)}" 
 				aria-label="new last name"
 			/>
-			<label for="lastname">${window.trans.modify} ${window.trans._lastName}</label>
-			<button class="btn btn-primary" type="submit">${window.trans.modify}</button>
+			<button class="btn btn-secondary" type="submit">${window.trans.modify}</button>
 		</div>
 	</form>
 	`;
@@ -296,23 +318,27 @@ function EditLangue() {
 		profileState.langue = langueInput;
 		localStorage.setItem('selectedLanguage', langueInput);
 		sendProfileToBackend({ 'langue': langueInput });
-		mountComponent(Profile);
 		profileState.isLoaded = false;
+		mountComponent(Profile);
 		changeLanguage();
 	});
+
+	// Get the current selected language from profileState
+	const selectedLanguage = profileState.langue;
+
 	return `
-	<form id="edit-langue">
-	<select class="form-select" name="languageSelector" id="languageSelector" aria-label="Select your language">
-		<option value="English" id="langue" name="langue">English 🇺🇸</option>
-		<option value="Français" id="langue" name="langue">Français 🇫🇷</option>
-		<option value="Español" id="langue" name="langue">Español 🇪🇸</option>
-	</select>
-	<button class="btn btn-primary" type="submit">${window.trans.modify}</button>
+	<form id="edit-langue" class="mt-3">
+		<div class="input-group">
+			<select class="form-select" name="languageSelector" id="languageSelector" aria-label="Select your language">
+				<option value="English" ${selectedLanguage === "English" ? "selected" : ""}>English 🇺🇸</option>
+				<option value="Français" ${selectedLanguage === "Français" ? "selected" : ""}>Français 🇫🇷</option>
+				<option value="Español" ${selectedLanguage === "Español" ? "selected" : ""}>Español 🇪🇸</option>
+			</select>
+			<button class="btn btn-secondary" type="submit">${window.trans.modify}</button>
+		</div>
 	</form>
 	`;
 }
-
-//   <option value="it" id="italianOption">Italiano 🇮🇹</option>
 
 function EditAvatar() {
 	bindEvent(profileState, "#edit-avatar", "submit", event => {
@@ -322,7 +348,7 @@ function EditAvatar() {
 		if (avatarInput.files && avatarInput.files[0]) {
 			const formData = new FormData();
 			formData.append('avatar', avatarInput.files[0]);
-			fetch('/pong/api/profile/upload-avatar/', { //not using httpPostJson because using formdata here
+			fetch('/pong/api/profile/upload-avatar/', { 
 				method: 'POST', 
 				body: formData,
 				credentials: 'include',
@@ -333,6 +359,7 @@ function EditAvatar() {
 					profileState.avatar = data.avatar_url;
 					profileState.isLoaded = false;
 					mountComponent(Profile);
+					changeLanguage();
 				} else {
 					alert('Error uploading avatar: ' + JSON.stringify(data.errors));
 				}
@@ -354,7 +381,7 @@ function EditAvatar() {
 				accept="image/*"
 				aria-label="new avatar"
 			/>
-			<button class="btn btn-primary" type="submit">${window.trans.upload} ${window.trans._avatar}</button>
+			<button class="btn btn-secondary" type="submit">${window.trans.upload} ${window.trans._avatar}</button>
 		</div>
 	</form>
 	`;
@@ -366,8 +393,13 @@ function EditPassword() {
 	bindEvent(profileState, "#edit-password-form", "submit", event => {
 		// empeche le comportement par defaut du formulaire ie soumission et rechargement de la page
 		event.preventDefault();
-		// recupere la valeur du champ 'old_password' du formulaire
-		const oldPassword = event.target.elements.old_password.value;
+
+		let  oldPassword = ""
+		
+		if (profileState.has_password){
+			oldPassword = event.target.elements.old_password.value;
+		}
+		
 		// recupere la valeur du champ 'new_password1' du formulaire
 		const newPassword1 = event.target.elements.new_password1.value;
 		// recupere la valeur du champ 'new_password2' du formulaire
@@ -386,25 +418,26 @@ function EditPassword() {
 			.then(data => {
 				// si le changement de mot de passe est reussi
 				if (data.status === 'success') {
-					alert('password changed successfully');
+					alert(`${window.trans.successPasswordChange}`);
 					// marque les donnees de profil comme non chargees
 					// recharge le composant du profil
-					mountComponent(Profile);
 					profileState.isLoaded = false;
+					mountComponent(Profile);
+					changeLanguage();
 				} else {
 					// prepare un message d'erreur en cas d'echec
-					let errorMessage = "there were errors changing your password:\n\n";
+					let errorMessage = `${window.trans.errPasswordChange}:\n\n`;
 					// si l'ancien mot de passe est incorrect
 					if (data.errors.old_password) {
-						errorMessage += "- your old password was entered incorrectly. please try again.\n";
+						errorMessage += `${window.trans.errOldPasswordRetry}\n`;
 					}
 					// si le nouveau mot de passe ne repond pas aux criteres de securite
 					if (data.errors.new_password2) {
-						errorMessage += "- please choose a more secure password.\n";
-						errorMessage += "\nfor a strong password:\n";
-						errorMessage += "- use a mix of uppercase and lowercase letters, numbers, and symbols\n";
-						errorMessage += "- avoid using personal information like birthdates or names\n";
-						errorMessage += "- make it at least 12 characters long\n";
+						errorMessage += `${window.trans.chooseMoreSecurePassword}\n`;
+						errorMessage += `\n${window.trans.forStrongPassword}\n`;
+						errorMessage += `- ${window.trans.useMixOfSymbols}\n`;
+						errorMessage += `- ${window.trans.avoidPersonalInfo}\n`;
+						errorMessage += `- ${window.trans.minimumLengthPassword}\n`;
 					}
 					// affiche le message d'erreur
 					alert(errorMessage);
@@ -412,48 +445,51 @@ function EditPassword() {
 			})
 			// traite les erreurs de la requete
 			.catch(error => {
-				console.error('error:', error);
-				alert('an error occurred. please try again.');
+				console.error(`${window.trans.error}:`, error);
+				alert(`${window.trans.errorRetry}`);
 			});
 	});
 
 	// retourne le formulaire html pour changer le mot de passe
+	//! Removing form-floating because that's ugly
+	// <label for="old_password" class="form-label">${window.trans.oldPassword}</label>
+	// <label for="new_password1" class="form-label">${window.trans.newPassword}</label>
+	// <label for="new_password2" class="form-label">${window.trans.confirmNewPassword}</label>
 	return `
 	<form id="edit-password-form" class="mt-3">
-		<div class="form-floating mt-3 w-50">
+	${profileState.has_password ? `
+		<div class="mt-3 input-group">
 			<input 
 				type="password" 
 				class="form-control" 
 				name="old_password" 
 				id="old_password" 
-				placeholder="${window.trans.oldPassword}" 
+				placeholder="${(window.trans.oldPassword)}" 
 				required
 			/>
-			<label for="old_password">${window.trans.oldPassword}</label>
 		</div>
-		<div class="form-floating mt-3 w-50">
+		` : ''}
+		<div class="mt-3 input-group">
 			<input 
 				type="password" 
 				class="form-control"
 				id="new_password1" 
 				name="new_password1" 
-				placeholder="${window.trans.newPassword}"
+				placeholder="${(window.trans.newPassword)}"
 				required
 			/>
-			<label for="new_password1">${window.trans.newPassword}</label>
 		</div>
-		<div class="form-floating mt-3 w-50">
+		<div class="mt-3 input-group">
 			<input 
 				type="password" 
 				class="form-control"
 				id="new_password2"  
 				name="new_password2" 
-				placeholder="${window.trans.confirmNewPassword}" 
+				placeholder="${(window.trans.confirmNewPassword)}" 
 				required
 			/>
-			<label for="new_password2">${window.trans.confirmNewPassword}</label>
+			<button class="btn btn-secondary" type="submit">${window.trans.change} ${window.trans._password}</button>
 		</div>
-		<button class="btn btn-primary mt-3" type="submit">${window.trans.change} ${window.trans._password}</button>
 	</form>
 	`;
 }
@@ -473,7 +509,8 @@ function handleDeleteAccount() {
 		.then(data => {
 			if (data.status === 'success') {
 				alert(`${window.trans.accDeleted}.`);
-				changePage(Login);
+				// changePage(Login);
+				changePage("#login");
 			} else {
 				alert(`${window.trans.errDeletingAccRetry}`);
 			}
@@ -484,3 +521,42 @@ function handleDeleteAccount() {
 		});
 	}
 }
+
+function DownloadUserInfo() {
+	bindEvent(profileState, "#download-user-info", "click", event => {
+		event.preventDefault();
+		const url = 'get_user_info?format=pdf';
+		
+		fetch(url, {
+			method: 'GET',
+			credentials: 'include',
+		})
+		.then(response => {
+			if (!response.ok) {
+				throw new Error('Network response was not ok');
+			}
+			return response.blob();
+		})
+		.then(blob => {
+			const url = window.URL.createObjectURL(blob);
+			const a = document.createElement('a');
+			a.style.display = 'none';
+			a.href = url;
+			a.download = 'user_info.pdf';
+			document.body.appendChild(a);
+			a.click();
+			window.URL.revokeObjectURL(url);
+		})
+		.catch(error => {
+			console.error('Error:', error);
+		});
+	});
+
+	return `
+	<div class="mt-3">
+		<button id="download-user-info" class="btn btn-primary">${window.trans.downloadUserInfo}</button>
+	</div>
+	`;
+}
+
+

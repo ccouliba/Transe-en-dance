@@ -24,7 +24,7 @@ function Register() {
 			<div class="row justify-content-center">
 				${registerState.showForm ? RegisterForm() : showRegisterButton()}
 				<div class="col-md">
-					<button class="btn btn-link" id="showLogin">${window.trans.backToLogin}</button>
+					<button class="btn btn-link mt-2" id="showLogin">${window.trans.backToLogin}</button>
 				</div>
 			</div>
 		</div>
@@ -69,7 +69,7 @@ function handleRegister(event) {
 function showRegisterButton() {
 	return `
 		<div class="col-md mt-1">
-			<button class="btn btn-primary" id="showRegisterForm">${window.trans.createAccount}</button>
+			<button class="btn btn-secondary" id="showRegisterForm">${window.trans.createAccount}</button>
 		</div>
 	`;
 }
@@ -78,26 +78,26 @@ function showRegisterButton() {
 function RegisterForm() {
 	return `
 		<form id="registerForm">
-			<div class="form-floating">
+			<div class="form-floating mt-3">
 				<input type="text" class="form-control" name="username" id="username" autocomplete="username" placeholder="${window.trans.username}" required>
-				<label for="username">${window.trans.username}</label>
+				<label for="username" class="form-label">${window.trans.username}</label>
 			</div>
-			<div class="form-floating">
+			<div class="form-floating mt-3">
 				<input type="email" class="form-control" name="email" id="email" placeholder="${window.trans.email}" required>
-				<label for="email">${window.trans.email}</label>
+				<label for="email" class="form-label">${window.trans.email}</label>
 			</div>
-			<div id="passwordHelpBlock" class="form-text">
+			<div id="passwordHelpBlock" class="form-text mt-5">
 				${window.trans.passwordSecurity}
 			</div>
-			<div class="form-floating">
+			<div class="form-floating mt-3">
 				<input type="password" class="form-control" name="password1" id="password1" autocomplete="current-password" placeholder="${window.trans.password}" required>
-				<label for="password1">${window.trans.password}</label>
+				<label for="password1" class="form-label">${window.trans.password}</label>
 			</div>
-			<div class="form-floating">
+			<div class="form-floating mt-3">
 				<input type="password" class="form-control" name="password2" id="password2" autocomplete="current-password" placeholder="${window.trans.confirmPassword}" required>
-				<label for="password2">${window.trans.confirmPassword}</label>
+				<label for="password2" class="form-label">${window.trans.confirmPassword}</label>
 			</div>
-			<button type="submit" class="btn btn-primary">${window.trans.register}</button>
+			<button type="submit" class="btn btn-secondary mt-2">${window.trans.register}</button>
 		</form>
 	`;
 }
@@ -125,7 +125,7 @@ function GDPRModal() {
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="gdprDecline">${window.trans.decline}</button>
-						<button type="button" class="btn btn-primary" id="gdprAccept">${window.trans.iAccept}</button>
+						<button type="button" class="btn btn-secondary" id="gdprAccept">${window.trans.iAccept}</button>
 					</div>
 				</div>
 			</div>

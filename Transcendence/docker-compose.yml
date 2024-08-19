@@ -3,9 +3,8 @@ services:
   web:
     container_name: backend
     build: ./project
-    # command: python manage.py runserver 0.0.0.0:8000
-    # New command to make it work
-    command: gunicorn server.wsgi:application --bind 0.0.0.0:8000 --certfile=./selfsigned.crt --keyfile=./selfsigned.key
+    # Command is now in runserver.sh
+    # command: gunicorn server.wsgi:application --bind 0.0.0.0:8000 --certfile=./selfsigned.crt --keyfile=./selfsigned.key
 
     volumes:
       - ./project/:/usr/src/project/

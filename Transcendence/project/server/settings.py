@@ -30,7 +30,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
 # DEBUG = bool(os.environ.get("DEBUG", default=0))
 
 # 'DJANGO_ALLOWED_HOSTS' should be a single string of hosts with a space between each.
@@ -128,18 +128,18 @@ DATABASES = {
 }
 
 # on localhost
-if os.getenv("DEV_ENV", False):
-    DATABASES = {
-        'default': {
-            'ENGINE': os.getenv('SQL_ENGINE', 'django.db.backends.postgresql_psycopg2'),
-            'NAME': os.getenv('SQL_DATABASE', 'db1'),
-            'USER': os.getenv('SQL_USER', 'ccouliba'),
-            'PASSWORD': os.getenv('SQL_PASSWORD', "password"),
-            'HOST': os.getenv('SQL_HOST', 'localhost'),
-            # 'HOST': 'localhost', #todo : A MODIFIER (juste pour pouvoir executer django localement)
-            'PORT': os.getenv('SQL_PORT', '5432'),
-        }
-    }
+# if os.getenv("DEV_ENV", False):
+#     DATABASES = {
+#         'default': {
+#             'ENGINE': os.getenv('SQL_ENGINE', 'django.db.backends.postgresql_psycopg2'),
+#             'NAME': os.getenv('SQL_DATABASE', 'db1'),
+#             'USER': os.getenv('SQL_USER', 'ccouliba'),
+#             'PASSWORD': os.getenv('SQL_PASSWORD', "password"),
+#             'HOST': os.getenv('SQL_HOST', 'localhost'),
+#             # 'HOST': 'localhost', #todo : A MODIFIER (juste pour pouvoir executer django localement)
+#             'PORT': os.getenv('SQL_PORT', '5432'),
+#         }
+#     }
 
 
 

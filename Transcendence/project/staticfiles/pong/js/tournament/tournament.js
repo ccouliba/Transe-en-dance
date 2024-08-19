@@ -4,19 +4,15 @@ var tournamentState = {
 	showAddParticipants: false
 };
 
-function isTournamentFinished(matches) {
-	return matches.every(match => match.status === "finished");
-}
 
 function Tournament() {
 
 	let tournament = tournamentState.tournament
+
 	if (!tournamentState.isLoaded) {
 		loadTournamentState();
 		return `<div class="container mt-5"><p>${window.trans.loadTournamentData}...</p></div>`;
 	}
-
-	
 	
 	if (tournament && tournament.is_started && !tournament.end_date) {
 		return TournamentMatchmaking();
@@ -43,13 +39,18 @@ function Tournament() {
 	`;
 }
 
+
+function isTournamentFinished(matches) {
+	return matches.every(match => match.status === "finished");
+}
+
 function startTournamentButton() {
 	 if (tournamentState.tournament && tournamentState.tournament.is_started) {
 	 	return '';
 	 }
 	return `
 		<div class="mt-4">
-			<button id="startTournamentBtn" class="btn btn-primary">${window.trans._btnStartTournament}</button>
+			<button id="startTournamentBtn" class="btn btn-secondary">${window.trans._btnStartTournament}</button>
 		</div>
 	`;
 }
@@ -63,12 +64,7 @@ function loadTournamentState() {
 
 	// Récupérer les données du dernier tournoi
 	httpGetJson('/pong/api/tournament/latest_tournament/')
-		.then(response => {
-			if (!response.ok) {
-				throw new Error(`${window.trans.httpError} status: ${response.status}`);
-			}
-			return response.json();
-		})
+		
 		.then(data => {
 			tournamentState.tournament = data.tournament;
 			if (tournamentState.tournament) {
@@ -84,7 +80,7 @@ function loadTournamentState() {
 			mountComponent(Tournament);			
 		})
 		.catch(error => {
-			console.error('Error loading tournaments:', error);
+			console.error(`${window.trans.errorLoadiTournament}: `, error);
 			tournamentState.isLoaded = true;
 			tournamentState.error = error.message;
 			mountComponent(Tournament); // Monter le composant Tournament même en cas d'erreur
@@ -94,7 +90,7 @@ function loadTournamentState() {
 function createTournament(event) {
 	event.preventDefault();
 	const name = document.getElementById('tournamentName').value;
-
+	console.log(name)
 	if (!name) {
 		alert(`${window.trans.tournamentNameReq}.`);
 		return;
@@ -283,8 +279,14 @@ function updateParticipantsList(newParticipant) {
 }
 
 function startTournament() {
+
 	if (!tournamentState.tournament) {
 		alert(`${window.trans.noTournamentAvail}.`);
+		return;
+	}
+
+	if (!tournamentState.tournament.participants || tournamentState.tournament.participants.length < 2) {
+		alert(`${window.trans.needAtLeastTwoParticipants}.`);
 		return;
 	}
 
@@ -350,7 +352,6 @@ function finishTournament() {
 		if (data.status === 'success') {
 			alert(`${window.trans.successFinishTournament}`);
 			// tournamentState.tournament.is_started = false;
-			// tournamentState.tournament = null;
 			// console.log("finishtournament noramelemnt")
 			matchmakingState.tournamentFinished = true;
 			// changePage("#tournament");
