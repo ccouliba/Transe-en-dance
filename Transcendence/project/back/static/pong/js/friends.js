@@ -147,7 +147,7 @@ function sendFriendRequest(email) {
 				alert(`${window.trans.friReqSentSuccess}`); // modale pour alerter l'utilisateur du succes
 				refreshFriendsList(); // rafraichir la liste des amis !!! pas besoin de websockets ou autres
 			} else {
-				alert(data.message); // modale pour alerter l'utilisateur de l'echec
+				alert(window.trans[data.message]); // modale pour alerter l'utilisateur de l'echec
 			}
 		})
 		.catch(error => console.error(`${window.trans.error}:`, error));

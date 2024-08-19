@@ -288,5 +288,12 @@
 	"weCantProceed": "No podemos proceder a su registro sin su consentimiento", 
 
 	"needAtLeastTwoParticipants": "Se necesitan al menos 2 participantes para comenzar un torneo.",
-	"downloadUserInfo" : "Descargar mis datos"
+	"downloadUserInfo" : "Descargar mis datos.",
+
+	"USER_NOT_FOUND": "Usuario no encontrado.",
+	"CANNOT_SEND_REQUEST_TO_SELF": "No puedes enviarte una solicitud de amistad a ti mismo.",
+	"FRIEND_REQUEST_ALREADY_SENT": "La solicitud de amistad ya ha sido enviada.",
+	"ALREADY_FRIENDS": "Ya eres amigo de este usuario.",
+	"FRIEND_REQUEST_SENT": "Solicitud de amistad enviada con éxito."
+	
 }
