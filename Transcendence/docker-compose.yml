@@ -81,9 +81,10 @@ services:
     image: docker.elastic.co/logstash/logstash:8.14.3
     user: root
     volumes:
-      - ./elk_data/logstash/pipeline/logstash.conf/:/usr/share/logstash/pipeline/tcp_logs.conf:ro
-      - ./elk_data/logstash/pipeline/logstash2.conf/:/usr/share/logstash/pipeline/file_logs.conf:ro
-      - ./project/logs:/logs
+      - ./project/logstash/pipeline/logstash_1.conf:/usr/share/logstash/pipeline/logstash.conf:ro
+      
+      #- ./elk_data/logstash/pipeline/logstash_2.conf/:/usr/share/logstash/pipeline/file_logs.conf:ro
+      - ./project/logs:/usr/share/logstash/logs
     ports:
       - 5959:5959/tcp
       - 5044:5044
