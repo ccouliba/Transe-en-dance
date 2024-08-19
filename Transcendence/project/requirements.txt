@@ -15,3 +15,5 @@ django-elasticsearch-dsl==8.0
 django-elasticsearch-dsl-drf
 
 python-json-logger>=2.0.7
+#Added to make it work 
+gunicorn==23.0.0
