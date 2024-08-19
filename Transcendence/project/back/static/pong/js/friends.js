@@ -89,24 +89,6 @@ function loadFriendsData() {
 		// .catch(error => console.error(`${window.trans.error}:`, error));
 }
 
-// function getFriendsStatus(){
-// 	// console.log("in getfriendstatus")
-// 	let url = `/pong/api/friends/get-status/`;
-	
-// 	return httpGetJson(url)
-// 		.then(response => response.json()) // Convertir la reponse en JSON
-// 		.then(payload=>{
-// 			payload.statuses.forEach((isOnline, i) => {
-// 				friendsState.friends[i].isOnline = isOnline	
-// 				// console.log(friendsState.friends[i].isOnline )
-
-// 			});
-// 			updateFriendsStatus();
-// 			// mountComponent(FriendsList) 
-			
-// 		})
-// 		.catch(error => console.error(`${window.trans.error}:`, error));
-// }
 
 function getFriendsStatus(){
 	let url = `/pong/api/friends/get-status/`;
@@ -134,16 +116,6 @@ function getFriendsStatus(){
 }
 
 
-// function updateFriendsStatus() {
-// 	const statusList = document.getElementById('friends-status-list');
-// 	// console.log('window.trans:', window.trans);
-// 	if (statusList) {
-// 		const statusSpans = statusList.querySelectorAll('.friend-status');
-// 		statusSpans.forEach((span, i) => {
-// 			span.textContent = friendsState.friends[i].isOnline ? `${window.trans.online}` : `${window.trans.offline}`;
-// 		});
-// 	}
-// }
 
 function updateFriendsStatus() {
 	const statusList = document.getElementById('friends-status-list');

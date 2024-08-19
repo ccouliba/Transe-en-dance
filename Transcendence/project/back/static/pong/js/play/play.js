@@ -1,14 +1,12 @@
 var playState = {
-	// player1Email: "", // email du joueur 1
-	// player2Email: "", // email du joueur 2
-	player1Username: "", // username du joueur 1
-	player2Username: "", // username du joueur 2
-	player1Score: 0, // score du joueur 1
-	player2Score: 0, // score du joueur 2
-	gameStarted: false, // indique si le jeu a commence
-	gameId: null, // identifiant de la partie
-	isLoaded: false, // indique si la page est chargee
-	gameOver: false, // indique si le jeu est termine,
+	player1Username: "", 
+	player2Username: "", 
+	player1Score: 0, 
+	player2Score: 0, 
+	gameStarted: false,
+	gameId: null, 
+	isLoaded: false, 
+	gameOver: false, 
 	checkInterval: null,
 	isKeyboardBind:false,
 	isTournamentMatch: false,
@@ -19,12 +17,6 @@ function Play() {
 	if (!playState.isLoaded) {
 		loadPlayState();
 	}
-	
-	// if (playState.gameOver || !playState.isLoaded) {
-	// 	playState.isLoaded = false;
-	// }
-
-
 
 	let content = '';
 
@@ -95,14 +87,12 @@ function Play() {
 
 
 function loadPlayState() {
-
 		
 	playState.isLoaded = true
 	bindEvent(playState, "#start-game-form", "submit", startGame);
 	bindEvent(playState, "#restartGameBtn", "click", restartGame);
 	bindEvent(playState, "#backToTournamentBtn", "click", backToTournament);
 	bindEvent(playState, "#startTournamentMatchBtn", "click", startTournamentMatch);
-	
 	
 	if (!playState.isKeyboardBind) {
 		bindKeyboardEvents();
@@ -131,7 +121,6 @@ function startGame(event) {
 		event.preventDefault();
 
 	if (!playState.isTournamentMatch) {
-		// playState.player1Username = document.getElementById("player1Username").value;
 		playState.player2Username = document.getElementById("player2Username").value;
 
 		if (playState.player1Username === playState.player2Username) {
@@ -145,7 +134,6 @@ function startGame(event) {
 	playState.player2Score = 0;
 	playState.gameOver = false;
 
-	// console.log(playState.isTournamentMatch, "is")
 	 if (!playState.isTournamentMatch) {
 		createGameInDatabase()
 		.then(({ status, body }) => {
@@ -156,18 +144,15 @@ function startGame(event) {
 				mountComponent(Play);
 				initializeGame();
 			} else if (status === 404 && body.error === "One or both players not found") {
-				// affiche une alerte si un ou les deux joueurs ne sont pas trouvés
 				alert(`${window.trans.oneOrTwoPlayersNotFound}`);
 				playState.gameStarted = false; 
 				
 			} else {
-				// gere les autres erreurs
 				console.error(`${window.trans.error}: `, body.error);
 			}
 		})
 	}
 	else{
-		//mountComponent(Play);
 		initializeGame();
 	}
 
