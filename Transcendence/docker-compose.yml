@@ -39,6 +39,19 @@ services:
     networks:
      - transcendance
 
+  filebeat:
+    image: docker.elastic.co/beats/filebeat:8.14.3
+    command: ["filebeat", "-e", "-d", "*"]
+    user: root
+    volumes:
+      - ./elk_data/filelebeat.yml:/usr/share/filebeat/filebeat.yml
+      - ./project/logs:/logs/
+    networks:
+      - elk
+    depends_on:
+      logstash:
+        condition: service_healthy
+  
   # # Elasticsearch is a search engine
   elasticsearch:
     container_name: elasticsearch
@@ -50,10 +63,6 @@ services:
       - bootstrap.memory_lock=true
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
       - xpack.security.enabled=false
-    # ulimits:
-    #   memlock:
-    #     soft: -1
-    #     hard: -1
     volumes:
       - elk_data:/usr/share/elasticsearch/data
     ports:
@@ -72,12 +81,12 @@ services:
     image: docker.elastic.co/logstash/logstash:8.14.3
     user: root
     volumes:
-      - ./elk_data/logstash/pipeline/logstash.conf/:/usr/share/logstash/pipeline/logstash.conf:ro
-      - ./elk_data/logstash/pipeline/logstash2.conf/:/usr/share/logstash/pipeline/logstash2.conf:ro
+      - ./elk_data/logstash/pipeline/logstash.conf/:/usr/share/logstash/pipeline/tcp_logs.conf:ro
+      - ./elk_data/logstash/pipeline/logstash2.conf/:/usr/share/logstash/pipeline/file_logs.conf:ro
       - ./project/logs:/logs
     ports:
-      - 5959:5959
       - 5959:5959/tcp
+      - 5044:5044
     environment:
       LS_JAVA_OPTS: "-Xmx256m -Xms256m"
     depends_on:
@@ -109,6 +118,8 @@ services:
 volumes:
   postgres_data:
   elk_data:
+    driver: local
+  logs:
     driver: local
 
 networks:

@@ -13,6 +13,7 @@ import os
 import sys
 from django.utils.translation import gettext_lazy as _
 from pathlib import Path
+from pythonjsonlogger import jsonlogger
 import logging
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -233,26 +234,34 @@ REST_FRAMEWORK = {
 BACK_LOG_FILE = os.path.join(BASE_DIR, 'logs/back.log')
 
 LOGGING = {
-    # Defines the dict version for logging config ; Should always be 1 ; another value seems to cause issues
     'version': 1,
-    'disable_existing_loggers': False, # ?q= false -> not activated
-    
+    'disable_existing_loggers': False,
+
     'formatters': {
-        'verbose': {
-            'format': '[%(asctime)s]::[%(levelname)s]::[%(name)s]=> (%(message)s)', # [%(funcName)s]::
+        'json': {
+            '()': jsonlogger.JsonFormatter,
+            'format': '%(levelname)s %(name)s %(message)s',
             'datefmt': '%Y/%m/%d %H:%M:%S',
         },
         'simple': {
-            'format': '[%(name)s]=> (%(message)s)',
+            'format': '%(asctime)s: [%(name)s]=> (%(message)s)',
         },
     },
-    
+
     'handlers': {
-        'file': {
+        'logstash_tcp': {
             'level': 'INFO',
-            'class': 'logging.FileHandler',
-            'filename': '../project/logs/back.logs',
-            'formatter': 'verbose',
+            'class': 'logging.handlers.SocketHandler',
+            'host': 'localhost',
+            'port': 5959,  # Port du pipeline Logstash pour les logs TCP
+            'formatter': 'json',
+        },
+        'logstash_beats': {
+            'level': 'INFO',
+            'class': 'logging.handlers.SocketHandler',
+            'host': 'localhost',
+            'port': 5044,  # Port du pipeline Logstash pour les logs Filebeat
+            'formatter': 'json',
         },
         'console': {
             'level': 'DEBUG',
@@ -261,35 +270,25 @@ LOGGING = {
             'formatter': 'simple',
         },
     },
-    
-    'root': {
-        'handlers': ['file'],
-        'level': 'WARNING',
-    },
-    
+
     'loggers': {
-        'django.request': {
-            'handlers': ['file', 'console'],
+        'django': {
+            'handlers': ['logstash_tcp', 'logstash_beats', 'console'],
             'level': 'DEBUG',
             'propagate': True,
         },
-        'django.db.backend': {
-            'handlers': ['file'],
+        'django.request': {
+            'handlers': ['logstash_tcp', 'logstash_beats', 'console'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+        'django.db.backends': {
+            'handlers': ['logstash_tcp', 'logstash_beats', 'console'],
             'level': 'INFO',
             'propagate': True,
         },
         'back': {
-            'handlers': ['file'],
-            'level': 'INFO',
-            'propagate': True,  # If logs should be propagate to parent logs
-        },
-        'backend': {
-            'handlers': ['file'],
-            'level': 'INFO',
-            'propagate': True,
-        },
-        'database': {
-            'handlers': ['file'],
+            'handlers': ['logstash_tcp', 'logstash_beats', 'console'],
             'level': 'INFO',
             'propagate': True,
         },
