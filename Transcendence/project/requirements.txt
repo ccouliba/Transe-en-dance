@@ -13,3 +13,5 @@ elasticsearch==8.0.0
 elasticsearch-dsl==8.12.0
 django-elasticsearch-dsl==8.0
 django-elasticsearch-dsl-drf
+
+python-json-logger>=2.0.7
