@@ -220,7 +220,7 @@ function initializeGameIA() {
 			centerAiPaddle(2);
 		else if (ball.x < canvas.width / 2 + ((canvas.width / 2) / 3))
 			centerAiPaddle(getBallSection(ball.y));
-		else
+		else if (ball.x > canvas.width / 2 + ((canvas.width / 2) / 2.5))
 			centerAiPaddle(predictBallY());
 	}
 

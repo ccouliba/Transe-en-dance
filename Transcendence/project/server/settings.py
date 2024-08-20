@@ -243,7 +243,7 @@ LOGGING = {
             'datefmt': '%Y/%m/%d %H:%M:%S',
         },
         'simple': {
-            'format': '%(name)s %(message)s',
+            'format': '%(name)s %(funcName)s %(message)s',
         },
     },
 
@@ -251,13 +251,13 @@ LOGGING = {
         'file': {
             'level': 'INFO',
             'class': 'logging.FileHandler',
-            'filename': '../project/logs/file-logs.json',
+            'filename': '../project/logs/django-logs.json',
             'formatter': 'simple',
         },
         'logstash': {
             'level': 'INFO',
             'class': 'logging.FileHandler',
-            'filename': '../project/logs/beats-logs.json',
+            'filename': '../project/logs/app-logs.json',
             'formatter': 'json',
         },
         'console': {

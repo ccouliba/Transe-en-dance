@@ -20,20 +20,20 @@ from django.utils.html import escape
 import requests
 from django.conf import settings
 from django.views.decorators.http import require_GET
+import logging
+
+logger = logging.getLogger(name="back")
+
 
 #loading env variables for external login with api42
 current_dir = os.path.dirname(os.path.abspath(__file__))
 env_path = os.path.join(current_dir, "../../../.utils/.env")
 load_dotenv(env_path)
 
-
 @ensure_csrf_cookie
 def base_view(request):
 	return render(request, 'pong/base.html')
 
-
-
-@loggingFunction
 def login_view(request):
 	data = json.loads(request.body)
 	username = data.get('username')
@@ -43,8 +43,10 @@ def login_view(request):
 	if user is not None:
 		login(request, user)
 		user.login()#utilisation de la methode de la class user (pour online/offline)
+		logger.info("Log avec success")		
 		return JsonResponse({'status': 'success'})
 	else:
+		logger.error("eeror lors du login")
 		return JsonResponse({'status': 'error', 'message': 'INVALID_CREDENTIALS'}, status=401)
 
 @loggingFunction
@@ -54,7 +56,7 @@ def logout_view(request):
 	request.session.flush()
 	logout(request)
 	user.logout()#utilisation de la methode de la class user (pour online/offline)
-	
+	logger.info("logout success")
 	return JsonResponse({'status': 'success'})
 
 # Cette vue gere l'inscription des nouveaux utilisateurs
@@ -76,7 +78,7 @@ def register_view(request):
 	except Exception as e:
 		return JsonResponse({'status': 'error', 'message': str(e)}, status=500)
 
-
+@loggingFunction
 @login_required
 @transaction.atomic
 def soft_delete_user(request):
@@ -99,15 +101,16 @@ def soft_delete_user(request):
 		user.save()
 		
 		logout(request)
-		
+		logger.info("delete success")
 		return JsonResponse({'status': 'success', 'message': 'accDeleted'})
-	
+	logger.error("delete failed")
 	return JsonResponse({'status': 'error', 'message': 'Invalid request method.'}, status=405)
 
 
 
 
 # Cette vue verifie si un utilisateur est authentifie ou pas. Elle est utilise dans base.html
+@loggingFunction
 def check_auth(request):
 	user = request.user
  
@@ -133,7 +136,6 @@ def external_login(request):
 	url = f"{forty2_auth_url}?client_id={client_id}&redirect_uri={redirect_uri}&response_type=code"
 	
 	return redirect(url)
-
 
 def get_response_from_api(request):
 	url = os.getenv('TOKEN_URL')
