@@ -257,6 +257,7 @@
 	"opponent": "Opponent",
 	"score": "Score",
 	"result": "Result",
+	"mode": "Mode",
 
 	"privacyPolicy": "Privacy policy for Pong Application",
 	"introduction": "Introduction",

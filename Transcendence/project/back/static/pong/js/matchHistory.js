@@ -36,6 +36,7 @@ function renderMatchHistory() {
 					<th>${window.trans.opponent}</th>
 					<th>${window.trans.score}</th>
 					<th>${window.trans.result}</th>
+					<th>${window.trans.mode}</th>
 				</tr>
 			</thead>
 			<tbody>
