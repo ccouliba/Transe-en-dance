@@ -38,19 +38,6 @@ services:
       retries: 3  
     networks:
      - transcendance
-
-  filebeat:
-    image: docker.elastic.co/beats/filebeat:8.14.3
-    command: ["filebeat", "-e", "-d", "*"]
-    user: root
-    volumes:
-      - ./elk_data/filelebeat.yml:/usr/share/filebeat/filebeat.yml
-      - ./project/logs:/logs/
-    networks:
-      - elk
-    depends_on:
-      logstash:
-        condition: service_healthy
   
   # # Elasticsearch is a search engine
   elasticsearch:
@@ -81,22 +68,21 @@ services:
     image: docker.elastic.co/logstash/logstash:8.14.3
     user: root
     volumes:
-      - ./elk_data/logstash/pipeline/logstash.conf/:/usr/share/logstash/pipeline/tcp_logs.conf:ro
-      - ./elk_data/logstash/pipeline/logstash2.conf/:/usr/share/logstash/pipeline/file_logs.conf:ro
-      - ./project/logs:/logs
+      - ./elk_data/logstash/pipeline/:/usr/share/logstash/pipeline/:ro
+      - ./project/logs:/logs/
     ports:
-      - 5959:5959/tcp
-      - 5044:5044
+      - 9600:9600
+      - 5959:5959
     environment:
       LS_JAVA_OPTS: "-Xmx256m -Xms256m"
     depends_on:
       elasticsearch:
         condition: service_healthy
     healthcheck:
-      test: ["CMD-SHELL", "curl -f http://localhost:5959"]
-      interval: 20s
+      test: ["CMD-SHELL", "curl -f http://localhost:9600/_node/stats || exit 1"]
+      interval: 10s
       timeout: 5s
-      retries: 3
+      retries: 2
     networks:
       - elk
       - transcendance
@@ -120,7 +106,6 @@ volumes:
   elk_data:
     driver: local
   logs:
-    driver: local
 
 networks:
   transcendance:

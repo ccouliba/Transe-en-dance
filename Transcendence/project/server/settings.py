@@ -63,7 +63,6 @@ ALLOWE_HOSTS = []
 
 
 INSTALLED_APPS = [
-    # 'elasticapm.contrib.django',
 	'back',
 	'django.contrib.admin',
 	'django.contrib.auth',
@@ -127,18 +126,18 @@ DATABASES = {
 }
 
 # on localhost
-if os.getenv("DEV_ENV", False):
-    DATABASES = {
-        'default': {
-            'ENGINE': os.getenv('SQL_ENGINE', 'django.db.backends.postgresql_psycopg2'),
-            'NAME': os.getenv('SQL_DATABASE', 'db1'),
-            'USER': os.getenv('SQL_USER', 'ccouliba'),
-            'PASSWORD': os.getenv('SQL_PASSWORD', "password"),
-            'HOST': os.getenv('SQL_HOST', 'localhost'),
-            # 'HOST': 'localhost', #todo : A MODIFIER (juste pour pouvoir executer django localement)
-            'PORT': os.getenv('SQL_PORT', '5432'),
-        }
-    }
+# if os.getenv("DEV_ENV", False):
+#     DATABASES = {
+#         'default': {
+#             'ENGINE': os.getenv('SQL_ENGINE', 'django.db.backends.postgresql_psycopg2'),
+#             'NAME': os.getenv('SQL_DATABASE', 'db1'),
+#             'USER': os.getenv('SQL_USER', 'ccouliba'),
+#             'PASSWORD': os.getenv('SQL_PASSWORD', "password"),
+#             'HOST': os.getenv('SQL_HOST', 'localhost'),
+#             # 'HOST': 'localhost', #todo : A MODIFIER (juste pour pouvoir executer django localement)
+#             'PORT': os.getenv('SQL_PORT', '5432'),
+#         }
+#     }
 
 
 
@@ -240,27 +239,25 @@ LOGGING = {
     'formatters': {
         'json': {
             '()': jsonlogger.JsonFormatter,
-            'format': '%(levelname)s %(name)s %(message)s',
+            'format': '%(asctime)s %(levelname)s %(name)s %(message)s',
             'datefmt': '%Y/%m/%d %H:%M:%S',
         },
         'simple': {
-            'format': '%(asctime)s: [%(name)s]=> (%(message)s)',
+            'format': '%(name)s %(message)s',
         },
     },
 
     'handlers': {
-        'logstash_tcp': {
+        'file': {
             'level': 'INFO',
-            'class': 'logging.handlers.SocketHandler',
-            'host': 'localhost',
-            'port': 5959,  # Port du pipeline Logstash pour les logs TCP
-            'formatter': 'json',
+            'class': 'logging.FileHandler',
+            'filename': '../project/logs/file-logs.json',
+            'formatter': 'simple',
         },
-        'logstash_beats': {
+        'logstash': {
             'level': 'INFO',
-            'class': 'logging.handlers.SocketHandler',
-            'host': 'localhost',
-            'port': 5044,  # Port du pipeline Logstash pour les logs Filebeat
+            'class': 'logging.FileHandler',
+            'filename': '../project/logs/beats-logs.json',
             'formatter': 'json',
         },
         'console': {
@@ -273,32 +270,24 @@ LOGGING = {
 
     'loggers': {
         'django': {
-            'handlers': ['logstash_tcp', 'logstash_beats', 'console'],
+            'handlers': ['logstash', 'console'],
             'level': 'DEBUG',
             'propagate': True,
         },
         'django.request': {
-            'handlers': ['logstash_tcp', 'logstash_beats', 'console'],
+            'handlers': ['logstash', 'console'],
             'level': 'DEBUG',
             'propagate': True,
         },
         'django.db.backends': {
-            'handlers': ['logstash_tcp', 'logstash_beats', 'console'],
+            'handlers': ['file', 'console'],
             'level': 'INFO',
             'propagate': True,
         },
         'back': {
-            'handlers': ['logstash_tcp', 'logstash_beats', 'console'],
+            'handlers': ['file', 'console'],
             'level': 'INFO',
             'propagate': True,
         },
-    },
-}
-
-# FOR ELASTICSEARCH APP 
-ELASTICSEARCH_DSL = {
-    'default': {
-        'hosts': os.getenv('ELASTICSEARCH_DSL_HOSTS'),
-        'http_auth': (os.getenv('ELASTIC_USERNAME'), os.getenv('ELASTIC_PASSWORD')),
     },
 }
