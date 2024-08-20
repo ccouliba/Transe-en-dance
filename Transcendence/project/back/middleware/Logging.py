@@ -10,7 +10,7 @@ class LoggingMiddleware():
         self.get_response = get_response
 
     def __call__(self, request):
-        logger = logging.getLogger(__name__)
+        logger = logging.getLogger("back")
         logger.info(f"Request from: [{request.path}]")
         response = self.get_response(request)
         
