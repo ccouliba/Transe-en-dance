@@ -10,7 +10,7 @@ def loggingFunction(func):
     ''' Pour conserver les parametres de la view appelant le decorateur '''
     @wraps(func)
     def wrapper(request, *args, **kwargs):
-        logger = logging.getLogger(__name__)
+        logger = logging.getLogger("back")
         logger.info(f"(from : [{func.__name__}])")
         return func(request, *args, **kwargs)
     return wrapper

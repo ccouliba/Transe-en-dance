@@ -37,28 +37,29 @@
 	  <div id="app">
 		  {% block content %}
 		  <script>
-			var lang = "{{ user.langue }}"
-			
-			{% if user.is_authenticated %}
-				if (window.location.hash === '' || window.location.hash === '#') {
-					loadTranslationFile(lang).then(() => {
-						changePage('#home');
-					});
-				} else {
-					loadTranslationFile(lang).then(() => {
-						changePage(window.location.hash);
-					});
-				}
+			  
+			  {% if user.is_authenticated %}
+					var lang = "{{ user.langue }}"
+					if (window.location.hash === '' || window.location.hash === '#') {
+						loadTranslationFile(lang).then(() => {
+							changePage('#home');
+						});
+					} else {
+						loadTranslationFile(lang).then(() => {
+							changePage(window.location.hash);
+						});
+					}
 				{% else %}
-				if (window.location.hash === '#register') {
-					loadTranslationFile(lang).then(() => { 
-						changePage('#register');
-					});
-				} else {
-					loadTranslationFile(lang).then(() => {
-						changePage('#login');
-					});
-				}
+					var lang = "{{ user.langue }}"
+					if (window.location.hash === '#register') {
+						loadTranslationFile(lang).then(() => { 
+							changePage('#register');
+						});
+					} else {
+						loadTranslationFile(lang).then(() => {
+							changePage('#login');
+						});
+					}
 			{% endif %}
 		
 		</script>
@@ -137,7 +138,7 @@
 	// Verifier si l'utilisateur est en mode de navigation privee et afficher la modale 
 	isIncognito().then(incognito => {
 		if (incognito) {
-			loadTranslations("en").then(() => {
+			loadTranslationFile("en").then(() => {
 				showModal();
 			});
 		}

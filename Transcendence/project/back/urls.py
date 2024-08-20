@@ -45,7 +45,6 @@ urlpatterns = [
 	path('api/friends_data/', friends_data, name='friends_data'),
 	path('api/friends/get-status/', friends_online_status, name='friends_online_status'),
  
- 
 	path('api/games/create_game/', create_game, name='create_game'),
 	path('api/games/<int:game_id>/update', update_game, name='update_game'),
 	path('api/games/finish_game/<int:game_id>/', finish_game, name='finish_game'),
