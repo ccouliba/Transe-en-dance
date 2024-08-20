@@ -137,7 +137,7 @@
 	// Verifier si l'utilisateur est en mode de navigation privee et afficher la modale 
 	isIncognito().then(incognito => {
 		if (incognito) {
-			loadTranslations("en").then(() => {
+			loadTranslationFile("en").then(() => {
 				showModal();
 			});
 		}
