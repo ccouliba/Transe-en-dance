@@ -45,7 +45,7 @@ def login_view(request):
 		user.login()#utilisation de la methode de la class user (pour online/offline)
 		return JsonResponse({'status': 'success'})
 	else:
-		return JsonResponse({'status': 'error', 'message': 'Invalid credentials'}, status=401)
+		return JsonResponse({'status': 'error', 'message': 'INVALID_CREDENTIALS'}, status=401)
 
 @loggingFunction
 @login_required
@@ -72,7 +72,7 @@ def register_view(request):
 		else:
 			return JsonResponse({'status': 'error', 'message': form.errors}, status=400)
 	except json.JSONDecodeError:
-		return JsonResponse({'status': 'error', 'message': 'Invalid JSON'}, status=400)
+		return JsonResponse({'status': 'error', 'message': 'INVALID_JSON'}, status=400)
 	except Exception as e:
 		return JsonResponse({'status': 'error', 'message': str(e)}, status=500)
 
@@ -100,7 +100,7 @@ def soft_delete_user(request):
 		
 		logout(request)
 		
-		return JsonResponse({'status': 'success', 'message': 'Your account has been successfully deleted.'})
+		return JsonResponse({'status': 'success', 'message': 'accDeleted'})
 	
 	return JsonResponse({'status': 'error', 'message': 'Invalid request method.'}, status=405)
 

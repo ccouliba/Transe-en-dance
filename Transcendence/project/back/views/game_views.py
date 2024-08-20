@@ -13,7 +13,7 @@ def create_game(request):
 		data = json.loads(request.body)
 		player2_username = data.get('player2Username')
 		if  not User.objects.filter(username=player2_username).exists():
-			return JsonResponse({'error': 'One or both players not found'}, status=404)
+			return JsonResponse({'error': 'oneOrTwoPlayersNotFound'}, status=404)
 		try:
 			player2 = User.objects.get(username=player2_username)
 			game = Game.objects.create(
@@ -27,9 +27,9 @@ def create_game(request):
 				'player2Username': player2.username
 			}, status=201)
 		except User.DoesNotExist:
-			return JsonResponse({'error': 'One or both players not found'}, status=404)
+			return JsonResponse({'error': 'oneOrTwoPlayersNotFound'}, status=404)
 	else:
-		return JsonResponse({'error': 'Invalid request method'}, status=405)
+		return JsonResponse({'error': 'INVALID_REQUEST_METHOD'}, status=405)
 
 @login_required
 def update_game(request, game_id):
@@ -50,13 +50,13 @@ def update_game(request, game_id):
 
 			game.save()
 
-			return JsonResponse({'message': 'Game updated successfully'}, status=200)
+			return JsonResponse({'message': 'GAME_UPDATED_SUCCESSFULLY'}, status=200)
 		except Game.DoesNotExist:
-			return JsonResponse({'error': 'Game not found'}, status=404)
+			return JsonResponse({'error': 'GAME_NOT_FOUND'}, status=404)
 		except User.DoesNotExist:
-			return JsonResponse({'error': 'Winner not found'}, status=404)
+			return JsonResponse({'error': 'WINNER_NOT_FOUND'}, status=404)
 	else:
-		return JsonResponse({'error': 'Invalid request method'}, status=405)
+		return JsonResponse({'error': 'INVALID_REQUEST_METHOD'}, status=405)
 
 
 @login_required
@@ -66,7 +66,7 @@ def finish_game(request, game_id):
 			game = Game.objects.get(id=game_id)
 			
 			if game.status == 'finished':
-				return JsonResponse({'error': 'Game already finished'}, status=400)
+				return JsonResponse({'error': 'GAME_ALREADY_FINISHED'}, status=400)
 			
 			data = json.loads(request.body)
 			winner_username  = data.get('winner')
@@ -83,16 +83,16 @@ def finish_game(request, game_id):
 			game.player2.save()
 			
 			return JsonResponse({
-				'message': 'Game finished successfully',
+				'message': 'GAME_FINISHED_SUCCESSFULLY',
 				'winner': winner.username
 			}, status=200)
 		
 		except Game.DoesNotExist:
-			return JsonResponse({'error': 'Game not found'}, status=404)
+			return JsonResponse({'error': 'GAME_NOT_FOUND'}, status=404)
 		except User.DoesNotExist:
-			return JsonResponse({'error': 'Winner not found'}, status=404)
+			return JsonResponse({'error': 'WINNER_NOT_FOUND'}, status=404)
 	else:
-		return JsonResponse({'error': 'Invalid request method'}, status=405)
+		return JsonResponse({'error': 'INVALID_REQUEST_METHOD'}, status=405)
 
 
 @login_required
@@ -130,4 +130,4 @@ def get_current_user(request):
 			'username': request.user.username,
 			'email': request.user.email
 		})
-	return JsonResponse({'error': 'Invalid request method'}, status=405)
+	return JsonResponse({'error': 'INVALID_REQUEST_METHOD'}, status=405)

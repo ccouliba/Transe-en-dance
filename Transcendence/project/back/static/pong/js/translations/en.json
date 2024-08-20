@@ -296,6 +296,14 @@
 	"FRIEND_REQUEST_SENT": "Friend request sent successfully.",
 	"NO_PENDING_FRIEND_REQUESTS": "No pending friend requests from this user.",
 	"FRIEND_REQUEST_ACCEPTED": "Friend request accepted successfully.",
-	"USER_NOT_IN_FRIEND_LIST": "This user is not in your friend list."
-
+	"USER_NOT_IN_FRIEND_LIST": "This user is not in your friend list.",
+	
+	"INVALID_CREDENTIALS": "Invalid credentials",
+	"INVALID_JSON": "Invalid JSON",
+	"INVALID_REQUEST_METHOD": "Invalid request method",
+	"GAME_UPDATED_SUCCESSFULLY": "Game updated successfully",
+	"GAME_NOT_FOUND": "Game not found",
+	"WINNER_NOT_FOUND": "Winner not found",
+	"GAME_ALREADY_FINISHED": "Game already finished",
+	"GAME_FINISHED_SUCCESSFULLY": "Game finished successfully"
 }

@@ -297,5 +297,14 @@
 	"FRIEND_REQUEST_SENT": "Demande d'amitié envoyée avec succès.",
 	"NO_PENDING_FRIEND_REQUESTS": "Aucune demande d'ami en attente de cet utilisateur.",
 	"FRIEND_REQUEST_ACCEPTED": "Demande d'ami acceptée avec succès.",
-	"USER_NOT_IN_FRIEND_LIST": "Cet utilisateur n'est pas dans votre liste d'amis."
+	"USER_NOT_IN_FRIEND_LIST": "Cet utilisateur n'est pas dans votre liste d'amis.",
+
+	"INVALID_CREDENTIALS": "Informations d'identification invalides",
+	"INVALID_JSON": "JSON invalide",
+	"INVALID_REQUEST_METHOD": "Méthode de requête invalide",
+	"GAME_UPDATED_SUCCESSFULLY": "Mise à jour du jeu réussie",
+	"GAME_NOT_FOUND": "Jeu non trouvé",
+	"WINNER_NOT_FOUND": "Vainqueur non trouvé",
+	"GAME_ALREADY_FINISHED": "Jeu déjà terminé",
+	"GAME_FINISHED_SUCCESSFULLY": "Le jeu s'est terminé avec succès"
 }
