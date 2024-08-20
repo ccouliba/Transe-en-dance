@@ -72,7 +72,6 @@ INSTALLED_APPS = [
 	'django.contrib.staticfiles',
 	'rest_framework',
 	'rest_framework.authtoken',
-    'django_elasticsearch_dsl',
 ]
 
 MIDDLEWARE = [
@@ -243,7 +242,7 @@ LOGGING = {
             'datefmt': '%Y/%m/%d %H:%M:%S',
         },
         'simple': {
-            'format': '%(name)s %(message)s',
+            'format': '%(name)s %(funcName)s %(message)s',
         },
     },
 

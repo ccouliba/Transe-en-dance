@@ -37,9 +37,9 @@
 	  <div id="app">
 		  {% block content %}
 		  <script>
-			var lang = "{{ user.langue }}"
-			
-			{% if user.is_authenticated %}
+			  
+			  {% if user.is_authenticated %}
+			  var lang = "{{ user.langue }}"
 				if (window.location.hash === '' || window.location.hash === '#') {
 					loadTranslationFile(lang).then(() => {
 						changePage('#home');
@@ -50,6 +50,7 @@
 					});
 				}
 				{% else %}
+				var lang = "{{ user.langue }}"
 				if (window.location.hash === '#register') {
 					loadTranslationFile(lang).then(() => { 
 						changePage('#register');
