@@ -13,7 +13,7 @@ from django.db.models import Q #pour executer des requetes dans la bdd avec des 
 # explication AbstractUser : #https://openclassrooms.com/fr/courses/7192426-allez-plus-loin-avec-le-framework-django/7386368-personnalisez-le-modele-utilisateur
 class User(AbstractUser):
 	creation_date = models.DateTimeField(default=timezone.now) 
-	langue = models.CharField(max_length=10, blank=True, null=True)  
+	langue = models.CharField(max_length=10, blank=True, null=True, default="en")  
 	avatar = models.CharField(max_length=255, blank=True, null=True)  # avatar de l'utilisateur est stocke sous forme de chemin ou URL
 	friends = models.ManyToManyField('self', symmetrical=True, blank=True)  # manytomany => un ami peut avoir plusieurs amis et chaque ami peut etre lie à plusieurs amis. Et symmetrical => si  A est ami  B alors B sera automatiquement ami  A 
 	is_online = models.BooleanField(default=False)
