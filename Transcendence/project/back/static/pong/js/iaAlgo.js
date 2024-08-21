@@ -220,7 +220,7 @@ function initializeGameIA() {
 			centerAiPaddle(2);
 		else if (ball.x < canvas.width / 2 + ((canvas.width / 2) / 3))
 			centerAiPaddle(getBallSection(ball.y));
-		else if (ball.x > canvas.width / 2 + ((canvas.width / 2) / 2.5))
+		else if (ball.x > canvas.width / 2 + ((canvas.width / 2) / (lvlIa + 0.5)))
 			centerAiPaddle(predictBallY());
 	}
 
@@ -280,7 +280,6 @@ function initializeGameIA() {
 		ctx.fillText(textPlayer, canvas.width / 4 - playerTextWidth / 2, 30);
 		ctx.fillText(textAI, canvas.width * 3 / 4 - aiTextWidth / 2, 30);
 
-		// Afficher message de fin de jeu
 		if (gameOver) {
 			ctx.font = '48px Arial';
 			ctx.textAlign = 'center';
@@ -331,19 +330,18 @@ function initializeGameIA() {
 }
 
 function toggleCanvas() {
-	
+	showLevelButtons();
 	clearInterval(intergame);
 	inGame = true;
 	var canvas = document.getElementById('myCanvas');
-	//if (canvas) {
-		//resetGame();
-	//} 
 	if (!canvas) {
 		initializeGameIA();
 	}
 }
 
 function hideCanvas() {
+	removeLevelButtons();
+	lvlIa = 2;
 	if (interia)
 		clearInterval(interia);
 	if (intergame)
@@ -356,3 +354,106 @@ function hideCanvas() {
 		document.body.removeChild(canvas);
 	}
 }
+
+/*_________________BUTTONS_______________________*/
+
+let buttonContainer = null;
+let lvlIa = 2;
+
+function addGlobalStyle(css) {
+    const style = document.createElement('style');
+    style.type = 'text/css';
+    style.appendChild(document.createTextNode(css));
+    document.head.appendChild(style);
+}
+
+// Ajouter des styles CSS
+const styles = `
+    /* Style général des boutons */
+    button {
+        font-size: 2rem;
+        padding: 15px;
+        border: none;
+        background-color: transparent;
+        cursor: pointer;
+        transition: transform 0.2s, color 0.2s;
+    }
+
+    /* Effet de survol pour agrandir le bouton */
+    button:hover {
+        transform: scale(1.1);
+    }
+
+    /* Style pour le bouton actif */
+    button.active {
+        transform: scale(1.2); /* Agrandit encore plus le bouton actif */
+        color: #f00; /* Optionnel : changer la couleur du texte pour plus de visibilité */
+    }
+`;
+
+// Ajouter les styles au document
+addGlobalStyle(styles);
+
+function showLevelButtons() {
+    const canvas = document.querySelector('canvas');
+    if (!canvas) {
+        console.error('Canvas element not found');
+        return;
+    }
+
+    if (!buttonContainer) {
+        buttonContainer = document.createElement('div');
+        buttonContainer.style.display = 'flex';
+        buttonContainer.style.justifyContent = 'center';
+        buttonContainer.style.alignItems = 'center';
+        buttonContainer.style.gap = '20px';
+        buttonContainer.style.width = '100%';
+
+        buttonContainer.style.position = 'absolute';
+        buttonContainer.style.top = 'calc(100vh - 150px)';
+        buttonContainer.style.left = '50%';
+        buttonContainer.style.transform = 'translateX(-50%)';
+
+        const level1Button = document.createElement('button');
+        level1Button.textContent = '😊';
+        level1Button.classList.add('level-button');
+
+        const level2Button = document.createElement('button');
+        level2Button.textContent = '😎';
+        level2Button.classList.add('level-button');
+
+        const level3Button = document.createElement('button');
+        level3Button.textContent = '😈 ';
+        level3Button.classList.add('level-button');
+
+        buttonContainer.appendChild(level1Button);
+        buttonContainer.appendChild(level2Button);
+        buttonContainer.appendChild(level3Button);
+
+        canvas.insertAdjacentElement('afterend', buttonContainer);
+
+        level2Button.classList.add('active');
+
+        [level1Button, level2Button, level3Button].forEach(button => {
+            button.addEventListener('click', function() {
+
+                document.querySelectorAll('.level-button').forEach(btn => btn.classList.remove('active'));
+
+
+                this.classList.add('active');
+
+                const level = Array.from(buttonContainer.children).indexOf(this) + 1;
+				lvlIa = level;
+                //console.log(`Niveau choisi : ${lvlIa}`);
+            });
+        });
+    }
+}
+
+function removeLevelButtons() {
+    if (buttonContainer) {
+        buttonContainer.remove();
+        buttonContainer = null;
+    }
+}
+
