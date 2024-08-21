@@ -67,6 +67,7 @@ function loadTournamentState() {
 		
 		.then(data => {
 			tournamentState.tournament = data.tournament;
+			
 			if (tournamentState.tournament) {
 				// S'assurer que is_started est bien un booléen
 				tournamentState.tournament.is_started = Boolean(tournamentState.tournament.is_started);
