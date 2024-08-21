@@ -3,10 +3,14 @@ services:
   web:
     container_name: backend
     build: ./project
+    # command: python manage.py runserver 0.0.0.0:8000
+    # New command to make it work
+    # command: gunicorn server.wsgi:application --bind 0.0.0.0:8000 --certfile=./selfsigned.crt --keyfile=./selfsigned.key
+
     volumes:
       - ./project/:/usr/src/project/
     ports:
-      - 8000:8000
+      - 8443:8443
     env_file:
       - ./.utils/.env
     depends_on:
