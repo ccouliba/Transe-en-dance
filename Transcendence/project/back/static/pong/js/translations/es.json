@@ -258,6 +258,7 @@
 	"opponent": "Adversario",
 	"score": "Puntaje",
 	"result": "Resultado",
+	"mode": "Modo",
 
 	"privacyPolicy": "Política de privacidad de la aplicación Pong",
 	"introduction": "Introducción",

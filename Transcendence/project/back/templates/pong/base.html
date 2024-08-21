@@ -35,7 +35,7 @@
 	<script src="{% static 'pong/js/iaAlgo.js' %}"></script>
 	<main class="w-100 m-auto">
 	  <div id="app">
-		  {% block content %}
+		{% block content %}
 		  <script>
 			  {% if user.is_authenticated %}
 					var lang = "{{ user.langue }}"

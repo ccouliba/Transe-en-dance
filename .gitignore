@@ -18,4 +18,4 @@ __pycache__/
 
 ./back/project/logs/back.logs
 
-la detresse de guegue
+./back/project/logs/*.*
