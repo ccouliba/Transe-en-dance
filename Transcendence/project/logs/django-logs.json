@@ -401,3 +401,87 @@ django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 302 0
 django.request Not Found: /accounts/login/
 django.request Not Found: /accounts/login/
 django.server "GET /accounts/login/?next=/pong/api/friends/get-status/ HTTP/1.1" 404 2649
+django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 302 0
+django.request Not Found: /accounts/login/
+django.request Not Found: /accounts/login/
+django.server "GET /accounts/login/?next=/pong/api/friends/get-status/ HTTP/1.1" 404 2649
+django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 302 0
+django.request Not Found: /accounts/login/
+django.request Not Found: /accounts/login/
+django.server "GET /accounts/login/?next=/pong/api/friends/get-status/ HTTP/1.1" 404 2649
+django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 302 0
+django.request Not Found: /accounts/login/
+django.request Not Found: /accounts/login/
+django.server "GET /accounts/login/?next=/pong/api/friends/get-status/ HTTP/1.1" 404 2649
+django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 302 0
+django.request Not Found: /accounts/login/
+django.request Not Found: /accounts/login/
+django.server "GET /accounts/login/?next=/pong/api/friends/get-status/ HTTP/1.1" 404 2649
+django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 302 0
+django.request Not Found: /accounts/login/
+django.request Not Found: /accounts/login/
+django.server "GET /accounts/login/?next=/pong/api/friends/get-status/ HTTP/1.1" 404 2649
+django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 302 0
+django.request Not Found: /accounts/login/
+django.request Not Found: /accounts/login/
+django.server "GET /accounts/login/?next=/pong/api/friends/get-status/ HTTP/1.1" 404 2649
+django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 302 0
+django.request Not Found: /accounts/login/
+django.request Not Found: /accounts/login/
+django.server "GET /accounts/login/?next=/pong/api/friends/get-status/ HTTP/1.1" 404 2649
+django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 302 0
+django.request Not Found: /accounts/login/
+django.request Not Found: /accounts/login/
+django.server "GET /accounts/login/?next=/pong/api/friends/get-status/ HTTP/1.1" 404 2649
+django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 302 0
+django.request Not Found: /accounts/login/
+django.request Not Found: /accounts/login/
+django.server "GET /accounts/login/?next=/pong/api/friends/get-status/ HTTP/1.1" 404 2649
+django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 302 0
+django.request Not Found: /accounts/login/
+django.request Not Found: /accounts/login/
+django.server "GET /accounts/login/?next=/pong/api/friends/get-status/ HTTP/1.1" 404 2649
+django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 302 0
+django.request Not Found: /accounts/login/
+django.request Not Found: /accounts/login/
+django.server "GET /accounts/login/?next=/pong/api/friends/get-status/ HTTP/1.1" 404 2649
+django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 302 0
+django.request Not Found: /accounts/login/
+django.request Not Found: /accounts/login/
+django.server "GET /accounts/login/?next=/pong/api/friends/get-status/ HTTP/1.1" 404 2649
+django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 302 0
+django.request Not Found: /accounts/login/
+django.request Not Found: /accounts/login/
+django.server "GET /accounts/login/?next=/pong/api/friends/get-status/ HTTP/1.1" 404 2649
+django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 302 0
+django.request Not Found: /accounts/login/
+django.request Not Found: /accounts/login/
+django.server "GET /accounts/login/?next=/pong/api/friends/get-status/ HTTP/1.1" 404 2649
+django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 302 0
+django.request Not Found: /accounts/login/
+django.request Not Found: /accounts/login/
+django.server "GET /accounts/login/?next=/pong/api/friends/get-status/ HTTP/1.1" 404 2649
+django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 302 0
+django.request Not Found: /accounts/login/
+django.request Not Found: /accounts/login/
+django.server "GET /accounts/login/?next=/pong/api/friends/get-status/ HTTP/1.1" 404 2649
+django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 302 0
+django.request Not Found: /accounts/login/
+django.request Not Found: /accounts/login/
+django.server "GET /accounts/login/?next=/pong/api/friends/get-status/ HTTP/1.1" 404 2649
+django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 302 0
+django.request Not Found: /accounts/login/
+django.request Not Found: /accounts/login/
+django.server "GET /accounts/login/?next=/pong/api/friends/get-status/ HTTP/1.1" 404 2649
+django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 302 0
+django.request Not Found: /accounts/login/
+django.request Not Found: /accounts/login/
+django.server "GET /accounts/login/?next=/pong/api/friends/get-status/ HTTP/1.1" 404 2649
+django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 302 0
+django.request Not Found: /accounts/login/
+django.request Not Found: /accounts/login/
+django.server "GET /accounts/login/?next=/pong/api/friends/get-status/ HTTP/1.1" 404 2649
+django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 302 0
+django.request Not Found: /accounts/login/
+django.request Not Found: /accounts/login/
+django.server "GET /accounts/login/?next=/pong/api/friends/get-status/ HTTP/1.1" 404 2649

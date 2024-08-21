@@ -134,3 +134,87 @@
 {"asctime": "2024/08/21 20:41:58", "levelname": "INFO", "name": "back", "message": "code: [302] => [error]"}
 {"asctime": "2024/08/21 20:41:58", "levelname": "INFO", "name": "back", "message": "Request from: [/accounts/login/]"}
 {"asctime": "2024/08/21 20:41:58", "levelname": "INFO", "name": "back", "message": "code: [404] => [error]"}
+{"asctime": "2024/08/21 20:42:03", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/api/friends/get-status/]"}
+{"asctime": "2024/08/21 20:42:03", "levelname": "INFO", "name": "back", "message": "code: [302] => [error]"}
+{"asctime": "2024/08/21 20:42:03", "levelname": "INFO", "name": "back", "message": "Request from: [/accounts/login/]"}
+{"asctime": "2024/08/21 20:42:03", "levelname": "INFO", "name": "back", "message": "code: [404] => [error]"}
+{"asctime": "2024/08/21 20:42:08", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/api/friends/get-status/]"}
+{"asctime": "2024/08/21 20:42:08", "levelname": "INFO", "name": "back", "message": "code: [302] => [error]"}
+{"asctime": "2024/08/21 20:42:08", "levelname": "INFO", "name": "back", "message": "Request from: [/accounts/login/]"}
+{"asctime": "2024/08/21 20:42:08", "levelname": "INFO", "name": "back", "message": "code: [404] => [error]"}
+{"asctime": "2024/08/21 20:42:13", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/api/friends/get-status/]"}
+{"asctime": "2024/08/21 20:42:13", "levelname": "INFO", "name": "back", "message": "code: [302] => [error]"}
+{"asctime": "2024/08/21 20:42:13", "levelname": "INFO", "name": "back", "message": "Request from: [/accounts/login/]"}
+{"asctime": "2024/08/21 20:42:13", "levelname": "INFO", "name": "back", "message": "code: [404] => [error]"}
+{"asctime": "2024/08/21 20:42:18", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/api/friends/get-status/]"}
+{"asctime": "2024/08/21 20:42:18", "levelname": "INFO", "name": "back", "message": "code: [302] => [error]"}
+{"asctime": "2024/08/21 20:42:18", "levelname": "INFO", "name": "back", "message": "Request from: [/accounts/login/]"}
+{"asctime": "2024/08/21 20:42:18", "levelname": "INFO", "name": "back", "message": "code: [404] => [error]"}
+{"asctime": "2024/08/21 20:42:23", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/api/friends/get-status/]"}
+{"asctime": "2024/08/21 20:42:23", "levelname": "INFO", "name": "back", "message": "code: [302] => [error]"}
+{"asctime": "2024/08/21 20:42:23", "levelname": "INFO", "name": "back", "message": "Request from: [/accounts/login/]"}
+{"asctime": "2024/08/21 20:42:23", "levelname": "INFO", "name": "back", "message": "code: [404] => [error]"}
+{"asctime": "2024/08/21 20:42:28", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/api/friends/get-status/]"}
+{"asctime": "2024/08/21 20:42:28", "levelname": "INFO", "name": "back", "message": "code: [302] => [error]"}
+{"asctime": "2024/08/21 20:42:28", "levelname": "INFO", "name": "back", "message": "Request from: [/accounts/login/]"}
+{"asctime": "2024/08/21 20:42:28", "levelname": "INFO", "name": "back", "message": "code: [404] => [error]"}
+{"asctime": "2024/08/21 20:42:33", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/api/friends/get-status/]"}
+{"asctime": "2024/08/21 20:42:33", "levelname": "INFO", "name": "back", "message": "code: [302] => [error]"}
+{"asctime": "2024/08/21 20:42:33", "levelname": "INFO", "name": "back", "message": "Request from: [/accounts/login/]"}
+{"asctime": "2024/08/21 20:42:33", "levelname": "INFO", "name": "back", "message": "code: [404] => [error]"}
+{"asctime": "2024/08/21 20:42:38", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/api/friends/get-status/]"}
+{"asctime": "2024/08/21 20:42:38", "levelname": "INFO", "name": "back", "message": "code: [302] => [error]"}
+{"asctime": "2024/08/21 20:42:38", "levelname": "INFO", "name": "back", "message": "Request from: [/accounts/login/]"}
+{"asctime": "2024/08/21 20:42:38", "levelname": "INFO", "name": "back", "message": "code: [404] => [error]"}
+{"asctime": "2024/08/21 20:42:43", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/api/friends/get-status/]"}
+{"asctime": "2024/08/21 20:42:43", "levelname": "INFO", "name": "back", "message": "code: [302] => [error]"}
+{"asctime": "2024/08/21 20:42:43", "levelname": "INFO", "name": "back", "message": "Request from: [/accounts/login/]"}
+{"asctime": "2024/08/21 20:42:43", "levelname": "INFO", "name": "back", "message": "code: [404] => [error]"}
+{"asctime": "2024/08/21 20:42:48", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/api/friends/get-status/]"}
+{"asctime": "2024/08/21 20:42:48", "levelname": "INFO", "name": "back", "message": "code: [302] => [error]"}
+{"asctime": "2024/08/21 20:42:48", "levelname": "INFO", "name": "back", "message": "Request from: [/accounts/login/]"}
+{"asctime": "2024/08/21 20:42:48", "levelname": "INFO", "name": "back", "message": "code: [404] => [error]"}
+{"asctime": "2024/08/21 20:42:53", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/api/friends/get-status/]"}
+{"asctime": "2024/08/21 20:42:53", "levelname": "INFO", "name": "back", "message": "code: [302] => [error]"}
+{"asctime": "2024/08/21 20:42:53", "levelname": "INFO", "name": "back", "message": "Request from: [/accounts/login/]"}
+{"asctime": "2024/08/21 20:42:53", "levelname": "INFO", "name": "back", "message": "code: [404] => [error]"}
+{"asctime": "2024/08/21 20:42:58", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/api/friends/get-status/]"}
+{"asctime": "2024/08/21 20:42:58", "levelname": "INFO", "name": "back", "message": "code: [302] => [error]"}
+{"asctime": "2024/08/21 20:42:58", "levelname": "INFO", "name": "back", "message": "Request from: [/accounts/login/]"}
+{"asctime": "2024/08/21 20:42:58", "levelname": "INFO", "name": "back", "message": "code: [404] => [error]"}
+{"asctime": "2024/08/21 20:43:03", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/api/friends/get-status/]"}
+{"asctime": "2024/08/21 20:43:03", "levelname": "INFO", "name": "back", "message": "code: [302] => [error]"}
+{"asctime": "2024/08/21 20:43:03", "levelname": "INFO", "name": "back", "message": "Request from: [/accounts/login/]"}
+{"asctime": "2024/08/21 20:43:03", "levelname": "INFO", "name": "back", "message": "code: [404] => [error]"}
+{"asctime": "2024/08/21 20:43:08", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/api/friends/get-status/]"}
+{"asctime": "2024/08/21 20:43:08", "levelname": "INFO", "name": "back", "message": "code: [302] => [error]"}
+{"asctime": "2024/08/21 20:43:08", "levelname": "INFO", "name": "back", "message": "Request from: [/accounts/login/]"}
+{"asctime": "2024/08/21 20:43:08", "levelname": "INFO", "name": "back", "message": "code: [404] => [error]"}
+{"asctime": "2024/08/21 20:43:13", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/api/friends/get-status/]"}
+{"asctime": "2024/08/21 20:43:13", "levelname": "INFO", "name": "back", "message": "code: [302] => [error]"}
+{"asctime": "2024/08/21 20:43:13", "levelname": "INFO", "name": "back", "message": "Request from: [/accounts/login/]"}
+{"asctime": "2024/08/21 20:43:13", "levelname": "INFO", "name": "back", "message": "code: [404] => [error]"}
+{"asctime": "2024/08/21 20:43:18", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/api/friends/get-status/]"}
+{"asctime": "2024/08/21 20:43:18", "levelname": "INFO", "name": "back", "message": "code: [302] => [error]"}
+{"asctime": "2024/08/21 20:43:18", "levelname": "INFO", "name": "back", "message": "Request from: [/accounts/login/]"}
+{"asctime": "2024/08/21 20:43:18", "levelname": "INFO", "name": "back", "message": "code: [404] => [error]"}
+{"asctime": "2024/08/21 20:43:23", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/api/friends/get-status/]"}
+{"asctime": "2024/08/21 20:43:23", "levelname": "INFO", "name": "back", "message": "code: [302] => [error]"}
+{"asctime": "2024/08/21 20:43:23", "levelname": "INFO", "name": "back", "message": "Request from: [/accounts/login/]"}
+{"asctime": "2024/08/21 20:43:23", "levelname": "INFO", "name": "back", "message": "code: [404] => [error]"}
+{"asctime": "2024/08/21 20:43:28", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/api/friends/get-status/]"}
+{"asctime": "2024/08/21 20:43:28", "levelname": "INFO", "name": "back", "message": "code: [302] => [error]"}
+{"asctime": "2024/08/21 20:43:28", "levelname": "INFO", "name": "back", "message": "Request from: [/accounts/login/]"}
+{"asctime": "2024/08/21 20:43:28", "levelname": "INFO", "name": "back", "message": "code: [404] => [error]"}
+{"asctime": "2024/08/21 20:43:33", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/api/friends/get-status/]"}
+{"asctime": "2024/08/21 20:43:33", "levelname": "INFO", "name": "back", "message": "code: [302] => [error]"}
+{"asctime": "2024/08/21 20:43:33", "levelname": "INFO", "name": "back", "message": "Request from: [/accounts/login/]"}
+{"asctime": "2024/08/21 20:43:33", "levelname": "INFO", "name": "back", "message": "code: [404] => [error]"}
+{"asctime": "2024/08/21 20:43:38", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/api/friends/get-status/]"}
+{"asctime": "2024/08/21 20:43:38", "levelname": "INFO", "name": "back", "message": "code: [302] => [error]"}
+{"asctime": "2024/08/21 20:43:38", "levelname": "INFO", "name": "back", "message": "Request from: [/accounts/login/]"}
+{"asctime": "2024/08/21 20:43:38", "levelname": "INFO", "name": "back", "message": "code: [404] => [error]"}
+{"asctime": "2024/08/21 20:43:43", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/api/friends/get-status/]"}
+{"asctime": "2024/08/21 20:43:43", "levelname": "INFO", "name": "back", "message": "code: [302] => [error]"}
+{"asctime": "2024/08/21 20:43:43", "levelname": "INFO", "name": "back", "message": "Request from: [/accounts/login/]"}
+{"asctime": "2024/08/21 20:43:43", "levelname": "INFO", "name": "back", "message": "code: [404] => [error]"}
