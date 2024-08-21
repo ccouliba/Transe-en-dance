@@ -14,6 +14,7 @@ var playState = {
 };
 
 function Play() {
+
 	if (!playState.isLoaded) {
 		loadPlayState();
 	}

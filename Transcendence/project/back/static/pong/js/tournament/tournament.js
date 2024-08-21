@@ -380,6 +380,7 @@ function startMatch(matchId, player1Username, player2Username) {
 	playState.gameOver = false;
 	playState.gameId = matchId;
 	playState.isTournamentMatch = true;
+	playState.isLoaded = false
 
 	mountComponent(Play);
 }

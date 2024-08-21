@@ -293,8 +293,10 @@ function endGame() {
 				alert(`${window.trans.errUpdateTournamentRetry}`);
 			});
 	} else {
-		finishGame(playState.gameId, playState.player1Score, playState.player2Score, winnerUsername);
-		changePage("#play");
+		finishGame(playState.gameId, playState.player1Score, playState.player2Score, winnerUsername).then(() => {
+			changePage("#play");
+		})
+		
 	}
 	updateProfileStats();
 }
