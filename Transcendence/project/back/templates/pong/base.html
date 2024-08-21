@@ -34,12 +34,11 @@
 	<script src="{% static 'pong/js/privacyPolicy.js' %}"></script>
 	<script src="{% static 'pong/js/iaAlgo.js' %}"></script>
 	<main class="w-100 m-auto">
-	  <div id="app">
-		  {% block content %}
-		  <script>
-			  
-			  {% if user.is_authenticated %}
-			  var lang = "{{ user.langue }}"
+		<div id="app">
+			{% block content %}
+			<script>
+			var lang = "{{ user.langue }}"
+			{% if user.is_authenticated %}
 				if (window.location.hash === '' || window.location.hash === '#') {
 					loadTranslationFile(lang).then(() => {
 						changePage('#home');
@@ -49,20 +48,7 @@
 						changePage(window.location.hash);
 					});
 				}
-			  
-			  {% if user.is_authenticated %}
-					var lang = "{{ user.langue }}"
-					if (window.location.hash === '' || window.location.hash === '#') {
-						loadTranslationFile(lang).then(() => {
-							changePage('#home');
-						});
-					} else {
-						loadTranslationFile(lang).then(() => {
-							changePage(window.location.hash);
-						});
-					}
 				{% else %}
-				var lang = "{{ user.langue }}"
 				if (window.location.hash === '#register') {
 					loadTranslationFile(lang).then(() => { 
 						changePage('#register');
@@ -72,21 +58,10 @@
 						changePage('#login');
 					});
 				}
-					var lang = "{{ user.langue }}"
-					if (window.location.hash === '#register') {
-						loadTranslationFile(lang).then(() => { 
-							changePage('#register');
-						});
-					} else {
-						loadTranslationFile(lang).then(() => {
-							changePage('#login');
-						});
-					}
 			{% endif %}
-		
-		</script>
-		{% endblock %}
-	  </div>
+			</script>
+			{% endblock %}
+		</div>
 	</main>
 	{% block scripts %} {% endblock %}
 
