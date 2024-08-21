@@ -309,5 +309,6 @@
 	"GAME_FINISHED_SUCCESSFULLY": "Game finished successfully",
 
 
-	"tournamentInProgress":"Tournaments in progress"
+	"tournamentInProgress":"Tournaments in progress",
+	"participantLimitReached": "Limit of 3 participants reached."
 }

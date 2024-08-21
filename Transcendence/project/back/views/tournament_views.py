@@ -107,14 +107,23 @@ def tournament_detail(request, tournament_id):
 def add_participants(request, tournament_id):
 	try:
 		tournament = get_object_or_404(Tournament, id=tournament_id)
+
+		current_participants_count = tournament.participants.count()
+		max_participants = 3
 		
+		if current_participants_count >= max_participants:
+			return JsonResponse({
+				'status': 'error',
+				'message': f'The tournament already has the maximum number of participants ({max_participants}).'
+			}, status=400)
+
 		data = json.loads(request.body)
 		participant_usernames = data.get('participants', [])
 		
 		added_participants = []
 		not_found_participants = []
 		already_in_tournament = []
-		
+
 		for username in participant_usernames:
 			try:
 				user = User.objects.get(username=username)
