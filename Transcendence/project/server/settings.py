@@ -60,8 +60,6 @@ ALLOWE_HOSTS = []
 
 # Application definition
 
-
-
 INSTALLED_APPS = [
 	'back',
 	'django.contrib.admin',
@@ -202,8 +200,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'back.User'
 
-LOGIN_REDIRECT_URL = '/pong/home'
-LOGOUT_REDIRECT_URL = '/pong/login'
+
+APPEND_SLASH = True
+
+LOGIN_REDIRECT_URL = '/pong/home/'
+LOGOUT_REDIRECT_URL = '/pong/login/'
 
 # to manage static files (e.g. images, JavaScript, CSS)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
@@ -276,22 +277,22 @@ LOGGING = {
 
     'loggers': {
         'django': {
-            'handlers': ['file', 'console'],
+            'handlers': ['file'],
             'level': 'DEBUG',
             'propagate': True,
         },
         'django.request': {
-            'handlers': ['file', 'console'],
+            'handlers': ['file'],
             'level': 'DEBUG',
             'propagate': True,
         },
         'django.db.backends': {
-            'handlers': ['logstash', 'console'],
+            'handlers': ['logstash'],
             'level': 'INFO',
             'propagate': True,
         },
         'back': {
-            'handlers': ['logstash', 'console'],
+            'handlers': ['logstash'],
             'level': 'INFO',
             'propagate': True,
         },

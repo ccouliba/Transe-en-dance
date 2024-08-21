@@ -28,12 +28,12 @@ urlpatterns = [
  
 	path('home/', home_view, name='home'),
 
- 	path("api/get-user-locale", get_user_locale,  name="user_locale"),
+ 	path("api/get-user-locale/", get_user_locale,  name="user_locale"),
 	
 	path('api/check_auth/', check_auth, name='check_auth'),
 	path('api/profile/', profile_view, name='profile'),
-	path('api/profile/update', profile_update_view, name='profile_update'),
-	path('api/profile/change-password', edit_password_view, name='change_password'),
+	path('api/profile/update/', profile_update_view, name='profile_update'),
+	path('api/profile/change-password/', edit_password_view, name='change_password'),
  	path('api/profile/upload-avatar/', upload_avatar, name='upload_avatar'),
  	path('api/profile/soft_delete_user/', soft_delete_user, name='upload_avatar'),
   
@@ -45,7 +45,7 @@ urlpatterns = [
 	path('api/friends/get-status/', friends_online_status, name='friends_online_status'),
  
 	path('api/games/create_game/', create_game, name='create_game'),
-	path('api/games/<int:game_id>/update', update_game, name='update_game'),
+	path('api/games/<int:game_id>/update/', update_game, name='update_game'),
 	path('api/games/finish_game/<int:game_id>/', finish_game, name='finish_game'),
 	path('api/games/match_history/', match_history, name='match_history'),
 	path('api/games/get_current_user/', get_current_user, name='get_current_user'),

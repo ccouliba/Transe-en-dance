@@ -14,7 +14,7 @@
 		<h1 class="pong-title">PONG</h1>
 		<div id="menu-container"></div>
 	</header>
-	{% comment %} <script src="{% url 'javascript-catalog' %}"></script> {% endcomment %}
+	<script src="{% url 'javascript-catalog' %}"></script>
 	<script src="{% static 'pong/js/loadTranslations.js' %}"></script>
 	<script src="{% static 'pong/js/menu.js' %}"></script>
 	<script src="{% static 'pong/js/home.js' %}"></script>
@@ -37,8 +37,8 @@
 	  <div id="app">
 		{% block content %}
 		  <script>
-			  var lang = "{{ user[langue] }}"
 			  {% if user.is_authenticated %}
+				var lang = "{{ user.langue }}"
 					if (window.location.hash === '' || window.location.hash === '#') {
 						loadTranslationFile(lang).then(() => {
 							changePage('#home');

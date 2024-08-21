@@ -1,777 +1,33 @@
 django.utils.autoreload Watching for file changes with StatReloader
-django.server "GET /pong/ HTTP/1.1" 200 4073
-django.server "GET /static/css/frontstyle.css HTTP/1.1" 200 3352
-django.server "GET /jsi18n/ HTTP/1.1" 200 3343
-django.server "GET /static/pong/js/loadTranslations.js HTTP/1.1" 200 1076
-django.server "GET /static/css/bootstrap.min.css HTTP/1.1" 200 232802
-django.server "GET /static/pong/js/menu.js HTTP/1.1" 200 3676
-django.server "GET /static/pong/js/home.js HTTP/1.1" 200 8470
-django.server "GET /static/pong/js/play/play.js HTTP/1.1" 200 5579
-django.server "GET /static/pong/js/play/pongGame.js HTTP/1.1" 200 9874
-django.server "GET /static/pong/js/friends.js HTTP/1.1" 200 8976
-django.server "GET /static/pong/js/tournament/tournamentDetail.js HTTP/1.1" 200 2641
-django.server "GET /static/pong/js/tournament/tournament.js HTTP/1.1" 200 11929
-django.server "GET /static/pong/js/tournament/matchmaking.js HTTP/1.1" 200 5070
-django.server "GET /static/pong/js/logout.js HTTP/1.1" 200 2588
-django.server "GET /static/pong/js/login.js HTTP/1.1" 200 5813
-django.server "GET /static/pong/js/profile.js HTTP/1.1" 200 18663
-django.server "GET /static/pong/js/main.js HTTP/1.1" 200 10281
-django.server "GET /static/pong/js/register.js HTTP/1.1" 200 5306
-django.server "GET /static/pong/js/matchHistory.js HTTP/1.1" 200 2153
-django.server "GET /static/pong/js/privacyPolicy.js HTTP/1.1" 200 747
-django.server "GET /static/pong/js/iaAlgo.js HTTP/1.1" 200 9849
-django.server "GET /static/pong/js/bootstrap.min.js HTTP/1.1" 200 60634
-django.server "GET /static/pong/js/translations/en.json HTTP/1.1" 200 15177
-django.server "GET /pong/external_login/ HTTP/1.1" 302 0
-django.server "GET /pong/auth/callback?code=10c470bf80f51d3b15570e2772da244fc0dfb97654cfb95bb903c51d65f011b5 HTTP/1.1" 301 0
-django.server "GET /pong/auth/callback/?code=10c470bf80f51d3b15570e2772da244fc0dfb97654cfb95bb903c51d65f011b5 HTTP/1.1" 302 0
-django.server "GET /pong/ HTTP/1.1" 200 2055
-django.server "GET /static/css/bootstrap.min.css HTTP/1.1" 200 232802
-django.server "GET /static/css/frontstyle.css HTTP/1.1" 200 3352
-django.server "GET /static/pong/js/loadTranslations.js HTTP/1.1" 200 1076
-django.server "GET /static/pong/js/menu.js HTTP/1.1" 200 3676
-django.server "GET /static/pong/js/home.js HTTP/1.1" 200 8470
-django.server "GET /static/pong/js/play/play.js HTTP/1.1" 200 5579
-django.server "GET /jsi18n/ HTTP/1.1" 200 3343
-django.server "GET /static/pong/js/play/pongGame.js HTTP/1.1" 200 9874
-django.server "GET /static/pong/js/logout.js HTTP/1.1" 200 2588
-django.server "GET /static/pong/js/tournament/tournamentDetail.js HTTP/1.1" 200 2641
-django.server "GET /static/pong/js/friends.js HTTP/1.1" 200 8976
-django.server "GET /static/pong/js/tournament/tournament.js HTTP/1.1" 200 11929
-django.server "GET /static/pong/js/tournament/matchmaking.js HTTP/1.1" 200 5070
-django.server "GET /static/pong/js/profile.js HTTP/1.1" 200 18663
-django.server "GET /static/pong/js/register.js HTTP/1.1" 200 5306
-django.server "GET /static/pong/js/main.js HTTP/1.1" 200 10281
-django.server "GET /static/pong/js/matchHistory.js HTTP/1.1" 200 2153
-django.server "GET /static/pong/js/login.js HTTP/1.1" 200 5813
-django.server "GET /static/pong/js/privacyPolicy.js HTTP/1.1" 200 747
-django.server "GET /static/pong/js/iaAlgo.js HTTP/1.1" 200 9849
-django.server "GET /static/pong/js/bootstrap.min.js HTTP/1.1" 200 60634
-django.server "GET /static/pong/js/translations/en.json HTTP/1.1" 200 15177
-django.server "GET /pong/api/check_auth/ HTTP/1.1" 200 50
-django.server "GET /pong/api/check_auth/ HTTP/1.1" 200 50
-django.server "GET /pong/api/profile/ HTTP/1.1" 200 317
-django.server "POST /pong/api/profile/update HTTP/1.1" 200 44
-django.server "GET /static/pong/js/translations/fr.json HTTP/1.1" 200 17409
-django.server "GET /pong/api/profile/ HTTP/1.1" 200 317
-django.server "POST /pong/api/profile/update HTTP/1.1" 200 44
-django.server "GET /pong/api/profile/ HTTP/1.1" 200 317
-django.server "POST /pong/api/profile/update HTTP/1.1" 200 44
-django.server "GET /static/pong/js/translations/es.json HTTP/1.1" 200 16858
-django.server "GET /pong/api/profile/ HTTP/1.1" 200 317
-django.server "POST /pong/api/profile/update HTTP/1.1" 200 44
-django.server "GET /pong/api/profile/ HTTP/1.1" 200 317
-django.server "GET /pong/api/check_auth/ HTTP/1.1" 200 50
-django.server "POST /pong/api/logout/ HTTP/1.1" 200 21
-django.server "GET /pong/api/check_auth/ HTTP/1.1" 200 45
-django.server "GET /pong/external_login/ HTTP/1.1" 302 0
-django.server "GET /pong/auth/callback?code=e23ce06bb5c84031e881aa56d58f911ed1395545bf0e7cc0ad7f3403d2785c92 HTTP/1.1" 301 0
-django.server "GET /pong/auth/callback/?code=e23ce06bb5c84031e881aa56d58f911ed1395545bf0e7cc0ad7f3403d2785c92 HTTP/1.1" 302 0
-django.server "GET /pong/ HTTP/1.1" 200 2055
+django.server "GET /pong/ HTTP/1.1" 200 4124
 django.server "GET /static/css/bootstrap.min.css HTTP/1.1" 304 0
-django.server "GET /static/pong/js/iaAlgo.js HTTP/1.1" 304 0
+django.server "GET /static/css/TrajanPro.css HTTP/1.1" 304 0
+django.server "GET /static/pong/js/home.js HTTP/1.1" 200 53
+django.server "GET /jsi18n/ HTTP/1.1" 200 3343
 django.server "GET /static/css/frontstyle.css HTTP/1.1" 304 0
-django.server "GET /static/pong/js/bootstrap.min.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/matchHistory.js HTTP/1.1" 304 0
-django.server "GET /jsi18n/ HTTP/1.1" 200 3343
-django.server "GET /pong/api/check_auth/ HTTP/1.1" 200 50
-django.utils.autoreload Watching for file changes with StatReloader
-django.server "GET /pong/ HTTP/1.1" 200 4073
-django.server "GET /static/css/bootstrap.min.css HTTP/1.1" 304 0
-django.server "GET /static/css/frontstyle.css HTTP/1.1" 304 0
-django.server "GET /jsi18n/ HTTP/1.1" 200 3343
-django.server "GET /static/pong/js/matchHistory.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/iaAlgo.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/bootstrap.min.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/translations/en.json HTTP/1.1" 304 0
-django.utils.autoreload Watching for file changes with StatReloader
-django.server "GET /pong/external_login/ HTTP/1.1" 302 0
-django.server "GET /pong/auth/callback?code=081e4f84bc8e558df6b72d690fa0aaa9c43707ebf4f02793ce18ab7c950ee7ff HTTP/1.1" 301 0
-django.server "GET /pong/auth/callback/?code=081e4f84bc8e558df6b72d690fa0aaa9c43707ebf4f02793ce18ab7c950ee7ff HTTP/1.1" 302 0
-django.server "GET /pong/ HTTP/1.1" 200 2055
-django.server "GET /static/css/bootstrap.min.css HTTP/1.1" 304 0
-django.server "GET /static/css/frontstyle.css HTTP/1.1" 304 0
-django.server "GET /static/pong/js/matchHistory.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/bootstrap.min.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/iaAlgo.js HTTP/1.1" 304 0
-django.server "GET /jsi18n/ HTTP/1.1" 200 3343
-django.server "GET /static/pong/js/translations/en.json HTTP/1.1" 304 0
-django.server "GET /pong/api/check_auth/ HTTP/1.1" 200 50
-django.server "GET /pong/api/check_auth/ HTTP/1.1" 200 50
-django.server "POST /pong/api/logout/ HTTP/1.1" 200 21
-django.server "GET /pong/api/check_auth/ HTTP/1.1" 200 45
-django.server "POST /pong/api/register/ HTTP/1.1" 200 21
-django.server "GET /pong/external_login/ HTTP/1.1" 302 0
-django.server "GET /pong/auth/callback?code=d1d6e8d29d9cd6c17cab5be48782524a9c96741d19524b407492c963f3b28f49 HTTP/1.1" 301 0
-django.server "GET /pong/auth/callback/?code=d1d6e8d29d9cd6c17cab5be48782524a9c96741d19524b407492c963f3b28f49 HTTP/1.1" 302 0
-django.server "GET /pong/ HTTP/1.1" 200 2055
-django.server "GET /jsi18n/ HTTP/1.1" 200 3343
-django.server "GET /pong/api/check_auth/ HTTP/1.1" 200 50
-django.server "GET /pong/api/check_auth/ HTTP/1.1" 200 50
-django.server "POST /pong/api/logout/ HTTP/1.1" 200 21
-django.server "GET /pong/api/check_auth/ HTTP/1.1" 200 45
-django.server "POST /pong/api/login/ HTTP/1.1" 200 21
-django.server "GET /pong/api/get-user-locale HTTP/1.1" 200 14
-django.server "GET /pong/api/check_auth/ HTTP/1.1" 200 44
-django.server "GET /pong HTTP/1.1" 301 0
-django.server "GET /pong/ HTTP/1.1" 200 2055
-django.server "GET /static/css/bootstrap.min.css HTTP/1.1" 304 0
-django.server "GET /static/css/frontstyle.css HTTP/1.1" 304 0
-django.server "GET /static/pong/js/matchHistory.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/iaAlgo.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/bootstrap.min.js HTTP/1.1" 304 0
-django.server "GET /jsi18n/ HTTP/1.1" 200 3343
-django.server "GET /static/pong/js/translations/en.json HTTP/1.1" 304 0
-django.server "GET /pong/api/check_auth/ HTTP/1.1" 200 44
-django.server "GET /pong/api/check_auth/ HTTP/1.1" 200 44
-django.server "GET /pong/api/games/match_history/ HTTP/1.1" 200 21
-django.server "GET /static/css/bootstrap.min.css HTTP/1.1" 304 0
-django.server "GET /static/css/frontstyle.css HTTP/1.1" 304 0
-django.utils.autoreload Watching for file changes with StatReloader
-django.request Internal Server Error: /pong/
-Traceback (most recent call last):
-  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
-    response = get_response(request)
-               ^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
-    response = wrapped_callback(request, *callback_args, **callback_kwargs)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/django/utils/decorators.py", line 134, in _wrapper_view
-    response = view_func(request, *args, **kwargs)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/src/backend/back/views/auth_views.py", line 35, in base_view
-    return render(request, 'pong/base.html')
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/django/shortcuts.py", line 24, in render
-    content = loader.render_to_string(template_name, context, request, using=using)
-              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/django/template/loader.py", line 62, in render_to_string
-    return template.render(context, request)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/django/template/backends/django.py", line 61, in render
-    return self.template.render(context)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/django/template/base.py", line 175, in render
-    return self._render(context)
-           ^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/django/template/base.py", line 167, in _render
-    return self.nodelist.render(context)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/django/template/base.py", line 1005, in render
-    return SafeString("".join([node.render_annotated(context) for node in self]))
-                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/django/template/base.py", line 1005, in <listcomp>
-    return SafeString("".join([node.render_annotated(context) for node in self]))
-                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/django/template/base.py", line 966, in render_annotated
-    return self.render(context)
-           ^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/django/template/defaulttags.py", line 471, in render
-    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/django/urls/base.py", line 88, in reverse
-    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 828, in _reverse_with_prefix
-    raise NoReverseMatch(msg)
-django.urls.exceptions.NoReverseMatch: Reverse for 'javascript-catalog' not found. 'javascript-catalog' is not a valid view function or pattern name.
-django.request Internal Server Error: /pong/
-Traceback (most recent call last):
-  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
-    response = get_response(request)
-               ^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
-    response = wrapped_callback(request, *callback_args, **callback_kwargs)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/django/utils/decorators.py", line 134, in _wrapper_view
-    response = view_func(request, *args, **kwargs)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/src/backend/back/views/auth_views.py", line 35, in base_view
-    return render(request, 'pong/base.html')
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/django/shortcuts.py", line 24, in render
-    content = loader.render_to_string(template_name, context, request, using=using)
-              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/django/template/loader.py", line 62, in render_to_string
-    return template.render(context, request)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/django/template/backends/django.py", line 61, in render
-    return self.template.render(context)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/django/template/base.py", line 175, in render
-    return self._render(context)
-           ^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/django/template/base.py", line 167, in _render
-    return self.nodelist.render(context)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/django/template/base.py", line 1005, in render
-    return SafeString("".join([node.render_annotated(context) for node in self]))
-                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/django/template/base.py", line 1005, in <listcomp>
-    return SafeString("".join([node.render_annotated(context) for node in self]))
-                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/django/template/base.py", line 966, in render_annotated
-    return self.render(context)
-           ^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/django/template/defaulttags.py", line 471, in render
-    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/django/urls/base.py", line 88, in reverse
-    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 828, in _reverse_with_prefix
-    raise NoReverseMatch(msg)
-django.urls.exceptions.NoReverseMatch: Reverse for 'javascript-catalog' not found. 'javascript-catalog' is not a valid view function or pattern name.
-django.server "GET /pong/ HTTP/1.1" 500 126436
-django.request Not Found: /favicon.ico
-django.request Not Found: /favicon.ico
-django.server "GET /favicon.ico HTTP/1.1" 404 2341
-django.utils.autoreload Watching for file changes with StatReloader
-django.server "GET /pong/ HTTP/1.1" 200 4069
-django.server "GET /static/css/bootstrap.min.css HTTP/1.1" 304 0
-django.server "GET /static/pong/js/home.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/loadTranslations.js HTTP/1.1" 304 0
 django.server "GET /static/pong/js/menu.js HTTP/1.1" 304 0
-django.server "GET /static/css/frontstyle.css HTTP/1.1" 304 0
-django.server "GET /static/pong/js/play/pongGame.js HTTP/1.1" 304 0
+django.server "GET /static/pong/js/loadTranslations.js HTTP/1.1" 304 0
 django.server "GET /static/pong/js/play/play.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/friends.js HTTP/1.1" 304 0
+django.server "GET /static/pong/js/play/pongGame.js HTTP/1.1" 304 0
 django.server "GET /static/pong/js/tournament/tournament.js HTTP/1.1" 304 0
+django.server "GET /static/pong/js/friends.js HTTP/1.1" 304 0
 django.server "GET /static/pong/js/tournament/tournamentDetail.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/tournament/matchmaking.js HTTP/1.1" 304 0
 django.server "GET /static/pong/js/logout.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/profile.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/login.js HTTP/1.1" 304 0
 django.server "GET /static/pong/js/register.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/matchHistory.js HTTP/1.1" 304 0
 django.server "GET /static/pong/js/main.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/privacyPolicy.js HTTP/1.1" 304 0
+django.server "GET /static/pong/js/login.js HTTP/1.1" 304 0
+django.server "GET /static/pong/js/profile.js HTTP/1.1" 304 0
+django.server "GET /static/pong/js/tournament/matchmaking.js HTTP/1.1" 304 0
 django.server "GET /static/pong/js/iaAlgo.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/bootstrap.min.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/translations/en.json HTTP/1.1" 304 0
-django.server "GET /pong/external_login/ HTTP/1.1" 302 0
-django.server "GET /pong/auth/callback?code=6fa954f7d388b730dcab6334940be1c7b83f55a12ea4325a0571c32a26edc576 HTTP/1.1" 301 0
-django.server "GET /pong/auth/callback/?code=6fa954f7d388b730dcab6334940be1c7b83f55a12ea4325a0571c32a26edc576 HTTP/1.1" 302 0
-django.server "GET /pong/ HTTP/1.1" 200 2023
-django.server "GET /pong/api/check_auth/ HTTP/1.1" 200 50
-django.utils.autoreload Watching for file changes with StatReloader
-django.server "GET /pong/api/check_auth/ HTTP/1.1" 200 45
-django.server "POST /pong/api/register/ HTTP/1.1" 200 21
-django.server "POST /pong/api/login/ HTTP/1.1" 200 21
-django.server "GET /pong/api/get-user-locale HTTP/1.1" 200 14
-django.server "GET /static/pong/js/translations/en.json HTTP/1.1" 304 0
-django.server "GET /pong/api/check_auth/ HTTP/1.1" 200 44
-django.server "GET /pong/api/check_auth/ HTTP/1.1" 200 44
-django.server "POST /pong/api/logout/ HTTP/1.1" 200 21
-django.server "GET /pong/api/check_auth/ HTTP/1.1" 200 45
-django.server "GET /pong/external_login/ HTTP/1.1" 302 0
-django.server "GET /pong/auth/callback?code=b744595109fc51609c3a563a311bb6303a3e539e913fc20faa5f9c713e460b7c HTTP/1.1" 301 0
-django.server "GET /pong/auth/callback/?code=b744595109fc51609c3a563a311bb6303a3e539e913fc20faa5f9c713e460b7c HTTP/1.1" 302 0
-django.server "GET /pong/ HTTP/1.1" 200 2055
-django.server "GET /static/css/bootstrap.min.css HTTP/1.1" 304 0
-django.server "GET /static/css/frontstyle.css HTTP/1.1" 304 0
+django.server "GET /static/pong/js/privacyPolicy.js HTTP/1.1" 304 0
 django.server "GET /static/pong/js/matchHistory.js HTTP/1.1" 304 0
 django.server "GET /static/pong/js/bootstrap.min.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/iaAlgo.js HTTP/1.1" 304 0
-django.server "GET /jsi18n/ HTTP/1.1" 200 3343
-django.server "GET /pong/api/check_auth/ HTTP/1.1" 200 50
-django.server "GET /pong/api/check_auth/ HTTP/1.1" 200 50
-django.server "POST /pong/api/logout/ HTTP/1.1" 200 21
-django.server "GET /pong/api/check_auth/ HTTP/1.1" 200 45
-django.server "POST /pong/api/login/ HTTP/1.1" 200 21
-django.server "GET /pong/api/get-user-locale HTTP/1.1" 200 14
-django.server "GET /pong/api/check_auth/ HTTP/1.1" 200 44
-django.server "GET /pong/api/check_auth/ HTTP/1.1" 200 44
-django.server "POST /pong/api/logout/ HTTP/1.1" 200 21
-django.server "GET /pong/api/check_auth/ HTTP/1.1" 200 45
+django.server "GET /static/pong/js/translations/en.json HTTP/1.1" 304 0
 django.server "GET /pong/external_login/ HTTP/1.1" 302 0
-django.server "GET /pong/auth/callback?code=f30a975ba202ba8c2ea37230153960cd01408dd7f63d2113b9d2f58841d35b1c HTTP/1.1" 301 0
-django.server "GET /pong/auth/callback/?code=f30a975ba202ba8c2ea37230153960cd01408dd7f63d2113b9d2f58841d35b1c HTTP/1.1" 302 0
+django.server "GET /pong/auth/callback?code=631dbda670eb3ce0cc20c8466dbd51c46d67b27fb427991bcdf960357f92bf35 HTTP/1.1" 301 0
+django.server "GET /pong/auth/callback/?code=631dbda670eb3ce0cc20c8466dbd51c46d67b27fb427991bcdf960357f92bf35 HTTP/1.1" 302 0
 django.server "GET /pong/ HTTP/1.1" 200 2055
 django.server "GET /jsi18n/ HTTP/1.1" 200 3343
-django.server "GET /pong/api/check_auth/ HTTP/1.1" 200 50
-django.server "GET /pong/ HTTP/1.1" 200 4123
-django.server "GET /static/css/bootstrap.min.css HTTP/1.1" 304 0
-django.server "GET /static/css/frontstyle.css HTTP/1.1" 304 0
-django.server "GET /jsi18n/ HTTP/1.1" 200 3343
-django.server "GET /static/pong/js/loadTranslations.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/menu.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/home.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/play/play.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/play/pongGame.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/friends.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/tournament/tournamentDetail.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/tournament/tournament.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/tournament/matchmaking.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/logout.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/profile.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/login.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/register.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/main.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/matchHistory.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/privacyPolicy.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/iaAlgo.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/bootstrap.min.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/translations/en.json HTTP/1.1" 304 0
-django.server "GET /pong/external_login/ HTTP/1.1" 302 0
-django.server "GET /pong/auth/callback?code=84ff10adff54c8c01f1ff59cc5fb0e4690ecba7518eabcb7f900664908c13c72 HTTP/1.1" 301 0
-django.server "GET /pong/auth/callback/?code=84ff10adff54c8c01f1ff59cc5fb0e4690ecba7518eabcb7f900664908c13c72 HTTP/1.1" 302 0
-django.server "GET /pong/ HTTP/1.1" 200 2055
-django.server "GET /jsi18n/ HTTP/1.1" 200 3343
-django.server "GET /pong/api/check_auth/ HTTP/1.1" 200 50
-django.utils.autoreload Watching for file changes with StatReloader
-django.server "GET /pong/api/check_auth/ HTTP/1.1" 200 45
-django.server "GET /pong/ HTTP/1.1" 200 4123
-django.server "GET /static/css/bootstrap.min.css HTTP/1.1" 304 0
-django.server "GET /static/css/frontstyle.css HTTP/1.1" 304 0
-django.server "GET /static/pong/js/loadTranslations.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/menu.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/home.js HTTP/1.1" 304 0
-django.server "GET /jsi18n/ HTTP/1.1" 200 3343
-django.server "GET /static/pong/js/tournament/tournamentDetail.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/friends.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/play/play.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/play/pongGame.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/tournament/tournament.js HTTP/1.1" 200 11941
-django.server "GET /static/pong/js/tournament/matchmaking.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/logout.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/matchHistory.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/register.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/login.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/main.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/profile.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/privacyPolicy.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/bootstrap.min.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/iaAlgo.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/translations/en.json HTTP/1.1" 304 0
-django.server "POST /pong/api/register/ HTTP/1.1" 200 21
-django.server "POST /pong/api/login/ HTTP/1.1" 200 21
-django.server "GET /pong/api/get-user-locale HTTP/1.1" 200 14
-django.server "GET /pong/api/check_auth/ HTTP/1.1" 200 44
-django.server "GET /pong/ HTTP/1.1" 200 4123
-django.server "GET /static/css/bootstrap.min.css HTTP/1.1" 304 0
-django.server "GET /static/css/frontstyle.css HTTP/1.1" 304 0
-django.server "GET /jsi18n/ HTTP/1.1" 200 3343
-django.server "GET /static/pong/js/matchHistory.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/iaAlgo.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/bootstrap.min.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/translations/en.json HTTP/1.1" 304 0
-django.server "GET /pong/external_login/ HTTP/1.1" 302 0
-django.server "GET /pong/auth/callback?code=5e31c7683531a60aefffc901ac3d8dc104a597342a5a57999e475e1fc4f02eb5 HTTP/1.1" 301 0
-django.server "GET /pong/auth/callback/?code=5e31c7683531a60aefffc901ac3d8dc104a597342a5a57999e475e1fc4f02eb5 HTTP/1.1" 302 0
-django.server "GET /pong/ HTTP/1.1" 200 2055
-django.server "GET /jsi18n/ HTTP/1.1" 200 3343
-django.server "GET /static/pong/js/tournament/tournament.js HTTP/1.1" 304 0
-django.server "GET /pong/api/check_auth/ HTTP/1.1" 200 50
-django.server "GET /pong/api/check_auth/ HTTP/1.1" 200 50
-django.server "POST /pong/api/logout/ HTTP/1.1" 200 21
-django.server "GET /pong/api/check_auth/ HTTP/1.1" 200 45
-django.utils.autoreload Watching for file changes with StatReloader
-django.request Internal Server Error: /pong/
-Traceback (most recent call last):
-  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
-    response = get_response(request)
-               ^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
-    response = wrapped_callback(request, *callback_args, **callback_kwargs)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/django/utils/decorators.py", line 134, in _wrapper_view
-    response = view_func(request, *args, **kwargs)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/src/backend/back/views/auth_views.py", line 35, in base_view
-    return render(request, 'pong/base.html')
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/django/shortcuts.py", line 24, in render
-    content = loader.render_to_string(template_name, context, request, using=using)
-              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/django/template/loader.py", line 62, in render_to_string
-    return template.render(context, request)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/django/template/backends/django.py", line 61, in render
-    return self.template.render(context)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/django/template/base.py", line 175, in render
-    return self._render(context)
-           ^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/django/template/base.py", line 167, in _render
-    return self.nodelist.render(context)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/django/template/base.py", line 1005, in render
-    return SafeString("".join([node.render_annotated(context) for node in self]))
-                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/django/template/base.py", line 1005, in <listcomp>
-    return SafeString("".join([node.render_annotated(context) for node in self]))
-                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/django/template/base.py", line 966, in render_annotated
-    return self.render(context)
-           ^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/django/template/defaulttags.py", line 471, in render
-    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/django/urls/base.py", line 88, in reverse
-    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 828, in _reverse_with_prefix
-    raise NoReverseMatch(msg)
-django.urls.exceptions.NoReverseMatch: Reverse for 'javascript-catalog' not found. 'javascript-catalog' is not a valid view function or pattern name.
-django.request Internal Server Error: /pong/
-Traceback (most recent call last):
-  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
-    response = get_response(request)
-               ^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
-    response = wrapped_callback(request, *callback_args, **callback_kwargs)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/django/utils/decorators.py", line 134, in _wrapper_view
-    response = view_func(request, *args, **kwargs)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/src/backend/back/views/auth_views.py", line 35, in base_view
-    return render(request, 'pong/base.html')
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/django/shortcuts.py", line 24, in render
-    content = loader.render_to_string(template_name, context, request, using=using)
-              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/django/template/loader.py", line 62, in render_to_string
-    return template.render(context, request)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/django/template/backends/django.py", line 61, in render
-    return self.template.render(context)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/django/template/base.py", line 175, in render
-    return self._render(context)
-           ^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/django/template/base.py", line 167, in _render
-    return self.nodelist.render(context)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/django/template/base.py", line 1005, in render
-    return SafeString("".join([node.render_annotated(context) for node in self]))
-                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/django/template/base.py", line 1005, in <listcomp>
-    return SafeString("".join([node.render_annotated(context) for node in self]))
-                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/django/template/base.py", line 966, in render_annotated
-    return self.render(context)
-           ^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/django/template/defaulttags.py", line 471, in render
-    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/django/urls/base.py", line 88, in reverse
-    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 828, in _reverse_with_prefix
-    raise NoReverseMatch(msg)
-django.urls.exceptions.NoReverseMatch: Reverse for 'javascript-catalog' not found. 'javascript-catalog' is not a valid view function or pattern name.
-django.server "GET /pong/ HTTP/1.1" 500 126287
-django.utils.autoreload Watching for file changes with StatReloader
-django.server "GET /pong/ HTTP/1.1" 200 4091
-django.server "GET /static/css/bootstrap.min.css HTTP/1.1" 304 0
-django.server "GET /static/pong/js/home.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/loadTranslations.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/play/play.js HTTP/1.1" 304 0
-django.server "GET /static/css/frontstyle.css HTTP/1.1" 304 0
-django.server "GET /static/pong/js/menu.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/play/pongGame.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/tournament/tournamentDetail.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/friends.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/tournament/matchmaking.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/tournament/tournament.js HTTP/1.1" 200 11938
-django.server "GET /static/pong/js/logout.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/profile.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/login.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/matchHistory.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/register.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/main.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/privacyPolicy.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/iaAlgo.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/bootstrap.min.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/translations/en.json HTTP/1.1" 304 0
-django.server "GET /pong/external_login/ HTTP/1.1" 302 0
-django.server "GET /pong/auth/callback?code=a4462c57681cc6dd7ead8a926391f5042edcd40fef4722ed4b1b98ad4467918b HTTP/1.1" 301 0
-django.server "GET /pong/auth/callback/?code=a4462c57681cc6dd7ead8a926391f5042edcd40fef4722ed4b1b98ad4467918b HTTP/1.1" 302 0
-django.server "GET /pong/ HTTP/1.1" 200 2023
-django.server "GET /static/css/bootstrap.min.css HTTP/1.1" 304 0
-django.server "GET /static/css/frontstyle.css HTTP/1.1" 304 0
-django.server "GET /static/pong/js/tournament/tournament.js HTTP/1.1" 200 11938
-django.server "GET /static/pong/js/matchHistory.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/iaAlgo.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/bootstrap.min.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/translations/en.json HTTP/1.1" 304 0
-django.server "GET /pong/api/check_auth/ HTTP/1.1" 200 50
-django.utils.autoreload Watching for file changes with StatReloader
-django.server "GET /pong/ HTTP/1.1" 200 4091
-django.server "GET /static/pong/js/tournament/tournament.js HTTP/1.1" 200 11929
-django.server "GET /pong/external_login/ HTTP/1.1" 302 0
-django.server "GET /pong/auth/callback?code=be7df6134e4101aee99d793dac8e9be1737607e1bc10325cb3fe6c1a7bd80f8a HTTP/1.1" 301 0
-django.server "GET /pong/auth/callback/?code=be7df6134e4101aee99d793dac8e9be1737607e1bc10325cb3fe6c1a7bd80f8a HTTP/1.1" 302 0
-django.server "GET /pong/ HTTP/1.1" 200 2023
-django.server "GET /pong/api/check_auth/ HTTP/1.1" 200 50
-django.utils.autoreload Watching for file changes with StatReloader
-django.server "GET /pong/ HTTP/1.1" 200 4091
-django.server "GET /static/pong/js/tournament/tournament.js HTTP/1.1" 200 11937
-django.server "GET /pong/external_login/ HTTP/1.1" 302 0
-django.server "GET /pong/auth/callback?code=767fc9ecbea49d803bd6d347cf3d55f13d3dba78cd4867163189be054e2507a3 HTTP/1.1" 301 0
-django.server "GET /pong/auth/callback/?code=767fc9ecbea49d803bd6d347cf3d55f13d3dba78cd4867163189be054e2507a3 HTTP/1.1" 302 0
-django.server "GET /pong/ HTTP/1.1" 200 2023
-django.server "GET /static/pong/js/tournament/tournament.js HTTP/1.1" 200 11937
-django.server "GET /pong/api/check_auth/ HTTP/1.1" 200 50
-django.utils.autoreload Watching for file changes with StatReloader
-django.server "GET /pong/ HTTP/1.1" 200 4091
-django.server "GET /static/css/bootstrap.min.css HTTP/1.1" 304 0
-django.server "GET /static/css/frontstyle.css HTTP/1.1" 304 0
-django.server "GET /static/pong/js/matchHistory.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/iaAlgo.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/tournament/tournament.js HTTP/1.1" 200 11938
-django.server "GET /static/pong/js/bootstrap.min.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/translations/en.json HTTP/1.1" 304 0
-django.server "GET /pong/external_login/ HTTP/1.1" 302 0
-django.server "GET /pong/auth/callback?code=f858c5094471d8b7e2ac70a9e76612af3c3ab2245b630e0aa5abc7ef333ae7ef HTTP/1.1" 301 0
-django.server "GET /pong/auth/callback/?code=f858c5094471d8b7e2ac70a9e76612af3c3ab2245b630e0aa5abc7ef333ae7ef HTTP/1.1" 302 0
-django.server "GET /pong/ HTTP/1.1" 200 2023
-django.server "GET /static/css/bootstrap.min.css HTTP/1.1" 304 0
-django.server "GET /static/pong/js/home.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/menu.js HTTP/1.1" 304 0
-django.server "GET /static/css/frontstyle.css HTTP/1.1" 304 0
-django.server "GET /static/pong/js/loadTranslations.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/play/play.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/play/pongGame.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/friends.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/tournament/tournamentDetail.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/tournament/matchmaking.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/tournament/tournament.js HTTP/1.1" 200 11938
-django.server "GET /static/pong/js/logout.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/profile.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/login.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/register.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/main.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/matchHistory.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/privacyPolicy.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/iaAlgo.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/bootstrap.min.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/translations/en.json HTTP/1.1" 304 0
-django.server "GET /pong/api/check_auth/ HTTP/1.1" 200 50
-django.utils.autoreload Watching for file changes with StatReloader
-django.utils.autoreload Watching for file changes with StatReloader
-django.server "GET /pong/ HTTP/1.1" 200 4091
-django.server "GET /static/pong/js/tournament/tournament.js HTTP/1.1" 200 11944
-django.server "GET /pong/external_login/ HTTP/1.1" 302 0
-django.server "GET /pong/auth/callback?code=588a129f923b4c417e4fbe2255cb5aaf52158d8a1654378c16160b1479f87184 HTTP/1.1" 301 0
-django.server "GET /pong/auth/callback/?code=588a129f923b4c417e4fbe2255cb5aaf52158d8a1654378c16160b1479f87184 HTTP/1.1" 302 0
-django.server "GET /pong/ HTTP/1.1" 200 2023
-django.server "GET /pong/api/check_auth/ HTTP/1.1" 200 50
-django.server "GET /pong/api/check_auth/ HTTP/1.1" 200 50
-django.server "POST /pong/api/logout/ HTTP/1.1" 200 21
-django.server "GET /pong/api/check_auth/ HTTP/1.1" 200 45
-django.server "GET /pong/external_login/ HTTP/1.1" 302 0
-django.server "GET /pong/auth/callback?code=3d124edddd4a03afb22dd780d1232cb4749e5fba3fd98e01a6fb4f04dd8b2030 HTTP/1.1" 301 0
-django.server "GET /pong/auth/callback/?code=3d124edddd4a03afb22dd780d1232cb4749e5fba3fd98e01a6fb4f04dd8b2030 HTTP/1.1" 302 0
-django.server "GET /pong/ HTTP/1.1" 200 2023
-django.server "GET /pong/api/check_auth/ HTTP/1.1" 200 50
-django.server "GET /pong/ HTTP/1.1" 200 2023
-django.server "GET /static/css/bootstrap.min.css HTTP/1.1" 304 0
-django.server "GET /static/css/frontstyle.css HTTP/1.1" 304 0
-django.server "GET /static/pong/js/matchHistory.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/tournament/tournament.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/iaAlgo.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/bootstrap.min.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/translations/en.json HTTP/1.1" 304 0
-django.server "GET /pong/api/check_auth/ HTTP/1.1" 200 50
-django.server "GET /pong/api/check_auth/ HTTP/1.1" 200 50
-django.server "GET /pong/api/profile/ HTTP/1.1" 200 317
-django.server "POST /pong/api/profile/upload-avatar/ HTTP/1.1" 200 83
-django.server "GET /pong/api/profile/ HTTP/1.1" 200 286
-django.server "GET /media/avatars/Arquitecture_trascendence.png HTTP/1.1" 200 135899
-django.server "GET /pong/api/check_auth/ HTTP/1.1" 200 50
-django.server "POST /pong/api/logout/ HTTP/1.1" 200 21
-django.server "GET /pong/api/check_auth/ HTTP/1.1" 200 45
-django.server "GET /pong/external_login/ HTTP/1.1" 302 0
-django.server "GET /pong/auth/callback?code=c7ac521e0a6f895f9f0238672a9fab6fcb03ba0b781c0cc757995571c41c6183 HTTP/1.1" 301 0
-django.server "GET /pong/auth/callback/?code=c7ac521e0a6f895f9f0238672a9fab6fcb03ba0b781c0cc757995571c41c6183 HTTP/1.1" 302 0
-django.server "GET /pong/ HTTP/1.1" 200 2023
-django.server "GET /static/css/bootstrap.min.css HTTP/1.1" 304 0
-django.server "GET /static/css/frontstyle.css HTTP/1.1" 304 0
-django.server "GET /static/pong/js/home.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/play/play.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/loadTranslations.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/menu.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/friends.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/tournament/tournamentDetail.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/tournament/tournament.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/play/pongGame.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/tournament/matchmaking.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/logout.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/profile.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/main.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/login.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/register.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/matchHistory.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/privacyPolicy.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/iaAlgo.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/bootstrap.min.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/translations/en.json HTTP/1.1" 304 0
-django.server "GET /pong/api/check_auth/ HTTP/1.1" 200 50
-django.server "GET /pong/ HTTP/1.1" 200 4091
-django.server "GET /static/css/bootstrap.min.css HTTP/1.1" 304 0
-django.server "GET /static/css/frontstyle.css HTTP/1.1" 304 0
-django.server "GET /static/pong/js/loadTranslations.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/play/play.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/home.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/menu.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/play/pongGame.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/friends.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/tournament/tournamentDetail.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/tournament/tournament.js HTTP/1.1" 200 11944
-django.server "GET /static/pong/js/tournament/matchmaking.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/logout.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/profile.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/login.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/main.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/register.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/privacyPolicy.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/matchHistory.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/iaAlgo.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/bootstrap.min.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/translations/en.json HTTP/1.1" 304 0
-django.server "GET /pong/external_login/ HTTP/1.1" 302 0
-django.server "GET /pong/auth/callback?code=26722c65a9805966f0357178ee8ff5969a35c8bcc3ecbf7173e3b821d193076a HTTP/1.1" 301 0
-django.server "GET /pong/auth/callback/?code=26722c65a9805966f0357178ee8ff5969a35c8bcc3ecbf7173e3b821d193076a HTTP/1.1" 302 0
-django.server "GET /pong/ HTTP/1.1" 200 2023
-django.server "GET /pong/api/check_auth/ HTTP/1.1" 200 50
-django.utils.autoreload Watching for file changes with StatReloader
-django.server "GET /pong/ HTTP/1.1" 200 4091
-django.server "GET /pong/external_login/ HTTP/1.1" 302 0
-django.server "GET /pong/auth/callback?code=8cacf35c331acf7638c0fd838ecbe749d1a975c5a721807d1dbd5687143ac7ce HTTP/1.1" 301 0
-django.server "GET /pong/auth/callback/?code=8cacf35c331acf7638c0fd838ecbe749d1a975c5a721807d1dbd5687143ac7ce HTTP/1.1" 302 0
-django.server "GET /pong/ HTTP/1.1" 200 2023
-django.server "GET /pong/api/check_auth/ HTTP/1.1" 200 50
-django.server "GET /pong/api/check_auth/ HTTP/1.1" 200 50
-django.server "POST /pong/api/logout/ HTTP/1.1" 200 21
-django.server "GET /pong/api/check_auth/ HTTP/1.1" 200 45
-django.server "POST /pong/api/register/ HTTP/1.1" 200 21
-django.server "POST /pong/api/login/ HTTP/1.1" 200 21
-django.server "GET /pong/api/get-user-locale HTTP/1.1" 200 14
-django.server "GET /pong/api/check_auth/ HTTP/1.1" 200 44
-django.server "GET /pong/api/check_auth/ HTTP/1.1" 200 44
-django.server "GET /pong/api/tournament/latest_tournament/ HTTP/1.1" 200 41
-django.server "GET /pong/ HTTP/1.1" 200 4091
-django.server "GET /pong/external_login/ HTTP/1.1" 302 0
-django.server "GET /pong/auth/callback?code=5db1bfe16cfdd5a3495dd536bc8ddd7ee08f60690c050dad0809a50952fef85b HTTP/1.1" 301 0
-django.server "GET /pong/auth/callback/?code=5db1bfe16cfdd5a3495dd536bc8ddd7ee08f60690c050dad0809a50952fef85b HTTP/1.1" 302 0
-django.server "GET /pong/ HTTP/1.1" 200 2023
-django.server "GET /pong/api/check_auth/ HTTP/1.1" 200 50
-django.server "GET /pong/ HTTP/1.1" 200 4091
-django.server "POST /pong/api/register/ HTTP/1.1" 200 21
-django.server "POST /pong/api/tournament/create/ HTTP/1.1" 200 118
-django.server "GET /pong/api/check_auth/ HTTP/1.1" 200 50
-django.server "GET /pong/api/tournament/latest_tournament/ HTTP/1.1" 200 216
-django.server "POST /pong/api/tournament/create/ HTTP/1.1" 200 116
-django.server "GET /pong/api/check_auth/ HTTP/1.1" 200 50
-django.server "GET /pong/api/tournament/latest_tournament/ HTTP/1.1" 200 214
-django.server "POST /pong/api/tournament/2/add_participants/ HTTP/1.1" 200 164
-django.server "POST /pong/api/tournament/2/add_participants/ HTTP/1.1" 200 164
-django.server "POST /pong/api/tournament/2/start/ HTTP/1.1" 200 88
-django.server "GET /pong/api/tournament/2/matchmaking/ HTTP/1.1" 200 865
-django.server "GET /pong/ HTTP/1.1" 200 2023
-django.server "GET /static/pong/js/tournament/tournament.js HTTP/1.1" 200 12004
-django.server "GET /pong/api/check_auth/ HTTP/1.1" 200 50
-django.server "GET /pong/api/tournament/latest_tournament/ HTTP/1.1" 200 255
-django.server "GET /pong/api/tournament/2/matchmaking/ HTTP/1.1" 200 865
-django.server "GET /pong/api/check_auth/ HTTP/1.1" 200 50
-django.server "GET /pong/api/check_auth/ HTTP/1.1" 200 50
-django.server "GET /pong/api/games/match_history/ HTTP/1.1" 200 21
-django.server "GET /pong/api/check_auth/ HTTP/1.1" 200 50
-django.server "GET /pong/api/tournament/latest_tournament/ HTTP/1.1" 200 255
-django.server "GET /pong/api/tournament/2/matchmaking/ HTTP/1.1" 200 865
-django.server "GET /pong/api/profile/ HTTP/1.1" 200 316
-django.server "GET /pong/api/check_auth/ HTTP/1.1" 200 50
-django.server "POST /pong/api/tournament/update_match_score/ HTTP/1.1" 200 266
-django.server "GET /pong/api/tournament/2/matchmaking/ HTTP/1.1" 200 866
-django.server "GET /pong/api/profile/ HTTP/1.1" 200 316
-django.server "GET /pong/api/check_auth/ HTTP/1.1" 200 50
-django.server "POST /pong/api/tournament/update_match_score/ HTTP/1.1" 200 266
-django.server "GET /pong/api/tournament/2/matchmaking/ HTTP/1.1" 200 867
-django.server "GET /pong/api/profile/ HTTP/1.1" 200 316
-django.server "GET /pong/api/check_auth/ HTTP/1.1" 200 50
-django.server "POST /pong/api/tournament/update_match_score/ HTTP/1.1" 200 266
-django.server "GET /pong/api/tournament/2/matchmaking/ HTTP/1.1" 200 869
-django.server "POST /pong/api/tournament/2/finish/ HTTP/1.1" 200 69
-django.utils.autoreload Watching for file changes with StatReloader
-django.server "GET /pong/ HTTP/1.1" 200 4091
-django.server "GET /static/css/bootstrap.min.css HTTP/1.1" 304 0
-django.server "GET /static/css/frontstyle.css HTTP/1.1" 304 0
-django.server "GET /static/pong/js/matchHistory.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/iaAlgo.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/bootstrap.min.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/tournament/tournament.js HTTP/1.1" 200 12007
-django.server "GET /static/pong/js/translations/en.json HTTP/1.1" 304 0
-django.server "GET /pong/external_login/ HTTP/1.1" 302 0
-django.server "GET /pong/auth/callback?code=67c6a534c64ea80f6e8acceac67668d2a58ef374e24661b3fcd2a5f76a9999b8 HTTP/1.1" 301 0
-django.server "GET /pong/auth/callback/?code=67c6a534c64ea80f6e8acceac67668d2a58ef374e24661b3fcd2a5f76a9999b8 HTTP/1.1" 302 0
-django.server "GET /pong/ HTTP/1.1" 200 2023
-django.server "GET /pong/api/check_auth/ HTTP/1.1" 200 50
-django.utils.autoreload Watching for file changes with StatReloader
-django.server "GET /pong/ HTTP/1.1" 200 4110
-django.server "GET /static/pong/js/tournament/tournament.js HTTP/1.1" 304 0
-django.server "GET /pong/external_login/ HTTP/1.1" 302 0
-django.server "GET /pong/auth/callback?code=3fc0619baa58ea7cf6cb1bf2bc04ebe5aa6443ee262af23d436ab3ab206267a4 HTTP/1.1" 301 0
-django.server "GET /pong/auth/callback/?code=3fc0619baa58ea7cf6cb1bf2bc04ebe5aa6443ee262af23d436ab3ab206267a4 HTTP/1.1" 302 0
-django.server "GET /pong/ HTTP/1.1" 200 2023
-django.server "GET /static/pong/js/loadTranslations.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/home.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/play/play.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/play/pongGame.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/menu.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/friends.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/tournament/tournamentDetail.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/profile.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/login.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/logout.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/tournament/matchmaking.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/register.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/main.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/privacyPolicy.js HTTP/1.1" 304 0
-django.server "GET /pong/api/check_auth/ HTTP/1.1" 200 50
-django.utils.autoreload Watching for file changes with StatReloader
-django.server "GET /pong/ HTTP/1.1" 200 4110
-django.server "GET /static/pong/js/tournament/tournament.js HTTP/1.1" 200 12016
-django.server "GET /pong/external_login/ HTTP/1.1" 302 0
-django.server "GET /pong/auth/callback?code=8faf23e79398e7e44361e24187719e5cb4c7cd7f56bd98b27682dfe2a49df355 HTTP/1.1" 301 0
-django.server "GET /pong/auth/callback/?code=8faf23e79398e7e44361e24187719e5cb4c7cd7f56bd98b27682dfe2a49df355 HTTP/1.1" 302 0
-django.server "GET /pong/ HTTP/1.1" 200 2023
-django.server "GET /pong/api/check_auth/ HTTP/1.1" 200 50
-django.utils.autoreload Watching for file changes with StatReloader
-django.server "GET /pong/ HTTP/1.1" 200 4111
-django.server "GET /static/css/frontstyle.css HTTP/1.1" 200 3352
-django.server "GET /static/css/TrajanPro.css HTTP/1.1" 200 383
-django.server "GET /static/pong/js/matchHistory.js HTTP/1.1" 200 2153
-django.server "GET /static/pong/js/play/play.js HTTP/1.1" 200 5428
-django.server "GET /static/pong/js/tournament/tournament.js HTTP/1.1" 200 12091
-django.server "GET /static/css/bootstrap.min.css HTTP/1.1" 200 232802
-django.server "GET /static/pong/js/iaAlgo.js HTTP/1.1" 200 12919
-django.server "GET /static/pong/js/bootstrap.min.js HTTP/1.1" 200 60634
-django.server "GET /static/fonts/TrajanPro-Regular.woff2 HTTP/1.1" 200 52056
-django.server "GET /static/pong/js/translations/en.json HTTP/1.1" 200 15230
-django.request Unauthorized: /pong/api/login/
-django.request Unauthorized: /pong/api/login/
-django.server "POST /pong/api/login/ HTTP/1.1" 401 53
-django.server "GET /pong/external_login/ HTTP/1.1" 302 0
-django.server "GET /pong/auth/callback?code=4a7321d3de4624a1f117153fc0a3230c225d7689ffd95e1f5b59a370742d6010 HTTP/1.1" 301 0
-django.server "GET /pong/auth/callback/?code=4a7321d3de4624a1f117153fc0a3230c225d7689ffd95e1f5b59a370742d6010 HTTP/1.1" 302 0
-django.server "GET /pong/ HTTP/1.1" 200 2024
-django.server "GET /static/css/bootstrap.min.css HTTP/1.1" 200 232802
-django.server "GET /static/css/TrajanPro.css HTTP/1.1" 200 383
-django.server "GET /static/css/frontstyle.css HTTP/1.1" 200 3352
-django.server "GET /static/pong/js/play/play.js HTTP/1.1" 200 5428
-django.server "GET /static/pong/js/matchHistory.js HTTP/1.1" 200 2153
-django.server "GET /static/pong/js/tournament/tournament.js HTTP/1.1" 200 12091
-django.server "GET /static/pong/js/iaAlgo.js HTTP/1.1" 200 12919
-django.server "GET /static/pong/js/bootstrap.min.js HTTP/1.1" 200 60634
-django.server "GET /static/fonts/TrajanPro-Regular.woff2 HTTP/1.1" 200 52056
-django.server "GET /static/pong/js/translations/en.json HTTP/1.1" 200 15230
-django.server "GET /pong/api/check_auth/ HTTP/1.1" 200 50
-django.server "GET /pong/ HTTP/1.1" 200 2024
-django.server "GET /pong/api/check_auth/ HTTP/1.1" 200 50
-django.server "GET /pong/ HTTP/1.1" 200 2024
-django.server "GET /pong/api/check_auth/ HTTP/1.1" 200 50
 django.server "GET /pong/api/check_auth/ HTTP/1.1" 200 50
 django.server "GET /pong/api/check_auth/ HTTP/1.1" 200 50
 django.server "GET /pong/api/games/get_current_user/ HTTP/1.1" 200 59
@@ -779,89 +35,369 @@ django.server "GET /pong/api/check_auth/ HTTP/1.1" 200 50
 django.server "GET /pong/api/check_auth/ HTTP/1.1" 200 50
 django.server "GET /pong/api/tournament/latest_tournament/ HTTP/1.1" 200 41
 django.server "GET /pong/api/check_auth/ HTTP/1.1" 200 50
-django.server "GET /pong/api/profile HTTP/1.1" 301 0
 django.server "GET /pong/api/profile/ HTTP/1.1" 200 317
 django.server "GET /pong/api/check_auth/ HTTP/1.1" 200 50
 django.server "GET /pong/api/friends_data/ HTTP/1.1" 200 59
 django.server "GET /pong/api/check_auth/ HTTP/1.1" 200 50
-django.server "GET /pong/api/games/match_history/ HTTP/1.1" 200 21
+django.server "POST /pong/api/logout/ HTTP/1.1" 200 21
+django.server "GET /pong/api/check_auth/ HTTP/1.1" 200 45
+django.server "GET /pong/external_login/ HTTP/1.1" 302 0
+django.server "GET /pong/auth/callback?code=ed529c0c8706c1e90d7fd12d83fc2fa391c20b6e832926bd9cc1731bddd02acd HTTP/1.1" 301 0
+django.server "GET /pong/auth/callback/?code=ed529c0c8706c1e90d7fd12d83fc2fa391c20b6e832926bd9cc1731bddd02acd HTTP/1.1" 302 0
+django.server "GET /pong/ HTTP/1.1" 200 2055
+django.server "GET /jsi18n/ HTTP/1.1" 200 3343
 django.server "GET /pong/api/check_auth/ HTTP/1.1" 200 50
 django.server "GET /pong/api/check_auth/ HTTP/1.1" 200 50
-django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 200 16
-django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 200 16
-django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 200 16
-django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 200 16
-django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 200 16
-django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 200 16
-django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 200 16
-django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 200 16
-django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 200 16
-django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 200 16
-django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 200 16
-django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 200 16
-django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 200 16
-django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 200 16
-django.server "GET /pong/ HTTP/1.1" 200 2024
-django.server "GET /static/css/bootstrap.min.css HTTP/1.1" 304 0
-django.server "GET /static/pong/js/play/play.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/matchHistory.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/tournament/tournament.js HTTP/1.1" 304 0
-django.server "GET /static/css/TrajanPro.css HTTP/1.1" 304 0
-django.server "GET /static/css/frontstyle.css HTTP/1.1" 304 0
-django.server "GET /static/pong/js/bootstrap.min.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/iaAlgo.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/translations/en.json HTTP/1.1" 304 0
-django.server "GET /pong/ HTTP/1.1" 200 2024
-django.server "GET /pong/api/check_auth/ HTTP/1.1" 200 50
-django.server "GET /pong/api/check_auth/ HTTP/1.1" 200 50
-django.server "GET /pong/ HTTP/1.1" 200 2024
-django.server "GET /pong/api/check_auth/ HTTP/1.1" 200 50
-django.server "GET /pong/ HTTP/1.1" 200 2024
+django.server "POST /pong/api/logout/ HTTP/1.1" 200 21
+django.server "GET /pong/api/check_auth/ HTTP/1.1" 200 45
+django.server "GET /pong/ HTTP/1.1" 200 4124
+django.server "GET /static/css/bootstrap.min.css HTTP/1.1" 200 232802
+django.server "GET /static/pong/js/home.js HTTP/1.1" 200 53
+django.server "GET /static/css/TrajanPro.css HTTP/1.1" 200 383
+django.server "GET /static/pong/js/loadTranslations.js HTTP/1.1" 200 1076
+django.server "GET /static/pong/js/menu.js HTTP/1.1" 200 3676
+django.server "GET /static/css/frontstyle.css HTTP/1.1" 200 3352
+django.server "GET /jsi18n/ HTTP/1.1" 200 3343
+django.server "GET /static/pong/js/play/play.js HTTP/1.1" 200 5428
+django.server "GET /static/pong/js/tournament/tournamentDetail.js HTTP/1.1" 200 2641
+django.server "GET /static/pong/js/friends.js HTTP/1.1" 200 8976
+django.server "GET /static/pong/js/tournament/tournament.js HTTP/1.1" 200 12022
+django.server "GET /static/pong/js/play/pongGame.js HTTP/1.1" 200 9875
+django.server "GET /static/pong/js/logout.js HTTP/1.1" 200 2588
+django.server "GET /static/pong/js/tournament/matchmaking.js HTTP/1.1" 200 5070
+django.server "GET /static/pong/js/404.js HTTP/1.1" 200 85
+django.server "GET /static/pong/js/profile.js HTTP/1.1" 200 18663
+django.server "GET /static/pong/js/login.js HTTP/1.1" 200 5813
+django.server "GET /static/pong/js/register.js HTTP/1.1" 200 5306
+django.server "GET /static/fonts/TrajanPro-Regular.woff2 HTTP/1.1" 200 52056
+django.server "GET /static/pong/js/main.js HTTP/1.1" 200 10281
+django.server "GET /static/pong/js/matchHistory.js HTTP/1.1" 200 2153
+django.server "GET /static/pong/js/privacyPolicy.js HTTP/1.1" 200 747
+django.server "GET /static/pong/js/iaAlgo.js HTTP/1.1" 200 12919
+django.server "GET /static/pong/js/background.js HTTP/1.1" 200 5688
+django.server "GET /static/pong/js/bootstrap.min.js HTTP/1.1" 200 60634
+django.server "GET /static/pong/js/translations/en.json HTTP/1.1" 200 15230
+django.server "GET /static/pong/images/favicon.ico HTTP/1.1" 200 15406
+django.server "GET /pong/external_login/ HTTP/1.1" 302 0
+django.server "GET /pong/auth/callback?code=41abb4e93850855e3d481a3945b3eae4960bd5884bb1f094ff313835962150fe HTTP/1.1" 301 0
+django.server "GET /pong/auth/callback/?code=41abb4e93850855e3d481a3945b3eae4960bd5884bb1f094ff313835962150fe HTTP/1.1" 302 0
+django.server "GET /pong/ HTTP/1.1" 200 2055
+django.server "GET /static/css/bootstrap.min.css HTTP/1.1" 200 232802
+django.server "GET /static/pong/js/menu.js HTTP/1.1" 200 3676
+django.server "GET /static/css/frontstyle.css HTTP/1.1" 200 3352
+django.server "GET /static/pong/js/loadTranslations.js HTTP/1.1" 200 1076
+django.server "GET /static/pong/js/home.js HTTP/1.1" 200 53
+django.server "GET /static/css/TrajanPro.css HTTP/1.1" 200 383
+django.server "GET /jsi18n/ HTTP/1.1" 200 3343
+django.server "GET /static/pong/js/tournament/tournamentDetail.js HTTP/1.1" 200 2641
+django.server "GET /static/pong/js/play/play.js HTTP/1.1" 200 5428
+django.server "GET /static/pong/js/friends.js HTTP/1.1" 200 8976
+django.server "GET /static/pong/js/play/pongGame.js HTTP/1.1" 200 9875
+django.server "GET /static/pong/js/tournament/tournament.js HTTP/1.1" 200 12022
+django.server "GET /static/pong/js/404.js HTTP/1.1" 200 85
+django.server "GET /static/pong/js/tournament/matchmaking.js HTTP/1.1" 200 5070
+django.server "GET /static/pong/js/logout.js HTTP/1.1" 200 2588
+django.server "GET /static/pong/js/profile.js HTTP/1.1" 200 18663
+django.server "GET /static/pong/js/login.js HTTP/1.1" 200 5813
+django.server "GET /static/pong/js/register.js HTTP/1.1" 200 5306
+django.server "GET /static/fonts/TrajanPro-Regular.woff2 HTTP/1.1" 200 52056
+django.server "GET /static/pong/js/main.js HTTP/1.1" 200 10281
+django.server "GET /static/pong/js/privacyPolicy.js HTTP/1.1" 200 747
+django.server "GET /static/pong/js/iaAlgo.js HTTP/1.1" 200 12919
+django.server "GET /static/pong/js/matchHistory.js HTTP/1.1" 200 2153
+django.server "GET /static/pong/js/background.js HTTP/1.1" 200 5688
+django.server "GET /static/pong/js/bootstrap.min.js HTTP/1.1" 200 60634
+django.server "GET /static/pong/js/translations/en.json HTTP/1.1" 200 15230
+django.server "GET /static/pong/images/favicon.ico HTTP/1.1" 200 15406
 django.server "GET /pong/api/check_auth/ HTTP/1.1" 200 50
 django.server "GET /pong/api/check_auth/ HTTP/1.1" 200 50
 django.server "POST /pong/api/logout/ HTTP/1.1" 200 21
 django.server "GET /pong/api/check_auth/ HTTP/1.1" 200 45
 django.server "GET /pong/external_login/ HTTP/1.1" 302 0
-django.server "GET /pong/auth/callback?code=fe9fd9ab9a9a71dc7fdb8721d96909e028bc1e1e2d6c3b380d2be6ec4f34b40c HTTP/1.1" 301 0
-django.server "GET /pong/auth/callback/?code=fe9fd9ab9a9a71dc7fdb8721d96909e028bc1e1e2d6c3b380d2be6ec4f34b40c HTTP/1.1" 302 0
-django.server "GET /pong/ HTTP/1.1" 200 2024
+django.server "GET /pong/auth/callback?code=748219d0b3f6d16ada06d7fe56cbdc26b79417c001210cb86ffafd0a2a85bd5f HTTP/1.1" 301 0
+django.server "GET /pong/auth/callback/?code=748219d0b3f6d16ada06d7fe56cbdc26b79417c001210cb86ffafd0a2a85bd5f HTTP/1.1" 302 0
+django.server "GET /pong/ HTTP/1.1" 200 2055
+django.server "GET /jsi18n/ HTTP/1.1" 200 3343
 django.server "GET /pong/api/check_auth/ HTTP/1.1" 200 50
-django.server "GET /pong/api/check_auth/ HTTP/1.1" 200 50
-django.server "GET /pong/api/check_auth/ HTTP/1.1" 200 50
-django.server "GET /pong/api/tournament/latest_tournament/ HTTP/1.1" 200 41
-django.server "GET /pong/api/check_auth/ HTTP/1.1" 200 50
-django.server "GET /pong/api/profile/ HTTP/1.1" 200 317
 django.server "GET /pong/api/check_auth/ HTTP/1.1" 200 50
 django.server "GET /pong/api/friends_data/ HTTP/1.1" 200 59
-django.server "GET /pong/api/check_auth/ HTTP/1.1" 200 50
-django.server "GET /pong/api/games/match_history/ HTTP/1.1" 200 21
-django.server "GET /pong/api/check_auth/ HTTP/1.1" 200 50
+django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 200 16
 django.server "GET /pong/api/check_auth/ HTTP/1.1" 200 50
 django.server "POST /pong/api/logout/ HTTP/1.1" 200 21
 django.server "GET /pong/api/check_auth/ HTTP/1.1" 200 45
 django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 302 0
 django.request Not Found: /accounts/login/
 django.request Not Found: /accounts/login/
-django.server "GET /accounts/login/?next=/pong/api/friends/get-status/ HTTP/1.1" 404 2388
+django.server "GET /accounts/login/?next=/pong/api/friends/get-status/ HTTP/1.1" 404 2649
 django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 302 0
 django.request Not Found: /accounts/login/
 django.request Not Found: /accounts/login/
-django.server "GET /accounts/login/?next=/pong/api/friends/get-status/ HTTP/1.1" 404 2388
+django.server "GET /accounts/login/?next=/pong/api/friends/get-status/ HTTP/1.1" 404 2649
 django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 302 0
 django.request Not Found: /accounts/login/
 django.request Not Found: /accounts/login/
-django.server "GET /accounts/login/?next=/pong/api/friends/get-status/ HTTP/1.1" 404 2388
-django.server "GET /pong/external_login/ HTTP/1.1" 302 0
-django.server "GET /pong/auth/callback?code=35e8a9820dfa1bba06c92c8c16e94f2630581f5d6f76b16237421df3775f124a HTTP/1.1" 301 0
-django.server "GET /pong/auth/callback/?code=35e8a9820dfa1bba06c92c8c16e94f2630581f5d6f76b16237421df3775f124a HTTP/1.1" 302 0
-django.server "GET /pong/ HTTP/1.1" 200 2024
-django.server "GET /static/css/bootstrap.min.css HTTP/1.1" 304 0
-django.server "GET /static/css/TrajanPro.css HTTP/1.1" 304 0
-django.server "GET /static/css/frontstyle.css HTTP/1.1" 304 0
-django.server "GET /static/pong/js/iaAlgo.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/play/play.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/matchHistory.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/bootstrap.min.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/tournament/tournament.js HTTP/1.1" 304 0
-django.server "GET /static/pong/js/translations/en.json HTTP/1.1" 304 0
-django.server "GET /pong/api/check_auth/ HTTP/1.1" 200 50
+django.server "GET /accounts/login/?next=/pong/api/friends/get-status/ HTTP/1.1" 404 2649
+django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 302 0
+django.request Not Found: /accounts/login/
+django.request Not Found: /accounts/login/
+django.server "GET /accounts/login/?next=/pong/api/friends/get-status/ HTTP/1.1" 404 2649
+django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 302 0
+django.request Not Found: /accounts/login/
+django.request Not Found: /accounts/login/
+django.server "GET /accounts/login/?next=/pong/api/friends/get-status/ HTTP/1.1" 404 2649
+django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 302 0
+django.request Not Found: /accounts/login/
+django.request Not Found: /accounts/login/
+django.server "GET /accounts/login/?next=/pong/api/friends/get-status/ HTTP/1.1" 404 2649
+django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 302 0
+django.request Not Found: /accounts/login/
+django.request Not Found: /accounts/login/
+django.server "GET /accounts/login/?next=/pong/api/friends/get-status/ HTTP/1.1" 404 2649
+django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 302 0
+django.request Not Found: /accounts/login/
+django.request Not Found: /accounts/login/
+django.server "GET /accounts/login/?next=/pong/api/friends/get-status/ HTTP/1.1" 404 2649
+django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 302 0
+django.request Not Found: /accounts/login/
+django.request Not Found: /accounts/login/
+django.server "GET /accounts/login/?next=/pong/api/friends/get-status/ HTTP/1.1" 404 2649
+django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 302 0
+django.request Not Found: /accounts/login/
+django.request Not Found: /accounts/login/
+django.server "GET /accounts/login/?next=/pong/api/friends/get-status/ HTTP/1.1" 404 2649
+django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 302 0
+django.request Not Found: /accounts/login/
+django.request Not Found: /accounts/login/
+django.server "GET /accounts/login/?next=/pong/api/friends/get-status/ HTTP/1.1" 404 2649
+django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 302 0
+django.request Not Found: /accounts/login/
+django.request Not Found: /accounts/login/
+django.server "GET /accounts/login/?next=/pong/api/friends/get-status/ HTTP/1.1" 404 2649
+django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 302 0
+django.request Not Found: /accounts/login/
+django.request Not Found: /accounts/login/
+django.server "GET /accounts/login/?next=/pong/api/friends/get-status/ HTTP/1.1" 404 2649
+django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 302 0
+django.request Not Found: /accounts/login/
+django.request Not Found: /accounts/login/
+django.server "GET /accounts/login/?next=/pong/api/friends/get-status/ HTTP/1.1" 404 2649
+django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 302 0
+django.request Not Found: /accounts/login/
+django.request Not Found: /accounts/login/
+django.server "GET /accounts/login/?next=/pong/api/friends/get-status/ HTTP/1.1" 404 2649
+django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 302 0
+django.request Not Found: /accounts/login/
+django.request Not Found: /accounts/login/
+django.server "GET /accounts/login/?next=/pong/api/friends/get-status/ HTTP/1.1" 404 2649
+django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 302 0
+django.request Not Found: /accounts/login/
+django.request Not Found: /accounts/login/
+django.server "GET /accounts/login/?next=/pong/api/friends/get-status/ HTTP/1.1" 404 2649
+django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 302 0
+django.request Not Found: /accounts/login/
+django.request Not Found: /accounts/login/
+django.server "GET /accounts/login/?next=/pong/api/friends/get-status/ HTTP/1.1" 404 2649
+django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 302 0
+django.request Not Found: /accounts/login/
+django.request Not Found: /accounts/login/
+django.server "GET /accounts/login/?next=/pong/api/friends/get-status/ HTTP/1.1" 404 2649
+django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 302 0
+django.request Not Found: /accounts/login/
+django.request Not Found: /accounts/login/
+django.server "GET /accounts/login/?next=/pong/api/friends/get-status/ HTTP/1.1" 404 2649
+django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 302 0
+django.request Not Found: /accounts/login/
+django.request Not Found: /accounts/login/
+django.server "GET /accounts/login/?next=/pong/api/friends/get-status/ HTTP/1.1" 404 2649
+django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 302 0
+django.request Not Found: /accounts/login/
+django.request Not Found: /accounts/login/
+django.server "GET /accounts/login/?next=/pong/api/friends/get-status/ HTTP/1.1" 404 2649
+django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 302 0
+django.request Not Found: /accounts/login/
+django.request Not Found: /accounts/login/
+django.server "GET /accounts/login/?next=/pong/api/friends/get-status/ HTTP/1.1" 404 2649
+django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 302 0
+django.request Not Found: /accounts/login/
+django.request Not Found: /accounts/login/
+django.server "GET /accounts/login/?next=/pong/api/friends/get-status/ HTTP/1.1" 404 2649
+django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 302 0
+django.request Not Found: /accounts/login/
+django.request Not Found: /accounts/login/
+django.server "GET /accounts/login/?next=/pong/api/friends/get-status/ HTTP/1.1" 404 2649
+django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 302 0
+django.request Not Found: /accounts/login/
+django.request Not Found: /accounts/login/
+django.server "GET /accounts/login/?next=/pong/api/friends/get-status/ HTTP/1.1" 404 2649
+django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 302 0
+django.request Not Found: /accounts/login/
+django.request Not Found: /accounts/login/
+django.server "GET /accounts/login/?next=/pong/api/friends/get-status/ HTTP/1.1" 404 2649
+django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 302 0
+django.request Not Found: /accounts/login/
+django.request Not Found: /accounts/login/
+django.server "GET /accounts/login/?next=/pong/api/friends/get-status/ HTTP/1.1" 404 2649
+django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 302 0
+django.request Not Found: /accounts/login/
+django.request Not Found: /accounts/login/
+django.server "GET /accounts/login/?next=/pong/api/friends/get-status/ HTTP/1.1" 404 2649
+django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 302 0
+django.request Not Found: /accounts/login/
+django.request Not Found: /accounts/login/
+django.server "GET /accounts/login/?next=/pong/api/friends/get-status/ HTTP/1.1" 404 2649
+django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 302 0
+django.request Not Found: /accounts/login/
+django.request Not Found: /accounts/login/
+django.server "GET /accounts/login/?next=/pong/api/friends/get-status/ HTTP/1.1" 404 2649
+django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 302 0
+django.request Not Found: /accounts/login/
+django.request Not Found: /accounts/login/
+django.server "GET /accounts/login/?next=/pong/api/friends/get-status/ HTTP/1.1" 404 2649
+django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 302 0
+django.request Not Found: /accounts/login/
+django.request Not Found: /accounts/login/
+django.server "GET /accounts/login/?next=/pong/api/friends/get-status/ HTTP/1.1" 404 2649
+django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 302 0
+django.request Not Found: /accounts/login/
+django.request Not Found: /accounts/login/
+django.server "GET /accounts/login/?next=/pong/api/friends/get-status/ HTTP/1.1" 404 2649
+django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 302 0
+django.request Not Found: /accounts/login/
+django.request Not Found: /accounts/login/
+django.server "GET /accounts/login/?next=/pong/api/friends/get-status/ HTTP/1.1" 404 2649
+django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 302 0
+django.request Not Found: /accounts/login/
+django.request Not Found: /accounts/login/
+django.server "GET /accounts/login/?next=/pong/api/friends/get-status/ HTTP/1.1" 404 2649
+django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 302 0
+django.request Not Found: /accounts/login/
+django.request Not Found: /accounts/login/
+django.server "GET /accounts/login/?next=/pong/api/friends/get-status/ HTTP/1.1" 404 2649
+django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 302 0
+django.request Not Found: /accounts/login/
+django.request Not Found: /accounts/login/
+django.server "GET /accounts/login/?next=/pong/api/friends/get-status/ HTTP/1.1" 404 2649
+django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 302 0
+django.request Not Found: /accounts/login/
+django.request Not Found: /accounts/login/
+django.server "GET /accounts/login/?next=/pong/api/friends/get-status/ HTTP/1.1" 404 2649
+django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 302 0
+django.request Not Found: /accounts/login/
+django.request Not Found: /accounts/login/
+django.server "GET /accounts/login/?next=/pong/api/friends/get-status/ HTTP/1.1" 404 2649
+django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 302 0
+django.request Not Found: /accounts/login/
+django.request Not Found: /accounts/login/
+django.server "GET /accounts/login/?next=/pong/api/friends/get-status/ HTTP/1.1" 404 2649
+django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 302 0
+django.request Not Found: /accounts/login/
+django.request Not Found: /accounts/login/
+django.server "GET /accounts/login/?next=/pong/api/friends/get-status/ HTTP/1.1" 404 2649
+django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 302 0
+django.request Not Found: /accounts/login/
+django.request Not Found: /accounts/login/
+django.server "GET /accounts/login/?next=/pong/api/friends/get-status/ HTTP/1.1" 404 2649
+django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 302 0
+django.request Not Found: /accounts/login/
+django.request Not Found: /accounts/login/
+django.server "GET /accounts/login/?next=/pong/api/friends/get-status/ HTTP/1.1" 404 2649
+django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 302 0
+django.request Not Found: /accounts/login/
+django.request Not Found: /accounts/login/
+django.server "GET /accounts/login/?next=/pong/api/friends/get-status/ HTTP/1.1" 404 2649
+django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 302 0
+django.request Not Found: /accounts/login/
+django.request Not Found: /accounts/login/
+django.server "GET /accounts/login/?next=/pong/api/friends/get-status/ HTTP/1.1" 404 2649
+django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 302 0
+django.request Not Found: /accounts/login/
+django.request Not Found: /accounts/login/
+django.server "GET /accounts/login/?next=/pong/api/friends/get-status/ HTTP/1.1" 404 2649
+django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 302 0
+django.request Not Found: /accounts/login/
+django.request Not Found: /accounts/login/
+django.server "GET /accounts/login/?next=/pong/api/friends/get-status/ HTTP/1.1" 404 2649
+django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 302 0
+django.request Not Found: /accounts/login/
+django.request Not Found: /accounts/login/
+django.server "GET /accounts/login/?next=/pong/api/friends/get-status/ HTTP/1.1" 404 2649
+django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 302 0
+django.request Not Found: /accounts/login/
+django.request Not Found: /accounts/login/
+django.server "GET /accounts/login/?next=/pong/api/friends/get-status/ HTTP/1.1" 404 2649
+django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 302 0
+django.request Not Found: /accounts/login/
+django.request Not Found: /accounts/login/
+django.server "GET /accounts/login/?next=/pong/api/friends/get-status/ HTTP/1.1" 404 2649
+django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 302 0
+django.request Not Found: /accounts/login/
+django.request Not Found: /accounts/login/
+django.server "GET /accounts/login/?next=/pong/api/friends/get-status/ HTTP/1.1" 404 2649
+django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 302 0
+django.request Not Found: /accounts/login/
+django.request Not Found: /accounts/login/
+django.server "GET /accounts/login/?next=/pong/api/friends/get-status/ HTTP/1.1" 404 2649
+django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 302 0
+django.request Not Found: /accounts/login/
+django.request Not Found: /accounts/login/
+django.server "GET /accounts/login/?next=/pong/api/friends/get-status/ HTTP/1.1" 404 2649
+django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 302 0
+django.request Not Found: /accounts/login/
+django.request Not Found: /accounts/login/
+django.server "GET /accounts/login/?next=/pong/api/friends/get-status/ HTTP/1.1" 404 2649
+django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 302 0
+django.request Not Found: /accounts/login/
+django.request Not Found: /accounts/login/
+django.server "GET /accounts/login/?next=/pong/api/friends/get-status/ HTTP/1.1" 404 2649
+django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 302 0
+django.request Not Found: /accounts/login/
+django.request Not Found: /accounts/login/
+django.server "GET /accounts/login/?next=/pong/api/friends/get-status/ HTTP/1.1" 404 2649
+django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 302 0
+django.request Not Found: /accounts/login/
+django.request Not Found: /accounts/login/
+django.server "GET /accounts/login/?next=/pong/api/friends/get-status/ HTTP/1.1" 404 2649
+django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 302 0
+django.request Not Found: /accounts/login/
+django.request Not Found: /accounts/login/
+django.server "GET /accounts/login/?next=/pong/api/friends/get-status/ HTTP/1.1" 404 2649
+django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 302 0
+django.request Not Found: /accounts/login/
+django.request Not Found: /accounts/login/
+django.server "GET /accounts/login/?next=/pong/api/friends/get-status/ HTTP/1.1" 404 2649
+django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 302 0
+django.request Not Found: /accounts/login/
+django.request Not Found: /accounts/login/
+django.server "GET /accounts/login/?next=/pong/api/friends/get-status/ HTTP/1.1" 404 2649
+django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 302 0
+django.request Not Found: /accounts/login/
+django.request Not Found: /accounts/login/
+django.server "GET /accounts/login/?next=/pong/api/friends/get-status/ HTTP/1.1" 404 2649
+django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 302 0
+django.request Not Found: /accounts/login/
+django.request Not Found: /accounts/login/
+django.server "GET /accounts/login/?next=/pong/api/friends/get-status/ HTTP/1.1" 404 2649
+django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 302 0
+django.request Not Found: /accounts/login/
+django.request Not Found: /accounts/login/
+django.server "GET /accounts/login/?next=/pong/api/friends/get-status/ HTTP/1.1" 404 2649
+django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 302 0
+django.request Not Found: /accounts/login/
+django.request Not Found: /accounts/login/
+django.server "GET /accounts/login/?next=/pong/api/friends/get-status/ HTTP/1.1" 404 2649
+django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 302 0
+django.request Not Found: /accounts/login/
+django.request Not Found: /accounts/login/
+django.server "GET /accounts/login/?next=/pong/api/friends/get-status/ HTTP/1.1" 404 2649
+django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 302 0
+django.request Not Found: /accounts/login/
+django.request Not Found: /accounts/login/
+django.server "GET /accounts/login/?next=/pong/api/friends/get-status/ HTTP/1.1" 404 2649
+django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 302 0
+django.request Not Found: /accounts/login/
+django.request Not Found: /accounts/login/
+django.server "GET /accounts/login/?next=/pong/api/friends/get-status/ HTTP/1.1" 404 2649
+django.server "GET /pong/api/friends/get-status/ HTTP/1.1" 302 0
+django.request Not Found: /accounts/login/
+django.request Not Found: /accounts/login/
+django.server "GET /accounts/login/?next=/pong/api/friends/get-status/ HTTP/1.1" 404 2649

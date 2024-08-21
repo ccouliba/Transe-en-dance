@@ -112,7 +112,6 @@ function createTournament(event) {
 		console.error(`${window.trans.error}:`, error);
 		alert(`${window.trans.errCreatingTournament}.`);
 	});
-	console.log("nom du tournoi : " + tournamentState.tournament.name);
 }
 
 function addParticipant(event) {

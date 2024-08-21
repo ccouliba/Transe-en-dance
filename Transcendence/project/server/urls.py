@@ -25,12 +25,13 @@ from django.views.i18n import JavaScriptCatalog
 urlpatterns = [
     path("pong/", include("back.urls")),
     path("admin/", admin.site.urls),
-    # path('jsi18n/', JavaScriptCatalog.as_view(), name='javascript-catalog'),
-]
+]  + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+# ! Added + static to make it work
 
 # Include JavaScript translation catalog
-# urlpatterns += [
-# ]
+urlpatterns += [
+    path('jsi18n/', JavaScriptCatalog.as_view(), name='javascript-catalog'),
+]
 
 if settings.DEBUG:
 	urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
