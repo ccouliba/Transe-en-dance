@@ -40,66 +40,66 @@ services:
      - transcendance
   
   # # Elasticsearch is a search engine
-  elasticsearch:
-    container_name: elasticsearch
-    image: docker.elastic.co/elasticsearch/elasticsearch:8.14.3
-    environment:
-      - node.name=elasticsearch
-      - cluster.name=es-docker-cluster
-      - discovery.type=single-node
-      - bootstrap.memory_lock=true
-      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-      - xpack.security.enabled=false
-    volumes:
-      - elk_data:/usr/share/elasticsearch/data
-    ports:
-      - 9200:9200
-    healthcheck:
-      test: ["CMD-SHELL", "curl -f http://localhost:9200/_cluster/health || exit 1"]
-      interval: 30s
-      timeout: 10s
-      retries: 2
-    networks:
-      - elk
+  # elasticsearch:
+  #   container_name: elasticsearch
+  #   image: docker.elastic.co/elasticsearch/elasticsearch:8.14.3
+  #   environment:
+  #     - node.name=elasticsearch
+  #     - cluster.name=es-docker-cluster
+  #     - discovery.type=single-node
+  #     - bootstrap.memory_lock=true
+  #     - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+  #     - xpack.security.enabled=false
+  #   volumes:
+  #     - elk_data:/usr/share/elasticsearch/data
+  #   ports:
+  #     - 9200:9200
+  #   healthcheck:
+  #     test: ["CMD-SHELL", "curl -f http://localhost:9200/_cluster/health || exit 1"]
+  #     interval: 30s
+  #     timeout: 10s
+  #     retries: 2
+  #   networks:
+  #     - elk
 
-  # # Logstash is a server-side data processing pipeline
-  logstash:
-    container_name: logstash
-    image: docker.elastic.co/logstash/logstash:8.14.3
-    user: root
-    volumes:
-      - ./elk_data/logstash/pipeline/:/usr/share/logstash/pipeline/:ro
-      - ./project/logs:/logs/
-    ports:
-      - 9600:9600
-      - 5959:5959
-    environment:
-      LS_JAVA_OPTS: "-Xmx256m -Xms256m"
-    depends_on:
-      elasticsearch:
-        condition: service_healthy
-    healthcheck:
-      test: ["CMD-SHELL", "curl -f http://localhost:9600/_node/stats || exit 1"]
-      interval: 10s
-      timeout: 5s
-      retries: 2
-    networks:
-      - elk
-      - transcendance
+  # # # Logstash is a server-side data processing pipeline
+  # logstash:
+  #   container_name: logstash
+  #   image: docker.elastic.co/logstash/logstash:8.14.3
+  #   user: root
+  #   volumes:
+  #     - ./elk_data/logstash/pipeline/:/usr/share/logstash/pipeline/:ro
+  #     - ./project/logs:/logs/
+  #   ports:
+  #     - 9600:9600
+  #     - 5959:5959
+  #   environment:
+  #     LS_JAVA_OPTS: "-Xmx256m -Xms256m"
+  #   depends_on:
+  #     elasticsearch:
+  #       condition: service_healthy
+  #   healthcheck:
+  #     test: ["CMD-SHELL", "curl -f http://localhost:9600/_node/stats || exit 1"]
+  #     interval: 10s
+  #     timeout: 5s
+  #     retries: 2
+  #   networks:
+  #     - elk
+  #     - transcendance
 
-  # # Kibana is used for data visualization
-  kibana:
-    container_name: kibana
-    image: docker.elastic.co/kibana/kibana:8.14.3
-    environment:
-      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
-    ports:
-      - 5601:5601
-    depends_on:
-      elasticsearch:
-        condition: service_healthy
-    networks:
-      - elk
+  # # # Kibana is used for data visualization
+  # kibana:
+  #   container_name: kibana
+  #   image: docker.elastic.co/kibana/kibana:8.14.3
+  #   environment:
+  #     - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+  #   ports:
+  #     - 5601:5601
+  #   depends_on:
+  #     elasticsearch:
+  #       condition: service_healthy
+  #   networks:
+  #     - elk
 
 volumes:
   postgres_data:

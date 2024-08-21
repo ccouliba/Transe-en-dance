@@ -27,7 +27,6 @@ urlpatterns = [
  
  
 	path('home/', home_view, name='home'),
-	path('home/', home_view, name='home'),
 
  	path("api/get-user-locale", get_user_locale,  name="user_locale"),
 	

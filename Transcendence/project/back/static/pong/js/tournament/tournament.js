@@ -21,9 +21,9 @@ function Tournament() {
 	// let tournamentStatus = getTournamentStatus(tournament)
 	// <h1>Latest tournament name : ${tournament.name} - status : ${tournamentStatus}</h1>
 	let lastTournament = ""
-	if (tournament){
-		lastTournament = `<h1>${window.trans.latestTournament} : ${tournament.name}</h1>`
-	}
+	// if (tournament){
+	// 	lastTournament = `<h1>${window.trans.latestTournament} : ${tournament.name}</h1>`
+	// }
 
 	return `<div class="container mt-5">
 			${lastTournament}	
@@ -90,13 +90,13 @@ function loadTournamentState() {
 function createTournament(event) {
 	event.preventDefault();
 	const name = document.getElementById('tournamentName').value;
-	console.log(name)
+	// console.log(name)
 	if (!name) {
 		alert(`${window.trans.tournamentNameReq}.`);
 		return;
 	}
 	let url = '/pong/api/tournament/create/'
-	httpPostJson(url, {name})
+	httpPostJson(url, {name: name})
 	.then(response => response.json())
 	.then(data => {
 		if (data.status === 'success') {
@@ -111,6 +111,7 @@ function createTournament(event) {
 		console.error(`${window.trans.error}:`, error);
 		alert(`${window.trans.errCreatingTournament}.`);
 	});
+	console.log("nom du tournoi : " + tournamentState.tournament.name);
 }
 
 function addParticipant(event) {

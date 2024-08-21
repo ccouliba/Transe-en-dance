@@ -221,22 +221,22 @@ def get_user_from_api(request, access_token):
 # Cette vue gere le callback de l'authentification (ie la reponse recue apres que l'utilisateur ait autorise l'application via l'authentification via l'API d'Intra 42)
 @loggingFunction
 def auth_callback(request):
-	print("Received callback request:", request.GET)
+	logger.info("Received callback request: %s", request.GET)
 	api_response = get_response_from_api(request)
 	if api_response is None:
-		print("API response is None")
+		logger.error("API response is None")
 		return redirect('/pong/#login')    
 	elif api_response.status_code == 200:
-		print("Successful API response:", api_response.json())
+		logger.info("Successful API response: %s", api_response.json())
 		token_data = api_response.json()
 		access_token = token_data.get('access_token')
 		if access_token:
 			return get_user_from_api(request, access_token)
 		else:
-			print("No access token in API response")
+			logger.error("No access token in API response")
 			return redirect('/pong/#login')
 	else:
-		print(f"Failed API response: {api_response.status_code} - {api_response.text}")
+		logger.error("Failed API response: %d - %s", api_response.status_code, api_response.text)
 	return redirect('/pong/#login')
 
 # Cette vue gere la connexion des utilisateurs
