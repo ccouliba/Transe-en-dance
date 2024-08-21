@@ -126,6 +126,15 @@ function addParticipant(event) {
 		alert(`${window.trans.enterUsername}.`);
 		return;
 	}
+
+	const currentParticipantsCount = tournamentState.tournament.participants ? tournamentState.tournament.participants.length : 0;
+	console.log("currentParticipantsCount",currentParticipantsCount)
+	if (currentParticipantsCount >= 3) {
+		alert(`${window.trans.participantLimitReached}`);
+		return;
+	}
+
+
 	let url = `/pong/api/tournament/${tournamentState.tournament.id}/add_participants/` 
 	let payload = { participants: [participant] }
 

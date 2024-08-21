@@ -285,7 +285,7 @@ function initializeGameIA() {
 			ctx.textAlign = 'center';
 			ctx.fillText(winner + ` ${window.trans._won}!`, canvas.width / 2, canvas.height / 2);
 			ctx.font = '24px Arial';
-			ctx.fillText(`${window.trans.pressEnter}`, canvas.width / 2, canvas.height / 2 + 40);
+			//ctx.fillText(`${window.trans.pressEnter}`, canvas.width / 2, canvas.height / 2 + 40);
 		}
 	}
 
