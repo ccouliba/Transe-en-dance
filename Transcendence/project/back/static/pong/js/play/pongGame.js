@@ -4,7 +4,7 @@ const PADDLE_WIDTH = 10;
 const BALL_SIZE = 10;
 const CANVAS_HEIGHT = 400;
 const CANVAS_WIDTH = 600;
-const WINNING_SCORE = 5; // a changer ou pas
+const WINNING_SCORE = 1; // a changer ou pas
 
 function initializePaddle(){
 	paddle1Y = (CANVAS_HEIGHT - PADDLE_HEIGHT) / 2;

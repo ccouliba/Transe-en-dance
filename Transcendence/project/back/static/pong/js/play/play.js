@@ -20,6 +20,7 @@ function Play() {
 
 	let content = '';
 
+	console.log("playState.isTournamentMatch", playState.isTournamentMatch)
 	if (playState.gameOver) {
 		clearInterval(playState.checkInterval);
 		content = `
@@ -40,10 +41,7 @@ function Play() {
 		content = playState.isTournamentMatch
 			? `
 				<div class="container mt-5">
-					<h1>${window.trans.tournamentMatch}</h1>
-					<p>${window.trans.waitingForGame}...</p>
-					<p>${playState.player1Username} vs ${playState.player2Username}</p>
-					<button id="startTournamentMatchBtn" class="btn btn-secondary mt-3">${window.trans.match}</button>
+					<h1>${window.trans.tournamentInProgress}</h1>
 				</div>
 			`
 			: `
