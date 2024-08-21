@@ -462,7 +462,8 @@ function EditPassword() {
 				type="password" 
 				class="form-control" 
 				name="old_password" 
-				id="old_password" 
+				id="old_password"
+				autocomplete="current-password" 
 				placeholder="${(window.trans.oldPassword)}" 
 				required
 			/>
@@ -474,6 +475,7 @@ function EditPassword() {
 				class="form-control"
 				id="new_password1" 
 				name="new_password1" 
+				autocomplete="new-password"
 				placeholder="${(window.trans.newPassword)}"
 				required
 			/>
@@ -483,7 +485,8 @@ function EditPassword() {
 				type="password" 
 				class="form-control"
 				id="new_password2"  
-				name="new_password2" 
+				name="new_password2"
+				autocomplete="new-password" 
 				placeholder="${(window.trans.confirmNewPassword)}" 
 				required
 			/>
