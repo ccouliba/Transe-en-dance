@@ -37,19 +37,6 @@
 	  <div id="app">
 		  {% block content %}
 		  <script>
-			  
-			  {% if user.is_authenticated %}
-			  var lang = "{{ user.langue }}"
-				if (window.location.hash === '' || window.location.hash === '#') {
-					loadTranslationFile(lang).then(() => {
-						changePage('#home');
-					});
-				} else {
-					loadTranslationFile(lang).then(() => {
-						changePage(window.location.hash);
-					});
-				}
-			  
 			  {% if user.is_authenticated %}
 					var lang = "{{ user.langue }}"
 					if (window.location.hash === '' || window.location.hash === '#') {
@@ -62,16 +49,6 @@
 						});
 					}
 				{% else %}
-				var lang = "{{ user.langue }}"
-				if (window.location.hash === '#register') {
-					loadTranslationFile(lang).then(() => { 
-						changePage('#register');
-					});
-				} else {
-					loadTranslationFile(lang).then(() => {
-						changePage('#login');
-					});
-				}
 					var lang = "{{ user.langue }}"
 					if (window.location.hash === '#register') {
 						loadTranslationFile(lang).then(() => { 
@@ -83,7 +60,6 @@
 						});
 					}
 			{% endif %}
-		
 		</script>
 		{% endblock %}
 	  </div>

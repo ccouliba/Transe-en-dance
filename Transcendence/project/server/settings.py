@@ -183,6 +183,13 @@ USE_I18N = True
 USE_L10N = True
 
 
+# FRONT_URL = 'front/'
+# FRONTFILES_DIRS = [
+# 	os.path.join(BASE_DIR, 'front'),
+# ]
+# FRONT_ROOT = os.path.join(BASE_DIR, 'front')
+
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
@@ -205,7 +212,7 @@ LOGOUT_REDIRECT_URL = '/pong/login'
 
 STATICFILES_DIRS = [
 	os.path.join(BASE_DIR, 'back/static'),
-	os.path.join(BASE_DIR, 'front')
+	os.path.join(BASE_DIR, 'front/static'),
 ]
 
 # Chemin pour les fichiers statiques collectés (utilisé avec collectstatic)
@@ -242,7 +249,7 @@ LOGGING = {
             'datefmt': '%Y/%m/%d %H:%M:%S',
         },
         'simple': {
-            'format': '%(name)s %(funcName)s %(message)s',
+            'format': '%(name)s %(message)s',
         },
     },
 
@@ -269,22 +276,22 @@ LOGGING = {
 
     'loggers': {
         'django': {
-            'handlers': ['logstash', 'console'],
+            'handlers': ['file', 'console'],
             'level': 'DEBUG',
             'propagate': True,
         },
         'django.request': {
-            'handlers': ['logstash', 'console'],
+            'handlers': ['file', 'console'],
             'level': 'DEBUG',
             'propagate': True,
         },
         'django.db.backends': {
-            'handlers': ['file', 'console'],
+            'handlers': ['logstash', 'console'],
             'level': 'INFO',
             'propagate': True,
         },
         'back': {
-            'handlers': ['file', 'console'],
+            'handlers': ['logstash', 'console'],
             'level': 'INFO',
             'propagate': True,
         },

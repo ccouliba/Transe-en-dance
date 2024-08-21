@@ -9,6 +9,7 @@ from django.db.models import UniqueConstraint
 from django.utils.translation import gettext_lazy as _
 from django.db.models import F #query expressions F() : mettre à jour ou manipuler les champs de la bdd dynamiquement
 from django.db.models import Q #pour executer des requetes dans la bdd avec des operations comme OR ou AND
+import os
 
 # explication AbstractUser : #https://openclassrooms.com/fr/courses/7192426-allez-plus-loin-avec-le-framework-django/7386368-personnalisez-le-modele-utilisateur
 class User(AbstractUser):
