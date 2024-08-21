@@ -307,5 +307,7 @@
 	"GAME_NOT_FOUND": "Juego no encontrado",
 	"WINNER_NOT_FOUND": "Ganador no encontrado",
 	"GAME_ALREADY_FINISHED": "Juego ya terminado",
-	"GAME_FINISHED_SUCCESSFULLY": "Juego terminado con éxito"
+	"GAME_FINISHED_SUCCESSFULLY": "Juego terminado con éxito", 
+	"tournamentInProgress":"Torneos en curso"
+
 }

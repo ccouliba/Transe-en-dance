@@ -306,5 +306,8 @@
 	"GAME_NOT_FOUND": "Game not found",
 	"WINNER_NOT_FOUND": "Winner not found",
 	"GAME_ALREADY_FINISHED": "Game already finished",
-	"GAME_FINISHED_SUCCESSFULLY": "Game finished successfully"
+	"GAME_FINISHED_SUCCESSFULLY": "Game finished successfully",
+
+
+	"tournamentInProgress":"Tournaments in progress"
 }

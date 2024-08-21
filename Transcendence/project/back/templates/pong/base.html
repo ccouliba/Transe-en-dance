@@ -37,7 +37,7 @@
 	  <div id="app">
 		{% block content %}
 		  <script>
-			  var lang = "{{ user.langue }}"
+			  var lang = "{{ user[langue] }}"
 			  {% if user.is_authenticated %}
 					if (window.location.hash === '' || window.location.hash === '#') {
 						loadTranslationFile(lang).then(() => {

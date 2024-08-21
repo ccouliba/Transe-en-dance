@@ -1,7 +1,7 @@
 var tournamentState = {
 	isLoaded: false,
 	tournament: null,
-	showAddParticipants: false
+	showAddParticipants: false,
 };
 
 
@@ -67,6 +67,7 @@ function loadTournamentState() {
 		
 		.then(data => {
 			tournamentState.tournament = data.tournament;
+			
 			if (tournamentState.tournament) {
 				// S'assurer que is_started est bien un booléen
 				tournamentState.tournament.is_started = Boolean(tournamentState.tournament.is_started);
@@ -355,11 +356,13 @@ function finishTournament() {
 			// tournamentState.tournament.is_started = false;
 			// console.log("finishtournament noramelemnt")
 			matchmakingState.tournamentFinished = true;
+			playState.isTournamentMatch = false;
 			// changePage("#tournament");
 			if (data.rankings) {
 				matchmakingState.rankings = data.rankings;
 			}
 			mountComponent(TournamentMatchmaking);
+
 		} else {
 			alert(`${window.trans.errFinishTournament}: ` + data.message);
 		}
@@ -381,6 +384,6 @@ function startMatch(matchId, player1Username, player2Username) {
 	playState.gameOver = false;
 	playState.gameId = matchId;
 	playState.isTournamentMatch = true;
-
+	playState.isLoaded = false;
 	mountComponent(Play);
 }

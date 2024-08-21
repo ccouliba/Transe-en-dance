@@ -107,7 +107,7 @@ class Friendship(models.Model):
 
 
 class Tournament(models.Model):
-	name = models.CharField(max_length=100, null=True, blank=True)
+	name = models.CharField(max_length=100, null=True, blank=True, default="")
 	is_started = models.BooleanField(default=False)
 	start_date = models.DateTimeField(null=True, blank=True)
 	end_date = models.DateTimeField(null=True, blank=True)
