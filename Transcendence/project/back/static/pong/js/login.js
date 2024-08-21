@@ -90,7 +90,6 @@ function handleLogin(event) {
 			if (!getCSRFToken()){
 				return
 			}
-			console.log("es tu lance deux fois fdp")
 			getUserLangFromBackend().then(locale => {
 
 				return changeLanguage(locale.lang)

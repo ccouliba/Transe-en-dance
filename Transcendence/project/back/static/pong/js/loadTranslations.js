@@ -1,7 +1,6 @@
 window.trans = '';
 
 function getUserLangFromBackend(){
-	console.log("pb")
 	url = `/pong/api/get-user-locale`
 	return httpGetJson(url)	
 }
