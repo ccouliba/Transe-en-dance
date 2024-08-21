@@ -117,10 +117,10 @@ class Tournament(models.Model):
  
 	def __init__(self, *args, **kwargs): # permet d'initialiser l'objet avec des valeurs par defaut ou personnalisees
 		super().__init__(*args, **kwargs) # pour appeler la method __init__ de la classe parente i.e. models.Model
-		if not self.created_at:
-			self.created_at = timezone.now()
+		# if not self.created_at:
+		# 	self.created_at = timezone.now() not necessary -> Django performs a default initialization
 	def __str__(self):
-		return self.name
+		return self.name if self.name else "Unnamed tournament"
 
 class Game(models.Model):
 	player1 = models.ForeignKey(User, related_name='player1_games', on_delete=models.CASCADE,  null=True, blank=True)

@@ -93,8 +93,9 @@ function loadFriendsData() {
 function getFriendsStatus(){
 	let url = `/pong/api/friends/get-status/`;
 	
+	if (logoutState.isLoggedOut = true)
+		return;
 	return httpGetJson(url)
-		
 		.then(payload => {
 			if (payload.error) {
 				console.error('Server error:', payload.error);
