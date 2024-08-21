@@ -49,8 +49,7 @@ function Play() {
 					<h1>${window.trans.pongGame}</h1>
 					<form id="start-game-form">
 						<div class="mb-3">
-							<label for="player1Username" class="form-label">${window.trans.firstPlayerUsername}</label>
-							<p id="player1Username">${playState.player1Username || `${window.trans.loading}...`}</p>
+							<p id="player1Username">${window.trans.firstPlayerUsername} : ${playState.player1Username || `${window.trans.loading}...`}</p>
 						</div>
 						<div class="mb-3">
 							<label for="player2Username" class="form-label">${window.trans.secondPlayerUsername}</label>
