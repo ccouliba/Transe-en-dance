@@ -292,7 +292,6 @@ function endGame() {
 
 		playState.gameOver = true
 		playState.gameStarted = false
-		console.log(tournamentState.tournament, "sdsd")
 		if (tournamentState.tournament){
 			changePage("#tournament")
 			return

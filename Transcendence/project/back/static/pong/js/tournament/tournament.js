@@ -313,7 +313,6 @@ function startNewTournament() {
 
 
 function finishTournament() {
-	console.log(isTournamentFinished(matchmakingState.matches), matchmakingState.matches)
 	if (!isTournamentFinished(matchmakingState.matches))
 	{
 		alert(`${window.trans.cantFinishTournament}`)
