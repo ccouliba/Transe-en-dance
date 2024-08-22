@@ -18,12 +18,10 @@ function Tournament() {
 		return TournamentMatchmaking();
 	}
 
-	// let tournamentStatus = getTournamentStatus(tournament)
-	// <h1>Latest tournament name : ${tournament.name} - status : ${tournamentStatus}</h1>
 	let lastTournament = ""
-	// if (tournament){
-	// 	lastTournament = `<h1>${window.trans.latestTournament} : ${tournament.name}</h1>`
-	// }
+	if (tournament){
+		lastTournament = `<h1>${window.trans.latestTournament} : ${tournament.name}</h1>`
+	}
 
 	return `<div class="container mt-5">
 			${lastTournament}	
@@ -69,10 +67,9 @@ function loadTournamentState() {
 			if (tournamentState.tournament) {
 				// S'assurer que is_started est bien un booléen
 				tournamentState.tournament.is_started = Boolean(tournamentState.tournament.is_started);
-				
+
 				// Initialiser les listes si elles n'existent pas
-				tournamentState.tournament.participants = tournamentState.tournament.participants || [];
-				tournamentState.tournament.aliases = tournamentState.tournament.aliases || [];
+				
 			}
 			
 			tournamentState.isLoaded = true;
@@ -126,8 +123,8 @@ function addParticipant(event) {
 	}
 
 	const currentParticipantsCount = tournamentState.tournament.participants ? tournamentState.tournament.participants.length : 0;
-	console.log("currentParticipantsCount",currentParticipantsCount)
-	if (currentParticipantsCount >= 3) {
+	
+	if (currentParticipantsCount >= 5) {
 		alert(`${window.trans.participantLimitReached}`);
 		return;
 	}
@@ -148,7 +145,7 @@ function addParticipant(event) {
 			if (data.added_participants.length > 0) {
 				alert(`${window.trans.participant} ${participant} ${window.trans.addedSuccessfully}!`);
 				document.getElementById('participant').value = '';  // Clear the input field
-				updateParticipantsList(data.added_participants[0]);
+			
 			} else if (data.already_in_tournament.length > 0) {
 				alert(`${participant} ${window.trans.alreadyInTournament}.`);
 			} else if (data.not_found_participants.length > 0) {
@@ -180,7 +177,9 @@ function addAlias(event) {
 		alert(`${window.trans.bothUsernameAndAlias}`);
 		return;
 	}
-	if (!tournamentState.tournament.participants.includes(username)) {
+
+	let participantsNames = Object.values(tournamentState.tournament.participants).map(p => p.username)
+	if (!participantsNames.includes(username)) {
 		alert(`${window.trans.notAParticipant}.`);
 		return;
 	}
@@ -189,77 +188,35 @@ function addAlias(event) {
 	httpPostJson(url, { username: username, alias: alias })
 	.then(response => {
 		if (!response.ok) {
-			throw new Error(`${window.trans.httpError} status: ${response.status}`);
+			return response.json().then(err => { throw err; });
 		}
 		return response.json();
 	})
 	.then(data => {
 		if (data.status === 'success') {
 			alert(`${window.trans.alias} "${alias}" ${window.trans.addSuccessFor} "${username}"!`);
-			document.getElementById('username').value = '';  // Clear the username input
-			document.getElementById('alias').value = '';     // Clear the alias input
 			
 			// Update the local tournament state
-			if (!Array.isArray(tournamentState.tournament.aliases)) {
-				tournamentState.tournament.aliases = [];
-			}
-			tournamentState.tournament.aliases.push({ username: username, alias: alias });
-			
-			// Update the UI
-			updateAliasesList();
+			tournamentState.tournament.participants.find(p => p.username == username).alias = alias;
+		
+			document.getElementById('username').value = '';
+			document.getElementById('alias').value = '';
+		
+			mountComponent(Tournament)
 		} else {
 			alert(`${window.trans.errAddAlias}: ` + data.message);
 		}
 	})
 	.catch(error => {
 		console.error(`${window.trans.error}:`, error);
-		alert(`${window.trans.errAddingAlias}:` + error.message);
+		if (error.status === 'error' && error.message) {
+			alert(`${window.trans.errAddingAlias}: ` + error.message);
+		} else {
+			alert(`${window.trans.errAddingAlias}: ${window.trans.unknownError}`);
+		}
 	});
 }
 
-function updateAliasesList() {
-	const aliasesList = document.getElementById('aliasesList');
-	if (aliasesList) {
-		// Clear the current list
-		aliasesList.innerHTML = '';
-		
-		// Repopulate the list with all aliases
-		if (tournamentState.tournament.aliases && tournamentState.tournament.aliases.length > 0) {
-			tournamentState.tournament.aliases.forEach(aliasObj => {
-				const newItem = document.createElement('li');
-				newItem.textContent = `${aliasObj.username}: ${aliasObj.alias}`;
-				aliasesList.appendChild(newItem);
-			});
-		} else {
-			// If there are no aliases, show the "No aliases yet" message
-			const noAliasesItem = document.createElement('li');
-			noAliasesItem.textContent = 'No aliases yet';
-			aliasesList.appendChild(noAliasItem);
-		}
-	}
-}
-
-function updateAliasesList() {
-	const aliasesList = document.getElementById('aliasesList');
-	if (aliasesList) {
-		// Clear the current list
-		aliasesList.innerHTML = '';
-		
-		// Repopulate the list with all aliases
-		if (tournamentState.tournament.aliases && tournamentState.tournament.aliases.length > 0) {
-			tournamentState.tournament.aliases.forEach(aliasObj => {
-				const newItem = document.createElement('li');
-				newItem.textContent = aliasObj.username ? `${aliasObj.username}: ${aliasObj.alias}` : aliasObj.alias;
-				aliasesList.appendChild(newItem);
-			});
-		} else {
-			// If there are no aliases, show the "No aliases yet" message
-			const noAliasesItem = document.createElement('li');
-			noAliasesItem.textContent = 'No aliases yet';
-			aliasesList.appendChild(noAliasesItem);
-		}
-	}
-}
 
 function updateParticipantsList(newParticipant) {
 	const participantsList = document.getElementById('participantsList');

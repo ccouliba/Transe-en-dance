@@ -7,12 +7,8 @@ function Participants() {
 	}
 		
 	const participantsList = tournament.participants && tournament.participants.length > 0
-		? tournament.participants.map(p => `<li>${p}</li>`).join('')
+		? tournament.participants.map(p => `<li>${p.username} (${p.alias || "no alias"})</li>`).join('')
 		: `<li>${window.trans.noParticipants}</li>`;
-
-	const aliasesList = tournament.aliases && tournament.aliases.length > 0
-		? tournament.aliases.map(a => `<li>${a.username}: ${a.alias}</li>`).join('')
-		: `<li>${window.trans.noAliases}</li>`;
 
 	return `
 	<div class="tournament-details">
@@ -21,9 +17,7 @@ function Participants() {
 			${participantsList}
 		</ul>
 		<h3>${window.trans.aliases}:</h3>
-		<ul id="aliasesList">
-			${aliasesList}
-		</ul>
+		
 	</div>
 	`;
 }

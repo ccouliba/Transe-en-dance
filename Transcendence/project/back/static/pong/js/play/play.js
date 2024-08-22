@@ -163,6 +163,14 @@ function startTournamentMatch(matchId, player1Username, player2Username) {
 
 	playState.player1Username = player1Username;
 	playState.player2Username = player2Username;
+	
+	// const player1Alias = tournamentState.tournament.aliases[player1Username] || '';
+	// const player2Alias = tournamentState.tournament.aliases[player2Username] || '';
+	// console.log(tournamentState.tournament.aliases[player1Username] )
+	// playState.player1Username = player1Username + (player1Alias ? ` (${player1Alias})` : '');
+	// playState.player2Username = player2Username + (player2Alias ? ` (${player2Alias})` : '');
+
+
 	playState.player1Score = 0;
 	playState.player2Score = 0;
 	playState.gameId = matchId;

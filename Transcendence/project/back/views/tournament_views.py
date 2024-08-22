@@ -12,7 +12,7 @@ from django.db.models import IntegerField
 from django.utils import timezone
 from django.shortcuts import get_object_or_404
 from django.utils.html import escape
-
+from django.core.exceptions import ValidationError
 
 @require_http_methods(["POST"])
 @login_required
@@ -24,7 +24,7 @@ def create_tournament(request):
 		if not name:
 			return JsonResponse({'status': 'error', 'message': 'Tournament name required.'}, status=400)
 
-		tournament = Tournament.objects.create(name=name, aliases=[]) #alias est une liste vide
+		tournament = Tournament.objects.create(name=name) 
   
 		tournament.participants.add(request.user)
 
@@ -45,17 +45,22 @@ def create_tournament(request):
 def tournament_view(request):
 	latest_tournament = Tournament.objects.filter(participants=request.user).order_by('-created_at').first()
 	if latest_tournament:
-		# Traitement des aliases pour s'assurer qu'ils sont dans le bon format
-		formatted_aliases = []
-		for alias in latest_tournament.aliases:
-			if isinstance(alias, dict) and 'username' in alias and 'alias' in alias:
-				formatted_aliases.append(alias)
-			elif isinstance(alias, str):
-				# Si c'est une ancienne entrée (juste une chaîne), on ajoute un username par défaut
-				formatted_aliases.append({'username': 'Unknown', 'alias': alias})
-			else:
-				# Si le format n'est pas reconnu, on l'ignore
-				continue
+
+		participantsViewModel = []
+		aliases = latest_tournament.aliases
+	
+		for participant in list(latest_tournament.participants.all()):
+   
+  
+			participantVm = {
+       			"username": participant.username
+			}
+
+			id = str(participant.id) 
+			if  id in aliases:
+				participantVm["alias"] = aliases[id]
+
+			participantsViewModel.append(participantVm)
 
 		tournament_data = {
 			'id': latest_tournament.id,
@@ -64,8 +69,8 @@ def tournament_view(request):
 			'start_date': latest_tournament.start_date.isoformat() if latest_tournament.start_date else None,
 			'end_date': latest_tournament.end_date.isoformat() if latest_tournament.end_date else None,
 			'created_at': latest_tournament.created_at.isoformat(),
-			'participants': [participant.username for participant in list(latest_tournament.participants.all())],
-			'aliases': formatted_aliases,
+			'participants':participantsViewModel,
+			'aliases': latest_tournament.aliases,
 		}
 	   
 		return JsonResponse({
@@ -109,7 +114,7 @@ def add_participants(request, tournament_id):
 		tournament = get_object_or_404(Tournament, id=tournament_id)
 
 		current_participants_count = tournament.participants.count()
-		max_participants = 8
+		max_participants = 5
 		
 		if current_participants_count >= max_participants:
 			return JsonResponse({
@@ -161,32 +166,31 @@ def add_alias(request, tournament_id):
 		tournament = get_object_or_404(Tournament, id=tournament_id)
 		
 		data = json.loads(request.body)
-		new_username = data.get('username')
+		username = data.get('username')
 		new_alias = escape(data.get('alias'))
 		
-		if not new_username or not new_alias:
+		if not username or not new_alias:
 			return JsonResponse({'status': 'error', 'message': 'Both username and alias are required.'}, status=400)
 
-		if not tournament.participants.filter(username=new_username).exists():
+		player = tournament.participants.filter(username=username).first()
+		if not player:
 			return JsonResponse({'status': 'error', 'message': 'The user is not a participant in this tournament.'}, status=400)
 
-		new_alias_obj = {'username': new_username, 'alias': new_alias}
-		
-		if new_alias_obj not in tournament.aliases:
-			tournament.aliases.append(new_alias_obj)
+		try:
+			tournament.set_player_alias(player, new_alias)
 			tournament.save()
 			
 			return JsonResponse({
 				'status': 'success',
-				'message': f'Alias "{new_alias}" added successfully for user "{new_username}".',
+				'message': f'Alias "{new_alias}" added successfully for user "{username}".',
 				'aliases': tournament.aliases
 			})
-		else:
+		except ValidationError as e:
 			return JsonResponse({
-				'status': 'warning',
-				'message': f'Alias "{new_alias}" for user "{new_username}" already exists in this tournament.',
+				'status': 'error',
+				'message': str(e),
 				'aliases': tournament.aliases
-			})
+			}, status=400)
 	except Exception as e:
 		return JsonResponse({'status': 'error', 'message': str(e)}, status=400)
 
@@ -217,8 +221,6 @@ def start_tournament(request, tournament_id):
 	except Exception as e:
 		return JsonResponse({'status': 'error', 'message': str(e)}, status=400)
 
-
-
 @login_required
 def tournament_matchmaking(request, tournament_id):
 	tournament = get_object_or_404(Tournament, id=tournament_id)
@@ -228,9 +230,8 @@ def tournament_matchmaking(request, tournament_id):
    
 	participants = list(tournament.participants.all())
 	
-	# Get aliases
-	aliases = {alias['username']: alias['alias'] for alias in tournament.aliases}
-   
+	aliases = tournament.aliases
+
 	# Generate all possible matches if they don't exist
 	if Composed.objects.filter(tournament=tournament).count() == 0:
 		matches = list(combinations(participants, 2))
@@ -240,8 +241,8 @@ def tournament_matchmaking(request, tournament_id):
    
 	# Fetch all matches
 	composed_games = Composed.objects.filter(tournament=tournament).select_related('game')
-	matches = get_matches(aliases, composed_games)
-   
+	matches = get_matches(tournament, composed_games)
+
 	rankings = get_rankings(matches, aliases)
 	# Determine winner if all games are finished
 	winner = None

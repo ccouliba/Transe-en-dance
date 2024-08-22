@@ -113,14 +113,46 @@ class Tournament(models.Model):
 	end_date = models.DateTimeField(null=True, blank=True)
 	created_at = models.DateTimeField(auto_now_add=True, null=True)
 	participants = models.ManyToManyField(User, related_name='tournaments', blank=True)
-	aliases = models.JSONField(default=list, blank=True) 
- 
+	# aliases = models.JSONField(default=list, blank=True) 
+	aliases = models.JSONField(default=dict, blank=True)
 	def __init__(self, *args, **kwargs): # permet d'initialiser l'objet avec des valeurs par defaut ou personnalisees
 		super().__init__(*args, **kwargs) # pour appeler la method __init__ de la classe parente i.e. models.Model
 		# if not self.created_at:
 		# 	self.created_at = timezone.now() not necessary -> Django performs a default initialization
 	def __str__(self):
 		return self.name if self.name else "Unnamed tournament"
+
+	def set_player_alias(self, player, alias):
+		if str(player.id) in self.aliases.values():
+			raise ValidationError("Ce joueur a déjà un alias dans ce tournoi.")
+		if alias in self.aliases:
+			raise ValidationError("Cet alias est déjà utilisé dans ce tournoi.")
+		self.aliases[player.id] = alias
+		self.save()
+
+	def get_player_alias(self, player):
+		for alias, player_id in self.aliases.items():
+			if player_id == str(player.id):
+				return alias
+		return None
+
+	def get_player_by_alias(self, alias):
+		player_id = self.aliases.get(alias)
+		if player_id:
+			return User.objects.get(id=player_id)
+		return None
+
+	def clean(self):
+		super().clean()
+		player_ids = set()
+		for alias, player_id in self.aliases.items():
+			if player_id in player_ids:
+				raise ValidationError("Un joueur ne peut avoir qu'un seul alias.")
+			player_ids.add(player_id)
+
+	def save(self, *args, **kwargs):
+		self.full_clean()
+		super().save(*args, **kwargs)
 
 class Game(models.Model):
 	player1 = models.ForeignKey(User, related_name='player1_games', on_delete=models.CASCADE,  null=True, blank=True)

@@ -146,7 +146,7 @@ async function loadProfileFromBackend() {
 // fonction pour envoyer les donnees de mise a jour du profil au backend
 function sendProfileToBackend(payload) {
 	// console.log("authenticated:", !!localStorage.getItem('userToken'));
-	let url = `/pong/api/profile/update`; // url de l'API pour mettre a jour le profil
+	let url = `/pong/api/profile/update/`; // url de l'API pour mettre a jour le profil
 
 	return httpPostJson(url, payload)
 		.then(response => {
