@@ -408,7 +408,7 @@ function EditPassword() {
 		// recupere la valeur du champ 'new_password2' du formulaire
 		const newPassword2 = event.target.elements.new_password2.value;
 
-		let url = `/pong/api/profile/change-password`;
+		let url = `/pong/api/profile/change-password/`;
 
 		// envoie une requete POST a l'API pour changer le mot de passe
 		httpPostJson(url, {
