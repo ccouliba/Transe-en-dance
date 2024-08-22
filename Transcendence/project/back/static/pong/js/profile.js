@@ -172,6 +172,10 @@ function EditUsername() {
 		event.preventDefault(); // empecher l'execution par defaut de l'evenement submit
 		const usernameInput = event.target.elements.username.value; // recuperer la nouvelle valeur du nom d'utilisateur
 
+		if (usernameInput.length === 0){
+			alert("no empty username")
+			return
+		}
 		profileState.username = usernameInput; // mettre a jour profileState
 		sendProfileToBackend({
 			'username': usernameInput
