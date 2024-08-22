@@ -11,6 +11,9 @@ function executeLogout() {
 		return; // sortir de la fonction si deja deconnecte
 	}
 	let url = `/pong/api/logout/`; 
+
+
+	clearInterval(friendsState.friendStatusInterval)
 	// fetch(url, {
 	// 	method: "POST", 
 	// 	credentials: "include", 
