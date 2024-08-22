@@ -30,6 +30,7 @@ function Login() {
 		loadLoginState(); // Charger la page si non chargee
 	}
 
+	updateMenu();
 	
 	return `
 		<div class="container text-center mt-5">

@@ -1,5 +1,6 @@
 function Menu() {
     const isLoggedIn = localStorage.getItem('userToken') === 'true';
+    if (!isLoggedIn) return ''; 
     return `
     <div class="menuStructureTop">
         ${isLoggedIn ? `

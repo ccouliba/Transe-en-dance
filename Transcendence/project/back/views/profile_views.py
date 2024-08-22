@@ -163,7 +163,7 @@ def edit_password_view(request):
 		if data.get('new_password1') != data.get('new_password2'):
 				return JsonResponse(
 				{'status': 'error', 'errors': {'new_password2': ['The two password fields didn\'t match.']}},
-				status=400
+				status=200
 			)
 		user.set_password(data.get('new_password1'))
 		user.save()

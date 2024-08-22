@@ -15,20 +15,20 @@ def send_friend_request(request):
 	try:
 		to_user = User.objects.get(email=to_email)
 	except User.DoesNotExist:
-		return JsonResponse({'status': 'error', 'message': 'USER_NOT_FOUND'}, status=404)
+		return JsonResponse({'status': 'error', 'message': 'USER_NOT_FOUND'}, status=200)
 
 	# Vérifier si l'utilisateur essaie de s'envoyer une demande d'ami
 	if request.user == to_user:
-		return JsonResponse({'status': 'error', 'message': 'CANNOT_SEND_REQUEST_TO_SELF'}, status=400)
+		return JsonResponse({'status': 'error', 'message': 'CANNOT_SEND_REQUEST_TO_SELF'}, status=200)
 
 	# Vérifier si une demande existe déjà
 	existing_request = Friendship.objects.filter(id_user_1=request.user, id_user_2=to_user).first()
 	if existing_request:
-		return JsonResponse({'status': 'error', 'message': 'FRIEND_REQUEST_ALREADY_SENT'}, status=400)
+		return JsonResponse({'status': 'error', 'message': 'FRIEND_REQUEST_ALREADY_SENT'}, status=200)
 
 	# Vérifier si les utilisateurs sont déjà amis
 	if request.user.friends.filter(id=to_user.id).exists():
-		return JsonResponse({'status': 'error', 'message': 'ALREADY_FRIENDS'}, status=400)
+		return JsonResponse({'status': 'error', 'message': 'ALREADY_FRIENDS'}, status=200)
 
 	# Créer une nouvelle demande d'ami
 	friend_request = Friendship.objects.create(id_user_1=request.user, id_user_2=to_user)
@@ -57,12 +57,12 @@ def accept_friend_request(request):
 		try:
 			from_user = User.objects.get(email=from_email)
 		except User.DoesNotExist:
-			return JsonResponse({'status': 'error', 'message': 'USER_NOT_FOUND'}, status=404)
+			return JsonResponse({'status': 'error', 'message': 'USER_NOT_FOUND'}, status=200)
 	
 		# Vérifier si une demande existe
 		friend_request = Friendship.objects.filter(id_user_1=from_user, id_user_2=request.user).first()
 		if not friend_request:
-			return JsonResponse({'status': 'error', 'message': 'NO_PENDING_FRIEND_REQUESTS'}, status=400)
+			return JsonResponse({'status': 'error', 'message': 'NO_PENDING_FRIEND_REQUESTS'}, status=200)
 		
 		# Accepter la demande d'ami
 		request.user.friends.add(from_user)
@@ -81,7 +81,7 @@ def accept_friend_request(request):
 			}
 		})
 	except User.DoesNotExist:
-		return JsonResponse({'status': 'error', 'message': 'USER_NOT_FOUND'}, status=404)
+		return JsonResponse({'status': 'error', 'message': 'USER_NOT_FOUND'}, status=200)
 	except Exception as e:
 		return JsonResponse({'status': 'error', 'message': str(e)}, status=500)
 
@@ -96,7 +96,7 @@ def remove_friend(request):
 		friend = User.objects.get(email=friend_email)
 		
 		if friend not in request.user.friends.all():
-			return JsonResponse({'status': 'error', 'message': 'USER_NOT_IN_FRIEND_LIST'}, status=400)
+			return JsonResponse({'status': 'error', 'message': 'USER_NOT_IN_FRIEND_LIST'}, status=200)
 		
 		request.user.friends.remove(friend)
 		friend.friends.remove(request.user)
@@ -106,7 +106,7 @@ def remove_friend(request):
 			'message': 'Ami supprimé avec succès.',
 		})
 	except User.DoesNotExist:
-		return JsonResponse({'status': 'error', 'message': 'USER_NOT_FOUND'}, status=404)
+		return JsonResponse({'status': 'error', 'message': 'USER_NOT_FOUND'}, status=200)
 	except Exception as e:
 		return JsonResponse({'status': 'error', 'message': str(e)}, status=500)
 

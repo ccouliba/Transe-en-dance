@@ -22,6 +22,7 @@ function executeLogout() {
 	})
 	.then(data => {
 		if (data.status === 'success') {
+
 			
 		} else {
 			console.error(`${window.trans.logoutFail}`, data.message); // afficher un message d'erreur
@@ -53,5 +54,6 @@ function resetAllStates() {
 // fonction pour afficher le message de deconnexion
 function Logout() {
 	executeLogout(); 
+	
 	return `${Login()}`;
 }

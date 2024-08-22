@@ -305,6 +305,8 @@ function updateMenu() {
 		// Mettre a jour le contenu HTML de l'element menu-container avec le nouveau menu genere par la fonction Menu
 		menuContainer.innerHTML = Menu();
 	}
+
+	
 }
 
 function escapeHtml(unsafe) {
