@@ -183,7 +183,7 @@ def edit_password_view(request):
 		update_session_auth_hash(request, form.user) #methode Django
 		return JsonResponse({'status': 'success'})
 
-	return JsonResponse({'status': 'error', 'errors': form.errors}, status=400)
+	return JsonResponse({'status': 'error', 'errors': form.errors}, status=200)
 
 
 
