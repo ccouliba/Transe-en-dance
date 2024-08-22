@@ -201,8 +201,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'back.User'
 
-
-APPEND_SLASH = True
+APPEND_SLASH = False
 
 LOGIN_REDIRECT_URL = '/pong/home/'
 LOGOUT_REDIRECT_URL = '/pong/login/'

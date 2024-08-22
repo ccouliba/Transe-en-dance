@@ -1,0 +1,11 @@
+server.ssl.enabled: true
+server.ssl.certificate: /usr/share/kibana/config/certs/certificate.crt
+server.ssl.key: /usr/share/kibana/config/certs/certificate.key
+
+elasticsearch.hosts: ["https://elasticsearch:9200"]
+elasticsearch.username: "kibana_system"
+elasticsearch.password: "Pssd1234"
+
+# Pour accepter le certificat auto-signé d'Elasticsearch
+elasticsearch.ssl.verificationMode: "certificate"
+elasticsearch.ssl.certificateAuthorities: [ "/usr/share/kibana/config/certs/certificate.crt" ]
