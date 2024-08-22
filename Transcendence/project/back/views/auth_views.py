@@ -72,9 +72,9 @@ def register_view(request):
 			user = form.save()
 			return JsonResponse({'status': 'success'})
 		else:
-			return JsonResponse({'status': 'error', 'message': form.errors}, status=400)
+			return JsonResponse({'status': 'error', 'message': form.errors}, status=200)
 	except json.JSONDecodeError:
-		return JsonResponse({'status': 'error', 'message': 'INVALID_JSON'}, status=400)
+		return JsonResponse({'status': 'error', 'message': 'INVALID_JSON'}, status=200)
 	except Exception as e:
 		return JsonResponse({'status': 'error', 'message': str(e)}, status=500)
 

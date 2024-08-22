@@ -61,6 +61,8 @@ function handleRegister(event) {
 		}
 	})
 	.catch(error => {
+
+
 		console.error(`${window.trans.error}`, error);
 		alert(`${window.trans.errorRegistrationRetry}.`);
 	});
