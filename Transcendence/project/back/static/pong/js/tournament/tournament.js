@@ -209,16 +209,26 @@ function addAlias(event) {
 		
 			mountComponent(Tournament)
 		} else {
-			alert(`${window.trans.errAddAlias}: ` + data.message);
+			let errorMessage;
+			switch(data.code) {
+				case 'PLAYER_ALREADY_HAS_ALIAS':
+					errorMessage = window.trans.playerAlreadyHasAlias;
+					break;
+				case 'ALIAS_ALREADY_USED':
+					errorMessage = window.trans.aliasAlreadyUsed;
+					break;
+				case 'VALIDATION_ERROR':
+					errorMessage = window.trans.validationError;
+					break;
+				default:
+					errorMessage = window.trans.unknownError;
+			}
+			alert(`${window.trans.errAddAlias}: ${errorMessage}`);
 		}
 	})
 	.catch(error => {
 		console.error(`${window.trans.error}:`, error);
-		if (error.status === 'error' && error.message) {
-			alert(`${window.trans.errAddingAlias}: ` + error.message);
-		} else {
-			alert(`${window.trans.errAddingAlias}: ${window.trans.unknownError}`);
-		}
+		alert(`${window.trans.errAddingAlias}: ${window.trans.unknownError}`);
 	});
 }
 

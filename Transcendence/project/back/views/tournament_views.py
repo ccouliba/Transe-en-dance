@@ -52,7 +52,7 @@ def tournament_view(request):
 		for participant in list(latest_tournament.participants.all()):
    
 			participantVm = {
-       			"username": participant.username
+	   			"username": participant.username
 			}
 
 			id = str(participant.id) 
@@ -185,13 +185,19 @@ def add_alias(request, tournament_id):
 				'aliases': tournament.aliases
 			})
 		except ValidationError as e:
+			error_message = str(e)
+			if "Ce joueur a déjà un alias dans ce tournoi" in error_message:
+				error_code = 'PLAYER_ALREADY_HAS_ALIAS'
+			elif "Cet alias est déjà utilisé dans ce tournoi" in error_message:
+				error_code = 'ALIAS_ALREADY_USED'
+			else:
+				error_code = 'VALIDATION_ERROR'
 			return JsonResponse({
 				'status': 'error',
-				'message': str(e),
-				'aliases': tournament.aliases
-			}, status=400)
+				'code': error_code,
+			}, status=200)
 	except Exception as e:
-		return JsonResponse({'status': 'error', 'message': str(e)}, status=400)
+		return JsonResponse({'status': 'error', 'code': 'UNKNOWN_ERROR'}, status=200)
 
 
 @login_required

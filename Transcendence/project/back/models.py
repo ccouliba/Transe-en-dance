@@ -147,7 +147,7 @@ class Tournament(models.Model):
 		player_ids = set()
 		for alias, player_id in self.aliases.items():
 			if player_id in player_ids:
-				raise ValidationError("Un joueur ne peut avoir qu'un seul alias.")
+				raise ValidationError("Cet alias est déjà utilisé dans ce tournoi.")
 			player_ids.add(player_id)
 
 	def save(self, *args, **kwargs):

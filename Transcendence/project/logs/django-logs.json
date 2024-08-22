@@ -3058,3 +3058,595 @@ back __call__ code: [200] => [success]
 back __call__ Request from: [/static/pong/images/favicon.ico]
 back __call__ code: [200] => [success]
 >>>>>>> merge_preprod_https
+django.request Unauthorized: /pong/api/login/
+django.request Unauthorized: /pong/api/login/
+django.request Bad Request: /pong/api/register/
+django.request Bad Request: /pong/api/register/
+django.request Not Found: /
+django.request Not Found: /
+django.request Not Found: /favicon.ico
+django.request Not Found: /favicon.ico
+django.request Unauthorized: /pong/api/login/
+django.request Unauthorized: /pong/api/login/
+django.request Unauthorized: /pong/api/login/
+django.request Unauthorized: /pong/api/login/
+django.request Internal Server Error: /pong/api/profile/update
+Traceback (most recent call last):
+  File "/home/nat/.local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/nat/.local/lib/python3.8/site-packages/django/utils/deprecation.py", line 136, in __call__
+    response = self.process_response(request, response)
+  File "/home/nat/.local/lib/python3.8/site-packages/django/middleware/common.py", line 108, in process_response
+    return self.response_redirect_class(self.get_full_path_with_slash(request))
+  File "/home/nat/.local/lib/python3.8/site-packages/django/middleware/common.py", line 87, in get_full_path_with_slash
+    raise RuntimeError(
+RuntimeError: You called this URL via POST, but the URL doesn't end in a slash and you have APPEND_SLASH set. Django can't redirect to the slash URL while maintaining POST data. Change your form to point to localhost:8443/pong/api/profile/update/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.
+django.request Internal Server Error: /pong/api/profile/update
+Traceback (most recent call last):
+  File "/home/nat/.local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/nat/.local/lib/python3.8/site-packages/django/utils/deprecation.py", line 136, in __call__
+    response = self.process_response(request, response)
+  File "/home/nat/.local/lib/python3.8/site-packages/django/middleware/common.py", line 108, in process_response
+    return self.response_redirect_class(self.get_full_path_with_slash(request))
+  File "/home/nat/.local/lib/python3.8/site-packages/django/middleware/common.py", line 87, in get_full_path_with_slash
+    raise RuntimeError(
+RuntimeError: You called this URL via POST, but the URL doesn't end in a slash and you have APPEND_SLASH set. Django can't redirect to the slash URL while maintaining POST data. Change your form to point to localhost:8443/pong/api/profile/update/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.
+django.request Internal Server Error: /pong/api/profile/update
+Traceback (most recent call last):
+  File "/home/nat/.local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/nat/.local/lib/python3.8/site-packages/django/utils/deprecation.py", line 136, in __call__
+    response = self.process_response(request, response)
+  File "/home/nat/.local/lib/python3.8/site-packages/django/middleware/common.py", line 108, in process_response
+    return self.response_redirect_class(self.get_full_path_with_slash(request))
+  File "/home/nat/.local/lib/python3.8/site-packages/django/middleware/common.py", line 87, in get_full_path_with_slash
+    raise RuntimeError(
+RuntimeError: You called this URL via POST, but the URL doesn't end in a slash and you have APPEND_SLASH set. Django can't redirect to the slash URL while maintaining POST data. Change your form to point to localhost:8443/pong/api/profile/update/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.
+django.request Internal Server Error: /pong/api/profile/update
+Traceback (most recent call last):
+  File "/home/nat/.local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/nat/.local/lib/python3.8/site-packages/django/utils/deprecation.py", line 136, in __call__
+    response = self.process_response(request, response)
+  File "/home/nat/.local/lib/python3.8/site-packages/django/middleware/common.py", line 108, in process_response
+    return self.response_redirect_class(self.get_full_path_with_slash(request))
+  File "/home/nat/.local/lib/python3.8/site-packages/django/middleware/common.py", line 87, in get_full_path_with_slash
+    raise RuntimeError(
+RuntimeError: You called this URL via POST, but the URL doesn't end in a slash and you have APPEND_SLASH set. Django can't redirect to the slash URL while maintaining POST data. Change your form to point to localhost:8443/pong/api/profile/update/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.
+django.request Internal Server Error: /pong/api/profile/update
+Traceback (most recent call last):
+  File "/home/nat/.local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/nat/.local/lib/python3.8/site-packages/django/utils/deprecation.py", line 136, in __call__
+    response = self.process_response(request, response)
+  File "/home/nat/.local/lib/python3.8/site-packages/django/middleware/common.py", line 108, in process_response
+    return self.response_redirect_class(self.get_full_path_with_slash(request))
+  File "/home/nat/.local/lib/python3.8/site-packages/django/middleware/common.py", line 87, in get_full_path_with_slash
+    raise RuntimeError(
+RuntimeError: You called this URL via POST, but the URL doesn't end in a slash and you have APPEND_SLASH set. Django can't redirect to the slash URL while maintaining POST data. Change your form to point to localhost:8443/pong/api/profile/update/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.
+django.request Internal Server Error: /pong/api/profile/update
+Traceback (most recent call last):
+  File "/home/nat/.local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/nat/.local/lib/python3.8/site-packages/django/utils/deprecation.py", line 136, in __call__
+    response = self.process_response(request, response)
+  File "/home/nat/.local/lib/python3.8/site-packages/django/middleware/common.py", line 108, in process_response
+    return self.response_redirect_class(self.get_full_path_with_slash(request))
+  File "/home/nat/.local/lib/python3.8/site-packages/django/middleware/common.py", line 87, in get_full_path_with_slash
+    raise RuntimeError(
+RuntimeError: You called this URL via POST, but the URL doesn't end in a slash and you have APPEND_SLASH set. Django can't redirect to the slash URL while maintaining POST data. Change your form to point to localhost:8443/pong/api/profile/update/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.
+django.request Internal Server Error: /pong/api/profile/update
+Traceback (most recent call last):
+  File "/home/nat/.local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/nat/.local/lib/python3.8/site-packages/django/utils/deprecation.py", line 136, in __call__
+    response = self.process_response(request, response)
+  File "/home/nat/.local/lib/python3.8/site-packages/django/middleware/common.py", line 108, in process_response
+    return self.response_redirect_class(self.get_full_path_with_slash(request))
+  File "/home/nat/.local/lib/python3.8/site-packages/django/middleware/common.py", line 87, in get_full_path_with_slash
+    raise RuntimeError(
+RuntimeError: You called this URL via POST, but the URL doesn't end in a slash and you have APPEND_SLASH set. Django can't redirect to the slash URL while maintaining POST data. Change your form to point to localhost:8443/pong/api/profile/update/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.
+django.request Internal Server Error: /pong/api/profile/update
+Traceback (most recent call last):
+  File "/home/nat/.local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/nat/.local/lib/python3.8/site-packages/django/utils/deprecation.py", line 136, in __call__
+    response = self.process_response(request, response)
+  File "/home/nat/.local/lib/python3.8/site-packages/django/middleware/common.py", line 108, in process_response
+    return self.response_redirect_class(self.get_full_path_with_slash(request))
+  File "/home/nat/.local/lib/python3.8/site-packages/django/middleware/common.py", line 87, in get_full_path_with_slash
+    raise RuntimeError(
+RuntimeError: You called this URL via POST, but the URL doesn't end in a slash and you have APPEND_SLASH set. Django can't redirect to the slash URL while maintaining POST data. Change your form to point to localhost:8443/pong/api/profile/update/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.
+django.request Internal Server Error: /pong/api/profile/update
+Traceback (most recent call last):
+  File "/home/nat/.local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/nat/.local/lib/python3.8/site-packages/django/utils/deprecation.py", line 136, in __call__
+    response = self.process_response(request, response)
+  File "/home/nat/.local/lib/python3.8/site-packages/django/middleware/common.py", line 108, in process_response
+    return self.response_redirect_class(self.get_full_path_with_slash(request))
+  File "/home/nat/.local/lib/python3.8/site-packages/django/middleware/common.py", line 87, in get_full_path_with_slash
+    raise RuntimeError(
+RuntimeError: You called this URL via POST, but the URL doesn't end in a slash and you have APPEND_SLASH set. Django can't redirect to the slash URL while maintaining POST data. Change your form to point to localhost:8443/pong/api/profile/update/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.
+django.request Internal Server Error: /pong/api/profile/update
+Traceback (most recent call last):
+  File "/home/nat/.local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/nat/.local/lib/python3.8/site-packages/django/utils/deprecation.py", line 136, in __call__
+    response = self.process_response(request, response)
+  File "/home/nat/.local/lib/python3.8/site-packages/django/middleware/common.py", line 108, in process_response
+    return self.response_redirect_class(self.get_full_path_with_slash(request))
+  File "/home/nat/.local/lib/python3.8/site-packages/django/middleware/common.py", line 87, in get_full_path_with_slash
+    raise RuntimeError(
+RuntimeError: You called this URL via POST, but the URL doesn't end in a slash and you have APPEND_SLASH set. Django can't redirect to the slash URL while maintaining POST data. Change your form to point to localhost:8443/pong/api/profile/update/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.
+django.request Internal Server Error: /pong/api/profile/update
+Traceback (most recent call last):
+  File "/home/nat/.local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/nat/.local/lib/python3.8/site-packages/django/utils/deprecation.py", line 136, in __call__
+    response = self.process_response(request, response)
+  File "/home/nat/.local/lib/python3.8/site-packages/django/middleware/common.py", line 108, in process_response
+    return self.response_redirect_class(self.get_full_path_with_slash(request))
+  File "/home/nat/.local/lib/python3.8/site-packages/django/middleware/common.py", line 87, in get_full_path_with_slash
+    raise RuntimeError(
+RuntimeError: You called this URL via POST, but the URL doesn't end in a slash and you have APPEND_SLASH set. Django can't redirect to the slash URL while maintaining POST data. Change your form to point to localhost:8443/pong/api/profile/update/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.
+django.request Internal Server Error: /pong/api/profile/update
+Traceback (most recent call last):
+  File "/home/nat/.local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/nat/.local/lib/python3.8/site-packages/django/utils/deprecation.py", line 136, in __call__
+    response = self.process_response(request, response)
+  File "/home/nat/.local/lib/python3.8/site-packages/django/middleware/common.py", line 108, in process_response
+    return self.response_redirect_class(self.get_full_path_with_slash(request))
+  File "/home/nat/.local/lib/python3.8/site-packages/django/middleware/common.py", line 87, in get_full_path_with_slash
+    raise RuntimeError(
+RuntimeError: You called this URL via POST, but the URL doesn't end in a slash and you have APPEND_SLASH set. Django can't redirect to the slash URL while maintaining POST data. Change your form to point to localhost:8443/pong/api/profile/update/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.
+django.request Bad Request: /pong/api/profile/send_friend_request/
+django.request Bad Request: /pong/api/profile/send_friend_request/
+django.request Unauthorized: /pong/api/login/
+django.request Unauthorized: /pong/api/login/
+django.request Internal Server Error: /pong/api/profile/update
+Traceback (most recent call last):
+  File "/home/nat/.local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/nat/.local/lib/python3.8/site-packages/django/utils/deprecation.py", line 136, in __call__
+    response = self.process_response(request, response)
+  File "/home/nat/.local/lib/python3.8/site-packages/django/middleware/common.py", line 108, in process_response
+    return self.response_redirect_class(self.get_full_path_with_slash(request))
+  File "/home/nat/.local/lib/python3.8/site-packages/django/middleware/common.py", line 87, in get_full_path_with_slash
+    raise RuntimeError(
+RuntimeError: You called this URL via POST, but the URL doesn't end in a slash and you have APPEND_SLASH set. Django can't redirect to the slash URL while maintaining POST data. Change your form to point to localhost:8443/pong/api/profile/update/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.
+django.request Internal Server Error: /pong/api/profile/update
+Traceback (most recent call last):
+  File "/home/nat/.local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/nat/.local/lib/python3.8/site-packages/django/utils/deprecation.py", line 136, in __call__
+    response = self.process_response(request, response)
+  File "/home/nat/.local/lib/python3.8/site-packages/django/middleware/common.py", line 108, in process_response
+    return self.response_redirect_class(self.get_full_path_with_slash(request))
+  File "/home/nat/.local/lib/python3.8/site-packages/django/middleware/common.py", line 87, in get_full_path_with_slash
+    raise RuntimeError(
+RuntimeError: You called this URL via POST, but the URL doesn't end in a slash and you have APPEND_SLASH set. Django can't redirect to the slash URL while maintaining POST data. Change your form to point to localhost:8443/pong/api/profile/update/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.
+django.request Internal Server Error: /pong/api/profile/update
+Traceback (most recent call last):
+  File "/home/nat/.local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/nat/.local/lib/python3.8/site-packages/django/utils/deprecation.py", line 136, in __call__
+    response = self.process_response(request, response)
+  File "/home/nat/.local/lib/python3.8/site-packages/django/middleware/common.py", line 108, in process_response
+    return self.response_redirect_class(self.get_full_path_with_slash(request))
+  File "/home/nat/.local/lib/python3.8/site-packages/django/middleware/common.py", line 87, in get_full_path_with_slash
+    raise RuntimeError(
+RuntimeError: You called this URL via POST, but the URL doesn't end in a slash and you have APPEND_SLASH set. Django can't redirect to the slash URL while maintaining POST data. Change your form to point to localhost:8443/pong/api/profile/update/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.
+django.request Internal Server Error: /pong/api/profile/update
+Traceback (most recent call last):
+  File "/home/nat/.local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/nat/.local/lib/python3.8/site-packages/django/utils/deprecation.py", line 136, in __call__
+    response = self.process_response(request, response)
+  File "/home/nat/.local/lib/python3.8/site-packages/django/middleware/common.py", line 108, in process_response
+    return self.response_redirect_class(self.get_full_path_with_slash(request))
+  File "/home/nat/.local/lib/python3.8/site-packages/django/middleware/common.py", line 87, in get_full_path_with_slash
+    raise RuntimeError(
+RuntimeError: You called this URL via POST, but the URL doesn't end in a slash and you have APPEND_SLASH set. Django can't redirect to the slash URL while maintaining POST data. Change your form to point to localhost:8443/pong/api/profile/update/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.
+django.request Internal Server Error: /pong/api/profile/update
+Traceback (most recent call last):
+  File "/home/nat/.local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/nat/.local/lib/python3.8/site-packages/django/utils/deprecation.py", line 136, in __call__
+    response = self.process_response(request, response)
+  File "/home/nat/.local/lib/python3.8/site-packages/django/middleware/common.py", line 108, in process_response
+    return self.response_redirect_class(self.get_full_path_with_slash(request))
+  File "/home/nat/.local/lib/python3.8/site-packages/django/middleware/common.py", line 87, in get_full_path_with_slash
+    raise RuntimeError(
+RuntimeError: You called this URL via POST, but the URL doesn't end in a slash and you have APPEND_SLASH set. Django can't redirect to the slash URL while maintaining POST data. Change your form to point to localhost:8443/pong/api/profile/update/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.
+django.request Internal Server Error: /pong/api/profile/update
+Traceback (most recent call last):
+  File "/home/nat/.local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/nat/.local/lib/python3.8/site-packages/django/utils/deprecation.py", line 136, in __call__
+    response = self.process_response(request, response)
+  File "/home/nat/.local/lib/python3.8/site-packages/django/middleware/common.py", line 108, in process_response
+    return self.response_redirect_class(self.get_full_path_with_slash(request))
+  File "/home/nat/.local/lib/python3.8/site-packages/django/middleware/common.py", line 87, in get_full_path_with_slash
+    raise RuntimeError(
+RuntimeError: You called this URL via POST, but the URL doesn't end in a slash and you have APPEND_SLASH set. Django can't redirect to the slash URL while maintaining POST data. Change your form to point to localhost:8443/pong/api/profile/update/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.
+django.request Bad Request: /pong/api/tournament/6/add_alias/
+django.request Bad Request: /pong/api/tournament/6/add_alias/
+django.request Bad Request: /pong/api/tournament/6/add_alias/
+django.request Bad Request: /pong/api/tournament/6/add_alias/
+django.request Bad Request: /pong/api/tournament/6/add_alias/
+django.request Bad Request: /pong/api/tournament/6/add_alias/
+django.request Bad Request: /pong/api/tournament/6/add_alias/
+django.request Bad Request: /pong/api/tournament/6/add_alias/
+django.request Internal Server Error: /pong/api/tournament/6/matchmaking/
+Traceback (most recent call last):
+  File "/home/nat/.local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/nat/.local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/nat/.local/lib/python3.8/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+  File "/home/nat/project/Transe-en-dance/Transcendence/project/back/views/tournament_views.py", line 231, in tournament_matchmaking
+    matches = get_matches(aliases, composed_games)
+  File "/home/nat/project/Transe-en-dance/Transcendence/project/back/views/tournament_presenter.py", line 39, in get_matches
+    matches = [
+  File "/home/nat/project/Transe-en-dance/Transcendence/project/back/views/tournament_presenter.py", line 44, in <listcomp>
+    'alias': tournament.get_player_alias(cg.game.player1)
+AttributeError: 'dict' object has no attribute 'get_player_alias'
+django.request Internal Server Error: /pong/api/tournament/6/matchmaking/
+Traceback (most recent call last):
+  File "/home/nat/.local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/nat/.local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/nat/.local/lib/python3.8/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+  File "/home/nat/project/Transe-en-dance/Transcendence/project/back/views/tournament_views.py", line 231, in tournament_matchmaking
+    matches = get_matches(aliases, composed_games)
+  File "/home/nat/project/Transe-en-dance/Transcendence/project/back/views/tournament_presenter.py", line 39, in get_matches
+    matches = [
+  File "/home/nat/project/Transe-en-dance/Transcendence/project/back/views/tournament_presenter.py", line 44, in <listcomp>
+    'alias': tournament.get_player_alias(cg.game.player1)
+AttributeError: 'dict' object has no attribute 'get_player_alias'
+django.request Internal Server Error: /pong/api/tournament/6/matchmaking/
+Traceback (most recent call last):
+  File "/home/nat/.local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/nat/.local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/nat/.local/lib/python3.8/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+  File "/home/nat/project/Transe-en-dance/Transcendence/project/back/views/tournament_views.py", line 231, in tournament_matchmaking
+    matches = get_matches(aliases, composed_games)
+  File "/home/nat/project/Transe-en-dance/Transcendence/project/back/views/tournament_presenter.py", line 39, in get_matches
+    matches = [
+  File "/home/nat/project/Transe-en-dance/Transcendence/project/back/views/tournament_presenter.py", line 44, in <listcomp>
+    'alias': tournament.get_player_alias(cg.game.player1)
+AttributeError: 'dict' object has no attribute 'get_player_alias'
+django.request Internal Server Error: /pong/api/tournament/6/matchmaking/
+Traceback (most recent call last):
+  File "/home/nat/.local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/nat/.local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/nat/.local/lib/python3.8/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+  File "/home/nat/project/Transe-en-dance/Transcendence/project/back/views/tournament_views.py", line 231, in tournament_matchmaking
+    matches = get_matches(aliases, composed_games)
+  File "/home/nat/project/Transe-en-dance/Transcendence/project/back/views/tournament_presenter.py", line 39, in get_matches
+    matches = [
+  File "/home/nat/project/Transe-en-dance/Transcendence/project/back/views/tournament_presenter.py", line 44, in <listcomp>
+    'alias': tournament.get_player_alias(cg.game.player1)
+AttributeError: 'dict' object has no attribute 'get_player_alias'
+django.request Not Found: /favicon.ico
+django.request Not Found: /favicon.ico
+django.request Internal Server Error: /pong/api/tournament/6/matchmaking/
+Traceback (most recent call last):
+  File "/home/nat/.local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/nat/.local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/nat/.local/lib/python3.8/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+  File "/home/nat/project/Transe-en-dance/Transcendence/project/back/views/tournament_views.py", line 231, in tournament_matchmaking
+    matches = get_matches(aliases, composed_games)
+  File "/home/nat/project/Transe-en-dance/Transcendence/project/back/views/tournament_presenter.py", line 39, in get_matches
+    matches = [
+  File "/home/nat/project/Transe-en-dance/Transcendence/project/back/views/tournament_presenter.py", line 44, in <listcomp>
+    'alias': tournament.get_player_alias(cg.game.player1)
+AttributeError: 'dict' object has no attribute 'get_player_alias'
+django.request Internal Server Error: /pong/api/tournament/6/matchmaking/
+Traceback (most recent call last):
+  File "/home/nat/.local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/nat/.local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/nat/.local/lib/python3.8/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+  File "/home/nat/project/Transe-en-dance/Transcendence/project/back/views/tournament_views.py", line 231, in tournament_matchmaking
+    matches = get_matches(aliases, composed_games)
+  File "/home/nat/project/Transe-en-dance/Transcendence/project/back/views/tournament_presenter.py", line 39, in get_matches
+    matches = [
+  File "/home/nat/project/Transe-en-dance/Transcendence/project/back/views/tournament_presenter.py", line 44, in <listcomp>
+    'alias': tournament.get_player_alias(cg.game.player1)
+AttributeError: 'dict' object has no attribute 'get_player_alias'
+django.request Internal Server Error: /pong/api/tournament/6/matchmaking/
+Traceback (most recent call last):
+  File "/home/nat/.local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/nat/.local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/nat/.local/lib/python3.8/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+  File "/home/nat/project/Transe-en-dance/Transcendence/project/back/views/tournament_views.py", line 233, in tournament_matchmaking
+    rankings = get_rankings(matches, aliases)
+  File "/home/nat/project/Transe-en-dance/Transcendence/project/back/views/tournament_presenter.py", line 13, in get_rankings
+    rankings[player1] = {'username': player1, 'alias': tournament.get_player_alias(tournament.participants.get(username=player1)), 'wins': 0, 'total_score': 0}
+AttributeError: 'dict' object has no attribute 'get_player_alias'
+django.request Internal Server Error: /pong/api/tournament/6/matchmaking/
+Traceback (most recent call last):
+  File "/home/nat/.local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/nat/.local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/nat/.local/lib/python3.8/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+  File "/home/nat/project/Transe-en-dance/Transcendence/project/back/views/tournament_views.py", line 233, in tournament_matchmaking
+    rankings = get_rankings(matches, aliases)
+  File "/home/nat/project/Transe-en-dance/Transcendence/project/back/views/tournament_presenter.py", line 13, in get_rankings
+    rankings[player1] = {'username': player1, 'alias': tournament.get_player_alias(tournament.participants.get(username=player1)), 'wins': 0, 'total_score': 0}
+AttributeError: 'dict' object has no attribute 'get_player_alias'
+django.request Internal Server Error: /pong/api/tournament/6/matchmaking/
+Traceback (most recent call last):
+  File "/home/nat/.local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/nat/.local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/nat/.local/lib/python3.8/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+  File "/home/nat/project/Transe-en-dance/Transcendence/project/back/views/tournament_views.py", line 233, in tournament_matchmaking
+    rankings = get_rankings(matches, aliases)
+  File "/home/nat/project/Transe-en-dance/Transcendence/project/back/views/tournament_presenter.py", line 13, in get_rankings
+    rankings[player1] = {'username': player1, 'alias': tournament.get_player_alias(tournament.participants.get(username=player1)), 'wins': 0, 'total_score': 0}
+AttributeError: 'dict' object has no attribute 'get_player_alias'
+django.request Internal Server Error: /pong/api/tournament/6/matchmaking/
+Traceback (most recent call last):
+  File "/home/nat/.local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/nat/.local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/nat/.local/lib/python3.8/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+  File "/home/nat/project/Transe-en-dance/Transcendence/project/back/views/tournament_views.py", line 233, in tournament_matchmaking
+    rankings = get_rankings(matches, aliases)
+  File "/home/nat/project/Transe-en-dance/Transcendence/project/back/views/tournament_presenter.py", line 13, in get_rankings
+    rankings[player1] = {'username': player1, 'alias': tournament.get_player_alias(tournament.participants.get(username=player1)), 'wins': 0, 'total_score': 0}
+AttributeError: 'dict' object has no attribute 'get_player_alias'
+django.request Internal Server Error: /pong/api/tournament/6/matchmaking/
+Traceback (most recent call last):
+  File "/home/nat/.local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/nat/.local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/nat/.local/lib/python3.8/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+  File "/home/nat/project/Transe-en-dance/Transcendence/project/back/views/tournament_views.py", line 233, in tournament_matchmaking
+    rankings = get_rankings(matches, aliases)
+  File "/home/nat/project/Transe-en-dance/Transcendence/project/back/views/tournament_presenter.py", line 14, in get_rankings
+    'alias': tournament.aliases.get(player1, player1) if isinstance(tournament, dict) else tournament.get_player_alias(tournament.participants.get(username=player1)),
+AttributeError: 'dict' object has no attribute 'aliases'
+django.request Internal Server Error: /pong/api/tournament/6/matchmaking/
+Traceback (most recent call last):
+  File "/home/nat/.local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/nat/.local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/nat/.local/lib/python3.8/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+  File "/home/nat/project/Transe-en-dance/Transcendence/project/back/views/tournament_views.py", line 233, in tournament_matchmaking
+    rankings = get_rankings(matches, aliases)
+  File "/home/nat/project/Transe-en-dance/Transcendence/project/back/views/tournament_presenter.py", line 14, in get_rankings
+    'alias': tournament.aliases.get(player1, player1) if isinstance(tournament, dict) else tournament.get_player_alias(tournament.participants.get(username=player1)),
+AttributeError: 'dict' object has no attribute 'aliases'
+django.request Not Found: /favicon.ico
+django.request Not Found: /favicon.ico
+django.request Internal Server Error: /pong/api/tournament/6/matchmaking/
+Traceback (most recent call last):
+  File "/home/nat/.local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/nat/.local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/nat/.local/lib/python3.8/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+  File "/home/nat/project/Transe-en-dance/Transcendence/project/back/views/tournament_views.py", line 233, in tournament_matchmaking
+    rankings = get_rankings(matches, aliases)
+  File "/home/nat/project/Transe-en-dance/Transcendence/project/back/views/tournament_presenter.py", line 14, in get_rankings
+    'alias': tournament.aliases.get(player1, player1) if isinstance(tournament, dict) else tournament.get_player_alias(tournament.participants.get(username=player1)),
+AttributeError: 'dict' object has no attribute 'aliases'
+django.request Internal Server Error: /pong/api/tournament/6/matchmaking/
+Traceback (most recent call last):
+  File "/home/nat/.local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/nat/.local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/nat/.local/lib/python3.8/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+  File "/home/nat/project/Transe-en-dance/Transcendence/project/back/views/tournament_views.py", line 233, in tournament_matchmaking
+    rankings = get_rankings(matches, aliases)
+  File "/home/nat/project/Transe-en-dance/Transcendence/project/back/views/tournament_presenter.py", line 14, in get_rankings
+    'alias': tournament.aliases.get(player1, player1) if isinstance(tournament, dict) else tournament.get_player_alias(tournament.participants.get(username=player1)),
+AttributeError: 'dict' object has no attribute 'aliases'
+django.request Internal Server Error: /pong/api/tournament/6/matchmaking/
+Traceback (most recent call last):
+  File "/home/nat/.local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/nat/.local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/nat/.local/lib/python3.8/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+  File "/home/nat/project/Transe-en-dance/Transcendence/project/back/views/tournament_views.py", line 233, in tournament_matchmaking
+    rankings = get_rankings(matches, aliases)
+  File "/home/nat/project/Transe-en-dance/Transcendence/project/back/views/tournament_presenter.py", line 14, in get_rankings
+    'alias': tournament.aliases.get(player1, player1) if isinstance(tournament, dict) else tournament.get_player_alias(tournament.participants.get(username=player1)),
+AttributeError: 'dict' object has no attribute 'aliases'
+django.request Internal Server Error: /pong/api/tournament/6/matchmaking/
+Traceback (most recent call last):
+  File "/home/nat/.local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/nat/.local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/nat/.local/lib/python3.8/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+  File "/home/nat/project/Transe-en-dance/Transcendence/project/back/views/tournament_views.py", line 233, in tournament_matchmaking
+    rankings = get_rankings(matches, aliases)
+  File "/home/nat/project/Transe-en-dance/Transcendence/project/back/views/tournament_presenter.py", line 14, in get_rankings
+    'alias': tournament.aliases.get(player1, player1) if isinstance(tournament, dict) else tournament.get_player_alias(tournament.participants.get(username=player1)),
+AttributeError: 'dict' object has no attribute 'aliases'
+django.request Not Found: /favicon.ico
+django.request Not Found: /favicon.ico
+django.request Bad Request: /pong/api/tournament/7/add_alias/
+django.request Bad Request: /pong/api/tournament/7/add_alias/
+django.request Bad Request: /pong/api/tournament/8/add_alias/
+django.request Bad Request: /pong/api/tournament/8/add_alias/
+django.request Bad Request: /pong/api/tournament/8/add_alias/
+django.request Bad Request: /pong/api/tournament/8/add_alias/
+django.request Internal Server Error: /pong/api/tournament/latest_tournament/
+Traceback (most recent call last):
+  File "/home/nat/.local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/nat/.local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/nat/.local/lib/python3.8/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+  File "/home/nat/project/Transe-en-dance/Transcendence/project/back/views/tournament_views.py", line 50, in tournament_view
+    aliases = json.loads(latest_tournament.aliases)
+  File "/usr/lib/python3.8/json/__init__.py", line 341, in loads
+    raise TypeError(f'the JSON object must be str, bytes or bytearray, '
+TypeError: the JSON object must be str, bytes or bytearray, not dict
+django.request Internal Server Error: /pong/api/tournament/latest_tournament/
+Traceback (most recent call last):
+  File "/home/nat/.local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/nat/.local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/nat/.local/lib/python3.8/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+  File "/home/nat/project/Transe-en-dance/Transcendence/project/back/views/tournament_views.py", line 50, in tournament_view
+    aliases = json.loads(latest_tournament.aliases)
+  File "/usr/lib/python3.8/json/__init__.py", line 341, in loads
+    raise TypeError(f'the JSON object must be str, bytes or bytearray, '
+TypeError: the JSON object must be str, bytes or bytearray, not dict
+django.request Internal Server Error: /pong/api/tournament/latest_tournament/
+Traceback (most recent call last):
+  File "/home/nat/.local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/nat/.local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/nat/.local/lib/python3.8/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+  File "/home/nat/project/Transe-en-dance/Transcendence/project/back/views/tournament_views.py", line 60, in tournament_view
+    participantVm["alias"] = aliases[participant.id]
+KeyError: 1
+django.request Internal Server Error: /pong/api/tournament/latest_tournament/
+Traceback (most recent call last):
+  File "/home/nat/.local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/nat/.local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/nat/.local/lib/python3.8/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+  File "/home/nat/project/Transe-en-dance/Transcendence/project/back/views/tournament_views.py", line 60, in tournament_view
+    participantVm["alias"] = aliases[participant.id]
+KeyError: 1
+django.request Internal Server Error: /pong/api/tournament/latest_tournament/
+Traceback (most recent call last):
+  File "/home/nat/.local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/nat/.local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/nat/.local/lib/python3.8/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+  File "/home/nat/project/Transe-en-dance/Transcendence/project/back/views/tournament_views.py", line 60, in tournament_view
+    participantVm["alias"] = aliases[participant.id]
+KeyError: 1
+django.request Internal Server Error: /pong/api/tournament/latest_tournament/
+Traceback (most recent call last):
+  File "/home/nat/.local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/nat/.local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/nat/.local/lib/python3.8/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+  File "/home/nat/project/Transe-en-dance/Transcendence/project/back/views/tournament_views.py", line 60, in tournament_view
+    participantVm["alias"] = aliases[participant.id]
+KeyError: 1
+django.request Internal Server Error: /pong/api/tournament/8/matchmaking/
+Traceback (most recent call last):
+  File "/home/nat/.local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/nat/.local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/nat/.local/lib/python3.8/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+  File "/home/nat/project/Transe-en-dance/Transcendence/project/back/views/tournament_views.py", line 246, in tournament_matchmaking
+    rankings = get_rankings(matches, aliases)
+NameError: name 'aliases' is not defined
+django.request Internal Server Error: /pong/api/tournament/8/matchmaking/
+Traceback (most recent call last):
+  File "/home/nat/.local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/nat/.local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/nat/.local/lib/python3.8/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+  File "/home/nat/project/Transe-en-dance/Transcendence/project/back/views/tournament_views.py", line 246, in tournament_matchmaking
+    rankings = get_rankings(matches, aliases)
+NameError: name 'aliases' is not defined
+django.request Not Found: /pong/api/games/create_game/
+django.request Not Found: /pong/api/games/create_game/
+django.request Not Found: /pong/api/games/create_game/
+django.request Not Found: /pong/api/games/create_game/
+django.request Not Found: /pong/api/games/create_game/
+django.request Not Found: /pong/api/games/create_game/
+django.request Bad Request: /pong/api/register/
+django.request Bad Request: /pong/api/register/
+django.request Bad Request: /pong/api/register/
+django.request Bad Request: /pong/api/register/
+django.request Not Found: /pong/api/games/create_game/
+django.request Not Found: /pong/api/games/create_game/
+django.request Not Found: /pong/api/games/create_game/
+django.request Not Found: /pong/api/games/create_game/
+django.request Not Found: /pong/api/games/create_game/
+django.request Not Found: /pong/api/games/create_game/
+django.request Not Found: /pong/api/games/create_game/
+django.request Not Found: /pong/api/games/create_game/
+django.request Not Found: /pong/api/games/create_game/
+django.request Not Found: /pong/api/games/create_game/
+django.request Not Found: /pong/api/games/create_game/
+django.request Not Found: /pong/api/games/create_game/
+django.request Not Found: /pong/api/games/create_game/
+django.request Not Found: /pong/api/games/create_game/
+django.request Unauthorized: /pong/api/login/
+django.request Unauthorized: /pong/api/login/
+django.request Not Found: /pong/api/games/create_game/
+django.request Not Found: /pong/api/games/create_game/
+django.request Not Found: /pong/api/games/create_game/
+django.request Not Found: /pong/api/games/create_game/
+django.request Not Found: /pong/api/games/create_game/
+django.request Not Found: /pong/api/games/create_game/
+django.request Not Found: /pong/api/games/create_game/
+django.request Not Found: /pong/api/games/create_game/
+django.request Not Found: /pong/api/games/create_game/
+django.request Not Found: /pong/api/games/create_game/
+django.request Not Found: /pong/api/games/create_game/
+django.request Not Found: /pong/api/games/create_game/
+django.request Not Found: /pong/api/games/create_game/
+django.request Not Found: /pong/api/games/create_game/
+django.request Bad Request: /pong/api/tournament/13/add_alias/
+django.request Bad Request: /pong/api/tournament/13/add_alias/
+django.request Bad Request: /pong/api/tournament/13/add_alias/
+django.request Bad Request: /pong/api/tournament/13/add_alias/
+django.request Bad Request: /pong/api/tournament/13/add_alias/
+django.request Bad Request: /pong/api/tournament/13/add_alias/

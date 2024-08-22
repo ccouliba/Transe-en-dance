@@ -288,7 +288,7 @@
 	"weCantProceed": "We cannot proceed with your registration without your consent", 
 
 	"needAtLeastTwoParticipants": "A minimum of 2 participants is required to start a tournament.",
-	"downloadUserInfo" : "Download my data.",
+	"downloadUserInfo" : "Download my data",
 
 	"USER_NOT_FOUND": "User not found.",
 	"CANNOT_SEND_REQUEST_TO_SELF": "You cannot send a friend request to yourself.",
@@ -310,5 +310,12 @@
 
 
 	"tournamentInProgress":"Tournaments in progress",
-	"participantLimitReached": "Limit of 3 participants reached."
+	"participantLimitReached": "Limit of participants reached.",
+
+	"missingFields": "Missing required fields",
+	"userNotParticipant": "User is not a participant",
+	"playerAlreadyHasAlias": "Player already has an alias",
+	"aliasAlreadyUsed": "Alias already used",
+	"validationError": "Validation error",
+	"unknownError": "An unknown error occurred"
 }

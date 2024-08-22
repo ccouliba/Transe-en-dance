@@ -289,7 +289,7 @@
 	"weCantProceed": "No podemos proceder a su registro sin su consentimiento", 
 
 	"needAtLeastTwoParticipants": "Se necesitan al menos 2 participantes para comenzar un torneo.",
-	"downloadUserInfo" : "Descargar mis datos.",
+	"downloadUserInfo" : "Descargar mis datos",
 
 	"USER_NOT_FOUND": "Usuario no encontrado.",
 	"CANNOT_SEND_REQUEST_TO_SELF": "No puedes enviarte una solicitud de amistad a ti mismo.",
@@ -309,7 +309,15 @@
 	"GAME_ALREADY_FINISHED": "Juego ya terminado",
 	"GAME_FINISHED_SUCCESSFULLY": "Juego terminado con éxito", 
 	"tournamentInProgress":"Torneos en curso",
-	"participantLimitReached": "Límite de 3 participantes alcanzado."
+	"participantLimitReached": "Límite participantes alcanzado.",
+
+	"missingFields": "Faltan campos obligatorios",
+	"userNotParticipant": "El usuario no es un participante",
+	"playerAlreadyHasAlias": "El jugador ya tiene un alias",
+	"aliasAlreadyUsed": "El alias ya está en uso",
+	"validationError": "Error de validación",
+	"unknownError": "Ocurrió un error desconocido"
+
 
 
 }
