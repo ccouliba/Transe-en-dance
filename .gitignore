@@ -19,3 +19,6 @@ __pycache__/
 ./back/project/logs/back.logs
 
 ./back/project/logs/*.*
+
+
+Transcendence/project/staticfiles/
