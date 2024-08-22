@@ -51,7 +51,6 @@ def tournament_view(request):
 	
 		for participant in list(latest_tournament.participants.all()):
    
-  
 			participantVm = {
        			"username": participant.username
 			}
