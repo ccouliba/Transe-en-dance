@@ -81,7 +81,7 @@ function handleLogin(event) {
 	httpPostJson(url, { username, password })
 	.then(response => {
 		if (!response.ok) throw new Error(`${window.trans.netAnsNotOK}`); // Verifier si la reponse est OK
-		return response.json(); // Convertir la reponse en JSON
+			return response.json(); // Convertir la reponse en JSON
 	})
 	.then(data => {
 		if (data.status === 'success') {
@@ -102,7 +102,7 @@ function handleLogin(event) {
 		}
 	})
 	.catch(error => {
-		console.error(`${window.trans.error}:`, error); 
+		// console.error(`${window.trans.error}:`, error); 
 		alert(`${window.trans.loginErrorRetry}.`); 
 	});
 }

@@ -30,9 +30,7 @@ function Tournament() {
 			${Participants()}
 			<h2 class="mt-4">${window.trans.createTournament}</h2>
 			${createTournamentForm()}
-			
 			${addParticipantForm()}
-			
 			${addAliasForm()}
 			${startTournamentButton()}
 		</div>
@@ -379,19 +377,4 @@ function finishTournament() {
 		console.error(`${window.trans.error}:`, error);
 		alert(`${window.trans.errFinishingTournament}: ` + error.message);
 	});
-}
-
-function startMatch(matchId, player1Username, player2Username) {
-	// Set up the play state for the tournament match
-	playState.gameStarted = true;
-
-	playState.player1Username = player1Username;
-	playState.player2Username = player2Username;
-	playState.player1Score = 0;
-	playState.player2Score = 0;
-	playState.gameOver = false;
-	playState.gameId = matchId;
-	playState.isTournamentMatch = true;
-	playState.isLoaded = false;
-	mountComponent(Play);
 }

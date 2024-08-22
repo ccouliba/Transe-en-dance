@@ -109,7 +109,7 @@ def add_participants(request, tournament_id):
 		tournament = get_object_or_404(Tournament, id=tournament_id)
 
 		current_participants_count = tournament.participants.count()
-		max_participants = 3
+		max_participants = 8
 		
 		if current_participants_count >= max_participants:
 			return JsonResponse({

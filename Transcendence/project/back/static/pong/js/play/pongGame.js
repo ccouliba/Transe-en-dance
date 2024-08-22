@@ -6,6 +6,21 @@ const CANVAS_HEIGHT = 400;
 const CANVAS_WIDTH = 600;
 const WINNING_SCORE = 1; // a changer ou pas
 
+
+function PongGame(){
+
+	if (playState.gameStarted && !playState.gameOver) {
+		setTimeout(initializeGame, 100);
+	}
+
+	return `
+	<div class="container mt-5">
+		<h1 class="text-center">${window.trans.pongGame}</h1>
+		<canvas id="pongCanvas" width="${CANVAS_WIDTH}" height="${CANVAS_HEIGHT}"></canvas>
+	</div>
+	`
+}
+
 function initializePaddle(){
 	paddle1Y = (CANVAS_HEIGHT - PADDLE_HEIGHT) / 2;
 	paddle2Y = (CANVAS_HEIGHT - PADDLE_HEIGHT) / 2;
@@ -63,7 +78,8 @@ function moveBall() {
 
 	// verifier si un joueur a gagne
 	if (playState.player1Score >= WINNING_SCORE || playState.player2Score >= WINNING_SCORE) {
-		endGame();
+		playState.gameOver = true;
+		return
 	}
 }
 
@@ -73,6 +89,11 @@ function moveBall() {
 
 // fonction pour initialiser le jeu
 function initializeGame() {
+
+	if (!playState.isKeyboardBind) {
+		bindKeyboardEvents();
+	}
+
 
 	initializePaddle()
 	let onlineStatusInterval;
@@ -117,14 +138,15 @@ function initializeGame() {
 			return
 		}
 
-		if (!playState.gameOver) {
-			moveBall();
-			drawGame();
-			requestAnimationFrame(update); // methode js qui demande au navigateur d'executer une fonction specifique avant le prochain rafraichissement de l'ecran (generalement 60 fps)
-		} else {
-			changePage("#play"); // si jeu est termine => forcer le rechargement de la page
-			// clearInterval(onlineStatusInterval);
+		if (playState.gameOver){
+			endGame()
+			return
 		}
+
+		moveBall();
+		drawGame();
+		requestAnimationFrame(update); // methode js qui demande au navigateur d'executer une fonction specifique avant le prochain rafraichissement de l'ecran (generalement 60 fps)
+		
 	}
 	// onlineStatusInterval = setInterval(updateOnlineStatus, 5000);
 
@@ -200,20 +222,13 @@ function updateProfileStats() {
 }
 
 
-
-
 function finishGame(gameId, player1Score, player2Score, winnerUsername) {
 
 	let url = `/pong/api/games/finish_game/${gameId}/` 
 	let payload = { winner: winnerUsername, player1Score, player2Score }
 	return httpPostJson(url, payload)
 	.then(response => response.json())
-	.then(data => {
-		// console.log('Game finished:', data);
-		playState.gameOver = false
-		playState.gameStarted = false
-		
-	})
+
 	.catch(error => console.error(`${window.trans.errFinishingGame}: `, error));
 }
 
@@ -231,11 +246,7 @@ function createGameInDatabase() {
 		return response.json().then(data => {
 			return { status: response.status, body: data };
 		});
-	}) // parse la reponse json
-	// .then(data => {
-	// 	// stocke l'id de la partie retourne par le serveur
-	// 	playState.gameId = data.gameId;
-	// })
+	}) 
 	
 	.catch(error => console.error(`${window.trans.error}: `, error));
 }
@@ -274,28 +285,19 @@ function updateTournamentMatchScore(matchId, player1Score, player2Score, winner)
 function endGame() {
 	playState.gameOver = true;
 	const winnerUsername  = playState.player1Score > playState.player2Score ? playState.player1Username : playState.player2Username;
-   
-	if (playState.isTournamentMatch) {
-		updateTournamentMatchScore(playState.gameId, playState.player1Score, playState.player2Score, winnerUsername)
-			.then((payload) => {
-				
-				playState.gameOver = false
-				playState.gameStarted = false
-				playState.isLoaded = false
-				
-				fetchMatchesAndRankings()
 
-				return
-				//changePage("#tournament");
-			})
-			.catch(error => {
-				console.error(`${window.trans.errUpdateTournamentData}: `, error);
-				alert(`${window.trans.errUpdateTournamentRetry}`);
-			});
-	} else {
-		finishGame(playState.gameId, playState.player1Score, playState.player2Score, winnerUsername);
+	finishGame(playState.gameId, playState.player1Score, playState.player2Score, winnerUsername).then(() => {
+
+		playState.gameOver = true
+		playState.gameStarted = false
+		console.log(tournamentState.tournament, "sdsd")
+		if (tournamentState.tournament){
+			changePage("#tournament")
+			return
+		}
 		changePage("#play");
-	}
+	})
+
 	updateProfileStats();
 }
 

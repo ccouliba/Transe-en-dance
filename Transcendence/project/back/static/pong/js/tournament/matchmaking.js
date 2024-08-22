@@ -39,7 +39,7 @@ function MatchList() {
 						${match.player1_score} - ${match.player2_score}
 					</span>
 					${match.status === 'pending' ?
-						`<button onclick="startMatch(${match.id}, '${match.player1.username}', '${match.player2.username}')" class="btn btn-primary btn-sm">${window.trans.btnStartMatch}</button>` :
+						`<button onclick="startTournamentMatch(${match.id}, '${match.player1.username}', '${match.player2.username}')" class="btn btn-primary btn-sm">${window.trans.btnStartMatch}</button>` :
 						`<span class="match-status">${match.status}</span>`
 					}
 				</li>
