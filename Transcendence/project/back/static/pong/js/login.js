@@ -98,7 +98,10 @@ function handleLogin(event) {
 			})
 
 		} else {
+			
 			alert(`${window.trans.failLogin}: ` + data.message); 
+			
+
 		}
 	})
 	.catch(error => {

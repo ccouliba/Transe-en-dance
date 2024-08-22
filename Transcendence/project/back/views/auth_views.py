@@ -47,7 +47,7 @@ def login_view(request):
 		return JsonResponse({'status': 'success'})
 	else:
 		logger.error("eeror lors du login")
-		return JsonResponse({'status': 'error', 'message': 'INVALID_CREDENTIALS'}, status=401)
+		return JsonResponse({'status': 'error', 'message': 'Invalid credentials. Please check your username and password.'}, status=200)
 
 @loggingFunction
 @login_required
