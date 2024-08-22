@@ -144,13 +144,18 @@ function addParticipant(event) {
 		if (data.status === 'success' || data.status === 'warning') {
 			if (data.added_participants.length > 0) {
 				alert(`${window.trans.participant} ${participant} ${window.trans.addedSuccessfully}!`);
-				document.getElementById('participant').value = '';  // Clear the input field
+				 document.getElementById('participant').value = '';  
+				
 			
 			} else if (data.already_in_tournament.length > 0) {
 				alert(`${participant} ${window.trans.alreadyInTournament}.`);
 			} else if (data.not_found_participants.length > 0) {
 				alert(`${window.trans.user} ${participant} ${window.trans.notFound}. ${window.trans.checkRegister}.`);
 			}
+			tournamentState.tournament.participants.push({
+				username: participant
+			})
+			mountComponent(Tournament)
 		} else {
 			alert(`${window.trans.errAddPart}: ` + data.message);
 		}

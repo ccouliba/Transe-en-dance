@@ -13,7 +13,7 @@ def create_game(request):
 		data = json.loads(request.body)
 		player2_username = data.get('player2Username')
 		if  not User.objects.filter(username=player2_username).exists():
-			return JsonResponse({'error': 'oneOrTwoPlayersNotFound'}, status=404)
+			return JsonResponse({'error': 'oneOrTwoPlayersNotFound'}, status=200)
 		try:
 			player2 = User.objects.get(username=player2_username)
 			game = Game.objects.create(
@@ -27,7 +27,7 @@ def create_game(request):
 				'player2Username': player2.username
 			}, status=201)
 		except User.DoesNotExist:
-			return JsonResponse({'error': 'oneOrTwoPlayersNotFound'}, status=404)
+			return JsonResponse({'error': 'oneOrTwoPlayersNotFound'}, status=200)
 	else:
 		return JsonResponse({'error': 'INVALID_REQUEST_METHOD'}, status=405)
 

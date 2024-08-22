@@ -81,28 +81,29 @@ function startNonTournamentGame(event){
 	}
 
 	createGameInDatabase()
-		.then(({ status, body }) => {
+		.then(( body ) => {
 
-			if (status === 404) {
-				alert(`${window.trans.oneOrTwoPlayersNotFound}`);
-				return
+
+			if (body.error == "oneOrTwoPlayersNotFound"){
+				throw new Error()
 			}
 
-			if (status === 201) {
-				playState.gameId = body.gameId;
-				playState.player1Username = body.player1Username;
-				playState.player2Username = body.player2Username;
-				playState.gameStarted = true
-				playState.gameOver = false
-				playState.tournamentId = null
-				playState.player1Score = 0
-				playState.player2Score = 0
-				
-				tournamentState.tournament = null
-				mountComponent(Play);
-				return
-			} 
-
+			playState.gameId = body.gameId;
+			playState.player1Username = body.player1Username;
+			playState.player2Username = body.player2Username;
+			playState.gameStarted = true
+			playState.gameOver = false
+			playState.tournamentId = null
+			playState.player1Score = 0
+			playState.player2Score = 0
+			
+			tournamentState.tournament = null
+			mountComponent(Play);
+			return
+		
+		})
+		.catch(error => {
+			alert(`${window.trans.oneOrTwoPlayersNotFound}`);
 		})
 }
 

@@ -16,8 +16,7 @@ function PongGame(){
 	return `
 	<div class="container mt-5">
 		<h1 class="text-center">${window.trans.pongGame}</h1>
-		
-		<h3 class="text-center">${playState.player1Username} VS ${playState.player2Username}</h3>
+
 		
 		<canvas id="pongCanvas" width="${CANVAS_WIDTH}" height="${CANVAS_HEIGHT}"></canvas>
 	</div>
@@ -242,16 +241,16 @@ function finishGame(gameId, player1Score, player2Score, winnerUsername) {
 function createGameInDatabase() {
 	// envoie une requete post a l'api pour creer une nouvelle partie
 	return httpPostJson('/pong/api/games/create_game/', {
-		// player1Username: playState.player1Username,
 		player2Username: playState.player2Username
 	})
 	.then(response => {
-		return response.json().then(data => {
-			return { status: response.status, body: data };
-		});
+		if (response.status == 404){
+			
+			throw new Error('not found');
+		}
+		return response.json()
 	}) 
 	
-	.catch(error => console.error(`${window.trans.error}: `, error));
 }
 
 

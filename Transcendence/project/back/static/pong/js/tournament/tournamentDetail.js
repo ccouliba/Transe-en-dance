@@ -6,6 +6,7 @@ function Participants() {
 		return ``
 	}
 		
+	
 	const participantsList = tournament.participants && tournament.participants.length > 0
 		? tournament.participants.map(p => `<li>${p.username} (${p.alias || "no alias"})</li>`).join('')
 		: `<li>${window.trans.noParticipants}</li>`;
@@ -16,7 +17,6 @@ function Participants() {
 		<ul id="participantsList">
 			${participantsList}
 		</ul>
-		<h3>${window.trans.aliases}:</h3>
 		
 	</div>
 	`;
