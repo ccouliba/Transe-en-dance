@@ -218,7 +218,6 @@ function httpGetJson(url) {
 }
 
 
-
 function httpPostJson(url, payload){
 	return fetch(url, {
 		method: 'POST',
