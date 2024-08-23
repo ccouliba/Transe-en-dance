@@ -57,15 +57,14 @@ def	profile_update_view(request):
 		data = json.loads(request.body)
 		user = request.user
 		updated = []
-
 		if 'username' in data:
 			user.username = escape(data['username'])
 			updated.append('username')
 
 		if 'email' in data:
-			email = escape(data['email'])
+			user.email = escape(data['email'])
 			try:
-				validate_email(email)
+				validate_email(user.email )
 			except ValidationError:
 				return JsonResponse({'status': 'failed', 'message': "email format invalid"}, status=400)
 			updated.append('email')

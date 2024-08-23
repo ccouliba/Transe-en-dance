@@ -316,7 +316,8 @@
 	"playerAlreadyHasAlias": "Le joueur a déjà un alias",
 	"aliasAlreadyUsed": "L'alias est déjà utilisé",
 	"validationError": "Erreur de validation",
-	"unknownError": "Une erreur inconnue s'est produite"
-
+	"unknownError": "Une erreur inconnue s'est produite",
+	"noEmptyUsername": "Le nom d'utilisateur ne peut pas être vide",
+	"emailCannotBeEmpty": "L'email ne peut pas être vide"
 
 }

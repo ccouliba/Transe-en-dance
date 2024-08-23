@@ -316,7 +316,12 @@
 	"playerAlreadyHasAlias": "El jugador ya tiene un alias",
 	"aliasAlreadyUsed": "El alias ya está en uso",
 	"validationError": "Error de validación",
-	"unknownError": "Ocurrió un error desconocido"
+	"unknownError": "Ocurrió un error desconocido",
+
+	"noEmptyUsername": "El nombre de usuario no puede estar vacío",
+	"emailCannotBeEmpty": "El correo electrónico no puede estar vacío"
+
+
 
 
 

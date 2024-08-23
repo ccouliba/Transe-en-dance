@@ -317,5 +317,10 @@
 	"playerAlreadyHasAlias": "Player already has an alias",
 	"aliasAlreadyUsed": "Alias already used",
 	"validationError": "Validation error",
-	"unknownError": "An unknown error occurred"
+	"unknownError": "An unknown error occurred",
+
+	"noEmptyUsername": "Username cannot be empty",
+	"emailCannotBeEmpty": "Email cannot be empty"
+
+
 }

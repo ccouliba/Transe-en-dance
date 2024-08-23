@@ -173,7 +173,8 @@ function EditUsername() {
 		const usernameInput = event.target.elements.username.value; // recuperer la nouvelle valeur du nom d'utilisateur
 
 		if (usernameInput.length === 0){
-			alert("no empty username")
+			alert(window.trans.noEmptyUsername)
+			
 			return
 		}
 		profileState.username = usernameInput; // mettre a jour profileState
@@ -213,8 +214,12 @@ function EditEmail() {
 	bindEvent(profileState, "#edit-email", "submit", event => {
 		event.preventDefault(); // empecher l'execution par defaut de l'evenement submit
 		const emailInput = event.target.elements.email.value; // recuperer la nouvelle valeur de l'email
-
+		if (emailInput.length === 0){
+			alert(window.trans.emailCannotBeEmpty)
+			return
+		}
 		profileState.email = emailInput; // mettre a jour profileState
+		console.log(profileState.email)
 		sendProfileToBackend({
 			'email': emailInput
 		}); // envoyer les donnees au backend
