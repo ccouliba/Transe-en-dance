@@ -163,6 +163,10 @@ function sendProfileToBackend(payload) {
 		});
 }
 
+function hasWhiteSpace(s) {
+	return /\s/g.test(s);
+}
+
 // fonction pour modifier le nom d'utilisateur
 function EditUsername() {
 	// ceci ne fonctionnerait pas :
@@ -172,7 +176,7 @@ function EditUsername() {
 		event.preventDefault(); // empecher l'execution par defaut de l'evenement submit
 		const usernameInput = event.target.elements.username.value; // recuperer la nouvelle valeur du nom d'utilisateur
 
-		if (usernameInput.length === 0){
+		if (usernameInput.length === 0 || hasWhiteSpace(usernameInput)){
 			alert(window.trans.noEmptyUsername)
 			
 			return
@@ -214,7 +218,7 @@ function EditEmail() {
 	bindEvent(profileState, "#edit-email", "submit", event => {
 		event.preventDefault(); // empecher l'execution par defaut de l'evenement submit
 		const emailInput = event.target.elements.email.value; // recuperer la nouvelle valeur de l'email
-		if (emailInput.length === 0){
+		if (emailInput.length === 0 || hasWhiteSpace(usernameInput)){
 			alert(window.trans.emailCannotBeEmpty)
 			return
 		}
