@@ -24,8 +24,8 @@ function Profile() {
 	// // charge les donnees du profil depuis le backend
 	// loadProfileFromBackend(); // get
 	
-	let winRate = 0.00
-	winRate = profileState.win_rate.toFixed(2)
+	let winRate = 0.00;
+	winRate = profileState.win_rate.toFixed(2);
 	bindEvent(profileState, "#deleteAccountBtn", "click", handleDeleteAccount);
 	
 	let avatarUrl = profileState.avatar_url; 
@@ -515,8 +515,9 @@ function handleDeleteAccount() {
 		.then(data => {
 			if (data.status === 'success') {
 				alert(`${window.trans.accDeleted}.`);
-				// changePage(Login);
-				localStorage.removeItem("userToken");
+				localStorage.clear();
+				sessionStorage.clear();
+				resetAllStates();
 				changePage("#login");
 			} else {
 				alert(`${window.trans.errDeletingAccRetry}`);

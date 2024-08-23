@@ -6,11 +6,11 @@ var logoutState = {
 // fonction pour gerer la deconnexion
 function executeLogout() {
 	// verifier si l'utilisateur est deja deconnecte ou pas
-	clearInterval(friendsState.friendStatusInterval)
+	clearInterval(friendsState.friendStatusInterval);
 
 	localStorage.clear(); // effacer le localstorage
 	sessionStorage.clear(); // effacer le sessionstorage
-	resetAllStates()
+	resetAllStates();
 	
 	let url = `/pong/api/logout/`; 
 	httpPostJson(url, {})
