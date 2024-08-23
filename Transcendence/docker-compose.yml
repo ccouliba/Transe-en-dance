@@ -6,13 +6,12 @@ services:
     # command: python manage.py runserver 0.0.0.0:8000
     # New command to make it work
     # command: gunicorn server.wsgi:application --bind 0.0.0.0:8000 --certfile=./selfsigned.crt --keyfile=./selfsigned.key
-
+    env_file:
+      - .env
     volumes:
       - ./project/:/usr/src/project/
     ports:
       - 8443:8443
-    env_file:
-      - ./.utils/.env
     depends_on:
       db:
         condition: service_healthy
@@ -29,6 +28,8 @@ services:
       - postgres_data:/var/lib/postgresql/data/
     ports:
       - 5432:5432
+    env_file:
+      - .env
     environment:
       - POSTGRES_USER=ccouliba
       - POSTGRES_PASSWORD=password
@@ -56,8 +57,7 @@ services:
       - xpack.security.enabled=false
     volumes:
       - elk_data:/usr/share/elasticsearch/data
-    ports:
-      - 9200:9200
+    
     healthcheck:
       test: ["CMD-SHELL", "curl -f http://localhost:9200/_cluster/health || exit 1"]
       interval: 30s
@@ -74,9 +74,7 @@ services:
     volumes:
       - ./elk_data/logstash/pipeline/:/usr/share/logstash/pipeline/:ro
       - ./project/logs:/logs/
-    ports:
-      - 9600:9600
-      - 5959:5959
+    
     environment:
       LS_JAVA_OPTS: "-Xmx256m -Xms256m"
     depends_on:
@@ -97,13 +95,28 @@ services:
     image: docker.elastic.co/kibana/kibana:8.14.3
     environment:
       - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
-    ports:
-      - 5601:5601
     depends_on:
       elasticsearch:
         condition: service_healthy
     networks:
       - elk
+
+  nginx:
+    image: nginx
+    container_name: nginx
+    build:
+      context: ./nginx
+      args:
+        KIBANA_NAME: ${KIBANA_NAME}
+        KIBANA_PASS: ${KIBANA_PASS}
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - "5555:80"
+    networks:
+      - elk
+    depends_on: 
+      - kibana
 
 volumes:
   postgres_data:
