@@ -218,7 +218,7 @@ function EditEmail() {
 	bindEvent(profileState, "#edit-email", "submit", event => {
 		event.preventDefault(); // empecher l'execution par defaut de l'evenement submit
 		const emailInput = event.target.elements.email.value; // recuperer la nouvelle valeur de l'email
-		if (emailInput.length === 0 || hasWhiteSpace(usernameInput)){
+		if (emailInput.length === 0 || hasWhiteSpace(emailInput)){
 			alert(window.trans.emailCannotBeEmpty)
 			return
 		}
