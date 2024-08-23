@@ -110,6 +110,11 @@ function startNonTournamentGame(event){
 
 function Play() {
 
+
+	if (logoutState.isLoggedOut){
+		return ""
+	}
+
 	if (!playState.isLoaded) {
 		loadPlayState();
 		return `Loading`

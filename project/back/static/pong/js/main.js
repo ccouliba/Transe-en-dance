@@ -134,6 +134,7 @@ window.changePage = function (url) {
 				// Stocker un token et le nom d'utilisateur dans le localStorage (=> une fonctionnalité de l'API Web Storage qui permet de stocker des données de manière persistante dans le navigateur)
 				localStorage.setItem("userToken", "true");
 				localStorage.setItem("username", data.username);
+				logoutState.isLoggedOut = false
 			} else {
 				// Si l'utilisateur n'est pas authentifie, supprimer les infos du localStorage
 				localStorage.removeItem("userToken");
@@ -171,7 +172,7 @@ window.changePage = function (url) {
 			// La verification est terminee meme en cas d'erreur
 		
 			// Afficher l'erreur dans la console
-			console.error(`${window.trans.error}:`, error);
+		//	console.error(`${window.trans.error}:`, error);
 			
 			
 		});

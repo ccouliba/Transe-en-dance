@@ -6,6 +6,10 @@ var logoutState = {
 // fonction pour gerer la deconnexion
 function executeLogout() {
 	// verifier si l'utilisateur est deja deconnecte ou pas
+
+	if (logoutState.isLoggedOut){
+		return
+	}
 	clearInterval(friendsState.friendStatusInterval);
 
 	localStorage.clear(); // effacer le localstorage
@@ -22,7 +26,7 @@ function executeLogout() {
 	})
 	.then(data => {
 		if (data.status === 'success') {
-
+			logoutState.isLoggedOut = true
 			
 		} else {
 			console.error(`${window.trans.logoutFail}`, data.message); // afficher un message d'erreur
@@ -30,8 +34,8 @@ function executeLogout() {
 		}
 	})
 	.catch(error => {
-		console.error(`${window.trans.logoutError}:`, error); // afficher une erreur en cas d'echec
-		alert(`${window.trans.logoutErrorRetry}.`); // alerter l'utilisateur de l'erreur
+	//	console.error(`${window.trans.logoutError}:`, error); // afficher une erreur en cas d'echec
+	//	alert(`${window.trans.logoutErrorRetry}.`); // alerter l'utilisateur de l'erreur
 	});
 }
 
