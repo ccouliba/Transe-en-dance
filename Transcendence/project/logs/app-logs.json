@@ -65,3 +65,618 @@
 {"asctime": "2024/08/23 20:12:56", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
 {"asctime": "2024/08/23 20:19:35", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/profile]"}
 {"asctime": "2024/08/23 20:19:35", "levelname": "INFO", "name": "back", "message": "code: [404] => [error]"}
+{"asctime": "2024/08/23 20:42:00", "levelname": "INFO", "name": "back", "message": "Request from: [/pong]"}
+{"asctime": "2024/08/23 20:42:00", "levelname": "INFO", "name": "back", "message": "code: [301] => [error]"}
+{"asctime": "2024/08/23 20:42:00", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/]"}
+{"asctime": "2024/08/23 20:42:00", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:42:00", "levelname": "INFO", "name": "back", "message": "Request from: [/static/css/frontstyle.css]"}
+{"asctime": "2024/08/23 20:42:00", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:42:00", "levelname": "INFO", "name": "back", "message": "Request from: [/static/css/bootstrap.min.css]"}
+{"asctime": "2024/08/23 20:42:00", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:42:00", "levelname": "INFO", "name": "back", "message": "Request from: [/static/css/TrajanPro.css]"}
+{"asctime": "2024/08/23 20:42:00", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:42:00", "levelname": "INFO", "name": "back", "message": "Request from: [/jsi18n/]"}
+{"asctime": "2024/08/23 20:42:00", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:42:00", "levelname": "INFO", "name": "back", "message": "Request from: [/static/fonts/TrajanPro-Regular.woff2]"}
+{"asctime": "2024/08/23 20:42:00", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:42:00", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/loadTranslations.js]"}
+{"asctime": "2024/08/23 20:42:00", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:42:00", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/menu.js]"}
+{"asctime": "2024/08/23 20:42:00", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:42:00", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/home.js]"}
+{"asctime": "2024/08/23 20:42:00", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:42:00", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/tournament/matchmaking.js]"}
+{"asctime": "2024/08/23 20:42:00", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:42:00", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/logout.js]"}
+{"asctime": "2024/08/23 20:42:00", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:42:00", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/404.js]"}
+{"asctime": "2024/08/23 20:42:00", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:42:00", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/profile.js]"}
+{"asctime": "2024/08/23 20:42:00", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:42:00", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/login.js]"}
+{"asctime": "2024/08/23 20:42:00", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:42:00", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/register.js]"}
+{"asctime": "2024/08/23 20:42:00", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:42:00", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/main.js]"}
+{"asctime": "2024/08/23 20:42:00", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:42:00", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/matchHistory.js]"}
+{"asctime": "2024/08/23 20:42:00", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:42:00", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/privacyPolicy.js]"}
+{"asctime": "2024/08/23 20:42:00", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:42:00", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/iaAlgo.js]"}
+{"asctime": "2024/08/23 20:42:00", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:42:00", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/background.js]"}
+{"asctime": "2024/08/23 20:42:00", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:42:00", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/bootstrap.min.js]"}
+{"asctime": "2024/08/23 20:42:00", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:42:00", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/play/play.js]"}
+{"asctime": "2024/08/23 20:42:00", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:42:00", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/play/pongGame.js]"}
+{"asctime": "2024/08/23 20:42:00", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:42:00", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/friends.js]"}
+{"asctime": "2024/08/23 20:42:00", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:42:00", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/tournament/tournament.js]"}
+{"asctime": "2024/08/23 20:42:00", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:42:00", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/tournament/tournamentDetail.js]"}
+{"asctime": "2024/08/23 20:42:00", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:42:00", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/translations/en.json]"}
+{"asctime": "2024/08/23 20:42:00", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:42:00", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/images/favicon.ico]"}
+{"asctime": "2024/08/23 20:42:00", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:42:00", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/translations/en.json]"}
+{"asctime": "2024/08/23 20:42:00", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:42:00", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/images/favicon.ico]"}
+{"asctime": "2024/08/23 20:42:00", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:42:00", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/translations/en.json]"}
+{"asctime": "2024/08/23 20:42:00", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:42:34", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/]"}
+{"asctime": "2024/08/23 20:42:34", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:42:34", "levelname": "INFO", "name": "back", "message": "Request from: [/static/css/frontstyle.css]"}
+{"asctime": "2024/08/23 20:42:34", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:42:34", "levelname": "INFO", "name": "back", "message": "Request from: [/static/css/bootstrap.min.css]"}
+{"asctime": "2024/08/23 20:42:34", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:42:34", "levelname": "INFO", "name": "back", "message": "Request from: [/static/css/TrajanPro.css]"}
+{"asctime": "2024/08/23 20:42:34", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:42:34", "levelname": "INFO", "name": "back", "message": "Request from: [/static/fonts/TrajanPro-Regular.woff2]"}
+{"asctime": "2024/08/23 20:42:34", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:42:34", "levelname": "INFO", "name": "back", "message": "Request from: [/jsi18n/]"}
+{"asctime": "2024/08/23 20:42:34", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:42:34", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/loadTranslations.js]"}
+{"asctime": "2024/08/23 20:42:34", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:42:34", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/menu.js]"}
+{"asctime": "2024/08/23 20:42:34", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:42:34", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/home.js]"}
+{"asctime": "2024/08/23 20:42:34", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:42:34", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/tournament/matchmaking.js]"}
+{"asctime": "2024/08/23 20:42:34", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:42:34", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/logout.js]"}
+{"asctime": "2024/08/23 20:42:34", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:42:34", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/404.js]"}
+{"asctime": "2024/08/23 20:42:34", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:42:34", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/profile.js]"}
+{"asctime": "2024/08/23 20:42:34", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:42:34", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/login.js]"}
+{"asctime": "2024/08/23 20:42:34", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:42:34", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/register.js]"}
+{"asctime": "2024/08/23 20:42:34", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:42:34", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/main.js]"}
+{"asctime": "2024/08/23 20:42:34", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:42:34", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/matchHistory.js]"}
+{"asctime": "2024/08/23 20:42:34", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:42:34", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/privacyPolicy.js]"}
+{"asctime": "2024/08/23 20:42:34", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:42:34", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/iaAlgo.js]"}
+{"asctime": "2024/08/23 20:42:34", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:42:34", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/background.js]"}
+{"asctime": "2024/08/23 20:42:34", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:42:34", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/bootstrap.min.js]"}
+{"asctime": "2024/08/23 20:42:34", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:42:34", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/play/play.js]"}
+{"asctime": "2024/08/23 20:42:34", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:42:34", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/play/pongGame.js]"}
+{"asctime": "2024/08/23 20:42:34", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:42:34", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/friends.js]"}
+{"asctime": "2024/08/23 20:42:34", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:42:34", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/tournament/tournament.js]"}
+{"asctime": "2024/08/23 20:42:34", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:42:34", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/tournament/tournamentDetail.js]"}
+{"asctime": "2024/08/23 20:42:34", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:42:34", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/translations/en.json]"}
+{"asctime": "2024/08/23 20:42:34", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:42:34", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/images/favicon.ico]"}
+{"asctime": "2024/08/23 20:42:34", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:42:34", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/translations/en.json]"}
+{"asctime": "2024/08/23 20:42:34", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:42:35", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/translations/en.json]"}
+{"asctime": "2024/08/23 20:42:35", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:43:00", "levelname": "INFO", "name": "back", "message": "Request from: [/pong]"}
+{"asctime": "2024/08/23 20:43:00", "levelname": "INFO", "name": "back", "message": "code: [301] => [error]"}
+{"asctime": "2024/08/23 20:43:00", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/]"}
+{"asctime": "2024/08/23 20:43:00", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:43:00", "levelname": "INFO", "name": "back", "message": "Request from: [/static/css/frontstyle.css]"}
+{"asctime": "2024/08/23 20:43:00", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:43:00", "levelname": "INFO", "name": "back", "message": "Request from: [/static/css/bootstrap.min.css]"}
+{"asctime": "2024/08/23 20:43:00", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:43:00", "levelname": "INFO", "name": "back", "message": "Request from: [/static/css/TrajanPro.css]"}
+{"asctime": "2024/08/23 20:43:00", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:43:00", "levelname": "INFO", "name": "back", "message": "Request from: [/jsi18n/]"}
+{"asctime": "2024/08/23 20:43:00", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:43:00", "levelname": "INFO", "name": "back", "message": "Request from: [/static/fonts/TrajanPro-Regular.woff2]"}
+{"asctime": "2024/08/23 20:43:00", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:43:00", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/loadTranslations.js]"}
+{"asctime": "2024/08/23 20:43:00", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:43:00", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/menu.js]"}
+{"asctime": "2024/08/23 20:43:00", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:43:00", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/home.js]"}
+{"asctime": "2024/08/23 20:43:00", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:43:00", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/tournament/matchmaking.js]"}
+{"asctime": "2024/08/23 20:43:00", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:43:00", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/logout.js]"}
+{"asctime": "2024/08/23 20:43:00", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:43:00", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/404.js]"}
+{"asctime": "2024/08/23 20:43:00", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:43:00", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/profile.js]"}
+{"asctime": "2024/08/23 20:43:00", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:43:00", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/login.js]"}
+{"asctime": "2024/08/23 20:43:00", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:43:00", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/register.js]"}
+{"asctime": "2024/08/23 20:43:00", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:43:00", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/main.js]"}
+{"asctime": "2024/08/23 20:43:00", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:43:00", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/matchHistory.js]"}
+{"asctime": "2024/08/23 20:43:00", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:43:00", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/privacyPolicy.js]"}
+{"asctime": "2024/08/23 20:43:00", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:43:00", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/iaAlgo.js]"}
+{"asctime": "2024/08/23 20:43:00", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:43:00", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/background.js]"}
+{"asctime": "2024/08/23 20:43:00", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:43:00", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/bootstrap.min.js]"}
+{"asctime": "2024/08/23 20:43:00", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:43:00", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/play/play.js]"}
+{"asctime": "2024/08/23 20:43:00", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:43:00", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/play/pongGame.js]"}
+{"asctime": "2024/08/23 20:43:00", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:43:00", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/friends.js]"}
+{"asctime": "2024/08/23 20:43:00", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:43:00", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/tournament/tournament.js]"}
+{"asctime": "2024/08/23 20:43:00", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:43:00", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/tournament/tournamentDetail.js]"}
+{"asctime": "2024/08/23 20:43:00", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:43:00", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/translations/en.json]"}
+{"asctime": "2024/08/23 20:43:00", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:43:00", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/images/favicon.ico]"}
+{"asctime": "2024/08/23 20:43:00", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:43:00", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/translations/en.json]"}
+{"asctime": "2024/08/23 20:43:00", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:43:00", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/images/favicon.ico]"}
+{"asctime": "2024/08/23 20:43:00", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:43:00", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/translations/en.json]"}
+{"asctime": "2024/08/23 20:43:00", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:43:10", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/external_login/]"}
+{"asctime": "2024/08/23 20:43:10", "levelname": "INFO", "name": "back", "message": "(from : [external_login])"}
+{"asctime": "2024/08/23 20:43:10", "levelname": "INFO", "name": "back", "message": "code: [302] => [error]"}
+{"asctime": "2024/08/23 20:43:47", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/api/register/]"}
+{"asctime": "2024/08/23 20:43:47", "levelname": "INFO", "name": "back", "message": "(from : [register_view])"}
+{"asctime": "2024/08/23 20:43:47", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:43:58", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/api/login/]"}
+{"asctime": "2024/08/23 20:43:58", "levelname": "INFO", "name": "back", "message": "Log avec success"}
+{"asctime": "2024/08/23 20:43:58", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:43:59", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/api/get-user-locale]"}
+{"asctime": "2024/08/23 20:43:59", "levelname": "INFO", "name": "back", "message": "code: [301] => [error]"}
+{"asctime": "2024/08/23 20:43:59", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/api/get-user-locale/]"}
+{"asctime": "2024/08/23 20:43:59", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:43:59", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/translations/en.json]"}
+{"asctime": "2024/08/23 20:43:59", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:43:59", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/api/check_auth/]"}
+{"asctime": "2024/08/23 20:43:59", "levelname": "INFO", "name": "back", "message": "(from : [check_auth])"}
+{"asctime": "2024/08/23 20:43:59", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:44:04", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/external_login/]"}
+{"asctime": "2024/08/23 20:44:04", "levelname": "INFO", "name": "back", "message": "(from : [external_login])"}
+{"asctime": "2024/08/23 20:44:04", "levelname": "INFO", "name": "back", "message": "code: [302] => [error]"}
+{"asctime": "2024/08/23 20:44:04", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/auth/callback]"}
+{"asctime": "2024/08/23 20:44:04", "levelname": "INFO", "name": "back", "message": "code: [301] => [error]"}
+{"asctime": "2024/08/23 20:44:04", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/auth/callback/]"}
+{"asctime": "2024/08/23 20:44:04", "levelname": "INFO", "name": "back", "message": "(from : [auth_callback])"}
+{"asctime": "2024/08/23 20:44:04", "levelname": "INFO", "name": "back", "message": "Received callback request: <QueryDict: {'code': ['9c16af3b55ec51381a7bfc84aeedb31599c65f7eafec11c6eea12108b44d7516']}>"}
+{"asctime": "2024/08/23 20:44:04", "levelname": "INFO", "name": "back", "message": "Successful API response: {'access_token': '696fbe282f7f2780fdb9ea33e85f0cbfac2693e2e8ce3c59366f18ae875e716f', 'token_type': 'bearer', 'expires_in': 1439, 'refresh_token': 'a64aac1d5fc9ed431cdf1989f23471561ab772715398b4fd3bc66893bcfa971d', 'scope': 'public', 'created_at': 1724432884, 'secret_valid_until': 1726687398}"}
+{"asctime": "2024/08/23 20:44:05", "levelname": "INFO", "name": "back", "message": "code: [302] => [error]"}
+{"asctime": "2024/08/23 20:44:05", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/]"}
+{"asctime": "2024/08/23 20:44:05", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:44:05", "levelname": "INFO", "name": "back", "message": "Request from: [/static/css/frontstyle.css]"}
+{"asctime": "2024/08/23 20:44:05", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:44:05", "levelname": "INFO", "name": "back", "message": "Request from: [/static/css/bootstrap.min.css]"}
+{"asctime": "2024/08/23 20:44:05", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:44:05", "levelname": "INFO", "name": "back", "message": "Request from: [/static/css/TrajanPro.css]"}
+{"asctime": "2024/08/23 20:44:05", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:44:05", "levelname": "INFO", "name": "back", "message": "Request from: [/static/fonts/TrajanPro-Regular.woff2]"}
+{"asctime": "2024/08/23 20:44:05", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:44:05", "levelname": "INFO", "name": "back", "message": "Request from: [/jsi18n/]"}
+{"asctime": "2024/08/23 20:44:05", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:44:05", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/loadTranslations.js]"}
+{"asctime": "2024/08/23 20:44:05", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:44:05", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/menu.js]"}
+{"asctime": "2024/08/23 20:44:05", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:44:05", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/home.js]"}
+{"asctime": "2024/08/23 20:44:05", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:44:05", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/tournament/matchmaking.js]"}
+{"asctime": "2024/08/23 20:44:05", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:44:05", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/logout.js]"}
+{"asctime": "2024/08/23 20:44:05", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:44:05", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/404.js]"}
+{"asctime": "2024/08/23 20:44:05", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:44:05", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/profile.js]"}
+{"asctime": "2024/08/23 20:44:05", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:44:05", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/login.js]"}
+{"asctime": "2024/08/23 20:44:05", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:44:05", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/register.js]"}
+{"asctime": "2024/08/23 20:44:05", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:44:05", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/main.js]"}
+{"asctime": "2024/08/23 20:44:05", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:44:05", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/matchHistory.js]"}
+{"asctime": "2024/08/23 20:44:05", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:44:05", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/privacyPolicy.js]"}
+{"asctime": "2024/08/23 20:44:05", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:44:05", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/iaAlgo.js]"}
+{"asctime": "2024/08/23 20:44:05", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:44:05", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/background.js]"}
+{"asctime": "2024/08/23 20:44:05", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:44:05", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/bootstrap.min.js]"}
+{"asctime": "2024/08/23 20:44:05", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:44:05", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/play/play.js]"}
+{"asctime": "2024/08/23 20:44:05", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:44:05", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/play/pongGame.js]"}
+{"asctime": "2024/08/23 20:44:05", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:44:05", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/friends.js]"}
+{"asctime": "2024/08/23 20:44:05", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:44:05", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/tournament/tournament.js]"}
+{"asctime": "2024/08/23 20:44:05", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:44:05", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/tournament/tournamentDetail.js]"}
+{"asctime": "2024/08/23 20:44:05", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:44:05", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/translations/en.json]"}
+{"asctime": "2024/08/23 20:44:05", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:44:05", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/images/favicon.ico]"}
+{"asctime": "2024/08/23 20:44:05", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:44:05", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/api/check_auth/]"}
+{"asctime": "2024/08/23 20:44:05", "levelname": "INFO", "name": "back", "message": "(from : [check_auth])"}
+{"asctime": "2024/08/23 20:44:05", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:44:09", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/api/check_auth/]"}
+{"asctime": "2024/08/23 20:44:09", "levelname": "INFO", "name": "back", "message": "(from : [check_auth])"}
+{"asctime": "2024/08/23 20:44:09", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:44:09", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/api/games/get_current_user/]"}
+{"asctime": "2024/08/23 20:44:09", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:44:09", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/images/favicon.ico]"}
+{"asctime": "2024/08/23 20:44:09", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:44:16", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/api/check_auth/]"}
+{"asctime": "2024/08/23 20:44:16", "levelname": "INFO", "name": "back", "message": "(from : [check_auth])"}
+{"asctime": "2024/08/23 20:44:16", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:44:17", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/api/games/create_game/]"}
+{"asctime": "2024/08/23 20:44:17", "levelname": "INFO", "name": "back", "message": "code: [201] => [error]"}
+{"asctime": "2024/08/23 20:44:18", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/api/games/finish_game/1/]"}
+{"asctime": "2024/08/23 20:44:18", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:44:18", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/api/profile]"}
+{"asctime": "2024/08/23 20:44:18", "levelname": "INFO", "name": "back", "message": "code: [301] => [error]"}
+{"asctime": "2024/08/23 20:44:18", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/api/check_auth/]"}
+{"asctime": "2024/08/23 20:44:18", "levelname": "INFO", "name": "back", "message": "(from : [check_auth])"}
+{"asctime": "2024/08/23 20:44:18", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:44:18", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/api/profile/]"}
+{"asctime": "2024/08/23 20:44:18", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:44:18", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/api/games/get_current_user/]"}
+{"asctime": "2024/08/23 20:44:18", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:44:19", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/api/check_auth/]"}
+{"asctime": "2024/08/23 20:44:19", "levelname": "INFO", "name": "back", "message": "(from : [check_auth])"}
+{"asctime": "2024/08/23 20:44:19", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:44:19", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/api/profile]"}
+{"asctime": "2024/08/23 20:44:19", "levelname": "INFO", "name": "back", "message": "code: [301] => [error]"}
+{"asctime": "2024/08/23 20:44:19", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/api/profile/]"}
+{"asctime": "2024/08/23 20:44:19", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:44:19", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/images/default_avatar.png]"}
+{"asctime": "2024/08/23 20:44:19", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:44:21", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/api/check_auth/]"}
+{"asctime": "2024/08/23 20:44:21", "levelname": "INFO", "name": "back", "message": "(from : [check_auth])"}
+{"asctime": "2024/08/23 20:44:22", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:44:22", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/api/games/get_current_user/]"}
+{"asctime": "2024/08/23 20:44:22", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:44:25", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/]"}
+{"asctime": "2024/08/23 20:44:25", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:44:25", "levelname": "INFO", "name": "back", "message": "Request from: [/static/css/frontstyle.css]"}
+{"asctime": "2024/08/23 20:44:25", "levelname": "INFO", "name": "back", "message": "code: [304] => [error]"}
+{"asctime": "2024/08/23 20:44:25", "levelname": "INFO", "name": "back", "message": "Request from: [/static/css/bootstrap.min.css]"}
+{"asctime": "2024/08/23 20:44:25", "levelname": "INFO", "name": "back", "message": "code: [304] => [error]"}
+{"asctime": "2024/08/23 20:44:25", "levelname": "INFO", "name": "back", "message": "Request from: [/static/css/TrajanPro.css]"}
+{"asctime": "2024/08/23 20:44:25", "levelname": "INFO", "name": "back", "message": "code: [304] => [error]"}
+{"asctime": "2024/08/23 20:44:25", "levelname": "INFO", "name": "back", "message": "Request from: [/jsi18n/]"}
+{"asctime": "2024/08/23 20:44:25", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:44:25", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/loadTranslations.js]"}
+{"asctime": "2024/08/23 20:44:25", "levelname": "INFO", "name": "back", "message": "code: [304] => [error]"}
+{"asctime": "2024/08/23 20:44:25", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/menu.js]"}
+{"asctime": "2024/08/23 20:44:25", "levelname": "INFO", "name": "back", "message": "code: [304] => [error]"}
+{"asctime": "2024/08/23 20:44:25", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/home.js]"}
+{"asctime": "2024/08/23 20:44:25", "levelname": "INFO", "name": "back", "message": "code: [304] => [error]"}
+{"asctime": "2024/08/23 20:44:25", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/play/play.js]"}
+{"asctime": "2024/08/23 20:44:25", "levelname": "INFO", "name": "back", "message": "code: [304] => [error]"}
+{"asctime": "2024/08/23 20:44:25", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/logout.js]"}
+{"asctime": "2024/08/23 20:44:25", "levelname": "INFO", "name": "back", "message": "code: [304] => [error]"}
+{"asctime": "2024/08/23 20:44:25", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/404.js]"}
+{"asctime": "2024/08/23 20:44:25", "levelname": "INFO", "name": "back", "message": "code: [304] => [error]"}
+{"asctime": "2024/08/23 20:44:25", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/profile.js]"}
+{"asctime": "2024/08/23 20:44:25", "levelname": "INFO", "name": "back", "message": "code: [304] => [error]"}
+{"asctime": "2024/08/23 20:44:25", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/login.js]"}
+{"asctime": "2024/08/23 20:44:25", "levelname": "INFO", "name": "back", "message": "code: [304] => [error]"}
+{"asctime": "2024/08/23 20:44:25", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/register.js]"}
+{"asctime": "2024/08/23 20:44:25", "levelname": "INFO", "name": "back", "message": "code: [304] => [error]"}
+{"asctime": "2024/08/23 20:44:25", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/main.js]"}
+{"asctime": "2024/08/23 20:44:25", "levelname": "INFO", "name": "back", "message": "code: [304] => [error]"}
+{"asctime": "2024/08/23 20:44:25", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/matchHistory.js]"}
+{"asctime": "2024/08/23 20:44:25", "levelname": "INFO", "name": "back", "message": "code: [304] => [error]"}
+{"asctime": "2024/08/23 20:44:25", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/privacyPolicy.js]"}
+{"asctime": "2024/08/23 20:44:25", "levelname": "INFO", "name": "back", "message": "code: [304] => [error]"}
+{"asctime": "2024/08/23 20:44:25", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/iaAlgo.js]"}
+{"asctime": "2024/08/23 20:44:25", "levelname": "INFO", "name": "back", "message": "code: [304] => [error]"}
+{"asctime": "2024/08/23 20:44:25", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/background.js]"}
+{"asctime": "2024/08/23 20:44:25", "levelname": "INFO", "name": "back", "message": "code: [304] => [error]"}
+{"asctime": "2024/08/23 20:44:25", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/bootstrap.min.js]"}
+{"asctime": "2024/08/23 20:44:25", "levelname": "INFO", "name": "back", "message": "code: [304] => [error]"}
+{"asctime": "2024/08/23 20:44:25", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/play/pongGame.js]"}
+{"asctime": "2024/08/23 20:44:25", "levelname": "INFO", "name": "back", "message": "code: [304] => [error]"}
+{"asctime": "2024/08/23 20:44:25", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/friends.js]"}
+{"asctime": "2024/08/23 20:44:25", "levelname": "INFO", "name": "back", "message": "code: [304] => [error]"}
+{"asctime": "2024/08/23 20:44:25", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/tournament/tournament.js]"}
+{"asctime": "2024/08/23 20:44:25", "levelname": "INFO", "name": "back", "message": "code: [304] => [error]"}
+{"asctime": "2024/08/23 20:44:25", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/tournament/tournamentDetail.js]"}
+{"asctime": "2024/08/23 20:44:25", "levelname": "INFO", "name": "back", "message": "code: [304] => [error]"}
+{"asctime": "2024/08/23 20:44:25", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/tournament/matchmaking.js]"}
+{"asctime": "2024/08/23 20:44:25", "levelname": "INFO", "name": "back", "message": "code: [304] => [error]"}
+{"asctime": "2024/08/23 20:44:25", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/translations/en.json]"}
+{"asctime": "2024/08/23 20:44:25", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:44:25", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/images/favicon.ico]"}
+{"asctime": "2024/08/23 20:44:25", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:44:25", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/api/check_auth/]"}
+{"asctime": "2024/08/23 20:44:25", "levelname": "INFO", "name": "back", "message": "(from : [check_auth])"}
+{"asctime": "2024/08/23 20:44:25", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:44:25", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/api/games/get_current_user/]"}
+{"asctime": "2024/08/23 20:44:25", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:44:37", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/api/check_auth/]"}
+{"asctime": "2024/08/23 20:44:37", "levelname": "INFO", "name": "back", "message": "(from : [check_auth])"}
+{"asctime": "2024/08/23 20:44:37", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:44:37", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/api/profile]"}
+{"asctime": "2024/08/23 20:44:37", "levelname": "INFO", "name": "back", "message": "code: [301] => [error]"}
+{"asctime": "2024/08/23 20:44:37", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/images/favicon.ico]"}
+{"asctime": "2024/08/23 20:44:37", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:44:37", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/api/profile/]"}
+{"asctime": "2024/08/23 20:44:37", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:44:42", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/api/check_auth/]"}
+{"asctime": "2024/08/23 20:44:42", "levelname": "INFO", "name": "back", "message": "(from : [check_auth])"}
+{"asctime": "2024/08/23 20:44:42", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:44:42", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/api/friends_data/]"}
+{"asctime": "2024/08/23 20:44:42", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:44:53", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/api/profile/send_friend_request/]"}
+{"asctime": "2024/08/23 20:44:53", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:44:55", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/api/friends_data/]"}
+{"asctime": "2024/08/23 20:44:55", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:45:14", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/api/check_auth/]"}
+{"asctime": "2024/08/23 20:45:14", "levelname": "INFO", "name": "back", "message": "(from : [check_auth])"}
+{"asctime": "2024/08/23 20:45:14", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:45:14", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/api/friends_data/]"}
+{"asctime": "2024/08/23 20:45:14", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:45:14", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/images/favicon.ico]"}
+{"asctime": "2024/08/23 20:45:14", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:45:45", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/api/profile/accept_friend_request/]"}
+{"asctime": "2024/08/23 20:45:45", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:45:47", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/api/friends_data/]"}
+{"asctime": "2024/08/23 20:45:47", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:45:49", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/]"}
+{"asctime": "2024/08/23 20:45:49", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:45:49", "levelname": "INFO", "name": "back", "message": "Request from: [/static/css/frontstyle.css]"}
+{"asctime": "2024/08/23 20:45:49", "levelname": "INFO", "name": "back", "message": "code: [304] => [error]"}
+{"asctime": "2024/08/23 20:45:49", "levelname": "INFO", "name": "back", "message": "Request from: [/static/css/bootstrap.min.css]"}
+{"asctime": "2024/08/23 20:45:49", "levelname": "INFO", "name": "back", "message": "code: [304] => [error]"}
+{"asctime": "2024/08/23 20:45:49", "levelname": "INFO", "name": "back", "message": "Request from: [/static/css/TrajanPro.css]"}
+{"asctime": "2024/08/23 20:45:49", "levelname": "INFO", "name": "back", "message": "code: [304] => [error]"}
+{"asctime": "2024/08/23 20:45:49", "levelname": "INFO", "name": "back", "message": "Request from: [/jsi18n/]"}
+{"asctime": "2024/08/23 20:45:49", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:45:49", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/loadTranslations.js]"}
+{"asctime": "2024/08/23 20:45:49", "levelname": "INFO", "name": "back", "message": "code: [304] => [error]"}
+{"asctime": "2024/08/23 20:45:49", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/menu.js]"}
+{"asctime": "2024/08/23 20:45:49", "levelname": "INFO", "name": "back", "message": "code: [304] => [error]"}
+{"asctime": "2024/08/23 20:45:49", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/home.js]"}
+{"asctime": "2024/08/23 20:45:49", "levelname": "INFO", "name": "back", "message": "code: [304] => [error]"}
+{"asctime": "2024/08/23 20:45:49", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/play/play.js]"}
+{"asctime": "2024/08/23 20:45:49", "levelname": "INFO", "name": "back", "message": "code: [304] => [error]"}
+{"asctime": "2024/08/23 20:45:49", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/logout.js]"}
+{"asctime": "2024/08/23 20:45:49", "levelname": "INFO", "name": "back", "message": "code: [304] => [error]"}
+{"asctime": "2024/08/23 20:45:49", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/404.js]"}
+{"asctime": "2024/08/23 20:45:49", "levelname": "INFO", "name": "back", "message": "code: [304] => [error]"}
+{"asctime": "2024/08/23 20:45:49", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/profile.js]"}
+{"asctime": "2024/08/23 20:45:49", "levelname": "INFO", "name": "back", "message": "code: [304] => [error]"}
+{"asctime": "2024/08/23 20:45:49", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/login.js]"}
+{"asctime": "2024/08/23 20:45:49", "levelname": "INFO", "name": "back", "message": "code: [304] => [error]"}
+{"asctime": "2024/08/23 20:45:49", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/register.js]"}
+{"asctime": "2024/08/23 20:45:49", "levelname": "INFO", "name": "back", "message": "code: [304] => [error]"}
+{"asctime": "2024/08/23 20:45:49", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/main.js]"}
+{"asctime": "2024/08/23 20:45:49", "levelname": "INFO", "name": "back", "message": "code: [304] => [error]"}
+{"asctime": "2024/08/23 20:45:49", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/matchHistory.js]"}
+{"asctime": "2024/08/23 20:45:49", "levelname": "INFO", "name": "back", "message": "code: [304] => [error]"}
+{"asctime": "2024/08/23 20:45:49", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/privacyPolicy.js]"}
+{"asctime": "2024/08/23 20:45:49", "levelname": "INFO", "name": "back", "message": "code: [304] => [error]"}
+{"asctime": "2024/08/23 20:45:49", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/iaAlgo.js]"}
+{"asctime": "2024/08/23 20:45:49", "levelname": "INFO", "name": "back", "message": "code: [304] => [error]"}
+{"asctime": "2024/08/23 20:45:49", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/background.js]"}
+{"asctime": "2024/08/23 20:45:49", "levelname": "INFO", "name": "back", "message": "code: [304] => [error]"}
+{"asctime": "2024/08/23 20:45:49", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/bootstrap.min.js]"}
+{"asctime": "2024/08/23 20:45:49", "levelname": "INFO", "name": "back", "message": "code: [304] => [error]"}
+{"asctime": "2024/08/23 20:45:49", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/play/pongGame.js]"}
+{"asctime": "2024/08/23 20:45:49", "levelname": "INFO", "name": "back", "message": "code: [304] => [error]"}
+{"asctime": "2024/08/23 20:45:49", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/friends.js]"}
+{"asctime": "2024/08/23 20:45:49", "levelname": "INFO", "name": "back", "message": "code: [304] => [error]"}
+{"asctime": "2024/08/23 20:45:49", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/tournament/tournament.js]"}
+{"asctime": "2024/08/23 20:45:49", "levelname": "INFO", "name": "back", "message": "code: [304] => [error]"}
+{"asctime": "2024/08/23 20:45:49", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/tournament/tournamentDetail.js]"}
+{"asctime": "2024/08/23 20:45:49", "levelname": "INFO", "name": "back", "message": "code: [304] => [error]"}
+{"asctime": "2024/08/23 20:45:49", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/tournament/matchmaking.js]"}
+{"asctime": "2024/08/23 20:45:49", "levelname": "INFO", "name": "back", "message": "code: [304] => [error]"}
+{"asctime": "2024/08/23 20:45:49", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/translations/en.json]"}
+{"asctime": "2024/08/23 20:45:49", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:45:49", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/images/favicon.ico]"}
+{"asctime": "2024/08/23 20:45:49", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:45:49", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/api/check_auth/]"}
+{"asctime": "2024/08/23 20:45:49", "levelname": "INFO", "name": "back", "message": "(from : [check_auth])"}
+{"asctime": "2024/08/23 20:45:49", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:45:49", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/api/friends_data/]"}
+{"asctime": "2024/08/23 20:45:49", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:45:49", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/api/check_auth/]"}
+{"asctime": "2024/08/23 20:45:49", "levelname": "INFO", "name": "back", "message": "(from : [check_auth])"}
+{"asctime": "2024/08/23 20:45:49", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:45:49", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/api/games/get_current_user/]"}
+{"asctime": "2024/08/23 20:45:49", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:45:49", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/images/favicon.ico]"}
+{"asctime": "2024/08/23 20:45:49", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:46:00", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/api/check_auth/]"}
+{"asctime": "2024/08/23 20:46:00", "levelname": "INFO", "name": "back", "message": "(from : [check_auth])"}
+{"asctime": "2024/08/23 20:46:00", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:46:02", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/api/check_auth/]"}
+{"asctime": "2024/08/23 20:46:02", "levelname": "INFO", "name": "back", "message": "(from : [check_auth])"}
+{"asctime": "2024/08/23 20:46:02", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:46:02", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/api/games/get_current_user/]"}
+{"asctime": "2024/08/23 20:46:02", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:46:10", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/api/games/create_game/]"}
+{"asctime": "2024/08/23 20:46:10", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:46:12", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/api/games/create_game/]"}
+{"asctime": "2024/08/23 20:46:12", "levelname": "INFO", "name": "back", "message": "code: [201] => [error]"}
+{"asctime": "2024/08/23 20:46:15", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/api/games/create_game/]"}
+{"asctime": "2024/08/23 20:46:15", "levelname": "INFO", "name": "back", "message": "code: [201] => [error]"}
+{"asctime": "2024/08/23 20:46:16", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/api/games/finish_game/2/]"}
+{"asctime": "2024/08/23 20:46:16", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:46:16", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/api/profile]"}
+{"asctime": "2024/08/23 20:46:16", "levelname": "INFO", "name": "back", "message": "code: [301] => [error]"}
+{"asctime": "2024/08/23 20:46:16", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/api/check_auth/]"}
+{"asctime": "2024/08/23 20:46:16", "levelname": "INFO", "name": "back", "message": "(from : [check_auth])"}
+{"asctime": "2024/08/23 20:46:16", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:46:16", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/api/profile/]"}
+{"asctime": "2024/08/23 20:46:16", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:46:16", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/api/games/get_current_user/]"}
+{"asctime": "2024/08/23 20:46:16", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:46:16", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/api/games/finish_game/3/]"}
+{"asctime": "2024/08/23 20:46:16", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:46:16", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/api/profile]"}
+{"asctime": "2024/08/23 20:46:16", "levelname": "INFO", "name": "back", "message": "code: [301] => [error]"}
+{"asctime": "2024/08/23 20:46:16", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/api/check_auth/]"}
+{"asctime": "2024/08/23 20:46:16", "levelname": "INFO", "name": "back", "message": "(from : [check_auth])"}
+{"asctime": "2024/08/23 20:46:16", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:46:16", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/api/profile/]"}
+{"asctime": "2024/08/23 20:46:16", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:46:16", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/api/games/get_current_user/]"}
+{"asctime": "2024/08/23 20:46:16", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:51:22", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/]"}
+{"asctime": "2024/08/23 20:51:22", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:51:23", "levelname": "INFO", "name": "back", "message": "Request from: [/static/css/frontstyle.css]"}
+{"asctime": "2024/08/23 20:51:23", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:51:23", "levelname": "INFO", "name": "back", "message": "Request from: [/static/css/bootstrap.min.css]"}
+{"asctime": "2024/08/23 20:51:23", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:51:23", "levelname": "INFO", "name": "back", "message": "Request from: [/static/css/TrajanPro.css]"}
+{"asctime": "2024/08/23 20:51:23", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:51:23", "levelname": "INFO", "name": "back", "message": "Request from: [/static/fonts/TrajanPro-Regular.woff2]"}
+{"asctime": "2024/08/23 20:51:23", "levelname": "INFO", "name": "back", "message": "code: [304] => [error]"}
+{"asctime": "2024/08/23 20:51:23", "levelname": "INFO", "name": "back", "message": "Request from: [/jsi18n/]"}
+{"asctime": "2024/08/23 20:51:23", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:51:23", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/loadTranslations.js]"}
+{"asctime": "2024/08/23 20:51:23", "levelname": "INFO", "name": "back", "message": "code: [304] => [error]"}
+{"asctime": "2024/08/23 20:51:23", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/menu.js]"}
+{"asctime": "2024/08/23 20:51:23", "levelname": "INFO", "name": "back", "message": "code: [304] => [error]"}
+{"asctime": "2024/08/23 20:51:23", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/home.js]"}
+{"asctime": "2024/08/23 20:51:23", "levelname": "INFO", "name": "back", "message": "code: [304] => [error]"}
+{"asctime": "2024/08/23 20:51:23", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/tournament/matchmaking.js]"}
+{"asctime": "2024/08/23 20:51:23", "levelname": "INFO", "name": "back", "message": "code: [304] => [error]"}
+{"asctime": "2024/08/23 20:51:23", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/logout.js]"}
+{"asctime": "2024/08/23 20:51:23", "levelname": "INFO", "name": "back", "message": "code: [304] => [error]"}
+{"asctime": "2024/08/23 20:51:23", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/404.js]"}
+{"asctime": "2024/08/23 20:51:23", "levelname": "INFO", "name": "back", "message": "code: [304] => [error]"}
+{"asctime": "2024/08/23 20:51:23", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/profile.js]"}
+{"asctime": "2024/08/23 20:51:23", "levelname": "INFO", "name": "back", "message": "code: [304] => [error]"}
+{"asctime": "2024/08/23 20:51:23", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/login.js]"}
+{"asctime": "2024/08/23 20:51:23", "levelname": "INFO", "name": "back", "message": "code: [304] => [error]"}
+{"asctime": "2024/08/23 20:51:23", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/register.js]"}
+{"asctime": "2024/08/23 20:51:23", "levelname": "INFO", "name": "back", "message": "code: [304] => [error]"}
+{"asctime": "2024/08/23 20:51:23", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/main.js]"}
+{"asctime": "2024/08/23 20:51:23", "levelname": "INFO", "name": "back", "message": "code: [304] => [error]"}
+{"asctime": "2024/08/23 20:51:23", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/matchHistory.js]"}
+{"asctime": "2024/08/23 20:51:23", "levelname": "INFO", "name": "back", "message": "code: [304] => [error]"}
+{"asctime": "2024/08/23 20:51:23", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/privacyPolicy.js]"}
+{"asctime": "2024/08/23 20:51:23", "levelname": "INFO", "name": "back", "message": "code: [304] => [error]"}
+{"asctime": "2024/08/23 20:51:23", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/iaAlgo.js]"}
+{"asctime": "2024/08/23 20:51:23", "levelname": "INFO", "name": "back", "message": "code: [304] => [error]"}
+{"asctime": "2024/08/23 20:51:23", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/background.js]"}
+{"asctime": "2024/08/23 20:51:23", "levelname": "INFO", "name": "back", "message": "code: [304] => [error]"}
+{"asctime": "2024/08/23 20:51:23", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/bootstrap.min.js]"}
+{"asctime": "2024/08/23 20:51:23", "levelname": "INFO", "name": "back", "message": "code: [304] => [error]"}
+{"asctime": "2024/08/23 20:51:23", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/play/play.js]"}
+{"asctime": "2024/08/23 20:51:23", "levelname": "INFO", "name": "back", "message": "code: [304] => [error]"}
+{"asctime": "2024/08/23 20:51:23", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/play/pongGame.js]"}
+{"asctime": "2024/08/23 20:51:23", "levelname": "INFO", "name": "back", "message": "code: [304] => [error]"}
+{"asctime": "2024/08/23 20:51:23", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/friends.js]"}
+{"asctime": "2024/08/23 20:51:23", "levelname": "INFO", "name": "back", "message": "code: [304] => [error]"}
+{"asctime": "2024/08/23 20:51:23", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/tournament/tournament.js]"}
+{"asctime": "2024/08/23 20:51:23", "levelname": "INFO", "name": "back", "message": "code: [304] => [error]"}
+{"asctime": "2024/08/23 20:51:23", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/tournament/tournamentDetail.js]"}
+{"asctime": "2024/08/23 20:51:23", "levelname": "INFO", "name": "back", "message": "code: [304] => [error]"}
+{"asctime": "2024/08/23 20:51:23", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/js/translations/en.json]"}
+{"asctime": "2024/08/23 20:51:23", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:51:23", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/images/favicon.ico]"}
+{"asctime": "2024/08/23 20:51:23", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:51:23", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/api/check_auth/]"}
+{"asctime": "2024/08/23 20:51:23", "levelname": "INFO", "name": "back", "message": "(from : [check_auth])"}
+{"asctime": "2024/08/23 20:51:23", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:51:23", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/api/games/get_current_user/]"}
+{"asctime": "2024/08/23 20:51:23", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:51:25", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/api/check_auth/]"}
+{"asctime": "2024/08/23 20:51:25", "levelname": "INFO", "name": "back", "message": "(from : [check_auth])"}
+{"asctime": "2024/08/23 20:51:25", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:51:25", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/api/games/get_current_user/]"}
+{"asctime": "2024/08/23 20:51:25", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:51:25", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/api/check_auth/]"}
+{"asctime": "2024/08/23 20:51:25", "levelname": "INFO", "name": "back", "message": "(from : [check_auth])"}
+{"asctime": "2024/08/23 20:51:25", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:51:25", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/images/favicon.ico]"}
+{"asctime": "2024/08/23 20:51:25", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:51:26", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/api/check_auth/]"}
+{"asctime": "2024/08/23 20:51:26", "levelname": "INFO", "name": "back", "message": "(from : [check_auth])"}
+{"asctime": "2024/08/23 20:51:26", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:51:26", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/images/favicon.ico]"}
+{"asctime": "2024/08/23 20:51:26", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:51:26", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/api/check_auth/]"}
+{"asctime": "2024/08/23 20:51:26", "levelname": "INFO", "name": "back", "message": "(from : [check_auth])"}
+{"asctime": "2024/08/23 20:51:26", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:51:26", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/api/games/get_current_user/]"}
+{"asctime": "2024/08/23 20:51:26", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:51:26", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/images/favicon.ico]"}
+{"asctime": "2024/08/23 20:51:26", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:51:27", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/api/check_auth/]"}
+{"asctime": "2024/08/23 20:51:27", "levelname": "INFO", "name": "back", "message": "(from : [check_auth])"}
+{"asctime": "2024/08/23 20:51:27", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:51:27", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/api/tournament/latest_tournament/]"}
+{"asctime": "2024/08/23 20:51:27", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:51:27", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/images/favicon.ico]"}
+{"asctime": "2024/08/23 20:51:27", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:51:27", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/api/check_auth/]"}
+{"asctime": "2024/08/23 20:51:27", "levelname": "INFO", "name": "back", "message": "(from : [check_auth])"}
+{"asctime": "2024/08/23 20:51:27", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:51:27", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/api/profile]"}
+{"asctime": "2024/08/23 20:51:27", "levelname": "INFO", "name": "back", "message": "code: [301] => [error]"}
+{"asctime": "2024/08/23 20:51:27", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/images/favicon.ico]"}
+{"asctime": "2024/08/23 20:51:27", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:51:27", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/api/profile/]"}
+{"asctime": "2024/08/23 20:51:27", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:51:28", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/api/check_auth/]"}
+{"asctime": "2024/08/23 20:51:28", "levelname": "INFO", "name": "back", "message": "(from : [check_auth])"}
+{"asctime": "2024/08/23 20:51:28", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:51:28", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/api/friends_data/]"}
+{"asctime": "2024/08/23 20:51:28", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:51:28", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/images/favicon.ico]"}
+{"asctime": "2024/08/23 20:51:28", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:51:28", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/api/check_auth/]"}
+{"asctime": "2024/08/23 20:51:28", "levelname": "INFO", "name": "back", "message": "(from : [check_auth])"}
+{"asctime": "2024/08/23 20:51:28", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:51:28", "levelname": "INFO", "name": "back", "message": "Request from: [/pong/api/games/match_history/]"}
+{"asctime": "2024/08/23 20:51:28", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
+{"asctime": "2024/08/23 20:51:28", "levelname": "INFO", "name": "back", "message": "Request from: [/static/pong/images/favicon.ico]"}
+{"asctime": "2024/08/23 20:51:28", "levelname": "INFO", "name": "back", "message": "code: [200] => [success]"}
