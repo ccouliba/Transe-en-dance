@@ -8,6 +8,9 @@ var friendsState = {
 };
 
 function Friends() {
+	if (logoutState.isLoggedOut){
+		return ""
+	}
 	if (!friendsState.isLoaded) {
 		loadFriendsData();
 		return `<div>${window.trans.loading}...</div>`;
@@ -36,6 +39,9 @@ function FriendsForms(){
 }
 	
 function FriendsList() {
+	if (logoutState.isLoggedOut){
+		return ""
+	}
 	return `
 		<h1 class="mb-4">${window.trans.friendsList}</h1>
 		

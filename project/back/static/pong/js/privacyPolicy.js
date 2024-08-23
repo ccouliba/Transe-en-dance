@@ -1,4 +1,7 @@
 function PrivacyPolicy() {
+	if (logoutState.isLoggedOut){
+		return ""
+	}
 	return `
 		<div class="container mt-5" id="profilePage">
 			<h1>${window.trans.privacyPolicy}</h1>

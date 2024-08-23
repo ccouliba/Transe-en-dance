@@ -6,7 +6,9 @@ var tournamentState = {
 
 
 function Tournament() {
-
+	if (logoutState.isLoggedOut){
+		return ""
+	}
 	let tournament = tournamentState.tournament
 
 	if (!tournamentState.isLoaded) {

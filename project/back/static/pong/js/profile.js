@@ -15,6 +15,12 @@ var profileState = {
 
 // fonction pour afficher le profil utilisateur
 function Profile() {
+
+
+	if (logoutState.isLoggedOut){
+		return ""
+	}
+
 	if (!profileState.isLoaded) {
 		loadProfileFromBackend();
 		return `<div>${window.trans.loading} ${window.trans.profile}...</div>`;

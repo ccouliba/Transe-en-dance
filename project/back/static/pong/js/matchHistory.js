@@ -4,6 +4,9 @@ var matchHistoryState = {
 };
 
 function MatchHistory() {
+	if (logoutState.isLoggedOut){
+		return ""
+	}
 	matchHistoryState.isLoaded = false;
 	loadMatchHistory();
 	let content = `

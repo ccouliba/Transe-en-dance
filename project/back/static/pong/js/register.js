@@ -3,7 +3,9 @@ var registerState = {
 }
 // Fonction pour afficher le formulaire d'inscription
 function Register() {
-
+	if (logoutState.isLoggedOut){
+		return ""
+	}
 	if (!registerState.isLoaded) {
 		bindEvent(registerState, "#showLogin", "click", (event)=>{
 			event.preventDefault()

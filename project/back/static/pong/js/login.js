@@ -26,6 +26,9 @@ function loadLoginState() {
 // b) Si le user clique sur le lien "Already have an account? Login" alors loginState.showRegister = false grace a la fonction toggleRegister
 // Donc le formulaire de connexion (LoginForm) sera affiche
 function Login() {
+	if (logoutState.isLoggedOut){
+		return ""
+	}
 	if (!loginState.isLoaded) {
 		loadLoginState(); // Charger la page si non chargee
 	}
