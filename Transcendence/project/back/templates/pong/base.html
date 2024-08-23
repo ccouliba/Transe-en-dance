@@ -67,14 +67,23 @@
 	</main>
 	{% block scripts %} {% endblock %}
 
-{% if not user.is_authenticated %}
-<script>
+	{% if not user.is_authenticated %}
+	<script>
 
 	// Script JS pour avoir une modale lorsque l'utilisateur est en mode navigation privee
-
 	loadTranslationFile("en")
-	// VerifiFonction pour verifier si l'utilisateur est en mode navigation privee
-	async function isIncognito() {
+
+	// Fonction pour vérifier si on est en navigation privée sur Firefox
+	async function isIncognitoOnFirefox() {
+		try {
+			await navigator.serviceWorker.register('/sw.js', { scope: '/' });
+			return false;
+		} catch (error) {
+			return true;
+		}
+	}
+	// Fonction pour vérifier si on est en navigation privée sur Chrome
+	async function isIncognitoOnChrome() {
 		if (navigator.storage && navigator.storage.estimate) {
 			const { quota } = await navigator.storage.estimate();
 			if (quota && typeof performance.memory !== "undefined") {
@@ -83,20 +92,30 @@
 		}
 		return false;
 	}
+	// Fonction pour vérifier le type de navigateur
+	async function getBrowserName() {
+		var userAgent = navigator.userAgent;
+		if (userAgent.includes("Chrome") && !userAgent.includes("Chromium"))
+			return await isIncognitoOnChrome();
+		else if (userAgent.includes("Firefox"))
+			return await isIncognitoOnFirefox();
+		else
+			return false;
+	}
 
 	// Fonction pour afficher la modale
 	function showModal() {
 		// Verifier si l'utilisateur a deja accepte les conditions
 		if (localStorage.getItem('incognitoAccepted') === 'true') return;
-
+		
 		const modal = document.createElement('div');
 		modal.style.cssText = `
-			position: fixed;
-			top: 50%;
-			left: 50%;
-			transform: translate(-50%, -50%);
-			background-color: white;
-			padding: 20px;
+		position: fixed;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		background-color: white;
+		padding: 20px;
 			border-radius: 5px;
 			box-shadow: 0 0 10px rgba(0,0,0,0.3);
 			z-index: 1000;
@@ -134,15 +153,15 @@
 		});
 	}
 
-	// Verifier si l'utilisateur est en mode de navigation privee et afficher la modale 
-	isIncognito().then(incognito => {
-		if (incognito) {
+	// Test si la connexion est privée
+	getBrowserName().then(isPrivate => {
+		if (isPrivate) {
 			loadTranslationFile("en").then(() => {
 				showModal();
-			});
+			})
 		}
 	});
-
+	
 	</script>
 	{% endif %}
 	<canvas id="background"></canvas>
