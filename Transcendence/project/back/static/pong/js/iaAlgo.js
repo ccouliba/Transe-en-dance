@@ -389,6 +389,12 @@ const styles = `
         transform: scale(1.2); /* Agrandit encore plus le bouton actif */
         color: #f00; /* Optionnel : changer la couleur du texte pour plus de visibilité */
     }
+	
+	.button-container {
+  	max-width: 600px; /* same as the canvas width */
+  	margin: auto;
+	background-color: transparent;
+}
 `;
 
 // Ajouter les styles au document
@@ -409,10 +415,8 @@ function showLevelButtons() {
         buttonContainer.style.gap = '20px';
         buttonContainer.style.width = '100%';
 
-        buttonContainer.style.position = 'absolute';
-        buttonContainer.style.top = 'calc(100vh - 150px)';
-        buttonContainer.style.left = '50%';
-        buttonContainer.style.transform = 'translateX(-50%)';
+        buttonContainer.style.position = 'relative';
+		buttonContainer.style.marginTop = '20px';
 
         const level1Button = document.createElement('button');
         level1Button.textContent = '😊';
@@ -430,7 +434,7 @@ function showLevelButtons() {
         buttonContainer.appendChild(level2Button);
         buttonContainer.appendChild(level3Button);
 
-        canvas.insertAdjacentElement('afterend', buttonContainer);
+        canvas.insertAdjacentElement('beforebegin', buttonContainer);
 
         level2Button.classList.add('active');
 
