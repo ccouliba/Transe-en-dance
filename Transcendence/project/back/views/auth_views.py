@@ -98,6 +98,8 @@ def soft_delete_user(request):
 		
 		user.avatar = None  
 		
+		user.logout()#utilisation de la methode de la class user (pour online/offline)
+		
 		user.save()
 		
 		logout(request)
