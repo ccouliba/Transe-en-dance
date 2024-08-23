@@ -516,6 +516,7 @@ function handleDeleteAccount() {
 			if (data.status === 'success') {
 				alert(`${window.trans.accDeleted}.`);
 				// changePage(Login);
+				localStorage.removeItem("userToken");
 				changePage("#login");
 			} else {
 				alert(`${window.trans.errDeletingAccRetry}`);
