@@ -7,18 +7,11 @@ __pycache__/
 # Ignorer les fichiers d'identification WSL de Windows
 *:Zone.Identifier
 
-./backend/project/.venv/
-
-*.logs
-
 # Ignorer le fichier de configuration de prettier
 .prettierrc
 
-./back/project/logs/*
+./project/logs/*
 
-./back/project/logs/back.logs
+.env
 
-./back/project/logs/*.*
-
-
-Transcendence/project/staticfiles/
+.vscode
