@@ -6,7 +6,8 @@ services:
     # command: python manage.py runserver 0.0.0.0:8000
     # New command to make it work
     # command: gunicorn server.wsgi:application --bind 0.0.0.0:8000 --certfile=./selfsigned.crt --keyfile=./selfsigned.key
-
+    env_file:
+      - .env
     volumes:
       - ./project/:/usr/src/project/
     ports:
@@ -27,6 +28,8 @@ services:
       - postgres_data:/var/lib/postgresql/data/
     ports:
       - 5432:5432
+    env_file:
+      - .env
     environment:
       - POSTGRES_USER=ccouliba
       - POSTGRES_PASSWORD=password
