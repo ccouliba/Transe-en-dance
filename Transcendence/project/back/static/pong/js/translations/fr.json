@@ -318,6 +318,8 @@
 	"validationError": "Erreur de validation",
 	"unknownError": "Une erreur inconnue s'est produite",
 	"noEmptyUsername": "Le nom d'utilisateur ne peut pas être vide",
-	"emailCannotBeEmpty": "L'email ne peut pas être vide"
+	"emailCannotBeEmpty": "L'email ne peut pas être vide",
+	"errorUploadingAvatar": "Erreur lors du téléchargement de l'avatar"
+
 
 }

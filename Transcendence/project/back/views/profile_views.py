@@ -193,8 +193,8 @@ def upload_avatar(request):
 	form = AvatarUploadForm(request.POST, request.FILES, instance=request.user)
 	if form.is_valid():
 		form.save()
-		return JsonResponse({'status': 'success', 'avatar_url': request.user.get_avatar_url()})  # Utilisez la nouvelle méthode ici
-	return JsonResponse({'status': 'error', 'errors': form.errors}, status=400)
+		return JsonResponse({'status': 'success', 'avatar_url': request.user.get_avatar_url()})  
+	return JsonResponse({'status': 'error', 'errors': form.errors}, status=200)
 
 
 # RGPD stuff 

@@ -373,12 +373,13 @@ function EditAvatar() {
 					mountComponent(Profile);
 					
 				} else {
-					alert('Error uploading avatar: ' + JSON.stringify(data.errors));
+					alert(window.trans.errorUploadingAvatar);
 				}
 			})
 			.catch(error => {
 				console.error('Error:', error);
-				alert('An error occurred while uploading the avatar. Please try again.');
+				alert(window.trans.errorUploadingAvatar);
+
 			});
 		}
 	});
