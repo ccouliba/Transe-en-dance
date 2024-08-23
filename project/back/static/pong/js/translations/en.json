@@ -321,7 +321,8 @@
 
 	"noEmptyUsername": "Username cannot be empty",
 	"emailCannotBeEmpty": "Email cannot be empty",
-	"errorUploadingAvatar": "Error uploading avatar"
+	"errorUploadingAvatar": "Error uploading avatar",
+	"emailFormatError": "Invalid email format"
 
 
 

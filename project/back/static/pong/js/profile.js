@@ -148,6 +148,7 @@ function sendProfileToBackend(payload) {
 	// console.log("authenticated:", !!localStorage.getItem('userToken'));
 	let url = `/pong/api/profile/update/`; // url de l'API pour mettre a jour le profil
 
+	//todo : rajouter catch response json pour mdp erronne et laurent
 	return httpPostJson(url, payload)
 		.then(response => {
 			if (!response.ok) {
@@ -156,6 +157,13 @@ function sendProfileToBackend(payload) {
 				});
 			}
 			return response.json(); // transformer la reponse en JSON
+		})
+		.then(data => {
+			if (data.status === 'failed') {
+				alert(window.trans.emailFormatError);
+				mountComponent(Profile);
+			}
+			return data; 
 		})
 		.catch(error => {
 			console.error('error:', error);

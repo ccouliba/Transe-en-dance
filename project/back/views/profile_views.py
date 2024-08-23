@@ -66,7 +66,7 @@ def	profile_update_view(request):
 			try:
 				validate_email(user.email )
 			except ValidationError:
-				return JsonResponse({'status': 'failed', 'message': "email format invalid"}, status=400)
+				return JsonResponse({'status': 'failed', 'message': "email format invalid"}, status=200)
 			updated.append('email')
 
 		if 'firstname' in data:
